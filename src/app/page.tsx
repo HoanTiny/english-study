@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import CoreLoopDemo from "@/components/CoreLoopDemo";
 import SprintGame from "@/components/SprintGame";
 import RoadmapPath from "@/components/RoadmapPath";
@@ -68,6 +69,20 @@ export default function Home() {
             từ, nói bắt buộc mỗi ngày, journal, shadowing và sổ tay, tất cả đổ về
             một hệ thống ôn tập thông minh.
           </p>
+          <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/today"
+              className="liquid-glass-btn px-7 py-3 text-sm font-bold active:scale-95 w-full sm:w-auto"
+            >
+              Bắt đầu học hôm nay →
+            </Link>
+            <Link
+              href="/lesson/greetings"
+              className="rounded-full border border-border bg-white/30 dark:bg-white/5 px-7 py-3 text-sm font-bold text-foreground backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 active:scale-95 w-full sm:w-auto"
+            >
+              Học thử bài đầu tiên
+            </Link>
+          </div>
         </section>
 
         {/* Interactive Showcase Switcher */}

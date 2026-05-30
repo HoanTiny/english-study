@@ -93,7 +93,7 @@ export default function JournalPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-12 pt-16">
+    <main className="mx-auto max-w-2xl px-5 py-12 pt-16 animate-fadeIn">
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gradient-iridescent">Nhật ký viết & nói</h1>
         <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">

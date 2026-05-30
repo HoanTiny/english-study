@@ -3,7 +3,7 @@
 
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 // Model có thể đổi qua env; mặc định Flash cho rẻ/nhanh.
-const MODEL = process.env.GEMINI_MODEL ?? "gemini-flash-latest";
+const MODEL = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
 
 export function geminiConfigured(): boolean {
   return !!process.env.GEMINI_API_KEY;
@@ -41,18 +41,25 @@ export async function geminiGenerate(
     body.systemInstruction = { parts: [{ text: opts.system }] };
   }
 
-  const res = await fetch(
-    `${API_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(key)}`,
-    {
+  // Gemini Flash thỉnh thoảng trả 503 "high demand" / 429 (rate limit) —
+  // đều tạm thời, nên thử lại với backoff trước khi báo lỗi.
+  const url = `${API_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(key)}`;
+  const MAX_ATTEMPTS = 3;
+  let res!: Response;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
-    },
-  );
-
-  if (!res.ok) {
+    });
+    if (res.ok) break;
     const detail = await res.text().catch(() => "");
-    throw new Error(`Gemini ${res.status}: ${detail.slice(0, 300)}`);
+    const retryable = res.status === 503 || res.status === 429;
+    if (!retryable || attempt === MAX_ATTEMPTS) {
+      throw new Error(`Gemini ${res.status}: ${detail.slice(0, 300)}`);
+    }
+    // backoff tăng dần: 0.8s, 1.6s
+    await new Promise((r) => setTimeout(r, 800 * attempt));
   }
 
   const json = (await res.json()) as {

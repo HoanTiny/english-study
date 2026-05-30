@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import { getLesson } from "@/lib/lessons";
 import { useAuth } from "@/lib/auth";
 import { addNote, listNotes } from "@/lib/notesRepo";
+import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
+import ListeningResource from "@/components/ListeningResource";
 
 export default function LessonPage() {
   const params = useParams<{ slug: string }>();
@@ -32,12 +34,29 @@ export default function LessonPage() {
     };
   }, [ready, userId]);
 
-  function speak(text: string, rate = 0.9) {
+  function speakTTS(text: string, rate = 0.9) {
     if (!window.speechSynthesis) return;
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
     u.rate = rate;
     window.speechSynthesis.speak(u);
+  }
+
+  // Từ đơn: ưu tiên audio người bản xứ (Free Dictionary API); nếu không có thì TTS.
+  // Cụm nhiều từ: dùng thẳng TTS.
+  async function speak(text: string, rate = 0.9) {
+    if (isSingleWord(text)) {
+      try {
+        const p = await fetchPronounce(text);
+        if (p.audio) {
+          await new Audio(p.audio).play();
+          return;
+        }
+      } catch {
+        // bỏ qua → fallback TTS
+      }
+    }
+    speakTTS(text, rate);
   }
 
   async function pushToReview(en: string, example: string) {
@@ -169,6 +188,12 @@ export default function LessonPage() {
           );
         })}
       </div>
+
+      <ListeningResource
+        cefr={lesson.cefr}
+        topic={lesson.title}
+        youtubeId={lesson.youtubeId}
+      />
 
       <div className="mt-8 text-center">
         <Link
