@@ -12,7 +12,15 @@ export const runtime = "nodejs";
 
 const API = "https://api.dictionaryapi.dev/api/v2/entries/en";
 
-type PronounceResult = { found: boolean; word?: string; ipa?: string; audio?: string };
+type Accent = { ipa?: string; audio?: string };
+type PronounceResult = {
+  found: boolean;
+  word?: string;
+  ipa?: string;
+  audio?: string;
+  us?: Accent; // giọng Anh-Mỹ
+  uk?: Accent; // giọng Anh-Anh
+};
 
 // Cache đơn giản theo vòng đời tiến trình. TTL 7 ngày; giới hạn số mục để khỏi phình bộ nhớ.
 const cache = new Map<string, { data: PronounceResult; at: number }>();
@@ -32,8 +40,15 @@ function extract(entries: DictEntry[]): PronounceResult {
     undefined;
   // Audio: link mp3 đầu tiên không rỗng.
   const audio = phonetics.find((p) => p.audio?.trim())?.audio?.trim() || undefined;
+  // Tách giọng Anh-Mỹ (-us) và Anh-Anh (-uk) nếu Free Dictionary có sẵn.
+  const byAccent = (tag: string): Accent | undefined => {
+    const p = phonetics.find((x) => x.audio?.toLowerCase().includes(tag));
+    return p ? { ipa: p.text?.trim() || undefined, audio: p.audio?.trim() } : undefined;
+  };
+  const us = byAccent("-us.");
+  const uk = byAccent("-uk.");
   if (!ipa && !audio) return { found: false };
-  return { found: true, word, ipa, audio };
+  return { found: true, word, ipa, audio, us, uk };
 }
 
 export async function GET(req: NextRequest) {

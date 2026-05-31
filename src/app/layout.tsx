@@ -1,13 +1,28 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
+import { Be_Vietnam_Pro, Dela_Gothic_One, Montserrat } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import SelectionLookup from "@/components/SelectionLookup";
 import { AuthProvider } from "@/lib/auth";
 
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-be-vietnam",
   subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700"],
+});
+
+// Font theo design Figma: heading "Dela Gothic One", body "Montserrat".
+const dela = Dela_Gothic_One({
+  variable: "--font-dela",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -20,17 +35,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi" className={`${beVietnam.variable} h-full antialiased`}>
+    <html
+      lang="vi"
+      className={`${beVietnam.variable} ${dela.variable} ${montserrat.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-background text-foreground transition-colors duration-500">
-        {/* Background Fluid Blobs for Liquid Glass Refraction */}
-        <div className="fluid-blob-container">
-          <div className="fluid-blob blob-primary"></div>
-          <div className="fluid-blob blob-accent"></div>
-          <div className="fluid-blob blob-pink"></div>
-        </div>
         <AuthProvider>
           <Nav />
           <div className="relative z-1">{children}</div>
+          <SelectionLookup />
         </AuthProvider>
       </body>
     </html>

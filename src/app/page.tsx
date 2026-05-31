@@ -6,42 +6,39 @@ import CoreLoopDemo from "@/components/CoreLoopDemo";
 import SprintGame from "@/components/SprintGame";
 import RoadmapPath from "@/components/RoadmapPath";
 
-const features = [
+const sections = [
   {
-    icon: "🔁",
-    title: "Core Loop: Nói bắt buộc",
-    desc: "Tiếp nhận → tự nhớ lại → NÓI ra → chấm phát âm. Không nói thì không qua bài.",
-    color: "from-indigo-500/20 to-purple-500/20",
+    surface: false,
+    eyebrow: "MINI-GAME",
+    title: "Học qua trò chơi vui nhộn",
+    desc: "Biến việc luyện cụm từ thành phản xạ với Sprint và Hội thoại AI.",
+    emoji: "🧘",
+    reverse: false,
+    cards: [
+      { label: "Sprint →", cls: "bg-pink-soft text-pink", href: "#play" },
+      { label: "Audio-call →", cls: "bg-primary-soft text-primary", href: "/audio-call" },
+    ],
+    button: null as null | { label: string; href: string },
   },
   {
-    icon: "📔",
-    title: "Nhật ký 5–10 câu/ngày",
-    desc: "Gợi ý chủ đề mỗi ngày, AI sửa 2–3 lỗi quan trọng, đọc to lại bài viết.",
-    color: "from-pink-500/20 to-rose-500/20",
+    surface: true,
+    eyebrow: "TỪ VỰNG",
+    title: "Mở rộng vốn từ của bạn",
+    desc: "Học theo cụm, đẩy vào hệ thống ôn tập SRS để không bao giờ quên.",
+    emoji: "🎒",
+    reverse: true,
+    cards: [],
+    button: { label: "Vào sổ tay →", href: "/notes" },
   },
   {
-    icon: "🎧",
-    title: "Shadowing",
-    desc: "Nghe giọng bản xứ, nhại lại, so khớp điểm phát âm. Chỉnh tốc độ 0.5–1x.",
-    color: "from-cyan-500/20 to-blue-500/20",
-  },
-  {
-    icon: "📝",
-    title: "Sổ tay thông minh",
-    desc: "Lưu cấu trúc câu & từ mới, một chạm đẩy vào hệ thống ôn tập để không quên.",
-    color: "from-teal-500/20 to-emerald-500/20",
-  },
-  {
-    icon: "📊",
-    title: "Hiểu vs Nói được",
-    desc: "Theo dõi khoảng cách giữa từ bạn hiểu và từ bạn nói được — mục tiêu là thu hẹp nó.",
-    color: "from-amber-500/20 to-orange-500/20",
-  },
-  {
-    icon: "🔥",
-    title: "Streak & nhắc học",
-    desc: "Học đều 2h/ngày. Chuỗi ngày học và nhắc nhở giữ động lực.",
-    color: "from-red-500/20 to-rose-600/20",
+    surface: false,
+    eyebrow: "TIẾN ĐỘ",
+    title: "Theo dõi tiến bộ mỗi ngày",
+    desc: "Lưu thống kê thành tích, số cụm đã nói được và khoảng cách Hiểu → Nói.",
+    emoji: "📊",
+    reverse: false,
+    cards: [],
+    button: { label: "Xem hôm nay →", href: "/today" },
   },
 ];
 
@@ -49,110 +46,148 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"sprint" | "core">("sprint");
 
   return (
-    <div className="pt-10">
-      <main className="mx-auto max-w-5xl px-5">
-        {/* Hero */}
-        <section className="py-20 text-center relative animate-fadeIn">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary backdrop-blur-md shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            Lộ trình A1 → Giao tiếp chuyên nghiệp · 2h/ngày
-          </span>
-          <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl leading-[1.1] text-foreground">
-            Hiểu tiếng Anh nhưng <br className="hidden sm:inline" />
-            <span className="text-gradient-iridescent">không nói được?</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-muted font-medium leading-relaxed">
-            SpeakUp ép bạn biến kiến thức bị động thành phản xạ nói thật — qua cụm
-            từ, nói bắt buộc mỗi ngày, journal, shadowing và sổ tay, tất cả đổ về
-            một hệ thống ôn tập thông minh.
-          </p>
-          <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/today"
-              className="liquid-glass-btn px-7 py-3 text-sm font-bold active:scale-95 w-full sm:w-auto"
-            >
-              Bắt đầu học hôm nay →
-            </Link>
-            <Link
-              href="/lesson/greetings"
-              className="rounded-full border border-border bg-white/30 dark:bg-white/5 px-7 py-3 text-sm font-bold text-foreground backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 active:scale-95 w-full sm:w-auto"
-            >
-              Học thử bài đầu tiên
-            </Link>
+    <div>
+      {/* ===== HERO ===== */}
+      <section className="mx-auto max-w-6xl px-6 animate-fadeIn">
+        <div className="grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
+          <div className="flex flex-col gap-7">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+              Nền tảng học nói tiếng Anh
+            </p>
+            <h1 className="font-display text-[2.6rem] leading-[1.15] text-foreground sm:text-6xl">
+              Học nói tiếng Anh,{" "}
+              <span className="text-primary">theo cách dễ nhất.</span>
+            </h1>
+            <p className="max-w-md text-lg font-medium leading-relaxed text-muted">
+              Luyện phản xạ nói qua cụm từ, nhật ký, shadowing và hội thoại AI —
+              tất cả đổ về một hệ thống ôn tập thông minh.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link href="/today" className="liquid-glass-btn px-7 py-3.5 text-sm font-bold active:scale-95">
+                Bắt đầu học hôm nay →
+              </Link>
+              <Link
+                href="/lesson/greetings"
+                className="rounded-full bg-primary-soft px-7 py-3.5 text-sm font-bold text-primary transition-transform hover:scale-105 active:scale-95"
+              >
+                Học thử bài đầu
+              </Link>
+            </div>
+            <div className="mt-2 flex items-center gap-8">
+              <div>
+                <p className="font-display text-4xl text-foreground">
+                  180<span className="text-primary">+</span>
+                </p>
+                <p className="mt-1 text-sm font-semibold text-muted">cụm thông dụng</p>
+              </div>
+              <span className="h-12 w-px bg-border" />
+              <div>
+                <p className="font-display text-4xl text-foreground">
+                  22<span className="text-primary">+</span>
+                </p>
+                <p className="mt-1 text-sm font-semibold text-muted">bài học</p>
+              </div>
+            </div>
+          </div>
+          {/* Visual */}
+          <div className="flex justify-center">
+            <div className="liquid-glass-card relative flex aspect-square w-full max-w-sm flex-col items-center justify-center gap-4 p-10">
+              <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full bg-primary-soft opacity-70 blur-2xl" />
+              <div className="absolute -bottom-5 -left-5 h-24 w-24 rounded-full bg-pink-soft opacity-60 blur-2xl" />
+              <span className="text-8xl">🗣️</span>
+              <p className="font-display text-xl text-foreground">Speak with confidence</p>
+              <p className="text-center text-sm font-semibold text-muted">A1 → giao tiếp, 2h mỗi ngày</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FEATURE SECTIONS ===== */}
+      {sections.map((s) => (
+        <section key={s.title} className={s.surface ? "bg-surface" : "bg-background"}>
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-16 md:grid-cols-2 md:py-20">
+            <div className={`flex flex-col gap-5 ${s.reverse ? "md:order-2" : ""}`}>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">{s.eyebrow}</p>
+              <h2 className="font-display text-3xl leading-tight text-foreground sm:text-4xl">{s.title}</h2>
+              <p className="max-w-md text-lg font-medium leading-relaxed text-muted">{s.desc}</p>
+              <div className="mt-1 flex flex-wrap items-center gap-3">
+                {s.button && (
+                  <Link
+                    href={s.button.href}
+                    className="rounded-full bg-primary-soft px-6 py-3 text-sm font-bold text-primary transition-transform hover:scale-105 active:scale-95"
+                  >
+                    {s.button.label}
+                  </Link>
+                )}
+                {s.cards.map((c) => (
+                  <Link
+                    key={c.label}
+                    href={c.href}
+                    className={`rounded-2xl px-5 py-3 text-sm font-bold transition-transform hover:scale-105 active:scale-95 ${c.cls}`}
+                  >
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className={s.reverse ? "md:order-1" : ""}>
+              <div className="liquid-glass-card flex aspect-[4/3] w-full items-center justify-center">
+                <span className="text-8xl">{s.emoji}</span>
+              </div>
+            </div>
           </div>
         </section>
+      ))}
 
-        {/* Interactive Showcase Switcher */}
-        <section className="pb-24 max-w-4xl mx-auto">
-          <div className="flex justify-center mb-8">
-            <div className="flex p-1 rounded-2xl border border-border bg-white/20 dark:bg-white/5 backdrop-blur-md shadow-sm">
+      {/* ===== SHOWCASE (game tương tác) ===== */}
+      <section id="play" className="bg-surface">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <h2 className="mb-3 text-center font-display text-3xl text-foreground sm:text-4xl">
+            Thử ngay vòng luyện nói
+          </h2>
+          <p className="mb-8 text-center text-sm font-semibold text-muted">
+            Chọn một chế độ và bắt đầu phản xạ.
+          </p>
+          <div className="mb-8 flex justify-center">
+            <div className="flex gap-1 rounded-2xl border border-border bg-background p-1">
               <button
                 onClick={() => setActiveTab("sprint")}
-                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
-                  activeTab === "sprint"
-                    ? "bg-gradient-to-r from-accent to-indigo-500 text-white shadow-md scale-102 font-extrabold"
-                    : "text-muted hover:text-foreground"
+                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                  activeTab === "sprint" ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
                 }`}
               >
                 ⚡ Game Từ Vựng Sprint
               </button>
               <button
                 onClick={() => setActiveTab("core")}
-                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
-                  activeTab === "core"
-                    ? "bg-gradient-to-r from-accent to-indigo-500 text-white shadow-md scale-102 font-extrabold"
-                    : "text-muted hover:text-foreground"
+                className={`rounded-xl px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                  activeTab === "core" ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
                 }`}
               >
                 🔁 Vòng Luyện Nói Cốt Lõi
               </button>
             </div>
           </div>
-          
-          <div className="transition-all duration-500">
-            {activeTab === "sprint" ? <SprintGame /> : <CoreLoopDemo />}
-          </div>
-        </section>
+          {activeTab === "sprint" ? <SprintGame /> : <CoreLoopDemo />}
+        </div>
+      </section>
 
-        {/* Features */}
-        <section className="pb-24">
-          <h2 className="mb-8 text-center text-3xl font-extrabold tracking-tight">Tính năng công nghệ</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="liquid-glass-interactive p-6 relative overflow-hidden group"
-              >
-                {/* Decorative fluid sphere inside card */}
-                <div className={`absolute -right-4 -bottom-4 w-16 h-16 rounded-full bg-gradient-to-tr ${f.color} filter blur-xl opacity-30 group-hover:scale-150 transition-transform duration-500`} />
-                
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 dark:bg-white/5 border border-border/80 text-3xl shadow-sm">
-                  {f.icon}
-                </div>
-                <h3 className="mb-2 text-lg font-bold tracking-tight">{f.title}</h3>
-                <p className="text-sm text-muted font-medium leading-relaxed">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Roadmap */}
-        <section className="pb-28">
-          <h2 className="mb-2 text-center text-3xl font-extrabold tracking-tight">Lộ trình 4 giai đoạn</h2>
-          <p className="mb-10 text-center text-sm font-medium text-muted">
-            Mở khóa dần từ phát âm cơ bản đến hội thoại tự tin toàn cầu.
+      {/* ===== ROADMAP ===== */}
+      <section className="bg-background">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <h2 className="mb-2 text-center font-display text-3xl text-foreground sm:text-4xl">
+            Lộ trình 4 giai đoạn
+          </h2>
+          <p className="mb-10 text-center text-sm font-semibold text-muted">
+            Mở khóa dần từ phát âm cơ bản đến hội thoại tự tin.
           </p>
           <RoadmapPath />
-        </section>
-      </main>
+        </div>
+      </section>
 
-      <footer className="border-t border-border/40 bg-surface/10 backdrop-blur-md py-10 text-center text-sm text-muted font-medium">
-        SpeakUp · Bản demo lộ trình & vòng học cốt lõi Liquid Glass 💎
+      <footer className="border-t border-border bg-surface py-10 text-center text-sm font-medium text-muted">
+        SpeakUp · Lộ trình A1 → giao tiếp · Học nói mỗi ngày
       </footer>
     </div>
   );
 }
-

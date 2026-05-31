@@ -71,9 +71,9 @@ export async function gradeNote(
         interval_days: next.interval,
         repetitions: next.repetitions,
         due_date: next.due,
-        // đã ôn ít nhất 1 lần coi như đã "hiểu"; "nói được" khi nhớ tốt nhiều lần
+        // đã ôn ≥1 lần coi như "hiểu"; "nói được/thuộc lâu" khi độ ổn định FSRS ≥ ~21 ngày
         recognized: true,
-        mastered: next.repetitions >= 2,
+        mastered: next.interval >= 21,
       },
       { onConflict: "user_id,source_type,source_id" },
     )

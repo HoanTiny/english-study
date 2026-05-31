@@ -1,7 +1,15 @@
 // Client helper: lấy IPA + audio người bản xứ cho MỘT từ qua /api/pronounce.
 // Có cache trong bộ nhớ trình duyệt để không gọi lại cùng một từ.
 
-export type Pronounce = { found: boolean; word?: string; ipa?: string; audio?: string };
+export type Accent = { ipa?: string; audio?: string };
+export type Pronounce = {
+  found: boolean;
+  word?: string;
+  ipa?: string;
+  audio?: string;
+  us?: Accent;
+  uk?: Accent;
+};
 
 const memo = new Map<string, Pronounce>();
 

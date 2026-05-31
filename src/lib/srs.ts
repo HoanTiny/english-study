@@ -1,19 +1,45 @@
-// Thuật toán lặp lại ngắt quãng SM-2 (SuperMemo 2).
-// Trạng thái mỗi thẻ ôn tập, độc lập với nguồn (note/vocab/shadowing).
+// Lặp lại ngắt quãng bằng FSRS (Free Spaced Repetition Scheduler) — mô hình hiện đại
+// dựa trên 3 biến: Độ khó (difficulty), Độ ổn định (stability), Khả năng nhớ lại (retrievability).
+//
+// LƯU Ý KIẾN TRÚC: để KHÔNG phải migration DB, ta tái dùng các cột SM-2 cũ:
+//   - ease_factor  ↔ FSRS difficulty (1..10)
+//   - interval_days↔ FSRS stability (làm tròn ngày)
+//   - repetitions  ↔ reps
+//   - due_date     ↔ ngày đến hạn
+// Nhờ vậy reviewRepo/giao diện giữ nguyên, chỉ thuật toán bên trong đổi sang FSRS.
+
+import {
+  fsrs,
+  generatorParameters,
+  createEmptyCard,
+  Rating,
+  State,
+  type Card,
+  type Grade as FsrsGrade,
+} from "ts-fsrs";
 
 export type SrsState = {
-  ease: number; // hệ số dễ, >= 1.3
-  interval: number; // số ngày đến lần ôn kế
-  repetitions: number; // số lần nhớ đúng liên tiếp
+  ease: number; // = FSRS difficulty (1..10)
+  interval: number; // = FSRS stability làm tròn (ngày)
+  repetitions: number; // = reps
   due: string; // ngày đến hạn (YYYY-MM-DD)
 };
 
-// 4 nút đánh giá quen thuộc → quality 0..5 của SM-2.
+// 4 nút đánh giá quen thuộc → Rating của FSRS.
 export type Grade = "again" | "hard" | "good" | "easy";
-export const GRADE_QUALITY: Record<Grade, number> = { again: 2, hard: 3, good: 4, easy: 5 };
+const RATING: Record<Grade, FsrsGrade> = {
+  again: Rating.Again,
+  hard: Rating.Hard,
+  good: Rating.Good,
+  easy: Rating.Easy,
+};
+// Vẫn ghi review_logs.quality (1..4) cho tương thích.
+export const GRADE_QUALITY: Record<Grade, number> = { again: 1, hard: 2, good: 3, easy: 4 };
+
+const scheduler = fsrs(generatorParameters({ enable_fuzz: true }));
 
 export function initialState(today: string): SrsState {
-  return { ease: 2.5, interval: 0, repetitions: 0, due: today };
+  return { ease: 0, interval: 0, repetitions: 0, due: today };
 }
 
 function addDays(date: string, days: number): string {
@@ -22,29 +48,46 @@ function addDays(date: string, days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-export function review(state: SrsState, grade: Grade, today: string): SrsState {
-  const q = GRADE_QUALITY[grade];
-
-  let { ease, interval, repetitions } = state;
-
-  if (q < 3) {
-    // Nhớ sai → học lại từ đầu, ôn lại trong ngày/hôm sau.
-    repetitions = 0;
-    interval = 1;
-  } else {
-    if (repetitions === 0) interval = 1;
-    else if (repetitions === 1) interval = 6;
-    else interval = Math.round(interval * ease);
-    repetitions += 1;
+// Dựng lại một thẻ FSRS từ trạng thái đã lưu (xấp xỉ last_review từ due - interval).
+function toCard(state: SrsState, today: string): Card {
+  const now = new Date(today + "T00:00:00Z");
+  if (state.repetitions === 0 && state.interval === 0) {
+    return createEmptyCard(now);
   }
+  const lastReview = addDays(state.due, -Math.max(1, state.interval));
+  return {
+    due: new Date(state.due + "T00:00:00Z"),
+    stability: Math.max(0.1, state.interval),
+    difficulty: state.ease >= 1 ? state.ease : 5,
+    elapsed_days: state.interval,
+    scheduled_days: state.interval,
+    reps: state.repetitions,
+    lapses: 0,
+    learning_steps: 0,
+    state: State.Review,
+    last_review: new Date(lastReview + "T00:00:00Z"),
+  };
+}
 
-  // Cập nhật hệ số dễ theo công thức SM-2.
-  ease = ease + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
-  if (ease < 1.3) ease = 1.3;
-
-  return { ease: Math.round(ease * 100) / 100, interval, repetitions, due: addDays(today, interval) };
+export function review(state: SrsState, grade: Grade, today: string): SrsState {
+  const card = toCard(state, today);
+  const now = new Date(today + "T00:00:00Z");
+  const { card: next } = scheduler.next(card, now, RATING[grade]);
+  return {
+    ease: Math.round(next.difficulty * 100) / 100,
+    interval: Math.max(1, Math.round(next.stability)),
+    repetitions: next.reps,
+    due: next.due.toISOString().slice(0, 10),
+  };
 }
 
 export function isDue(state: SrsState, today: string): boolean {
   return state.due <= today;
+}
+
+// "Sức mạnh trí nhớ" 0..100 cho thanh hiển thị — từ stability (≈ interval ngày), thang log.
+// ~1 ngày → thấp, ~180 ngày → ~100%.
+export function memoryStrength(state: SrsState): number {
+  const s = Math.max(0, state.interval);
+  return Math.min(100, Math.round((Math.log10(s + 1) / Math.log10(181)) * 100));
 }

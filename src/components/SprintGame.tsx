@@ -271,25 +271,32 @@ export default function SprintGame() {
             <div className="space-y-2.5">
               <p className="text-xs font-black uppercase tracking-wider text-muted">Lựa chọn trình độ học tập</p>
               <div className="grid grid-cols-6 gap-2">
-                {Object.keys(SPRINT_WORDS).map((lvl) => (
-                  <button
-                    key={lvl}
-                    onClick={() => setLevel(lvl)}
-                    className={`h-10 w-10 rounded-full border text-xs font-black transition-all duration-300 flex items-center justify-center ${
-                      level === lvl
-                        ? "bg-gradient-to-tr from-accent to-indigo-500 border-accent text-white shadow-md scale-110"
-                        : "border-border bg-white/10 dark:bg-white/5 text-muted hover:text-foreground hover:scale-105"
-                    }`}
-                  >
-                    {lvl}
-                  </button>
-                ))}
+                {Object.keys(SPRINT_WORDS).map((lvl) => {
+                  // Màu viền theo cấp độ như design Figma
+                  const ring: Record<string, string> = {
+                    A1: "#10b981", A2: "#f59e0b", B1: "#ef4444",
+                    B2: "#be123c", C1: "#a855f7", C2: "#2b788b",
+                  };
+                  const active = level === lvl;
+                  return (
+                    <button
+                      key={lvl}
+                      onClick={() => setLevel(lvl)}
+                      style={{ borderColor: ring[lvl], color: active ? "#fff" : ring[lvl], background: active ? ring[lvl] : "transparent" }}
+                      className={`h-10 w-10 rounded-full border-2 text-xs font-black transition-all duration-300 flex items-center justify-center ${
+                        active ? "scale-110 shadow-md" : "hover:scale-105"
+                      }`}
+                    >
+                      {lvl}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             <button
               onClick={() => startGame(level)}
-              className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-accent to-indigo-500 hover:from-accent/90 hover:to-indigo-500/90 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_8px_24px_rgba(6,182,212,0.25)]"
+              className="w-full py-3.5 px-6 rounded-2xl bg-primary hover:opacity-90 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_8px_24px_rgba(43,120,139,0.3)]"
             >
               Bắt đầu phản xạ ngay (Get started)
             </button>
@@ -357,15 +364,15 @@ export default function SprintGame() {
           <div className="grid grid-cols-2 gap-4">
             <button
               onClick={() => handleAnswer(false)}
-              className="py-4 px-6 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-500 hover:bg-rose-500 hover:text-white transition-all duration-300 text-sm font-black shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] hover:shadow-[0_8px_20px_rgba(244,63,94,0.3)] active:scale-95 flex items-center justify-center gap-1"
+              className="py-4 px-6 rounded-2xl bg-pink-soft text-pink border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-black active:scale-95 flex items-center justify-center gap-1"
             >
-              <span>Wrong</span> (Sai) ◀
+              ◀ Wrong (Sai)
             </button>
             <button
               onClick={() => handleAnswer(true)}
-              className="py-4 px-6 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-accent hover:bg-accent hover:text-white transition-all duration-300 text-sm font-black shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] hover:shadow-[0_8px_20px_rgba(6,182,212,0.3)] active:scale-95 flex items-center justify-center gap-1"
+              className="py-4 px-6 rounded-2xl bg-primary-soft text-primary border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-black active:scale-95 flex items-center justify-center gap-1"
             >
-              ▶ Đúng (Right)
+              Right (Đúng) ▶
             </button>
           </div>
 
@@ -411,7 +418,7 @@ export default function SprintGame() {
             <div className="flex flex-col gap-2 w-full mt-6">
               <button
                 onClick={() => startGame(level)}
-                className="w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-accent to-indigo-500 hover:from-accent/90 hover:to-indigo-500/90 text-xs font-bold text-white transition-all duration-300 active:scale-95 shadow-md flex items-center justify-center gap-1.5"
+                className="w-full py-3 px-5 rounded-2xl bg-primary hover:opacity-90 text-xs font-bold text-white transition-all duration-300 active:scale-95 shadow-md flex items-center justify-center gap-1.5"
               >
                 🔄 Chơi lại ván mới
               </button>

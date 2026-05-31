@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { todayKey } from "@/lib/store";
-import { isDue, type Grade } from "@/lib/srs";
+import { isDue, memoryStrength, type Grade } from "@/lib/srs";
 import { useAuth } from "@/lib/auth";
 import { listNotes, type Note } from "@/lib/notesRepo";
 import {
@@ -143,6 +143,26 @@ export default function ReviewPage() {
           <p className="mt-2 text-sm font-semibold text-muted max-w-xs mx-auto leading-relaxed">
             Đặt nhanh một câu thực tế sử dụng cấu trúc/từ vựng này và phát âm to ra tiếng.
           </p>
+
+          {/* Sức mạnh trí nhớ (FSRS stability) */}
+          {(() => {
+            const s = srs[current.id];
+            const strength = s ? memoryStrength(s) : 0;
+            return (
+              <div className="mx-auto mt-5 max-w-xs">
+                <div className="mb-1 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-muted">
+                  <span>🧠 Sức mạnh trí nhớ</span>
+                  <span>{s ? `${strength}% · ~${s.interval}d` : "Thẻ mới"}</span>
+                </div>
+                <div className="h-2 overflow-hidden rounded-full bg-border">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-pink to-primary transition-all duration-500"
+                    style={{ width: `${s ? Math.max(6, strength) : 0}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })()}
 
           {!revealed ? (
             <button
