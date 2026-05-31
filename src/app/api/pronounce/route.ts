@@ -20,6 +20,27 @@ type PronounceResult = {
   audio?: string;
   us?: Accent; // giọng Anh-Mỹ
   uk?: Accent; // giọng Anh-Anh
+  pos?: string[]; // loại từ viết tắt: n, v, adj, adv...
+};
+
+// Chuẩn hoá IPA: bỏ dấu gạch chéo bao, bỏ dấu nối lưỡi (tie bar) render xấu, gọn khoảng trắng.
+function cleanIpa(s?: string): string | undefined {
+  if (!s) return s;
+  const out = s
+    .replace(/^\/+|\/+$/g, "")
+    .replace(/[͜͡]/g, "") // combining tie bar trên/dưới → t͡ʃ thành tʃ
+    .replace(/ʧ/g, "tʃ")
+    .replace(/ʤ/g, "dʒ")
+    .replace(/ɚ/g, "ər")
+    .replace(/ɝ/g, "ɜr")
+    .replace(/\s+/g, " ")
+    .trim();
+  return out || undefined;
+}
+
+const POS_ABBR: Record<string, string> = {
+  noun: "n", verb: "v", adjective: "adj", adverb: "adv", pronoun: "pron",
+  preposition: "prep", conjunction: "conj", interjection: "interj", determiner: "det", numeral: "num",
 };
 
 // Cache đơn giản theo vòng đời tiến trình. TTL 7 ngày; giới hạn số mục để khỏi phình bộ nhớ.
@@ -28,27 +49,37 @@ const TTL = 7 * 24 * 60 * 60 * 1000;
 const MAX_ENTRIES = 5000;
 
 type DictPhonetic = { text?: string; audio?: string };
-type DictEntry = { word?: string; phonetic?: string; phonetics?: DictPhonetic[] };
+type DictEntry = { word?: string; phonetic?: string; phonetics?: DictPhonetic[]; meanings?: { partOfSpeech?: string }[] };
 
 function extract(entries: DictEntry[]): PronounceResult {
   const word = entries[0]?.word;
   const phonetics = entries.flatMap((e) => e.phonetics ?? []);
+  // Loại từ (viết tắt, không trùng) từ các meanings.
+  const pos = [
+    ...new Set(
+      entries
+        .flatMap((e) => e.meanings ?? [])
+        .map((m) => POS_ABBR[(m.partOfSpeech || "").toLowerCase()])
+        .filter(Boolean),
+    ),
+  ];
   // IPA: ưu tiên trường `phonetic` ở cấp entry, nếu không lấy text đầu tiên có nội dung.
-  const ipa =
+  const ipa = cleanIpa(
     entries.find((e) => e.phonetic?.trim())?.phonetic?.trim() ||
-    phonetics.find((p) => p.text?.trim())?.text?.trim() ||
-    undefined;
+      phonetics.find((p) => p.text?.trim())?.text?.trim() ||
+      undefined,
+  );
   // Audio: link mp3 đầu tiên không rỗng.
   const audio = phonetics.find((p) => p.audio?.trim())?.audio?.trim() || undefined;
   // Tách giọng Anh-Mỹ (-us) và Anh-Anh (-uk) nếu Free Dictionary có sẵn.
   const byAccent = (tag: string): Accent | undefined => {
     const p = phonetics.find((x) => x.audio?.toLowerCase().includes(tag));
-    return p ? { ipa: p.text?.trim() || undefined, audio: p.audio?.trim() } : undefined;
+    return p ? { ipa: cleanIpa(p.text), audio: p.audio?.trim() } : undefined;
   };
   const us = byAccent("-us.");
   const uk = byAccent("-uk.");
-  if (!ipa && !audio) return { found: false };
-  return { found: true, word, ipa, audio, us, uk };
+  if (!ipa && !audio && pos.length === 0) return { found: false };
+  return { found: true, word, ipa, audio, us, uk, pos: pos.length ? pos : undefined };
 }
 
 export async function GET(req: NextRequest) {

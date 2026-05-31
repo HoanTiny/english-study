@@ -35,7 +35,8 @@ export default function LessonPage() {
   }, [ready, userId]);
 
   function speakTTS(text: string, rate = 0.9) {
-    if (!window.speechSynthesis) return;
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
     u.rate = rate;
@@ -80,13 +81,13 @@ export default function LessonPage() {
 
   if (!lesson) {
     return (
-      <main className="mx-auto max-w-2xl px-5 py-12 pt-16 text-center animate-fadeIn">
-        <p className="text-muted font-bold">Bài học này đang được biên soạn. 🛠️</p>
+      <main className="mx-auto max-w-2xl px-5 py-24 text-center animate-fadeIn relative">
+        <p className="text-muted font-bold text-sm">Bài học này đang được ban biên tập thiết lập… 🛠️</p>
         <Link
           href="/"
-          className="mt-5 inline-block liquid-glass-btn px-6 py-2.5 text-sm font-bold active:scale-95"
+          className="mt-6 inline-block liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
         >
-          ← Về lộ trình
+          ← Quay lại lộ trình
         </Link>
       </main>
     );
@@ -95,93 +96,101 @@ export default function LessonPage() {
   const savedCount = lesson.phrases.filter((p) => saved.has(p.en)).length;
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-12 pt-16 animate-fadeIn">
+    <main className="mx-auto max-w-2xl px-6 py-16 pt-24 animate-fadeIn relative">
+      {/* Background radial highlight */}
+      <div className="absolute top-10 right-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
+
       <Link
         href="/"
-        className="text-xs font-bold text-muted hover:text-foreground transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-muted hover:text-foreground hover:border-primary/50 transition-all duration-300 active:scale-95 shadow-sm cursor-pointer"
       >
-        ← Lộ trình
+        ← Lộ trình học
       </Link>
 
-      <div className="mt-3 mb-8">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gradient-iridescent">
+      <div className="mt-6 mb-10">
+        <div className="flex flex-wrap items-center gap-3">
+          <h1 className="font-display text-3xl sm:text-4xl font-black tracking-tight text-foreground">
             {lesson.title}
           </h1>
-          <span className="rounded-xl border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary">
+          <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-primary shadow-sm">
             {lesson.cefr}
           </span>
         </div>
-        <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">
+        <p className="mt-3 text-xs sm:text-sm font-semibold text-muted leading-relaxed">
           {lesson.intro}
         </p>
         {lesson.tip && (
-          <p className="mt-3 rounded-xl border border-accent/30 bg-accent/5 px-4 py-2.5 text-sm font-medium text-foreground/90">
-            💡 {lesson.tip}
-          </p>
+          <div className="mt-5 rounded-2xl border border-accent/25 bg-accent/5 p-4 sm:p-5 text-xs font-semibold text-foreground/90 leading-relaxed shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-16 bg-accent/5 rounded-full filter blur-md pointer-events-none" />
+            💡 <span className="font-black text-accent uppercase tracking-wider text-[9px] mr-1">Mẹo học tập:</span> {lesson.tip}
+          </div>
         )}
-        <div className="mt-4 flex items-center gap-3">
-          <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-black/5 dark:bg-white/5 border border-border/40">
+        <div className="mt-6 flex items-center gap-4">
+          <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-black/5 dark:bg-white/5 border border-border/40 shadow-inner">
             <div
               className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-500 rounded-full"
               style={{ width: `${(savedCount / lesson.phrases.length) * 100}%` }}
             />
           </div>
-          <span className="text-[10px] font-black text-muted shrink-0 bg-white/20 dark:bg-white/5 border border-border px-2.5 py-1 rounded-full">
-            {savedCount}/{lesson.phrases.length} đã lưu ôn
+          <span className="text-[9px] font-black text-muted shrink-0 bg-white/60 dark:bg-slate-900/60 border border-border/80 px-3 py-1.5 rounded-full shadow-sm">
+            {savedCount}/{lesson.phrases.length} đã lưu ôn tập
           </span>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {lesson.phrases.map((p) => {
           const isSaved = saved.has(p.en);
           return (
             <div
               key={p.en}
-              className="liquid-glass-card p-5 border border-border relative overflow-hidden transition-all duration-300 hover:shadow-md"
+              className="liquid-glass-card p-6 sm:p-7 border border-border/85 shadow-lg relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-xl"
             >
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary/5 rounded-full filter blur-xl pointer-events-none" />
-              <div className="flex items-start gap-3">
-                <div className="min-w-0">
-                  <p className="text-xl font-bold text-foreground leading-relaxed">
+              <div className="absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br from-primary/5 to-transparent blur-xl pointer-events-none" />
+              <div className="flex items-start gap-4">
+                <div className="min-w-0 flex-1">
+                  <p className="font-display text-lg sm:text-xl font-bold text-foreground leading-snug tracking-tight">
                     {p.en}
                   </p>
-                  {p.ipa && (
-                    <p className="text-xs font-semibold text-accent mt-0.5">{p.ipa}</p>
-                  )}
-                  <p className="text-sm font-semibold text-muted mt-0.5">{p.vi}</p>
+                  <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                    {p.ipa && (
+                      <span className="text-[10px] font-mono font-black text-accent bg-accent/5 border border-accent/10 px-2 py-0.5 rounded">
+                        /{p.ipa}/
+                      </span>
+                    )}
+                    <span className="text-xs font-semibold text-muted">{p.vi}</span>
+                  </div>
                 </div>
                 <button
                   onClick={() => speak(p.en)}
-                  className="ml-auto shrink-0 flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/30 dark:bg-white/5 text-sm transition-all duration-300 hover:border-primary hover:bg-primary/5 active:scale-95 shadow-sm"
-                  title="Nghe phát âm"
+                  className="shrink-0 flex h-11 w-11 items-center justify-center rounded-xl border border-border/80 bg-white/60 dark:bg-slate-900/60 text-sm transition-all duration-300 hover:border-primary hover:bg-primary-soft/30 active:scale-95 shadow-sm cursor-pointer"
+                  title="Nghe cụm từ"
                 >
                   🔊
                 </button>
               </div>
 
-              <p className="mt-3 rounded-xl bg-white/10 dark:bg-black/20 border border-border/30 p-3 text-sm italic font-medium leading-relaxed text-foreground/90">
+              <div className="mt-4 rounded-2xl bg-white/35 dark:bg-black/35 border border-border/80 p-4 text-xs sm:text-sm font-semibold italic text-foreground/80 leading-relaxed shadow-sm">
                 “{p.example}”
-              </p>
+              </div>
 
-              <div className="mt-4 flex gap-3 pt-3 border-t border-border/40">
+              <div className="mt-5 flex items-center justify-between gap-3 pt-4 border-t border-border/40">
                 <button
                   onClick={() => speak(p.example, 0.85)}
-                  className="rounded-xl border border-border bg-white/20 dark:bg-white/5 py-2 px-4 text-sm font-semibold transition-all duration-300 hover:border-accent/60 hover:bg-accent/5 active:scale-95 flex items-center gap-1.5"
+                  className="rounded-full border border-border/80 bg-white/50 dark:bg-black/30 py-2.5 px-4.5 text-[9px] font-black uppercase tracking-wider text-muted hover:text-foreground hover:border-primary/40 active:scale-95 transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  🎙️ Nói theo câu mẫu
+                  🎙️ Nhại theo câu
                 </button>
                 <button
                   onClick={() => pushToReview(p.en, p.example)}
                   disabled={isSaved || busy === p.en}
-                  className={`ml-auto rounded-xl px-4 py-2 text-sm font-bold transition-all duration-300 active:scale-95 flex items-center gap-1.5 ${
+                  className={`rounded-full px-5 py-2.5 text-[9px] font-black uppercase tracking-wider transition-all duration-300 active:scale-95 flex items-center gap-1.5 cursor-pointer shadow-md ${
                     isSaved
-                      ? "bg-accent/15 border border-accent/30 text-accent cursor-default"
-                      : "liquid-glass-btn disabled:opacity-50"
+                      ? "bg-teal-500/10 border border-teal-500/25 text-teal-600 dark:text-teal-400 cursor-default shadow-sm"
+                      : "liquid-glass-btn disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
                   }`}
                 >
-                  {isSaved ? "✓ Đã trong ôn tập" : busy === p.en ? "Đang lưu…" : "+ Đẩy vào ôn tập"}
+                  {isSaved ? "✓ Đã lưu ôn tập" : busy === p.en ? "Đang lưu…" : "+ Lưu ôn tập"}
                 </button>
               </div>
             </div>
@@ -195,10 +204,10 @@ export default function LessonPage() {
         youtubeId={lesson.youtubeId}
       />
 
-      <div className="mt-8 text-center">
+      <div className="mt-12 text-center">
         <Link
           href="/review"
-          className="inline-block liquid-glass-btn px-6 py-2.5 text-sm font-bold active:scale-95"
+          className="inline-block liquid-glass-btn px-8 py-4 text-xs font-black uppercase tracking-widest active:scale-95 shadow-lg"
         >
           Tới phòng ôn tập SRS →
         </Link>

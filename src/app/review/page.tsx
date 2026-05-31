@@ -15,10 +15,10 @@ import {
 type SrsMap = Record<string, NoteReviewState>;
 
 const grades: { g: Grade; label: string; cls: string }[] = [
-  { g: "again", label: "Lại", cls: "bg-rose-500/10 border border-rose-500/30 text-rose-500 hover:bg-rose-500 hover:text-white hover:shadow-[0_0_12px_rgba(244,63,94,0.4)]" },
-  { g: "hard", label: "Khó", cls: "bg-amber-500/10 border border-amber-500/30 text-amber-500 hover:bg-amber-500 hover:text-white hover:shadow-[0_0_12px_rgba(245,158,11,0.4)]" },
-  { g: "good", label: "Tốt", cls: "bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:shadow-[0_0_12px_rgba(99,102,241,0.4)]" },
-  { g: "easy", label: "Dễ", cls: "bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 hover:bg-cyan-500 hover:text-white hover:shadow-[0_0_12px_rgba(6,182,212,0.4)]" },
+  { g: "again", label: "Học lại", cls: "bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white hover:border-transparent" },
+  { g: "hard", label: "Khó", cls: "bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 hover:bg-amber-500 hover:text-white hover:border-transparent" },
+  { g: "good", label: "Tốt", cls: "bg-primary-soft/80 border border-primary/20 text-primary hover:bg-primary hover:text-white hover:border-transparent" },
+  { g: "easy", label: "Dễ", cls: "bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white hover:border-transparent" },
 ];
 
 export default function ReviewPage() {
@@ -76,47 +76,48 @@ export default function ReviewPage() {
 
   if (!loaded) {
     return (
-      <main className="mx-auto max-w-xl px-5 py-12 pt-16 text-center text-muted font-semibold">
-        Đang đồng bộ dữ liệu… ⏳
+      <main className="mx-auto max-w-xl px-5 py-24 text-center">
+        <p className="text-xs font-black uppercase tracking-wider text-muted animate-pulse">Đang đồng bộ dữ liệu ôn tập… ⏳</p>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-xl px-5 py-12 pt-16 animate-fadeIn">
-      <div className="mb-8 flex items-baseline justify-between border-b border-border/40 pb-4">
+    <main className="mx-auto max-w-xl px-5 py-16 animate-fadeIn relative">
+      <div className="mb-8 flex items-baseline justify-between border-b border-border/40 pb-4.5">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-gradient-iridescent">Ôn tập thông minh</h1>
-          <p className="text-sm font-semibold text-muted mt-1">Giao tiếp phản xạ theo chu kỳ ngắt quãng (SRS)</p>
+          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary-soft/80 border border-primary/10 px-3.5 py-1.5 rounded-full inline-flex self-start mb-2">
+            🔁 ÔN TẬP SRS THÔNG MINH
+          </span>
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground mt-1.5">Học tập thông minh</h1>
+          <p className="text-xs font-semibold text-muted mt-1">Ôn tập ngắt quãng tối ưu hóa phản xạ tự nhiên</p>
         </div>
-        <span className="text-xs font-bold text-muted bg-white/30 dark:bg-white/5 border border-border px-3 py-1.5 rounded-full">
-          🔥 <span className="text-primary font-black">{queue.length}</span> thẻ đến hạn · {totalInReview} tổng
+        <span className="text-[10px] font-black text-muted bg-surface border border-border px-3.5 py-2 rounded-full shadow-sm shrink-0">
+          🔥 <span className="text-primary font-black">{queue.length}</span> thẻ đến hạn
         </span>
       </div>
 
       {totalInReview === 0 ? (
-        <div className="liquid-glass-card py-16 text-center border border-dashed border-border/60 relative overflow-hidden">
-          <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary/10 rounded-full filter blur-xl pointer-events-none" />
-          <p className="text-muted font-bold text-base">Hồ ôn tập hiện đang trống. Hãy lưu từ vựng trong sổ tay trước.</p>
+        <div className="liquid-glass-card py-16 text-center border border-dashed border-border/60 bg-white/10 dark:bg-black/10 relative overflow-hidden">
+          <p className="text-muted font-semibold text-sm">Hồ ôn tập hiện tại của bạn đang trống. Hãy thêm từ vựng từ Sổ tay.</p>
           <Link
             href="/notes"
-            className="mt-5 inline-block liquid-glass-btn px-6 py-2.5 text-sm font-bold active:scale-95"
+            className="mt-6 inline-block liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
           >
             Đến Sổ tay & Đẩy thẻ ôn tập →
           </Link>
         </div>
       ) : queue.length === 0 ? (
-        <div className="liquid-glass-card py-16 px-6 text-center shadow-xl border border-border relative overflow-hidden">
-          <div className="absolute -top-12 -left-12 w-24 h-24 bg-accent/10 rounded-full filter blur-xl pointer-events-none" />
+        <div className="liquid-glass-card py-16 px-6 text-center shadow-xl border border-border bg-white/10 dark:bg-black/10 relative overflow-hidden">
           <p className="text-5xl mb-4 animate-bounce">🎉</p>
-          <p className="text-xl font-extrabold tracking-tight text-foreground">Bạn đã hoàn thành xuất sắc!</p>
-          <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">
-            Hôm nay đã ôn xong <span className="text-accent font-black">{doneCount}</span> thẻ. Hãy quay lại vào ngày mai để tiếp tục phản xạ nhé.
+          <p className="text-xl font-extrabold tracking-tight text-foreground">Tuyệt vời! Bạn đã hoàn thành!</p>
+          <p className="mt-2.5 text-xs font-semibold text-muted leading-relaxed max-w-sm mx-auto">
+            Hôm nay bạn đã ôn tập xuất sắc toàn bộ <span className="text-accent font-black">{doneCount}</span> thẻ đến hạn. Hãy quay lại vào ngày mai để tiếp tục phản xạ nhé!
           </p>
         </div>
       ) : (
-        <div className="liquid-glass-card p-6 md:p-8 text-center shadow-xl border border-border relative overflow-hidden transition-all duration-500 hover:shadow-2xl">
-          <div className="absolute -top-12 -right-12 w-24 h-24 bg-indigo-500/10 rounded-full filter blur-xl pointer-events-none" />
+        <div className="liquid-glass-card p-6 md:p-8 text-center shadow-2xl border border-border/80 relative overflow-hidden transition-all duration-500 bg-white/30 dark:bg-black/20 backdrop-blur-md">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
 
           {/* Liquid progress tube */}
           <div className="mb-6 flex items-center gap-3">
@@ -126,22 +127,22 @@ export default function ReviewPage() {
                 style={{ width: `${(doneCount / (doneCount + queue.length)) * 100}%` }}
               />
             </div>
-            <span className="text-[10px] font-black text-muted shrink-0 bg-white/20 dark:bg-white/5 border border-border px-2.5 py-1 rounded-full">
+            <span className="text-[10px] font-black text-muted shrink-0 bg-surface border border-border px-2.5 py-1 rounded-full shadow-sm">
               {doneCount}/{doneCount + queue.length}
             </span>
           </div>
 
-          <span className={`inline-block rounded-lg border px-3 py-0.5 text-[10px] font-black uppercase tracking-wider ${
+          <span className={`inline-block rounded-full border px-3.5 py-1 text-[8.5px] font-black uppercase tracking-wider ${
             current.kind === "structure" 
-              ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-500" 
-              : "bg-cyan-500/10 border-cyan-500/20 text-accent"
+              ? "bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400" 
+              : "bg-primary-soft/80 border-primary/20 text-primary"
           }`}>
-            {current.kind === "structure" ? "Cấu trúc câu" : "Từ / Cụm mới"}
+            {current.kind === "structure" ? "Cấu trúc câu" : "Từ vựng / Cụm từ"}
           </span>
           
-          <p className="mt-6 text-2xl font-black text-foreground leading-relaxed px-2">{current.content}</p>
-          <p className="mt-2 text-sm font-semibold text-muted max-w-xs mx-auto leading-relaxed">
-            Đặt nhanh một câu thực tế sử dụng cấu trúc/từ vựng này và phát âm to ra tiếng.
+          <p className="mt-6 text-2xl font-extrabold text-foreground leading-relaxed px-2 tracking-tight">{current.content}</p>
+          <p className="mt-2.5 text-xs font-semibold text-muted max-w-xs mx-auto leading-relaxed">
+            Nói to cụm từ này, đặt một câu ví dụ thực tế liên quan để tạo phản xạ nói.
           </p>
 
           {/* Sức mạnh trí nhớ (FSRS stability) */}
@@ -149,15 +150,15 @@ export default function ReviewPage() {
             const s = srs[current.id];
             const strength = s ? memoryStrength(s) : 0;
             return (
-              <div className="mx-auto mt-5 max-w-xs">
-                <div className="mb-1 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-muted">
-                  <span>🧠 Sức mạnh trí nhớ</span>
-                  <span>{s ? `${strength}% · ~${s.interval}d` : "Thẻ mới"}</span>
+              <div className="mx-auto mt-6 max-w-xs border-t border-border/40 pt-5">
+                <div className="mb-2 flex items-center justify-between text-[8.5px] font-black uppercase tracking-wider text-muted">
+                  <span>🧠 Sức mạnh ghi nhớ FSRS</span>
+                  <span>{s ? `${strength}% · ~${s.interval}d` : "Thẻ mới tinh"}</span>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-border">
+                <div className="h-2 overflow-hidden rounded-full bg-border shadow-inner border border-border/40">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-pink to-primary transition-all duration-500"
-                    style={{ width: `${s ? Math.max(6, strength) : 0}%` }}
+                    style={{ width: `${s ? Math.max(8, strength) : 0}%` }}
                   />
                 </div>
               </div>
@@ -167,24 +168,24 @@ export default function ReviewPage() {
           {!revealed ? (
             <button
               onClick={() => setRevealed(true)}
-              className="mt-8 w-full liquid-glass-btn py-3 text-sm font-bold active:scale-95"
+              className="mt-8 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
             >
               Hiển thị câu ví dụ gợi ý
             </button>
           ) : (
             <div className="animate-fadeIn">
-              <p className="mt-6 rounded-2xl bg-white/10 dark:bg-black/25 border border-border p-4 text-sm italic font-medium leading-relaxed text-foreground/90">
-                {current.example ? `“${current.example}”` : "(Thẻ này chưa được chèn câu ví dụ)"}
+              <p className="mt-6 rounded-2xl bg-white/40 dark:bg-black/25 border border-border p-4 text-xs italic font-semibold leading-relaxed text-foreground/90 shadow-sm">
+                {current.example ? `“${current.example}”` : "(Chưa có câu ví dụ minh họa)"}
               </p>
               
               <div className="border-t border-border/40 mt-6 pt-5">
-                <p className="mb-4 text-xs font-black uppercase tracking-wider text-muted">Bạn nhớ thẻ này tốt đến mức nào?</p>
+                <p className="mb-4 text-[9px] font-black uppercase tracking-wider text-muted">Bạn nhớ thẻ này ở mức độ nào?</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {grades.map(({ g, label, cls }) => (
                     <button
                       key={g}
                       onClick={() => grade(g)}
-                      className={`rounded-xl py-2.5 text-xs font-bold transition-all duration-300 scale-100 active:scale-95 ${cls}`}
+                      className={`rounded-xl py-3 text-xs font-black transition-all duration-300 scale-100 active:scale-95 cursor-pointer shadow-sm ${cls}`}
                     >
                       {label}
                     </button>
@@ -198,4 +199,3 @@ export default function ReviewPage() {
     </main>
   );
 }
-

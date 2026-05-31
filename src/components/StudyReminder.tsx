@@ -93,14 +93,16 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
     <div className="mt-6">
       {/* Banner nhắc khi đã quá giờ mà chưa học */}
       {showBanner && (
-        <div className="mb-4 flex items-center gap-3 rounded-2xl border border-primary/40 bg-primary/10 px-4 py-3 animate-fadeIn">
-          <span className="text-xl">⏰</span>
-          <p className="flex-1 text-sm font-bold text-foreground">
-            Đến giờ học rồi! Chỉ cần ôn vài thẻ hoặc viết 1 dòng nhật ký thôi.
+        <div className="rounded-3xl border border-primary/20 bg-primary/5 p-4 flex items-center gap-3 mb-6 animate-fadeIn">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-white dark:bg-black/40 border border-primary/20 text-lg shadow-sm">
+            ⏰
+          </div>
+          <p className="flex-1 text-xs sm:text-sm font-extrabold text-foreground text-left leading-relaxed">
+            Đến giờ học rồi! Chỉ cần ôn vài thẻ hoặc viết một dòng nhật ký ngắn thôi để giữ chuỗi nhé.
           </p>
           <button
             onClick={() => setShowBanner(false)}
-            className="text-xs font-bold text-muted hover:text-foreground"
+            className="w-8 h-8 rounded-full border border-border/80 bg-white/50 dark:bg-black/25 flex items-center justify-center text-xs font-black text-muted hover:text-foreground active:scale-95 transition-all cursor-pointer"
             aria-label="Đóng nhắc nhở"
           >
             ✕
@@ -108,63 +110,71 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
         </div>
       )}
 
-      <div className="liquid-glass-card p-5 border border-border">
+      {/* Main Reminder Card */}
+      <div className="rounded-3xl border border-border/30 dark:border-white/5 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md p-5 sm:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.015)] relative overflow-hidden text-left transition-colors duration-500 hover:border-primary/30 dark:hover:border-primary/20">
         <button
           onClick={() => setOpen((v) => !v)}
-          className="flex w-full items-center gap-3 text-left"
+          className="flex w-full items-center gap-4 text-left cursor-pointer group animate-fadeIn"
         >
-          <span className="text-2xl">🔔</span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20 text-md shadow-inner transition-transform duration-500 group-hover:scale-105">
+            <span className="relative z-1 animate-pulse">🔔</span>
+          </div>
           <div className="flex-1">
-            <p className="text-sm font-black text-foreground">Nhắc học hằng ngày</p>
-            <p className="text-xs font-semibold text-muted">
+            <p className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Nhắc học hằng ngày</p>
+            <p className="text-[10px] sm:text-xs font-semibold text-muted mt-0.5">
               {settings.enabled
-                ? `Bật · mỗi ngày lúc ${settings.time}`
-                : "Tắt · bật để được nhắc giữ chuỗi học"}
+                ? `Đang bật · Báo lúc ${settings.time} mỗi ngày`
+                : "Đang tắt · Bật nhắc nhở để giữ vững chuỗi học của bạn"}
             </p>
           </div>
-          <span className="text-xs font-bold text-muted">{open ? "▲" : "▼"}</span>
+          <span className="w-8 h-8 rounded-full border border-border/80 bg-white/40 dark:bg-black/20 flex items-center justify-center text-xs font-bold text-muted group-hover:text-foreground transition-all duration-300">
+            {open ? "▲" : "▼"}
+          </span>
         </button>
 
         {open && (
-          <div className="mt-4 space-y-4 border-t border-border/50 pt-4 animate-fadeIn">
+          <div className="mt-5 space-y-4.5 border-t border-border/10 pt-5 animate-fadeIn">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-bold text-foreground">Bật nhắc nhở</span>
+              <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Bật nhắc nhở</span>
               <button
                 onClick={toggleEnabled}
                 role="switch"
                 aria-checked={settings.enabled}
-                className={`relative h-6 w-11 shrink-0 rounded-full transition-colors duration-300 ${
-                  settings.enabled ? "bg-primary" : "bg-black/15 dark:bg-white/15"
+                className={`relative h-6.5 w-12 shrink-0 rounded-full transition-colors duration-300 cursor-pointer ${
+                  settings.enabled ? "bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" : "bg-black/10 dark:bg-white/10"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-300 ${
-                    settings.enabled ? "translate-x-[22px]" : "translate-x-0.5"
+                  className={`absolute top-0.75 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-300 ${
+                    settings.enabled ? "translate-x-[22px]" : "translate-x-1"
                   }`}
                 />
               </button>
             </div>
 
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm font-bold text-foreground">Giờ nhắc</span>
+              <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Giờ nhắc nhở</span>
               <input
                 type="time"
                 value={settings.time}
                 onChange={(e) => changeTime(e.target.value)}
-                className="rounded-xl border border-border bg-white/40 dark:bg-white/5 px-3 py-1.5 text-sm font-bold text-foreground focus:border-primary focus:outline-none"
+                className="rounded-xl border border-border bg-white/60 dark:bg-black/20 px-4.5 py-2 text-xs sm:text-sm font-black text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
               />
             </div>
 
             {perm === "denied" && (
-              <p className="text-xs font-semibold text-amber-600 dark:text-amber-400">
-                Trình duyệt đang chặn thông báo. Hãy bật quyền thông báo cho trang
-                này trong cài đặt trình duyệt để nhận nhắc nhở.
-              </p>
+              <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20">
+                <p className="text-[10px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 leading-relaxed">
+                  ⚠️ Trình duyệt của bạn đang chặn thông báo. Vui lòng cấp quyền nhận thông báo cho SpeakUp trong phần Cài đặt trang web của trình duyệt để có thể nhận nhắc nhở hằng ngày nhé.
+                </p>
+              </div>
             )}
-            <p className="text-xs font-semibold text-muted leading-relaxed">
-              Nhắc nhở hoạt động khi tab SpeakUp đang mở. Để nhận thông báo cả khi
-              đóng app, bản sau sẽ thêm push notification thật.
-            </p>
+            
+            <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-border/10">
+              <p className="text-[9px] sm:text-[10px] font-semibold text-muted leading-relaxed">
+                * Nhắc nhở hoạt động khi tab trình duyệt của SpeakUp đang mở. Ở bản cập nhật tiếp theo, chúng tôi sẽ hỗ trợ Push Notification hệ thống ngay cả khi bạn tắt ứng dụng.
+              </p>
+            </div>
           </div>
         )}
       </div>

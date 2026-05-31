@@ -11,6 +11,8 @@ export const supabase = createClient(url, anonKey, {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: false,
+    // Bật để hứng phiên đăng nhập trả về từ Google OAuth (redirect kèm token trên URL).
+    detectSessionInUrl: true,
+    flowType: "pkce",
   },
 });

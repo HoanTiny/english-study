@@ -9,6 +9,7 @@ export type Pronounce = {
   audio?: string;
   us?: Accent;
   uk?: Accent;
+  pos?: string[];
 };
 
 const memo = new Map<string, Pronounce>();

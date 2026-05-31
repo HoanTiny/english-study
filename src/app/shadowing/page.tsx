@@ -30,7 +30,8 @@ export default function ShadowingPage() {
   }, [ready, userId]);
 
   function speak(text: string) {
-    if (!window.speechSynthesis) return;
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-US";
     u.rate = speed;
@@ -90,22 +91,27 @@ export default function ShadowingPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-12 pt-16 animate-fadeIn">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-6 mb-8">
+    <main className="mx-auto max-w-2xl px-5 py-16 animate-fadeIn relative">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-border/40 pb-6 mb-10">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-gradient-iridescent">Shadowing nhại giọng</h1>
-          <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">
-            Nghe phát âm chuẩn của người bản xứ → nhại lại từng ngữ điệu biểu cảm → thu âm giọng nói để AI chấm điểm phản xạ tức thì.
+          <span className="shimmer-edge inline-flex self-start items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+            🗣️ LUYỆN NÓI NHẠI GIỌNG
+          </span>
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground mt-3">Shadowing nhại giọng</h1>
+          <p className="mt-2 text-xs sm:text-sm font-semibold text-muted leading-relaxed">
+            Nghe phát âm chuẩn của người bản xứ → nhại lại từng ngữ điệu biểu cảm → thu âm giọng nói để AI phân tích và chấm điểm tức thì.
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-1 rounded-xl border border-border bg-white/20 dark:bg-white/5 p-1 backdrop-blur-md shadow-sm w-fit self-start sm:self-center">
+        
+        {/* Speed dials */}
+        <div className="flex shrink-0 items-center gap-1 rounded-2xl border border-border/60 bg-surface/50 p-1.5 backdrop-blur-md shadow-sm w-fit self-start sm:self-center">
           {speeds.map((s) => (
             <button
               key={s}
               onClick={() => setSpeed(s)}
-              className={`rounded-lg px-3 py-1 text-xs font-bold transition-all duration-300 ${
+              className={`rounded-xl px-3.5 py-2 text-xs font-black transition-all duration-300 cursor-pointer ${
                 speed === s 
-                  ? "bg-primary text-white shadow-[0_2px_8px_rgba(99,102,241,0.25)]" 
+                  ? "bg-primary text-primary-fg shadow-sm" 
                   : "text-muted hover:text-foreground"
               }`}
             >
@@ -115,63 +121,63 @@ export default function ShadowingPage() {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
         {shadowItems.map((item) => {
           const score = scores[item.id];
           const isRec = recordingId === item.id;
           return (
-            <div key={item.id} className="liquid-glass-card p-5 md:p-6 border border-border relative overflow-hidden transition-all duration-300 hover:shadow-md group">
-              <div className="absolute -top-12 -right-12 w-24 h-24 bg-primary/5 rounded-full filter blur-xl pointer-events-none" />
+            <div key={item.id} className="liquid-glass-card p-6 border border-border/80 shadow-md relative overflow-hidden transition-all duration-300 hover:shadow-lg group">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/5 to-transparent blur-xl pointer-events-none" />
 
-              <div className="flex items-center gap-2">
-                <span className="rounded-lg bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-primary">
-                  Phân cấp: {item.level}
+              <div className="flex items-center gap-3">
+                <span className="rounded-full bg-primary-soft border border-primary/10 px-3.5 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">
+                  {item.level}
                 </span>
                 {score != null && (
                   <span
-                    className={`ml-auto text-xs font-extrabold border rounded-lg px-2.5 py-0.5 shadow-sm transition-all duration-500 ${
+                    className={`ml-auto text-[10px] font-black border rounded-full px-3.5 py-1 shadow-sm transition-all duration-500 ${
                       score >= 80 
-                        ? "bg-gradient-to-tr from-accent/20 to-emerald-500/20 border-accent/30 text-accent shadow-[0_0_12px_rgba(6,182,212,0.2)]" 
-                        : "bg-gradient-to-tr from-warn/20 to-rose-500/20 border-warn/30 text-warn shadow-[0_0_12px_rgba(245,158,11,0.2)]"
+                        ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400" 
+                        : "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
                     }`}
                   >
-                    Điểm: <span className="text-sm font-black">{score}</span>
+                    Đạt được: <span className="text-xs font-black">{score}đ</span>
                   </span>
                 )}
               </div>
               
-              <p className="mt-3 text-xl font-bold text-foreground leading-relaxed">{item.en}</p>
-              <p className="text-sm font-semibold text-muted mt-0.5">{item.vi}</p>
+              <p className="mt-4 text-lg font-bold text-foreground leading-relaxed tracking-tight">{item.en}</p>
+              <p className="text-xs font-semibold text-muted mt-1">{item.vi}</p>
 
-              <div className="mt-4 flex flex-col sm:flex-row gap-3 pt-3 border-t border-border/40">
+              <div className="mt-5 flex flex-col sm:flex-row gap-3 pt-4 border-t border-border/40">
                 <button
                   onClick={() => speak(item.en)}
-                  className="flex-1 rounded-xl border border-border bg-white/20 dark:bg-white/5 py-2.5 text-sm font-semibold transition-all duration-300 hover:border-primary/50 hover:bg-primary/5 active:scale-95 flex items-center justify-center gap-1.5"
+                  className="flex-1 rounded-full border border-border/60 bg-surface/50 py-3.5 text-xs font-black uppercase tracking-wider transition-all duration-300 hover:border-primary/50 hover:bg-primary-soft/30 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  <span>🔊</span> Nghe phát âm mẫu
+                  <span>🔊</span> Nghe mẫu
                 </button>
                 {!isRec ? (
                   <button
                     onClick={() => record(item.id, item.en)}
-                    className="flex-1 liquid-glass-btn py-2.5 text-sm font-bold flex items-center justify-center gap-1.5 active:scale-95"
+                    className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-95"
                   >
-                    🎤 Luyện nhại giọng
+                    🎤 Luyện nhại
                   </button>
                 ) : assessing ? (
                   <button
                     disabled
-                    className="flex-1 animate-pulse rounded-xl bg-primary py-2.5 text-sm font-bold text-white flex items-center justify-center gap-1.5 cursor-wait"
+                    className="flex-1 animate-pulse rounded-full bg-primary border border-primary/20 py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg flex items-center justify-center gap-1.5 cursor-wait"
                   >
-                    <span className="h-2 w-2 rounded-full bg-white animate-ping"></span>
+                    <span className="h-2 w-2 rounded-full bg-current animate-ping"></span>
                     Đang nghe… nói câu trên
                   </button>
                 ) : (
                   <button
                     onClick={() => stop(item.id)}
-                    className="flex-1 animate-pulse rounded-xl bg-rose-500 py-2.5 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_6px_16px_rgba(244,63,94,0.3)] flex items-center justify-center gap-1.5"
+                    className="flex-1 animate-pulse rounded-full bg-rose-600 py-3.5 text-xs font-black uppercase tracking-wider text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg shadow-rose-500/20 flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <span className="h-2 w-2 rounded-full bg-white animate-ping"></span>
-                    Dừng ghi âm & Chấm điểm
+                    Dừng ghi & Chấm điểm
                   </button>
                 )}
               </div>
@@ -182,4 +188,3 @@ export default function ShadowingPage() {
     </main>
   );
 }
-

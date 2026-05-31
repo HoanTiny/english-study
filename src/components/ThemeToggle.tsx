@@ -24,7 +24,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Đổi giao diện sáng/tối"
-      className="rounded-xl border border-border bg-white/20 dark:bg-white/5 backdrop-blur-md px-3.5 py-2 text-sm text-muted transition-all duration-300 hover:text-foreground hover:scale-105 active:scale-95 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] hover:shadow-[0_4px_16px_var(--glow-color)]"
+      className="shimmer-edge rounded-xl border border-border bg-surface backdrop-blur-md px-4 py-2 text-xs font-bold text-muted transition-all duration-300 hover:text-foreground hover:border-primary/50 hover:scale-[1.03] active:scale-95 shadow-sm"
     >
       {dark ? "☀️ Sáng" : "🌙 Tối"}
     </button>

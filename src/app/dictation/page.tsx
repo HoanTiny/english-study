@@ -1,15 +1,18 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import sentencesData from "@/data/sentences.json";
 import YtPlayer, { type YtPlayerHandle } from "@/components/YtPlayer";
+import { useAuth } from "@/lib/auth";
+import { listSavedVideos, saveVideo, deleteSavedVideo, type SavedVideo } from "@/lib/dictationVideosRepo";
+import { LISTEN_TOPICS } from "@/data/listenVideos";
 
-// NGHE CHÉP CHÍNH TẢ kiểu Parroto. 2 nguồn:
-//  • Kho câu (TTS): audio tổng hợp + câu của app — hợp lệ 100%, ổn định.
-//  • Video YouTube: dán link video CÓ phụ đề → lấy transcript, đồng bộ player.
-// Cả 2 dùng chung: ô che TỪNG TỪ (👁 để lộ), độ khó Easy/Normal/Hard, thanh Bản chép + %.
+// Gợi ý sẵn: các video từ trang Luyện nghe CÓ phụ đề (chép chính tả được).
+const SUGGESTED = LISTEN_TOPICS.flatMap((t) => t.videos)
+  .filter((v) => v.cc)
+  .map((v) => ({ id: v.id, title: v.title, channel: v.channel, level: v.level }));
 
 type Row = { en: string; vi?: string; topic?: string; start?: number; dur?: number };
 const DATA = sentencesData as Row[];
@@ -17,8 +20,8 @@ const TOPICS = [...new Set(DATA.map((s) => s.topic).filter(Boolean))] as string[
 type Diff = "easy" | "normal" | "hard";
 type Source = "bank" | "yt";
 
-function norm(w: string) {
-  return w.toLowerCase().replace(/[.,!?;:"'’()]/g, "");
+function norm(s: string) {
+  return s.toLowerCase().replace(/[.,!?;:"'’()]/g, "");
 }
 function maskWord(w: string, diff: Diff) {
   const len = w.replace(/[.,!?;:"'’()]/g, "").length;
@@ -54,7 +57,9 @@ export default function DictationPage() {
 function DictationInner() {
   const sp = useSearchParams();
   const vParam = sp.get("v");
+  const { userId } = useAuth();
   const [source, setSource] = useState<Source>(vParam ? "yt" : "bank");
+  const [saved, setSaved] = useState<SavedVideo[]>([]);
   const [phase, setPhase] = useState<"setup" | "playing">("setup");
   const [diff, setDiff] = useState<Diff>("normal");
 
@@ -96,26 +101,53 @@ function DictationInner() {
     setTimeout(() => speak(rows[0].en), 300);
   }
 
-  async function fetchYt(value: string) {
-    setErr("");
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/yt-transcript?v=${encodeURIComponent(value)}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Không lấy được phụ đề.");
-      const rows: Row[] = (data.segments as { text: string; start: number; dur: number }[]).map((s) => ({
-        en: s.text,
-        start: s.start,
-        dur: s.dur,
-      }));
-      if (rows.length === 0) throw new Error("Phụ đề rỗng.");
-      begin(rows, data.id);
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : "Có lỗi xảy ra.");
-    } finally {
-      setLoading(false);
-    }
+  const refreshSaved = useCallback(() => {
+    listSavedVideos()
+      .then(setSaved)
+      .catch(() => {});
+  }, []);
+
+  const fetchYt = useCallback(
+    async (value: string) => {
+      setErr("");
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/yt-transcript?v=${encodeURIComponent(value)}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Không lấy được phụ đề.");
+        const rows: Row[] = (data.segments as { text: string; start: number; dur: number }[]).map((s) => ({
+          en: s.text,
+          start: s.start,
+          dur: s.dur,
+        }));
+        if (rows.length === 0) throw new Error("Phụ đề rỗng.");
+        // Lưu lại video để lần sau dùng không cần dán link.
+        if (userId && data.id) {
+          saveVideo(userId, { videoId: data.id, title: data.title ?? "", channel: data.channel ?? "" })
+            .then(refreshSaved)
+            .catch(() => {});
+        }
+        begin(rows, data.id);
+      } catch (e) {
+        setErr(e instanceof Error ? e.message : "Có lỗi xảy ra.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    // begin/setX là ổn định; chỉ phụ thuộc userId & refreshSaved
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [userId, refreshSaved],
+  );
+
+  async function removeSaved(id: string) {
+    setSaved((list) => list.filter((v) => v.id !== id));
+    deleteSavedVideo(id).catch(refreshSaved);
   }
+
+  // Nạp danh sách video đã lưu khi đã đăng nhập.
+  useEffect(() => {
+    if (userId) refreshSaved();
+  }, [userId, refreshSaved]);
 
   // Mở từ trang Luyện nghe với ?v=<id> → tự nạp transcript & bắt đầu
   useEffect(() => {
@@ -125,7 +157,7 @@ function DictationInner() {
       fetchYt(vParam);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vParam]);
+  }, [vParam, fetchYt]);
 
   const cur = segs[idx];
   const words = useMemo(() => (cur ? cur.en.split(/\s+/) : []), [cur]);
@@ -165,68 +197,132 @@ function DictationInner() {
   // ===================== SETUP =====================
   if (phase === "setup") {
     return (
-      <main className="mx-auto max-w-2xl px-6 py-12 pt-16 animate-fadeIn">
-        <Link href="/listening" className="mb-4 inline-block text-xs font-bold text-muted hover:text-foreground">← Luyện nghe</Link>
-        <div className="liquid-glass-card flex flex-col items-center gap-6 p-8 text-center">
-          <span className="text-6xl">📝</span>
-          <div className="space-y-2">
-            <h1 className="font-display text-3xl text-foreground">Chép chính tả</h1>
-            <p className="mx-auto max-w-md text-sm font-medium text-muted">
-              Nghe từng đoạn → gõ lại. Ô che <b>từng từ</b> (bấm 👁 để lộ), 3 mức độ khó, thanh bản chép & tiến độ.
+      <main className="mx-auto max-w-2xl px-5 py-16 animate-fadeIn relative">
+        <Link href="/listening" className="mb-5 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground cursor-pointer transition-colors">
+          ← Luyện nghe
+        </Link>
+        <div className="liquid-glass-card flex flex-col items-center gap-6 p-6 md:p-8 text-center border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md">
+          <span className="text-6xl animate-bounce">📝</span>
+          <div className="space-y-1">
+            <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+              ⚡ CHÉP CHÍNH TẢ PHẢN XẠ
+            </span>
+            <h1 className="font-display text-3xl font-extrabold text-foreground mt-3">Nghe chép chính tả</h1>
+            <p className="mx-auto max-w-md text-xs sm:text-sm font-semibold text-muted leading-relaxed">
+              Luyện thính giác phản xạ từng từ chuẩn xác. Nghe từng phân đoạn → điền lại bản chép.
             </p>
           </div>
 
           {/* Chọn nguồn */}
-          <div className="flex w-full max-w-sm gap-2">
-            <button onClick={() => setSource("bank")} className={`flex-1 rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition-all ${source === "bank" ? "border-primary bg-primary text-white" : "border-border text-muted hover:text-foreground"}`}>
-              📚 Kho câu (TTS)
+          <div className="flex w-full max-w-sm gap-3">
+            <button onClick={() => setSource("bank")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "bank" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
+              📚 Kho câu
             </button>
-            <button onClick={() => setSource("yt")} className={`flex-1 rounded-xl border-2 px-3 py-2.5 text-sm font-bold transition-all ${source === "yt" ? "border-primary bg-primary text-white" : "border-border text-muted hover:text-foreground"}`}>
-              ▶️ Video YouTube
+            <button onClick={() => setSource("yt")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "yt" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
+              ▶️ YouTube Video
             </button>
           </div>
 
           {/* Độ khó (chung) */}
           <div className="w-full max-w-sm text-left">
-            <label className="text-xs font-bold uppercase tracking-wider text-muted">Độ khó</label>
-            <div className="mt-1 flex gap-2">
+            <label className="text-[9px] font-black uppercase tracking-wider text-muted">Độ khó che chữ</label>
+            <div className="mt-2 flex gap-3">
               {(["easy", "normal", "hard"] as Diff[]).map((d) => (
-                <button key={d} onClick={() => setDiff(d)} className={`flex-1 rounded-xl border-2 py-2 text-sm font-bold capitalize transition-all ${diff === d ? "border-primary bg-primary text-white" : "border-border text-muted hover:text-foreground"}`}>
-                  {d}
+                <button key={d} onClick={() => setDiff(d)} className={`flex-1 rounded-full border py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${diff === d ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground"}`}>
+                  {d === "easy" ? "Dễ" : d === "normal" ? "Vừa" : "Khó"}
                 </button>
               ))}
             </div>
-            <p className="mt-1 text-[11px] text-muted">Easy: hiện chữ cái đầu · Normal: che theo độ dài · Hard: giấu cả độ dài.</p>
+            <p className="mt-2 text-[10px] font-semibold text-muted leading-normal">
+              * Dễ: lộ ký tự đầu · Vừa: che theo độ dài ký tự · Khó: giấu kín toàn bộ ký tự.
+            </p>
           </div>
 
           {source === "bank" ? (
-            <div className="w-full max-w-sm space-y-3 text-left">
+            <div className="w-full max-w-sm space-y-4 text-left">
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-muted">Chủ đề</label>
-                <select value={topic} onChange={(e) => setTopic(e.target.value)} className="mt-1 w-full rounded-xl border-2 border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground outline-none focus:border-primary">
+                <label className="text-[9px] font-black uppercase tracking-wider text-muted">Chủ đề từ vựng</label>
+                <select value={topic} onChange={(e) => setTopic(e.target.value)} className="mt-2 w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4.5 py-3 text-xs font-bold text-foreground outline-none focus:border-primary">
                   <option value="all">Tất cả ({DATA.length} câu)</option>
                   {TOPICS.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
-                <p className="mt-1 text-xs font-semibold text-muted">{count} câu khả dụng · mỗi phiên 8 câu</p>
+                <p className="mt-2 text-[10px] font-semibold text-muted">{count} câu khả dụng · mỗi phiên 8 câu ôn</p>
               </div>
-              <button onClick={startBank} className="liquid-glass-btn w-full py-3.5 text-sm font-bold">Bắt đầu nghe →</button>
+              <button onClick={startBank} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider shadow-md">Bắt đầu ngay</button>
             </div>
           ) : (
-            <div className="w-full max-w-sm space-y-3 text-left">
+            <div className="w-full max-w-sm space-y-4 text-left">
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-muted">Link video YouTube</label>
+                <label className="text-[9px] font-black uppercase tracking-wider text-muted">Link liên kết YouTube</label>
                 <input
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
                   placeholder="https://www.youtube.com/watch?v=..."
-                  className="mt-1 w-full rounded-xl border-2 border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground outline-none focus:border-primary"
+                  className="mt-2 w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4.5 py-3 text-xs font-bold text-foreground outline-none focus:border-primary shadow-inner"
                 />
-                <p className="mt-1 text-[11px] text-muted">Chỉ chạy với video <b>có phụ đề</b> (CC). Phục vụ học cá nhân.</p>
+                <p className="mt-2 text-[10px] font-semibold text-muted leading-normal">Lưu ý: Chỉ khả dụng với video có chứa phụ đề chuẩn của tác giả (CC).</p>
               </div>
-              {err && <p className="rounded-xl bg-pink-soft px-3 py-2 text-xs font-semibold text-pink">{err}</p>}
-              <button onClick={() => fetchYt(link)} disabled={loading || !link.trim()} className="liquid-glass-btn w-full py-3.5 text-sm font-bold disabled:opacity-50">
-                {loading ? "Đang lấy phụ đề…" : "Lấy phụ đề & bắt đầu →"}
+              {err && <p className="rounded-2xl bg-rose-500/10 border border-rose-500/20 px-4 py-3 text-xs font-semibold text-rose-600 mt-2">{err}</p>}
+              <button onClick={() => fetchYt(link)} disabled={loading || !link.trim()} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider shadow-md disabled:opacity-50">
+                {loading ? "Đang lấy transcript…" : "Tải Transcript & bắt đầu"}
               </button>
+
+              {/* Video đã lưu — bấm để dùng lại, không cần dán link */}
+              {saved.length > 0 && (
+                <div className="pt-1">
+                  <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Video đã lưu</p>
+                  <div className="max-h-60 space-y-2 overflow-y-auto pr-1">
+                    {saved.map((v) => (
+                      <div key={v.id} className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-surface/50 p-2 shadow-sm">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={`https://i.ytimg.com/vi/${v.videoId}/default.jpg`} alt="" className="h-10 w-16 shrink-0 rounded-lg object-cover" loading="lazy" />
+                        <button
+                          onClick={() => { setLink(v.videoId); fetchYt(v.videoId); }}
+                          disabled={loading}
+                          className="min-w-0 flex-1 cursor-pointer text-left disabled:opacity-50"
+                          title="Mở lại video này"
+                        >
+                          <p className="truncate text-xs font-bold text-foreground">{v.title}</p>
+                          {v.channel && <p className="truncate text-[10px] font-semibold text-muted">{v.channel}</p>}
+                        </button>
+                        <button
+                          onClick={() => removeSaved(v.id)}
+                          className="shrink-0 cursor-pointer rounded-lg px-2 py-1 text-muted hover:bg-rose-500/10 hover:text-rose-600"
+                          aria-label="Xoá video đã lưu"
+                          title="Xoá khỏi danh sách"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Gợi ý từ Luyện nghe (đều có phụ đề) */}
+              <div className="pt-1">
+                <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">
+                  📝 Gợi ý từ Luyện nghe <span className="text-emerald-600">· có phụ đề</span>
+                </p>
+                <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
+                  {SUGGESTED.map((v) => (
+                    <button
+                      key={v.id}
+                      onClick={() => { setLink(v.id); fetchYt(v.id); }}
+                      disabled={loading}
+                      className="flex w-full cursor-pointer items-center gap-2.5 rounded-2xl border border-border/60 bg-surface/50 p-2 text-left shadow-sm transition-all hover:border-primary/50 disabled:opacity-50"
+                      title="Dùng video này để chép chính tả"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={`https://i.ytimg.com/vi/${v.id}/default.jpg`} alt="" className="h-10 w-16 shrink-0 rounded-lg object-cover" loading="lazy" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-xs font-bold text-foreground">{v.title}</span>
+                        <span className="block truncate text-[10px] font-semibold text-muted">{v.channel} · {v.level}</span>
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -236,94 +332,150 @@ function DictationInner() {
 
   // ===================== PLAYING =====================
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 pt-16 animate-fadeIn">
-      <div className="mb-4 flex items-center justify-between">
-        <button onClick={() => { setPhase("setup"); ytRef.current?.pause(); }} className="text-xs font-bold text-muted hover:text-foreground">← Thoát</button>
-        <div className="flex items-center gap-1 rounded-xl border border-border bg-surface p-0.5 text-xs font-bold">
+    <main className="mx-auto max-w-6xl px-6 py-6 pt-20 animate-fadeIn relative">
+      <div className="mb-4 flex items-center justify-between border-b border-border/40 pb-3">
+        <button onClick={() => { setPhase("setup"); ytRef.current?.pause(); }} className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-muted hover:text-foreground hover:border-primary/50 transition-all duration-300 active:scale-95 shadow-sm cursor-pointer">← Thoát game</button>
+        <div className="flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/35 p-1.5 text-[9px] font-black uppercase tracking-wider shadow-sm">
           {(["easy", "normal", "hard"] as Diff[]).map((d) => (
-            <button key={d} onClick={() => setDiff(d)} className={`rounded-lg px-3 py-1 capitalize ${diff === d ? "bg-primary text-white" : "text-muted"}`}>{d}</button>
+            <button key={d} onClick={() => setDiff(d)} className={`rounded-lg px-3 py-1 cursor-pointer transition-all ${diff === d ? "bg-primary text-primary-fg shadow-sm" : "text-muted"}`}>{d === "easy" ? "Dễ" : d === "normal" ? "Vừa" : "Khó"}</button>
           ))}
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
-        {/* Trái + giữa */}
-        <div className="space-y-4">
-          <div className="liquid-glass-card flex flex-col items-center gap-4 p-6 text-center">
-            {source === "yt" && vid ? (
+      <div className="grid gap-6 lg:grid-cols-[1.14fr_0.86fr] items-start">
+        {/* Cinematic Studio Work Deck */}
+        <div className="liquid-glass-card p-5 sm:p-6 border border-border/85 shadow-2xl relative overflow-hidden flex flex-col gap-4">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-2xl pointer-events-none" />
+
+          {/* YouTube Player Frame */}
+          {source === "yt" && vid ? (
+            <div className="w-full rounded-2xl overflow-hidden border border-border bg-black/10 shadow-lg max-w-xl mx-auto">
               <YtPlayer ref={ytRef} videoId={vid} />
-            ) : (
-              <span className="text-5xl">🐤🎧</span>
-            )}
-            <p className="text-xs font-bold uppercase tracking-wider text-muted">Đoạn {idx + 1}/{segs.length}</p>
-            <div className="flex gap-3">
-              <button onClick={() => listen(false)} className="liquid-glass-btn px-6 py-2.5 text-sm font-bold">▶ Nghe đoạn</button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-6 bg-black/5 dark:bg-white/5 border border-border/40 rounded-2xl shadow-inner">
+              <span className="text-5xl animate-bounce">🎧🎙️</span>
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted mt-2">Học nghe chép chính tả kho câu</p>
+            </div>
+          )}
+
+          {/* Playback Controls Row */}
+          <div className="flex items-center justify-between gap-4 border-b border-border/40 pb-3">
+            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted">
+              Phân đoạn {idx + 1}/{segs.length}
+            </span>
+            <div className="flex gap-2.5">
+              <button 
+                onClick={() => listen(false)} 
+                className="liquid-glass-btn px-6 py-2.5 text-[10px] font-black uppercase tracking-wider shadow-md active:scale-95 transition-all"
+              >
+                ▶ Nghe đoạn
+              </button>
               {source === "bank" && (
-                <button onClick={() => listen(true)} className="rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-bold text-foreground hover:border-primary/50">🐢 Chậm</button>
+                <button 
+                  onClick={() => listen(true)} 
+                  className="rounded-full border border-border/80 bg-white/50 dark:bg-slate-900/60 px-5 py-2.5 text-[10px] font-black uppercase tracking-wider text-foreground hover:border-primary/55 hover:bg-primary-soft/20 cursor-pointer active:scale-95 transition-all duration-300 shadow-sm"
+                >
+                  🐢 Nghe chậm
+                </button>
               )}
             </div>
           </div>
 
-          <div className="liquid-glass-card p-5">
-            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-muted">Gõ những gì bạn nghe được</p>
-            <textarea value={typed} onChange={(e) => setTyped(e.target.value)} rows={2} placeholder="Gõ câu trả lời của bạn ở đây…" className="w-full rounded-xl border-2 border-border bg-background px-4 py-3 text-base font-semibold text-foreground outline-none focus:border-primary" />
+          {/* Typing Laboratory */}
+          <div>
+            <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Gõ bản chép của bạn ở phía dưới</p>
+            <textarea 
+              value={typed} 
+              onChange={(e) => setTyped(e.target.value)} 
+              rows={2} 
+              placeholder="Nhập câu tiếng Anh bạn vừa nghe được…" 
+              className="w-full resize-none rounded-xl border border-border/80 bg-white/35 dark:bg-black/35 p-3.5 text-xs sm:text-sm font-semibold text-foreground outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/80 focus:bg-white/80 dark:focus:bg-slate-950/80 transition-all placeholder:text-muted/50 shadow-inner leading-relaxed" 
+            />
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            {/* Spelling dynamic word badges */}
+            <div className="mt-3.5 flex flex-wrap gap-2">
               {words.map((w, i) => {
                 const st = wordState(i);
-                const cls =
-                  st === "correct" ? "border-primary bg-primary-soft text-primary"
-                  : st === "wrong" ? "border-pink bg-pink-soft text-pink"
-                  : st === "revealed" ? "border-amber-400 bg-amber-400/15 text-amber-600"
-                  : "border-border bg-surface text-muted";
+                let cls = "border-border bg-white/40 dark:bg-black/20 text-muted shadow-sm";
+                if (st === "correct") cls = "border-teal-500 bg-teal-500/10 text-teal-600 dark:text-teal-400 font-bold shadow-sm";
+                else if (st === "wrong") cls = "border-pink bg-pink-soft text-pink font-bold shadow-sm";
+                else if (st === "revealed") cls = "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold shadow-sm";
                 return (
-                  <span key={i} className={`flex flex-col items-center rounded-lg border px-2 py-1 ${cls}`}>
+                  <span key={i} className={`flex items-center gap-1 rounded-xl border px-3 py-1.5 transition-all ${cls}`}>
                     {!isDone && st === "hidden" && (
-                      <button onClick={() => setRevealed((s) => new Set(s).add(i))} className="text-[10px] opacity-60 hover:opacity-100" title="Hiện từ này">👁</button>
+                      <button onClick={() => setRevealed((s) => new Set(s).add(i))} className="text-[10px] opacity-65 hover:opacity-100 cursor-pointer mr-1" title="Hiện từ này">👁</button>
                     )}
-                    <span className="text-sm font-bold tracking-wide">{st === "hidden" ? maskWord(w, diff) : w}</span>
+                    <span className="text-xs font-semibold tracking-wide leading-none">{st === "hidden" ? maskWord(w, diff) : w}</span>
                   </span>
                 );
               })}
             </div>
-            <p className="mt-2 text-[11px] text-muted">Từ bấm 👁 (tiết lộ) sẽ không được tính điểm.</p>
+            
+            <p className="mt-2 text-[8px] font-black uppercase tracking-wider text-muted">* Mẹo: Mỗi từ mở bằng nhãn 👁 sẽ không được tính điểm chính xác.</p>
 
-            {isDone && cur?.vi && <p className="mt-2 text-sm font-medium text-muted">Nghĩa: {cur.vi}</p>}
+            {/* Vietnamese translation box */}
+            {isDone && cur?.vi && (
+              <div className="mt-3.5 text-xs sm:text-sm font-bold text-primary bg-primary-soft/80 border border-primary/25 p-3.5 rounded-2xl leading-relaxed shadow-sm">
+                💡 Nghĩa Việt: {cur.vi}
+              </div>
+            )}
 
-            <div className="mt-4 flex flex-col gap-2">
-              <button onClick={revealAll} className="rounded-xl border border-amber-400/50 bg-amber-400/10 py-2.5 text-sm font-bold text-amber-600 hover:bg-amber-400/20">Hiện tất cả từ</button>
+            {/* Action Row */}
+            <div className="mt-4.5 flex gap-3">
+              <button 
+                onClick={revealAll} 
+                className="flex-1 rounded-full border border-amber-500/30 bg-amber-500/10 py-3.5 text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer shadow-sm active:scale-95 transition-all"
+              >
+                Hiện tất cả các từ
+              </button>
               {!isDone ? (
-                <button onClick={check} disabled={!typed.trim()} className="liquid-glass-btn py-3 text-sm font-bold disabled:opacity-50">Kiểm tra</button>
+                <button 
+                  onClick={check} 
+                  disabled={!typed.trim()} 
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
+                >
+                  Kiểm tra kết quả
+                </button>
               ) : (
-                <button onClick={() => goto(idx + 1)} disabled={idx + 1 >= segs.length} className="liquid-glass-btn py-3 text-sm font-bold disabled:opacity-50">Tiếp theo →</button>
+                <button 
+                  onClick={() => goto(idx + 1)} 
+                  disabled={idx + 1 >= segs.length} 
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
+                >
+                  Đoạn tiếp theo →
+                </button>
               )}
             </div>
           </div>
         </div>
 
-        {/* Phải: BẢN CHÉP */}
-        <div className="liquid-glass-card flex flex-col p-4">
-          <div className="mb-3 flex items-center justify-between">
-            <span className="font-display text-lg text-foreground">Bản chép</span>
-            <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-bold text-primary">{progress}%</span>
+        {/* High-Fidelity DAW Playlist Tracks */}
+        <div className="liquid-glass-card flex flex-col p-5 sm:p-6 border border-border/85 shadow-2xl relative overflow-hidden max-h-[560px]">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
+          
+          <div className="mb-3.5 flex items-center justify-between border-b border-border/40 pb-3">
+            <span className="font-display text-sm font-black uppercase tracking-wider text-foreground">Bản chép chính tả</span>
+            <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[9px] font-black text-primary shadow-sm">{progress}% hoàn tất</span>
           </div>
-          <div className="mb-3 h-2 overflow-hidden rounded-full bg-border">
-            <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="mb-4 h-2.5 overflow-hidden rounded-full bg-border border border-border/40 shadow-inner">
+            <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
-          <div className="max-h-[60vh] space-y-2 overflow-y-auto pr-1">
+          <div className="space-y-3 overflow-y-auto pr-1 custom-scrollbar">
             {segs.map((s, i) => {
               const ws = s.en.split(/\s+/);
+              const active = i === idx;
               return (
                 <button
                   key={i}
                   onClick={() => goto(i)}
-                  className={`w-full rounded-xl border-2 p-3 text-left transition-all ${i === idx ? "border-primary bg-primary-soft/40" : done[i] ? "border-border bg-surface" : "border-border bg-background"}`}
+                  className={`w-full rounded-2xl border p-4 text-left transition-all duration-300 cursor-pointer shadow-sm active:scale-98 ${active ? "border-primary bg-primary-soft" : done[i] ? "border-border/60 bg-white/40 dark:bg-slate-900/30" : "border-border bg-white/20 dark:bg-black/10"}`}
                 >
-                  <div className="mb-1 flex items-center justify-between">
-                    <span className="text-xs font-bold text-muted">#{i + 1}</span>
-                    {done[i] && <span className="text-xs text-primary">✓</span>}
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <span className="text-[9px] font-black uppercase tracking-wider text-muted">Đoạn #{i + 1}</span>
+                    {done[i] && <span className="text-[9px] text-primary font-black bg-primary-soft border border-primary/10 px-2 py-0.5 rounded-full shadow-sm">✓ Hoàn thành</span>}
                   </div>
-                  <p className="text-sm font-semibold leading-relaxed text-foreground/90">
+                  <p className="text-xs sm:text-sm font-semibold leading-relaxed text-foreground/90">
                     {done[i] ? s.en : ws.map((w) => maskWord(w, diff)).join(" ")}
                   </p>
                 </button>

@@ -88,7 +88,7 @@ const YtPlayer = forwardRef<YtPlayerHandle, { videoId: string }>(function YtPlay
       if (!p) return;
       clearTimers();
       const from = Math.max(0, start);
-      const end = from + Math.max(0.4, dur) + 0.05; // đầu đoạn + thời lượng (đã chặn theo đoạn sau)
+      const end = from + Math.max(0.4, dur); // mốc dừng thật theo từ (đầu đoạn kế tiếp)
       p.seekTo(from, true);
       p.playVideo();
       // Dừng theo VỊ TRÍ PHÁT THỰC TẾ (chính xác kể cả khi đang đệm/tua)

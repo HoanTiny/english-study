@@ -1,42 +1,44 @@
 @import "tailwindcss";
 
-/* Bảng màu theo design Figma (Colors & Shadows): teal làm chủ đạo, nền sáng phẳng */
+@custom-variant dark (&:is(.dark *));
+
+/* Premium Liquid Glass Theme: deep navy / soft teal / warm white */
 :root {
-  --background: #f6f5f4;       /* Grey Light */
-  --surface: #ffffff;          /* thẻ phẳng nền trắng */
-  --foreground: #1a1a1a;       /* gần Black */
-  --muted: #757575;            /* Grey Dark */
-  --border: #e0e0e0;           /* Grey Medium */
-  --primary: #2b788b;          /* Cyan Dark (teal) */
+  --background: #fafaf9;                 /* Luxe warm organic white */
+  --surface: rgba(255, 255, 255, 0.45);  /* Translucent frosted glass */
+  --foreground: #0a1120;                 /* Deep navy near-black */
+  --muted: #4b5563;                      /* Soft charcoal gray */
+  --border: rgba(10, 17, 32, 0.07);      /* Ultra-thin slate border */
+  --primary: #0f766e;                    /* Rich, calming forest teal */
   --primary-fg: #ffffff;
-  --primary-soft: #c3dce3;     /* Cyan Light (nền nút phụ) */
-  --accent: #2b788b;
-  --pink: #945069;             /* Pink Dark */
-  --pink-soft: #f2d4dc;        /* Pink Light */
-  --warn: #f59e0b;
-  --ring: rgba(43, 120, 139, 0.25);
-  --glass-highlight: rgba(255, 255, 255, 0.7);
-  --glow-color: rgba(43, 120, 139, 0.12);
+  --primary-soft: rgba(15, 118, 110, 0.09); /* Soft forest teal background wash */
+  --accent: #0d9488;                     /* Active energizing sea teal */
+  --pink: #9d174d;                       /* Elegant deep crimson rose */
+  --pink-soft: rgba(157, 23, 77, 0.09);  /* Soft rose background wash */
+  --warn: #b45309;                       /* Soft warm amber */
+  --ring: rgba(15, 118, 110, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.65); /* Liquid edge reflection */
+  --glow-color: rgba(15, 118, 110, 0.04);
   --font-dela: var(--font-outfit);
   --font-montserrat: var(--font-be-vietnam);
 }
 
 .dark {
-  --background: #0c1a1e;        /* dark teal-black */
-  --surface: rgba(22, 38, 43, 0.7);
-  --foreground: #e7eef0;
-  --muted: #9bb2b8;
-  --border: rgba(255, 255, 255, 0.15);
-  --primary: #5fb6cc;          /* teal sáng cho nền tối */
-  --primary-fg: #0c1a1e;
-  --primary-soft: rgba(95, 182, 204, 0.18);
-  --accent: #5fb6cc;
-  --pink: #d98fa6;
-  --pink-soft: rgba(217, 143, 166, 0.18);
+  --background: #030712;                 /* High-end rich deep navy-black */
+  --surface: rgba(15, 23, 42, 0.45);     /* Translucent frosty deep slate */
+  --foreground: #f8fafc;                 /* Crisp cold-white text */
+  --muted: #94a3b8;                      /* Elegant muted cold gray */
+  --border: rgba(255, 255, 255, 0.06);   /* Ultra-thin glass boundary */
+  --primary: #2dd4bf;                    /* Bright sea teal */
+  --primary-fg: #030712;
+  --primary-soft: rgba(45, 212, 191, 0.12);
+  --accent: #2dd4bf;
+  --pink: #f472b6;                       /* Energetic pastel rose */
+  --pink-soft: rgba(244, 114, 182, 0.12);
   --warn: #fbbf24;
-  --ring: rgba(95, 182, 204, 0.25);
-  --glass-highlight: rgba(255, 255, 255, 0.12);
-  --glow-color: rgba(95, 182, 204, 0.2);
+  --ring: rgba(45, 212, 191, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.08); /* Dark mode edge reflection */
+  --glow-color: rgba(45, 212, 191, 0.12);
   --font-dela: var(--font-outfit);
   --font-montserrat: var(--font-be-vietnam);
 }
@@ -59,10 +61,9 @@
   --font-display: var(--font-outfit), var(--font-be-vietnam), sans-serif;
 }
 
-/* Tiện ích font hiển thị (heading) theo design */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
 html {
@@ -78,107 +79,159 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Text selection màu thương hiệu */
 ::selection {
-  background: rgba(43, 120, 139, 0.22);
+  background: rgba(15, 118, 110, 0.2);
   color: var(--foreground);
 }
 
-/* Focus ring cho người dùng bàn phím (accessibility) */
 :focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: 0.5rem;
+  outline: 2.5px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
 }
 
-/* Thanh cuộn tùy biến mảnh, hợp tông kính */
+/* Custom premium scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(43, 120, 139, 0.4) transparent;
+  scrollbar-color: rgba(15, 118, 110, 0.3) transparent;
 }
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(43, 120, 139, 0.35);
+  background: rgba(15, 118, 110, 0.25);
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(43, 120, 139, 0.55);
+  background: rgba(15, 118, 110, 0.5);
   background-clip: padding-box;
 }
 
 /* ==========================================================================
-   CARD / NAV / BUTTON — phẳng mềm theo design Figma (giữ tên class cũ để cascade)
+   LIQUID GLASS ELEMENTS - Overhauled with high-end lighting refraction
    ========================================================================== */
 
-/* Thẻ phẳng: nền trắng, viền nhạt, bóng mềm, bo góc */
 .liquid-glass-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 12px 32px -12px rgba(20, 30, 33, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1.2px solid var(--border);
+  box-shadow: 0 12px 40px -12px rgba(10, 17, 32, 0.06),
+              0 2px 10px -4px rgba(10, 17, 32, 0.03),
+              inset 0 1.5px 0.5px var(--glass-highlight);
   border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .dark .liquid-glass-card {
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -16px rgba(0, 0, 0, 0.65),
+              0 2px 12px -4px rgba(0, 0, 0, 0.35),
+              inset 0 1.5px 0.5px var(--glass-highlight);
 }
 
 .liquid-glass-interactive {
-  composes: liquid-glass-card;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
+  background: var(--surface);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1.2px solid var(--border);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 32px -12px rgba(10, 17, 32, 0.05),
+              inset 0 1.5px 0.5px var(--glass-highlight);
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, border-color;
 }
 
 .liquid-glass-interactive:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-4px) scale(1.01);
   border-color: var(--primary);
-  box-shadow: 0 24px 48px -16px rgba(43, 120, 139, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  box-shadow: 0 24px 48px -12px rgba(15, 118, 110, 0.15),
+              inset 0 1.5px 0.5px var(--glass-highlight);
 }
 
 .dark .liquid-glass-interactive:hover {
-  box-shadow: 0 24px 48px -16px rgba(95, 182, 204, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 48px -12px rgba(45, 212, 191, 0.22),
+              inset 0 1.5px 0.5px var(--glass-highlight);
 }
 
-/* Thanh điều hướng phẳng (viền dưới) */
-.liquid-nav {
-  background: color-mix(in srgb, var(--background) 88%, transparent);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 24px -16px rgba(20, 30, 33, 0.2);
-}
-
-/* Nút pill teal đặc */
+/* Elegant glass buttons */
 .liquid-glass-btn {
   background: var(--primary);
-  border: 1px solid transparent;
-  box-shadow: 0 8px 20px -6px rgba(43, 120, 139, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px -8px rgba(15, 118, 110, 0.45);
   border-radius: 9999px;
   color: var(--primary-fg);
+  font-weight: 700;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .liquid-glass-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  background: color-mix(in srgb, var(--primary) 88%, black);
-  box-shadow: 0 12px 26px -6px rgba(43, 120, 139, 0.5);
+  transform: translateY(-2px) scale(1.025);
+  background: color-mix(in srgb, var(--primary) 92%, black);
+  box-shadow: 0 12px 28px -6px rgba(15, 118, 110, 0.55);
+}
+
+.dark .liquid-glass-btn:hover {
+  background: color-mix(in srgb, var(--primary) 92%, white);
+  box-shadow: 0 12px 28px -6px rgba(45, 212, 191, 0.4);
 }
 
 .liquid-glass-btn:active {
   transform: translateY(1px) scale(0.98);
 }
 
-/* Liquid Speech Wave Animation */
+/* Glassy Navigation container */
+.liquid-nav {
+  background: color-mix(in srgb, var(--background) 80%, transparent);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border-bottom: 1.2px solid var(--border);
+  box-shadow: 0 4px 20px -12px rgba(10, 17, 32, 0.1);
+}
+
+/* Shimmer effects for interactive highlights */
+.shimmer-edge {
+  position: relative;
+}
+.shimmer-edge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer-anim 4.5s infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes shimmer-anim {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Liquid speech wave animation */
 .wave-bar {
   display: inline-block;
   width: 4px;
-  height: 15px;
+  height: 16px;
   background-color: var(--primary);
   border-radius: 4px;
   margin: 0 2px;
@@ -187,12 +240,12 @@ body {
 
 @keyframes liquid-wave {
   0% { transform: scaleY(0.4); background-color: var(--primary); }
-  50% { transform: scaleY(1.5); background-color: var(--accent); }
-  100% { transform: scaleY(0.8); background-color: #ec4899; }
+  50% { transform: scaleY(1.6); background-color: var(--accent); }
+  100% { transform: scaleY(0.7); background-color: var(--pink); }
 }
 
 /* ==========================================================================
-   BACKGROUND FLUID BLOBS
+   BACKGROUND FLUID BLOBS - Premium visual depth
    ========================================================================== */
 
 .fluid-blob-container {
@@ -206,97 +259,83 @@ body {
   z-index: -10;
   pointer-events: none;
   overflow: hidden;
-}
-
-/* Design Figma là phẳng → tắt blob nền động (giữ markup để dễ bật lại nếu cần) */
-.fluid-blob-container {
-  display: none;
+  display: block;
 }
 
 .fluid-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.35;
+  filter: blur(100px);
+  opacity: 0.28;
   mix-blend-mode: multiply;
   will-change: transform;
 }
 
 .dark .fluid-blob {
-  opacity: 0.28;
+  opacity: 0.18;
   mix-blend-mode: screen;
-  filter: blur(110px);
+  filter: blur(120px);
 }
 
 .blob-primary {
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, rgba(139, 92, 246, 0.2) 70%, transparent 100%);
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.4) 0%, rgba(15, 118, 110, 0.15) 60%, transparent 100%);
   top: -10vw;
-  left: -10vw;
-  animation: float-slow-1 25s infinite alternate ease-in-out;
+  left: -8vw;
+  animation: float-slow-1 30s infinite alternate ease-in-out;
 }
 
 .blob-accent {
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.5) 0%, rgba(16, 185, 129, 0.15) 75%, transparent 100%);
-  bottom: -15vw;
-  right: -10vw;
-  animation: float-slow-2 30s infinite alternate ease-in-out;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.35) 0%, rgba(13, 148, 136, 0.12) 65%, transparent 100%);
+  bottom: -12vw;
+  right: -8vw;
+  animation: float-slow-2 35s infinite alternate ease-in-out;
 }
 
 .blob-pink {
-  width: 45vw;
-  height: 45vw;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.45) 0%, rgba(219, 39, 119, 0.1) 70%, transparent 100%);
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, rgba(157, 23, 77, 0.08) 70%, transparent 100%);
   top: 30vh;
   left: 45vw;
-  animation: float-slow-3 20s infinite alternate ease-in-out;
+  animation: float-slow-3 25s infinite alternate ease-in-out;
 }
 
 @keyframes float-slow-1 {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  50% { transform: translate(80px, 60px) rotate(180deg) scale(1.15); }
-  100% { transform: translate(-40px, -20px) rotate(360deg) scale(0.9); }
+  50% { transform: translate(60px, 80px) rotate(180deg) scale(1.1); }
+  100% { transform: translate(-30px, -40px) rotate(360deg) scale(0.95); }
 }
 
 @keyframes float-slow-2 {
-  0% { transform: translate(0, 0) rotate(0deg) scale(0.9); }
-  50% { transform: translate(-100px, -60px) rotate(-180deg) scale(1.2); }
-  100% { transform: translate(50px, 40px) rotate(-360deg) scale(1); }
+  0% { transform: translate(0, 0) rotate(0deg) scale(0.95); }
+  50% { transform: translate(-80px, -60px) rotate(-180deg) scale(1.15); }
+  100% { transform: translate(40px, 30px) rotate(-360deg) scale(1); }
 }
 
 @keyframes float-slow-3 {
-  0% { transform: translate(0, 0) scale(1.1); }
-  50% { transform: translate(60px, -80px) scale(0.85); }
-  100% { transform: translate(-50px, 70px) scale(1.05); }
+  0% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(50px, -60px) scale(0.9); }
+  100% { transform: translate(-40px, 50px) scale(1.02); }
 }
 
-/* ==========================================================================
-   IRIDESCENT TEXT & HIGHLIGHTS
-   ========================================================================== */
-
-/* Theo design: dùng teal đặc thay cho gradient cầu vồng */
+/* Iridescent/Teal display gradients */
 .text-gradient-iridescent {
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-@keyframes shine-text {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ==========================================================================
-   UTILITIES BỔ SUNG (trước đây dùng nhưng chưa định nghĩa)
-   ========================================================================== */
-
-/* Hiệu ứng xuất hiện trang/thẻ — dùng 17 chỗ qua class `animate-fadeIn` */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -305,16 +344,15 @@ body {
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Mức scale trung gian (Tailwind không có sẵn scale-102) */
 .scale-102 {
   transform: scale(1.02);
 }
 
 /* ==========================================================================
-   ACCESSIBILITY: giảm chuyển động khi người dùng yêu cầu
+   REDUCED MOTION FOR ACCESSBILITY
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -325,9 +363,8 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  /* Tắt hẳn các blob nền chuyển động liên tục */
-  .fluid-blob {
+  .fluid-blob,
+  .shimmer-edge::after {
     animation: none !important;
   }
 }
-
