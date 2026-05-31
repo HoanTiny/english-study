@@ -16,14 +16,10 @@ import sentencesData from "@/data/sentences.json";
 // Nhãn thời gian cho 4 nút đánh giá (xấp xỉ FSRS cho thẻ mới).
 const GRADES: { g: Grade; label: string; when: string; cls: string }[] = [
   { g: "again", label: "Học lại", when: "trong ngày", cls: "bg-pink-soft text-pink" },
-  { g: "hard", label: "Khó", when: "1–2 ngày", cls: "bg-amber-400/20 text-amber-600" },
+  { g: "hard", label: "Khó", when: "1–2 ngày", cls: "bg-amber-400/20 text-amber-600 dark:text-amber-400" },
   { g: "good", label: "Tốt", when: "vài ngày", cls: "bg-primary-soft text-primary" },
-  { g: "easy", label: "Dễ", when: "~1 tuần", cls: "bg-emerald-400/20 text-emerald-600" },
+  { g: "easy", label: "Dễ", when: "~1 tuần", cls: "bg-emerald-400/20 text-emerald-600 dark:text-emerald-400" },
 ];
-
-// Tính năng "Từ vựng" — Thư viện bộ thẻ (tham khảo Parroto) + HỌC THEO TỪNG TỪ ĐA CHẾ ĐỘ:
-// Flashcard (lật) · Đoán (gõ từ) · Trắc nghiệm (chọn). Học sâu: Active Recall + audio bản xứ + câu ví dụ AI.
-// Tất cả miễn phí, không khóa PRO.
 
 type Card = { en: string; vi: string; ipa?: string; example?: string; cefr: string };
 type Deck = { slug: string; title: string; cefr: string; emoji: string; cards: Card[]; isWord?: boolean };
@@ -99,9 +95,9 @@ function bucket(cefr: string): "A1" | "A2" | "B1" {
 }
 
 const COLLECTIONS: { key: "A1" | "A2" | "B1"; name: string; grad: string }[] = [
-  { key: "A1", name: "Khởi đầu A1", grad: "from-emerald-400/30 to-teal-500/30" },
-  { key: "A2", name: "Mở rộng A2", grad: "from-amber-400/30 to-orange-500/30" },
-  { key: "B1", name: "Giao tiếp B1+", grad: "from-pink-400/30 to-fuchsia-500/30" },
+  { key: "A1", name: "Khởi đầu A1", grad: "from-emerald-400/20 to-teal-500/20 text-emerald-600 dark:text-emerald-400" },
+  { key: "A2", name: "Mở rộng A2", grad: "from-amber-400/20 to-orange-500/20 text-amber-600 dark:text-amber-400" },
+  { key: "B1", name: "Giao tiếp B1+", grad: "from-pink-400/20 to-fuchsia-500/20 text-pink dark:text-pink-soft" },
 ];
 
 const MODES: { key: Mode; label: string; icon: string }[] = [
@@ -163,16 +159,28 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
         <button
           key={d.slug}
           onClick={() => onPick(d)}
-          className="liquid-glass-card group flex flex-col overflow-hidden p-0 text-left transition-all duration-300 hover:-translate-y-1 hover:border-primary/50"
+          className="liquid-glass-interactive group flex flex-col overflow-hidden p-0 text-left border border-border/60 shadow-md rounded-2xl relative cursor-pointer"
         >
-          <div className={`flex h-24 items-center justify-center bg-gradient-to-br ${grad} text-4xl`}>{d.emoji}</div>
-          <div className="flex flex-1 flex-col gap-1 p-4">
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-primary-soft px-2 py-0.5 text-[10px] font-bold text-primary">{badge ?? d.cefr}</span>
-              <span className="text-[11px] font-semibold text-muted">{d.cards.length} {unit}</span>
+          {/* Subtle Background Glow inside the card */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-pink-soft/5 blur-2xl pointer-events-none" />
+          
+          <div className="flex items-center gap-4 p-5">
+            {/* Elegant glassmorphic squircle for emoji */}
+            <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${grad} text-3xl shadow-inner border border-border/40 relative group-hover:scale-105 transition-transform duration-300`}>
+              <div className="absolute inset-0 bg-white/10 dark:bg-black/10 rounded-2xl" />
+              <span className="relative z-1">{d.emoji}</span>
             </div>
-            <h3 className="font-display text-sm leading-snug text-foreground">{d.title}</h3>
-            <span className="mt-1 text-xs font-bold text-primary opacity-0 transition-opacity group-hover:opacity-100">Bắt đầu học →</span>
+            
+            <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-primary-soft/60 px-2 py-0.5 text-[8.5px] font-bold uppercase tracking-wider text-primary">{badge ?? d.cefr}</span>
+                <span className="text-[10px] font-bold text-muted">{d.cards.length} {unit}</span>
+              </div>
+              <h3 className="font-display text-sm font-bold leading-tight text-foreground truncate mt-1">{d.title}</h3>
+              <span className="text-[10px] font-bold text-primary inline-flex items-center gap-1 mt-1 group-hover:translate-x-1 transition-all duration-300">
+                Học ngay <span className="text-[12px]">→</span>
+              </span>
+            </div>
           </div>
         </button>
       ))}
@@ -182,7 +190,7 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
 
 const CATS = [
   { key: "lesson" as const, label: "Theo bài học", icon: "📗", count: DECKS.length },
-  { key: "word" as const, label: "Từ theo chủ đề", icon: "🔤", count: WORD_DECKS.length },
+  { key: "word" as const, label: "Từ chủ đề", icon: "🔤", count: WORD_DECKS.length },
   { key: "sentence" as const, label: "Mẫu câu giao tiếp", icon: "💬", count: SENTENCE_DECKS.length },
 ];
 
@@ -199,7 +207,8 @@ export default function VocabPage() {
   const [idx, setIdx] = useState(0);
   const [known, setKnown] = useState(0);
   const [again, setAgain] = useState(0);
-  // trạng thái mỗi thẻ
+  
+  // Trạng thái mỗi thẻ
   const [revealed, setRevealed] = useState(false); // flashcard
   const [typed, setTyped] = useState(""); // type
   const [hinted, setHinted] = useState(false); // type
@@ -337,38 +346,65 @@ export default function VocabPage() {
     const term = q.trim().toLowerCase();
     const match = (d: Deck) => !term || d.title.toLowerCase().includes(term);
     return (
-      <main className="mx-auto max-w-5xl px-6 py-12 pt-16 animate-fadeIn">
-        <div className="mb-6 text-center">
-          <h1 className="font-display text-3xl text-foreground sm:text-4xl">📚 Từ vựng</h1>
-          <p className="mt-2 text-sm font-semibold text-muted">
-            Chọn danh mục → bộ thẻ → học đa chế độ (Flashcard · Đoán · Trắc nghiệm). Miễn phí.
+      <main className="mx-auto max-w-5xl px-5 py-16 animate-fadeIn relative">
+        {/* Ambient background glows */}
+        <div className="absolute top-12 left-1/4 w-72 h-72 rounded-full bg-primary/5 blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-12 right-1/4 w-72 h-72 rounded-full bg-pink-soft/5 blur-3xl pointer-events-none animate-pulse" />
+
+        <div className="mb-10 text-center flex flex-col items-center gap-3">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+            Thư viện Flashcards
+          </span>
+          <h1 className="font-display text-3xl font-extrabold text-foreground sm:text-5xl tracking-tight leading-none mt-1">
+            Học từ vựng tiếng Anh
+          </h1>
+          <p className="max-w-md text-sm font-semibold text-muted leading-relaxed">
+            Chọn danh mục, bộ thẻ thông minh và bắt đầu phản xạ qua Flashcard, Đoán gõ hoặc Trắc nghiệm đa chiều.
           </p>
         </div>
 
         {/* Tab danh mục lớn */}
-        <div className="mb-5 grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="mb-8 grid grid-cols-3 gap-3 p-1.5 rounded-2xl border border-border/60 bg-surface/50 backdrop-blur-sm shadow-inner">
           {CATS.map((c) => (
             <button
               key={c.key}
               onClick={() => { setCat(c.key); setQ(""); }}
-              className={`flex flex-col items-center gap-1 rounded-2xl border-2 px-3 py-3 transition-all ${cat === c.key ? "border-primary bg-primary-soft" : "border-border bg-surface hover:border-primary/40"}`}
+              className={`flex flex-col sm:flex-row items-center justify-center gap-2 rounded-xl px-4 py-3 cursor-pointer transition-all duration-300 active:scale-95 ${
+                cat === c.key 
+                  ? "bg-primary text-primary-fg shadow-md scale-102 font-bold" 
+                  : "text-muted hover:text-foreground hover:bg-primary-soft/20"
+              }`}
             >
-              <span className="text-2xl">{c.icon}</span>
-              <span className={`text-center text-xs font-bold sm:text-sm ${cat === c.key ? "text-primary" : "text-foreground"}`}>{c.label}</span>
-              <span className="text-[10px] font-semibold text-muted">{c.count} bộ</span>
+              <span className="text-xl shrink-0">{c.icon}</span>
+              <div className="text-center sm:text-left min-w-0">
+                <p className={`text-xs sm:text-sm font-bold leading-tight ${cat === c.key ? "text-primary-fg" : "text-foreground"}`}>
+                  {c.label}
+                </p>
+                <p className={`text-[9px] font-semibold mt-0.5 leading-none ${cat === c.key ? "text-primary-fg/80" : "text-muted"}`}>
+                  {c.count} bộ thẻ
+                </p>
+              </div>
             </button>
           ))}
         </div>
 
         {/* Tìm kiếm + game */}
-        <div className="mb-7 flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="🔎 Tìm bộ thẻ theo tên…"
-            className="w-full rounded-full border border-border bg-surface px-4 py-2.5 text-sm font-medium text-foreground outline-none focus:border-primary sm:max-w-xs"
-          />
-          <Link href="/collocations" className="shrink-0 text-sm font-bold text-primary hover:underline">🧩 Game Ghép cụm →</Link>
+        <div className="mb-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <div className="relative w-full sm:max-w-xs">
+            <span className="absolute inset-y-0 left-3.5 flex items-center text-muted text-sm pointer-events-none">🔎</span>
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Tìm kiếm bộ thẻ từ vựng..."
+              className="w-full rounded-full border border-border/60 bg-surface/80 backdrop-blur-sm pl-10 pr-4 py-2.5 text-sm font-medium text-foreground outline-none focus:border-primary shadow-sm transition-all focus:bg-surface focus:ring-4 focus:ring-primary/10"
+            />
+          </div>
+          <Link 
+            href="/collocations" 
+            className="shrink-0 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/30 px-5 py-2.5 text-xs font-black text-primary transition-all hover:bg-primary-soft/60 hover:scale-102 active:scale-98 shadow-sm"
+          >
+            🧩 Mini-game Ghép cụm từ <span className="text-[14px]">→</span>
+          </Link>
         </div>
 
         {/* Theo bài học — gom A1/A2/B1 */}
@@ -377,9 +413,10 @@ export default function VocabPage() {
             const decks = DECKS.filter((d) => bucket(d.cefr) === col.key && match(d));
             if (decks.length === 0) return null;
             return (
-              <section key={col.key} className="mb-8">
-                <h2 className="mb-3 font-display text-lg text-foreground">
-                  {col.name} <span className="text-xs font-semibold text-muted">({decks.length})</span>
+              <section key={col.key} className="mb-12">
+                <h2 className="mb-4 font-display text-lg font-bold text-foreground border-b border-border/40 pb-2 flex items-center gap-2">
+                  <span>{col.key === "A1" ? "🌱" : col.key === "A2" ? "🌿" : "🌳"}</span> {col.name} 
+                  <span className="text-xs font-semibold text-muted bg-black/5 dark:bg-white/5 px-2.5 py-0.5 rounded-full ml-1">({decks.length})</span>
                 </h2>
                 <DeckGrid decks={decks} grad={col.grad} unit="thẻ" onPick={startDeck} />
               </section>
@@ -388,12 +425,12 @@ export default function VocabPage() {
 
         {/* Từ theo chủ đề */}
         {cat === "word" && (
-          <DeckGrid decks={WORD_DECKS.filter(match)} grad="from-sky-400/30 to-indigo-500/30" badge="Từ đơn" unit="từ" onPick={startDeck} />
+          <DeckGrid decks={WORD_DECKS.filter(match)} grad="from-sky-400/20 to-indigo-500/20 text-sky-600 dark:text-sky-400" badge="Từ đơn" unit="từ" onPick={startDeck} />
         )}
 
         {/* Mẫu câu giao tiếp */}
         {cat === "sentence" && (
-          <DeckGrid decks={SENTENCE_DECKS.filter(match)} grad="from-violet-400/30 to-pink-400/30" badge="Câu" unit="câu" onPick={startDeck} />
+          <DeckGrid decks={SENTENCE_DECKS.filter(match)} grad="from-violet-400/20 to-pink-400/20 text-violet-600 dark:text-pink-soft" badge="Câu" unit="câu" onPick={startDeck} />
         )}
       </main>
     );
@@ -401,31 +438,39 @@ export default function VocabPage() {
 
   // ===== STUDY =====
   return (
-    <main className="mx-auto max-w-2xl px-6 py-12 pt-16 animate-fadeIn">
+    <main className="mx-auto max-w-2xl px-5 py-16 animate-fadeIn relative">
+      {/* Toast Alert */}
       {toast && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-lg animate-fadeIn">
+        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-primary/95 backdrop-blur-md border border-white/10 px-6 py-3 text-xs font-black text-white shadow-xl animate-fadeIn tracking-wider uppercase">
           {toast}
         </div>
       )}
-      <button onClick={backToLibrary} className="mb-4 text-xs font-bold text-muted hover:text-foreground">
+      
+      {/* Back button */}
+      <button onClick={backToLibrary} className="mb-5 inline-flex items-center gap-1 text-xs font-bold text-muted hover:text-foreground cursor-pointer transition-colors">
         ← Thư viện từ vựng
       </button>
-      <div className="mb-5 text-center">
-        <h1 className="font-display text-2xl text-foreground">{deck?.emoji} {deck?.title}</h1>
+      
+      <div className="mb-6 text-center">
+        <h1 className="font-display text-2xl font-bold text-foreground flex items-center justify-center gap-2">
+          <span>{deck?.emoji}</span> {deck?.title}
+        </h1>
       </div>
 
       {/* Tab chế độ học */}
-      <div className="mb-6 flex justify-center">
-        <div className="flex gap-1 rounded-2xl border border-border bg-surface p-1">
+      <div className="mb-8 flex justify-center">
+        <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-surface/50 backdrop-blur-sm p-1.5 shadow-sm">
           {MODES.map((m) => (
             <button
               key={m.key}
               onClick={() => switchMode(m.key)}
-              className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-                mode === m.key ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
+              className={`rounded-xl px-5 py-2.5 text-xs font-bold transition-all cursor-pointer active:scale-95 duration-300 ${
+                mode === m.key 
+                  ? "bg-primary text-primary-fg shadow-sm" 
+                  : "text-muted hover:text-foreground hover:bg-primary-soft/20"
               }`}
             >
-              {m.icon} {m.label}
+              <span className="mr-1">{m.icon}</span> {m.label}
             </button>
           ))}
         </div>
@@ -433,61 +478,90 @@ export default function VocabPage() {
 
       {phase === "playing" && card && (
         <div>
-          <div className="mb-5 flex items-center gap-3">
-            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border">
-              <div className="h-full rounded-full bg-primary transition-all duration-300" style={{ width: `${(idx / cards.length) * 100}%` }} />
+          {/* Progress bar */}
+          <div className="mb-6 flex items-center gap-4">
+            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border/60 shadow-inner">
+              <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-300" style={{ width: `${(idx / cards.length) * 100}%` }} />
             </div>
-            <span className="shrink-0 text-xs font-bold text-muted">{idx + 1}/{cards.length}</span>
+            <span className="shrink-0 text-xs font-extrabold text-muted bg-surface/80 border border-border/60 px-2.5 py-0.5 rounded-full">{idx + 1}/{cards.length}</span>
           </div>
 
           {/* ---- FLASHCARD ---- */}
           {mode === "flashcard" && (
             <>
-              <div className="liquid-glass-card flex min-h-[320px] flex-col items-center justify-center gap-5 p-8 text-center">
-                <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[10px] font-bold text-primary">{card.cefr}</span>
-                <p className="text-2xl font-bold text-foreground">{card.vi}</p>
-                <button onClick={() => play(card.en)} className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-white shadow-md transition-transform hover:scale-105 active:scale-95">🔊</button>
+              <div className="liquid-glass-card flex min-h-[350px] flex-col items-center justify-center gap-5 p-8 text-center bg-white/40 dark:bg-black/20 border border-border/60 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent blur-xl pointer-events-none" />
+                <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary">{card.cefr}</span>
+                <p className="text-2xl font-bold text-foreground mt-2 leading-snug">{card.vi}</p>
+                
+                <button 
+                  onClick={() => play(card.en)} 
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-white shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                >
+                  🗣️
+                </button>
+                
                 {!revealed ? (
-                  <>
-                    <p className="text-sm font-medium italic text-muted">Tự nhớ lại cụm tiếng Anh…</p>
-                    <button onClick={() => setRevealed(true)} className="rounded-full bg-primary-soft px-6 py-2.5 text-sm font-bold text-primary hover:scale-105 active:scale-95">Hiện đáp án</button>
-                  </>
+                  <div className="flex flex-col items-center gap-3 mt-4">
+                    <p className="text-xs font-medium italic text-muted">Tự phản xạ cụm tiếng Anh trong đầu…</p>
+                    <button onClick={() => setRevealed(true)} className="rounded-full bg-primary px-8 py-3 text-xs font-bold text-primary-fg hover:scale-[1.03] active:scale-95 transition-all cursor-pointer shadow-md shadow-primary/20 hover:shadow-primary/35">Hiện đáp án</button>
+                  </div>
                 ) : (
-                  <div className="w-full animate-fadeIn space-y-2 border-t border-border pt-4">
-                    <p className="font-display text-2xl text-primary">{card.en}</p>
-                    {card.ipa && <p className="text-sm font-semibold text-accent">{card.ipa}</p>}
+                  <div className="w-full animate-fadeIn space-y-4 border-t border-border/50 pt-5 mt-3">
+                    <p className="font-display text-2xl font-black text-primary tracking-tight leading-none">{card.en}</p>
+                    {card.ipa && <p className="text-sm font-semibold text-accent leading-none">{card.ipa}</p>}
+                    
                     {/* Đối chiếu accent UK/US + thu âm nghe lại */}
-                    <div className="my-3"><PronounceBar word={card.en} /></div>
-                    {card.example && <p className="mt-2 rounded-xl bg-surface p-3 text-sm italic text-foreground/90">“{card.example}”</p>}
+                    <div className="my-4"><PronounceBar word={card.en} /></div>
+                    
+                    {card.example && (
+                      <p className="mt-3 rounded-2xl bg-surface/80 border border-border/60 p-4 text-sm italic text-foreground/90 leading-relaxed shadow-sm">
+                        “{card.example}”
+                      </p>
+                    )}
+                    
                     {extra && (
-                      <div className="rounded-xl border border-primary/20 bg-primary-soft/40 p-3 text-left animate-fadeIn">
-                        <p className="text-sm font-semibold italic text-foreground">✨ “{extra.sentence}”</p>
-                        {extra.vi && <p className="mt-0.5 text-xs text-muted">{extra.vi}</p>}
+                      <div className="rounded-2xl border border-primary/20 bg-primary-soft/40 p-4 text-left animate-fadeIn shadow-sm">
+                        <p className="text-sm font-semibold italic text-foreground leading-relaxed">✨ “{extra.sentence}”</p>
+                        {extra.vi && <p className="mt-1 text-xs text-muted leading-relaxed">{extra.vi}</p>}
                       </div>
                     )}
-                    <button onClick={newExample} disabled={loadingExtra} className="rounded-full border border-primary/30 px-4 py-1.5 text-xs font-bold text-primary hover:bg-primary-soft active:scale-95 disabled:opacity-50">
-                      {loadingExtra ? "Đang tạo…" : "✨ Câu ví dụ khác (AI)"}
+                    
+                    <button onClick={newExample} disabled={loadingExtra} className="rounded-full border border-primary/30 px-5 py-2 text-xs font-bold text-primary hover:bg-primary-soft/20 active:scale-95 disabled:opacity-50 transition-all cursor-pointer">
+                      {loadingExtra ? "Đang tạo ví dụ…" : "✨ Câu ví dụ khác (AI)"}
                     </button>
                   </div>
                 )}
               </div>
+              
               {revealed && (
-                <div className="mt-4 animate-fadeIn space-y-3">
-                  <p className="text-center text-[11px] font-semibold text-muted">Bạn nhớ từ này tốt đến đâu? (chọn để đưa vào lịch ôn lại)</p>
-                  <div className="grid grid-cols-4 gap-2">
+                <div className="mt-6 animate-fadeIn space-y-4 w-full">
+                  <span className="h-px w-full bg-border/60 block my-4" />
+                  <p className="text-center text-[10px] font-bold uppercase tracking-wider text-muted/80">Bạn nhớ từ này tốt đến đâu?</p>
+                  <div className="grid grid-cols-4 gap-2.5">
                     {GRADES.map(({ g, label, when, cls }) => (
-                      <button key={g} onClick={() => gradeAndNext(g)} className={`rounded-2xl py-2.5 transition-transform hover:scale-[1.04] active:scale-95 ${cls}`}>
-                        <span className="block text-sm font-black">{label}</span>
-                        <span className="block text-[10px] font-semibold opacity-80">{when}</span>
+                      <button 
+                        key={g} 
+                        onClick={() => gradeAndNext(g)} 
+                        className={`rounded-2xl py-3 cursor-pointer transition-all duration-300 hover:scale-[1.04] active:scale-95 shadow-sm border border-transparent hover:border-black/5 dark:hover:border-white/5 flex flex-col items-center justify-center ${cls}`}
+                      >
+                        <span className="text-xs font-black tracking-wide leading-none">{label}</span>
+                        <span className="text-[9px] font-bold opacity-80 mt-1.5 leading-none">{when}</span>
                       </button>
                     ))}
                   </div>
-                  <div className="flex items-center justify-center gap-3 pt-1">
-                    <button onClick={() => advance(true)} className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-bold text-primary hover:bg-primary-soft">
+                  <div className="flex items-center justify-center gap-4 pt-2">
+                    <button 
+                      onClick={() => advance(true)} 
+                      className="flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-black text-primary bg-primary-soft/50 hover:bg-primary-soft hover:scale-102 active:scale-95 transition-all cursor-pointer"
+                    >
                       ✓ Thành thạo
                     </button>
-                    <button onClick={() => { if (card) saveWord(card, { review: false }); advance(true); }} className="flex items-center gap-1 rounded-full border border-border px-4 py-2 text-sm font-bold text-foreground hover:bg-surface">
-                      {card && savedSet.has(card.en) ? "✓ Đã lưu" : "🔖 Lưu vào sổ tay"}
+                    <button 
+                      onClick={() => { if (card) saveWord(card, { review: false }); advance(true); }} 
+                      className="flex items-center gap-1.5 rounded-full border border-border/60 bg-surface px-5 py-2.5 text-xs font-black text-foreground hover:bg-primary-soft/20 hover:scale-102 active:scale-95 transition-all cursor-pointer"
+                    >
+                      {card && savedSet.has(card.en) ? "✓ Đã lưu" : "🔖 Lưu sổ tay"}
                     </button>
                   </div>
                 </div>
@@ -497,42 +571,51 @@ export default function VocabPage() {
 
           {/* ---- ĐOÁN (gõ từ) ---- */}
           {mode === "type" && (
-            <div className="liquid-glass-card flex min-h-[320px] flex-col items-center justify-center gap-4 p-8 text-center">
-              <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[10px] font-bold text-primary">{card.cefr}</span>
-              <p className="text-xl font-bold text-foreground">{card.vi}</p>
+            <div className="liquid-glass-card flex min-h-[360px] flex-col items-center justify-center gap-5 p-8 text-center bg-white/40 dark:bg-black/20 border border-border/60 shadow-xl">
+              <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary">{card.cefr}</span>
+              <p className="text-xl sm:text-2xl font-black text-foreground mt-2">{card.vi}</p>
               {card.example ? (
-                <p className="text-sm italic text-muted">
+                <p className="text-sm italic text-muted max-w-md mt-1 leading-relaxed">
                   “{card.example.replace(new RegExp(card.en.replace(/[.*+?^${}()|[\]\\…]/g, "\\$&"), "i"), "_____")}”
                 </p>
               ) : (
-                <p className="text-sm italic text-muted">Gõ từ tiếng Anh đúng nghĩa trên.</p>
+                <p className="text-xs font-bold text-muted uppercase mt-1 tracking-wider">Gõ cụm từ tiếng Anh tương ứng</p>
               )}
-              {hinted && <p className="text-sm font-bold text-accent">Gợi ý: {card.en.slice(0, Math.max(2, Math.ceil(card.en.length / 3)))}…</p>}
+              
+              {hinted && (
+                <p className="text-xs font-bold text-amber-600 bg-amber-400/10 px-3 py-1.5 rounded-xl border border-amber-500/20 mt-1 animate-fadeIn">
+                  💡 Gợi ý chữ cái đầu: <span className="font-mono text-sm tracking-wider font-extrabold">{card.en.slice(0, Math.max(2, Math.ceil(card.en.length / 3)))}…</span>
+                </p>
+              )}
 
               {resolved === null ? (
-                <>
+                <div className="w-full max-w-sm flex flex-col gap-5 mt-4">
                   <input
                     autoFocus
                     value={typed}
                     onChange={(e) => setTyped(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && typed.trim() && checkType()}
-                    placeholder="Nhập cụm tiếng Anh…"
-                    className="w-full max-w-sm rounded-xl border-2 border-border bg-background px-4 py-3 text-center text-lg font-semibold text-foreground outline-none focus:border-primary"
+                    placeholder="Nhập cụm tiếng Anh tại đây..."
+                    className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3.5 text-center text-lg font-bold text-foreground outline-none focus:border-primary shadow-inner focus:bg-background transition-all focus:ring-4 focus:ring-primary/10"
                   />
-                  <div className="flex gap-3">
-                    <button onClick={() => setHinted(true)} className="rounded-full bg-amber-400/20 px-5 py-2.5 text-sm font-bold text-amber-600">💡 Gợi ý</button>
-                    <button onClick={() => advance(false)} className="rounded-full bg-pink-soft px-5 py-2.5 text-sm font-bold text-pink">Không biết</button>
-                    <button onClick={checkType} disabled={!typed.trim()} className="liquid-glass-btn px-6 py-2.5 text-sm font-bold disabled:opacity-50">Kiểm tra</button>
+                  <div className="flex gap-2.5">
+                    <button onClick={() => setHinted(true)} className="w-1/3 rounded-xl bg-amber-400/25 py-3 text-xs font-black text-amber-700 dark:text-amber-400 active:scale-95 cursor-pointer transition-all hover:bg-amber-400/35">💡 Gợi ý</button>
+                    <button onClick={() => advance(false)} className="w-1/3 rounded-xl bg-pink-soft py-3 text-xs font-black text-pink active:scale-95 cursor-pointer transition-all hover:bg-pink-soft/80">✕ Bỏ qua</button>
+                    <button onClick={checkType} disabled={!typed.trim()} className="w-1/3 liquid-glass-btn py-3 text-xs font-black disabled:opacity-50 cursor-pointer">✓ Kiểm tra</button>
                   </div>
-                </>
+                </div>
               ) : (
-                <div className="w-full animate-fadeIn space-y-2 border-t border-border pt-4">
-                  <p className={`font-display text-2xl ${resolved ? "text-primary" : "text-pink"}`}>{resolved ? "✓ Chính xác!" : "✗ Chưa đúng"}</p>
-                  <p className="font-display text-xl text-foreground">{card.en}</p>
-                  {card.ipa && <p className="text-sm font-semibold text-accent">{card.ipa}</p>}
-                  <div className="mt-2 flex items-center justify-center gap-3">
-                    <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="rounded-full border border-border px-4 py-2.5 text-sm font-bold text-foreground hover:bg-surface">🔖 Lưu vào sổ tay</button>
-                    <button onClick={() => advance(!!resolved)} className="liquid-glass-btn px-8 py-2.5 text-sm font-bold">Tiếp →</button>
+                <div className="w-full animate-fadeIn space-y-4 border-t border-border/50 pt-5">
+                  <p className={`font-display text-2xl font-black ${resolved ? "text-primary animate-pulse" : "text-pink"}`}>
+                    {resolved ? "✓ Chính xác!" : "✗ Chưa chính xác"}
+                  </p>
+                  <div className="bg-background/40 rounded-2xl p-4 border border-border/40 inline-flex flex-col items-center">
+                    <p className="font-display text-xl font-bold text-foreground">{card.en}</p>
+                    {card.ipa && <p className="text-xs font-mono font-bold text-accent mt-1">{card.ipa}</p>}
+                  </div>
+                  <div className="mt-3 flex items-center justify-center gap-3 w-full max-w-sm mx-auto">
+                    <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border/60 bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all">🔖 Lưu sổ tay</button>
+                    <button onClick={() => advance(!!resolved)} className="w-1/2 liquid-glass-btn py-3 text-xs font-black cursor-pointer">Tiếp theo →</button>
                   </div>
                 </div>
               )}
@@ -541,29 +624,44 @@ export default function VocabPage() {
 
           {/* ---- TRẮC NGHIỆM ---- */}
           {mode === "choice" && (
-            <div className="liquid-glass-card flex min-h-[320px] flex-col items-center justify-center gap-5 p-8 text-center">
-              <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[10px] font-bold text-primary">{card.cefr}</span>
-              <p className="text-xl font-bold text-foreground">{card.vi}</p>
-              <button onClick={() => play(card.en)} className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl text-white shadow-md">🔊</button>
-              <div className="grid w-full max-w-md grid-cols-1 gap-2.5 sm:grid-cols-2">
-                {options.map((opt) => {
-                  let cls = "border-border bg-surface text-foreground hover:border-primary/60";
+            <div className="liquid-glass-card flex min-h-[360px] flex-col items-center justify-center gap-6 p-8 text-center bg-white/40 dark:bg-black/20 border border-border/60 shadow-xl">
+              <span className="rounded-full bg-primary-soft px-3 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary">{card.cefr}</span>
+              <p className="text-xl sm:text-2xl font-black text-foreground mt-2">{card.vi}</p>
+              
+              <button 
+                onClick={() => play(card.en)} 
+                className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-xl text-primary shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                🔊
+              </button>
+              
+              <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2 mt-2">
+                {options.map((opt, idx) => {
+                  let cls = "border-border/60 bg-surface/50 text-foreground hover:border-primary/60 hover:bg-primary-soft/10";
                   if (resolved !== null) {
-                    if (opt === card.en) cls = "border-primary bg-primary-soft text-primary";
-                    else if (opt === chosen) cls = "border-pink bg-pink-soft text-pink";
-                    else cls = "border-border bg-surface text-muted opacity-60";
+                    if (opt === card.en) cls = "border-primary bg-primary-soft text-primary shadow-sm font-extrabold";
+                    else if (opt === chosen) cls = "border-pink bg-pink-soft text-pink shadow-sm font-extrabold";
+                    else cls = "border-border/40 bg-surface/30 text-muted opacity-50";
                   }
+                  const badges = ["A", "B", "C", "D"];
                   return (
-                    <button key={opt} disabled={resolved !== null} onClick={() => pick(opt)} className={`rounded-2xl border-2 px-4 py-3 text-sm font-bold transition-all active:scale-95 ${cls}`}>
-                      {opt}
+                    <button 
+                      key={opt} 
+                      disabled={resolved !== null} 
+                      onClick={() => pick(opt)} 
+                      className={`rounded-2xl border-2 px-4 py-3.5 text-sm font-bold transition-all cursor-pointer active:scale-95 flex items-center gap-3 ${cls}`}
+                    >
+                      <span className="rounded-lg bg-black/5 dark:bg-white/5 border border-border/50 text-[10px] font-black w-6 h-6 flex items-center justify-center shrink-0">{badges[idx]}</span>
+                      <span className="truncate text-left">{opt}</span>
                     </button>
                   );
                 })}
               </div>
+              
               {resolved !== null && (
-                <div className="flex items-center justify-center gap-3 animate-fadeIn">
-                  <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="rounded-full border border-border px-4 py-2.5 text-sm font-bold text-foreground hover:bg-surface">🔖 Lưu vào sổ tay</button>
-                  <button onClick={() => advance(!!resolved)} className="liquid-glass-btn px-8 py-2.5 text-sm font-bold">Tiếp →</button>
+                <div className="flex items-center justify-center gap-3 w-full max-w-md mt-2 animate-fadeIn">
+                  <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border/60 bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all">🔖 Lưu sổ tay</button>
+                  <button onClick={() => advance(!!resolved)} className="w-1/2 liquid-glass-btn py-3 text-xs font-black cursor-pointer">Tiếp theo →</button>
                 </div>
               )}
             </div>
@@ -572,24 +670,29 @@ export default function VocabPage() {
       )}
 
       {phase === "done" && (
-        <div className="liquid-glass-card flex flex-col items-center gap-5 p-10 text-center">
-          <span className="text-6xl">🎉</span>
-          <h2 className="font-display text-2xl text-foreground">Xong bộ “{deck?.title}”!</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-2xl border-2 border-primary px-8 py-4">
-              <p className="font-display text-3xl text-primary">{known}</p>
-              <p className="text-xs font-bold uppercase text-muted">đúng / nhớ</p>
+        <div className="liquid-glass-card flex flex-col items-center gap-6 p-10 text-center border border-border/60 shadow-2xl bg-white/40 dark:bg-black/20 backdrop-blur-sm max-w-md mx-auto">
+          <span className="text-6xl animate-bounce">🎉</span>
+          <div className="flex flex-col gap-2">
+            <h2 className="font-display text-2xl font-black text-foreground">Hoàn thành xuất sắc!</h2>
+            <p className="text-xs font-bold text-muted uppercase tracking-wider">Đã vượt qua bộ: “{deck?.title}”</p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-4 w-full">
+            <div className="rounded-2xl border border-primary/20 bg-primary-soft/20 p-5 flex flex-col items-center justify-center shadow-sm">
+              <p className="font-display text-4xl font-black text-primary leading-none">{known}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-primary mt-2">Đã thuộc</p>
             </div>
-            <div className="rounded-2xl border-2 border-pink px-8 py-4">
-              <p className="font-display text-3xl text-pink">{again}</p>
-              <p className="text-xs font-bold uppercase text-muted">cần ôn lại</p>
+            <div className="rounded-2xl border border-pink/20 bg-pink-soft/20 p-5 flex flex-col items-center justify-center shadow-sm">
+              <p className="font-display text-4xl font-black text-pink leading-none">{again}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-pink mt-2">Cần ôn lại</p>
             </div>
           </div>
-          <div className="flex flex-col gap-2 sm:flex-row">
+          
+          <div className="flex flex-col gap-3 w-full mt-4">
             {deck && (
-              <button onClick={() => startDeck(deck)} className="liquid-glass-btn px-6 py-3 text-sm font-bold">🔄 Học lại bộ này</button>
+              <button onClick={() => startDeck(deck)} className="w-full liquid-glass-btn py-3 text-xs font-black cursor-pointer shadow-lg shadow-primary/20 hover:shadow-primary/35">🔄 Học lại bộ này</button>
             )}
-            <button onClick={backToLibrary} className="rounded-full border border-border bg-surface px-6 py-3 text-sm font-bold text-foreground hover:border-primary/40">← Chọn bộ khác</button>
+            <button onClick={backToLibrary} className="w-full rounded-full border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 transition-all cursor-pointer">← Chọn bộ học khác</button>
           </div>
         </div>
       )}

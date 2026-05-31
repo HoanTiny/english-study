@@ -17,6 +17,8 @@
   --ring: rgba(43, 120, 139, 0.25);
   --glass-highlight: rgba(255, 255, 255, 0.7);
   --glow-color: rgba(43, 120, 139, 0.12);
+  --font-dela: var(--font-outfit);
+  --font-montserrat: var(--font-be-vietnam);
 }
 
 .dark {
@@ -24,7 +26,7 @@
   --surface: rgba(22, 38, 43, 0.7);
   --foreground: #e7eef0;
   --muted: #9bb2b8;
-  --border: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.15);
   --primary: #5fb6cc;          /* teal sáng cho nền tối */
   --primary-fg: #0c1a1e;
   --primary-soft: rgba(95, 182, 204, 0.18);
@@ -35,6 +37,8 @@
   --ring: rgba(95, 182, 204, 0.25);
   --glass-highlight: rgba(255, 255, 255, 0.12);
   --glow-color: rgba(95, 182, 204, 0.2);
+  --font-dela: var(--font-outfit);
+  --font-montserrat: var(--font-be-vietnam);
 }
 
 @theme inline {
@@ -51,14 +55,14 @@
   --color-primary-soft: var(--primary-soft);
   --color-pink: var(--pink);
   --color-pink-soft: var(--pink-soft);
-  --font-sans: var(--font-montserrat), var(--font-be-vietnam), system-ui, sans-serif;
-  --font-display: var(--font-dela), var(--font-be-vietnam), sans-serif;
+  --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
+  --font-display: var(--font-outfit), var(--font-be-vietnam), sans-serif;
 }
 
 /* Tiện ích font hiển thị (heading) theo design */
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 html {
@@ -115,25 +119,30 @@ body {
 .liquid-glass-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 10px 30px -12px rgba(20, 30, 33, 0.12);
-  border-radius: 1.25rem;
+  box-shadow: 0 12px 32px -12px rgba(20, 30, 33, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-radius: 1.5rem;
 }
 
 .dark .liquid-glass-card {
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .liquid-glass-interactive {
   composes: liquid-glass-card;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow;
 }
 
 .liquid-glass-interactive:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.01);
   border-color: var(--primary);
-  box-shadow: 0 22px 40px -16px rgba(43, 120, 139, 0.28);
+  box-shadow: 0 24px 48px -16px rgba(43, 120, 139, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.dark .liquid-glass-interactive:hover {
+  box-shadow: 0 24px 48px -16px rgba(95, 182, 204, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Thanh điều hướng phẳng (viền dưới) */
@@ -152,7 +161,7 @@ body {
   box-shadow: 0 8px 20px -6px rgba(43, 120, 139, 0.4);
   border-radius: 9999px;
   color: var(--primary-fg);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-glass-btn:hover {

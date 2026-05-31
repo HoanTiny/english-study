@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Dela_Gothic_One, Montserrat } from "next/font/google";
+import { Be_Vietnam_Pro, Outfit } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import SelectionLookup from "@/components/SelectionLookup";
@@ -9,19 +9,13 @@ const beVietnam = Be_Vietnam_Pro({
   variable: "--font-be-vietnam",
   subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700"],
-});
-
-// Font theo design Figma: heading "Dela Gothic One", body "Montserrat".
-const dela = Dela_Gothic_One({
-  variable: "--font-dela",
-  subsets: ["latin"],
-  weight: "400",
   display: "swap",
 });
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -37,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${beVietnam.variable} ${dela.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${beVietnam.variable} ${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground transition-colors duration-500">
         <AuthProvider>
