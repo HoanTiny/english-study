@@ -3,7 +3,7 @@
 
 const API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 // Model có thể đổi qua env; mặc định Flash cho rẻ/nhanh.
-const MODEL = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
+const MODEL = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
 
 export function geminiConfigured(): boolean {
   return !!process.env.GEMINI_API_KEY;
