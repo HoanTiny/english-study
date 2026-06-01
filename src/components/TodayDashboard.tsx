@@ -33,228 +33,130 @@ export default function TodayDashboard() {
   }, [ready, userId, today]);
 
   const gapPct = stats && stats.recognized > 0 ? Math.round((stats.mastered / stats.recognized) * 100) : 0;
-
-  // SVG Circular Ring parameters
-  const radius = 40;
+  const radius = 34;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (gapPct / 100) * circumference;
+  const dashoffset = circumference - (gapPct / 100) * circumference;
 
   if (!loaded) {
     return (
-      <div className="rounded-3xl border border-border/20 bg-surface/50 dark:bg-black/20 p-12 text-center backdrop-blur-md">
+      <div className="rounded-3xl border border-border/40 bg-surface/50 p-12 text-center">
         <div className="flex flex-col items-center justify-center gap-3">
-          <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-          <p className="text-[10px] font-black uppercase tracking-[0.25em] text-primary">
-            Đang đồng bộ tiến trình…
-          </p>
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+          <p className="text-[11px] font-bold uppercase tracking-wider text-muted">Đang đồng bộ tiến trình…</p>
         </div>
       </div>
     );
   }
   if (!stats) return null;
 
+  const empty = stats.inReview === 0 && !stats.journalToday && stats.shadowDone === 0;
+
+  // 3 nhiệm vụ chính — cấu hình gọn để render đồng nhất.
+  const tasks = [
+    {
+      href: "/review",
+      icon: "🔁",
+      title: "Ôn tập",
+      value: String(stats.dueToday),
+      unit: "thẻ đến hạn hôm nay",
+      foot: `Đã ôn ${stats.inReview} thẻ`,
+      cta: stats.dueToday > 0 ? "Ôn ngay →" : "Hoàn tất ✓",
+      done: stats.dueToday === 0,
+      tint: "primary" as const,
+    },
+    {
+      href: "/journal",
+      icon: "📔",
+      title: "Nhật ký",
+      value: `🔥 ${stats.journalStreak}`,
+      unit: "ngày streak liên tiếp",
+      foot: stats.journalToday ? "Đã viết hôm nay" : "Chưa viết hôm nay",
+      cta: stats.journalToday ? "Đã viết ✓" : "Viết ngay →",
+      done: !!stats.journalToday,
+      tint: "pink" as const,
+    },
+    {
+      href: "/shadowing",
+      icon: "🎧",
+      title: "Shadowing",
+      value: stats.shadowAvg != null ? String(stats.shadowAvg) : "—",
+      unit: "điểm phát âm TB",
+      foot: `Đã học ${stats.shadowDone} câu`,
+      cta: "Luyện nói →",
+      done: false,
+      tint: "primary" as const,
+    },
+  ];
+
   return (
-    <div className="space-y-6 animate-fadeIn">
-      {/* 1. Hiểu vs Nói được (Circular SVG Premium Panel) */}
-      <div className="rounded-3xl border border-border/30 dark:border-white/5 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.015)] relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-accent/5 to-transparent opacity-60 pointer-events-none" />
-        
-        <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex-1 space-y-4 text-left">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">
-                📊 Chỉ số chuyển đổi
-              </span>
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-muted font-display">Hiểu → Nói được</span>
-            </div>
-            
-            <div className="space-y-1.5">
-              <h2 className="text-base sm:text-lg font-black text-foreground uppercase tracking-wide">Vốn từ thực tế của bạn</h2>
-              <p className="text-xs sm:text-sm font-semibold text-muted leading-relaxed max-w-xl">
-                Tổng số từ vựng bạn đã chuyển hóa thành công từ dạng <b>thụ động (chỉ hiểu khi nghe/đọc)</b> sang dạng <b>chủ động (nói ra tự nhiên được)</b> thông qua các bài luyện nói FSRS hằng ngày.
-              </p>
-            </div>
+    <div className="space-y-5 animate-fadeIn">
+      {/* Hero: tỉ lệ Hiểu → Nói được */}
+      <div className="rounded-3xl border border-border/40 bg-white/70 dark:bg-zinc-900/60 p-6 md:p-7 flex flex-col sm:flex-row items-center gap-6">
+        <div className="flex-1 text-center sm:text-left">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft/70 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary">
+            📊 Hiểu → Nói được
+          </span>
+          <h2 className="mt-3 font-display text-xl md:text-2xl font-extrabold text-foreground">Vốn từ chủ động của bạn</h2>
+          <p className="mt-1 text-xs sm:text-sm font-medium text-muted">Số từ bạn đã luyện đến mức nói ra tự nhiên được.</p>
+          <p className="mt-3 font-display text-3xl font-black text-foreground leading-none">
+            {stats.mastered}
+            <span className="ml-1.5 text-sm font-semibold text-muted">/ {stats.recognized} từ đã tiếp cận</span>
+          </p>
+        </div>
 
-            <div className="flex items-baseline gap-1.5 pt-1">
-              <span className="text-[11px] sm:text-xs font-bold text-muted uppercase tracking-wider">Từ đã thạo:</span>
-              <p className="font-display text-3xl font-black text-foreground tracking-tight leading-none">
-                {stats.mastered}
-                <span className="text-sm font-semibold text-muted font-sans ml-1.5">/ {stats.recognized} từ tiếp cận</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Epic Circular SVG Progress Gauge */}
-          <div className="relative shrink-0 flex items-center justify-center w-28 h-28 group-hover:scale-102 transition-transform duration-500">
-            <svg className="w-full h-full transform -rotate-90">
-              {/* Background ring */}
-              <circle
-                cx="56"
-                cy="56"
-                r={radius}
-                className="stroke-black/5 dark:stroke-white/5"
-                strokeWidth="8"
-                fill="transparent"
-              />
-              {/* Highlight dynamic ring */}
-              <circle
-                cx="56"
-                cy="56"
-                r={radius}
-                className="stroke-primary"
-                strokeWidth="8"
-                fill="transparent"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                strokeLinecap="round"
-                style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.34, 1.56, 0.64, 1)" }}
-              />
-            </svg>
-            <div className="absolute flex flex-col items-center justify-center text-center">
-              <span className="text-2xl font-display font-black text-foreground tracking-tight">{gapPct}%</span>
-              <span className="text-[9px] font-black uppercase tracking-wider text-muted mt-0.5">Chuyển hóa</span>
-            </div>
+        {/* Vòng % */}
+        <div className="relative flex h-24 w-24 shrink-0 items-center justify-center">
+          <svg className="h-full w-full -rotate-90">
+            <circle cx="48" cy="48" r={radius} className="stroke-black/5 dark:stroke-white/10" strokeWidth="7" fill="transparent" />
+            <circle cx="48" cy="48" r={radius} className="stroke-primary" strokeWidth="7" fill="transparent" strokeDasharray={circumference} strokeDashoffset={dashoffset} strokeLinecap="round" style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.34,1.56,0.64,1)" }} />
+          </svg>
+          <div className="absolute flex flex-col items-center">
+            <span className="font-display text-xl font-black text-foreground">{gapPct}%</span>
+            <span className="text-[9px] font-bold uppercase tracking-wider text-muted">chuyển hóa</span>
           </div>
         </div>
       </div>
 
-      {/* 2. Lưới 3 nhiệm vụ (Sleek Compact Bento Grid) */}
-      <div className="grid gap-5 sm:grid-cols-3">
-        {/* Ôn tập */}
-        <Link
-          href="/review"
-          className="rounded-3xl border border-border/30 dark:border-white/5 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md p-5 flex flex-col justify-between min-h-[170px] shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:-translate-y-1 hover:border-primary/30 dark:hover:border-primary/20 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group cursor-pointer"
-        >
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft/80 border border-primary/20 text-md shadow-inner transition-transform duration-500 group-hover:scale-105">
-              🔁
+      {/* 3 nhiệm vụ */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        {tasks.map((t) => (
+          <Link
+            key={t.href}
+            href={t.href}
+            className="group flex flex-col gap-3 rounded-3xl border border-border/40 bg-white/70 dark:bg-zinc-900/60 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className={`flex h-9 w-9 items-center justify-center rounded-xl text-base ${t.tint === "pink" ? "bg-pink-soft/70" : "bg-primary-soft/70"}`}>{t.icon}</span>
+              <span className="font-display text-sm font-extrabold text-foreground">{t.title}</span>
             </div>
-            <div className="text-right">
-              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">ÔN TẬP FSRS</p>
-              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Lặp lại ngắt quãng</p>
+            <div>
+              <p className="font-display text-3xl font-black text-foreground leading-none">{t.value}</p>
+              <p className="mt-1 text-[11px] font-medium text-muted">{t.unit}</p>
             </div>
-          </div>
-          
-          <div className="my-3 text-left">
-            <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight">
-              {stats.dueToday}
-            </p>
-            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Thẻ đến hạn hôm nay</p>
-          </div>
-          
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
-            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Đã ôn: {stats.inReview}</span>
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap ${
-              stats.dueToday > 0 
-                ? "bg-primary text-primary-fg shadow-sm shadow-primary/20" 
-                : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/25"
-            }`}>
-              {stats.dueToday > 0 ? (
-                <>
-                  Ôn ngay
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
-                </>
-              ) : (
-                "Xong ✓"
-              )}
-            </span>
-          </div>
-        </Link>
-
-        {/* Nhật ký */}
-        <Link
-          href="/journal"
-          className="rounded-3xl border border-border/30 dark:border-white/5 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md p-5 flex flex-col justify-between min-h-[170px] shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:-translate-y-1 hover:border-pink/30 dark:hover:border-pink/20 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group cursor-pointer"
-        >
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-pink-soft/80 border border-pink/20 text-md shadow-inner transition-transform duration-500 group-hover:scale-105">
-              📔
+            <div className="mt-auto flex items-center justify-between border-t border-border/30 pt-3">
+              <span className="text-[11px] font-semibold text-muted">{t.foot}</span>
+              <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider ${t.done ? "bg-emerald-500/10 text-emerald-500" : t.tint === "pink" ? "bg-pink text-pink-fg" : "bg-primary text-primary-fg"}`}>
+                {t.cta}
+              </span>
             </div>
-            <div className="text-right">
-              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-pink">NHẬT KÝ PHẢN XẠ</p>
-              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Viết tự do kích hoạt</p>
-            </div>
-          </div>
-          
-          <div className="my-3 text-left">
-            <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight flex items-center gap-1">
-              <span className="text-xl animate-pulse">🔥</span> {stats.journalStreak}
-            </p>
-            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Ngày streak liên tiếp</p>
-          </div>
-          
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
-            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Hôm nay</span>
-            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap ${
-              !stats.journalToday 
-                ? "bg-pink text-pink-fg shadow-sm shadow-pink/20" 
-                : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/25"
-            }`}>
-              {stats.journalToday ? (
-                "Đã viết ✓"
-              ) : (
-                <>
-                  Viết ngay
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
-                </>
-              )}
-            </span>
-          </div>
-        </Link>
-
-        {/* Shadowing */}
-        <Link
-          href="/shadowing"
-          className="rounded-3xl border border-border/30 dark:border-white/5 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md p-5 flex flex-col justify-between min-h-[170px] shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:-translate-y-1 hover:border-primary/30 dark:hover:border-primary/20 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group cursor-pointer"
-        >
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-soft/80 border border-primary/20 text-md shadow-inner transition-transform duration-500 group-hover:scale-105">
-              🎧
-            </div>
-            <div className="text-right">
-              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">SHADOWING</p>
-              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Phát âm phản xạ</p>
-            </div>
-          </div>
-          
-          <div className="my-3 text-left">
-            <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight">
-              {stats.shadowAvg != null ? `${stats.shadowAvg}` : "—"}
-            </p>
-            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Điểm phát âm TB</p>
-          </div>
-          
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
-            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Đã học: {stats.shadowDone} câu</span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-primary-fg shadow-sm shadow-primary/20 text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap">
-              Shadow
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
-            </span>
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
 
-      {/* Gợi ý bài học hôm nay */}
+      {/* Gợi ý bài học */}
       <SuggestedLesson />
 
-      {/* 3. Nhắc học hằng ngày */}
+      {/* Nhắc học hằng ngày */}
       <StudyReminder studiedToday={stats.journalToday || (stats.inReview > 0 && stats.dueToday === 0)} />
 
-      {/* 4. Tip & Quickstart Pointer (Redesigned as Elegant Card) */}
-      {stats.inReview === 0 && !stats.journalToday && stats.shadowDone === 0 && (
-        <div className="rounded-3xl border border-primary/10 bg-gradient-to-tr from-primary/5 via-accent/5 to-transparent p-6 md:p-8 text-center backdrop-blur-md relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
-          <div className="relative flex flex-col items-center justify-center gap-3.5 max-w-lg mx-auto">
-            <span className="text-2xl animate-bounce">✨</span>
-            <h3 className="text-xs font-black uppercase tracking-widest text-primary">Khởi động lộ trình học hôm nay</h3>
-            <p className="text-xs sm:text-sm font-semibold text-muted leading-relaxed">
-              Bạn chưa có hoạt động nào trong hôm nay. Hãy bắt đầu bằng cách chọn lưu một vài cụm từ thông dụng trong{" "}
-              <Link href="/vocab" className="text-primary font-black underline hover:text-primary-dark transition-all">
-                Thư viện từ vựng
-              </Link>
-              , hệ thống thuật toán FSRS sẽ tự động lên lịch nhắc nhở và tối ưu hóa chu kỳ ôn tập dành riêng cho bạn!
-            </p>
-          </div>
+      {/* Khởi động khi chưa có hoạt động */}
+      {empty && (
+        <div className="rounded-3xl border border-primary/15 bg-primary-soft/20 p-5 text-center">
+          <p className="text-sm font-semibold text-muted leading-relaxed">
+            ✨ Chưa có hoạt động hôm nay. Lưu vài từ trong{" "}
+            <Link href="/vocab" className="font-black text-primary underline">Thư viện từ vựng</Link>{" "}
+            để FSRS tự lên lịch ôn cho bạn nhé!
+          </p>
         </div>
       )}
     </div>

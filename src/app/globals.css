@@ -61,7 +61,8 @@
   --color-pink-fg: var(--pink-fg);
   --color-pink-soft: var(--pink-soft);
   --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
-  --font-display: var(--font-outfit), var(--font-be-vietnam), sans-serif;
+  /* Display dùng Be Vietnam Pro (hỗ trợ đầy đủ tiếng Việt); Outfit chỉ làm dự phòng cho ký tự Latin. */
+  --font-display: var(--font-be-vietnam), var(--font-outfit), system-ui, sans-serif;
 }
 
 .font-display {
