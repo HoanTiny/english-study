@@ -13,6 +13,14 @@ import {
   msUntilNext,
   type ReminderSettings,
 } from "@/lib/reminder";
+import {
+  pushSupported,
+  enablePush,
+  disablePush,
+  updateReminderTime,
+} from "@/lib/push";
+import { useAuth } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 // `studiedToday`: hôm nay đã có hoạt động học chưa (ôn tập / nhật ký / shadowing).
 // Khi đã học rồi thì không nhắc nữa.
@@ -24,7 +32,11 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
   const [perm, setPerm] = useState<NotificationPermission>("default");
   const [open, setOpen] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
+  const [testMsg, setTestMsg] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { userId } = useAuth();
+  const canPush = pushSupported();
 
   // Nạp cấu hình + quyền lúc mount.
   useEffect(() => {
@@ -65,19 +77,28 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
   }, [settings.enabled, settings.time, perm, studiedToday]);
 
   const toggleEnabled = async () => {
+    if (busy) return;
     if (!settings.enabled) {
-      // Bật: cần quyền thông báo (yêu cầu rõ ràng từ click của người dùng).
-      let p = perm;
-      if (p !== "granted") p = await requestPermission();
+      setBusy(true);
+      // Bật: ưu tiên web push (nhắc cả khi đóng app); fallback Notification trong tab.
+      let granted = false;
+      if (canPush && userId) {
+        granted = await enablePush(userId, settings.time);
+      }
+      let p = permission();
+      if (!granted && p !== "granted") p = await requestPermission();
       setPerm(p);
-      const next = { ...settings, enabled: p === "granted" };
+      const ok = granted || p === "granted";
+      const next = { ...settings, enabled: ok };
       setSettings(next);
       saveReminder(next);
+      setBusy(false);
     } else {
       const next = { ...settings, enabled: false };
       setSettings(next);
       saveReminder(next);
       setShowBanner(false);
+      if (canPush) disablePush().catch(() => {});
     }
   };
 
@@ -85,6 +106,31 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
     const next = { ...settings, time };
     setSettings(next);
     saveReminder(next);
+    if (settings.enabled && canPush) updateReminderTime(time).catch(() => {});
+  };
+
+  const sendTest = async () => {
+    setTestMsg(null);
+    setBusy(true);
+    try {
+      const { data } = await supabase.auth.getSession();
+      const token = data.session?.access_token;
+      const res = await fetch("/api/push/test", {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      const j = await res.json();
+      if (j.ok) setTestMsg(`Đã gửi tới ${j.sent}/${j.total} thiết bị ✓`);
+      else if (j.error === "no_subscription")
+        setTestMsg("Chưa đăng ký thiết bị này — hãy bật nhắc nhở trước.");
+      else if (j.error === "unconfigured")
+        setTestMsg("Server chưa cấu hình VAPID key.");
+      else setTestMsg("Gửi thử thất bại, thử lại sau.");
+    } catch {
+      setTestMsg("Gửi thử thất bại, thử lại sau.");
+    } finally {
+      setBusy(false);
+    }
   };
 
   if (!notificationSupported()) return null;
@@ -170,9 +216,27 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
               </div>
             )}
             
+            {settings.enabled && (
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Kiểm tra</span>
+                <button
+                  onClick={sendTest}
+                  disabled={busy}
+                  className="rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black text-primary hover:bg-primary/15 active:scale-95 transition-all disabled:opacity-40 cursor-pointer"
+                >
+                  {busy ? "Đang gửi…" : "🔔 Gửi thử thông báo"}
+                </button>
+              </div>
+            )}
+            {testMsg && (
+              <p className="text-[10px] sm:text-xs font-bold text-primary text-right">{testMsg}</p>
+            )}
+
             <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-border/10">
               <p className="text-[9px] sm:text-[10px] font-semibold text-muted leading-relaxed">
-                * Nhắc nhở hoạt động khi tab trình duyệt của SpeakUp đang mở. Ở bản cập nhật tiếp theo, chúng tôi sẽ hỗ trợ Push Notification hệ thống ngay cả khi bạn tắt ứng dụng.
+                {canPush
+                  ? "* Đã bật Push Notification hệ thống: bạn sẽ được nhắc đúng giờ ngay cả khi đã đóng tab SpeakUp (cần trình duyệt còn chạy nền). Nếu không có push, app vẫn nhắc khi tab đang mở."
+                  : "* Trình duyệt này chưa hỗ trợ Push nền — nhắc nhở sẽ hoạt động khi tab SpeakUp đang mở."}
               </p>
             </div>
           </div>

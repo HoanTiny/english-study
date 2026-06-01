@@ -60,7 +60,7 @@
   - Stack an toàn: CEFR-J Wordlist (nhãn cấp độ, OK thương mại), Tatoeba (câu Anh–Việt, CC-BY), Free Dictionary API (IPA/audio), VOA (nghe, public domain), YouTube IFrame (nhúng video)
   - Tránh nhúng/copy: Oxford 3000/5000 & Cambridge EVP (chỉ tra cứu), British Council/BBC (chỉ link)
 - [x] Nội dung sâu hơn cho Giai đoạn 3–4 (B1/B1+ lên 9 cụm/bài, ngôn ngữ hội thoại tự nhiên)
-- [ ] Push notification thật (hiện chỉ nhắc khi tab đang mở)
+- [x] **Push notification thật (Web Push)** (2026-06-01): service worker `public/sw.js` + VAPID (`web-push`). Bật nhắc ở `/today` → subscribe + lưu `push_subscriptions` (Supabase, RLS) kèm giờ + tz_offset. Route `/api/push/test` (gửi thử cho chính mình, xác thực Bearer token) + `/api/push/send-due` (cron, bảo vệ `PUSH_CRON_SECRET`, gửi đúng giờ local + chống trùng `last_sent`). `StudyReminder` có nút "🔔 Gửi thử". `next build` sạch (34 route). ⚠️ Cần: chạy `db/migrate_push_subscriptions.sql` + (khi deploy) cron gọi `/api/push/send-due?secret=...` vài lần/giờ.
 
 ### Áp dụng design Figma (2026-05-30)
 > Thiết kế: file Figma "Untitled" (P8ts69z7…), kết nối qua Figma MCP. Hướng: re-skin theo design (teal/sáng/phẳng), pha chút liquid-glass.
