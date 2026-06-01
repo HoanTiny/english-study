@@ -1,23 +1,54 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getLesson } from "@/lib/lessons";
+import { fetchLesson, type LessonContentDB } from "@/lib/lessonsRepo";
 import { useAuth } from "@/lib/auth";
 import { addNote, listNotes } from "@/lib/notesRepo";
 import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
 import ListeningResource from "@/components/ListeningResource";
+import LessonQuiz from "@/components/LessonQuiz";
+import { isLessonDone } from "@/lib/lessonDone";
+
+// Phát audio đã upload (bucket private) qua signed-URL endpoint.
+function audioSrc(path: string) {
+  return `/api/lesson-audio?path=${encodeURIComponent(path)}`;
+}
 
 export default function LessonPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
-  const lesson = useMemo(() => getLesson(slug), [slug]);
   const { userId, ready } = useAuth();
+
+  // Nội dung bài: đọc từ DB (CMS) trước, fallback file tĩnh.
+  const [lesson, setLesson] = useState<LessonContentDB | undefined>(undefined);
+  const [lessonLoading, setLessonLoading] = useState(true);
 
   // Cụm đã lưu vào ôn tập (theo nội dung trùng khớp).
   const [saved, setSaved] = useState<Set<string>>(new Set());
   const [busy, setBusy] = useState<string | null>(null);
+  const [doneBadge, setDoneBadge] = useState(false);
+
+  useEffect(() => {
+    setDoneBadge(isLessonDone(slug));
+  }, [slug]);
+
+  useEffect(() => {
+    let active = true;
+    setLessonLoading(true);
+    fetchLesson(slug)
+      .then((l) => {
+        if (active) {
+          setLesson(l);
+          setLessonLoading(false);
+        }
+      })
+      .catch(() => active && setLessonLoading(false));
+    return () => {
+      active = false;
+    };
+  }, [slug]);
 
   useEffect(() => {
     if (!ready || !userId) return;
@@ -43,9 +74,16 @@ export default function LessonPage() {
     window.speechSynthesis.speak(u);
   }
 
-  // Từ đơn: ưu tiên audio người bản xứ (Free Dictionary API); nếu không có thì TTS.
-  // Cụm nhiều từ: dùng thẳng TTS.
-  async function speak(text: string, rate = 0.9) {
+  // Ưu tiên: audio đã upload trong CMS → audio bản xứ (Free Dictionary, từ đơn) → TTS.
+  async function speak(text: string, rate = 0.9, uploadedPath?: string | null) {
+    if (uploadedPath) {
+      try {
+        await new Audio(audioSrc(uploadedPath)).play();
+        return;
+      } catch {
+        // bỏ qua → fallback dưới
+      }
+    }
     if (isSingleWord(text)) {
       try {
         const p = await fetchPronounce(text);
@@ -77,6 +115,14 @@ export default function LessonPage() {
     } finally {
       setBusy(null);
     }
+  }
+
+  if (lessonLoading) {
+    return (
+      <main className="mx-auto max-w-2xl px-5 py-32 text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+      </main>
+    );
   }
 
   if (!lesson) {
@@ -115,6 +161,11 @@ export default function LessonPage() {
           <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-primary shadow-sm">
             {lesson.cefr}
           </span>
+          {doneBadge && (
+            <span className="rounded-full bg-teal-500/10 border border-teal-500/25 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-teal-600 dark:text-teal-400 shadow-sm">
+              ✓ Đã hoàn thành
+            </span>
+          )}
         </div>
         <p className="mt-3 text-xs sm:text-sm font-semibold text-muted leading-relaxed">
           {lesson.intro}
@@ -162,7 +213,7 @@ export default function LessonPage() {
                   </div>
                 </div>
                 <button
-                  onClick={() => speak(p.en)}
+                  onClick={() => speak(p.en, 0.9, p.audioUrl)}
                   className="shrink-0 flex h-11 w-11 items-center justify-center rounded-xl border border-border/80 bg-white/60 dark:bg-slate-900/60 text-sm transition-all duration-300 hover:border-primary hover:bg-primary-soft/30 active:scale-95 shadow-sm cursor-pointer"
                   title="Nghe cụm từ"
                 >
@@ -197,6 +248,8 @@ export default function LessonPage() {
           );
         })}
       </div>
+
+      <LessonQuiz phrases={lesson.phrases} slug={slug} />
 
       <ListeningResource
         cefr={lesson.cefr}

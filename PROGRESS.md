@@ -152,6 +152,18 @@
 - [x] Đã kiểm tra mobile các component trang chủ (Sprint/CoreLoop) — đã responsive sẵn (`flex-col md:flex-row`), không cần sửa.
 - [x] `next build` sạch — 14 route
 
+### Mở rộng nội dung bài học (2026-06-01)
+- [x] **+9 bài chủ đề mới** (nội dung gốc, 8 cụm/bài) → tổng **31 bài / 253 cụm** (trước: 22 bài / ~180 cụm). Gắn vào curriculum + chuỗi mở khoá động:
+  - A1: `clothes-appearance` (Quần áo & ngoại hình), `house-home` (Nhà cửa & đồ đạc)
+  - A2: `shopping-money` (Mua sắm & trả giá), `feelings-emotions` (Cảm xúc), `making-plans` (Hẹn hò & rủ rê)
+  - B1: `technology-phone` (Công nghệ & điện thoại), `work-office` (Công việc), `environment-nature` (Môi trường)
+  - B1+: `small-talk` (Nói chuyện xã giao)
+- [x] **Cải thiện trải nghiệm học** (2026-06-01):
+  - **Quiz cuối bài** (`LessonQuiz.tsx`): trắc nghiệm nghĩa→chọn cụm đúng, chấm điểm, đọc đáp án (TTS), màn kết quả + làm lại. Gắn vào mọi trang `/lesson/[slug]`.
+  - **Đánh dấu "đã hoàn thành"** (`lessonDone.ts`, localStorage): badge "✓ Đã hoàn thành" trên đầu bài sau khi làm quiz.
+  - **Gợi ý bài học hôm nay** (`SuggestedLesson.tsx`) trên `/today`: ưu tiên bài đang học dở → bài mới mở khoá → bài chưa làm quiz. Đã verify trên Chrome.
+- [ ] (Còn lại theo yêu cầu) làm dày 22 bài cũ lên 12–15 cụm; thêm bộ từ vựng & câu mới.
+
 ## Biến môi trường (`.env.local`)
 Xem mẫu đầy đủ ở `.env.example`. Tóm tắt:
 ```

@@ -18,6 +18,7 @@ import {
   enablePush,
   disablePush,
   updateReminderTime,
+  hasPushSubscription,
 } from "@/lib/push";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
@@ -38,11 +39,24 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
   const { userId } = useAuth();
   const canPush = pushSupported();
 
-  // Nạp cấu hình + quyền lúc mount.
+  // Nạp cấu hình + đối chiếu trạng thái THẬT của thiết bị này lúc mount.
   useEffect(() => {
-    setSettings(loadReminder());
+    const s = loadReminder();
     if (notificationSupported()) setPerm(permission());
-  }, []);
+    (async () => {
+      if (canPush) {
+        const hasSub = await hasPushSubscription();
+        const granted = permission() === "granted";
+        // "Đang bật" chỉ đúng khi thiết bị này thực sự có quyền + đã subscribe.
+        const reallyEnabled = s.enabled && hasSub && granted;
+        const next = { ...s, enabled: reallyEnabled };
+        setSettings(next);
+        if (s.enabled !== reallyEnabled) saveReminder(next);
+      } else {
+        setSettings(s);
+      }
+    })();
+  }, [canPush]);
 
   // Banner trong app: đã bật, đã quá giờ, chưa học, chưa bắn lần nào hôm nay.
   useEffect(() => {
@@ -109,22 +123,37 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
     if (settings.enabled && canPush) updateReminderTime(time).catch(() => {});
   };
 
+  async function callTest(): Promise<{ ok: boolean; sent?: number; total?: number; error?: string }> {
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+    const res = await fetch("/api/push/test", {
+      method: "POST",
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    return res.json();
+  }
+
   const sendTest = async () => {
     setTestMsg(null);
     setBusy(true);
     try {
-      const { data } = await supabase.auth.getSession();
-      const token = data.session?.access_token;
-      const res = await fetch("/api/push/test", {
-        method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-      });
-      const j = await res.json();
-      if (j.ok) setTestMsg(`Đã gửi tới ${j.sent}/${j.total} thiết bị ✓`);
+      if (permission() === "denied") {
+        setTestMsg("Trình duyệt đang chặn thông báo cho trang này. Hãy bật lại quyền Thông báo (🔒 cạnh URL) rồi thử lại.");
+        return;
+      }
+      let j = await callTest();
+      // Chưa có sub cho user hiện tại (vd. vừa đăng nhập) → tự đăng ký lại rồi thử lần nữa.
+      if (!j.ok && j.error === "no_subscription" && canPush && userId) {
+        const ok = await enablePush(userId, settings.time);
+        if (ok) j = await callTest();
+      }
+      if (j.ok) setTestMsg(`Đã gửi tới ${j.sent}/${j.total} thiết bị ✓ (nếu không thấy, kiểm tra cài đặt thông báo của hệ điều hành)`);
       else if (j.error === "no_subscription")
-        setTestMsg("Chưa đăng ký thiết bị này — hãy bật nhắc nhở trước.");
+        setTestMsg("Chưa đăng ký được thiết bị này. Hãy bật lại toggle nhắc nhở.");
       else if (j.error === "unconfigured")
         setTestMsg("Server chưa cấu hình VAPID key.");
+      else if (j.error === "unauthorized")
+        setTestMsg("Phiên đăng nhập hết hạn — tải lại trang rồi thử lại.");
       else setTestMsg("Gửi thử thất bại, thử lại sau.");
     } catch {
       setTestMsg("Gửi thử thất bại, thử lại sau.");
@@ -186,13 +215,13 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
                 onClick={toggleEnabled}
                 role="switch"
                 aria-checked={settings.enabled}
-                className={`relative h-6.5 w-12 shrink-0 rounded-full transition-colors duration-300 cursor-pointer ${
-                  settings.enabled ? "bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" : "bg-black/10 dark:bg-white/10"
+                className={`relative h-7 w-12 shrink-0 rounded-full transition-colors duration-300 cursor-pointer ${
+                  settings.enabled ? "bg-primary" : "bg-black/10 dark:bg-white/10"
                 }`}
               >
                 <span
-                  className={`absolute top-0.75 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-300 ${
-                    settings.enabled ? "translate-x-[22px]" : "translate-x-1"
+                  className={`absolute top-1 left-1 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-300 ${
+                    settings.enabled ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>
@@ -233,7 +262,7 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
             )}
 
             <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-border/10">
-              <p className="text-[9px] sm:text-[10px] font-semibold text-muted leading-relaxed">
+              <p className="text-[11px] sm:text-xs font-semibold text-muted leading-relaxed">
                 {canPush
                   ? "* Đã bật Push Notification hệ thống: bạn sẽ được nhắc đúng giờ ngay cả khi đã đóng tab SpeakUp (cần trình duyệt còn chạy nền). Nếu không có push, app vẫn nhắc khi tab đang mở."
                   : "* Trình duyệt này chưa hỗ trợ Push nền — nhắc nhở sẽ hoạt động khi tab SpeakUp đang mở."}

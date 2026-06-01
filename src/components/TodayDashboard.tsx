@@ -6,6 +6,7 @@ import { todayKey } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { loadDashboard, type DashboardStats } from "@/lib/statsRepo";
 import StudyReminder from "@/components/StudyReminder";
+import SuggestedLesson from "@/components/SuggestedLesson";
 
 // Bảng tiến độ "Hôm nay": tỉ lệ Hiểu→Nói + 3 nhiệm vụ + nhắc học.
 // Dùng chung cho trang /today và /account.
@@ -61,21 +62,21 @@ export default function TodayDashboard() {
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex-1 space-y-4 text-left">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">
+              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">
                 📊 Chỉ số chuyển đổi
               </span>
-              <span className="text-[9px] font-black uppercase tracking-wider text-muted font-display">Hiểu → Nói được</span>
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-muted font-display">Hiểu → Nói được</span>
             </div>
             
             <div className="space-y-1.5">
-              <h2 className="text-sm font-black text-foreground uppercase tracking-wide">Vốn từ thực tế của bạn</h2>
-              <p className="text-xs font-semibold text-muted leading-relaxed max-w-xl">
+              <h2 className="text-base sm:text-lg font-black text-foreground uppercase tracking-wide">Vốn từ thực tế của bạn</h2>
+              <p className="text-xs sm:text-sm font-semibold text-muted leading-relaxed max-w-xl">
                 Tổng số từ vựng bạn đã chuyển hóa thành công từ dạng <b>thụ động (chỉ hiểu khi nghe/đọc)</b> sang dạng <b>chủ động (nói ra tự nhiên được)</b> thông qua các bài luyện nói FSRS hằng ngày.
               </p>
             </div>
 
             <div className="flex items-baseline gap-1.5 pt-1">
-              <span className="text-[10px] font-bold text-muted uppercase tracking-wider">Từ đã thạo:</span>
+              <span className="text-[11px] sm:text-xs font-bold text-muted uppercase tracking-wider">Từ đã thạo:</span>
               <p className="font-display text-3xl font-black text-foreground tracking-tight leading-none">
                 {stats.mastered}
                 <span className="text-sm font-semibold text-muted font-sans ml-1.5">/ {stats.recognized} từ tiếp cận</span>
@@ -111,7 +112,7 @@ export default function TodayDashboard() {
             </svg>
             <div className="absolute flex flex-col items-center justify-center text-center">
               <span className="text-2xl font-display font-black text-foreground tracking-tight">{gapPct}%</span>
-              <span className="text-[7.5px] font-black uppercase tracking-widest text-muted mt-0.5">Tốc độ</span>
+              <span className="text-[9px] font-black uppercase tracking-wider text-muted mt-0.5">Chuyển hóa</span>
             </div>
           </div>
         </div>
@@ -129,8 +130,8 @@ export default function TodayDashboard() {
               🔁
             </div>
             <div className="text-right">
-              <p className="text-[9px] font-black uppercase tracking-wider text-primary">ÔN TẬP FSRS</p>
-              <p className="text-[7.5px] font-semibold text-muted uppercase tracking-widest">Lặp lại ngắt quãng</p>
+              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">ÔN TẬP FSRS</p>
+              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Lặp lại ngắt quãng</p>
             </div>
           </div>
           
@@ -138,17 +139,24 @@ export default function TodayDashboard() {
             <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight">
               {stats.dueToday}
             </p>
-            <p className="mt-1 text-[9px] font-bold text-muted uppercase tracking-wider">Thẻ đến hạn hôm nay</p>
+            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Thẻ đến hạn hôm nay</p>
           </div>
           
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between">
-            <span className="text-[9px] font-bold text-muted uppercase tracking-wider">{stats.inReview} thẻ ôn xong</span>
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[8.5px] font-black uppercase tracking-wider transition-all duration-300 ${
+          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
+            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Đã ôn: {stats.inReview}</span>
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap ${
               stats.dueToday > 0 
-                ? "bg-primary text-primary-fg shadow-sm shadow-primary/20 group-hover:px-4" 
+                ? "bg-primary text-primary-fg shadow-sm shadow-primary/20" 
                 : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/25"
             }`}>
-              {stats.dueToday > 0 ? "Ôn ngay →" : "Xong ✓"}
+              {stats.dueToday > 0 ? (
+                <>
+                  Ôn ngay
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
+                </>
+              ) : (
+                "Xong ✓"
+              )}
             </span>
           </div>
         </Link>
@@ -163,8 +171,8 @@ export default function TodayDashboard() {
               📔
             </div>
             <div className="text-right">
-              <p className="text-[9px] font-black uppercase tracking-wider text-pink">NHẬT KÝ PHẢN XẠ</p>
-              <p className="text-[7.5px] font-semibold text-muted uppercase tracking-widest">Viết tự do kích hoạt</p>
+              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-pink">NHẬT KÝ PHẢN XẠ</p>
+              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Viết tự do kích hoạt</p>
             </div>
           </div>
           
@@ -172,17 +180,24 @@ export default function TodayDashboard() {
             <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight flex items-center gap-1">
               <span className="text-xl animate-pulse">🔥</span> {stats.journalStreak}
             </p>
-            <p className="mt-1 text-[9px] font-bold text-muted uppercase tracking-wider">Ngày streak liên tiếp</p>
+            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Ngày streak liên tiếp</p>
           </div>
           
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between">
-            <span className="text-[9px] font-bold text-muted uppercase tracking-wider">Nhật ký hôm nay</span>
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[8.5px] font-black uppercase tracking-wider transition-all duration-300 ${
+          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
+            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Hôm nay</span>
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap ${
               !stats.journalToday 
-                ? "bg-pink text-pink-fg shadow-sm shadow-pink/20 group-hover:px-4" 
+                ? "bg-pink text-pink-fg shadow-sm shadow-pink/20" 
                 : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/25"
             }`}>
-              {stats.journalToday ? "Đã viết ✓" : "Viết ngay →"}
+              {stats.journalToday ? (
+                "Đã viết ✓"
+              ) : (
+                <>
+                  Viết ngay
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
+                </>
+              )}
             </span>
           </div>
         </Link>
@@ -197,8 +212,8 @@ export default function TodayDashboard() {
               🎧
             </div>
             <div className="text-right">
-              <p className="text-[9px] font-black uppercase tracking-wider text-primary">SHADOWING</p>
-              <p className="text-[7.5px] font-semibold text-muted uppercase tracking-widest">Phát âm phản xạ</p>
+              <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">SHADOWING</p>
+              <p className="text-[9px] font-semibold text-muted uppercase tracking-widest">Phát âm phản xạ</p>
             </div>
           </div>
           
@@ -206,17 +221,21 @@ export default function TodayDashboard() {
             <p className="text-3xl font-display font-black text-foreground leading-none tracking-tight">
               {stats.shadowAvg != null ? `${stats.shadowAvg}` : "—"}
             </p>
-            <p className="mt-1 text-[9px] font-bold text-muted uppercase tracking-wider">Điểm phát âm TB</p>
+            <p className="mt-1 text-[10px] font-bold text-muted uppercase tracking-wider">Điểm phát âm TB</p>
           </div>
           
-          <div className="border-t border-border/10 pt-3 flex items-center justify-between">
-            <span className="text-[9px] font-bold text-muted uppercase tracking-wider">{stats.shadowDone} câu hoàn thành</span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary text-primary-fg shadow-sm shadow-primary/20 group-hover:px-4 text-[8.5px] font-black uppercase tracking-wider transition-all duration-300">
-              Shadow →
+          <div className="border-t border-border/10 pt-3 flex items-center justify-between gap-2">
+            <span className="text-[10px] sm:text-xs font-bold text-muted uppercase tracking-wider whitespace-nowrap">Đã học: {stats.shadowDone} câu</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-primary-fg shadow-sm shadow-primary/20 text-[10px] font-black uppercase tracking-wider transition-all duration-300 shrink-0 whitespace-nowrap">
+              Shadow
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
             </span>
           </div>
         </Link>
       </div>
+
+      {/* Gợi ý bài học hôm nay */}
+      <SuggestedLesson />
 
       {/* 3. Nhắc học hằng ngày */}
       <StudyReminder studiedToday={stats.journalToday || (stats.inReview > 0 && stats.dueToday === 0)} />

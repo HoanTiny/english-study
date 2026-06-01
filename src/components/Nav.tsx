@@ -18,6 +18,7 @@ const skillLinks = [
   { href: "/roleplay", label: "Hội thoại AI", desc: "Luyện nói tự nhiên cùng AI", icon: "📞" },
   { href: "/journal", label: "Nhật ký phản xạ", desc: "Viết nhật ký, nhận phản hồi AI", icon: "✍️" },
   { href: "/listening", label: "Luyện nghe", desc: "Nghe hội thoại theo ngữ cảnh", icon: "🎧" },
+  { href: "/listening-exercises", label: "Bài tập nghe", desc: "Nghe & trả lời, chấm tự động", icon: "📝" },
   { href: "/shadowing", label: "Luyện Shadowing", desc: "Nhại giọng, cải thiện phát âm", icon: "🗣️" },
 ];
 
@@ -45,6 +46,9 @@ export default function Nav() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // CMS admin có chrome riêng (layout /admin) → ẩn Nav của app.
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <header className="liquid-nav sticky top-0 z-50 w-full transition-all duration-300">

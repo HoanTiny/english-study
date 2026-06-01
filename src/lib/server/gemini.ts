@@ -9,7 +9,7 @@ export function geminiConfigured(): boolean {
   return !!process.env.GEMINI_API_KEY;
 }
 
-type GeminiPart = { text?: string };
+type GeminiPart = { text?: string; inlineData?: { mimeType: string; data: string } };
 type GeminiContent = { role?: string; parts: GeminiPart[] };
 
 type GenerateOptions = {

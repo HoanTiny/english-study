@@ -2,11 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { stages, type LessonStatus } from "@/lib/curriculum";
-import { getLesson } from "@/lib/lessons";
+import { type LessonStatus } from "@/lib/curriculum";
 import { useAuth } from "@/lib/auth";
 import { listNotes } from "@/lib/notesRepo";
-import { countSavedByLesson, computeStatuses } from "@/lib/lessonProgress";
+import { countSavedByLesson } from "@/lib/lessonProgress";
+import {
+  staticStages,
+  loadStages,
+  computeStatusesView,
+  type ViewStage,
+} from "@/lib/lessonsView";
 
 const statusStyles: Record<LessonStatus, string> = {
   done: "border-accent/40 bg-accent/10 dark:bg-accent/15 text-accent hover:border-accent/80 hover:shadow-[0_0_16px_rgba(6,182,212,0.3)]",
@@ -24,32 +29,33 @@ const statusIcon: Record<LessonStatus, string> = {
 
 export default function RoadmapPath() {
   const { userId, ready } = useAuth();
+  // Khởi tạo bằng dữ liệu tĩnh để render ngay; thay bằng DB sau khi tải.
+  const [viewStages, setViewStages] = useState<ViewStage[]>(() => staticStages());
   const [dyn, setDyn] = useState<Record<string, LessonStatus>>({});
 
   useEffect(() => {
     if (!ready || !userId) return;
     let active = true;
-    listNotes()
-      .then((notes) => {
-        if (active) setDyn(computeStatuses(countSavedByLesson(notes)));
+    Promise.all([loadStages(), listNotes()])
+      .then(([vs, notes]) => {
+        if (!active) return;
+        setViewStages(vs);
+        setDyn(computeStatusesView(vs, countSavedByLesson(notes)));
       })
-      .catch((e) => console.error("roadmap progress", e));
+      .catch((e) => console.error("roadmap load", e));
     return () => {
       active = false;
     };
   }, [ready, userId]);
 
-  const statusOf = (slug: string, fallback: LessonStatus): LessonStatus =>
-    dyn[slug] ?? fallback;
+  const statusOf = (slug: string): LessonStatus => dyn[slug] ?? "locked";
 
   return (
     <div className="space-y-12">
-      {stages.map((stage) => {
+      {viewStages.map((stage) => {
         const total = stage.lessons.length;
-        const done = stage.lessons.filter(
-          (l) => statusOf(l.slug, l.status) === "done",
-        ).length;
-        const pct = Math.round((done / total) * 100);
+        const done = stage.lessons.filter((l) => statusOf(l.slug) === "done").length;
+        const pct = total ? Math.round((done / total) * 100) : 0;
         return (
           <section 
             key={stage.id} 
@@ -83,9 +89,7 @@ export default function RoadmapPath() {
               {stage.lessons.map((lesson) => {
                 // Hội thoại AI là công cụ luyện tập, luôn mở và trỏ sang /roleplay.
                 const isRoleplay = lesson.slug === "ai-roleplay";
-                const st = isRoleplay
-                  ? "available"
-                  : statusOf(lesson.slug, lesson.status);
+                const st = isRoleplay ? "available" : statusOf(lesson.slug);
                 const card = (
                   <div
                     className={`flex h-full items-center gap-3.5 rounded-2xl border p-4 transition-all duration-300 ${statusStyles[st]} ${st !== 'locked' ? 'hover:-translate-y-1' : ''}`}
@@ -110,7 +114,7 @@ export default function RoadmapPath() {
                   );
                 }
                 // Có nội dung & chưa khoá → cho bấm vào học.
-                const hasContent = st !== "locked" && getLesson(lesson.slug);
+                const hasContent = st !== "locked" && lesson.phraseCount > 0;
                 return hasContent ? (
                   <Link key={lesson.slug} href={`/lesson/${lesson.slug}`}>
                     {card}

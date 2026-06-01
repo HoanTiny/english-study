@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { TOPIC_META, LEVELS } from "@/data/listenVideos";
+import { useAdminAuth } from "@/lib/adminAuth";
 
 type AdminVid = {
   id: string;
@@ -16,12 +17,8 @@ type AdminVid = {
   sort_order: number;
 };
 
-const KEY_STORE = "speakup_admin_key";
-const topicLabel = (key: string) => TOPIC_META.find((t) => t.key === key)?.label ?? key;
-
 export default function AdminListeningPage() {
-  const [key, setKey] = useState("");
-  const [authed, setAuthed] = useState(false);
+  const { key } = useAdminAuth();
   const [videos, setVideos] = useState<AdminVid[]>([]);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
@@ -51,25 +48,10 @@ export default function AdminListeningPage() {
     setVideos(data.videos ?? []);
   }, [api]);
 
-  // tự đăng nhập lại nếu đã lưu mật mã
+  // Đã đăng nhập ở layout → nạp danh sách ngay khi có key.
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem(KEY_STORE) : null;
-    if (saved) setKey(saved);
-  }, []);
-
-  async function login() {
-    setErr("");
-    setBusy(true);
-    try {
-      await load();
-      setAuthed(true);
-      localStorage.setItem(KEY_STORE, key);
-    } catch (e) {
-      setErr(e instanceof Error ? e.message : "Đăng nhập thất bại.");
-    } finally {
-      setBusy(false);
-    }
-  }
+    if (key) load().catch((e) => setErr(e instanceof Error ? e.message : "Lỗi tải."));
+  }, [key, load]);
 
   async function run<T>(fn: () => Promise<T>, ok = "") {
     setErr("");
@@ -122,46 +104,21 @@ export default function AdminListeningPage() {
     });
 
   // ===== Cổng mật mã =====
-  if (!authed) {
-    return (
-      <main className="mx-auto max-w-md px-6 py-20 animate-fadeIn">
-        <div className="liquid-glass-card flex flex-col gap-4 p-8 text-center border border-border/80 shadow-2xl">
-          <span className="text-5xl">🔐</span>
-          <h1 className="font-display text-2xl font-extrabold text-foreground">CMS Luyện nghe</h1>
-          <p className="text-xs font-semibold text-muted">Nhập mật mã admin để quản lý video.</p>
-          <input
-            type="password"
-            value={key}
-            onChange={(e) => setKey(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && login()}
-            placeholder="Mật mã admin"
-            className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3 text-sm font-bold text-foreground outline-none focus:border-primary"
-          />
-          {err && <p className="rounded-xl bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-600">{err}</p>}
-          <button onClick={login} disabled={busy || !key.trim()} className="liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider disabled:opacity-50">
-            {busy ? "Đang kiểm tra…" : "Đăng nhập"}
-          </button>
-          <p className="text-[10px] text-muted">Cần cấu hình <code>SUPABASE_SERVICE_ROLE_KEY</code> &amp; <code>ADMIN_PASSCODE</code> trong .env.local.</p>
-        </div>
-      </main>
-    );
-  }
-
   // ===== CMS =====
   return (
-    <main className="mx-auto max-w-4xl px-5 py-16 animate-fadeIn">
+    <div className="mx-auto max-w-4xl">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="font-display text-2xl font-extrabold text-foreground">📺 CMS Luyện nghe</h1>
+        <p className="text-sm font-bold text-zinc-400">{videos.length} video · kho luyện nghe</p>
         <div className="flex items-center gap-2">
-          <Link href="/listening" className="rounded-full border border-border/60 bg-surface/50 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground">Xem trang ↗</Link>
-          <button onClick={recheck} disabled={busy} className="rounded-full border border-primary/30 bg-primary-soft/70 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-primary disabled:opacity-50">
+          <Link href="/listening" className="rounded-full border border-white/15 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:text-white">Xem trang ↗</Link>
+          <button onClick={recheck} disabled={busy} className="rounded-full bg-primary/20 border border-primary/30 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-primary disabled:opacity-50">
             🔄 Kiểm tra phụ đề
           </button>
         </div>
       </div>
 
-      {msg && <p className="mb-4 rounded-xl bg-emerald-500/10 px-4 py-2 text-xs font-semibold text-emerald-600">{msg}</p>}
-      {err && <p className="mb-4 rounded-xl bg-rose-500/10 px-4 py-2 text-xs font-semibold text-rose-600">{err}</p>}
+      {msg && <p className="mb-4 rounded-xl bg-emerald-500/15 px-4 py-2 text-xs font-bold text-emerald-300">{msg}</p>}
+      {err && <p className="mb-4 rounded-xl bg-rose-500/15 px-4 py-2 text-xs font-bold text-rose-300">{err}</p>}
 
       {/* Thêm video */}
       <div className="liquid-glass-card mb-8 flex flex-col gap-3 p-5 border border-border/80 shadow-lg sm:flex-row sm:items-end">
@@ -233,6 +190,6 @@ export default function AdminListeningPage() {
           </section>
         );
       })}
-    </main>
+    </div>
   );
 }

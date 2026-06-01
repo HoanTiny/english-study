@@ -35,6 +35,8 @@ export const stages: Stage[] = [
       { slug: "places-directions", title: "Nơi chốn & chỉ đường", topic: "Tình huống", status: "locked" },
       { slug: "health-body", title: "Sức khoẻ & cơ thể", topic: "Đời sống", status: "locked" },
       { slug: "free-time", title: "Sở thích & thể thao", topic: "Ngữ pháp · want/shall/could", status: "locked" },
+      { slug: "clothes-appearance", title: "Quần áo & ngoại hình", topic: "Đời sống", status: "locked" },
+      { slug: "house-home", title: "Nhà cửa & đồ đạc", topic: "Đời sống", status: "locked" },
     ],
   },
   {
@@ -51,6 +53,9 @@ export const stages: Stage[] = [
       { slug: "jobs-ambitions", title: "Nghề nghiệp & ước mơ", topic: "Tương lai", status: "locked" },
       { slug: "adverbs-manner", title: "Trạng từ chỉ cách thức", topic: "Ngữ pháp · Trạng từ", status: "locked" },
       { slug: "first-conditional", title: "Câu điều kiện loại 1", topic: "Ngữ pháp · If", status: "locked" },
+      { slug: "shopping-money", title: "Mua sắm & trả giá", topic: "Tình huống", status: "locked" },
+      { slug: "feelings-emotions", title: "Cảm xúc & tâm trạng", topic: "Đời sống", status: "locked" },
+      { slug: "making-plans", title: "Hẹn hò & rủ rê", topic: "Hội thoại", status: "locked" },
     ],
   },
   {
@@ -63,6 +68,9 @@ export const stages: Stage[] = [
       { slug: "restaurant", title: "Ở nhà hàng", topic: "Tình huống", status: "locked" },
       { slug: "travel", title: "Du lịch & sân bay", topic: "Tình huống", status: "locked" },
       { slug: "opinions", title: "Nêu ý kiến", topic: "Hội thoại", status: "locked" },
+      { slug: "technology-phone", title: "Công nghệ & điện thoại", topic: "Tình huống", status: "locked" },
+      { slug: "work-office", title: "Công việc & văn phòng", topic: "Tình huống", status: "locked" },
+      { slug: "environment-nature", title: "Môi trường & thiên nhiên", topic: "Hội thoại", status: "locked" },
     ],
   },
   {
@@ -72,6 +80,7 @@ export const stages: Stage[] = [
     goal: "Nói tự nhiên, phản xạ nhanh, giảm dịch trong đầu",
     months: "Tháng 10–12",
     lessons: [
+      { slug: "small-talk", title: "Nói chuyện xã giao", topic: "Hội thoại", status: "locked" },
       { slug: "think-in-english", title: "Suy nghĩ bằng tiếng Anh", topic: "Tư duy", status: "locked" },
       { slug: "ai-roleplay", title: "Hội thoại với AI", topic: "Hội thoại", status: "locked" },
     ],
