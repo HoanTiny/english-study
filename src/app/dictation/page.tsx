@@ -135,7 +135,6 @@ function DictationInner() {
       }
     },
     // begin/setX là ổn định; chỉ phụ thuộc userId & refreshSaved
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [userId, refreshSaved],
   );
 
@@ -156,7 +155,6 @@ function DictationInner() {
       setLink(vParam);
       fetchYt(vParam);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vParam, fetchYt]);
 
   const cur = segs[idx];

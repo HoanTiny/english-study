@@ -24,6 +24,79 @@ type RiRow = {
   due_date: string;
 };
 
+// Một ngày trong dòng thời gian hoạt động.
+export type ActivityDay = {
+  date: string; // YYYY-MM-DD (UTC, đồng bộ với cách app tính "today")
+  label: string; // nhãn ngắn hiển thị trên trục (vd "2/6")
+  reviews: number; // số lần ôn (review_logs) trong ngày
+  journaled: boolean; // có viết nhật ký không
+  shadowAvg: number | null; // điểm phát âm TB của các câu shadowing trong ngày
+};
+
+function utcDate(ts: string): string {
+  return new Date(ts).toISOString().slice(0, 10);
+}
+
+// Dòng thời gian hoạt động `days` ngày gần nhất (gồm hôm nay).
+// Dữ liệu THẬT từ review_logs / journal_entries / shadowing_attempts (đều scoped theo user qua RLS).
+export async function loadActivityTimeline(today: string, days = 14): Promise<ActivityDay[]> {
+  const start = new Date(today + "T00:00:00Z");
+  start.setUTCDate(start.getUTCDate() - (days - 1));
+  const startStr = start.toISOString().slice(0, 10);
+
+  const [logsRes, jRes, sRes] = await Promise.all([
+    supabase.from("review_logs").select("reviewed_at").gte("reviewed_at", startStr),
+    supabase.from("journal_entries").select("entry_date").gte("entry_date", startStr),
+    supabase
+      .from("shadowing_attempts")
+      .select("pronunciation_score, created_at")
+      .gte("created_at", startStr),
+  ]);
+
+  if (logsRes.error) throw logsRes.error;
+  if (jRes.error) throw jRes.error;
+  if (sRes.error) throw sRes.error;
+
+  // Khởi tạo khung ngày rỗng theo thứ tự thời gian.
+  const buckets = new Map<string, { reviews: number; journaled: boolean; scores: number[] }>();
+  const order: string[] = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(start);
+    d.setUTCDate(start.getUTCDate() + i);
+    const key = d.toISOString().slice(0, 10);
+    order.push(key);
+    buckets.set(key, { reviews: 0, journaled: false, scores: [] });
+  }
+
+  for (const r of logsRes.data as { reviewed_at: string }[]) {
+    const b = buckets.get(utcDate(r.reviewed_at));
+    if (b) b.reviews++;
+  }
+  for (const r of jRes.data as { entry_date: string }[]) {
+    const b = buckets.get(r.entry_date);
+    if (b) b.journaled = true;
+  }
+  for (const r of sRes.data as { pronunciation_score: number | null; created_at: string }[]) {
+    if (r.pronunciation_score == null) continue;
+    const b = buckets.get(utcDate(r.created_at));
+    if (b) b.scores.push(Number(r.pronunciation_score));
+  }
+
+  return order.map((key) => {
+    const b = buckets.get(key)!;
+    const [, m, d] = key.split("-");
+    return {
+      date: key,
+      label: `${Number(d)}/${Number(m)}`,
+      reviews: b.reviews,
+      journaled: b.journaled,
+      shadowAvg: b.scores.length
+        ? Math.round(b.scores.reduce((a, c) => a + c, 0) / b.scores.length)
+        : null,
+    };
+  });
+}
+
 export async function loadDashboard(today: string): Promise<DashboardStats> {
   const [notesRes, riRes, jRes, sRes] = await Promise.all([
     supabase.from("notes").select("id, in_review"),

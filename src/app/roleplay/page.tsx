@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useAuth } from "@/lib/auth";
+import { addErrors } from "@/lib/errorLogRepo";
 
 type Msg = { role: "user" | "model"; text: string };
 
@@ -19,6 +21,69 @@ export default function RoleplayPage() {
   const [loading, setLoading] = useState(false);
   const [unconfigured, setUnconfigured] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const { userId } = useAuth();
+
+  // Nói bằng giọng (Web Speech API) + chấm cuối buổi.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recRef = useRef<any>(null);
+  const [listening, setListening] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [feedback, setFeedback] = useState<any | null>(null);
+  const [scoring, setScoring] = useState(false);
+  const sttSupported =
+    typeof window !== "undefined" &&
+    ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+  const userTurns = messages.filter((m) => m.role === "user").length;
+
+  function toggleMic() {
+    if (listening) {
+      recRef.current?.stop();
+      return;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+    const rec = new SR();
+    rec.lang = "en-US";
+    rec.interimResults = true;
+    rec.continuous = false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (e: any) => {
+      let t = "";
+      for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript;
+      setInput(t);
+    };
+    rec.onend = () => setListening(false);
+    rec.onerror = () => setListening(false);
+    recRef.current = rec;
+    setInput("");
+    rec.start();
+    setListening(true);
+  }
+
+  async function getFeedback() {
+    if (!scenario || scoring) return;
+    setScoring(true);
+    setFeedback(null);
+    try {
+      const res = await fetch("/api/roleplay-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ scenario: scenario.en, messages }),
+      });
+      const d = await res.json();
+      setFeedback(d.ok ? d.feedback : { error: d.error || "error" });
+      // Lưu lỗi vào Sổ lỗi cá nhân.
+      if (d.ok && userId && Array.isArray(d.feedback?.corrections) && d.feedback.corrections.length) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        addErrors(userId, d.feedback.corrections.map((c: any) => ({ source: "roleplay" as const, original: c.original, correction: c.better, note: c.why }))).catch(() => {});
+      }
+    } catch {
+      setFeedback({ error: "network" });
+    } finally {
+      setScoring(false);
+    }
+  }
 
   function speak(text: string) {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
@@ -56,6 +121,7 @@ export default function RoleplayPage() {
     setScenario(sc);
     setMessages([]);
     setUnconfigured(false);
+    setFeedback(null);
     sendTo([], sc); // để AI mở lời
   }
 
@@ -155,12 +221,21 @@ export default function RoleplayPage() {
             )}
           </div>
 
-          <div className="mt-5 flex gap-3 border-t border-border/40 pt-5">
+          <div className="mt-5 flex gap-2 border-t border-border/40 pt-5">
+            {sttSupported && (
+              <button
+                onClick={toggleMic}
+                title="Nói bằng giọng"
+                className={`shrink-0 flex h-11 w-11 items-center justify-center rounded-full text-lg transition-all active:scale-95 ${listening ? "bg-rose-500 text-white animate-pulse" : "bg-primary-soft text-primary hover:bg-primary/20"}`}
+              >
+                🎤
+              </button>
+            )}
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send()}
-              placeholder="Type your reply in English…"
+              placeholder={listening ? "Đang nghe… nói tiếng Anh" : "Nói (🎤) hoặc gõ câu trả lời…"}
               className="flex-1 rounded-full border border-border/60 bg-background/50 px-5 py-3 text-xs font-semibold outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background text-foreground placeholder:text-muted/60 shadow-inner"
             />
             <button
@@ -168,9 +243,84 @@ export default function RoleplayPage() {
               disabled={!input.trim() || loading}
               className="liquid-glass-btn px-6 py-3 text-xs font-black uppercase tracking-wider disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Gửi thoại
+              Gửi
             </button>
           </div>
+
+          {/* Kết thúc & chấm */}
+          {userTurns >= 1 && (
+            <div className="mt-3 text-center">
+              <button
+                onClick={getFeedback}
+                disabled={scoring}
+                className="rounded-full border border-accent/40 bg-accent/10 px-5 py-2 text-xs font-black text-accent hover:bg-accent/15 active:scale-95 disabled:opacity-40"
+              >
+                {scoring ? "Đang chấm…" : "⭐ Kết thúc & nhận nhận xét"}
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Bảng nhận xét sau khi chấm */}
+      {feedback && (
+        <div className="mt-5 liquid-glass-card p-5 md:p-6 border border-border/80 shadow-xl animate-fadeIn">
+          {feedback.error ? (
+            <p className="text-xs font-bold text-muted">
+              {feedback.error === "no_user_turns" ? "Bạn chưa nói câu nào để chấm." : feedback.error === "unconfigured" ? "Chưa cấu hình AI để chấm." : "Chưa chấm được, thử lại sau."}
+            </p>
+          ) : (
+            <>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/15 text-lg font-black text-accent">{feedback.score ?? "–"}</div>
+                <div>
+                  <p className="text-sm font-black text-foreground">Nhận xét buổi nói {feedback.level ? `· ~${feedback.level}` : ""}</p>
+                  {feedback.fluency && <p className="text-[11px] font-semibold text-muted">{feedback.fluency}</p>}
+                </div>
+              </div>
+
+              {Array.isArray(feedback.strengths) && feedback.strengths.length > 0 && (
+                <div className="mb-3">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-emerald-500 mb-1">✓ Điểm tốt</p>
+                  <ul className="list-disc pl-5 text-xs font-semibold text-foreground/90 space-y-0.5">
+                    {feedback.strengths.map((s: string, i: number) => <li key={i}>{s}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              {Array.isArray(feedback.corrections) && feedback.corrections.length > 0 && (
+                <div className="mb-3">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-rose-500 mb-1">✎ Sửa lỗi</p>
+                  <div className="space-y-2">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    {feedback.corrections.map((c: any, i: number) => (
+                      <div key={i} className="rounded-xl bg-black/5 dark:bg-white/5 border border-border/40 p-2.5 text-xs">
+                        <p className="text-rose-500/90 line-through">{c.original}</p>
+                        <p className="text-emerald-600 dark:text-emerald-400 font-bold">→ {c.better}</p>
+                        {c.why && <p className="text-[10px] text-muted mt-0.5">{c.why}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {Array.isArray(feedback.vocab) && feedback.vocab.length > 0 && (
+                <div className="mb-3">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-primary mb-1">＋ Từ/cụm nên dùng</p>
+                  <ul className="text-xs font-semibold text-foreground/90 space-y-0.5">
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    {feedback.vocab.map((v: any, i: number) => (
+                      <li key={i}><span className="text-primary font-bold">{v.phrase}</span>{v.vi ? ` — ${v.vi}` : ""}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {feedback.tip && (
+                <p className="rounded-xl bg-primary-soft/40 border border-primary/20 p-2.5 text-xs font-semibold text-foreground">💡 {feedback.tip}</p>
+              )}
+            </>
+          )}
         </div>
       )}
 

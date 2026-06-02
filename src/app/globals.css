@@ -2,47 +2,47 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Premium Liquid Glass Theme: deep navy / soft teal / warm white */
+/* Premium Liquid Glass Theme: Royal Blue, Red, Pink and Matte Charcoal */
 :root {
-  --background: #fafaf9;                 /* Luxe warm organic white */
+  --background: #ffffff;                 /* Pure organic clean white */
   --surface: rgba(255, 255, 255, 0.45);  /* Translucent frosted glass */
   --foreground: #0a1120;                 /* Deep navy near-black */
   --muted: #4b5563;                      /* Soft charcoal gray */
   --border: rgba(10, 17, 32, 0.07);      /* Ultra-thin slate border */
-  --primary: #0f766e;                    /* Rich, calming forest teal */
+  --primary: #3949AB;                    /* Elegant Royal Indigo Blue */
   --primary-fg: #ffffff;
-  --primary-soft: rgba(15, 118, 110, 0.09); /* Soft forest teal background wash */
-  --accent: #0d9488;                     /* Active energizing sea teal */
-  --pink: #9d174d;                       /* Elegant deep crimson rose */
-  --pink-fg: #ffffff;                    /* High contrast white text for light mode */
-  --pink-soft: rgba(157, 23, 77, 0.09);  /* Soft rose background wash */
-  --warn: #b45309;                       /* Soft warm amber */
-  --ring: rgba(15, 118, 110, 0.2);
+  --primary-soft: rgba(57, 73, 171, 0.08); /* Soft Indigo Blue background wash */
+  --accent: #3949AB;                     /* Active Indigo Blue */
+  --pink: #E91E63;                       /* Vibrant Accent Pink */
+  --pink-fg: #ffffff;
+  --pink-soft: rgba(233, 30, 99, 0.08);  /* Soft rose background wash */
+  --warn: #fb0502;                       /* Vibrant Accent Red */
+  --ring: rgba(57, 73, 171, 0.2);
   --glass-highlight: rgba(255, 255, 255, 0.65); /* Liquid edge reflection */
-  --glow-color: rgba(15, 118, 110, 0.04);
-  --font-dela: var(--font-outfit);
-  --font-montserrat: var(--font-be-vietnam);
+  --glow-color: rgba(57, 73, 171, 0.04);
+  --font-dela: var(--font-plus-jakarta-sans);
+  --font-montserrat: var(--font-inter);
 }
 
 .dark {
-  --background: #030712;                 /* High-end rich deep navy-black */
-  --surface: rgba(15, 23, 42, 0.45);     /* Translucent frosty deep slate */
+  --background: #09090b;                 /* Pure luxury deep black-carbon background */
+  --surface: rgba(22, 22, 26, 0.82);     /* Premium solid-looking frosted slate card */
   --foreground: #f8fafc;                 /* Crisp cold-white text */
-  --muted: #94a3b8;                      /* Elegant muted cold gray */
-  --border: rgba(255, 255, 255, 0.06);   /* Ultra-thin glass boundary */
-  --primary: #2dd4bf;                    /* Bright sea teal */
-  --primary-fg: #030712;
-  --primary-soft: rgba(45, 212, 191, 0.12);
-  --accent: #2dd4bf;
-  --pink: #f472b6;                       /* Energetic pastel rose */
-  --pink-fg: #030712;                    /* Deep dark navy-black contrast for dark mode */
-  --pink-soft: rgba(244, 114, 182, 0.12);
-  --warn: #fbbf24;
-  --ring: rgba(45, 212, 191, 0.2);
+  --muted: #a1a1aa;                      /* Highly readable warm gray */
+  --border: rgba(255, 255, 255, 0.12);   /* Crisp visible card border */
+  --primary: #7986cb;                    /* Beautiful light indigo for superb readability on dark background */
+  --primary-fg: #09090b;
+  --primary-soft: rgba(121, 134, 203, 0.14);
+  --accent: #7986cb;
+  --pink: #f48fb1;                       /* Soft pastel rose */
+  --pink-fg: #09090b;
+  --pink-soft: rgba(244, 143, 177, 0.12);
+  --warn: #ff5252;                       /* Alert coral red */
+  --ring: rgba(121, 134, 203, 0.25);
   --glass-highlight: rgba(255, 255, 255, 0.08); /* Dark mode edge reflection */
-  --glow-color: rgba(45, 212, 191, 0.12);
-  --font-dela: var(--font-outfit);
-  --font-montserrat: var(--font-be-vietnam);
+  --glow-color: rgba(121, 134, 203, 0.08);
+  --font-dela: var(--font-plus-jakarta-sans);
+  --font-montserrat: var(--font-inter);
 }
 
 @theme inline {
@@ -60,9 +60,9 @@
   --color-pink: var(--pink);
   --color-pink-fg: var(--pink-fg);
   --color-pink-soft: var(--pink-soft);
-  --font-sans: var(--font-be-vietnam), system-ui, sans-serif;
-  /* Display dùng Be Vietnam Pro (hỗ trợ đầy đủ tiếng Việt); Outfit chỉ làm dự phòng cho ký tự Latin. */
-  --font-display: var(--font-be-vietnam), var(--font-outfit), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* Display dùng Plus Jakarta Sans và Inter làm fallback diacritics */
+  --font-display: var(--font-plus-jakarta-sans), var(--font-inter), sans-serif;
 }
 
 .font-display {

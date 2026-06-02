@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import CoreLoopDemo from "@/components/CoreLoopDemo";
 import RoadmapPath from "@/components/RoadmapPath";
 
@@ -62,9 +63,12 @@ export default function Home() {
           <div className="md:col-span-5 flex justify-center md:justify-end animate-fadeIn">
             <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden liquid-glass-card border border-border/80 shadow-2xl p-2.5 flex items-center justify-center bg-white/10 dark:bg-black/10 group transition-all duration-500">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-pink-soft/10 pointer-events-none" />
-              <img
+              <Image
                 src="/hero_wave_3d.png"
                 alt="SpeakUp Voice Waves"
+                width={448}
+                height={448}
+                priority
                 className="w-full h-full object-cover rounded-2xl shadow-inner group-hover:scale-[1.03] transition-transform duration-700 ease-out"
               />
               <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-surface/90 dark:bg-zinc-950/80 backdrop-blur-md border border-border/80 p-4 shadow-xl flex items-center gap-3">
@@ -208,7 +212,7 @@ export default function Home() {
               Chuyển hóa vốn từ thụ động thành chủ động
             </h2>
             <p className="max-w-md text-sm sm:text-base font-semibold leading-relaxed text-muted">
-              Đo lường chính xác khoảng cách giữa số từ bạn chỉ "hiểu khi nghe đọc" và số cụm từ bạn thực sự "tự tin nói được" trong giao tiếp hàng ngày.
+              Đo lường chính xác khoảng cách giữa số từ bạn chỉ “hiểu khi nghe đọc” và số cụm từ bạn thực sự “tự tin nói được” trong giao tiếp hàng ngày.
             </p>
             <Link href="/today" className="rounded-full bg-primary-soft px-8 py-4 text-xs font-black uppercase tracking-wider text-primary border border-primary/15 transition-all hover:scale-105 active:scale-95 self-start mt-2 shadow-sm">
               Xem tiến độ hôm nay →

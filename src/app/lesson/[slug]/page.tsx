@@ -206,7 +206,7 @@ export default function LessonPage() {
                   <div className="flex flex-wrap items-center gap-2 mt-1.5">
                     {p.ipa && (
                       <span className="text-[10px] font-mono font-black text-accent bg-accent/5 border border-accent/10 px-2 py-0.5 rounded">
-                        /{p.ipa}/
+                        /{p.ipa.replace(/^\/+|\/+$/g, "").trim()}/
                       </span>
                     )}
                     <span className="text-xs font-semibold text-muted">{p.vi}</span>

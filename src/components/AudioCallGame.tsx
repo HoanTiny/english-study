@@ -281,6 +281,10 @@ export default function AudioCallGame() {
             <span className="text-6xl animate-bounce">🏆</span>
             <h3 className="font-display text-xl font-extrabold text-foreground">Kết quả đàm thoại</h3>
             <p className="text-xs font-semibold text-muted">Bạn đã làm rất xuất sắc!</p>
+            <div className="mt-1">
+              <p className="font-display text-4xl font-black text-primary leading-none">{score}</p>
+              <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-1">điểm</p>
+            </div>
             <div className="grid w-full grid-cols-2 gap-3 mt-2">
               <div className="rounded-2xl border border-pink/20 bg-pink-soft py-3 shadow-sm">
                 <p className="text-xl font-black text-pink">❤ {Math.max(0, lives)}</p>

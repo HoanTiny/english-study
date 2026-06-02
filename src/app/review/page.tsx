@@ -6,6 +6,7 @@ import { todayKey } from "@/lib/store";
 import { isDue, memoryStrength, type Grade } from "@/lib/srs";
 import { useAuth } from "@/lib/auth";
 import { listNotes, type Note } from "@/lib/notesRepo";
+import { assessPronunciation } from "@/lib/pronunciation";
 import {
   listNoteReviewStates,
   gradeNote,
@@ -29,6 +30,9 @@ export default function ReviewPage() {
   const [loaded, setLoaded] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [doneCount, setDoneCount] = useState(0);
+  const [speaking, setSpeaking] = useState(false);
+  const [speakScore, setSpeakScore] = useState<number | null>(null);
+  const [sttUnavailable, setSttUnavailable] = useState(false);
 
   // Tải song song: danh sách note đang ôn + trạng thái SRS từ Supabase.
   useEffect(() => {
@@ -55,7 +59,7 @@ export default function ReviewPage() {
         const s = srs[n.id];
         return !s || isDue(s, today);
       });
-  }, [notes, loaded, today, doneCount, srs]);
+  }, [notes, loaded, today, srs]);
 
   const current = queue[0];
 
@@ -63,12 +67,29 @@ export default function ReviewPage() {
     if (!current || !userId) return;
     const prev = srs[current.id] ?? null;
     setRevealed(false);
+    setSpeakScore(null); // reset điểm nói cho thẻ kế
     setDoneCount((c) => c + 1);
     try {
       const next = await gradeNote(userId, current.id, prev, g, today);
       setSrs((m) => ({ ...m, [current.id]: next }));
     } catch (e) {
       console.error("gradeNote", e);
+    }
+  }
+
+  // Nói thành tiếng & chấm phát âm (Azure). Chỉ áp dụng cho từ/cụm tiếng Anh.
+  async function sayIt() {
+    if (!current || speaking) return;
+    setSpeaking(true);
+    setSpeakScore(null);
+    try {
+      const r = await assessPronunciation(current.content);
+      if (r === null) setSttUnavailable(true);
+      else setSpeakScore(r.pronunciation);
+    } catch {
+      setSttUnavailable(true);
+    } finally {
+      setSpeaking(false);
     }
   }
 
@@ -177,7 +198,30 @@ export default function ReviewPage() {
               <p className="mt-6 rounded-2xl bg-white/40 dark:bg-black/25 border border-border p-4 text-xs italic font-semibold leading-relaxed text-foreground/90 shadow-sm">
                 {current.example ? `“${current.example}”` : "(Chưa có câu ví dụ minh họa)"}
               </p>
-              
+
+              {/* Nói thành tiếng & chấm phát âm */}
+              {!sttUnavailable && (
+                <div className="mt-4 flex flex-col items-center gap-2">
+                  <button
+                    onClick={sayIt}
+                    disabled={speaking}
+                    className={`rounded-full px-5 py-2.5 text-xs font-black transition-all active:scale-95 ${speaking ? "bg-rose-500 text-white animate-pulse" : "bg-primary-soft border border-primary/25 text-primary hover:bg-primary/15"}`}
+                  >
+                    {speaking ? "🎙️ Đang nghe… nói cụm trên" : "🎤 Nói thử & chấm phát âm"}
+                  </button>
+                  {speakScore != null && (
+                    <div className="flex items-center gap-2 text-xs font-black">
+                      <span className={speakScore >= 80 ? "text-emerald-500" : speakScore >= 60 ? "text-amber-500" : "text-rose-500"}>
+                        Phát âm: {speakScore}/100
+                      </span>
+                      <span className="text-muted font-semibold">
+                        {speakScore >= 80 ? "· Tốt! 👍" : speakScore >= 60 ? "· Khá, nói lại cho chuẩn hơn" : "· Cần luyện thêm"}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="border-t border-border/40 mt-6 pt-5">
                 <p className="mb-4 text-[9px] font-black uppercase tracking-wider text-muted">Bạn nhớ thẻ này ở mức độ nào?</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

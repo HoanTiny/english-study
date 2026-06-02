@@ -10,6 +10,7 @@ import {
   type Entry,
   type Feedback,
 } from "@/lib/journalRepo";
+import { addErrors } from "@/lib/errorLogRepo";
 
 const MIN = 5;
 const TARGET = 10;
@@ -83,6 +84,13 @@ export default function JournalPage() {
     const fb = await getFeedback(body, prompt.en);
     setFeedback(fb);
     setScoring(false);
+    // Lưu lỗi vào Sổ lỗi cá nhân.
+    if (fb.length) {
+      addErrors(
+        userId,
+        fb.map((f) => ({ source: "journal" as const, original: f.fragment, correction: f.suggestion, note: f.issue })),
+      ).catch(() => {});
+    }
     const entry: Entry = { date: today, prompt: prompt.en, body, sentences, feedback: fb };
     // cập nhật lạc quan
     setEntries((prev) => [entry, ...prev.filter((e) => e.date !== today)]);

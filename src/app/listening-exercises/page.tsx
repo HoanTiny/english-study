@@ -88,8 +88,16 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
   const order = useMemo(() => {
     const idx = ex.items.map((_, i) => i);
     if (ex.type !== "ordering") return idx;
+    // Xáo trộn TẤT ĐỊNH theo ex.id (seeded PRNG) — không dùng Math.random trong render,
+    // nên thứ tự ổn định qua mỗi lần render và không lộ đáp án.
+    let seed = 0;
+    for (let c = 0; c < ex.id.length; c++) seed = (seed * 31 + ex.id.charCodeAt(c)) >>> 0;
+    const rand = () => {
+      seed = (seed * 1664525 + 1013904223) >>> 0;
+      return seed / 0xffffffff;
+    };
     for (let k = idx.length - 1; k > 0; k--) {
-      const j = Math.floor(Math.random() * (k + 1));
+      const j = Math.floor(rand() * (k + 1));
       [idx[k], idx[j]] = [idx[j], idx[k]];
     }
     return idx;
@@ -120,8 +128,12 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
               <div className="flex items-start gap-2">
                 <span className="text-xs font-black text-muted mt-0.5">{pos + 1}</span>
                 <div className="flex-1">
+                  {it.image && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={exAudioSrc(it.image)} alt="" className="mb-2 h-28 w-28 rounded-xl object-contain border border-border/60 bg-white" />
+                  )}
                   {ex.type === "speaking" ? (
-                    <p className="text-sm font-bold text-foreground">{it.text}</p>
+                    it.text ? <p className="text-sm font-bold text-foreground">{it.text}</p> : null
                   ) : (
                     <p className="text-sm font-bold text-foreground">{it.prompt ?? it.label}</p>
                   )}

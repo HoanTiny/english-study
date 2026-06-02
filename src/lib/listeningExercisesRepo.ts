@@ -8,6 +8,7 @@ export type ExItem = {
   answer?: number | string | boolean;
   label?: string;
   text?: string;
+  image?: string; // path ảnh (bucket) — phát qua signed URL
 };
 
 export type ListeningExercise = {

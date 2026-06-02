@@ -159,6 +159,11 @@ export default function SprintGame() {
     speak(item.en);
   }
 
+  // Chơi lại với đúng bộ từ hiện tại — đọc poolRef trong handler (lúc click), không phải lúc render.
+  function replay() {
+    startWith(poolRef.current, poolLabel);
+  }
+
   function startWith(pool: Word[], label: string) {
     poolRef.current = pool;
     setPoolLabel(label);
@@ -453,7 +458,7 @@ export default function SprintGame() {
                 </div>
               </div>
               <div className="flex flex-row sm:flex-col gap-2 w-full sm:w-auto shrink-0">
-                <button onClick={() => startWith(poolRef.current, poolLabel)} className="flex-1 sm:flex-none py-2.5 px-5 rounded-2xl bg-primary hover:opacity-90 text-xs font-bold text-white transition-all duration-300 active:scale-95 shadow-md whitespace-nowrap">🔄 Chơi lại</button>
+                <button onClick={replay} className="flex-1 sm:flex-none py-2.5 px-5 rounded-2xl bg-primary hover:opacity-90 text-xs font-bold text-white transition-all duration-300 active:scale-95 shadow-md whitespace-nowrap">🔄 Chơi lại</button>
                 <button onClick={() => setPhase("welcome")} className="flex-1 sm:flex-none py-2.5 px-5 rounded-2xl border border-border bg-white/40 dark:bg-white/5 text-xs font-bold text-foreground transition-all duration-300 hover:border-primary/40 active:scale-95 whitespace-nowrap">🏠 Đổi bộ từ</button>
               </div>
             </div>

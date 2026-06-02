@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { lessonContent } from "@/lib/lessons";
 import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
 import PronounceBar from "@/components/PronounceBar";
+import WordImage, { fetchWordImage } from "@/components/WordImage";
 import { useAuth } from "@/lib/auth";
 import { addNote } from "@/lib/notesRepo";
 import { gradeNote } from "@/lib/reviewRepo";
@@ -115,6 +116,12 @@ function shuffle<T>(a: T[]): T[] {
   return r;
 }
 
+// Chuẩn hoá IPA: bỏ dấu "/" thừa rồi bọc đúng 1 cặp (tránh "//dɒg//").
+function fmtIpa(ipa: string): string {
+  const core = ipa.replace(/^\/+|\/+$/g, "").trim();
+  return core ? `/${core}/` : "";
+}
+
 function norm(s: string): string {
   return s.toLowerCase().replace(/…|\.\.\./g, "").replace(/[.,!?"'’]/g, "").replace(/\s+/g, " ").trim();
 }
@@ -218,6 +225,12 @@ export default function VocabPage() {
   const [loadingExtra, setLoadingExtra] = useState(false);
 
   const card = cards[idx];
+
+  // Prefetch ảnh thẻ kế tiếp (làm ấm cache → chuyển thẻ có ảnh ngay).
+  useEffect(() => {
+    const nxt = cards[idx + 1];
+    if (nxt?.en) fetchWordImage(nxt.en, nxt.vi);
+  }, [idx, cards]);
 
   // Lựa chọn trắc nghiệm (ổn định theo từng thẻ)
   const options = useMemo(() => {
@@ -493,9 +506,12 @@ export default function VocabPage() {
                   <>
                     <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
                     <p className="text-xl sm:text-2xl font-bold text-foreground mt-1 leading-relaxed px-4">{card.vi}</p>
-                    
-                    <button 
-                      onClick={() => play(card.en)} 
+
+                    {/* Ảnh minh hoạ ngay mặt trước (gợi nhớ trực quan) */}
+                    <WordImage word={card.en} meaning={card.vi} />
+
+                    <button
+                      onClick={() => play(card.en)}
                       className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl text-white shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer my-2"
                       aria-label="Phát âm tiếng Anh"
                     >
@@ -517,11 +533,14 @@ export default function VocabPage() {
                     
                     {/* IPA & Translation Details */}
                     <div className="flex items-center justify-center gap-2 text-xs font-semibold text-muted">
-                      {card.ipa && <span className="font-mono text-accent">/{card.ipa}/</span>}
+                      {card.ipa && <span className="font-mono text-accent">{fmtIpa(card.ipa)}</span>}
                       <span>·</span>
                       <span className="text-foreground/90 font-bold">{card.vi}</span>
                     </div>
-                    
+
+                    {/* Ảnh minh hoạ (Openverse, CC) */}
+                    <WordImage word={card.en} meaning={card.vi} />
+
                     {/* Compact Pronunciation Widget */}
                     <div className="w-full max-w-xs my-0.5">
                       <PronounceBar word={card.en} />
@@ -630,7 +649,7 @@ export default function VocabPage() {
                   </p>
                   <div className="bg-background/40 rounded-2xl p-5 border border-border inline-flex flex-col items-center">
                     <p className="font-display text-xl font-bold text-foreground">{card.en}</p>
-                    {card.ipa && <p className="text-xs font-mono font-bold text-accent mt-1.5">/{card.ipa}/</p>}
+                    {card.ipa && <p className="text-xs font-mono font-bold text-accent mt-1.5">{fmtIpa(card.ipa)}</p>}
                   </div>
                   <div className="mt-3 flex items-center justify-center gap-3 w-full max-w-sm mx-auto">
                     <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all">🔖 Lưu ôn tập</button>

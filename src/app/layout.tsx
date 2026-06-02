@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Outfit } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
+import ClientShell from "@/components/ClientShell";
 import SelectionLookup from "@/components/SelectionLookup";
 import OnboardingGate from "@/components/OnboardingGate";
 import { AuthProvider } from "@/lib/auth";
 
-const beVietnam = Be_Vietnam_Pro({
-  variable: "--font-be-vietnam",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
+  subsets: ["latin", "vietnamese"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${beVietnam.variable} ${outfit.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground transition-colors duration-500 relative">
         {/* Background fluid blobs for visual depth behind glassmorphism */}
@@ -42,9 +42,8 @@ export default function RootLayout({
           <div className="fluid-blob blob-pink" />
         </div>
         <AuthProvider>
-          <Nav />
+          <ClientShell>{children}</ClientShell>
           <OnboardingGate />
-          <div className="relative z-1">{children}</div>
           <SelectionLookup />
         </AuthProvider>
       </body>

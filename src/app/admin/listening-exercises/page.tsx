@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { parseExercises, parseKeys, type ParsedExercise, type ParsedKey } from "@/lib/parseExercises";
 
@@ -23,6 +23,7 @@ type Item = {
   answer?: number | string | boolean;
   label?: string;
   text?: string;
+  image?: string; // path ảnh trong bucket (tuỳ chọn)
 };
 type Exercise = {
   id?: string;
@@ -72,6 +73,116 @@ export default function AdminListeningExercisesPage() {
   const [quickKey, setQuickKey] = useState(""); // dán đáp án nhanh cho bài đang sửa
   const [quickKeyOpen, setQuickKeyOpen] = useState(false);
   const [quickOcrBusy, setQuickOcrBusy] = useState(false);
+  const [gridOpen, setGridOpen] = useState(false);
+  const [gridCols, setGridCols] = useState(4);
+  const [gridRows, setGridRows] = useState(3);
+  const [gridBusy, setGridBusy] = useState(false);
+  const [gridSrc, setGridSrc] = useState<string | null>(null); // dataURL ảnh đang căn
+  const [gm, setGm] = useState({ top: 0, right: 0, bottom: 0, left: 0 }); // lề % để loại tiêu đề/mép
+  const gridImgRef = useRef<HTMLImageElement | null>(null);
+  const previewRef = useRef<HTMLCanvasElement | null>(null);
+
+  async function uploadBlob(blob: Blob): Promise<string> {
+    const fd = new FormData();
+    fd.append("file", new File([blob], "tile.png", { type: "image/png" }));
+    fd.append("folder", "exercise-img");
+    const res = await fetch("/api/admin/upload", { method: "POST", headers: { "x-admin-key": key }, body: fd });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "upload lỗi");
+    return data.path as string;
+  }
+
+  function loadGridFile(file: File) {
+    const r = new FileReader();
+    r.onload = () => {
+      const src = String(r.result);
+      const im = new window.Image();
+      im.onload = () => { gridImgRef.current = im; setGridSrc(src); };
+      im.src = src;
+    };
+    r.readAsDataURL(file);
+  }
+
+  function onPasteGrid(e: React.ClipboardEvent) {
+    const item = Array.from(e.clipboardData?.items ?? []).find((it) => it.type.startsWith("image/"));
+    if (item) {
+      const file = item.getAsFile();
+      if (file) { e.preventDefault(); loadGridFile(file); }
+    }
+  }
+
+  // Vùng lưới (theo px ảnh gốc) sau khi trừ lề.
+  const gridRegion = useCallback(
+    (img: HTMLImageElement) => {
+      const x = (img.naturalWidth * gm.left) / 100;
+      const y = (img.naturalHeight * gm.top) / 100;
+      const w = img.naturalWidth * (1 - (gm.left + gm.right) / 100);
+      const h = img.naturalHeight * (1 - (gm.top + gm.bottom) / 100);
+      return { x, y, w, h };
+    },
+    [gm],
+  );
+
+  // Vẽ xem trước + kẻ lưới.
+  useEffect(() => {
+    const cv = previewRef.current, img = gridImgRef.current;
+    if (!cv || !img || !gridSrc) return;
+    const maxW = 460;
+    const scale = Math.min(1, maxW / img.naturalWidth);
+    cv.width = img.naturalWidth * scale;
+    cv.height = img.naturalHeight * scale;
+    const ctx = cv.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+    const reg = gridRegion(img);
+    const rx = reg.x * scale, ry = reg.y * scale, rw = reg.w * scale, rh = reg.h * scale;
+    ctx.strokeStyle = "#14b8a6";
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(rx, ry, rw, rh);
+    ctx.strokeStyle = "rgba(20,184,166,0.7)";
+    ctx.lineWidth = 1;
+    for (let c = 1; c < gridCols; c++) { const x = rx + (rw * c) / gridCols; ctx.beginPath(); ctx.moveTo(x, ry); ctx.lineTo(x, ry + rh); ctx.stroke(); }
+    for (let r = 1; r < gridRows; r++) { const y = ry + (rh * r) / gridRows; ctx.beginPath(); ctx.moveTo(rx, y); ctx.lineTo(rx + rw, y); ctx.stroke(); }
+  }, [gridSrc, gridCols, gridRows, gridRegion]);
+
+  // Cắt theo vùng đã căn → upload từng ô → thêm câu.
+  async function doGridCut() {
+    const img = gridImgRef.current;
+    if (!img) return;
+    setGridBusy(true);
+    setErr("");
+    try {
+      const cols = Math.max(1, gridCols), rows = Math.max(1, gridRows);
+      const reg = gridRegion(img);
+      const tw = Math.floor(reg.w / cols), th = Math.floor(reg.h / rows);
+      const canvas = document.createElement("canvas");
+      canvas.width = tw; canvas.height = th;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("Không tạo được canvas.");
+      const paths: string[] = [];
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          ctx.clearRect(0, 0, tw, th);
+          ctx.drawImage(img, reg.x + c * tw, reg.y + r * th, tw, th, 0, 0, tw, th);
+          const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b as Blob), "image/png"));
+          paths.push(await uploadBlob(blob));
+        }
+      }
+      const newItems: Item[] = paths.map((p) => ({ image: p, text: "" }));
+      setEditing((prev) => (prev ? { ...prev, items: [...prev.items, ...newItems] } : prev));
+      setGridSrc(null);
+      gridImgRef.current = null;
+      setGridOpen(false);
+      flash(`Đã cắt ${paths.length} ảnh → thêm ${paths.length} câu`);
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "Cắt ảnh thất bại.");
+    } finally {
+      setGridBusy(false);
+    }
+  }
+
+  const imgSrc = (path: string) => `/api/lesson-audio?path=${encodeURIComponent(path)}`;
 
   // OCR ảnh đáp án → điền các dòng "<số> <đáp án>" vào ô dán nhanh.
   async function ocrQuickKey(file: File) {
@@ -735,12 +846,61 @@ export default function AdminListeningExercisesPage() {
             <div className="flex items-center justify-between mb-2">
               <p className="text-xs font-black uppercase tracking-wider text-zinc-400">Câu hỏi ({editing.items.length})</p>
               <div className="flex items-center gap-3">
+                <button onClick={() => setGridOpen((v) => !v)} className="text-xs font-black text-amber-400">🖼 Cắt ảnh lưới</button>
                 {editing.type !== "speaking" && editing.items.length > 0 && (
                   <button onClick={() => setQuickKeyOpen((v) => !v)} className="text-xs font-black text-teal-400">🔑 Dán đáp án nhanh</button>
                 )}
                 <button onClick={addItem} className="text-xs font-black text-primary">+ Thêm</button>
               </div>
             </div>
+
+            {gridOpen && (
+              <div className="mb-3 rounded-2xl border border-amber-500/30 bg-amber-500/5 p-3 space-y-3">
+                <p className="text-[11px] font-bold text-zinc-300">
+                  Dán/tải <b className="text-amber-400">ảnh lưới</b> → căn lưới teal trùng các hình rồi bấm Cắt. Chỉnh <b>lề</b> để bỏ tiêu đề/mép thừa.
+                </p>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <label className="text-[11px] font-bold text-zinc-300">Cột <input type="number" min={1} value={gridCols} onChange={(e) => setGridCols(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
+                  <label className="text-[11px] font-bold text-zinc-300">Hàng <input type="number" min={1} value={gridRows} onChange={(e) => setGridRows(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
+                  <span className="text-[11px] font-black text-amber-400">= {gridCols * gridRows} ô</span>
+                </div>
+
+                {!gridSrc ? (
+                  <div
+                    onPaste={onPasteGrid}
+                    tabIndex={0}
+                    className="rounded-xl border-2 border-dashed border-amber-500/40 bg-black/20 p-4 text-center text-[11px] font-bold text-zinc-400 outline-none focus:border-amber-400"
+                  >
+                    Bấm vào đây rồi <b className="text-amber-400">Ctrl+V</b> để dán ảnh lưới
+                    <div className="mt-2">
+                      <label className="inline-block rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-amber-400 cursor-pointer">
+                        hoặc chọn file
+                        <input type="file" accept="image/*" hidden onChange={(e) => e.target.files?.[0] && loadGridFile(e.target.files[0])} />
+                      </label>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <canvas ref={previewRef} className="max-w-full rounded-lg border border-white/10 bg-white" />
+                    {/* Lề (top/right/bottom/left) % */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {(["top", "right", "bottom", "left"] as const).map((side) => (
+                        <label key={side} className="text-[10px] font-bold text-zinc-400">
+                          Lề {side === "top" ? "trên" : side === "right" ? "phải" : side === "bottom" ? "dưới" : "trái"}: {gm[side]}%
+                          <input type="range" min={0} max={40} value={gm[side]} onChange={(e) => setGm({ ...gm, [side]: +e.target.value })} className="w-full accent-amber-500" />
+                        </label>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <button onClick={doGridCut} disabled={gridBusy} className="rounded-xl bg-amber-600 px-4 py-2 text-xs font-black text-white disabled:opacity-40">
+                        {gridBusy ? "Đang cắt & tải…" : `✂️ Cắt ${gridCols * gridRows} ô → thêm câu`}
+                      </button>
+                      <button onClick={() => { setGridSrc(null); gridImgRef.current = null; setGm({ top: 0, right: 0, bottom: 0, left: 0 }); }} className="text-[11px] font-bold text-zinc-400">Chọn ảnh khác</button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
 
             {quickKeyOpen && editing.type !== "speaking" && (
               <div className="mb-3 rounded-2xl border border-teal-500/30 bg-teal-500/5 p-3 space-y-2">
@@ -785,6 +945,15 @@ export default function AdminListeningExercisesPage() {
                     )}
                     <button onClick={() => setItems(editing.items.filter((_, idx) => idx !== i))} className="ml-auto text-xs text-rose-400 font-black">✕</button>
                   </div>
+
+                  {/* Ảnh của câu (nếu có) */}
+                  {it.image && (
+                    <div className="flex items-center gap-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imgSrc(it.image)} alt="" className="h-16 w-16 rounded-lg object-cover border border-white/10 bg-white" />
+                      <button onClick={() => upd(i, { image: undefined })} className="text-[10px] font-black text-rose-400">Gỡ ảnh</button>
+                    </div>
+                  )}
 
                   {/* phần CÂU HỎI */}
                   {editing.type === "mc" && (

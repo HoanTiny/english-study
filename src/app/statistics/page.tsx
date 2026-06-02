@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
+  Bar,
+  BarChart,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -12,7 +14,12 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useAuth } from "@/lib/auth";
-import { loadDashboard, type DashboardStats } from "@/lib/statsRepo";
+import {
+  loadDashboard,
+  loadActivityTimeline,
+  type DashboardStats,
+  type ActivityDay,
+} from "@/lib/statsRepo";
 import { listShadowScores } from "@/lib/shadowingRepo";
 import { shadowItems } from "@/lib/content";
 
@@ -69,17 +76,22 @@ export default function StatisticsPage() {
   const [tab, setTab] = useState<"day" | "all">("day");
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [scores, setScores] = useState<Record<string, number>>({});
+  const [timeline, setTimeline] = useState<ActivityDay[]>([]);
+  const [rangeDays, setRangeDays] = useState<7 | 14 | 30>(14);
+  const [metric, setMetric] = useState<"reviews" | "pron">("reviews");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!ready || !userId) return;
     let active = true;
     const today = new Date().toISOString().slice(0, 10);
-    Promise.all([loadDashboard(today), listShadowScores()])
-      .then(([d, s]) => {
+    // Tải sẵn 30 ngày, cắt theo khoảng đang chọn ở client (không query lại).
+    Promise.all([loadDashboard(today), listShadowScores(), loadActivityTimeline(today, 30)])
+      .then(([d, s, t]) => {
         if (!active) return;
         setStats(d);
         setScores(s);
+        setTimeline(t);
       })
       .catch((e) => console.error("statistics", e))
       .finally(() => active && setLoading(false));
@@ -87,6 +99,15 @@ export default function StatisticsPage() {
       active = false;
     };
   }, [ready, userId]);
+
+  const shownTimeline = useMemo(() => timeline.slice(-rangeDays), [timeline, rangeDays]);
+  const totalReviews = useMemo(() => shownTimeline.reduce((n, d) => n + d.reviews, 0), [shownTimeline]);
+  const activeDays = useMemo(() => shownTimeline.filter((d) => d.reviews > 0 || d.journaled).length, [shownTimeline]);
+  const pronDays = useMemo(() => shownTimeline.filter((d) => d.shadowAvg != null), [shownTimeline]);
+  const pronAvg = useMemo(
+    () => (pronDays.length ? Math.round(pronDays.reduce((n, d) => n + (d.shadowAvg ?? 0), 0) / pronDays.length) : null),
+    [pronDays],
+  );
 
   // Dữ liệu biểu đồ: điểm phát âm theo từng câu shadowing (dữ liệu thật).
   const chartData = useMemo(
@@ -170,6 +191,7 @@ export default function StatisticsPage() {
           </div>
         </div>
       ) : (
+        <div className="space-y-8">
         <div className="grid gap-8 lg:grid-cols-12 items-start">
           {/* Cột trái: số liệu (7 cols) */}
           <div className="liquid-glass-card p-6 sm:p-8 border border-border/80 shadow-xl lg:col-span-7 space-y-6">
@@ -264,6 +286,146 @@ export default function StatisticsPage() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Dòng thời gian hoạt động 14 ngày gần nhất (dữ liệu thật) */}
+        <div className="liquid-glass-card p-6 sm:p-8 border border-border/80 shadow-xl">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">
+                Hoạt động {rangeDays} ngày gần đây
+              </h3>
+              <p className="mt-1 text-xs font-semibold text-muted">
+                {metric === "reviews"
+                  ? "Số lần ôn tập mỗi ngày · chấm 📓 = ngày có viết nhật ký"
+                  : "Điểm phát âm trung bình mỗi ngày (Shadowing) · thang 0–100"}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <div className="inline-flex rounded-full bg-white/40 dark:bg-black/35 border border-border/70 p-1 shadow-sm">
+                  {([7, 14, 30] as const).map((d) => (
+                    <button
+                      key={d}
+                      onClick={() => setRangeDays(d)}
+                      className={`rounded-full px-3.5 py-1 text-[11px] font-black tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
+                        rangeDays === d ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
+                      }`}
+                    >
+                      {d} ngày
+                    </button>
+                  ))}
+                </div>
+                <div className="inline-flex rounded-full bg-white/40 dark:bg-black/35 border border-border/70 p-1 shadow-sm">
+                  {([
+                    { k: "reviews", label: "Lượt ôn" },
+                    { k: "pron", label: "Phát âm" },
+                  ] as const).map((m) => (
+                    <button
+                      key={m.k}
+                      onClick={() => setMetric(m.k)}
+                      className={`rounded-full px-3.5 py-1 text-[11px] font-black tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
+                        metric === m.k ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
+                      }`}
+                    >
+                      {m.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-2.5">
+              <div className="rounded-2xl border border-border/60 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
+                <p className="text-lg font-black text-primary leading-none">{totalReviews}</p>
+                <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Lượt ôn</p>
+              </div>
+              <div className="rounded-2xl border border-border/60 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
+                {metric === "reviews" ? (
+                  <>
+                    <p className="text-lg font-black text-accent leading-none">{activeDays}</p>
+                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Ngày học</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-lg font-black text-accent leading-none">{pronAvg != null ? `${pronAvg}đ` : "—"}</p>
+                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Phát âm TB</p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {(metric === "reviews" ? totalReviews === 0 && activeDays === 0 : pronDays.length === 0) ? (
+            <div className="flex flex-col items-center justify-center gap-3 py-14 text-center">
+              <span className="text-5xl animate-pulse">{metric === "reviews" ? "📈" : "🎤"}</span>
+              <p className="font-semibold text-muted text-xs sm:text-sm max-w-xs leading-relaxed">
+                {metric === "reviews" ? (
+                  <>
+                    Chưa có hoạt động trong {rangeDays} ngày qua — hãy{" "}
+                    <Link href="/review" className="text-primary hover:underline font-bold">
+                      ôn tập
+                    </Link>{" "}
+                    vài thẻ để bắt đầu vẽ biểu đồ tiến bộ.
+                  </>
+                ) : (
+                  <>
+                    Chưa có điểm phát âm trong {rangeDays} ngày qua — hãy luyện{" "}
+                    <Link href="/shadowing" className="text-primary hover:underline font-bold">
+                      Shadowing
+                    </Link>{" "}
+                    để theo dõi tiến bộ phát âm.
+                  </>
+                )}
+              </p>
+            </div>
+          ) : (
+            <div className="mt-6 h-[260px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                {metric === "reviews" ? (
+                  <BarChart data={shownTimeline} margin={{ top: 16, right: 10, left: -25, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                    <XAxis dataKey="label" interval="preserveStartEnd" minTickGap={16} tick={{ fontSize: 10, fill: "var(--muted)", fontWeight: "bold" }} axisLine={false} tickLine={false} />
+                    <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: "var(--muted)", fontWeight: "bold" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      cursor={{ fill: "var(--primary)", opacity: 0.06 }}
+                      contentStyle={{
+                        borderRadius: "16px",
+                        border: "1px solid var(--border)",
+                        background: "var(--surface)",
+                        backdropFilter: "blur(16px)",
+                        fontSize: "12px",
+                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+                      }}
+                      formatter={(v) => [`${v} lượt`, "Ôn tập"]}
+                      labelFormatter={(l, p) => {
+                        const d = p?.[0]?.payload as ActivityDay | undefined;
+                        return d?.journaled ? `Ngày ${l} · 📓 có nhật ký` : `Ngày ${l}`;
+                      }}
+                    />
+                    <Bar dataKey="reviews" fill={TEAL} radius={[6, 6, 0, 0]} maxBarSize={28} />
+                  </BarChart>
+                ) : (
+                  <LineChart data={shownTimeline} margin={{ top: 16, right: 10, left: -25, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                    <XAxis dataKey="label" interval="preserveStartEnd" minTickGap={16} tick={{ fontSize: 10, fill: "var(--muted)", fontWeight: "bold" }} axisLine={false} tickLine={false} />
+                    <YAxis domain={[0, 100]} tick={{ fontSize: 10, fill: "var(--muted)", fontWeight: "bold" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      contentStyle={{
+                        borderRadius: "16px",
+                        border: "1px solid var(--border)",
+                        background: "var(--surface)",
+                        backdropFilter: "blur(16px)",
+                        fontSize: "12px",
+                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+                      }}
+                      formatter={(v) => [`${v} điểm`, "Phát âm TB"]}
+                      labelFormatter={(l) => `Ngày ${l}`}
+                    />
+                    <Line type="monotone" dataKey="shadowAvg" stroke={TEAL} strokeWidth={3} connectNulls dot={{ r: 4, fill: TEAL, strokeWidth: 1 }} activeDot={{ r: 6, strokeWidth: 0 }} />
+                  </LineChart>
+                )}
+              </ResponsiveContainer>
+            </div>
+          )}
+        </div>
         </div>
       )}
     </main>
