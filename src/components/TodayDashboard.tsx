@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth";
 import { loadDashboard, type DashboardStats } from "@/lib/statsRepo";
 import StudyReminder from "@/components/StudyReminder";
 import SuggestedLesson from "@/components/SuggestedLesson";
+import Icon3D from "@/components/Icon3D";
 
 export default function TodayDashboard() {
   const today = todayKey();
@@ -144,7 +145,7 @@ export default function TodayDashboard() {
                 {item.value}
               </p>
             </div>
-            <span className="text-xl shrink-0 filter drop-shadow-sm">{item.icon}</span>
+            <Icon3D emoji={item.icon} size={32} className="drop-shadow-sm" />
           </div>
         ))}
       </div>
@@ -160,8 +161,8 @@ export default function TodayDashboard() {
           className="group liquid-glass-interactive p-5 flex flex-col justify-between gap-5 rounded-3xl border border-border/40 shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft/80 text-xl border border-primary/10">
-              🔁
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft/80 border border-primary/10">
+              <Icon3D emoji="🔁" size={26} />
             </span>
             <div className="min-w-0">
               <p className="text-[9px] font-black uppercase tracking-wider text-muted">Vòng ôn tập</p>
@@ -188,8 +189,8 @@ export default function TodayDashboard() {
           className="group liquid-glass-interactive p-5 flex flex-col justify-between gap-5 rounded-3xl border border-border/40 shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-soft/80 text-xl border border-pink/10">
-              📔
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-soft/80 border border-pink/10">
+              <Icon3D emoji="📔" size={26} />
             </span>
             <div className="min-w-0">
               <p className="text-[9px] font-black uppercase tracking-wider text-muted">Luyện phản xạ viết</p>
@@ -197,8 +198,8 @@ export default function TodayDashboard() {
             </div>
           </div>
           <div>
-            <p className="font-display text-4xl font-black text-pink leading-none">
-              🔥 {stats.journalStreak}
+            <p className="font-display text-4xl font-black text-pink leading-none flex items-center gap-1.5">
+              <Icon3D emoji="🔥" size={32} /> {stats.journalStreak}
             </p>
             <p className="mt-1 text-[11px] font-medium text-muted">ngày streak viết nhật ký</p>
           </div>
@@ -216,8 +217,8 @@ export default function TodayDashboard() {
           className="group liquid-glass-interactive p-5 flex flex-col justify-between gap-5 rounded-3xl border border-border/40 shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft/80 text-xl border border-primary/10">
-              🎙️
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-soft/80 border border-primary/10">
+              <Icon3D emoji="🗣️" size={26} />
             </span>
             <div className="min-w-0">
               <p className="text-[9px] font-black uppercase tracking-wider text-muted">Luyện nhại giọng</p>
@@ -251,7 +252,7 @@ export default function TodayDashboard() {
       {empty && (
         <div className="rounded-2xl border border-primary/15 bg-primary-soft/20 p-5 text-center select-none">
           <p className="text-xs font-semibold text-muted leading-relaxed">
-            ✨ Bạn chưa có hoạt động nào hôm nay. Hãy lưu vài cụm từ hữu ích trong{" "}
+            <Icon3D emoji="✨" size={16} className="mr-1 align-[-3px]" /> Bạn chưa có hoạt động nào hôm nay. Hãy lưu vài cụm từ hữu ích trong{" "}
             <Link href="/vocab" className="font-black text-primary underline">Thư viện từ vựng</Link>{" "}
             để kích hoạt thuật toán FSRS tự động lên lịch học nhé!
           </p>

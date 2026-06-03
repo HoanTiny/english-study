@@ -7,6 +7,7 @@ import { isDue, memoryStrength, type Grade } from "@/lib/srs";
 import { useAuth } from "@/lib/auth";
 import { listNotes, type Note } from "@/lib/notesRepo";
 import { assessPronunciation } from "@/lib/pronunciation";
+import PronounceMini from "@/components/PronounceMini";
 import {
   listNoteReviewStates,
   gradeNote,
@@ -162,6 +163,9 @@ export default function ReviewPage() {
           </span>
           
           <p className="mt-6 text-2xl font-extrabold text-foreground leading-relaxed px-2 tracking-tight">{current.content}</p>
+          <div className="mt-2 flex justify-center">
+            <PronounceMini text={current.content} />
+          </div>
           <p className="mt-2.5 text-xs font-semibold text-muted max-w-xs mx-auto leading-relaxed">
             Nói to cụm từ này, đặt một câu ví dụ thực tế liên quan để tạo phản xạ nói.
           </p>

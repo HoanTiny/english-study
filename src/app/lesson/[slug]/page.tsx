@@ -176,6 +176,12 @@ export default function LessonPage() {
             💡 <span className="font-black text-accent uppercase tracking-wider text-[9px] mr-1">Mẹo học tập:</span> {lesson.tip}
           </div>
         )}
+        {slug === "ipa-sounds" && (
+          <Link href="/ipa" className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-primary/30 bg-primary-soft/40 p-4 transition-all hover:border-primary/60 hover:bg-primary-soft/60">
+            <span className="text-sm font-bold text-foreground">🔤 Học IPA tương tác: bảng âm · nghe–nhại · phân biệt cặp âm</span>
+            <span className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-black text-primary-fg">Mở →</span>
+          </Link>
+        )}
         <div className="mt-6 flex items-center gap-4">
           <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-black/5 dark:bg-white/5 border border-border/40 shadow-inner">
             <div

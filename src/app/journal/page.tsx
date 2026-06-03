@@ -162,7 +162,7 @@ export default function JournalPage() {
           <button
             onClick={save}
             disabled={sentences < MIN || scoring}
-            className="flex-1 liquid-glass-btn py-4 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none disabled:hover:scale-100 shadow-md transition-all duration-300"
+            className="flex-1 liquid-glass-btn py-4 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:scale-100 shadow-md transition-all duration-300"
           >
             {scoring ? (
               <>

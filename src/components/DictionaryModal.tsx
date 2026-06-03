@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useAuth } from "@/lib/auth";
 import { addNote } from "@/lib/notesRepo";
 import { isSingleWord } from "@/lib/pronounce";
@@ -43,11 +44,16 @@ export default function DictionaryModal({
   }, [open]);
 
   useEffect(() => {
+    if (!open) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
-    if (open) window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden"; // khoá cuộn nền
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
   }, [open, onClose]);
 
   // Mở kèm từ bôi đen → tự điền + tra ngay.
@@ -96,11 +102,11 @@ export default function DictionaryModal({
     }
   }
 
-  if (!open) return null;
+  if (!open || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-start justify-center bg-black/60 p-4 pt-20 backdrop-blur-md animate-fadeIn" onClick={onClose}>
-      <div className="liquid-glass-card w-full max-w-xl overflow-hidden bg-surface shadow-2xl border border-border/80" onClick={(e) => e.stopPropagation()}>
+      <div className="w-full max-w-xl overflow-hidden rounded-3xl border border-black/10 bg-white shadow-2xl dark:border-white/10 dark:bg-zinc-900" onClick={(e) => e.stopPropagation()}>
         {/* Header + ô tìm */}
         <div className="flex items-center justify-between border-b border-border px-6 py-4.5">
           <span className="font-display text-base font-bold text-foreground flex items-center gap-2">
@@ -169,6 +175,7 @@ export default function DictionaryModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

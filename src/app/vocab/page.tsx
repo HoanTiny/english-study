@@ -22,7 +22,13 @@ const GRADES: { g: Grade; label: string; when: string; cls: string }[] = [
   { g: "easy", label: "Dễ", when: "~1 tuần", cls: "bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white" },
 ];
 
-type Card = { en: string; vi: string; ipa?: string; example?: string; cefr: string };
+type Card = { en: string; vi: string; ipa?: string; example?: string; cefr: string; pos?: string };
+
+// Loại từ (vocab.json dùng tiếng Anh) → nhãn ngắn tiếng Việt.
+const POS_VI: Record<string, string> = {
+  noun: "danh từ", verb: "động từ", adjective: "tính từ", adverb: "trạng từ",
+  pronoun: "đại từ", preposition: "giới từ", conjunction: "liên từ", interjection: "thán từ", determiner: "từ hạn định",
+};
 type Deck = { slug: string; title: string; cefr: string; emoji: string; cards: Card[]; isWord?: boolean };
 type Mode = "flashcard" | "type" | "choice";
 
@@ -42,7 +48,7 @@ const WORD_DECKS: Deck[] = (() => {
   const byTopic = new Map<string, Card[]>();
   for (const w of vocabWords as WordRow[]) {
     if (!byTopic.has(w.topic)) byTopic.set(w.topic, []);
-    byTopic.get(w.topic)!.push({ en: w.en, vi: w.vi, ipa: w.ipa, cefr: "A1–A2" });
+    byTopic.get(w.topic)!.push({ en: w.en, vi: w.vi, ipa: w.ipa, cefr: "A1–A2", pos: w.pos });
   }
   return [...byTopic.entries()].map(([topic, cards]) => ({
     slug: "w-" + topic,
@@ -532,7 +538,8 @@ export default function VocabPage() {
                     <p className="font-display text-2xl sm:text-3xl font-black text-primary tracking-tight leading-none mt-0.5">{card.en}</p>
                     
                     {/* IPA & Translation Details */}
-                    <div className="flex items-center justify-center gap-2 text-xs font-semibold text-muted">
+                    <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted">
+                      {card.pos && <span className="rounded-md bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-black text-indigo-500">{POS_VI[card.pos] ?? card.pos}</span>}
                       {card.ipa && <span className="font-mono text-accent">{fmtIpa(card.ipa)}</span>}
                       <span>·</span>
                       <span className="text-foreground/90 font-bold">{card.vi}</span>
@@ -649,7 +656,10 @@ export default function VocabPage() {
                   </p>
                   <div className="bg-background/40 rounded-2xl p-5 border border-border inline-flex flex-col items-center">
                     <p className="font-display text-xl font-bold text-foreground">{card.en}</p>
-                    {card.ipa && <p className="text-xs font-mono font-bold text-accent mt-1.5">{fmtIpa(card.ipa)}</p>}
+                    <div className="mt-1.5 flex items-center justify-center gap-2">
+                      {card.pos && <span className="rounded-md bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-black text-indigo-500">{POS_VI[card.pos] ?? card.pos}</span>}
+                      {card.ipa && <span className="text-xs font-mono font-bold text-accent">{fmtIpa(card.ipa)}</span>}
+                    </div>
                   </div>
                   <div className="mt-3 flex items-center justify-center gap-3 w-full max-w-sm mx-auto">
                     <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all">🔖 Lưu ôn tập</button>

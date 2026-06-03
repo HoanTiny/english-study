@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import DictionaryModal from "./DictionaryModal";
+import Icon3D from "./Icon3D";
 import { useAuth } from "@/lib/auth";
 
 const directLinks = [
@@ -15,6 +16,7 @@ const directLinks = [
 ];
 
 const skillLinks = [
+  { href: "/ipa", label: "Học phát âm IPA", desc: "44 âm + phân biệt cặp âm", icon: "🔤" },
   { href: "/sprint", label: "Game Sprint", desc: "Phản xạ từ vựng siêu tốc", icon: "⚡" },
   { href: "/roleplay", label: "Hội thoại AI", desc: "Luyện nói tự nhiên cùng AI", icon: "📞" },
   { href: "/journal", label: "Nhật ký phản xạ", desc: "Viết nhật ký, sửa lỗi cùng AI", icon: "✍️" },
@@ -87,7 +89,7 @@ export default function Nav() {
                         : "text-muted hover:bg-primary-soft/40 hover:text-foreground border border-transparent"
                     }`}
                   >
-                    <span className="text-base shrink-0">{item.icon}</span>
+                    <Icon3D emoji={item.icon} size={20} className="shrink-0" />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -113,7 +115,7 @@ export default function Nav() {
                         : "text-muted hover:bg-primary-soft/40 hover:text-foreground border border-transparent"
                     }`}
                   >
-                    <span className="text-base shrink-0">{item.icon}</span>
+                    <Icon3D emoji={item.icon} size={20} className="shrink-0" />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -139,7 +141,7 @@ export default function Nav() {
                         : "text-muted hover:bg-primary-soft/40 hover:text-foreground border border-transparent"
                     }`}
                   >
-                    <span className="text-base shrink-0">{item.icon}</span>
+                    <Icon3D emoji={item.icon} size={20} className="shrink-0" />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -258,7 +260,7 @@ export default function Nav() {
                         isActive(item.href) ? "bg-primary-soft text-primary shadow-sm" : "text-muted hover:bg-primary-soft/20"
                       }`}
                     >
-                      <span className="text-base">{item.icon}</span> {item.label}
+                      <Icon3D emoji={item.icon} size={20} /> {item.label}
                     </Link>
                   ))}
                 </div>
@@ -276,7 +278,7 @@ export default function Nav() {
                         isActive(item.href) ? "bg-primary-soft text-primary shadow-sm" : "text-muted hover:bg-primary-soft/20"
                       }`}
                     >
-                      <span className="text-base">{item.icon}</span> {item.label}
+                      <Icon3D emoji={item.icon} size={20} /> {item.label}
                     </Link>
                   ))}
                 </div>
@@ -294,7 +296,7 @@ export default function Nav() {
                         isActive(item.href) ? "bg-primary-soft text-primary shadow-sm" : "text-muted hover:bg-primary-soft/20"
                       }`}
                     >
-                      <span className="text-base">{item.icon}</span> {item.label}
+                      <Icon3D emoji={item.icon} size={20} /> {item.label}
                     </Link>
                   ))}
                 </div>
