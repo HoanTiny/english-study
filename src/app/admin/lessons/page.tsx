@@ -74,7 +74,32 @@ export default function AdminLessonsPage() {
 
   function flash(m: string) {
     setMsg(m);
-    setTimeout(() => setMsg(""), 2500);
+    setTimeout(() => setMsg(""), 3500);
+  }
+
+  // Seed lại toàn bộ bài học từ file tĩnh (lessons.ts) xuống DB.
+  // Ghi đè phrases theo slug; GIỮ NGUYÊN audio đã upload. Dùng sau khi sửa lessons.ts.
+  async function seedAll() {
+    if (!window.confirm("Seed lại toàn bộ bài học từ nội dung tĩnh xuống DB?\n\n• Phrases sẽ được ghi đè (cập nhật nội dung mới)\n• Audio cụm/bài đã upload được GIỮ NGUYÊN\n• Vị trí giai đoạn (stage) cập nhật theo lộ trình mới")) return;
+    setBusy(true);
+    setErr("");
+    try {
+      const res = await fetch("/api/admin/seed-lessons", {
+        method: "POST",
+        headers: { "x-admin-key": key },
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Lỗi ${res.status}`);
+      flash(
+        `✓ Đã seed ${data.lessonCount} bài · ${data.phraseCount} cụm` +
+          (data.errors?.length ? ` · ⚠️ ${data.errors.length} lỗi` : ""),
+      );
+      await load();
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : "Lỗi seed.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function openEdit(slug: string) {
@@ -170,7 +195,17 @@ export default function AdminLessonsPage() {
       <div className="flex items-center justify-between mb-6">
         <p className="text-sm font-bold text-zinc-400">{lessons.length} bài · quản lý nội dung & audio</p>
         {!editing && (
-          <button onClick={newLesson} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black active:scale-95">+ Bài mới</button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={seedAll}
+              disabled={busy}
+              title="Đẩy nội dung tĩnh (lessons.ts) xuống DB — cập nhật bài mới sửa, giữ nguyên audio"
+              className="rounded-xl border border-border bg-white/10 px-4 py-2 text-xs font-black text-foreground hover:border-primary/40 active:scale-95 disabled:opacity-50"
+            >
+              {busy ? "Đang seed…" : "↻ Seed lại"}
+            </button>
+            <button onClick={newLesson} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black active:scale-95">+ Bài mới</button>
+          </div>
         )}
       </div>
       {msg && <p className="mb-3 rounded-lg bg-teal-500/15 px-3 py-2 text-xs font-black text-teal-300">{msg}</p>}

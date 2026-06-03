@@ -9,6 +9,7 @@ import { useAuth } from "@/lib/auth";
 
 const directLinks = [
   { href: "/", label: "Lộ trình học", icon: "🎯" },
+  { href: "/dashboard", label: "Bảng điều khiển", icon: "🧭" },
   { href: "/today", label: "Nhiệm vụ hôm nay", icon: "📅" },
   { href: "/statistics", label: "Thống kê tiến độ", icon: "📊" },
 ];
