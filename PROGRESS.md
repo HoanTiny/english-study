@@ -1,6 +1,6 @@
 # SpeakUp — Tiến độ dự án
 
-> Cập nhật: 2026-05-29 · App học tiếng Anh A1 → giao tiếp (2h/ngày), mọi hoạt động đổ về 1 hub ôn tập SRS, theo dõi khoảng cách **Hiểu → Nói được**.
+> Cập nhật: 2026-06-04 · App học tiếng Anh A1 → giao tiếp (2h/ngày), mọi hoạt động đổ về 1 hub ôn tập SRS (FSRS), theo dõi khoảng cách **Hiểu → Nói được**.
 
 ## Stack
 - Next.js 16.2.6 (App Router, Turbopack) · React 19 · TypeScript · Tailwind v4
@@ -211,3 +211,4 @@ AZURE_SPEECH_REGION=southeastasia   # cần thêm
 
 ## Trạng thái build
 ✅ `next build` sạch — 13 route (gồm 3 API route: journal-feedback, roleplay, speech-token).
+- [x] **Rà & sửa nút/modal lỗi hiển thị** (2026-06-04): nút disabled dùng `liquid-glass-btn` (nền màu) + ép `disabled:!text-muted/40` → chữ mờ tịt trên nền xanh (nền không bị `!bg-black/5` ghi đè). Sửa sang `disabled:opacity-55` ở **Nhật ký** (nút chấm điểm), **Chép chính tả** (Kiểm tra/Tiếp theo), **bài học** (lưu & chấm). Rà toàn bộ: chỉ 2 modal có `fixed inset-0` (IPA, DictionaryModal) — đã portal + khoá cuộn; overlay menu mobile trong Nav không bị nhốt. App typecheck sạch. (Audit DB: mọi migration đã chạy — error_notes/listening_exercises(26)/word_examples(141)/listen_videos(30)/push(1).)

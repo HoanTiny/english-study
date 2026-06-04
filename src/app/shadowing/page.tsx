@@ -14,6 +14,7 @@ export default function ShadowingPage() {
   const [speed, setSpeed] = useState(0.75);
   const [recordingId, setRecordingId] = useState<string | null>(null);
   const [assessing, setAssessing] = useState(false);
+  const [level, setLevel] = useState("all");
   const mediaRef = useRef<MediaRecorder | null>(null);
 
   useEffect(() => {
@@ -121,63 +122,81 @@ export default function ShadowingPage() {
         </div>
       </div>
 
-      <div className="space-y-5">
-        {shadowItems.map((item) => {
+      {/* Bộ lọc cấp độ + tiến độ */}
+      {(() => {
+        const levels = ["all", ...Array.from(new Set(shadowItems.map((i) => i.level)))];
+        const done = shadowItems.filter((i) => scores[i.id] != null).length;
+        return (
+          <div className="mb-6 flex flex-wrap items-center gap-2">
+            {levels.map((l) => (
+              <button
+                key={l}
+                onClick={() => setLevel(l)}
+                className={`rounded-full border px-3.5 py-1.5 text-[11px] font-black uppercase tracking-wider transition-all ${
+                  level === l ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"
+                }`}
+              >
+                {l === "all" ? "Tất cả" : l}
+              </button>
+            ))}
+            <span className="ml-auto rounded-full border border-border/60 bg-surface/50 px-3 py-1.5 text-[10px] font-bold text-muted">
+              ✓ Đã đạt <b className="text-emerald-600 dark:text-emerald-400">{done}</b>/{shadowItems.length} câu
+            </span>
+          </div>
+        );
+      })()}
+
+      <div className="space-y-3">
+        {(level === "all" ? shadowItems : shadowItems.filter((i) => i.level === level)).map((item) => {
           const score = scores[item.id];
           const isRec = recordingId === item.id;
           return (
-            <div key={item.id} className="liquid-glass-card p-6 border border-border/80 shadow-md relative overflow-hidden transition-all duration-300 hover:shadow-lg group">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary/5 to-transparent blur-xl pointer-events-none" />
-
-              <div className="flex items-center gap-3">
-                <span className="rounded-full bg-primary-soft border border-primary/10 px-3.5 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">
+            <div key={item.id} className="rounded-2xl border border-border/60 bg-white/70 dark:bg-zinc-900/50 p-4 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md">
+              <div className="flex items-start gap-3">
+                <span className="mt-0.5 shrink-0 rounded-full bg-primary-soft border border-primary/10 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-primary">
                   {item.level}
                 </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-bold text-foreground leading-snug">{item.en}</p>
+                  <p className="text-xs font-semibold text-muted mt-0.5">{item.vi}</p>
+                </div>
                 {score != null && (
                   <span
-                    className={`ml-auto text-[10px] font-black border rounded-full px-3.5 py-1 shadow-sm transition-all duration-500 ${
-                      score >= 80 
-                        ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400" 
+                    className={`shrink-0 text-[10px] font-black border rounded-full px-2.5 py-0.5 ${
+                      score >= 80
+                        ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
                         : "bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400"
                     }`}
                   >
-                    Đạt được: <span className="text-xs font-black">{score}đ</span>
+                    {score}đ
                   </span>
                 )}
               </div>
-              
-              <p className="mt-4 text-lg font-bold text-foreground leading-relaxed tracking-tight">{item.en}</p>
-              <p className="text-xs font-semibold text-muted mt-1">{item.vi}</p>
 
-              <div className="mt-5 flex flex-col sm:flex-row gap-3 pt-4 border-t border-border/40">
+              <div className="mt-3 flex gap-2">
                 <button
                   onClick={() => speak(item.en)}
-                  className="flex-1 rounded-full border border-border/60 bg-surface/50 py-3.5 text-xs font-black uppercase tracking-wider transition-all duration-300 hover:border-primary/50 hover:bg-primary-soft/30 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+                  className="flex items-center justify-center gap-1.5 rounded-full border border-border/60 bg-surface/50 px-4 py-2 text-[11px] font-black uppercase tracking-wider transition-all hover:border-primary/50 hover:bg-primary-soft/30 active:scale-95 cursor-pointer"
                 >
-                  <span>🔊</span> Nghe mẫu
+                  🔊 Nghe mẫu
                 </button>
                 {!isRec ? (
                   <button
                     onClick={() => record(item.id, item.en)}
-                    className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-95"
+                    className="flex flex-1 items-center justify-center gap-1.5 liquid-glass-btn py-2 text-[11px] font-black uppercase tracking-wider active:scale-95"
                   >
                     🎤 Luyện nhại
                   </button>
                 ) : assessing ? (
-                  <button
-                    disabled
-                    className="flex-1 animate-pulse rounded-full bg-primary border border-primary/20 py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg flex items-center justify-center gap-1.5 cursor-wait"
-                  >
-                    <span className="h-2 w-2 rounded-full bg-current animate-ping"></span>
-                    Đang nghe… nói câu trên
+                  <button disabled className="flex flex-1 animate-pulse items-center justify-center gap-1.5 rounded-full bg-primary py-2 text-[11px] font-black uppercase tracking-wider text-primary-fg cursor-wait">
+                    <span className="h-2 w-2 rounded-full bg-current animate-ping" /> Đang nghe…
                   </button>
                 ) : (
                   <button
                     onClick={() => stop(item.id)}
-                    className="flex-1 animate-pulse rounded-full bg-rose-600 py-3.5 text-xs font-black uppercase tracking-wider text-white transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg shadow-rose-500/20 flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="flex flex-1 animate-pulse items-center justify-center gap-1.5 rounded-full bg-rose-600 py-2 text-[11px] font-black uppercase tracking-wider text-white shadow-lg shadow-rose-500/20 active:scale-95 cursor-pointer"
                   >
-                    <span className="h-2 w-2 rounded-full bg-white animate-ping"></span>
-                    Dừng ghi & Chấm điểm
+                    <span className="h-2 w-2 rounded-full bg-white animate-ping" /> Dừng & Chấm
                   </button>
                 )}
               </div>

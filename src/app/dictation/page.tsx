@@ -431,7 +431,7 @@ function DictationInner() {
                 <button 
                   onClick={check} 
                   disabled={!typed.trim()} 
-                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Kiểm tra kết quả
                 </button>
@@ -439,7 +439,7 @@ function DictationInner() {
                 <button 
                   onClick={() => goto(idx + 1)} 
                   disabled={idx + 1 >= segs.length} 
-                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Đoạn tiếp theo →
                 </button>

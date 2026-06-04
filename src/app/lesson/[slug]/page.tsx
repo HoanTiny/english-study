@@ -259,7 +259,7 @@ export default function LessonPage() {
                   className={`rounded-full px-5 py-2.5 text-[9px] font-black uppercase tracking-wider transition-all duration-300 active:scale-95 flex items-center gap-1.5 cursor-pointer shadow-md ${
                     isSaved
                       ? "bg-teal-500/10 border border-teal-500/25 text-teal-600 dark:text-teal-400 cursor-default shadow-sm"
-                      : "liquid-glass-btn disabled:!bg-black/5 dark:disabled:!bg-white/5 disabled:!text-muted/40 disabled:!border-border/30 disabled:shadow-none"
+                      : "liquid-glass-btn disabled:opacity-55 disabled:cursor-not-allowed"
                   }`}
                 >
                   {isSaved ? "✓ Đã lưu ôn tập" : busy === p.en ? "Đang lưu…" : "+ Lưu ôn tập"}
