@@ -9,6 +9,7 @@ export type IpaSound = {
   tip: string; // mô tả cách phát âm (khẩu hình)
   example: string; // câu ví dụ
   hard?: boolean; // âm người Việt hay sai
+  videoId?: string; // (tùy chọn) YouTube ID video khẩu hình để nhúng shadow; bỏ trống → nút mở tìm kiếm YouTube
 };
 
 export const IPA_SOUNDS: IpaSound[] = [
@@ -88,4 +89,23 @@ export const TYPE_LABEL: Record<SoundType, string> = {
   consonant: "Phụ âm (24)",
   monophthong: "Nguyên âm đơn (12)",
   diphthong: "Nguyên âm đôi (8)",
+};
+
+// Video khẩu hình theo từng âm — playlist "BBC Learning English · The Sounds of English"
+// (nhúng qua YouTube IFrame, hợp ToS). symbol → YouTube videoId.
+export const IPA_VIDEO: Record<string, string> = {
+  // Phụ âm
+  "/p/": "AZRREr7DqqM", "/b/": "yP7aCKO6bTE", "/t/": "0T1QYByMxrs", "/d/": "qA5ZYC89oso",
+  "/k/": "d1jyIpAmLe8", "/ɡ/": "9eAqj9EfeK0", "/f/": "vE12RFyH-hY", "/v/": "mO04G0v5a_c",
+  "/θ/": "b4Aj3k65HSo", "/ð/": "tu1t3Fn5Lw8", "/s/": "QtH3vRXmvvo", "/z/": "o1ZvmX80t7Q",
+  "/ʃ/": "NF92RdZC6wE", "/ʒ/": "bTxeAiBF61I", "/h/": "DM_gN6imoC8", "/tʃ/": "PykxZ5kkrjs",
+  "/dʒ/": "0IeQmGdo7gQ", "/m/": "0Te4Us8Tsv8", "/n/": "qkgucMjv4T0", "/ŋ/": "rgWse3tloTw",
+  "/l/": "CwWLgmMk0Z0", "/r/": "Lxuo14hjP_8", "/w/": "HzhPB1hXG-o", "/j/": "_Fi9E6Yw-qg",
+  // Nguyên âm đơn
+  "/iː/": "RZmGzSb-6OM", "/ɪ/": "TNFKG0yvDx4", "/e/": "hLN1cdSTDo8", "/æ/": "qVhaIHk88a8",
+  "/ɑː/": "uDHMuMQdBNw", "/ɒ/": "MAk-XtHsyzM", "/ɔː/": "KHllC40_u1Q", "/ʊ/": "eJ7dM_LU9t4",
+  "/uː/": "mnKEGLuEzV4", "/ʌ/": "PZwKFFp7V50", "/ɜː/": "zSJJWHymEPw", "/ə/": "wg0P0oYkniE",
+  // Nguyên âm đôi
+  "/eɪ/": "5FMPlqlFt9g", "/aɪ/": "Hb8COxAtl14", "/ɔɪ/": "lFRrEI85IcM", "/aʊ/": "9WDnVMQIaTs",
+  "/əʊ/": "r1BRCG0P9C8", "/ɪə/": "vC0h4S0YPJc", "/eə/": "0J7-5maJJIk", "/ʊə/": "nHSqluHrD-U",
 };

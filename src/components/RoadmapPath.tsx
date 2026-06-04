@@ -20,6 +20,12 @@ const statusStyles: Record<LessonStatus, string> = {
   locked: "border-border/40 bg-black/5 dark:bg-white/5 text-muted opacity-50 cursor-not-allowed",
 };
 
+// Bài "công cụ" → mở thẳng trang luyện riêng (không phải bài cụm/SRS).
+const TOOL_HREF: Record<string, string> = {
+  "ipa-sounds": "/ipa",
+  "ai-roleplay": "/roleplay",
+};
+
 const statusIcon: Record<LessonStatus, string> = {
   done: "✨ ✓",
   in_progress: "⚡ ▶",
@@ -87,9 +93,9 @@ export default function RoadmapPath() {
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {stage.lessons.map((lesson) => {
-                // Hội thoại AI là công cụ luyện tập, luôn mở và trỏ sang /roleplay.
-                const isRoleplay = lesson.slug === "ai-roleplay";
-                const st = isRoleplay ? "available" : statusOf(lesson.slug);
+                // Bài "công cụ" (IPA, Hội thoại AI) luôn mở & trỏ sang trang luyện riêng.
+                const toolHref = TOOL_HREF[lesson.slug];
+                const st = toolHref ? "available" : statusOf(lesson.slug);
                 const card = (
                   <div
                     className={`flex h-full items-center gap-3.5 rounded-2xl border p-4 transition-all duration-300 ${statusStyles[st]} ${st !== 'locked' ? 'hover:-translate-y-1' : ''}`}
@@ -105,10 +111,10 @@ export default function RoadmapPath() {
                     </div>
                   </div>
                 );
-                // Hội thoại AI → trang riêng /roleplay.
-                if (isRoleplay) {
+                // Bài công cụ → trang luyện riêng (/ipa, /roleplay).
+                if (toolHref) {
                   return (
-                    <Link key={lesson.slug} href="/roleplay">
+                    <Link key={lesson.slug} href={toolHref}>
                       {card}
                     </Link>
                   );

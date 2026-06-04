@@ -93,6 +93,10 @@ export async function loadStages(): Promise<ViewStage[]> {
  * Bài đầu mở; bài kế mở khi bài trước "bắt đầu" (lưu ≥1 cụm); "done" khi lưu đủ cụm;
  * bài không có nội dung (phraseCount=0) → khoá & gãy chuỗi.
  */
+// Bài "công cụ" — mở thẳng sang trang luyện riêng (không phải bài học cụm/SRS).
+// Luôn mở & KHÔNG chặn chuỗi mở khoá (bỏ qua khi tính prevStarted).
+export const TOOL_SLUGS = new Set(["ipa-sounds", "ai-roleplay"]);
+
 export function computeStatusesView(
   viewStages: ViewStage[],
   savedByLesson: Record<string, number>,
@@ -101,6 +105,10 @@ export function computeStatusesView(
   let prevStarted = true;
   for (const stage of viewStages) {
     for (const l of stage.lessons) {
+      if (TOOL_SLUGS.has(l.slug)) {
+        out[l.slug] = "available"; // công cụ: luôn mở, không ảnh hưởng chuỗi
+        continue;
+      }
       if (l.phraseCount <= 0) {
         out[l.slug] = "locked";
         prevStarted = false;

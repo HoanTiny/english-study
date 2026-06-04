@@ -82,6 +82,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mọi phần tử bấm được hiện con trỏ bàn tay (Tailwind v4 mặc định nút = default).
+   Đặt trong @layer base để class cursor-* (cursor-not-allowed, cursor-default…) vẫn ƯU TIÊN.
+   Nút disabled giữ con trỏ mặc định. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+}
+
 body {
   background: radial-gradient(circle at 50% 16%, #f8fafc 0%, #eef1f6 55%, #d9dee8 100%) fixed;
   color: var(--foreground);

@@ -1,6 +1,8 @@
 // Nội dung học chi tiết — học theo CỤM (chunk) + câu mẫu, không học từ lẻ.
 // Mỗi cụm có thể đẩy thẳng vào hệ thống ôn tập SRS.
 
+import { IPA_SOUNDS, MINIMAL_PAIRS } from "@/data/ipa";
+
 export type LessonPhrase = {
   en: string; // cụm/câu cần nói được
   vi: string; // nghĩa tiếng Việt
@@ -19,6 +21,23 @@ export type LessonContent = {
   // tìm kiếm theo kênh uy tín hợp cấp độ (xem src/lib/listening.ts).
   youtubeId?: string;
 };
+
+// Bài IPA dùng CHUNG nguồn dữ liệu với trang /ipa (src/data/ipa.ts) — sửa 1 nơi, cả hai cập nhật.
+function ipaSoundPhrases(): LessonPhrase[] {
+  const sounds: LessonPhrase[] = IPA_SOUNDS.map((s) => ({
+    en: `${s.symbol} — ${s.words.slice(0, 2).join(", ")}`,
+    vi: (s.hard ? "⚠️ Khó với người Việt. " : "") + s.tip,
+    ipa: s.symbol,
+    example: s.example,
+  }));
+  const pairs: LessonPhrase[] = MINIMAL_PAIRS.map((p) => ({
+    en: `${p.a.word} ↔ ${p.b.word} (${p.sound})`,
+    vi: p.tip,
+    ipa: `${p.a.ipa} ↔ ${p.b.ipa}`,
+    example: p.example,
+  }));
+  return [...sounds, ...pairs];
+}
 
 export const lessonContent: Record<string, LessonContent> = {
   greetings: {
@@ -263,64 +282,7 @@ export const lessonContent: Record<string, LessonContent> = {
     intro:
       "Trọn bộ 44 âm tiếng Anh (chuẩn IPA): 24 phụ âm + 20 nguyên âm (12 đơn + 8 đôi). Học theo phương pháp đã được kiểm chứng: NGHE → NHẠI LẠI (shadowing) → luyện CẶP ÂM dễ nhầm để tai phân biệt rõ rồi miệng mới nói đúng.",
     tip: "Quy trình mỗi ngày: ① Bấm 🔊 nghe mẫu, NHẠI LẠI NGAY theo nhịp (shadowing) — phóng đại khẩu hình lúc đầu. ② Đọc IPA chậm, tách từng âm. ③ Chỉ luyện kỹ 3–5 âm/ngày và lặp đều, đừng cố nuốt cả 44 âm một lúc. ④ Làm kỹ phần 'Cặp âm dễ nhầm' ở cuối bài. ⑤ Muốn ghi âm & chấm điểm so với mẫu → sang mục Shadowing.",
-    phrases: [
-      // ── 24 PHỤ ÂM ──
-      { en: "/p/ — pen, happy", vi: "Phụ âm tắc, vô thanh — bật hơi mạnh.", ipa: "/pen/ /ˈhæpi/", example: "Please pass me the pen." },
-      { en: "/b/ — bad, job", vi: "Tắc, hữu thanh — như /p/ nhưng rung dây thanh.", ipa: "/bæd/ /dʒɒb/", example: "That's not a bad job." },
-      { en: "/t/ — tea, water", vi: "Tắc, vô thanh — đầu lưỡi chạm lợi.", ipa: "/tiː/ /ˈwɔːtə/", example: "I'd like a cup of tea." },
-      { en: "/d/ — dog, red", vi: "Tắc, hữu thanh — như /t/ có rung.", ipa: "/dɒɡ/ /red/", example: "The red dog is mine." },
-      { en: "/k/ — cat, school", vi: "Tắc, vô thanh — cuống lưỡi chạm vòm mềm.", ipa: "/kæt/ /skuːl/", example: "The cat is at school." },
-      { en: "/ɡ/ — go, big", vi: "Tắc, hữu thanh — như /k/ có rung.", ipa: "/ɡəʊ/ /bɪɡ/", example: "Let's go to the big park." },
-      { en: "/f/ — fish, coffee", vi: "Xát, vô thanh — răng trên chạm môi dưới.", ipa: "/fɪʃ/ /ˈkɒfi/", example: "I had fish and coffee." },
-      { en: "/v/ — very, love", vi: "Xát, hữu thanh — răng trên chạm môi dưới, CÓ rung (người Việt hay đọc nhầm thành /b/).", ipa: "/ˈveri/ /lʌv/", example: "I love it very much." },
-      { en: "/θ/ — think, bath", vi: "Xát, vô thanh — đặt lưỡi giữa hai răng, thổi hơi (không có trong tiếng Việt).", ipa: "/θɪŋk/ /bɑːθ/", example: "I think I'll take a bath." },
-      { en: "/ð/ — this, mother", vi: "Xát, hữu thanh — lưỡi giữa hai răng, CÓ rung.", ipa: "/ðɪs/ /ˈmʌðə/", example: "This is my mother." },
-      { en: "/s/ — sun, bus", vi: "Xát, vô thanh — luồng hơi qua đầu lưỡi.", ipa: "/sʌn/ /bʌs/", example: "The sun is out; catch the bus." },
-      { en: "/z/ — zoo, is", vi: "Xát, hữu thanh — như /s/ có rung (đừng bỏ rung ở cuối từ).", ipa: "/zuː/ /ɪz/", example: "The zoo is open." },
-      { en: "/ʃ/ — she, fish", vi: "Xát, vô thanh — chu môi, âm 'sh'.", ipa: "/ʃiː/ /fɪʃ/", example: "She likes fish." },
-      { en: "/ʒ/ — vision, usually", vi: "Xát, hữu thanh — như /ʃ/ có rung; ít gặp.", ipa: "/ˈvɪʒən/ /ˈjuːʒuəli/", example: "I usually have good vision." },
-      { en: "/h/ — hat, hello", vi: "Xát, vô thanh — thở hơi nhẹ ra.", ipa: "/hæt/ /həˈləʊ/", example: "Hello, nice hat!" },
-      { en: "/tʃ/ — chair, watch", vi: "Tắc-xát, vô thanh — âm 'ch'.", ipa: "/tʃeə/ /wɒtʃ/", example: "Sit on the chair and watch." },
-      { en: "/dʒ/ — job, age", vi: "Tắc-xát, hữu thanh — âm 'j'.", ipa: "/dʒɒb/ /eɪdʒ/", example: "He got a job at his age." },
-      { en: "/m/ — man, time", vi: "Mũi, hữu thanh — khép môi, hơi ra mũi.", ipa: "/mæn/ /taɪm/", example: "The man has no time." },
-      { en: "/n/ — no, sun", vi: "Mũi, hữu thanh — đầu lưỡi chạm lợi.", ipa: "/nəʊ/ /sʌn/", example: "No sun today." },
-      { en: "/ŋ/ — sing, long", vi: "Mũi, hữu thanh — 'ng' cuối từ; đừng thêm /g/.", ipa: "/sɪŋ/ /lɒŋ/", example: "I sing a long song." },
-      { en: "/l/ — leg, ball", vi: "Bên, hữu thanh — đầu lưỡi chạm lợi.", ipa: "/leɡ/ /bɔːl/", example: "Kick the ball with your leg." },
-      { en: "/r/ — red, sorry", vi: "Hữu thanh — cong lưỡi, KHÔNG chạm (khác /l/).", ipa: "/red/ /ˈsɒri/", example: "Sorry, the red one is taken." },
-      { en: "/w/ — we, water", vi: "Bán nguyên âm — tròn môi rồi mở.", ipa: "/wiː/ /ˈwɔːtə/", example: "We need some water." },
-      { en: "/j/ — yes, you", vi: "Bán nguyên âm — như 'y' trong 'yes'.", ipa: "/jes/ /juː/", example: "Yes, this is for you." },
-      // ── 12 NGUYÊN ÂM ĐƠN ──
-      { en: "/iː/ — see, eat", vi: "Nguyên âm DÀI — môi giãn rộng (mỉm cười).", ipa: "/siː/ /iːt/", example: "I see you eat a lot." },
-      { en: "/ɪ/ — sit, big", vi: "Nguyên âm NGẮN — thả lỏng, đừng kéo dài (≠ /iː/).", ipa: "/sɪt/ /bɪɡ/", example: "Sit on the big chair." },
-      { en: "/e/ — bed, ten", vi: "Ngắn — như 'e' tiếng Việt, gọn.", ipa: "/bed/ /ten/", example: "There are ten beds." },
-      { en: "/æ/ — cat, bad", vi: "Ngắn — miệng mở rộng, giữa 'a' và 'e'.", ipa: "/kæt/ /bæd/", example: "The bad cat ran away." },
-      { en: "/ɑː/ — car, father", vi: "DÀI — mở miệng, lưỡi lùi sau.", ipa: "/kɑː/ /ˈfɑːðə/", example: "My father drives a car." },
-      { en: "/ɒ/ — hot, dog", vi: "Ngắn — tròn môi nhẹ (Anh-Anh).", ipa: "/hɒt/ /dɒɡ/", example: "The dog is hot." },
-      { en: "/ɔː/ — door, four", vi: "DÀI — tròn môi, hạ hàm.", ipa: "/dɔː/ /fɔː/", example: "Open the four doors." },
-      { en: "/ʊ/ — book, good", vi: "Ngắn — tròn môi nhẹ, gọn (≠ /uː/).", ipa: "/bʊk/ /ɡʊd/", example: "This is a good book." },
-      { en: "/uː/ — blue, food", vi: "DÀI — tròn môi, đẩy hơi ra.", ipa: "/bluː/ /fuːd/", example: "The blue box has food." },
-      { en: "/ʌ/ — cup, love", vi: "Ngắn — thả lỏng, âm ở giữa miệng.", ipa: "/kʌp/ /lʌv/", example: "I love this cup." },
-      { en: "/ɜː/ — bird, learn", vi: "DÀI — lưỡi ở giữa, môi không tròn.", ipa: "/bɜːd/ /lɜːn/", example: "Learn about the bird." },
-      { en: "/ə/ — about, teacher (schwa)", vi: "Âm 'ơ' YẾU nhất — ở âm tiết không nhấn (rất phổ biến).", ipa: "/əˈbaʊt/ /ˈtiːtʃə/", example: "Ask the teacher about it." },
-      // ── 8 NGUYÊN ÂM ĐÔI ──
-      { en: "/eɪ/ — day, name", vi: "Nguyên âm đôi — trượt 'ê → i'.", ipa: "/deɪ/ /neɪm/", example: "What's your name today?" },
-      { en: "/aɪ/ — my, time", vi: "Trượt 'a → i'.", ipa: "/maɪ/ /taɪm/", example: "It's my time now." },
-      { en: "/ɔɪ/ — boy, enjoy", vi: "Trượt 'o → i'.", ipa: "/bɔɪ/ /ɪnˈdʒɔɪ/", example: "The boy enjoys the game." },
-      { en: "/aʊ/ — now, house", vi: "Trượt 'a → u'.", ipa: "/naʊ/ /haʊs/", example: "Come to my house now." },
-      { en: "/əʊ/ — go, home", vi: "Trượt 'ơ → u' (Anh-Anh).", ipa: "/ɡəʊ/ /həʊm/", example: "Let's go home." },
-      { en: "/ɪə/ — here, near", vi: "Trượt 'i → ơ'.", ipa: "/hɪə/ /nɪə/", example: "Come here, near me." },
-      { en: "/eə/ — hair, care", vi: "Trượt 'e → ơ'.", ipa: "/heə/ /keə/", example: "Take care of your hair." },
-      { en: "/ʊə/ — tour, pure", vi: "Trượt 'u → ơ'; ngày càng hiếm.", ipa: "/tʊə/ /pjʊə/", example: "It's a pure, quiet tour." },
-      // ── CẶP ÂM DỄ NHẦM (minimal pairs) — luyện tai phân biệt, lỗi phổ biến của người Việt ──
-      { en: "ship ↔ sheep (/ɪ/ ↔ /iː/)", vi: "Nguyên âm NGẮN vs DÀI — đừng đọc giống nhau.", ipa: "/ʃɪp/ ↔ /ʃiːp/", example: "The sheep is on the ship." },
-      { en: "bad ↔ bed (/æ/ ↔ /e/)", vi: "Miệng MỞ RỘNG vs gọn.", ipa: "/bæd/ ↔ /bed/", example: "This bed is not bad." },
-      { en: "think ↔ sink (/θ/ ↔ /s/)", vi: "Lưỡi GIỮA hai răng vs sau răng.", ipa: "/θɪŋk/ ↔ /sɪŋk/", example: "I think it will sink." },
-      { en: "they ↔ day (/ð/ ↔ /d/)", vi: "Âm XÁT (rung, hơi ra) vs âm TẮC.", ipa: "/ðeɪ/ ↔ /deɪ/", example: "They arrived that day." },
-      { en: "very ↔ berry (/v/ ↔ /b/)", vi: "Răng chạm môi (/v/) vs hai môi (/b/).", ipa: "/ˈveri/ ↔ /ˈberi/", example: "This berry is very sweet." },
-      { en: "right ↔ light (/r/ ↔ /l/)", vi: "Cong lưỡi KHÔNG chạm (/r/) vs chạm lợi (/l/).", ipa: "/raɪt/ ↔ /laɪt/", example: "Turn right at the light." },
-      { en: "ice ↔ eyes (/s/ ↔ /z/ cuối)", vi: "Âm cuối VÔ THANH vs HỮU THANH (đừng bỏ rung).", ipa: "/aɪs/ ↔ /aɪz/", example: "The ice hurt my eyes." },
-      { en: "sin ↔ sing (/n/ ↔ /ŋ/)", vi: "Âm cuối /n/ vs /ŋ/ — đừng nuốt 'ng'.", ipa: "/sɪn/ ↔ /sɪŋ/", example: "It's a sin not to sing." },
-    ],
+    phrases: ipaSoundPhrases(),
   },
   "describe-compare": {
     slug: "describe-compare",
@@ -1579,6 +1541,64 @@ export const lessonContent: Record<string, LessonContent> = {
       { en: "He said he had finished.", vi: "Anh ấy nói đã làm xong.", ipa: "/hiː sed hiː hæd ˈfɪnɪʃt/", example: "He said he had finished the report." },
       { en: "They told us not to worry.", vi: "Họ bảo chúng tôi đừng lo.", ipa: "/ðeɪ təʊld ʌs nɒt tə ˈwʌri/", example: "They told us not to worry about the delay." },
       { en: "She said she would call back.", vi: "Cô ấy nói sẽ gọi lại.", ipa: "/ʃiː sed ʃiː wʊd kɔːl bæk/", example: "She said she would call back in an hour." },
+    ],
+  },
+
+  // ───────────────────────── B2 · NGỮ PHÁP NÂNG CAO ─────────────────────────
+  "narrative-tenses": {
+    slug: "narrative-tenses",
+    title: "Thì kể chuyện",
+    cefr: "B2",
+    intro: "Kể chuyện mạch lạc bằng cách phối hợp quá khứ đơn, quá khứ tiếp diễn và quá khứ hoàn thành (việc xảy ra trước/sau, bối cảnh & ngắt quãng).",
+    tip: "Quá khứ tiếp diễn = bối cảnh đang diễn ra; quá khứ đơn = việc xen vào; quá khứ hoàn thành = việc xảy ra TRƯỚC đó.",
+    phrases: [
+      { en: "I was walking home when…", vi: "Tôi đang đi bộ về thì…", ipa: "/aɪ wɒz ˈwɔːkɪŋ həʊm wen/", example: "I was walking home when it started to rain." },
+      { en: "By the time we arrived, …", vi: "Đến lúc chúng tôi tới thì…", ipa: "/baɪ ðə taɪm wiː əˈraɪvd/", example: "By the time we arrived, the show had started." },
+      { en: "She had already left.", vi: "Cô ấy đã rời đi rồi.", ipa: "/ʃiː hæd ɔːlˈredi left/", example: "When I called, she had already left." },
+      { en: "It had been raining all day.", vi: "Trời đã mưa cả ngày.", ipa: "/ɪt hæd bɪn ˈreɪnɪŋ ɔːl deɪ/", example: "The ground was wet — it had been raining all day." },
+      { en: "While I was cooking, …", vi: "Trong lúc tôi đang nấu ăn,…", ipa: "/waɪl aɪ wɒz ˈkʊkɪŋ/", example: "While I was cooking, the phone rang." },
+      { en: "As soon as I saw him, …", vi: "Ngay khi tôi thấy anh ấy,…", ipa: "/əz suːn əz aɪ sɔː hɪm/", example: "As soon as I saw him, I knew something was wrong." },
+      { en: "We had been waiting for hours.", vi: "Chúng tôi đã đợi hàng giờ.", ipa: "/wiː hæd bɪn ˈweɪtɪŋ fər ˈaʊəz/", example: "We had been waiting for hours before the bus came." },
+      { en: "Suddenly, everything went quiet.", vi: "Đột nhiên, mọi thứ im bặt.", ipa: "/ˈsʌdnli ˈevriθɪŋ went ˈkwaɪət/", example: "Suddenly, everything went quiet." },
+      { en: "It turned out (that)…", vi: "Hóa ra là…", ipa: "/ɪt tɜːnd aʊt ðæt/", example: "It turned out that he had known all along." },
+    ],
+  },
+
+  "third-conditional": {
+    slug: "third-conditional",
+    title: "Câu điều kiện loại 3 & hỗn hợp",
+    cefr: "B2",
+    intro: "Nói về điều trái với quá khứ (hối tiếc, giả định đã khác): If + had + V3, would have + V3. Câu hỗn hợp nối quá khứ với hiện tại.",
+    tip: "Loại 3: If + quá khứ hoàn thành → would have + V3. Hỗn hợp: điều kiện quá khứ → kết quả hiện tại (would + V).",
+    phrases: [
+      { en: "If I had known, I would have…", vi: "Nếu tôi biết, tôi đã…", ipa: "/ɪf aɪ həd nəʊn aɪ wʊd həv/", example: "If I had known, I would have told you." },
+      { en: "I wouldn't have done that.", vi: "Tôi đã không làm thế (nếu…).", ipa: "/aɪ ˈwʊdnt həv dʌn ðæt/", example: "I wouldn't have said anything if I'd known." },
+      { en: "She would have passed if…", vi: "Cô ấy đã đậu nếu…", ipa: "/ʃiː wʊd həv pɑːst ɪf/", example: "She would have passed if she had studied." },
+      { en: "We could have won if…", vi: "Chúng tôi đã có thể thắng nếu…", ipa: "/wiː kʊd həv wʌn ɪf/", example: "We could have won if we'd played better." },
+      { en: "If it hadn't rained, …", vi: "Nếu trời không mưa thì…", ipa: "/ɪf ɪt ˈhædnt reɪnd/", example: "If it hadn't rained, we would have gone out." },
+      { en: "You should have told me.", vi: "Lẽ ra bạn nên nói với tôi.", ipa: "/juː ʃʊd həv təʊld miː/", example: "You should have told me earlier." },
+      { en: "What would you have done?", vi: "Bạn sẽ đã làm gì (lúc đó)?", ipa: "/wɒt wʊd juː həv dʌn/", example: "What would you have done in my place?" },
+      { en: "If I'd been there, I would have helped.", vi: "Nếu tôi ở đó, tôi đã giúp.", ipa: "/ɪf aɪd bɪn ðeə aɪ wʊd həv helpt/", example: "If I'd been there, I would have helped you." },
+      { en: "If I had saved more, I'd be richer now.", vi: "Nếu tôi tiết kiệm hơn, giờ đã giàu hơn. (hỗn hợp)", ipa: "/ɪf aɪ həd seɪvd mɔː aɪd biː ˈrɪtʃə naʊ/", example: "If I had saved more, I'd be richer now." },
+    ],
+  },
+
+  "relative-clauses": {
+    slug: "relative-clauses",
+    title: "Mệnh đề quan hệ",
+    cefr: "B2",
+    intro: "Nối câu và bổ sung thông tin cho danh từ bằng who/which/that/whose/where/when — nói câu dài, mạch lạc, tự nhiên hơn.",
+    tip: "who = người · which = vật · that = cả hai (mệnh đề xác định) · whose = sở hữu · where = nơi chốn. Có thể lược 'that/which' khi nó là tân ngữ.",
+    phrases: [
+      { en: "the person who…", vi: "người mà…", ipa: "/ðə ˈpɜːsn huː/", example: "She's the person who helped me." },
+      { en: "the thing that…", vi: "điều/thứ mà…", ipa: "/ðə θɪŋ ðæt/", example: "That's the thing that worries me." },
+      { en: "the place where…", vi: "nơi mà…", ipa: "/ðə pleɪs weə/", example: "This is the place where we first met." },
+      { en: "the reason why…", vi: "lý do mà…", ipa: "/ðə ˈriːzn waɪ/", example: "Tell me the reason why you left." },
+      { en: "…, which is…", vi: "…, điều mà… (bổ sung)", ipa: "/wɪtʃ ɪz/", example: "He arrived late, which annoyed everyone." },
+      { en: "the man whose…", vi: "người đàn ông mà (sở hữu)…", ipa: "/ðə mæn huːz/", example: "That's the man whose car was stolen." },
+      { en: "the day when…", vi: "ngày mà…", ipa: "/ðə deɪ wen/", example: "I remember the day when we first met." },
+      { en: "everyone who…", vi: "tất cả những ai…", ipa: "/ˈevriwʌn huː/", example: "Everyone who came enjoyed the party." },
+      { en: "the book (that) I read", vi: "cuốn sách (mà) tôi đọc", ipa: "/ðə bʊk ðæt aɪ red/", example: "The book I read last week was great." },
     ],
   },
 };

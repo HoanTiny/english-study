@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { fetchLesson, type LessonContentDB } from "@/lib/lessonsRepo";
 import { useAuth } from "@/lib/auth";
 import { addNote, listNotes } from "@/lib/notesRepo";
@@ -19,7 +19,13 @@ function audioSrc(path: string) {
 export default function LessonPage() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
+  const router = useRouter();
   const { userId, ready } = useAuth();
+
+  // IPA đã gộp về trang luyện tương tác /ipa → chuyển hướng, không hiển thị bản trùng.
+  useEffect(() => {
+    if (slug === "ipa-sounds") router.replace("/ipa");
+  }, [slug, router]);
 
   // Nội dung bài: đọc từ DB (CMS) trước, fallback file tĩnh.
   const [lesson, setLesson] = useState<LessonContentDB | undefined>(undefined);
@@ -115,6 +121,15 @@ export default function LessonPage() {
     } finally {
       setBusy(null);
     }
+  }
+
+  if (slug === "ipa-sounds") {
+    return (
+      <main className="mx-auto max-w-2xl px-5 py-32 text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+        <p className="mt-4 text-xs font-black uppercase tracking-wider text-muted">Đang mở trang luyện IPA…</p>
+      </main>
+    );
   }
 
   if (lessonLoading) {

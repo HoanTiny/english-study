@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { IPA_SOUNDS, MINIMAL_PAIRS, TYPE_LABEL, type IpaSound, type SoundType } from "@/data/ipa";
+import { IPA_SOUNDS, MINIMAL_PAIRS, TYPE_LABEL, IPA_VIDEO, type IpaSound, type SoundType } from "@/data/ipa";
 import { fetchPronounce } from "@/lib/pronounce";
 import WordCardDeck from "@/components/WordCardDeck";
 
-type Mode = "chart" | "shadow" | "discriminate";
+type Mode = "chart" | "shadow" | "discriminate" | "quiz";
 
 // Phát âm 1 từ: ưu tiên audio người bản xứ (Free Dictionary), fallback TTS.
 async function playWord(word: string) {
@@ -48,11 +48,12 @@ export default function IpaPage() {
       </div>
 
       {/* Tabs — segmented control */}
-      <div className="mb-7 grid grid-cols-3 gap-1 rounded-2xl border border-border/60 bg-black/[0.03] p-1 dark:bg-white/5">
+      <div className="mb-7 grid grid-cols-4 gap-1 rounded-2xl border border-border/60 bg-black/[0.03] p-1 dark:bg-white/5">
         {([
           ["chart", "📋", "Bảng 44 âm"],
           ["shadow", "🎧", "Nghe & nhại"],
           ["discriminate", "🎯", "Phân biệt"],
+          ["quiz", "📝", "Kiểm tra"],
         ] as [Mode, string, string][]).map(([m, icon, label]) => (
           <button
             key={m}
@@ -71,6 +72,7 @@ export default function IpaPage() {
       {mode === "chart" && <ChartMode />}
       {mode === "shadow" && <ShadowMode />}
       {mode === "discriminate" && <DiscriminateMode />}
+      {mode === "quiz" && <QuizMode />}
     </main>
   );
 }
@@ -121,7 +123,7 @@ function ChartMode() {
           onClick={() => setSel(null)}
         >
           <div
-            className="relative w-full rounded-t-3xl border border-black/5 bg-white px-6 pb-7 pt-8 shadow-2xl dark:border-white/10 dark:bg-zinc-900 sm:max-w-sm sm:rounded-3xl"
+            className="relative max-h-[90vh] w-full overflow-y-auto overscroll-contain rounded-t-3xl border border-black/5 bg-white px-6 pb-7 pt-8 shadow-2xl dark:border-white/10 dark:bg-zinc-900 sm:max-h-[88vh] sm:max-w-lg sm:rounded-3xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button onClick={() => setSel(null)} className="absolute right-3.5 top-3.5 flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:bg-black/5 dark:hover:bg-white/10" aria-label="Đóng">✕</button>
@@ -141,6 +143,28 @@ function ChartMode() {
             <button onClick={() => playWord(sel.words[0])} className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-black text-primary-fg shadow-md shadow-primary/20 transition-transform active:scale-95">
               🔊 Nghe âm mẫu
             </button>
+
+            {/* Video khẩu hình để shadow: nhúng iframe nếu có videoId, ngược lại mở tìm kiếm YouTube (luôn sống) */}
+            {IPA_VIDEO[sel.symbol] ? (
+              <div className="mt-4 aspect-video w-full overflow-hidden rounded-2xl border border-black/10 shadow-sm dark:border-white/10">
+                <iframe
+                  className="h-full w-full"
+                  src={`https://www.youtube-nocookie.com/embed/${IPA_VIDEO[sel.symbol]}`}
+                  title={`Khẩu hình âm ${sel.symbol}`}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <a
+                href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`BBC Learning English the sounds of English ${sel.symbol}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-white/60 py-3 text-xs font-black text-foreground transition-colors hover:border-primary/40 dark:bg-white/5"
+              >
+                🎬 Xem video khẩu hình để nhại (YouTube)
+              </a>
+            )}
 
             {/* Từ ví dụ — bộ thẻ trượt (mỗi từ + IPA + câu ví dụ, vuốt để chuyển) */}
             <p className="mt-5 text-center text-[10px] font-black uppercase tracking-wider text-muted">Luyện nghe từ ví dụ · vuốt để chuyển</p>
@@ -334,6 +358,182 @@ function DiscriminateMode() {
       </div>
 
       <p className="text-center text-[11px] font-medium text-muted">💡 Bấm 🔊 nghe rồi chọn — luyện TAI phân biệt trước (phương pháp HVPT). Nghe lại nhiều lần nếu cần.</p>
+    </div>
+  );
+}
+
+// ============ CHẾ ĐỘ 4: KIỂM TRA (hữu hạn, có điểm — nhận âm + phân biệt cặp) ============
+// 2 dạng câu: "sound" = âm /X/ có trong từ nào · "pair" = nghe → chọn từ trong cặp dễ nhầm.
+type QuizQ =
+  | { kind: "sound"; symbol: string; tip: string; answer: string; options: string[] }
+  | { kind: "pair"; label: string; tip: string; answer: string; options: string[] };
+
+function shuffleArr<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function QuizMode() {
+  const QN_SOUND = 6; // câu nhận âm
+  const QN_PAIR = 6; // câu phân biệt cặp dễ nhầm
+  const [started, setStarted] = useState(false);
+  const [qs, setQs] = useState<QuizQ[]>([]);
+  const [idx, setIdx] = useState(0);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [score, setScore] = useState(0);
+  const [done, setDone] = useState(false);
+
+  function buildQuestions(): QuizQ[] {
+    // Dạng A — nhận âm: cho ký hiệu, chọn từ chứa âm đó.
+    const sounds: QuizQ[] = shuffleArr(IPA_SOUNDS)
+      .slice(0, QN_SOUND)
+      .map((s) => {
+        const answer = s.words[0];
+        const distractors = shuffleArr(
+          IPA_SOUNDS.filter((x) => x.symbol !== s.symbol).flatMap((x) => x.words),
+        )
+          .filter((w) => !s.words.includes(w))
+          .slice(0, 3);
+        return { kind: "sound", symbol: s.symbol, tip: s.tip, answer, options: shuffleArr([answer, ...distractors]) };
+      });
+    // Dạng B — phân biệt cặp âm giống nhau: nghe 1 từ trong cặp, chọn đúng từ.
+    const pairs: QuizQ[] = shuffleArr(MINIMAL_PAIRS)
+      .slice(0, QN_PAIR)
+      .map((p) => {
+        const answer = Math.random() < 0.5 ? p.a.word : p.b.word;
+        return { kind: "pair", label: p.sound, tip: p.tip, answer, options: shuffleArr([p.a.word, p.b.word]) };
+      });
+    return shuffleArr([...sounds, ...pairs]);
+  }
+
+  function start() {
+    setQs(buildQuestions());
+    setIdx(0);
+    setPicked(null);
+    setScore(0);
+    setDone(false);
+    setStarted(true);
+  }
+
+  // Câu phân biệt cặp: tự phát từ cần nghe khi chuyển sang câu đó.
+  useEffect(() => {
+    if (started && !done && qs[idx]?.kind === "pair") playWord(qs[idx].answer);
+  }, [idx, started, done, qs]);
+
+  function pick(opt: string) {
+    if (picked) return;
+    setPicked(opt);
+    if (opt === qs[idx].answer) setScore((s) => s + 1);
+    playWord(qs[idx].answer); // nghe lại từ đúng để xác nhận
+  }
+
+  function next() {
+    if (idx + 1 >= qs.length) setDone(true);
+    else {
+      setIdx((i) => i + 1);
+      setPicked(null);
+    }
+  }
+
+  if (!started) {
+    return (
+      <div className="rounded-3xl border border-primary/20 bg-primary-soft/30 p-7 text-center shadow-sm">
+        <p className="text-4xl">📝</p>
+        <p className="mt-2 font-display text-lg font-black text-foreground">Kiểm tra nhận âm</p>
+        <p className="mt-1.5 text-xs font-semibold text-muted leading-relaxed">
+          {QN_SOUND + QN_PAIR} câu trộn 2 dạng: <b>nhận âm</b> (âm /X/ có trong từ nào) và <b>phân biệt cặp âm giống nhau</b> (nghe → chọn đúng từ). Vừa nhớ ký hiệu, vừa luyện tai.
+        </p>
+        <button onClick={start} className="mt-5 rounded-full bg-primary px-7 py-3 text-xs font-black uppercase tracking-wider text-primary-fg active:scale-95">
+          Bắt đầu kiểm tra →
+        </button>
+      </div>
+    );
+  }
+
+  if (done) {
+    const pct = Math.round((score / qs.length) * 100);
+    const great = pct >= 80;
+    return (
+      <div className="rounded-3xl border border-border/60 bg-white/70 p-8 text-center shadow-sm animate-fadeIn dark:bg-zinc-900/60">
+        <p className="text-4xl">{great ? "🎉" : "💪"}</p>
+        <p className="mt-2 font-display text-2xl font-black text-foreground">
+          {score}/{qs.length} <span className="text-base text-muted">({pct}%)</span>
+        </p>
+        <p className="mt-1 text-xs font-semibold text-muted">
+          {great ? "Tuyệt vời! Tai bạn nhận âm tốt." : "Tốt rồi — nghe lại Bảng âm vài lần rồi thử lại nhé."}
+        </p>
+        <button onClick={start} className="mt-5 rounded-full border border-border/80 bg-white/50 px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-muted transition-all hover:border-primary/40 hover:text-foreground active:scale-95 dark:bg-black/30">
+          ↻ Làm lại
+        </button>
+      </div>
+    );
+  }
+
+  const q = qs[idx];
+  return (
+    <div className="rounded-3xl border border-border/60 bg-white/70 p-6 shadow-sm dark:bg-zinc-900/60 sm:p-7">
+      <div className="mb-4 flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
+        <span className="text-muted">Câu {idx + 1}/{qs.length}</span>
+        <span className="text-primary">Điểm: {score}</span>
+      </div>
+
+      {q.kind === "sound" ? (
+        <>
+          <p className="text-xs font-bold uppercase tracking-wider text-muted">Âm nào dưới đây có trong từ?</p>
+          <p className="mt-1 font-display text-4xl font-black text-primary">{q.symbol}</p>
+          <p className="mt-1 text-[11px] font-medium text-muted">{q.tip}</p>
+        </>
+      ) : (
+        <>
+          <p className="text-xs font-bold uppercase tracking-wider text-muted">Nghe và chọn từ bạn nghe được</p>
+          <div className="mt-2 flex items-center gap-3">
+            <button
+              onClick={() => playWord(q.answer)}
+              title="Nghe lại"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl text-primary-fg shadow-md shadow-primary/20 transition-transform hover:scale-105 active:scale-95"
+            >
+              🔊
+            </button>
+            <span className="rounded-full bg-surface px-2.5 py-1 text-[11px] font-black text-muted">{q.label}</span>
+          </div>
+          <p className="mt-2 text-[11px] font-medium text-muted">{q.tip}</p>
+        </>
+      )}
+
+      <div className="mt-5 grid grid-cols-2 gap-2.5">
+        {q.options.map((opt) => {
+          const isAnswer = opt === q.answer;
+          const isPicked = opt === picked;
+          let cls = "border-border/70 bg-white/50 text-foreground hover:border-primary/50 dark:bg-black/20";
+          if (picked) {
+            if (isAnswer) cls = "border-primary bg-primary-soft text-primary";
+            else if (isPicked) cls = "border-pink bg-pink-soft text-pink";
+            else cls = "border-border/40 opacity-60";
+          }
+          return (
+            <button
+              key={opt}
+              onClick={() => pick(opt)}
+              disabled={!!picked}
+              className={`rounded-2xl border-2 px-4 py-3.5 text-center font-display text-base font-black transition-all active:scale-[0.98] ${cls} ${picked ? "cursor-default" : "cursor-pointer"}`}
+            >
+              {opt}
+              {picked && isAnswer && <span className="ml-1.5">✓</span>}
+              {picked && isPicked && !isAnswer && <span className="ml-1.5">✗</span>}
+            </button>
+          );
+        })}
+      </div>
+
+      {picked && (
+        <button onClick={next} className="mt-5 w-full rounded-full bg-primary py-3 text-xs font-black uppercase tracking-wider text-primary-fg active:scale-95">
+          {idx + 1 >= qs.length ? "Xem kết quả →" : "Câu tiếp →"}
+        </button>
+      )}
     </div>
   );
 }
