@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 import DictionaryModal from "./DictionaryModal";
 import Icon3D from "./Icon3D";
 import { useAuth } from "@/lib/auth";
+import { useCmsRole } from "@/lib/adminAuth";
 
 const directLinks = [
   { href: "/", label: "Lộ trình học", icon: "🎯" },
@@ -36,6 +37,7 @@ const resourceLinks = [
 export default function Nav() {
   const pathname = usePathname();
   const { isAnonymous, displayName, email, streak } = useAuth();
+  const cmsRole = useCmsRole(); // 'admin' | 'editor' | null
   const [open, setOpen] = useState(false);
   const [dictOpen, setDictOpen] = useState(false);
 
@@ -152,6 +154,16 @@ export default function Nav() {
 
         {/* Bottom Footer Area */}
         <div className="pt-4 border-t border-border/40 space-y-4">
+          {/* Quản trị CMS — chỉ admin/editor */}
+          {cmsRole && (
+            <Link
+              href="/admin/lessons"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary-soft/60 py-2.5 text-[11px] font-black uppercase tracking-wider text-primary transition-all duration-300 hover:border-primary/60 hover:bg-primary-soft active:scale-98 shadow-sm"
+            >
+              🛠️ <span>{cmsRole === "admin" ? "Trang quản trị" : "Quản trị nội dung"}</span>
+            </Link>
+          )}
+
           {/* Policy Links */}
           <div className="flex justify-between px-3 text-[9px] font-bold text-muted/60 hover:text-muted/95 transition-colors">
             <Link href="/privacy" className="hover:underline">Chính sách bảo mật</Link>

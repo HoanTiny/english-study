@@ -29,12 +29,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // suppressHydrationWarning ở <html>/<body>: tiện ích trình duyệt (Cốc Cốc, dịch trang,
+  // Grammarly…) hay theme thường chèn/sửa thuộc tính thẻ gốc trước khi React hydrate.
+  // Chỉ áp dụng cho chính thẻ đó (1 cấp), KHÔNG giấu mismatch trong nội dung app.
   return (
     <html
       lang="vi"
+      suppressHydrationWarning
       className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground transition-colors duration-500 relative">
+      <body
+        suppressHydrationWarning
+        className="min-h-full bg-background text-foreground transition-colors duration-500 relative"
+      >
         {/* Background fluid blobs for visual depth behind glassmorphism */}
         <div className="fluid-blob-container">
           <div className="fluid-blob blob-primary" />

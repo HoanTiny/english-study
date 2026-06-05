@@ -1,21 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin, adminConfigured, checkAdmin } from "@/lib/server/supabaseAdmin";
+import { supabaseAdmin, adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 import { parseVideoId, hasCaptions, getMeta } from "@/lib/server/youtube";
 
 export const runtime = "nodejs";
 
 const COLS = "id, video_id, title, channel, topic, level, cc, hidden, sort_order";
 
-function guard(req: Request): NextResponse | null {
+async function guard(req: Request): Promise<NextResponse | null> {
   if (!adminConfigured())
-    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY / ADMIN_PASSCODE." }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY ." }, { status: 503 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
   return null;
 }
 
 // GET — danh sách toàn bộ (gồm cả ẩn) cho CMS.
 export async function GET(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const { data, error } = await supabaseAdmin()
     .from("listen_videos")
@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
 
 // POST — action: create | reorder | recheck
 export async function POST(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const body = await req.json().catch(() => ({}));
   const db = supabaseAdmin();
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
 // PATCH — sửa 1 video (title/channel/topic/level/cc/hidden)
 export async function PATCH(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const body = await req.json().catch(() => ({}));
   if (!body.id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });
@@ -115,7 +115,7 @@ export async function PATCH(req: NextRequest) {
 
 // DELETE — ?id=
 export async function DELETE(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const id = req.nextUrl.searchParams.get("id");
   if (!id) return NextResponse.json({ error: "Thiếu id." }, { status: 400 });

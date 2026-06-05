@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin, adminConfigured, checkAdmin } from "@/lib/server/supabaseAdmin";
+import { supabaseAdmin, adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 
 export const runtime = "nodejs";
 
@@ -8,7 +8,7 @@ const BUCKET = "lesson-audio"; // dùng chung bucket private (ảnh + audio)
 // POST (multipart): file + folder? → upload, trả về { path }. KHÔNG ghi DB.
 export async function POST(req: NextRequest) {
   if (!adminConfigured()) return NextResponse.json({ error: "unconfigured" }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
 
   const form = await req.formData().catch(() => null);
   if (!form) return NextResponse.json({ error: "Form không hợp lệ." }, { status: 400 });

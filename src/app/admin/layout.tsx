@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminAuthProvider, useAdminAuth } from "@/lib/adminAuth";
+import { supabase } from "@/lib/supabase";
 
 const NAV = [
   { href: "/admin/lessons", label: "Bài học", icon: "📘", desc: "Nội dung & audio" },
@@ -11,59 +12,63 @@ const NAV = [
   { href: "/admin/listening", label: "Video nghe", icon: "🎧", desc: "Kho YouTube" },
 ];
 
-function LoginScreen() {
-  const { login, error } = useAdminAuth();
-  const [val, setVal] = useState("");
-  const [busy, setBusy] = useState(false);
-  
-  async function submit() {
-    if (!val.trim()) return;
-    setBusy(true);
-    await login(val.trim());
-    setBusy(false);
+async function adminSignOut(redirect: string) {
+  try {
+    await supabase.auth.signOut();
+  } catch {
+    /* ignore */
   }
+  window.location.href = redirect;
+}
+
+function AccessScreen() {
+  const { email } = useAdminAuth();
+  const loggedIn = !!email;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#09090b] px-5 select-none font-sans">
       <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#161619] p-8 shadow-2xl text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-        
+
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 text-2xl relative z-1">
-          🔐
-        </div>
-        
-        <div className="relative z-1 space-y-1">
-          <h1 className="font-display text-xl font-black text-white">SpeakUp CMS</h1>
-          <p className="text-[11px] font-bold text-muted">Đăng nhập quản trị nội dung</p>
+          {loggedIn ? "🚫" : "🔐"}
         </div>
 
-        <div className="relative z-1 mt-6">
-          <input
-            type="password"
-            value={val}
-            onChange={(e) => setVal(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && submit()}
-            placeholder="Mật mã admin"
-            autoFocus
-            className="w-full rounded-2xl border-2 border-white/10 bg-black/25 px-4 py-3 text-xs font-bold text-white outline-none focus:border-primary placeholder:text-muted/65 transition-all shadow-inner"
-          />
-          {error && (
-            <p className="mt-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 px-3.5 py-2 text-xs font-bold text-rose-400">
-              {error}
-            </p>
+        <div className="relative z-1 space-y-1">
+          <h1 className="font-display text-xl font-black text-white">SpeakUp CMS</h1>
+          <p className="text-[11px] font-bold text-muted">Quản trị nội dung — chỉ tài khoản admin</p>
+        </div>
+
+        <div className="relative z-1 mt-6 space-y-4">
+          {loggedIn ? (
+            <>
+              <p className="rounded-xl bg-rose-500/10 border border-rose-500/20 px-3.5 py-3 text-xs font-bold text-rose-400 leading-relaxed">
+                Tài khoản <b className="text-rose-300">{email}</b> không có quyền quản trị.
+              </p>
+              <button
+                onClick={() => adminSignOut("/login")}
+                className="w-full rounded-2xl bg-primary py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg transition-all hover:opacity-90 active:scale-98 shadow-lg shadow-primary/25 cursor-pointer"
+              >
+                Đăng nhập tài khoản khác →
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-xs font-semibold text-muted leading-relaxed">
+                Vui lòng đăng nhập bằng tài khoản admin để vào CMS.
+              </p>
+              <Link
+                href="/login"
+                className="block w-full rounded-2xl bg-primary py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg transition-all hover:opacity-90 active:scale-98 shadow-lg shadow-primary/25"
+              >
+                Đăng nhập →
+              </Link>
+            </>
           )}
-          
-          <button
-            onClick={submit}
-            disabled={busy || !val.trim()}
-            className="mt-4 w-full rounded-2xl bg-primary py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg transition-all hover:opacity-90 active:scale-98 disabled:opacity-40 shadow-lg shadow-primary/25 cursor-pointer"
-          >
-            {busy ? "Đang kiểm tra…" : "Vào CMS →"}
-          </button>
-          
+
           <Link
             href="/"
-            className="mt-4 inline-block text-[10px] font-bold text-muted hover:text-white transition-colors"
+            className="mt-1 inline-block text-[10px] font-bold text-muted hover:text-white transition-colors"
           >
             ← Quay lại ứng dụng chính
           </Link>
@@ -74,10 +79,14 @@ function LoginScreen() {
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
-  const { logout } = useAdminAuth();
   const pathname = usePathname();
+  const { isAdmin } = useAdminAuth();
   const [open, setOpen] = useState(false);
-  const current = NAV.find((n) => pathname === n.href || pathname?.startsWith(n.href + "/"));
+  // Mục "Tài khoản" chỉ dành cho admin (editor không quản lý được tài khoản).
+  const nav = isAdmin
+    ? [...NAV, { href: "/admin/users", label: "Tài khoản", icon: "👥", desc: "Phân quyền" }]
+    : NAV;
+  const current = nav.find((n) => pathname === n.href || pathname?.startsWith(n.href + "/"));
 
   return (
     <div className="dark min-h-screen bg-[#09090b] text-[#f8fafc] font-sans">
@@ -100,7 +109,7 @@ function Shell({ children }: { children: React.ReactNode }) {
 
         {/* Sidebar Nav */}
         <nav className="flex flex-col gap-1.5 flex-1">
-          {NAV.map((n) => {
+          {nav.map((n) => {
             const active = pathname === n.href || pathname?.startsWith(n.href + "/");
             return (
               <Link
@@ -135,7 +144,7 @@ function Shell({ children }: { children: React.ReactNode }) {
             ← Về ứng dụng
           </Link>
           <button
-            onClick={logout}
+            onClick={() => adminSignOut("/")}
             className="rounded-xl px-3 py-2 text-left text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-500/10 active:scale-98 transition-all cursor-pointer"
           >
             Đăng xuất
@@ -156,7 +165,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         <span className="font-display text-xs font-black text-white">
           SpeakUp CMS · {current?.label}
         </span>
-        <button onClick={logout} className="text-[10px] font-black uppercase tracking-wider text-rose-500">
+        <button onClick={() => adminSignOut("/")} className="text-[10px] font-black uppercase tracking-wider text-rose-500">
           Thoát
         </button>
       </header>
@@ -164,7 +173,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       {/* Mobile Drawer Menu */}
       {open && (
         <div className="border-b border-white/5 bg-[#161619] p-3 md:hidden space-y-1 select-none">
-          {NAV.map((n) => (
+          {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
@@ -218,7 +227,7 @@ function Gate({ children }: { children: React.ReactNode }) {
     );
   }
   
-  if (!authed) return <LoginScreen />;
+  if (!authed) return <AccessScreen />;
   return <Shell>{children}</Shell>;
 }
 

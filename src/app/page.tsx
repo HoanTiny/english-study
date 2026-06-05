@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useAuth } from "@/lib/auth";
+import { useCmsRole } from "@/lib/adminAuth";
 import RoadmapPath from "@/components/RoadmapPath";
 
 export default function Home() {
   const { displayName, isAnonymous, streak } = useAuth();
+  const cmsRole = useCmsRole(); // 'admin' | 'editor' | null
   const firstName = displayName ? displayName.trim().split(/\s+/).pop() : "";
   const greeting = !isAnonymous && firstName ? `Chào ${firstName} 👋` : "Lộ trình học của bạn";
 
@@ -34,6 +36,14 @@ export default function Home() {
               >
                 Bảng điều khiển
               </Link>
+              {cmsRole && (
+                <Link
+                  href="/admin/lessons"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary-soft/60 px-7 py-3.5 text-xs font-black uppercase tracking-wider text-primary transition-all hover:border-primary/60 hover:scale-[1.02] active:scale-95 shadow-sm"
+                >
+                  🛠️ {cmsRole === "admin" ? "Trang quản trị" : "Quản trị nội dung"}
+                </Link>
+              )}
             </div>
           </div>
 

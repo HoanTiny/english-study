@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin, adminConfigured, checkAdmin } from "@/lib/server/supabaseAdmin";
+import { supabaseAdmin, adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 
 export const runtime = "nodejs";
 
-function guard(req: Request): NextResponse | null {
+async function guard(req: Request): Promise<NextResponse | null> {
   if (!adminConfigured())
-    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY / ADMIN_PASSCODE." }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY ." }, { status: 503 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
   return null;
 }
 
 // GET — danh sách bài (gồm ẩn) + số cụm.
 export async function GET(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const db = supabaseAdmin();
   const slug = new URL(req.url).searchParams.get("slug");
@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 
 // POST — { action: "saveLesson" | "savePhrases" | "delete" | "toggleVisible", ... }
 export async function POST(req: NextRequest) {
-  const g = guard(req);
+  const g = await guard(req);
   if (g) return g;
   const db = supabaseAdmin();
   const body = await req.json().catch(() => ({}));

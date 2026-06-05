@@ -25,12 +25,15 @@ import { shadowItems } from "@/lib/content";
 
 const TEAL = "var(--primary)";
 
+// Thẻ kính frosted tối giản — đồng bộ với Bảng điều khiển & Nhiệm vụ hôm nay.
+const GLASS =
+  "rounded-3xl border border-white/60 bg-white/55 shadow-[0_10px_40px_-14px_rgba(70,70,110,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none";
+
 function StatBlock({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex flex-col bg-white/30 dark:bg-black/20 border border-border/80 p-5 rounded-2xl shadow-sm min-w-[130px] relative overflow-hidden flex-1 transition-all duration-300 hover:scale-[1.02]">
-      <div className="absolute top-0 right-0 w-12 h-12 bg-primary/5 rounded-full filter blur-md pointer-events-none" />
-      <span className="font-display text-4xl font-black text-foreground tracking-tight">{value}</span>
-      <span className="mt-2 text-[9px] font-black uppercase tracking-wider text-muted leading-tight">{label}</span>
+    <div className="min-w-[120px] flex-1 rounded-2xl border border-border/50 bg-white/45 px-5 py-4 backdrop-blur-md dark:bg-white/5">
+      <span className="font-display text-3xl font-black tracking-tight text-foreground">{value}</span>
+      <p className="mt-1.5 text-[9px] font-black uppercase tracking-wider text-muted leading-tight">{label}</p>
     </div>
   );
 }
@@ -47,25 +50,22 @@ function ActivityRow({
   rows: { k: string; v: string }[];
 }) {
   return (
-    <div className="flex items-start gap-4 bg-white/20 dark:bg-black/10 border border-border/85 p-5 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-md">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-soft border border-primary/10 text-2xl shadow-sm">
-        {emoji}
+    <div className="rounded-2xl border border-border/50 bg-white/40 p-5 backdrop-blur-md dark:bg-white/5">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <h3 className="flex items-center gap-2 font-display text-sm font-extrabold text-foreground">
+          <span className="text-lg">{emoji}</span> {name}
+        </h3>
+        <span className="rounded-full border border-primary/20 bg-primary-soft/60 px-3 py-0.5 text-[9px] font-black uppercase tracking-wider text-primary">
+          {tag}
+        </span>
       </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center justify-between gap-2 border-b border-border/40 pb-2 mb-3">
-          <h3 className="font-display text-base font-extrabold text-foreground">{name}</h3>
-          <span className="rounded-full bg-pink-soft/80 border border-pink/20 px-3 py-0.5 text-[9px] font-black uppercase tracking-wider text-pink shadow-sm">
-            {tag}
-          </span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-          {rows.map((r) => (
-            <div key={r.k} className="bg-white/40 dark:bg-slate-900/30 border border-border/80 px-3.5 py-2 rounded-xl text-center shadow-inner">
-              <p className="text-base font-black text-foreground tracking-tight">{r.v}</p>
-              <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-0.5">{r.k}</p>
-            </div>
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-2.5">
+        {rows.map((r) => (
+          <div key={r.k} className="min-w-[88px] flex-1 rounded-xl border border-border/40 bg-white/40 px-3 py-2 text-center dark:bg-black/20">
+            <p className="font-display text-base font-black tracking-tight text-foreground">{r.v}</p>
+            <p className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-muted">{r.k}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -178,8 +178,7 @@ export default function StatisticsPage() {
         </div>
       ) : !userId ? (
         <div className="mx-auto max-w-xl">
-          <div className="liquid-glass-card flex flex-col items-center gap-5 p-10 text-center relative overflow-hidden border border-border/80 shadow-2xl">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
+          <div className={`${GLASS} flex flex-col items-center gap-5 p-10 text-center`}>
             <span className="text-6xl animate-bounce">📊</span>
             <h2 className="font-display text-2xl font-black text-foreground">Chưa có thống kê 😕</h2>
             <p className="max-w-sm font-semibold text-muted text-xs sm:text-sm leading-relaxed">
@@ -194,7 +193,7 @@ export default function StatisticsPage() {
         <div className="space-y-8">
         <div className="grid gap-8 lg:grid-cols-12 items-start">
           {/* Cột trái: số liệu (7 cols) */}
-          <div className="liquid-glass-card p-6 sm:p-8 border border-border/80 shadow-xl lg:col-span-7 space-y-6">
+          <div className={`${GLASS} p-6 sm:p-8 lg:col-span-7 space-y-6`}>
             <div>
               <h2 className="font-display text-2xl sm:text-3xl font-black text-foreground tracking-tight">
                 {tab === "day" ? "Thống kê hôm nay" : "Thống kê tổng quan"}
@@ -237,7 +236,7 @@ export default function StatisticsPage() {
           </div>
 
           {/* Cột phải: biểu đồ (5 cols) */}
-          <div className="liquid-glass-card flex flex-col p-6 sm:p-8 border border-border/80 shadow-xl lg:col-span-5 min-h-[420px]">
+          <div className={`${GLASS} flex flex-col p-6 sm:p-8 lg:col-span-5 min-h-[420px]`}>
             <div>
               <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">Điểm phát âm</h3>
               <p className="mt-1 mb-6 text-xs font-semibold text-muted">
@@ -289,7 +288,7 @@ export default function StatisticsPage() {
         </div>
 
         {/* Dòng thời gian hoạt động 14 ngày gần nhất (dữ liệu thật) */}
-        <div className="liquid-glass-card p-6 sm:p-8 border border-border/80 shadow-xl">
+        <div className={`${GLASS} p-6 sm:p-8`}>
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">

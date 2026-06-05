@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminConfigured, checkAdmin } from "@/lib/server/supabaseAdmin";
+import { adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 import { anthropicConfigured, anthropicVision } from "@/lib/server/anthropic";
 import { openaiCompatConfigured, openaiCompatVision } from "@/lib/server/openaiCompat";
@@ -45,7 +45,7 @@ Quy tắc:
 
 export async function POST(req: NextRequest) {
   if (!adminConfigured()) return NextResponse.json({ error: "Chưa cấu hình admin." }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
   if (!anthropicConfigured() && !openaiCompatConfigured() && !geminiConfigured())
     return NextResponse.json({ error: "Chưa cấu hình provider AI nào (ANTHROPIC / OPENAI_COMPAT / GEMINI)." }, { status: 503 });
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabaseAdmin, adminConfigured, checkAdmin } from "@/lib/server/supabaseAdmin";
+import { supabaseAdmin, adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 
 export const runtime = "nodejs";
 
@@ -9,7 +9,7 @@ const BUCKET = "lesson-audio";
 export async function POST(req: NextRequest) {
   if (!adminConfigured())
     return NextResponse.json({ error: "Chưa cấu hình service role / passcode." }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
 
   const form = await req.formData().catch(() => null);
   if (!form) return NextResponse.json({ error: "Form không hợp lệ." }, { status: 400 });
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
 // DELETE (?target=&id=&path=) — gỡ audio.
 export async function DELETE(req: NextRequest) {
   if (!adminConfigured()) return NextResponse.json({ error: "unconfigured" }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+  if (!(await checkCms(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
   const sp = new URL(req.url).searchParams;
   const target = sp.get("target") || "lesson";
   const id = sp.get("id");

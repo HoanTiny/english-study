@@ -141,24 +141,54 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
                   {/* MC */}
                   {ex.type === "mc" && (
                     <div className="mt-2 space-y-1.5">
-                      {(it.options ?? []).map((opt, oi) => (
-                        <label key={oi} className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold cursor-pointer ${submitted && oi === it.answer ? "text-teal-600 dark:text-teal-400" : "text-foreground"}`}>
-                          <input type="radio" disabled={submitted} checked={answers[i] === oi} onChange={() => setAnswers({ ...answers, [i]: oi })} />
-                          {opt}
-                        </label>
-                      ))}
+                      {(it.options ?? []).map((opt, oi) => {
+                        const isAnswer = oi === it.answer; // đáp án đúng
+                        const isPicked = answers[i] === oi; // lựa chọn của người dùng
+                        const isWrongPick = submitted && isPicked && !isAnswer; // chọn sai → giữ màu đỏ
+                        return (
+                          <label
+                            key={oi}
+                            className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-semibold cursor-pointer ${
+                              submitted && isAnswer
+                                ? "text-teal-600 dark:text-teal-400"
+                                : isWrongPick
+                                  ? "text-rose-600 dark:text-rose-400 line-through decoration-rose-400/60"
+                                  : "text-foreground"
+                            }`}
+                          >
+                            <input type="radio" disabled={submitted} checked={isPicked} onChange={() => setAnswers({ ...answers, [i]: oi })} />
+                            {opt}
+                            {isWrongPick && <span className="ml-1 text-[10px] font-black uppercase tracking-wider text-rose-500">bạn chọn</span>}
+                          </label>
+                        );
+                      })}
                     </div>
                   )}
 
                   {/* True/False */}
                   {ex.type === "truefalse" && (
                     <div className="mt-2 flex gap-4">
-                      {[true, false].map((v) => (
-                        <label key={String(v)} className="flex items-center gap-1.5 text-sm font-bold cursor-pointer">
-                          <input type="radio" disabled={submitted} checked={answers[i] === v} onChange={() => setAnswers({ ...answers, [i]: v })} />
-                          {v ? "Đúng (right)" : "Sai (wrong)"}
-                        </label>
-                      ))}
+                      {[true, false].map((v) => {
+                        const isAnswer = v === it.answer;
+                        const isPicked = answers[i] === v;
+                        const isWrongPick = submitted && isPicked && !isAnswer;
+                        return (
+                          <label
+                            key={String(v)}
+                            className={`flex items-center gap-1.5 text-sm font-bold cursor-pointer ${
+                              submitted && isAnswer
+                                ? "text-teal-600 dark:text-teal-400"
+                                : isWrongPick
+                                  ? "text-rose-600 dark:text-rose-400 line-through decoration-rose-400/60"
+                                  : "text-foreground"
+                            }`}
+                          >
+                            <input type="radio" disabled={submitted} checked={isPicked} onChange={() => setAnswers({ ...answers, [i]: v })} />
+                            {v ? "Đúng (right)" : "Sai (wrong)"}
+                            {isWrongPick && <span className="ml-1 text-[10px] font-black uppercase tracking-wider text-rose-500">bạn chọn</span>}
+                          </label>
+                        );
+                      })}
                     </div>
                   )}
 

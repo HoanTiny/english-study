@@ -9,8 +9,8 @@ export const runtime = "nodejs";
 // Idempotent: upsert theo slug, ghi đè phrases. KHÔNG ghi đè audio_url đã có.
 export async function POST(req: NextRequest) {
   if (!adminConfigured())
-    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY / ADMIN_PASSCODE." }, { status: 503 });
-  if (!checkAdmin(req)) return NextResponse.json({ error: "Sai mật mã admin." }, { status: 401 });
+    return NextResponse.json({ error: "Chưa cấu hình SUPABASE_SERVICE_ROLE_KEY ." }, { status: 503 });
+  if (!(await checkAdmin(req))) return NextResponse.json({ error: "Cần đăng nhập bằng tài khoản admin." }, { status: 401 });
 
   const db = supabaseAdmin();
   let lessonCount = 0;
