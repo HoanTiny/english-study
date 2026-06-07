@@ -28,16 +28,13 @@ export default function NotesPage() {
 
   // Tải danh sách khi đã có phiên đăng nhập.
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready) return;
+    if (!userId) { setLoaded(true); return; }
     let active = true;
     listNotes()
-      .then((rows) => {
-        if (active) {
-          setNotes(rows);
-          setLoaded(true);
-        }
-      })
-      .catch((e) => console.error("listNotes", e));
+      .then((rows) => { if (active) setNotes(rows); })
+      .catch((e) => console.error("listNotes", e))
+      .finally(() => { if (active) setLoaded(true); });
     return () => {
       active = false;
     };

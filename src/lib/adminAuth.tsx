@@ -56,8 +56,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         const r = await fetch("/api/admin/ping", { headers: { "x-admin-key": token } });
         const data = (await r.json().catch(() => ({}))) as { role?: "admin" | "editor" };
         if (active) {
-          setAuthed(r.ok);
-          setRole(r.ok ? data.role ?? null : null);
+          setRole(data.role ?? null);
+          setAuthed(!!data.role);
         }
       } catch {
         if (active) {

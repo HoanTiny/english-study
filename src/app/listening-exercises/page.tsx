@@ -16,10 +16,10 @@ export default function ListeningExercisesPage() {
   const [active, setActive] = useState<ListeningExercise | null>(null);
 
   useEffect(() => {
-    listExercises().then((x) => {
-      setAll(x);
-      setLoaded(true);
-    });
+    listExercises()
+      .then((x) => setAll(x))
+      .catch((e) => console.error("listExercises failed", e))
+      .finally(() => setLoaded(true));
   }, []);
 
   const filtered = useMemo(

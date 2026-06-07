@@ -28,11 +28,13 @@ export default function ErrorsPage() {
   const [hideResolved, setHideResolved] = useState(true);
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready) return;
+    if (!userId) { setLoaded(true); return; }
     let active = true;
-    listErrors().then((r) => {
-      if (active) { setRows(r); setLoaded(true); }
-    });
+    listErrors()
+      .then((r) => { if (active) setRows(r); })
+      .catch((e) => console.error("listErrors", e))
+      .finally(() => { if (active) setLoaded(true); });
     return () => { active = false; };
   }, [ready, userId]);
 

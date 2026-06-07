@@ -24,16 +24,17 @@ export default function DashboardPage() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready) return;
+    if (!userId) { setLoaded(true); return; }
     let active = true;
     Promise.all([loadDashboard(today), loadActivityTimeline(today, 7)])
       .then(([s, w]) => {
         if (!active) return;
         setStats(s);
         setWeek(w);
-        setLoaded(true);
       })
-      .catch((e) => console.error("dashboard", e));
+      .catch((e) => console.error("dashboard", e))
+      .finally(() => { if (active) setLoaded(true); });
     return () => {
       active = false;
     };

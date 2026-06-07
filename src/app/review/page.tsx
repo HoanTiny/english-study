@@ -37,16 +37,17 @@ export default function ReviewPage() {
 
   // Tải song song: danh sách note đang ôn + trạng thái SRS từ Supabase.
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready) return;
+    if (!userId) { setLoaded(true); return; }
     let active = true;
     Promise.all([listNotes(), listNoteReviewStates()])
       .then(([ns, states]) => {
         if (!active) return;
         setNotes(ns);
         setSrs(states);
-        setLoaded(true);
       })
-      .catch((e) => console.error("load review", e));
+      .catch((e) => console.error("load review", e))
+      .finally(() => { if (active) setLoaded(true); });
     return () => {
       active = false;
     };
