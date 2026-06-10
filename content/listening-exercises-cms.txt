@@ -1,0 +1,357 @@
+=== EXERCISE ===
+unit: 1
+section: VOA Let's Learn English
+activity: 1
+level: A1
+title: Lesson 1 – Welcome! (Trắc nghiệm)
+type: mc
+instructions: Xem video "Let's Learn English – Lesson 1: Welcome!" (VOA, có trong mục Luyện nghe) rồi chọn đáp án đúng.
+- What is the woman's name? :: Ana | *Anna | Hanna
+- How do you spell her name? :: *A-N-N-A | A-N-A | A-N-N-A-H
+- What address does Pete welcome Anna to? :: *1400 Irving Street | 1500 Irving Street | 1400 Living Street
+- Who meets Anna first? :: Marsha | Jonathan | *Pete
+transcript:
+Pete: Hi! Are you Anna?
+Anna: Yes! Hi there! Are you Pete?
+Pete: I am Pete.
+Anna: Nice to meet you.
+Anna: Let's try that again. I'm Anna. Nice to meet you.
+Pete: I'm Pete. "Anna" Is that A-N-A?
+Anna: No. A-N-N-A
+Pete: Well, Anna with two "n's"... Welcome to... 1400 Irving Street!
+Anna: My new apartment! Yes!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 1. Nội dung VOA thuộc phạm vi công cộng. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html)
+
+=== EXERCISE ===
+unit: 1
+section: VOA Let's Learn English
+activity: 2
+level: A1
+title: Lesson 1 – Welcome! (Điền từ)
+type: fill
+instructions: Nghe lại đoạn hội thoại và điền từ còn thiếu.
+- Hi! ___ you Anna? :: Are
+- Nice to ___ you. :: meet
+- Welcome to 1400 Irving ___! :: Street
+- My new ___! :: apartment
+transcript:
+Pete: Hi! Are you Anna?
+Anna: Yes! Hi there! Are you Pete?
+Pete: I am Pete.
+Anna: Nice to meet you.
+Anna: Let's try that again. I'm Anna. Nice to meet you.
+Pete: I'm Pete. "Anna" Is that A-N-A?
+Anna: No. A-N-N-A
+Pete: Well, Anna with two "n's"... Welcome to... 1400 Irving Street!
+Anna: My new apartment! Yes!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 1. Nội dung VOA thuộc phạm vi công cộng. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html)
+
+=== EXERCISE ===
+unit: 2
+section: VOA Let's Learn English
+activity: 1
+level: A1
+title: Lesson 2 – Hello, I'm Anna! (Trắc nghiệm)
+type: mc
+instructions: Xem video "Lesson 2: Hello, I'm Anna!" (VOA) rồi chọn đáp án đúng.
+- Who is new to D.C.? :: *Anna | Pete | Jonathan
+- Where is Anna from? :: a big city | *a small town | Washington D.C.
+- Which apartment is Jonathan in? :: *B4 | C2 | D7
+- Who is Anna's roommate? :: *Marsha | Pete | Jonathan
+- What must Anna remember to do? :: *call Marsha at work | cook dinner for Pete | clean apartment C2
+transcript:
+Jonathan: Hey, Pete! Who's your friend?
+Pete: She is Anna. She is new to D.C.
+Jonathan: Where are you from?
+Anna: I am from a small town.
+Jonathan: Well, welcome to D.C.
+Anna: Thank you.
+Jonathan: I am Jonathan. I am in apartment B4.
+Anna: I am in apartment C2. Marsha is my roommate.
+Jonathan: I know Marsha. She is nice.
+Pete: And I am in Apartment D7. I have to go now.
+Anna: Oh!
+Pete: Remember to call Marsha at work. Tell her you're here.
+Anna: Right, thanks, Pete. Nice to meet you!
+Jonathan: You too, Bye.
+Anna: Apartment C2, here I come!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 2. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-2-hello/3113733.html)
+
+=== EXERCISE ===
+unit: 2
+section: VOA Let's Learn English
+activity: 2
+level: A1
+title: Lesson 2 – Hello, I'm Anna! (Đúng/Sai)
+type: truefalse
+instructions: Nghe đoạn hội thoại và chọn Đúng hay Sai.
+- Anna is from a small town. :: true
+- Pete lives in apartment C2. :: false
+- Jonathan knows Marsha. :: true
+- Marsha is Anna's sister. :: false
+- Jonathan lives in apartment B4. :: true
+transcript:
+Jonathan: Hey, Pete! Who's your friend?
+Pete: She is Anna. She is new to D.C.
+Jonathan: Where are you from?
+Anna: I am from a small town.
+Jonathan: Well, welcome to D.C.
+Anna: Thank you.
+Jonathan: I am Jonathan. I am in apartment B4.
+Anna: I am in apartment C2. Marsha is my roommate.
+Jonathan: I know Marsha. She is nice.
+Pete: And I am in Apartment D7. I have to go now.
+Anna: Oh!
+Pete: Remember to call Marsha at work. Tell her you're here.
+Anna: Right, thanks, Pete. Nice to meet you!
+Jonathan: You too, Bye.
+Anna: Apartment C2, here I come!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 2. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-2-hello/3113733.html)
+
+=== EXERCISE ===
+unit: 3
+section: VOA Let's Learn English
+activity: 1
+level: A1
+title: Lesson 3 – I'm Here! (Trắc nghiệm)
+type: mc
+instructions: Xem video "Lesson 3: I'm Here!" (VOA) rồi chọn đáp án đúng.
+- What does Anna want to do? :: *cook dinner | go to work | call Pete
+- What is Marsha's work number? :: 555-8689 | *555-8986 | 555-9886
+- What happens on Anna's first call? :: Marsha answers | *she calls the wrong number | nobody answers
+- Where is the supermarket? :: *1500 Irving Street | 1400 Irving Street | 1600 Irving Street
+- Is the supermarket near the apartment? :: *yes, it is near | no, it is far | Marsha does not know
+transcript:
+Anna: I am in my new apartment! Great! I live with Marsha. We're roommates.
+Anna: I want to cook dinner. Oh! Hmmm. Is there a supermarket near here? Marsha knows. Marsha's work number is 555-8986.
+Man: Hello.
+Anna: Hello. Is this Marsha? It is Anna.
+Man: I am sorry. You have the wrong number.
+Anna: Oh. Is this 555-8986?
+Man: No. This is 555-8689.
+Anna: Oh. Excuse me!
+Man: Okay. 'Bye.
+Anna: One more time. 555-8986. Please be Marsha.
+Marsha: Hello. This is Marsha.
+Anna: Yes, Marsha. I want to cook dinner.
+Marsha: Excuse me? Anna? Is that you?
+Anna: Oh, yes. I am here!
+Anna: I want to find a supermarket.
+Marsha: Oh, okay. The supermarket is at 1500 Irving Street. It is near the apartment.
+Anna: Great! Goodbye!
+Marsha: Goodbye, Anna.
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 3. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-3-i-am-here/3126527.html)
+
+=== EXERCISE ===
+unit: 3
+section: VOA Let's Learn English
+activity: 2
+level: A1
+title: Lesson 3 – I'm Here! (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu.
+- Is there a ___ near here? :: supermarket
+- You have the ___ number. :: wrong
+- I want to ___ dinner. :: cook
+- The supermarket is ___ the apartment. :: near
+- We're ___ . (người ở cùng nhà) :: roommates
+transcript:
+Anna: I am in my new apartment! Great! I live with Marsha. We're roommates.
+Anna: I want to cook dinner. Oh! Hmmm. Is there a supermarket near here? Marsha knows. Marsha's work number is 555-8986.
+Man: Hello.
+Anna: Hello. Is this Marsha? It is Anna.
+Man: I am sorry. You have the wrong number.
+Anna: Oh. Is this 555-8986?
+Man: No. This is 555-8689.
+Anna: Oh. Excuse me!
+Man: Okay. 'Bye.
+Anna: One more time. 555-8986. Please be Marsha.
+Marsha: Hello. This is Marsha.
+Anna: Yes, Marsha. I want to cook dinner.
+Marsha: Excuse me? Anna? Is that you?
+Anna: Oh, yes. I am here!
+Anna: I want to find a supermarket.
+Marsha: Oh, okay. The supermarket is at 1500 Irving Street. It is near the apartment.
+Anna: Great! Goodbye!
+Marsha: Goodbye, Anna.
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 3. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-3-i-am-here/3126527.html)
+
+=== EXERCISE ===
+unit: 4
+section: Hội thoại tình huống
+activity: 1
+level: A2
+title: Gọi điện đặt bàn nhà hàng (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hội thoại đặt bàn qua điện thoại rồi chọn đáp án đúng. (Khớp bài học "Gọi điện & nhắn tin" và "Ở nhà hàng")
+- How many people is the table for? :: *two | three | four
+- What time does Linh want? :: seven | *seven thirty | seven forty-five
+- What time does the restaurant offer? :: seven thirty | *seven forty-five | eight
+- Where does Linh want to sit? :: near the door | *by the window | outside
+- How does Linh spell her name? :: L-I-N | *L-I-N-H | L-Y-N-H
+transcript:
+Receptionist: Good evening, Saigon Bistro. How can I help you?
+Linh: Hi, I'd like to book a table for two for tomorrow night.
+Receptionist: Sure. What time would you like?
+Linh: Around seven thirty, please.
+Receptionist: Let me check... I'm sorry, seven thirty is full. We have a table at seven forty-five. Is that okay?
+Linh: That works. Could we sit by the window?
+Receptionist: Of course. What name is it under?
+Linh: Linh. That's L-I-N-H.
+Receptionist: Great. See you tomorrow at seven forty-five, Ms. Linh.
+Linh: Thank you! Bye.
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 4
+section: Hội thoại tình huống
+activity: 2
+level: A2
+title: Gọi điện đặt bàn nhà hàng (Sắp xếp hội thoại)
+type: ordering
+instructions: Sắp xếp các câu sau theo đúng thứ tự hội thoại.
+1. Good evening, Saigon Bistro. How can I help you?
+2. Hi, I'd like to book a table for two for tomorrow night.
+3. Sure. What time would you like?
+4. Around seven thirty, please.
+5. I'm sorry, seven thirty is full. We have a table at seven forty-five.
+6. That works. Could we sit by the window?
+transcript:
+Receptionist: Good evening, Saigon Bistro. How can I help you?
+Linh: Hi, I'd like to book a table for two for tomorrow night.
+Receptionist: Sure. What time would you like?
+Linh: Around seven thirty, please.
+Receptionist: Let me check... I'm sorry, seven thirty is full. We have a table at seven forty-five. Is that okay?
+Linh: That works. Could we sit by the window?
+Receptionist: Of course. What name is it under?
+Linh: Linh. That's L-I-N-H.
+Receptionist: Great. See you tomorrow at seven forty-five, Ms. Linh.
+Linh: Thank you! Bye.
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 5
+section: Hội thoại tình huống
+activity: 1
+level: B1
+title: Nhận phòng khách sạn gặp sự cố (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hội thoại check-in khách sạn rồi chọn đáp án đúng. (Khớp bài học "Khách sạn & chỗ ở")
+- What name is the booking under? :: *Mark Evans | Mark Evant | Max Evans
+- What is the problem? :: the hotel is full | *the system shows a single room instead of a double | the room is dirty
+- How does the hotel fix the problem? :: gives a refund | *upgrades him to a deluxe double at no extra charge | moves him to another hotel
+- When is breakfast served? :: from seven to ten | *from six to ten | from six to nine
+- What does Mark ask for at the end? :: airport pick-up | *a late check-out on Friday | an extra towel
+transcript:
+Receptionist: Good afternoon! Welcome to the Riverside Hotel. How can I help you?
+Mark: Hi, I have a booking under the name Mark Evans.
+Receptionist: Let me see... I'm sorry, I can only find a single room here.
+Mark: That's strange. I booked a double room for three nights. There's been a mix-up with my reservation.
+Receptionist: My apologies, sir. We can upgrade you to a deluxe double at no extra charge.
+Mark: That would be great. Also, is breakfast included?
+Receptionist: Yes, breakfast is served from six to ten on the second floor.
+Mark: Perfect. And could I have a late check-out on Friday?
+Receptionist: That should be fine if you let us know by Thursday evening.
+Mark: Will do. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 5
+section: Hội thoại tình huống
+activity: 2
+level: B1
+title: Nhận phòng khách sạn gặp sự cố (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu.
+- I have a ___ under the name Mark Evans. :: booking
+- There's been a ___ with my reservation. (sự nhầm lẫn) :: mix-up
+- We can ___ you to a deluxe double. (nâng hạng) :: upgrade
+- Is breakfast ___? :: included
+- Could I have a late ___ on Friday? :: check-out
+transcript:
+Receptionist: Good afternoon! Welcome to the Riverside Hotel. How can I help you?
+Mark: Hi, I have a booking under the name Mark Evans.
+Receptionist: Let me see... I'm sorry, I can only find a single room here.
+Mark: That's strange. I booked a double room for three nights. There's been a mix-up with my reservation.
+Receptionist: My apologies, sir. We can upgrade you to a deluxe double at no extra charge.
+Mark: That would be great. Also, is breakfast included?
+Receptionist: Yes, breakfast is served from six to ten on the second floor.
+Mark: Perfect. And could I have a late check-out on Friday?
+Receptionist: That should be fine if you let us know by Thursday evening.
+Mark: Will do. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 6
+section: Hội thoại tình huống
+activity: 1
+level: B1
+title: Phỏng vấn xin việc (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn phỏng vấn rồi chọn đáp án đúng. (Khớp bài học "Phỏng vấn xin việc")
+- How many years of experience does Mai have? :: two | *three | five
+- Why did she leave her last job? :: the salary was low | *the company moved to another city | she had an argument
+- What is her greatest strength? :: she speaks three languages | *she stays calm under pressure | she works very fast
+- Where does she see herself in five years? :: running her own company | *leading a small team | working abroad
+- When can she start? :: next week | *next month | immediately
+transcript:
+Interviewer: Thanks for coming in, Ms. Tran. First, tell me about yourself.
+Mai: Thank you for the opportunity. I have three years of experience in customer service, and I'm looking for a new challenge.
+Interviewer: Why did you leave your last job?
+Mai: The company moved to another city, so I decided to find something closer to home.
+Interviewer: I see. What's your greatest strength?
+Mai: I stay calm under pressure, and I'm a quick learner.
+Interviewer: Where do you see yourself in five years?
+Mai: I'd like to be leading a small team.
+Interviewer: And when can you start?
+Mai: I'm available to start next month.
+Interviewer: Great. Do you have any questions for us?
+Mai: Yes — what does a typical day look like here?
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 6
+section: Hội thoại tình huống
+activity: 2
+level: B1
+title: Phỏng vấn xin việc (Đúng/Sai)
+type: truefalse
+instructions: Nghe lại đoạn phỏng vấn và chọn Đúng hay Sai.
+- Mai has three years of experience in customer service. :: true
+- She left her last job because of the low salary. :: false
+- She says she is a quick learner. :: true
+- In five years she wants to work abroad. :: false
+- She can start next month. :: true
+- She has no questions for the interviewer. :: false
+transcript:
+Interviewer: Thanks for coming in, Ms. Tran. First, tell me about yourself.
+Mai: Thank you for the opportunity. I have three years of experience in customer service, and I'm looking for a new challenge.
+Interviewer: Why did you leave your last job?
+Mai: The company moved to another city, so I decided to find something closer to home.
+Interviewer: I see. What's your greatest strength?
+Mai: I stay calm under pressure, and I'm a quick learner.
+Interviewer: Where do you see yourself in five years?
+Mai: I'd like to be leading a small team.
+Interviewer: And when can you start?
+Mai: I'm available to start next month.
+Interviewer: Great. Do you have any questions for us?
+Mai: Yes — what does a typical day look like here?
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 7
+section: Luyện nói theo mẫu
+activity: 1
+level: B2
+title: Giữ nhịp hội thoại (Nói theo)
+type: speaking
+instructions: Nghe và nói theo từng câu — đây là các cụm giúp giữ nhịp hội thoại tự nhiên. (Khớp bài học "Hội thoại với AI" và video BBC "How to keep conversations flowing")
+- That's a good question. Let me think.
+- Sorry, could you say that more slowly?
+- If I understand correctly, you want me to describe my day.
+- Speaking of which, have you ever tried Vietnamese coffee?
+- Going back to what you said, why do you think that?
+- Let me give you an example.
+- I see it a bit differently.
+- To put it simply, I prefer quiet places.
+  

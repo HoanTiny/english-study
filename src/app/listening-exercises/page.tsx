@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { listExercises, exAudioSrc, type ListeningExercise } from "@/lib/listeningExercisesRepo";
 
 const LEVELS = ["Tất cả", "A1", "A2", "B1", "B2"];
@@ -64,6 +64,159 @@ export default function ListeningExercisesPage() {
   );
 }
 
+// Đọc transcript bằng giọng máy của trình duyệt (Web Speech API) khi bài chưa có
+// file audio. Hội thoại dạng "Tên: câu nói" được đọc lần lượt, đổi cao độ giọng
+// theo từng nhân vật để dễ phân biệt. Các dòng ghi chú trong ngoặc đơn bị bỏ qua.
+// Đọc một câu đơn lẻ bằng giọng máy (dùng cho bài speaking/shadowing).
+function speakLine(text: string) {
+  const synth = window.speechSynthesis;
+  if (!synth) return;
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US";
+  u.rate = 0.9;
+  const voice =
+    synth.getVoices().find((v) => v.lang === "en-US") ??
+    synth.getVoices().find((v) => v.lang.startsWith("en")) ??
+    null;
+  if (voice) u.voice = voice;
+  synth.speak(u);
+}
+
+function TtsPlayer({ transcript }: { transcript: string }) {
+  const [playing, setPlaying] = useState(false);
+  const [idx, setIdx] = useState(0);
+  const playingRef = useRef(false);
+  const idxRef = useRef(0);
+  // Mỗi lần phát/tua là một "phiên" mới — chặn chuỗi onend cũ chạy tiếp sau khi cancel().
+  const genRef = useRef(0);
+
+  const lines = useMemo(
+    () =>
+      transcript
+        .split(/\r?\n/)
+        .map((l) => l.trim())
+        .filter((l) => l && !l.startsWith("(")),
+    [transcript],
+  );
+
+  // Danh sách nhân vật (ổn định cho cả đoạn) để đổi cao độ giọng.
+  const speakers = useMemo(() => {
+    const s: string[] = [];
+    for (const line of lines) {
+      const m = line.match(/^([A-Za-z][A-Za-z .'-]{1,24}):\s*(.+)$/);
+      if (m && !s.includes(m[1].trim())) s.push(m[1].trim());
+    }
+    return s;
+  }, [lines]);
+
+  // Dừng đọc khi rời trang/đổi bài.
+  useEffect(
+    () => () => {
+      playingRef.current = false;
+      window.speechSynthesis?.cancel();
+    },
+    [],
+  );
+
+  function stop() {
+    genRef.current++;
+    playingRef.current = false;
+    window.speechSynthesis?.cancel();
+    setPlaying(false);
+  }
+
+  // Đọc từ câu thứ `from` tới hết (hoặc tới khi bấm Dừng/tua).
+  function playFrom(from: number) {
+    const synth = window.speechSynthesis;
+    if (!synth || lines.length === 0) return;
+    synth.cancel();
+    const voice =
+      synth.getVoices().find((v) => v.lang === "en-US") ??
+      synth.getVoices().find((v) => v.lang.startsWith("en")) ??
+      null;
+    playingRef.current = true;
+    setPlaying(true);
+    const gen = ++genRef.current;
+    const speakAt = (k: number) => {
+      if (!playingRef.current || gen !== genRef.current) return;
+      if (k >= lines.length) {
+        playingRef.current = false;
+        setPlaying(false);
+        return;
+      }
+      idxRef.current = k;
+      setIdx(k);
+      const line = lines[k];
+      const m = line.match(/^([A-Za-z][A-Za-z .'-]{1,24}):\s*(.+)$/);
+      const name = m ? m[1].trim() : "";
+      const text = m ? m[2] : line;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-US";
+      u.rate = 0.92;
+      u.pitch = name ? (speakers.indexOf(name) % 2 === 0 ? 1.05 : 0.8) : 1;
+      if (voice) u.voice = voice;
+      u.onend = () => {
+        if (playingRef.current && gen === genRef.current) speakAt(k + 1);
+      };
+      synth.speak(u);
+    };
+    speakAt(Math.max(0, Math.min(from, lines.length - 1)));
+  }
+
+  // Tua tới câu n: đang phát thì nhảy sang đọc câu đó luôn, đang dừng thì chỉ ghim vị trí.
+  function seek(n: number) {
+    const k = Math.max(0, Math.min(n, lines.length - 1));
+    if (playingRef.current) playFrom(k);
+    else {
+      idxRef.current = k;
+      setIdx(k);
+    }
+  }
+
+  return (
+    <div className="mt-4 rounded-xl border border-border/60 bg-surface/50 px-4 py-3">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => seek(idxRef.current - 1)}
+          title="Câu trước"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-black hover:border-primary/40 active:scale-90 transition-all"
+        >
+          ⏮
+        </button>
+        <button
+          onClick={playing ? stop : () => playFrom(idxRef.current)}
+          className="rounded-full bg-primary px-4 py-2 text-xs font-black text-primary-fg active:scale-95 transition-transform"
+        >
+          {playing ? "⏹ Dừng" : "▶ Nghe (giọng máy)"}
+        </button>
+        <button
+          onClick={() => seek(idxRef.current + 1)}
+          title="Câu sau"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-black hover:border-primary/40 active:scale-90 transition-all"
+        >
+          ⏭
+        </button>
+        <span className="ml-auto text-[11px] font-black text-muted tabular-nums">
+          Câu {idx + 1}/{lines.length}
+        </span>
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={Math.max(0, lines.length - 1)}
+        value={idx}
+        onChange={(e) => seek(Number(e.target.value))}
+        className="mt-2.5 w-full accent-[var(--primary,#6366f1)]"
+        aria-label="Tua tới câu"
+      />
+      <p className="mt-1.5 text-[11px] font-semibold text-muted leading-snug">
+        Bài này chưa có file thu âm — giọng đọc trình duyệt theo transcript. Kéo thanh trượt hoặc bấm ⏮/⏭ để tua theo câu.
+      </p>
+    </div>
+  );
+}
+
 function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
   // câu trả lời người dùng
   const [answers, setAnswers] = useState<Record<number, string | number | boolean>>({});
@@ -110,9 +263,13 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
       <h1 className="mt-3 font-display text-2xl font-black text-foreground">{ex.title}</h1>
       {ex.instructions && <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">{ex.instructions}</p>}
 
-      {/* Audio */}
+      {/* Audio — file thật nếu có; chưa có thì đọc transcript bằng giọng máy (TTS) */}
       {ex.audio_path ? (
         <audio controls src={exAudioSrc(ex.audio_path)} className="mt-4 w-full" />
+      ) : ex.transcript ? (
+        <TtsPlayer transcript={ex.transcript} />
+      ) : ex.type === "speaking" ? (
+        <p className="mt-4 rounded-xl bg-primary/10 border border-primary/20 px-3 py-2 text-xs font-bold text-primary">Bấm 🔊 ở từng câu để nghe giọng máy đọc, rồi nói theo (shadowing).</p>
       ) : (
         <p className="mt-4 rounded-xl bg-amber-500/10 border border-amber-500/20 px-3 py-2 text-xs font-bold text-amber-600 dark:text-amber-400">Bài này chưa có audio.</p>
       )}
@@ -133,7 +290,18 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
                     <img src={exAudioSrc(it.image)} alt="" className="mb-2 h-28 w-28 rounded-xl object-contain border border-border/60 bg-white" />
                   )}
                   {ex.type === "speaking" ? (
-                    it.text ? <p className="text-sm font-bold text-foreground">{it.text}</p> : null
+                    it.text ? (
+                      <div className="flex items-center gap-2.5">
+                        <button
+                          onClick={() => speakLine(it.text!)}
+                          title="Nghe câu này (giọng máy)"
+                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/25 text-sm hover:bg-primary/20 active:scale-90 transition-all"
+                        >
+                          🔊
+                        </button>
+                        <p className="text-sm font-bold text-foreground">{it.text}</p>
+                      </div>
+                    ) : null
                   ) : (
                     <p className="text-sm font-bold text-foreground">{it.prompt ?? it.label}</p>
                   )}

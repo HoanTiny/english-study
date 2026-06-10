@@ -18,6 +18,8 @@ export const LISTEN_TOPICS: ListenTopic[] = [
       { id: "7twBgTvHU5k", title: "Let's Learn English L1 – Lesson 31: Speaking", channel: "VOA Learning English", level: "A1", cc: false },
       { id: "JnHNiJyBwvY", title: "English Conversation – Everyday Situations", channel: "Daily English", level: "A1", cc: true },
       { id: "feHt3D2pv80", title: "Basic English Conversations for Everyday Life", channel: "Daily English", level: "A2", cc: true },
+      { id: "j64n3KdIob0", title: "Real Easy English: How to talk about your brain", channel: "BBC Learning English", level: "A2", cc: true },
+      { id: "Gct6PU-D5qw", title: "Real Easy English: The language of secrets", channel: "BBC Learning English", level: "A2", cc: true },
     ],
   },
   {
@@ -52,6 +54,8 @@ export const LISTEN_TOPICS: ListenTopic[] = [
       { id: "XajvB178Hhs", title: "American English Diphthongs – IPA", channel: "Rachel's English", level: "B1", cc: true },
       { id: "jaRcbpN_KlM", title: "Diphthongs & Vowel mistakes", channel: "Rachel's English", level: "B1", cc: true },
       { id: "zash7H0eMQ4", title: "Welcome to Rachel's English", channel: "Rachel's English", level: "A2", cc: true },
+      { id: "YfvD3KpHY2A", title: "How to Pronounce: Fun Practice - Exaggeration", channel: "VOA Learning English", level: "A2", cc: true },
+      { id: "uuYpEPqCYYs", title: "How to Pronounce: Pauses and connections", channel: "VOA Learning English", level: "B1", cc: true },
     ],
   },
   {
@@ -64,6 +68,9 @@ export const LISTEN_TOPICS: ListenTopic[] = [
       { id: "wCgPjVzREqs", title: "How the world learned to love fast food", channel: "BBC Learning English", level: "B1", cc: true },
       { id: "gEdPVA-6rVs", title: "BOX SET: Food and Drink (1 giờ)", channel: "BBC Learning English", level: "B1", cc: true },
       { id: "m9LyXOBmQvo", title: "BOX SET: Business & Work 2", channel: "BBC Learning English", level: "B2", cc: true },
+      { id: "Cq8v437OWyU", title: "The power of poetry", channel: "BBC Learning English", level: "B1", cc: true },
+      { id: "dgFm7A8pyzo", title: "Living with debt", channel: "BBC Learning English", level: "B1", cc: true },
+      { id: "pcj0JDQiPXY", title: "BOX SET: Communication 2 (30 phút)", channel: "BBC Learning English", level: "B1", cc: true },
     ],
   },
   {
@@ -74,6 +81,40 @@ export const LISTEN_TOPICS: ListenTopic[] = [
       { id: "f2O6mQkFiiw", title: "How to practice effectively… for anything", channel: "TED-Ed", level: "B2", cc: true },
       { id: "W6aL9YyRx1A", title: "What is the coldest thing in the world?", channel: "TED-Ed", level: "B2", cc: true },
       { id: "aISXCw0Pi94", title: "How Every Child Can Thrive by Five", channel: "TED", level: "B2", cc: true },
+      { id: "Q9Vt6NGBVBc", title: "Just how ancient is sumo?", channel: "TED-Ed", level: "B2", cc: true },
+      { id: "uBwkMc1llmM", title: "The incredible engineering of Venice", channel: "TED-Ed", level: "B2", cc: true },
+      { id: "HDt_rTPPh70", title: "Why does catnip make cats go crazy?", channel: "TED-Ed", level: "B2", cc: true },
+      { id: "65I_1sgTMLE", title: "When should you use 'fewer' vs 'less'?", channel: "TED-Ed", level: "B2", cc: true },
+    ],
+  },
+  {
+    key: "news",
+    label: "Tiếng Anh thời sự",
+    emoji: "📰",
+    videos: [
+      { id: "j25wX7H1fnk", title: "What could a super El Niño bring? (Learning English from the News)", channel: "BBC Learning English", level: "B1", cc: true },
+      { id: "2FZEznNC-Fs", title: "Is social media 'the new smoking'? (Learning English from the News)", channel: "BBC Learning English", level: "B2", cc: true },
+    ],
+  },
+  {
+    key: "speakclass",
+    label: "Lớp luyện nói (BBC Live)",
+    emoji: "🧑‍🏫",
+    videos: [
+      { id: "I1GWT0Oosp8", title: "How to keep conversations flowing in natural English", channel: "BBC Learning English", level: "B1", cc: true },
+      { id: "ORHniANns7k", title: "Everyday phrasal verbs used in real spoken English", channel: "BBC Learning English", level: "B1", cc: true },
+    ],
+  },
+  {
+    key: "grammarvid",
+    label: "Ngữ pháp & từ vựng qua video",
+    emoji: "📘",
+    videos: [
+      { id: "q4PkX8_xUYk", title: "Everyday Grammar: Ramen, A Popular Food in Japan", channel: "VOA Learning English", level: "A2", cc: true },
+      { id: "41jE1ijuf_4", title: "Everyday Grammar: A Popular Person in Turkey", channel: "VOA Learning English", level: "A2", cc: true },
+      { id: "vyPofYmxIJA", title: "Everyday Grammar: 'Population' in Sentences", channel: "VOA Learning English", level: "A2", cc: true },
+      { id: "J8EWSLZ36s0", title: "English in a Minute: Dish It Out but Can't Take It", channel: "VOA Learning English", level: "B1", cc: true },
+      { id: "1no_QyItrgw", title: "BOX SET: 8 expressions with 'you', 'your', 'my'", channel: "BBC Learning English", level: "B1", cc: true },
     ],
   },
   {

@@ -45,6 +45,7 @@ export const stages: Stage[] = [
       { slug: "health-body", title: "Sức khoẻ & cơ thể", topic: "Đời sống", status: "available" },
       { slug: "clothes-appearance", title: "Quần áo & ngoại hình", topic: "Tính từ miêu tả", status: "available" },
       { slug: "house-home", title: "Nhà cửa & đồ đạc", topic: "Đời sống", status: "available" },
+      { slug: "school-study", title: "Trường học & học tập", topic: "Đời sống · lớp học", status: "available" },
       { slug: "present-continuous", title: "Đang xảy ra (tiếp diễn)", topic: "Hiện tại tiếp diễn", status: "available" },
     ],
   },
@@ -67,6 +68,8 @@ export const stages: Stage[] = [
       { slug: "feelings-emotions", title: "Cảm xúc & tâm trạng", topic: "Đời sống", status: "available" },
       { slug: "jobs-ambitions", title: "Nghề nghiệp & ước mơ", topic: "Tương lai", status: "available" },
       { slug: "making-plans", title: "Hẹn hò & rủ rê", topic: "Hội thoại", status: "available" },
+      { slug: "transport", title: "Phương tiện & đi lại", topic: "Tình huống", status: "available" },
+      { slug: "phone-calls", title: "Gọi điện & nhắn tin", topic: "Hội thoại", status: "available" },
     ],
   },
   {
@@ -79,9 +82,11 @@ export const stages: Stage[] = [
     lessons: [
       { slug: "restaurant", title: "Ở nhà hàng", topic: "Tình huống", status: "locked" },
       { slug: "travel", title: "Du lịch & sân bay", topic: "Tình huống", status: "locked" },
+      { slug: "hotel-accommodation", title: "Khách sạn & chỗ ở", topic: "Tình huống", status: "locked" },
       { slug: "opinions", title: "Nêu ý kiến & đồng/không đồng ý", topic: "Hội thoại", status: "locked" },
       { slug: "technology-phone", title: "Công nghệ & điện thoại", topic: "Tình huống", status: "locked" },
       { slug: "work-office", title: "Công việc & văn phòng", topic: "Tình huống", status: "locked" },
+      { slug: "job-interview", title: "Phỏng vấn xin việc", topic: "Tình huống", status: "locked" },
       { slug: "environment-nature", title: "Môi trường & thiên nhiên", topic: "Hội thoại", status: "locked" },
       { slug: "present-perfect-continuous", title: "Hiện tại hoàn thành tiếp diễn", topic: "Ngữ pháp · have been V-ing", status: "locked" },
       { slug: "second-conditional", title: "Câu điều kiện loại 2", topic: "Ngữ pháp · If + quá khứ → would", status: "locked" },

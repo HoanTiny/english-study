@@ -1,0 +1,237 @@
+=== EXERCISE ===
+unit: 1
+section: VOA Let's Learn English
+activity: 2
+transcript:
+Pete: Hi! Are you Anna?
+Anna: Yes! Hi there! Are you Pete?
+Pete: I am Pete.
+Anna: Nice to meet you.
+Anna: Let's try that again. I'm Anna. Nice to meet you.
+Pete: I'm Pete. "Anna" Is that A-N-A?
+Anna: No. A-N-N-A
+Pete: Well, Anna with two "n's"... Welcome to... 1400 Irving Street!
+Anna: My new apartment! Yes!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 1. Nội dung VOA thuộc phạm vi công cộng. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html)
+
+=== EXERCISE ===
+unit: 2
+section: VOA Let's Learn English
+activity: 2
+transcript:
+Jonathan: Hey, Pete! Who's your friend?
+Pete: She is Anna. She is new to D.C.
+Jonathan: Where are you from?
+Anna: I am from a small town.
+Jonathan: Well, welcome to D.C.
+Anna: Thank you.
+Jonathan: I am Jonathan. I am in apartment B4.
+Anna: I am in apartment C2. Marsha is my roommate.
+Jonathan: I know Marsha. She is nice.
+Pete: And I am in Apartment D7. I have to go now.
+Anna: Oh!
+Pete: Remember to call Marsha at work. Tell her you're here.
+Anna: Right, thanks, Pete. Nice to meet you!
+Jonathan: You too, Bye.
+Anna: Apartment C2, here I come!
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 2. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-2-hello/3113733.html)
+
+=== EXERCISE ===
+unit: 3
+section: VOA Let's Learn English
+activity: 2
+transcript:
+Anna: I am in my new apartment! Great! I live with Marsha. We're roommates.
+Anna: I want to cook dinner. Oh! Hmmm. Is there a supermarket near here? Marsha knows. Marsha's work number is 555-8986.
+Man: Hello.
+Anna: Hello. Is this Marsha? It is Anna.
+Man: I am sorry. You have the wrong number.
+Anna: Oh. Is this 555-8986?
+Man: No. This is 555-8689.
+Anna: Oh. Excuse me!
+Man: Okay. 'Bye.
+Anna: One more time. 555-8986. Please be Marsha.
+Marsha: Hello. This is Marsha.
+Anna: Yes, Marsha. I want to cook dinner.
+Marsha: Excuse me? Anna? Is that you?
+Anna: Oh, yes. I am here!
+Anna: I want to find a supermarket.
+Marsha: Oh, okay. The supermarket is at 1500 Irving Street. It is near the apartment.
+Anna: Great! Goodbye!
+Marsha: Goodbye, Anna.
+(Nguồn: VOA Learning English – Let's Learn English Level 1, Lesson 3. Public domain. Tải audio: learningenglish.voanews.com/a/lets-learn-english-lesson-3-i-am-here/3126527.html)
+
+=== EXERCISE ===
+unit: 4
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Receptionist: Good evening, Saigon Bistro. How can I help you?
+Linh: Hi, I'd like to book a table for two for tomorrow night.
+Receptionist: Sure. What time would you like?
+Linh: Around seven thirty, please.
+Receptionist: Let me check... I'm sorry, seven thirty is full. We have a table at seven forty-five. Is that okay?
+Linh: That works. Could we sit by the window?
+Receptionist: Of course. What name is it under?
+Linh: Linh. That's L-I-N-H.
+Receptionist: Great. See you tomorrow at seven forty-five, Ms. Linh.
+Linh: Thank you! Bye.
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 5
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Receptionist: Good afternoon! Welcome to the Riverside Hotel. How can I help you?
+Mark: Hi, I have a booking under the name Mark Evans.
+Receptionist: Let me see... I'm sorry, I can only find a single room here.
+Mark: That's strange. I booked a double room for three nights. There's been a mix-up with my reservation.
+Receptionist: My apologies, sir. We can upgrade you to a deluxe double at no extra charge.
+Mark: That would be great. Also, is breakfast included?
+Receptionist: Yes, breakfast is served from six to ten on the second floor.
+Mark: Perfect. And could I have a late check-out on Friday?
+Receptionist: That should be fine if you let us know by Thursday evening.
+Mark: Will do. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 6
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Interviewer: Thanks for coming in, Ms. Tran. First, tell me about yourself.
+Mai: Thank you for the opportunity. I have three years of experience in customer service, and I'm looking for a new challenge.
+Interviewer: Why did you leave your last job?
+Mai: The company moved to another city, so I decided to find something closer to home.
+Interviewer: I see. What's your greatest strength?
+Mai: I stay calm under pressure, and I'm a quick learner.
+Interviewer: Where do you see yourself in five years?
+Mai: I'd like to be leading a small team.
+Interviewer: And when can you start?
+Mai: I'm available to start next month.
+Interviewer: Great. Do you have any questions for us?
+Mai: Yes — what does a typical day look like here?
+(Hội thoại tự biên soạn cho SpeakUp — có thể tự thu âm hoặc dùng TTS để tạo audio.)
+
+=== EXERCISE ===
+unit: 8
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Seller: Hello! Can I help you?
+Customer: Yes, I'm looking for a bag. How much is this one?
+Seller: That one is 400,000 dong. Real leather!
+Customer: Hmm, that's too expensive. Have you got this in brown?
+Seller: Yes, here you are. Brown, same size.
+Customer: It's nice. Can you give me a discount?
+Seller: Okay... 350,000 for you.
+Customer: How about 300,000? I'm a student.
+Seller: 320,000. Final price!
+Customer: Deal. Can I pay in cash?
+Seller: Of course. Thank you! Here's your change.
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 9
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Tourist: Excuse me, how do I get to the post office?
+Local: The post office? It's not far — about a five-minute walk.
+Tourist: Oh good! Which way do I go?
+Local: Go straight on this street, then turn left at the traffic lights.
+Tourist: Left at the lights, okay.
+Local: Then keep going past the school. The post office is next to a big supermarket.
+Tourist: Is it on the left or the right?
+Local: On the right. You can't miss it — it's a yellow building.
+Tourist: Thank you so much!
+Local: No problem. Have a nice day!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 10
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Nam: What a lovely day! It's sunny and warm.
+Mai: I know! Perfect weather. But the forecast says it might rain on Sunday afternoon.
+Nam: Really? Then let's do something on Sunday morning.
+Mai: Good idea. Do you fancy going to the beach?
+Nam: The beach sounds great. What time shall we meet?
+Mai: How about nine? Before it gets too hot.
+Nam: Nine works for me. I'll pick you up.
+Mai: Perfect. I'll bring some food for a picnic.
+Nam: And I'll bring the drinks. See you Sunday!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 11
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Doctor: Good morning. What seems to be the problem?
+Patient: I have a sore throat and I can't stop coughing.
+Doctor: I see. How long have you felt like this?
+Patient: Since Monday. It's getting worse.
+Doctor: Do you have a fever?
+Patient: Only a little. I checked this morning.
+Doctor: Okay, let me have a look... Your throat is quite red. It's just a cold, nothing serious.
+Patient: That's a relief!
+Doctor: Take this medicine three times a day after meals. And drink plenty of warm water.
+Patient: Three times a day. Got it.
+Doctor: Rest for a few days and you'll feel much better. Get well soon!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 13
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Tom: Linh! Long time no see. How have you been?
+Linh: Tom! I've been great. I just got back from Da Lat — a week's holiday.
+Tom: Nice! What was the weather like?
+Linh: Cool and a little foggy in the mornings. Perfect for walking around.
+Tom: Sounds lovely. What did you enjoy most?
+Linh: Visiting the coffee farms, definitely. I learned so much. How about you? How's work going?
+Tom: Busy as always. The deadline is next week, so I have a lot on my plate.
+Linh: Hang in there! Oh, by the way, are you coming to the team dinner on Friday?
+Tom: Of course. I wouldn't miss it. Anyway, I should get back to work. Catch up later?
+Linh: Sure. Nice talking to you!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 14
+section: Hội thoại tình huống
+activity: 2
+transcript:
+Agent: Thank you for calling FastNet support. How can I help you today?
+Customer: Hi, my internet keeps dropping. It's been happening for three days now.
+Agent: I'm sorry to hear that. Have you tried turning the router off and on?
+Customer: Yes, several times. It works for a few minutes, then drops again.
+Agent: Okay. Can you look at the router? Is any light blinking?
+Customer: Let me see... yes, the red light is blinking.
+Agent: I see. That usually means a problem with the line, not your router.
+Customer: So what happens next?
+Agent: We'll send a technician to check the line. Is tomorrow morning okay, between nine and eleven?
+Customer: Tomorrow morning works. Thank you.
+Agent: You're welcome. Your reference number is 4582. Is there anything else I can help you with?
+Customer: No, that's all. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 16
+section: Hội thoại chủ đề
+activity: 2
+transcript:
+You'll never guess what happened on my trip to Sapa last year.
+We had been driving for about six hours, and everything was going smoothly.
+But while we were going up the mountain, thick fog came out of nowhere. We couldn't see more than five metres ahead.
+To make matters worse, it was getting dark and my phone had no signal.
+We were just about to turn back when a local farmer appeared on his motorbike.
+He told us the road ahead was too dangerous at night, and he invited us to stay at his house.
+His family cooked us dinner, and we sat around the fire telling stories.
+By the time we left the next morning, the sky was completely clear.
+Looking back, getting lost in the fog turned out to be the best part of the trip.
+Sometimes the things you never planned become the stories you tell forever.
+(Độc thoại tự biên soạn cho SpeakUp.)

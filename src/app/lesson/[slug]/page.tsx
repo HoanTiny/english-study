@@ -10,6 +10,10 @@ import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
 import ListeningResource from "@/components/ListeningResource";
 import LessonQuiz from "@/components/LessonQuiz";
 import { isLessonDone } from "@/lib/lessonDone";
+import grammarData from "@/data/grammar.json";
+
+type GrammarStruct = { structure: string; vi: string; example: string; exampleVi: string; level: string; lessons?: string[] };
+const GRAMMAR = grammarData as GrammarStruct[];
 
 // Phát audio đã upload (bucket private) qua signed-URL endpoint.
 function audioSrc(path: string) {
@@ -269,6 +273,37 @@ export default function LessonPage() {
           );
         })}
       </div>
+
+      {/* Cấu trúc câu liên quan tới bài này (map trong src/data/grammar.json) */}
+      {(() => {
+        const related = GRAMMAR.filter((s) => s.lessons?.includes(slug));
+        if (related.length === 0) return null;
+        return (
+          <div className="mt-12">
+            <div className="mb-4 flex items-center gap-3">
+              <h2 className="text-xs font-black uppercase tracking-wider text-muted">🧩 Cấu trúc câu liên quan</h2>
+              <span className="text-[10px] font-bold text-muted/70">{related.length} cấu trúc</span>
+              <div className="h-px flex-1 bg-border/50" />
+            </div>
+            <div className="space-y-2.5">
+              {related.map((s) => (
+                <Link
+                  key={s.structure}
+                  href={`/grammar?q=${encodeURIComponent(s.structure)}`}
+                  className="flex items-center gap-3 rounded-2xl border border-border/60 bg-surface/60 px-4 py-3.5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md active:scale-[0.99]"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="font-display text-sm font-extrabold text-foreground leading-snug">{s.structure}</p>
+                    <p className="mt-0.5 truncate text-xs font-semibold text-muted">{s.vi} · “{s.example}”</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-primary-soft border border-primary/20 px-2.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider text-primary">{s.level}</span>
+                  <span className="shrink-0 text-xs font-black text-primary">Xem →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
 
       <LessonQuiz phrases={lesson.phrases} slug={slug} />
 
