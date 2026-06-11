@@ -317,6 +317,16 @@ export default function SprintGame() {
               </p>
             </div>
 
+            {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
+            <div className="rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
+              <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+              <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
+                <li>1️⃣ Màn hình hiện <b>từ tiếng Anh + một nghĩa Việt</b> — chọn <b>Đúng</b> nếu khớp, <b>Sai</b> nếu không.</li>
+                <li>2️⃣ Bạn có <b>30 giây</b>; trả lời đúng 4 câu liên tiếp để nhân điểm <b>×2, ×4</b>.</li>
+                <li>⌨️ Phím tắt: <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">←</kbd> Sai · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">→</kbd> Đúng.</li>
+              </ul>
+            </div>
+
             {/* Nguồn từ vựng */}
             <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-[10px] font-black uppercase tracking-wider">
               {([["cefr", "Cấp độ"], ["topic", "Chủ đề"], ["ai", "🤖 AI tạo"]] as [Source, string][]).map(([s, lbl]) => (

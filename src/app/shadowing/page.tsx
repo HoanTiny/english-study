@@ -122,6 +122,16 @@ export default function ShadowingPage() {
         </div>
       </div>
 
+      {/* Cách luyện — hướng dẫn nhanh cho lần đầu */}
+      <div className="mb-6 rounded-2xl border border-border/60 bg-surface/50 p-4">
+        <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách luyện shadowing</p>
+        <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
+          <li>1️⃣ Bấm 🔊 nghe câu mẫu — bắt đầu với tốc độ chậm (0.75x) rồi tăng dần.</li>
+          <li>2️⃣ Bấm 🎙️ và <b>nhại theo ngay lập tức</b>, bắt chước cả ngữ điệu lẫn nhịp ngắt.</li>
+          <li>3️⃣ Nhận điểm phát âm sau mỗi lượt — luyện lại tới khi đạt ≥ 80 là đạt.</li>
+        </ul>
+      </div>
+
       {/* Bộ lọc cấp độ + tiến độ */}
       {(() => {
         const levels = ["all", ...Array.from(new Set(shadowItems.map((i) => i.level)))];

@@ -127,6 +127,16 @@ export default function CollocationGame() {
               Ghép động từ (Head) bên trái với tân ngữ đi kèm (Tail) bên phải để tạo cụm Collocation tự nhiên. Học theo cụm giúp bạn phản xạ nhanh hơn ghép từng từ đơn!
             </p>
           </div>
+          {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
+          <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
+            <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+            <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
+              <li>1️⃣ Chọn một <b>động từ</b> ở cột trái (ví dụ: <i>make</i>).</li>
+              <li>2️⃣ Chọn <b>từ đi kèm</b> đúng ở cột phải (<i>a decision</i> ✓, không phải <i>a photo</i>).</li>
+              <li>3️⃣ Ghép đúng <b>+10 điểm</b> và nghe phát âm cả cụm; ghép đủ 5 cặp để sang vòng mới.</li>
+            </ul>
+          </div>
+
           <button onClick={start} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md">
             Bắt đầu ghép
           </button>
