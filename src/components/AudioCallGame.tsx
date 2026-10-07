@@ -169,6 +169,16 @@ export default function AudioCallGame() {
             </p>
           </div>
           
+          {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
+          <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
+            <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+            <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
+              <li>1️⃣ Bấm <b>▶ nghe từ</b> — nghe lại bao nhiêu lần cũng được.</li>
+              <li>2️⃣ Chọn <b>nghĩa đúng</b> trong 5 lựa chọn; chọn sai mất 1 mạng.</li>
+              <li>⌨️ Phím tắt: <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">1–5</kbd> chọn · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">Space</kbd> nghe lại · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">Enter</kbd> câu kế.</li>
+            </ul>
+          </div>
+
           <div className="space-y-2.5">
             <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chọn trình độ CEFR</p>
             <div className="flex justify-center gap-3">

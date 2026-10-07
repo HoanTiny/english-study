@@ -24,6 +24,8 @@ const skillLinks = [
   { href: "/shadowing", label: "Luyện Shadowing", desc: "Nhại giọng cải thiện phát âm", icon: "🗣️" },
   { href: "/listening", label: "Luyện nghe thụ động", desc: "Nghe hội thoại theo ngữ cảnh", icon: "🎧" },
   { href: "/listening-exercises", label: "Bài tập nghe hiểu", desc: "Nghe & trả lời trắc nghiệm", icon: "📝" },
+  { href: "/dictation", label: "Chép chính tả", desc: "Nghe video & gõ lại từng câu", icon: "⌨️" },
+  { href: "/audio-call", label: "Game cuộc gọi", desc: "Nghe điện thoại & phản xạ nhanh", icon: "☎️" },
 ];
 
 const resourceLinks = [
@@ -32,6 +34,7 @@ const resourceLinks = [
   { href: "/errors", label: "Sổ lỗi cá nhân", desc: "Gom lỗi từ nhật ký/hội thoại", icon: "📕" },
   { href: "/vocab", label: "Từ vựng cốt lõi", desc: "Thư viện cụm từ thông dụng", icon: "🎒" },
   { href: "/grammar", label: "Kiến thức Ngữ pháp", desc: "Học cấu trúc & làm bài tập", icon: "📚" },
+  { href: "/collocations", label: "Cụm từ đi đôi", desc: "Collocations dùng tự nhiên", icon: "🧲" },
 ];
 
 export default function Nav() {

@@ -75,6 +75,14 @@ export default function ShadowingPage() {
     <h1 className="text-3xl font-bold">Shadowing nhại giọng</h1>
     <p className="mt-3 text-sm text-muted">Nghe mẫu, nói lại và xem từ cần luyện. Điểm từ Azure là gợi ý luyện tập.</p>
     <p className="mt-2 text-xs text-muted">Bản thu chỉ nghe lại trong phiên này, không tải lên kho lưu trữ. Lịch sử điểm lưu trong tài khoản.</p>
+    <section aria-label="Cách luyện shadowing" className="my-5 rounded-2xl border border-border bg-surface/50 p-4">
+      <h2 className="mb-2 text-sm font-bold">Cách luyện shadowing</h2>
+      <ol className="list-decimal space-y-1.5 pl-5 text-sm text-foreground/85">
+        <li>Bấm <b>Nghe mẫu</b>, bắt đầu với tốc độ 0.75x rồi tăng dần.</li>
+        <li>Bấm <b>Thu âm và chấm</b>, nói lại theo ngữ điệu và nhịp ngắt của câu mẫu.</li>
+        <li>Nghe lại bản thu, xem từ cần sửa và luyện tiếp với mục tiêu từ 80 điểm.</li>
+      </ol>
+    </section>
     {error && <div role="alert" className="my-4 text-rose-600">{error} {!pending && !busy && <button onClick={() => { setError(null); setRetry(n => n + 1); }} className="ml-2 underline">Tải lại</button>}</div>}
     {pending && <div className="my-4 rounded-xl border border-border p-3"><p>Kết quả chưa lưu: {pending.result.pronunciation}/100</p><button disabled={saving} onClick={() => save(pending)} className="mr-4 underline">{saving ? "Đang lưu…" : "Lưu lại"}</button><button disabled={saving} onClick={() => { setPending(null); setError(null); }} className="underline">Bỏ kết quả chưa lưu</button></div>}
     <div className="my-5 flex flex-wrap gap-2" aria-label="Tốc độ nghe mẫu">{[0.5,0.75,1].map(s => <button key={s} aria-pressed={speed === s} onClick={() => setSpeed(s)} className={`rounded-full border px-4 py-2 ${speed === s ? "bg-primary text-primary-fg" : "border-border"}`}>{s}x</button>)}</div>

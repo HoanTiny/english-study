@@ -1,0 +1,441 @@
+=== EXERCISE ===
+unit: 8
+section: Hội thoại tình huống
+activity: 1
+level: A2
+title: Mua sắm – trả giá ở chợ (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hội thoại mua túi xách rồi chọn đáp án đúng. (Khớp bài học "Mua sắm & trả giá")
+- What does the customer want to buy? :: shoes | *a bag | a shirt
+- How much is the first price? :: *400,000 dong | 300,000 dong | 350,000 dong
+- What is wrong with the first colour? :: too dark | *she wants it in brown | too bright
+- What is the final price? :: 400,000 dong | *320,000 dong | 300,000 dong
+- How does she pay? :: by card | *in cash | by bank transfer
+transcript:
+Seller: Hello! Can I help you?
+Customer: Yes, I'm looking for a bag. How much is this one?
+Seller: That one is 400,000 dong. Real leather!
+Customer: Hmm, that's too expensive. Have you got this in brown?
+Seller: Yes, here you are. Brown, same size.
+Customer: It's nice. Can you give me a discount?
+Seller: Okay... 350,000 for you.
+Customer: How about 300,000? I'm a student.
+Seller: 320,000. Final price!
+Customer: Deal. Can I pay in cash?
+Seller: Of course. Thank you! Here's your change.
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 8
+section: Hội thoại tình huống
+activity: 2
+level: A2
+title: Mua sắm – trả giá ở chợ (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu.
+- I'm ___ for a bag. :: looking
+- Can you give me a ___? :: discount
+- Have you got this in ___? :: brown
+- Can I pay in ___? :: cash
+- Here's your ___. :: change
+transcript:
+Seller: Hello! Can I help you?
+Customer: Yes, I'm looking for a bag. How much is this one?
+Seller: That one is 400,000 dong. Real leather!
+Customer: Hmm, that's too expensive. Have you got this in brown?
+Seller: Yes, here you are. Brown, same size.
+Customer: It's nice. Can you give me a discount?
+Seller: Okay... 350,000 for you.
+Customer: How about 300,000? I'm a student.
+Seller: 320,000. Final price!
+Customer: Deal. Can I pay in cash?
+Seller: Of course. Thank you! Here's your change.
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 9
+section: Hội thoại tình huống
+activity: 1
+level: A2
+title: Hỏi đường đến bưu điện (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hỏi đường rồi chọn đáp án đúng. (Khớp bài học "Nơi chốn & chỉ đường")
+- Where does the tourist want to go? :: the bank | *the post office | the museum
+- How far is it? :: *about a five-minute walk | about a ten-minute walk | very far, take a bus
+- Where should he turn left? :: at the corner | *at the traffic lights | at the bridge
+- What is the post office next to? :: a school | *a big supermarket | a coffee shop
+- Which side of the street is it on? :: *the right | the left | the middle
+transcript:
+Tourist: Excuse me, how do I get to the post office?
+Local: The post office? It's not far — about a five-minute walk.
+Tourist: Oh good! Which way do I go?
+Local: Go straight on this street, then turn left at the traffic lights.
+Tourist: Left at the lights, okay.
+Local: Then keep going past the school. The post office is next to a big supermarket.
+Tourist: Is it on the left or the right?
+Local: On the right. You can't miss it — it's a yellow building.
+Tourist: Thank you so much!
+Local: No problem. Have a nice day!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 9
+section: Hội thoại tình huống
+activity: 2
+level: A2
+title: Hỏi đường đến bưu điện (Đúng/Sai)
+type: truefalse
+instructions: Nghe lại và chọn Đúng hay Sai.
+- The post office is very far away. :: false
+- He should turn left at the traffic lights. :: true
+- The post office is next to a school. :: false
+- The post office is a yellow building. :: true
+- It is on the right side of the street. :: true
+transcript:
+Tourist: Excuse me, how do I get to the post office?
+Local: The post office? It's not far — about a five-minute walk.
+Tourist: Oh good! Which way do I go?
+Local: Go straight on this street, then turn left at the traffic lights.
+Tourist: Left at the lights, okay.
+Local: Then keep going past the school. The post office is next to a big supermarket.
+Tourist: Is it on the left or the right?
+Local: On the right. You can't miss it — it's a yellow building.
+Tourist: Thank you so much!
+Local: No problem. Have a nice day!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 10
+section: Hội thoại tình huống
+activity: 1
+level: A2
+title: Nói chuyện thời tiết & hẹn đi chơi (Trắc nghiệm)
+type: mc
+instructions: Nghe hai người bạn nói về thời tiết và kế hoạch cuối tuần. (Khớp bài "Thời tiết & mùa" và "Hẹn hò & rủ rê")
+- What is the weather like today? :: rainy and cold | *sunny and warm | windy and cloudy
+- What does the forecast say about Sunday? :: sunny all day | *it might rain in the afternoon | there will be a storm
+- Where do they decide to go? :: the cinema | *the beach | the park
+- What time will they meet? :: at eight | *at nine | at ten
+- What will Mai bring? :: drinks | *food | an umbrella
+transcript:
+Nam: What a lovely day! It's sunny and warm.
+Mai: I know! Perfect weather. But the forecast says it might rain on Sunday afternoon.
+Nam: Really? Then let's do something on Sunday morning.
+Mai: Good idea. Do you fancy going to the beach?
+Nam: The beach sounds great. What time shall we meet?
+Mai: How about nine? Before it gets too hot.
+Nam: Nine works for me. I'll pick you up.
+Mai: Perfect. I'll bring some food for a picnic.
+Nam: And I'll bring the drinks. See you Sunday!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 10
+section: Hội thoại tình huống
+activity: 2
+level: A2
+title: Nói chuyện thời tiết & hẹn đi chơi (Sắp xếp hội thoại)
+type: ordering
+instructions: Sắp xếp các câu sau theo đúng thứ tự hội thoại.
+1. What a lovely day! It's sunny and warm.
+2. But the forecast says it might rain on Sunday afternoon.
+3. Then let's do something on Sunday morning.
+4. Do you fancy going to the beach?
+5. What time shall we meet?
+6. How about nine? Before it gets too hot.
+transcript:
+Nam: What a lovely day! It's sunny and warm.
+Mai: I know! Perfect weather. But the forecast says it might rain on Sunday afternoon.
+Nam: Really? Then let's do something on Sunday morning.
+Mai: Good idea. Do you fancy going to the beach?
+Nam: The beach sounds great. What time shall we meet?
+Mai: How about nine? Before it gets too hot.
+Nam: Nine works for me. I'll pick you up.
+Mai: Perfect. I'll bring some food for a picnic.
+Nam: And I'll bring the drinks. See you Sunday!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 11
+section: Hội thoại tình huống
+activity: 1
+level: A2
+title: Đi khám bệnh (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hội thoại ở phòng khám rồi chọn đáp án đúng. (Khớp bài học "Sức khoẻ & cơ thể")
+- What is wrong with the patient? :: a headache and a fever | *a sore throat and a cough | a stomachache
+- How long has he felt like this? :: since yesterday | *since Monday | for a week
+- Does he have a fever? :: yes, a high fever | *only a little | no
+- How often should he take the medicine? :: once a day | twice a day | *three times a day after meals
+- What should he drink? :: *warm water | cold juice | coffee
+transcript:
+Doctor: Good morning. What seems to be the problem?
+Patient: I have a sore throat and I can't stop coughing.
+Doctor: I see. How long have you felt like this?
+Patient: Since Monday. It's getting worse.
+Doctor: Do you have a fever?
+Patient: Only a little. I checked this morning.
+Doctor: Okay, let me have a look... Your throat is quite red. It's just a cold, nothing serious.
+Patient: That's a relief!
+Doctor: Take this medicine three times a day after meals. And drink plenty of warm water.
+Patient: Three times a day. Got it.
+Doctor: Rest for a few days and you'll feel much better. Get well soon!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 11
+section: Hội thoại tình huống
+activity: 2
+level: A2
+title: Đi khám bệnh (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu.
+- I have a sore ___. :: throat
+- How long have you ___ like this? :: felt
+- Do you have a ___? :: fever
+- Take this medicine three ___ a day. :: times
+- Drink plenty of ___ water. :: warm
+transcript:
+Doctor: Good morning. What seems to be the problem?
+Patient: I have a sore throat and I can't stop coughing.
+Doctor: I see. How long have you felt like this?
+Patient: Since Monday. It's getting worse.
+Doctor: Do you have a fever?
+Patient: Only a little. I checked this morning.
+Doctor: Okay, let me have a look... Your throat is quite red. It's just a cold, nothing serious.
+Patient: That's a relief!
+Doctor: Take this medicine three times a day after meals. And drink plenty of warm water.
+Patient: Three times a day. Got it.
+Doctor: Rest for a few days and you'll feel much better. Get well soon!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 12
+section: Hội thoại tình huống
+activity: 1
+level: B1
+title: Gọi xe & kẹt xe (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn hội thoại trên taxi rồi chọn đáp án đúng. (Khớp bài học "Phương tiện & đi lại")
+- Where is the passenger going? :: the train station | *the airport | the city centre
+- What time is her flight? :: at six | *at seven thirty | at eight
+- Why does the driver take another road? :: the road is closed | *there was an accident on the highway | she asked him to
+- How long will it take? :: about thirty minutes | *about forty-five minutes | about an hour
+- What does she ask the driver to do at the end? :: turn on the radio | drive faster | *drop her at Terminal 2
+transcript:
+Driver: Good afternoon! Where to?
+Passenger: The airport, please. And I'm in a bit of a hurry — my flight is at seven thirty.
+Driver: No problem. Hmm, the traffic is terrible today. There was an accident on the highway.
+Passenger: Oh no. Will we make it?
+Driver: Don't worry. I'll take another road. It's a bit longer but much faster today.
+Passenger: How long will it take?
+Driver: About forty-five minutes. You'll have plenty of time.
+Passenger: That's a relief. Oh, one more thing — could you drop me at Terminal 2?
+Driver: Terminal 2, sure. International flight?
+Passenger: Yes, I'm flying to Singapore for work.
+Driver: Nice! Buckle up, please, and we'll get going.
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 13
+section: Hội thoại tình huống
+activity: 1
+level: B1
+title: Small talk ở văn phòng (Trắc nghiệm)
+type: mc
+instructions: Nghe đoạn small talk giữa hai đồng nghiệp rồi chọn đáp án đúng. (Khớp bài học "Nói chuyện xã giao" và "Công việc & văn phòng")
+- Where was Linh last week? :: at home sick | *on holiday in Da Lat | at a conference
+- What was the weather like there? :: hot and sunny | *cool and a little foggy | rainy all week
+- What did she enjoy most? :: the food | *the coffee farms | the lake
+- What is happening at work on Friday? :: a meeting with the boss | *a team dinner | a product launch
+- Why does Tom have a lot on his plate? :: he is new | *the deadline is next week | his computer broke
+transcript:
+Tom: Linh! Long time no see. How have you been?
+Linh: Tom! I've been great. I just got back from Da Lat — a week's holiday.
+Tom: Nice! What was the weather like?
+Linh: Cool and a little foggy in the mornings. Perfect for walking around.
+Tom: Sounds lovely. What did you enjoy most?
+Linh: Visiting the coffee farms, definitely. I learned so much. How about you? How's work going?
+Tom: Busy as always. The deadline is next week, so I have a lot on my plate.
+Linh: Hang in there! Oh, by the way, are you coming to the team dinner on Friday?
+Tom: Of course. I wouldn't miss it. Anyway, I should get back to work. Catch up later?
+Linh: Sure. Nice talking to you!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 13
+section: Hội thoại tình huống
+activity: 2
+level: B1
+title: Small talk ở văn phòng (Đúng/Sai)
+type: truefalse
+instructions: Nghe lại và chọn Đúng hay Sai.
+- Linh was on holiday in Da Lat for a week. :: true
+- The weather there was hot and sunny. :: false
+- She enjoyed visiting the coffee farms most. :: true
+- Tom's deadline is next month. :: false
+- There is a team dinner on Friday. :: true
+- Tom will not go to the dinner. :: false
+transcript:
+Tom: Linh! Long time no see. How have you been?
+Linh: Tom! I've been great. I just got back from Da Lat — a week's holiday.
+Tom: Nice! What was the weather like?
+Linh: Cool and a little foggy in the mornings. Perfect for walking around.
+Tom: Sounds lovely. What did you enjoy most?
+Linh: Visiting the coffee farms, definitely. I learned so much. How about you? How's work going?
+Tom: Busy as always. The deadline is next week, so I have a lot on my plate.
+Linh: Hang in there! Oh, by the way, are you coming to the team dinner on Friday?
+Tom: Of course. I wouldn't miss it. Anyway, I should get back to work. Catch up later?
+Linh: Sure. Nice talking to you!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 14
+section: Hội thoại tình huống
+activity: 1
+level: B1
+title: Gọi tổng đài hỗ trợ kỹ thuật (Trắc nghiệm)
+type: mc
+instructions: Nghe cuộc gọi tới bộ phận hỗ trợ rồi chọn đáp án đúng. (Khớp bài học "Công nghệ & điện thoại")
+- What is the customer's problem? :: the phone screen is cracked | *the internet keeps dropping | the laptop will not start
+- How long has it been happening? :: since this morning | *for three days | for a week
+- What did she already try? :: changing the password | *turning the router off and on | buying a new router
+- What light is blinking on the router? :: the green light | *the red light | no light at all
+- When will the technician come? :: this afternoon | *tomorrow morning | next Monday
+transcript:
+Agent: Thank you for calling FastNet support. How can I help you today?
+Customer: Hi, my internet keeps dropping. It's been happening for three days now.
+Agent: I'm sorry to hear that. Have you tried turning the router off and on?
+Customer: Yes, several times. It works for a few minutes, then drops again.
+Agent: Okay. Can you look at the router? Is any light blinking?
+Customer: Let me see... yes, the red light is blinking.
+Agent: I see. That usually means a problem with the line, not your router.
+Customer: So what happens next?
+Agent: We'll send a technician to check the line. Is tomorrow morning okay, between nine and eleven?
+Customer: Tomorrow morning works. Thank you.
+Agent: You're welcome. Your reference number is 4582. Is there anything else I can help you with?
+Customer: No, that's all. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 14
+section: Hội thoại tình huống
+activity: 2
+level: B1
+title: Gọi tổng đài hỗ trợ kỹ thuật (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu.
+- My internet keeps ___. :: dropping
+- Have you tried turning the router ___ and on? :: off
+- The ___ light is blinking. :: red
+- We'll send a ___ to check the line. :: technician
+- Your ___ number is 4582. :: reference
+transcript:
+Agent: Thank you for calling FastNet support. How can I help you today?
+Customer: Hi, my internet keeps dropping. It's been happening for three days now.
+Agent: I'm sorry to hear that. Have you tried turning the router off and on?
+Customer: Yes, several times. It works for a few minutes, then drops again.
+Agent: Okay. Can you look at the router? Is any light blinking?
+Customer: Let me see... yes, the red light is blinking.
+Agent: I see. That usually means a problem with the line, not your router.
+Customer: So what happens next?
+Agent: We'll send a technician to check the line. Is tomorrow morning okay, between nine and eleven?
+Customer: Tomorrow morning works. Thank you.
+Agent: You're welcome. Your reference number is 4582. Is there anything else I can help you with?
+Customer: No, that's all. Thanks for your help!
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 15
+section: Hội thoại chủ đề
+activity: 1
+level: B2
+title: Tranh luận: sống xanh trong thành phố (Trắc nghiệm)
+type: mc
+instructions: Nghe hai người bạn thảo luận về lối sống xanh rồi chọn đáp án đúng. (Khớp bài học "Môi trường & thiên nhiên" và "Nêu ý kiến")
+- What did Huy start doing last month? :: planting trees | *cycling to work | recycling at home
+- Why was he hesitant at first? :: it was expensive | *the traffic looked dangerous | his office was too far
+- What does Lan think is the biggest problem? :: noise | *plastic waste | air pollution
+- What does Lan use instead of plastic bags? :: paper bags | *reusable cloth bags | boxes
+- What do they agree on at the end? :: laws must change first | *small actions make a big difference | it is too late to act
+transcript:
+Lan: You look fit these days, Huy. What's your secret?
+Huy: I started cycling to work last month. It saves money and it's eco-friendly.
+Lan: Good for you! Weren't you worried about the traffic?
+Huy: To be honest, I was hesitant at first — the traffic looked dangerous. But there's a new bike lane on my route, so it's fine.
+Lan: That's great. Personally, I think the biggest problem in our city is plastic waste. It's everywhere.
+Huy: I couldn't agree more. What do you do about it?
+Lan: I bring reusable cloth bags whenever I go shopping, and I refuse plastic straws.
+Huy: That's a good habit. Some people say one person can't change anything, though.
+Lan: I see their point, but I disagree. If everyone does a little, it adds up.
+Huy: Exactly. Small actions make a big difference.
+(Hội thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 16
+section: Hội thoại chủ đề
+activity: 1
+level: B2
+title: Kể chuyện: chuyến đi nhớ đời (Trắc nghiệm)
+type: mc
+instructions: Nghe câu chuyện về một chuyến đi rồi chọn đáp án đúng. (Khớp bài học "Thì kể chuyện")
+- Where was the speaker travelling to? :: Hue | *Sapa | Ha Giang
+- What happened while they were driving up the mountain? :: the car broke down | *thick fog came out of nowhere | it started to snow
+- Who helped them? :: a police officer | *a local farmer | another tourist
+- Where did they spend the night? :: in the car | in a hotel | *at the farmer's house
+- How does the speaker feel about the trip now? :: he regrets it | *it turned out to be the best part of the trip | he never wants to travel again
+transcript:
+You'll never guess what happened on my trip to Sapa last year.
+We had been driving for about six hours, and everything was going smoothly.
+But while we were going up the mountain, thick fog came out of nowhere. We couldn't see more than five metres ahead.
+To make matters worse, it was getting dark and my phone had no signal.
+We were just about to turn back when a local farmer appeared on his motorbike.
+He told us the road ahead was too dangerous at night, and he invited us to stay at his house.
+His family cooked us dinner, and we sat around the fire telling stories.
+By the time we left the next morning, the sky was completely clear.
+Looking back, getting lost in the fog turned out to be the best part of the trip.
+Sometimes the things you never planned become the stories you tell forever.
+(Độc thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 16
+section: Hội thoại chủ đề
+activity: 2
+level: B2
+title: Kể chuyện: chuyến đi nhớ đời (Điền từ)
+type: fill
+instructions: Nghe lại và điền từ còn thiếu — chú ý các cấu trúc thì kể chuyện.
+- We ___ been driving for about six hours. :: had
+- Thick fog came out of ___. :: nowhere
+- To make matters ___, it was getting dark. :: worse
+- We were just ___ to turn back. :: about
+- ___ back, it was the best part of the trip. :: Looking
+transcript:
+You'll never guess what happened on my trip to Sapa last year.
+We had been driving for about six hours, and everything was going smoothly.
+But while we were going up the mountain, thick fog came out of nowhere. We couldn't see more than five metres ahead.
+To make matters worse, it was getting dark and my phone had no signal.
+We were just about to turn back when a local farmer appeared on his motorbike.
+He told us the road ahead was too dangerous at night, and he invited us to stay at his house.
+His family cooked us dinner, and we sat around the fire telling stories.
+By the time we left the next morning, the sky was completely clear.
+Looking back, getting lost in the fog turned out to be the best part of the trip.
+Sometimes the things you never planned become the stories you tell forever.
+(Độc thoại tự biên soạn cho SpeakUp.)
+
+=== EXERCISE ===
+unit: 17
+section: Luyện nói theo mẫu
+activity: 1
+level: B1
+title: Phản xạ nêu ý kiến (Nói theo)
+type: speaking
+instructions: Bấm 🔊 nghe từng câu rồi nói theo — các cụm nêu ý kiến và phản hồi lịch sự. (Khớp bài học "Nêu ý kiến")
+- In my opinion, public transport should be free.
+- I see your point, but I'm not so sure about that.
+- That's a good point. I hadn't thought of it that way.
+- Personally, I'd rather work from home.
+- To be honest, I have mixed feelings about it.
+- On the other hand, it could be too expensive.
+- As far as I'm concerned, it depends on the situation.
+- Let's agree to disagree.
