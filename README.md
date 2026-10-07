@@ -59,6 +59,8 @@ Chạy theo thứ tự trong SQL editor của Supabase (các file trong `db/`):
 2. `policies.sql` — RLS policies
 3. Các migration bổ sung tính năng: `migrate_journal_shadowing.sql`, `migrate_note_meaning.sql`, `migrate_onboarding.sql`, `fix_profiles_email.sql`, `migrate_push_subscriptions.sql`, `migrate_dictation_videos.sql`, `migrate_listen_videos.sql`, `migrate_lessons_cms.sql`, `migrate_listening_exercises.sql`, `migrate_error_log.sql`, `migrate_roles.sql`, `migrate_word_examples.sql`
 4. `migrate_learning_integrity.sql` — bảo vệ role, quota API, ghi CMS nguyên tử, kết quả quiz, trạng thái FSRS đầy đủ
+5. `migrate_personalized_study.sql` — luyện lỗi và hoạt động học theo ngày
+6. `migrate_shadowing_history.sql` — lịch sử từng lượt chấm và chi tiết phát âm (dùng cho biểu đồ hoạt động)
 
 Seed video Luyện nghe (sau khi đã có `migrate_listen_videos.sql` + service-role key):
 
@@ -83,6 +85,14 @@ node scripts/seed-listen-videos.mjs
 - Sổ lỗi: tự viết lại trước khi xem gợi ý, tự đánh giá và ôn lại theo lịch. Cần 3 lần đúng cách nhau để tự đánh dấu đã nắm; dữ liệu này không phải điểm AI.
 - Chạy thêm `db/migrate_personalized_study.sql` sau migration integrity. Chức năng luyện lỗi cần migration này.
 - Kiểm tra trình duyệt tùy chọn: `node scripts/smoke-personalized.mjs` với Playwright có sẵn, app tại `http://localhost:3107` và build dùng Supabase placeholder `https://build-check.supabase.co` / `build-check-placeholder`. Test chặn toàn bộ backend bằng fixture; không kiểm tra DB thật. Có thể đặt `PLAYWRIGHT_MODULE`, `CHROME_PATH`, `SMOKE_BASE_URL` theo môi trường.
+
+## Luyện phát âm và thống kê
+
+- Shadowing chuẩn bị dịch vụ trước khi mở micro. Chờ trạng thái **Đang thu** rồi nói, bấm **Dừng và chấm** khi xong; tự dừng sau 30 giây. **Hủy** bỏ bản thu và không ghi điểm.
+- Bản thu được chuyển sang WAV mono 16 kHz trước khi gửi Azure chấm. Có thể nghe lại trong phiên; lỗi lưu cho phép **Lưu lại** với cùng mã lượt để tránh nhân đôi lịch sử.
+- Bấm một từ trong kết quả để xem IPA, nghe mẫu và luyện riêng. Điểm luyện từ chỉ tồn tại trong phiên, không thay điểm cả câu và không tính hoàn thành bài.
+- Biểu đồ ngày dùng `shadowing_history`, gồm cả các lần luyện lại cùng câu. Trung bình 7/14/30 ngày tính theo số lượt, dùng ngày địa phương; phần tổng quan từng câu vẫn hiển thị điểm mới nhất. Không thể khôi phục các lượt chưa được ghi trước khi cài migration lịch sử.
+- Kiểm tra tích hợp tùy chọn: `node scripts/check-shadowing-browser.mjs`, cùng bản build local và biến Playwright như `smoke-personalized.mjs`. Cần Azure trong `.env.local`; dùng một lượng nhỏ quota cho giọng tổng hợp, không mở micro thật và giả lập toàn bộ Supabase. Kiểm tra dừng/hủy, chuyển định dạng, chấm thật, lưu lại, cách ly điểm luyện từ, thống kê và giao diện mobile.
 
 ## Triển khai bản sửa tính toàn vẹn (2026-10-04)
 

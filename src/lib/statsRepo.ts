@@ -2,6 +2,7 @@
 
 import { localDate } from "./calendar";
 import { supabase } from "@/lib/supabase";
+import { listShadowActivity } from "./shadowingRepo";
 
 export type DashboardStats = {
   // Ôn tập
@@ -34,32 +35,41 @@ export type ActivityDay = {
   reviews: number; // số lần ôn (review_logs) trong ngày
   journaled: boolean; // có viết nhật ký không
   shadowAvg: number | null; // điểm phát âm TB của các câu shadowing trong ngày
+  shadowCount: number; // số lượt chấm, kể cả luyện lại cùng câu
+  shadowTotal: number; // tổng điểm chưa làm tròn để tính TB nhiều ngày chính xác
 };
+
+export function averagePronunciation(days: ActivityDay[]): number | null {
+  const count = days.reduce((sum, day) => sum + day.shadowCount, 0);
+  return count ? Math.round(days.reduce((sum, day) => sum + day.shadowTotal, 0) / count) : null;
+}
+
+function nextDayInstant(today: string): string {
+  const end = new Date(today + "T00:00:00");
+  end.setDate(end.getDate() + 1);
+  return end.toISOString();
+}
 
 function activityDate(ts: string): string {
   return localDate(new Date(ts));
 }
 
 // Dòng thời gian hoạt động `days` ngày gần nhất (gồm hôm nay).
-// Dữ liệu THẬT từ review_logs / journal_entries / shadowing_attempts (đều scoped theo user qua RLS).
+// Dữ liệu từ review_logs / journal_entries / shadowing_history (scoped theo user qua RLS).
 export async function loadActivityTimeline(today: string, days = 14): Promise<ActivityDay[]> {
   const start = new Date(today + "T00:00:00Z");
   start.setUTCDate(start.getUTCDate() - (days - 1));
   const startStr = start.toISOString().slice(0, 10);
 
   const startInstant = new Date(startStr + "T00:00:00").toISOString();
-  const [logsRes, jRes, sRes] = await Promise.all([
+  const [logsRes, jRes, attempts] = await Promise.all([
     supabase.from("review_logs").select("reviewed_at").gte("reviewed_at", startInstant),
     supabase.from("journal_entries").select("entry_date").gte("entry_date", startStr),
-    supabase
-      .from("shadowing_attempts")
-      .select("pronunciation_score, created_at").eq("score_source", "azure")
-      .gte("created_at", startInstant),
+    listShadowActivity(startInstant, nextDayInstant(today)),
   ]);
 
   if (logsRes.error) throw logsRes.error;
   if (jRes.error) throw jRes.error;
-  if (sRes.error) throw sRes.error;
 
   // Khởi tạo khung ngày rỗng theo thứ tự thời gian.
   const buckets = new Map<string, { reviews: number; journaled: boolean; scores: number[] }>();
@@ -80,7 +90,7 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
     const b = buckets.get(r.entry_date);
     if (b) b.journaled = true;
   }
-  for (const r of sRes.data as { pronunciation_score: number | null; created_at: string }[]) {
+  for (const r of attempts) {
     if (r.pronunciation_score == null) continue;
     const b = buckets.get(activityDate(r.created_at));
     if (b) b.scores.push(Number(r.pronunciation_score));
@@ -94,6 +104,8 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
       label: `${Number(d)}/${Number(m)}`,
       reviews: b.reviews,
       journaled: b.journaled,
+      shadowCount: b.scores.length,
+      shadowTotal: b.scores.reduce((a, c) => a + c, 0),
       shadowAvg: b.scores.length
         ? Math.round(b.scores.reduce((a, c) => a + c, 0) / b.scores.length)
         : null,
@@ -102,7 +114,7 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
 }
 
 export async function loadDashboard(today: string): Promise<DashboardStats> {
-  const [notesRes, riRes, jRes, sRes] = await Promise.all([
+  const [notesRes, riRes, jRes, sRes, todayAttempts] = await Promise.all([
     supabase.from("notes").select("id, in_review"),
     supabase
       .from("review_items")
@@ -111,6 +123,7 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
     supabase.from("journal_entries").select("entry_date"),
     supabase.from("shadowing_attempts")
       .select("pronunciation_score, created_at").eq("score_source", "azure"),
+    listShadowActivity(new Date(today + "T00:00:00").toISOString(), nextDayInstant(today)),
   ]);
 
   if (notesRes.error) throw notesRes.error;
@@ -152,7 +165,7 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
   const scores = (sRes.data as { pronunciation_score: number | null }[])
     .map((r) => r.pronunciation_score)
     .filter((v): v is number => v != null);
-  const shadowToday = (sRes.data as { pronunciation_score: number | null; created_at: string }[]).filter(r => r.pronunciation_score != null && localDate(new Date(r.created_at)) === today).length;
+  const shadowToday = new Set(todayAttempts.map(r => r.client_key)).size;
   const shadowDone = scores.length;
   const shadowAvg =
     shadowDone > 0

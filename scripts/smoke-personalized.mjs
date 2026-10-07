@@ -41,7 +41,14 @@ const auth = { access_token: token, refresh_token: "fixture-refresh", expires_at
         if (failDashboard && !url.searchParams.get("select")?.includes("assessment")) return send({ message: "fixture unavailable" }, 400);
         return send([{ client_key: "s1", pronunciation_score: 70, created_at: "2026-01-01T00:00:00Z", assessment: { accuracy: 65, fluency: 75, completeness: 90, recognized: "hello", words: [{ word: "hello", accuracy: 65, error: "Mispronunciation" }] } }]);
       }
-      if (table === "shadowing_history") return send([{ id: "h1", pronunciation_score: 70, speed_rate: .75, created_at: "2026-01-02T00:00:00Z" }, { id: "h2", pronunciation_score: 60, speed_rate: .75, created_at: "2026-01-01T00:00:00Z" }]);
+      if (table === "shadowing_history") {
+        const rows = [{ id: "h1", client_key: "s1", pronunciation_score: 70, speed_rate: .75, created_at: "2026-01-02T00:00:00Z" }, { id: "h2", client_key: "s1", pronunciation_score: 60, speed_rate: .75, created_at: "2026-01-01T00:00:00Z" }];
+        const bounds = url.searchParams.getAll("created_at");
+        return send(rows.filter(row => bounds.every(bound => {
+          const value = new Date(bound.slice(bound.indexOf(".") + 1)).getTime();
+          return bound.startsWith("gte.") ? new Date(row.created_at).getTime() >= value : new Date(row.created_at).getTime() < value;
+        })));
+      }
       if (table === "cms_lessons") return send([{ id: "l1", slug: "a2-one", title: "Bài A2 phù hợp", cefr: "A2", stage: 2, order_index: 0 }]);
       if (table === "cms_lesson_phrases") return send([{ lesson_id: "l1" }, { lesson_id: "l1" }]);
       if (table === "error_log") return send([errorRow]);
@@ -101,8 +108,15 @@ const auth = { access_token: token, refresh_token: "fixture-refresh", expires_at
     await page.getByRole("button", { name: "Chi tiết và lịch sử", exact: true }).first().click();
     await page.getByText("So với lần trước: +10 điểm", { exact: true }).waitFor();
     await page.getByText("hello: 65 · cần sửa âm", { exact: true }).waitFor();
+    await page.getByRole("button", { name: "hello: 65 · cần sửa âm", exact: true }).click();
+    const wordPractice = page.getByRole("region", { name: "Luyện từ hello", exact: true });
+    await wordPractice.getByText(/Chưa có phiên âm/).waitFor();
+    await wordPractice.getByRole("button", { name: "Thu âm từ này", exact: true }).click();
+    await page.getByRole("alert").filter({ hasText: "dịch vụ chấm phát âm" }).waitFor();
+    await wordPractice.getByRole("button", { name: "Quay lại luyện cả câu", exact: true }).click();
+    assert.equal(await wordPractice.count(), 0);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
     assert.deepEqual(runtimeErrors, []);
-    console.log("PASS: A2 plan, daily shadow count, load retry, real review credit, reload resume, error recall/retry, skipped-step summary, mobile overflow, no runtime errors.");
+    console.log("PASS: A2 plan, daily shadow count, load retry, review credit, reload resume, error recall/retry, skipped-step summary, word drill/service failure, mobile overflow, no runtime errors.");
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
