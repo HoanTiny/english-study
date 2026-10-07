@@ -39,6 +39,25 @@ export async function speechConfigured(): Promise<boolean> {
   return (await getToken()) !== null;
 }
 
+/** Prepare the service before starting a recording, so setup time is never scored. */
+export async function preparePronunciation(signal: AbortSignal) {
+  const tok = await getToken(signal);
+  if (!tok || signal.aborted) return null;
+  const SDK = await import("microsoft-cognitiveservices-speech-sdk");
+  return signal.aborted ? null : { tok, SDK };
+}
+
+type Prepared = NonNullable<Awaited<ReturnType<typeof preparePronunciation>>>;
+
+/** The caller supplies mono PCM WAV, never a compressed MediaRecorder blob. */
+export function assessRecordedPronunciation(
+  referenceText: string, wav: Blob, prepared: Prepared, signal: AbortSignal,
+): Promise<PronResult | null> {
+  return recognize(referenceText, prepared, signal, () =>
+    prepared.SDK.AudioConfig.fromWavFileInput(new File([wav], "practice.wav", { type: "audio/wav" })),
+  );
+}
+
 /**
  * Thu âm 1 lần qua micro và chấm phát âm so với `referenceText`.
  * Tự động dừng khi người nói ngừng (recognizeOnceAsync).
@@ -53,29 +72,40 @@ export async function assessPronunciation(
   // Dynamic import giữ SDK ngoài bundle chính.
   const SDK = await import("microsoft-cognitiveservices-speech-sdk");
 
+  return recognize(referenceText, { tok, SDK }, options?.signal, () =>
+    options?.stream ? SDK.AudioConfig.fromStreamInput(options.stream) : SDK.AudioConfig.fromDefaultMicrophoneInput(),
+  );
+}
+
+function recognize(
+  referenceText: string, { tok, SDK }: Prepared, signal: AbortSignal | undefined,
+  createAudio: () => import("microsoft-cognitiveservices-speech-sdk").AudioConfig,
+): Promise<PronResult | null> {
   return new Promise<PronResult | null>((resolve) => {
     let settled = false;
     let recognizer: InstanceType<typeof SDK.SpeechRecognizer> | undefined;
+    let audioConfig: ReturnType<typeof createAudio> | undefined;
     const abort = () => done(null);
     const done = (r: PronResult | null) => {
       if (!settled) {
         settled = true;
         clearTimeout(timer);
-        options?.signal?.removeEventListener("abort", abort);
+        signal?.removeEventListener("abort", abort);
         try { recognizer?.close(); } catch { /* Already closed. */ }
+        try { audioConfig?.close(); } catch { /* Already closed. */ }
         resolve(r);
       }
     };
     const timer = setTimeout(() => done(null), 30000);
-    options?.signal?.addEventListener("abort", abort, { once: true });
-    if (options?.signal?.aborted) { done(null); return; }
+    signal?.addEventListener("abort", abort, { once: true });
+    if (signal?.aborted) { done(null); return; }
     try {
       const speechConfig = SDK.SpeechConfig.fromAuthorizationToken(
         tok.token,
         tok.region,
       );
       speechConfig.speechRecognitionLanguage = "en-US";
-      const audioConfig = options?.stream ? SDK.AudioConfig.fromStreamInput(options.stream) : SDK.AudioConfig.fromDefaultMicrophoneInput();
+      audioConfig = createAudio();
       recognizer = new SDK.SpeechRecognizer(speechConfig, audioConfig);
 
       const paConfig = new SDK.PronunciationAssessmentConfig(

@@ -20,6 +20,24 @@ export async function listShadowLatest(): Promise<ShadowAttempt[]> {
   return data ?? [];
 }
 
+export type ShadowActivity = Pick<ShadowAttempt, "id" | "client_key" | "pronunciation_score" | "created_at">;
+
+/** Read every attempt in [start, end), including repeats. RLS scopes the current user. */
+export async function listShadowActivity(start: string, end: string): Promise<ShadowActivity[]> {
+  const rows: ShadowActivity[] = [];
+  const pageSize = 1000;
+  for (let offset = 0; ; offset += pageSize) {
+    const { data, error } = await supabase.from("shadowing_history")
+      .select("id,client_key,pronunciation_score,created_at")
+      .gte("created_at", start).lt("created_at", end)
+      .order("created_at", { ascending: true }).order("id", { ascending: true })
+      .range(offset, offset + pageSize - 1);
+    if (error) throw error;
+    rows.push(...(data ?? []));
+    if (!data || data.length < pageSize) return rows;
+  }
+}
+
 type Row = { client_key: string; pronunciation_score: number | null };
 
 /** Điểm phát âm mới nhất theo từng câu (client_key = id tĩnh 's1'..). */
