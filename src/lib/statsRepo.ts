@@ -37,6 +37,7 @@ export type ActivityDay = {
   shadowAvg: number | null; // điểm phát âm TB của các câu shadowing trong ngày
   shadowCount: number; // số lượt chấm, kể cả luyện lại cùng câu
   shadowTotal: number; // tổng điểm chưa làm tròn để tính TB nhiều ngày chính xác
+  shadowSentences: Record<string, { count: number; total: number; latestScore: number; latestAt: string }>;
 };
 
 export function averagePronunciation(days: ActivityDay[]): number | null {
@@ -54,6 +55,18 @@ function activityDate(ts: string): string {
   return localDate(new Date(ts));
 }
 
+async function listReviewActivity(start: string, end: string) {
+  const rows: { reviewed_at: string }[] = [];
+  for (let offset = 0; ; offset += 1000) {
+    const { data, error } = await supabase.from("review_logs").select("id,reviewed_at")
+      .gte("reviewed_at", start).lt("reviewed_at", end)
+      .order("reviewed_at", { ascending: true }).order("id", { ascending: true }).range(offset, offset + 999);
+    if (error) throw error;
+    rows.push(...(data ?? []));
+    if (!data || data.length < 1000) return rows;
+  }
+}
+
 // Dòng thời gian hoạt động `days` ngày gần nhất (gồm hôm nay).
 // Dữ liệu từ review_logs / journal_entries / shadowing_history (scoped theo user qua RLS).
 export async function loadActivityTimeline(today: string, days = 14): Promise<ActivityDay[]> {
@@ -62,27 +75,27 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
   const startStr = start.toISOString().slice(0, 10);
 
   const startInstant = new Date(startStr + "T00:00:00").toISOString();
-  const [logsRes, jRes, attempts] = await Promise.all([
-    supabase.from("review_logs").select("reviewed_at").gte("reviewed_at", startInstant),
+  const [logs, jRes, attempts] = await Promise.all([
+    listReviewActivity(startInstant, nextDayInstant(today)),
     supabase.from("journal_entries").select("entry_date").gte("entry_date", startStr),
     listShadowActivity(startInstant, nextDayInstant(today)),
   ]);
 
-  if (logsRes.error) throw logsRes.error;
   if (jRes.error) throw jRes.error;
 
   // Khởi tạo khung ngày rỗng theo thứ tự thời gian.
-  const buckets = new Map<string, { reviews: number; journaled: boolean; scores: number[] }>();
+  const buckets = new Map<string, { reviews: number; journaled: boolean; scores: number[];
+    sentences: Map<string, ActivityDay["shadowSentences"][string]> }>();
   const order: string[] = [];
   for (let i = 0; i < days; i++) {
     const d = new Date(start);
     d.setUTCDate(start.getUTCDate() + i);
     const key = d.toISOString().slice(0, 10);
     order.push(key);
-    buckets.set(key, { reviews: 0, journaled: false, scores: [] });
+    buckets.set(key, { reviews: 0, journaled: false, scores: [], sentences: new Map() });
   }
 
-  for (const r of logsRes.data as { reviewed_at: string }[]) {
+  for (const r of logs) {
     const b = buckets.get(activityDate(r.reviewed_at));
     if (b) b.reviews++;
   }
@@ -93,7 +106,14 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
   for (const r of attempts) {
     if (r.pronunciation_score == null) continue;
     const b = buckets.get(activityDate(r.created_at));
-    if (b) b.scores.push(Number(r.pronunciation_score));
+    if (b) {
+      const score = Number(r.pronunciation_score);
+      b.scores.push(score);
+      const previous = b.sentences.get(r.client_key);
+      const isLatest = !previous || Date.parse(r.created_at) >= Date.parse(previous.latestAt);
+      b.sentences.set(r.client_key, { count: (previous?.count ?? 0) + 1, total: (previous?.total ?? 0) + score,
+        latestScore: isLatest ? score : previous.latestScore, latestAt: isLatest ? r.created_at : previous.latestAt });
+    }
   }
 
   return order.map((key) => {
@@ -106,6 +126,7 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
       journaled: b.journaled,
       shadowCount: b.scores.length,
       shadowTotal: b.scores.reduce((a, c) => a + c, 0),
+      shadowSentences: Object.fromEntries(b.sentences),
       shadowAvg: b.scores.length
         ? Math.round(b.scores.reduce((a, c) => a + c, 0) / b.scores.length)
         : null,

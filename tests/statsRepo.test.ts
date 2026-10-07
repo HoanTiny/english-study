@@ -65,6 +65,15 @@ it("propagates history failures rather than showing zero activity", async () => 
   await expect(loadActivityTimeline("2026-10-07")).rejects.toThrow("offline");
   await expect(loadDashboard("2026-10-07")).rejects.toThrow("offline");
 });
+it("counts review activity beyond 1000 rows and propagates review query failures", async () => {
+  rows.review_logs = Array.from({ length: 1001 }, (_, i) => ({ id: String(i), reviewed_at: new Date(2026, 9, 7, 12).toISOString() }));
+  const timeline = await loadActivityTimeline("2026-10-07", 14);
+  expect(timeline.at(-1)?.reviews).toBe(1001);
+  const reviewQueries = queries.filter(row => row.table === "review_logs");
+  expect(reviewQueries[1].query.range).toHaveBeenCalledWith(1000, 1999);
+  errors.review_logs = new Error("review unavailable");
+  await expect(loadActivityTimeline("2026-10-07", 14)).rejects.toThrow("review unavailable");
+});
 it("keeps empty days empty and an empty range's average unknown", async () => {
   const timeline = await loadActivityTimeline("2026-10-07", 7);
   expect(timeline).toHaveLength(7);

@@ -112,7 +112,7 @@ export default function ShadowingPage() {
     <div className="space-y-4">{items.map(item => {
       const saved = latest.find(r => r.client_key === item.id);
       const result = pending?.id === item.id ? pending.result : saved?.assessment;
-      return <section key={item.id} className="rounded-2xl border border-border p-5">
+      return <section key={item.id} id={item.id} className="scroll-mt-24 rounded-2xl border border-border p-5">
         <p className="text-xs font-bold text-primary">{item.level}{due.some(r => r.client_key === item.id) ? " · Ôn lại hôm nay" : ""}</p>
         <h2 className="mt-2 text-lg font-bold">{item.en}</h2><p className="text-sm text-muted">{item.vi}</p>
         {saved && <p className="mt-2 font-bold">Đã lưu: {saved.pronunciation_score}/100</p>}

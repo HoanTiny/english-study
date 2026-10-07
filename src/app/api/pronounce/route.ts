@@ -99,8 +99,10 @@ export async function GET(req: NextRequest) {
     return Response.json(hit.data, { headers: { "x-cache": "hit" } });
   }
 
+  const timeout = AbortSignal.timeout(5000);
   try {
     const res = await fetch(`${API}/${encodeURIComponent(word)}`, {
+      signal: AbortSignal.any([req.signal, timeout]),
       headers: { Accept: "application/json" },
       // Cache phía Next/CDN thêm 1 ngày.
       next: { revalidate: 86_400 },
@@ -124,8 +126,9 @@ export async function GET(req: NextRequest) {
     cache.set(word, { data, at: Date.now() });
 
     return Response.json(data, { headers: { "x-cache": "miss" } });
-  } catch (e) {
-    console.error("pronounce error", e);
-    return Response.json({ found: false, error: "exception" }, { status: 502 });
+  } catch {
+    return Response.json({ found: false, error: timeout.aborted ? "timeout" : "unavailable" }, {
+      status: timeout.aborted ? 504 : 502, headers: { "Cache-Control": "no-store" },
+    });
   }
 }

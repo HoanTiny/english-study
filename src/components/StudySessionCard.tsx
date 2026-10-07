@@ -14,13 +14,14 @@ import { listShadowLatest } from "@/lib/shadowingRepo";
 import { shadowDue } from "@/lib/shadowPractice";
 import { buildStudyPlan, nextStudyStep, stepDone, type StudyMinutes } from "@/lib/studyPlan";
 import { saveStudySession, clearStudySession, useStudySession } from "@/lib/studySession";
+import StudySyncStatus from "./StudySyncStatus";
 
 type Options = { lesson: { slug: string; title: string; remaining: number } | null; dueErrors: number; dueShadow: number };
 export default function StudySessionCard({ dueReviews }: { dueReviews: number }) {
   const { userId, currentStage, profileReady } = useAuth();
   const router = useRouter();
   const day = localDate();
-  const { session, storageError } = useStudySession(userId);
+  const { session, syncStatus } = useStudySession(userId);
   const [minutes, setMinutes] = useState<StudyMinutes>(20);
   const [options, setOptions] = useState<Options | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +46,7 @@ export default function StudySessionCard({ dueReviews }: { dueReviews: number })
   function start() {
     if (!userId || !options || !plan.length) return;
     try {
-      saveStudySession({ version: 1, userId, day: localDate(), minutes, startedAt: new Date().toISOString(), steps: plan });
+      saveStudySession({ version: 1, id: crypto.randomUUID(), userId, day: localDate(), minutes, startedAt: new Date().toISOString(), steps: plan });
       router.push(plan[0].href);
     } catch { setError("Trình duyệt chưa cho phép lưu buổi học. Hãy bật lưu trữ và thử lại."); }
   }
@@ -60,7 +61,7 @@ export default function StudySessionCard({ dueReviews }: { dueReviews: number })
       <h2 className="mt-2 font-display text-xl font-bold">{session ? (next ? "Tiếp tục từng bước" : "Tổng kết buổi học") : "Hôm nay bạn có bao nhiêu phút?"}</h2>
       <p className="mt-2 text-sm text-muted">Theo trình độ {(["A1", "A2", "B1", "B2"])[currentStage - 1] ?? "A1"} và nội dung cần ôn. Thời gian là ước tính, không cần chạy đua.</p>
       {error && <div role="alert" className="mt-3 text-sm text-rose-600">{error} <button className="underline" onClick={() => setRetry(n => n + 1)}>Thử lại</button></div>}
-      {storageError && <p role="alert" className="mt-3 text-sm text-rose-600">Chưa lưu được tiến độ buổi học trên thiết bị. Kết quả bài luyện vẫn được lưu vào tài khoản.</p>}
+      <StudySyncStatus />
       {session ? <>
         <p className="mt-4 text-sm font-semibold">{session.steps.filter(stepDone).length}/{session.steps.length} bước đạt mục tiêu · {session.minutes} phút dự kiến</p>
         <ol className="my-4 space-y-2">
@@ -79,8 +80,8 @@ export default function StudySessionCard({ dueReviews }: { dueReviews: number })
         <ol className="mb-5 space-y-2">
           {plan.map((step, i) => <li key={step.kind} className="flex justify-between gap-3 text-sm"><span>{i + 1}. {step.title} <span className="text-muted">({step.target} {step.kind === "quiz" ? "bài đạt" : step.kind === "review" ? "thẻ" : step.kind === "errors" ? "lỗi" : "cụm/câu"})</span></span><span className="shrink-0 text-muted">~{step.minutes} phút</span></li>)}
         </ol>
-        <button disabled={!options || !!error} onClick={start} className="liquid-glass-btn px-6 py-3 text-sm disabled:opacity-50">Bắt đầu buổi học →</button>
-        <p className="mt-3 text-xs text-muted">Buổi học được giữ trên thiết bị này trong hôm nay. Kết quả bài luyện lưu theo tài khoản.</p>
+        <button disabled={!options || !!error || syncStatus === "loading"} onClick={start} className="liquid-glass-btn px-6 py-3 text-sm disabled:opacity-50">Bắt đầu buổi học →</button>
+        <p className="mt-3 text-xs text-muted">Buổi học trong ngày đồng bộ theo tài khoản khi có mạng. Thiết bị giữ bản dự phòng để bạn tiếp tục khi mất kết nối.</p>
       </>}
     </section>
   );

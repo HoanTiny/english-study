@@ -24,6 +24,7 @@ import {
 import { listShadowScores } from "@/lib/shadowingRepo";
 import { shadowItems } from "@/lib/content";
 import { localDate } from "@/lib/calendar";
+import WeeklyReport from "@/components/WeeklyReport";
 
 const TEAL = "var(--primary)";
 
@@ -143,8 +144,10 @@ export default function StatisticsPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-16 pt-24 animate-fadeIn relative">
       {/* Background radial highlight */}
-      <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl pointer-events-none" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl" />
+      </div>
 
       {/* Tabs */}
       <div className="mb-12 flex justify-center">
@@ -198,6 +201,7 @@ export default function StatisticsPage() {
         </div>
       ) : (
         <div className="space-y-8">
+        <WeeklyReport timeline={timeline} />
         <div className="grid gap-8 lg:grid-cols-12 items-start">
           {/* Cột trái: số liệu (7 cols) */}
           <div className={`${GLASS} p-6 sm:p-8 lg:col-span-7 space-y-6`}>
