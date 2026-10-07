@@ -5,9 +5,10 @@ import { useAuth } from "@/lib/auth";
 import Nav from "./Nav";
 import StudySessionBanner from "./StudySessionBanner";
 import Header from "./Header";
+import { StudySessionProvider } from "@/lib/studySession";
 
 export default function ClientShell({ children }: { children: React.ReactNode }) {
-  const { error } = useAuth();
+  const { error, userId } = useAuth();
   const pathname = usePathname();
   const isAdmin = pathname?.startsWith("/admin");
 
@@ -16,7 +17,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="flex min-h-screen flex-col md:flex-row">
+    <StudySessionProvider userId={userId}><div className="flex min-h-screen flex-col md:flex-row">
       {/* Sidebar Navigation */}
       <Nav />
 
@@ -27,6 +28,6 @@ export default function ClientShell({ children }: { children: React.ReactNode })
         {error && <p role="alert" className="px-5 py-3 text-red-600">{error}</p>}
         <main className="flex-1 relative z-1">{children}</main>
       </div>
-    </div>
+    </div></StudySessionProvider>
   );
 }

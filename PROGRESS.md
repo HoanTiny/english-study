@@ -1,6 +1,14 @@
 # SpeakUp — Tiến độ dự án
 
-> Cập nhật: 2026-06-10 · App học tiếng Anh A1 → giao tiếp (2h/ngày), mọi hoạt động đổ về 1 hub ôn tập SRS (FSRS), theo dõi khoảng cách **Hiểu → Nói được**.
+> Cập nhật: 2026-10-07 · App học tiếng Anh A1 → giao tiếp (2h/ngày), mọi hoạt động đổ về 1 hub ôn tập SRS (FSRS), theo dõi khoảng cách **Hiểu → Nói được**.
+
+## Bổ sung ngày 2026-10-07
+
+- IPA có timeout và thử lại trong khung luyện từ; lỗi tạm thời không được giữ trong cache.
+- Buổi 10/20/30 phút đồng bộ theo tài khoản/ngày, giữ thay đổi chưa gửi qua tải trang, gộp tiến độ khi nhiều thiết bị cùng học và bảo vệ buổi đã dừng khỏi dữ liệu cũ.
+- Tổng kết 7 ngày so với tuần trước, so sánh phát âm trên cùng câu và gợi ý luyện lại; phân trang lịch sử ôn thẻ và sửa nền trang thống kê gây tràn mobile.
+- Migration đồng bộ đã áp dụng trên Supabase production sau xác nhận; kiểm thử hai tài khoản thật và cleanup thành công. Chi tiết: [docs/study-session-sync.md](docs/study-session-sync.md).
+- 115 unit test, TypeScript, build và browser smoke đạt; ESLint 0 lỗi, 31 cảnh báo. Mã nguồn cần được merge/deploy để giao diện mới xuất hiện trên production. Các mục bên dưới là lịch sử phát triển cũ; README mô tả hành vi hiện tại.
 
 ## Stack
 - Next.js 16.2.6 (App Router, Turbopack) · React 19 · TypeScript · Tailwind v4

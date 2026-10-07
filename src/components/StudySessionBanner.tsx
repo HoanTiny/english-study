@@ -4,19 +4,22 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { nextStudyStep, stepDone } from "@/lib/studyPlan";
-import { saveStudySession, useStudySession } from "@/lib/studySession";
+import { updateStudySession, useStudySession } from "@/lib/studySession";
+import { sessionId } from "@/lib/studySync";
+import StudySyncStatus from "./StudySyncStatus";
 
 export default function StudySessionBanner() {
   const { userId } = useAuth();
-  const { session, storageError } = useStudySession(userId);
+  const { session } = useStudySession(userId);
   const pathname = usePathname();
   const [error, setError] = useState(false);
   if (!session || pathname === "/today") return null;
   const next = nextStudyStep(session);
   const done = session.steps.filter(stepDone).length;
   function skip() {
-    if (!session || !next) return;
-    try { saveStudySession({ ...session, steps: session.steps.map(s => s.kind === next.kind ? { ...s, skipped: true } : s) }); }
+    if (!userId || !session || !next) return;
+    try { updateStudySession(userId, current => sessionId(current) === sessionId(session)
+      ? { ...current, steps: current.steps.map(s => s.kind === next.kind ? { ...s, skipped: true } : s) } : current); }
     catch { setError(true); }
   }
   return <aside className="border-b border-primary/20 bg-primary-soft px-5 py-3 text-sm" aria-label="Tiến độ buổi học">
@@ -28,6 +31,7 @@ export default function StudySessionBanner() {
         <button onClick={skip} className="ml-auto text-xs text-muted underline">Bỏ qua bước này</button>
       </> : <Link href="/today" className="font-bold text-primary underline">Xem tổng kết →</Link>}
     </div>
-    {(error || storageError) && <p role="alert" className="mt-2 text-rose-600">Chưa lưu được tiến độ buổi học trên thiết bị này.</p>}
+    {error && <p role="alert" className="mt-2 text-rose-600">Chưa lưu được tiến độ buổi học trên thiết bị này.</p>}
+    <StudySyncStatus />
   </aside>;
 }

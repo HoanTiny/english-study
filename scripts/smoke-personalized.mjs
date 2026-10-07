@@ -21,6 +21,7 @@ const auth = { access_token: token, refresh_token: "fixture-refresh", expires_at
     let failPractice = true;
     let reviews = [];
     let practiced = 0;
+    let study = { revision: 0, session: null };
     const errorRow = { id: "e1", source: "grammar", original: "She go to school.", correction: "She goes to school.", note: "Hiện tại đơn", resolved: false, created_at: "2026-01-01T00:00:00Z", practice_count: 0, correct_streak: 0, last_practiced_at: null, next_review_at: "2026-01-01T00:00:00Z" };
     await context.route("https://build-check.supabase.co/**", async route => {
       const req = route.request(); const url = new URL(req.url());
@@ -31,6 +32,11 @@ const auth = { access_token: token, refresh_token: "fixture-refresh", expires_at
       if (url.pathname.includes("/auth/")) return send(user);
       const table = url.pathname.split("/").pop();
       const body = req.postDataJSON();
+      if (table === "study_sessions") return send(study.revision ? [study] : []);
+      if (table === "sync_study_session") {
+        if (body.p_expected_revision !== study.revision) return send({ ...study, applied: false });
+        study = { revision: study.revision + 1, session: body.p_session }; return send({ ...study, applied: true });
+      }
       if (table === "profiles") return send(req.method() === "GET" ? { id: uid, current_stage: 2, onboarded: true, streak_count: 0, last_active: null, display_name: "Học viên", role: null } : {});
       if (table === "notes") return send([{ id: "n1", kind: "word", content: "hello", meaning: "xin chào", example: "Hello, Anna.", tags: [], in_review: true }]);
       if (table === "review_items") {

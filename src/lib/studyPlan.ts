@@ -6,6 +6,7 @@ export type StudyStep = {
 };
 export type StudySession = {
   version: 1; userId: string; day: string; minutes: StudyMinutes; startedAt: string; steps: StudyStep[];
+  id?: string; // New sessions have a UUID; startedAt identifies legacy local sessions.
 };
 export type StudyEvent = { kind: StudyKind; id: string; slug?: string };
 
@@ -51,20 +52,29 @@ export function applyStudyEvent(session: StudySession, event: StudyEvent): Study
 /** Local storage is untrusted; validate routes and counts before displaying links. */
 export function parseStudySession(raw: string | null, userId: string, day: string): StudySession | null {
   try {
+    if (raw && raw.length > 128000) return null;
     const value = JSON.parse(raw ?? "null") as StudySession;
     if (!value || value.version !== 1 || value.userId !== userId || value.day !== day
       || ![10,20,30].includes(value.minutes) || !Array.isArray(value.steps) || !value.steps.length
-      || value.steps.length > 5 || !Number.isFinite(Date.parse(value.startedAt))) return null;
+      || value.steps.length > 5 || typeof value.startedAt !== "string" || !Number.isFinite(Date.parse(value.startedAt))
+      || (value.id !== undefined && !/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(value.id))) return null;
+    if (new Set(value.steps.map(s => s?.kind)).size !== value.steps.length) return null;
     for (const s of value.steps) {
       if (!s || !["review","lesson","quiz","errors","shadowing"].includes(s.kind)
-        || typeof s.title !== "string" || !Number.isInteger(s.target) || s.target <= 0 || s.target > 100
+        || typeof s.title !== "string" || s.title.length > 200 || !Number.isInteger(s.target) || s.target <= 0 || s.target > 100
         || !Number.isInteger(s.minutes) || s.minutes <= 0 || typeof s.skipped !== "boolean"
-        || !Array.isArray(s.completedIds) || s.completedIds.length > 100 || s.completedIds.some(id => typeof id !== "string")) return null;
+        || !Array.isArray(s.completedIds) || s.completedIds.length > 100 || s.completedIds.some(id => typeof id !== "string" || id.length > 1000)) return null;
       const expected = s.kind === "lesson" || s.kind === "quiz"
         ? (typeof s.slug === "string" && s.slug ? `/lesson/${encodeURIComponent(s.slug)}` : null)
         : `/${s.kind}`;
       if (s.href !== expected) return null;
     }
-    return value;
+    if (value.steps.reduce((sum, step) => sum + step.minutes, 0) !== value.minutes) return null;
+    // Canonical shape makes JSON comparisons stable after Postgres JSONB key ordering.
+    return { version: 1, userId, day, minutes: value.minutes, startedAt: value.startedAt,
+      ...(value.id ? { id: value.id } : {}), steps: value.steps.map(s => ({
+        kind: s.kind, title: s.title, href: s.href, minutes: s.minutes, target: s.target,
+        completedIds: [...new Set(s.completedIds)].sort(), skipped: s.skipped, ...(s.slug ? { slug: s.slug } : {}),
+      })) };
   } catch { return null; }
 }

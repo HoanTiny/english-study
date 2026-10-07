@@ -46,7 +46,7 @@ Unit test kiểm tra trạng thái FSRS qua JSON, thời điểm đến hạn, l
 
 Sau migration integrity, chạy `db/migrate_personalized_study.sql` để bổ sung lịch ôn Sổ lỗi. Migration không xóa lỗi cũ. Lỗi chưa giải quyết được đưa vào hàng đợi ngay; lỗi từng tự đánh dấu đã nắm vẫn giữ nguyên trạng thái.
 
-Buổi học 10/20/30 phút là kế hoạch theo số hoạt động, không phải đồng hồ bắt buộc. Hoạt động chỉ tăng tiến độ sau khi lưu thành công. Các mục tiêu được tính theo số thẻ/cụm/câu khác nhau; luyện lặp lại cùng một mục không tăng số lượng trong cùng buổi. Bước bỏ qua không được tính hoàn thành. Buổi học lưu trên thiết bị theo user/ngày, hết hiệu lực khi sang ngày mới; không đồng bộ giữa thiết bị. Kết quả học và lịch ôn lỗi lưu trong Supabase.
+Buổi học 10/20/30 phút là kế hoạch theo số hoạt động, không phải đồng hồ bắt buộc. Hoạt động chỉ tăng tiến độ sau khi lưu thành công. Các mục tiêu được tính theo số thẻ/cụm/câu khác nhau; luyện lặp lại cùng một mục không tăng số lượng trong cùng buổi. Bước bỏ qua không được tính hoàn thành. Sau `migrate_study_session_sync.sql`, buổi học đồng bộ qua Supabase theo user/ngày và giữ bản trên thiết bị để thử gửi lại; hết hiệu lực khi sang ngày mới. Xem [quy tắc đồng bộ và triển khai](study-session-sync.md). Kết quả học và lịch ôn lỗi lưu trong Supabase.
 
 Kết quả xếp lớp mở bài đầu của cấp tương ứng, giữ bài thấp hơn để ôn, không tự cấp chứng nhận hoàn thành bài cũ. Có thể vào lại `/onboarding` để xếp lớp lại. Khi lưu trình độ thất bại, không chuyển trang hay cập nhật cấp học trên giao diện.
 
@@ -59,6 +59,6 @@ Sau các migration trước đó, chạy `db/migrate_shadowing_history.sql` trư
 
 Giao diện hiển thị 10 lượt gần nhất mỗi câu, điểm thành phần, từ cần sửa và chênh lệch hai lượt cuối. Câu có điểm mới nhất dưới 80 được ưu tiên từ ngày kế tiếp theo giờ thiết bị, kể cả trong gợi ý buổi học. 80 là ngưỡng luyện tập, không phải chứng nhận trình độ.
 
-Bản thu chỉ giữ trong bộ nhớ trình duyệt để nghe lại lượt vừa thu; rời trang hoặc thu lượt mới sẽ xóa bản thu này. Âm thanh được gửi tới Azure để chấm, không được tải lên Supabase Storage. Chưa hỗ trợ nghe lại âm thanh của các lượt cũ. Thiết bị không có MediaRecorder vẫn có thể chấm nhưng không có bản nghe lại.
+Bản thu chỉ giữ trong bộ nhớ trình duyệt để nghe lại lượt vừa thu; rời trang hoặc thu lượt mới sẽ xóa bản thu này. Âm thanh được gửi tới Azure để chấm, không được tải lên Supabase Storage. Chưa hỗ trợ nghe lại âm thanh của các lượt cũ. Luồng thu, dừng và chấm hiện tại cần MediaRecorder và Web Audio; thiết bị thiếu hỗ trợ sẽ hiển thị lỗi, không tạo điểm thay thế.
 
 Kiểm thử tự động dùng dữ liệu giả lập. Cần cấu hình Supabase/Azure thật, áp dụng migration, rồi xác nhận quyền microphone, kết quả từng từ, lịch sử sau tải lại và cách ly dữ liệu giữa hai tài khoản trên môi trường triển khai.

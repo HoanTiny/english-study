@@ -70,6 +70,7 @@ function WeeklyChart({ week }: { week: ActivityDay[] }) {
         <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-gradient-to-t from-emerald-400/70 to-emerald-300/90" /> Lượt ôn</span>
         <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Có nhật ký</span>
       </div>
+      <Link href="/statistics#weekly-report" className="mt-4 inline-block text-sm font-semibold text-primary underline">Xem tổng kết tuần →</Link>
     </div>
   );
 }
