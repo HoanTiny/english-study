@@ -1,5 +1,6 @@
 "use client";
 
+import { touchStreak } from "@/lib/profileRepo";
 import { supabase } from "@/lib/supabase";
 
 export type Feedback = { fragment: string; issue: string; suggestion: string };
@@ -60,5 +61,6 @@ export async function saveEntry(
     .select("entry_date, prompt_text, body, sentence_count, ai_feedback")
     .single();
   if (error) throw error;
+  void touchStreak(userId).then(() => window.dispatchEvent(new Event("study-activity"))).catch(console.error);
   return fromRow(data as Row);
 }

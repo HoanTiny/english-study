@@ -1,5 +1,7 @@
 "use client";
 
+import { recordStudyEvent } from "./studySession";
+import { touchStreak } from "@/lib/profileRepo";
 import { supabase } from "@/lib/supabase";
 import {
   review,
@@ -7,6 +9,7 @@ import {
   GRADE_QUALITY,
   type Grade,
   type SrsState,
+  type StoredCard,
 } from "@/lib/srs";
 
 // Trạng thái SRS của một thẻ note, kèm id hàng review_items (nếu đã tồn tại).
@@ -19,6 +22,7 @@ type Row = {
   interval_days: number;
   repetitions: number;
   due_date: string;
+  fsrs_card: StoredCard | null;
 };
 
 function fromRow(r: Row): NoteReviewState {
@@ -28,6 +32,7 @@ function fromRow(r: Row): NoteReviewState {
     interval: r.interval_days,
     repetitions: r.repetitions,
     due: r.due_date,
+    card: r.fsrs_card ?? undefined,
   };
 }
 
@@ -37,7 +42,7 @@ export async function listNoteReviewStates(): Promise<
 > {
   const { data, error } = await supabase
     .from("review_items")
-    .select("id, source_id, ease_factor, interval_days, repetitions, due_date")
+    .select("id, source_id, ease_factor, interval_days, repetitions, due_date, fsrs_card")
     .eq("source_type", "note");
   if (error) throw error;
   const map: Record<string, NoteReviewState> = {};
@@ -46,7 +51,7 @@ export async function listNoteReviewStates(): Promise<
 }
 
 /**
- * Chấm một thẻ note: tính SM-2, upsert review_items, ghi review_logs.
+ * Chấm một thẻ note: tính FSRS, upsert review_items, ghi review_logs.
  * `prev` là trạng thái hiện tại (null nếu thẻ chưa từng ôn).
  * Trả về trạng thái mới.
  */
@@ -58,7 +63,7 @@ export async function gradeNote(
   today: string,
 ): Promise<NoteReviewState> {
   const prevState: SrsState = prev ?? initialState(today);
-  const next = review(prevState, grade, today);
+  const next = review(prevState, grade, today, new Date());
 
   const { data, error } = await supabase
     .from("review_items")
@@ -71,15 +76,18 @@ export async function gradeNote(
         interval_days: next.interval,
         repetitions: next.repetitions,
         due_date: next.due,
-        // đã ôn ≥1 lần coi như "hiểu"; "nói được/thuộc lâu" khi độ ổn định FSRS ≥ ~21 ngày
-        recognized: true,
-        mastered: next.interval >= 21,
+        fsrs_card: next.card,
+        // Recognition and stable recall are distinct from speaking ability.
+        recognized: grade !== "again",
+        mastered: grade !== "again" && (next.card?.stability ?? 0) >= 21,
       },
       { onConflict: "user_id,source_type,source_id" },
     )
-    .select("id, source_id, ease_factor, interval_days, repetitions, due_date")
+    .select("id, source_id, ease_factor, interval_days, repetitions, due_date, fsrs_card")
     .single();
   if (error) throw error;
+  recordStudyEvent(userId, { kind: "review", id: noteId });
+  void touchStreak(userId).then(() => window.dispatchEvent(new Event("study-activity"))).catch(console.error);
 
   const saved = fromRow(data as Row);
 

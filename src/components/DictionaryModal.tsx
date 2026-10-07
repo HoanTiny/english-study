@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -72,7 +73,7 @@ export default function DictionaryModal({
     setResults(null);
     setNote("");
     try {
-      const res = await fetch(`/api/dict?q=${encodeURIComponent(term)}`);
+      const res = await apiFetch(`/api/dict?q=${encodeURIComponent(term)}`);
       const d = await res.json();
       if (d.source === "unconfigured") setNote("Cần cấu hình GEMINI_API_KEY để tra từ điển.");
       else if (d.source === "overloaded") setNote("Hệ thống dịch đang quá tải (hết lượt miễn phí). Thử lại sau ít phút — hoặc tra từ tiếng Anh để xem định nghĩa.");

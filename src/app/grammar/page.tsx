@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useMemo, useState } from "react";
 import grammarData from "@/data/grammar.json";
@@ -69,7 +70,7 @@ export default function GrammarPage() {
     if (!cur || !typed.trim() || checking) return;
     setChecking(true);
     try {
-      const res = await fetch("/api/grammar-check", {
+      const res = await apiFetch("/api/grammar-check", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ structure: cur.structure, sentence: typed }),

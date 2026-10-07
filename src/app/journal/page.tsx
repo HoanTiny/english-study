@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useMemo, useState } from "react";
 import { promptOfTheDay } from "@/lib/content";
@@ -15,33 +16,13 @@ import { addErrors } from "@/lib/errorLogRepo";
 const MIN = 5;
 const TARGET = 10;
 
-function mockFeedback(text: string): Feedback[] {
-  const fb: Feedback[] = [];
-  if (/\bi\s/.test(text))
-    fb.push({ fragment: "i", issue: "Viết hoa 'I'", suggestion: "Dùng 'I' thay vì 'i'." });
-  if (/\byesterday\b/i.test(text) && !/\bwas\b|\bwent\b|ed\b/i.test(text))
-    fb.push({ fragment: "yesterday", issue: "Thì quá khứ", suggestion: "Với 'yesterday' nên dùng quá khứ đơn." });
-  if (/\bi\s+like\s+very\s+much\b/i.test(text) || /\bvery much\b/i.test(text))
-    fb.push({ fragment: "very much", issue: "Tự nhiên hơn", suggestion: "Thử 'a lot' cho tự nhiên hơn." });
-  return fb.slice(0, 3);
-}
-
-// Gọi AI thật (Gemini) qua route handler; nếu chưa có key hoặc lỗi → mock.
-async function getFeedback(body: string, prompt: string): Promise<Feedback[]> {
+async function getFeedback(body: string, prompt: string): Promise<Feedback[] | null> {
   try {
-    const res = await fetch("/api/journal-feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ body, prompt }),
-    });
-    if (res.ok) {
-      const data = (await res.json()) as { feedback: Feedback[] | null };
-      if (data.feedback !== null) return data.feedback;
-    }
-  } catch {
-    // bỏ qua, dùng mock
-  }
-  return mockFeedback(body);
+    const res = await apiFetch("/api/journal-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ body, prompt }) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data.feedback) ? data.feedback : null;
+  } catch { return null; }
 }
 
 export default function JournalPage() {
@@ -50,6 +31,7 @@ export default function JournalPage() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [body, setBody] = useState("");
   const [feedback, setFeedback] = useState<Feedback[] | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [scoring, setScoring] = useState(false);
 
   const sentences = countSentences(body);
@@ -59,11 +41,15 @@ export default function JournalPage() {
   useEffect(() => {
     if (!ready || !userId) return;
     let active = true;
+    setEntries([]);
+    setBody("");
+    setFeedback(null);
+    setNotice(null);
     listEntries()
       .then((rows) => {
         if (active) setEntries(rows);
       })
-      .catch((e) => console.error("listEntries", e));
+      .catch(() => { if (active) setNotice("Không tải được nhật ký. Vui lòng tải lại trang."); });
     return () => {
       active = false;
     };
@@ -81,24 +67,18 @@ export default function JournalPage() {
   async function save() {
     if (!userId || scoring) return;
     setScoring(true);
-    const fb = await getFeedback(body, prompt.en);
-    setFeedback(fb);
-    setScoring(false);
-    // Lưu lỗi vào Sổ lỗi cá nhân.
-    if (fb.length) {
-      addErrors(
-        userId,
-        fb.map((f) => ({ source: "journal" as const, original: f.fragment, correction: f.suggestion, note: f.issue })),
-      ).catch(() => {});
-    }
-    const entry: Entry = { date: today, prompt: prompt.en, body, sentences, feedback: fb };
-    // cập nhật lạc quan
-    setEntries((prev) => [entry, ...prev.filter((e) => e.date !== today)]);
+    setNotice(null);
     try {
+      const fb = await getFeedback(body, prompt.en);
+      const entry: Entry = { date: today, prompt: prompt.en, body, sentences, feedback: fb ?? [] };
       await saveEntry(userId, entry);
-    } catch (e) {
-      console.error("saveEntry", e);
-    }
+      setEntries(prev => [entry, ...prev.filter(e => e.date !== today)]);
+      setFeedback(fb);
+      setNotice(fb === null ? "Đã lưu nhật ký. AI chưa phản hồi; bạn có thể thử chấm lại." : "Đã lưu nhật ký và phản hồi AI.");
+      if (fb?.length) await addErrors(userId, fb.map(f => ({ source: "journal" as const, original: f.fragment, correction: f.suggestion, note: f.issue }))).catch(() => setNotice("Đã lưu nhật ký; chưa đồng bộ được Sổ lỗi."));
+    } catch {
+      setNotice("Chưa lưu được nhật ký. Nội dung vẫn ở đây; hãy thử lại.");
+    } finally { setScoring(false); }
   }
 
   return (
@@ -184,6 +164,7 @@ export default function JournalPage() {
         </div>
       </div>
 
+      {notice && <p role="status" className="my-4">{notice}</p>}
       {feedback && (
         <div className="mt-8 liquid-glass-card p-6 sm:p-7 border border-border/85 shadow-xl animate-fadeIn relative overflow-hidden">
           <div className="absolute top-0 left-0 w-24 h-24 bg-accent/5 rounded-full filter blur-xl pointer-events-none" />

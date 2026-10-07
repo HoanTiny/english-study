@@ -57,28 +57,10 @@ export async function POST(req: NextRequest) {
       }
       lessonCount++;
 
-      // Thay toàn bộ phrases của bài (giữ nguyên audio cụm nếu trùng en).
-      const { data: oldPhrases } = await db
-        .from("cms_lesson_phrases")
-        .select("en, audio_url")
-        .eq("lesson_id", up.id);
-      const audioByEn = new Map((oldPhrases ?? []).map((p) => [p.en, p.audio_url]));
+      const { error: pErr } = await db.rpc("replace_lesson_phrases", { p_lesson: up.id, p_phrases: content.phrases });
+      if (pErr) errors.push(meta.slug + ": " + pErr.message);
+      else phraseCount += content.phrases.length;
 
-      await db.from("cms_lesson_phrases").delete().eq("lesson_id", up.id);
-      const rows = content.phrases.map((p, idx) => ({
-        lesson_id: up.id,
-        en: p.en,
-        vi: p.vi ?? null,
-        ipa: p.ipa ?? null,
-        example: p.example ?? null,
-        audio_url: audioByEn.get(p.en) ?? null,
-        order_index: idx,
-      }));
-      if (rows.length) {
-        const { error: pErr } = await db.from("cms_lesson_phrases").insert(rows);
-        if (pErr) errors.push(`${meta.slug} phrases: ${pErr.message}`);
-        else phraseCount += rows.length;
-      }
     }
   }
 

@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { YoutubeTranscript } from "youtube-transcript";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
@@ -206,6 +207,8 @@ const cache = new Map<
 >();
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const q = req.nextUrl.searchParams.get("v") ?? "";
   const id = parseVideoId(q);
   if (!id) return NextResponse.json({ error: "Link/ID video không hợp lệ." }, { status: 400 });

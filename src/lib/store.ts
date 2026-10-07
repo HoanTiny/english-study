@@ -1,5 +1,6 @@
 "use client";
 
+import { localDate } from "./calendar";
 import { useEffect, useState } from "react";
 
 // Lưu trữ tạm bằng localStorage cho bản demo (thật sẽ thay bằng Supabase).
@@ -25,7 +26,7 @@ export function useLocalState<T>(key: string, initial: T) {
 }
 
 export function todayKey() {
-  return new Date().toISOString().slice(0, 10);
+  return localDate();
 }
 
 export function countSentences(text: string) {

@@ -9,7 +9,10 @@
     "lint": "eslint",
     "lint:cefr": "node scripts/lint-cefr.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check:services": "node scripts/check-live-services.mjs",
+    "check:speech": "node scripts/check-azure-speech.mjs",
+    "check:learning": "node scripts/check-live-learning.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",

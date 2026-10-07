@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
 
@@ -5,6 +6,8 @@ export const runtime = "nodejs";
 
 // Sinh bộ từ vựng cho game Sprint bằng Gemini, theo cấp độ CEFR (+ chủ đề tuỳ chọn).
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   if (!geminiConfigured()) {
     return NextResponse.json({ error: "Chưa cấu hình GEMINI_API_KEY." }, { status: 503 });
   }
