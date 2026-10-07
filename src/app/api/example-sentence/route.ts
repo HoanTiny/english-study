@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -15,6 +16,8 @@ Trả về DUY NHẤT JSON: {"sentence": "<câu tiếng Anh>", "vi": "<dịch ti
 Không thêm chữ nào ngoài JSON.`;
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   let en = "";
   let vi = "";
   try {

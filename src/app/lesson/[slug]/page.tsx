@@ -33,6 +33,7 @@ export default function LessonPage() {
 
   // Nội dung bài: đọc từ DB (CMS) trước, fallback file tĩnh.
   const [lesson, setLesson] = useState<LessonContentDB | undefined>(undefined);
+  const [lessonError, setLessonError] = useState(false);
   const [lessonLoading, setLessonLoading] = useState(true);
 
   // Cụm đã lưu vào ôn tập (theo nội dung trùng khớp).
@@ -41,12 +42,17 @@ export default function LessonPage() {
   const [doneBadge, setDoneBadge] = useState(false);
 
   useEffect(() => {
-    setDoneBadge(isLessonDone(slug));
-  }, [slug]);
+    let active = true;
+    setDoneBadge(false);
+    if (userId) void isLessonDone(userId, slug).then(done => { if (active) setDoneBadge(done); }).catch(() => {});
+    return () => { active = false; };
+  }, [slug, userId]);
 
   useEffect(() => {
     let active = true;
     setLessonLoading(true);
+    setLessonError(false);
+    setLesson(undefined);
     fetchLesson(slug)
       .then((l) => {
         if (active) {
@@ -54,7 +60,7 @@ export default function LessonPage() {
           setLessonLoading(false);
         }
       })
-      .catch(() => active && setLessonLoading(false));
+      .catch(() => { if (active) { setLessonError(true); setLessonLoading(false); } });
     return () => {
       active = false;
     };
@@ -135,6 +141,8 @@ export default function LessonPage() {
       </main>
     );
   }
+
+  if (lessonError) return <p role="alert" className="p-8">Không tải được bài học. Vui lòng tải lại trang.</p>;
 
   if (lessonLoading) {
     return (
@@ -305,7 +313,7 @@ export default function LessonPage() {
         );
       })()}
 
-      <LessonQuiz phrases={lesson.phrases} slug={slug} />
+      <LessonQuiz onPassed={() => setDoneBadge(true)} phrases={lesson.phrases} slug={slug} />
 
       <ListeningResource
         cefr={lesson.cefr}

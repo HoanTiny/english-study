@@ -1,5 +1,6 @@
 "use client";
 
+import { localDate } from "./calendar";
 import { supabase } from "@/lib/supabase";
 
 export type DashboardStats = {
@@ -7,12 +8,13 @@ export type DashboardStats = {
   inReview: number; // tổng thẻ note đang ôn
   dueToday: number; // số thẻ đến hạn hôm nay
   recognized: number; // đã "hiểu"
-  mastered: number; // đã "nói được"
+  mastered: number; // ghi nhớ vững
   // Nhật ký
   journalToday: boolean; // đã viết hôm nay chưa
   journalStreak: number; // chuỗi ngày viết liên tiếp
   journalTotal: number;
   // Shadowing
+  shadowToday: number;
   shadowDone: number; // số câu đã luyện
   shadowAvg: number | null; // điểm trung bình
 };
@@ -22,19 +24,20 @@ type RiRow = {
   recognized: boolean;
   mastered: boolean;
   due_date: string;
+  fsrs_card: { due: string } | null;
 };
 
 // Một ngày trong dòng thời gian hoạt động.
 export type ActivityDay = {
-  date: string; // YYYY-MM-DD (UTC, đồng bộ với cách app tính "today")
+  date: string; // YYYY-MM-DD (ngày địa phương)
   label: string; // nhãn ngắn hiển thị trên trục (vd "2/6")
   reviews: number; // số lần ôn (review_logs) trong ngày
   journaled: boolean; // có viết nhật ký không
   shadowAvg: number | null; // điểm phát âm TB của các câu shadowing trong ngày
 };
 
-function utcDate(ts: string): string {
-  return new Date(ts).toISOString().slice(0, 10);
+function activityDate(ts: string): string {
+  return localDate(new Date(ts));
 }
 
 // Dòng thời gian hoạt động `days` ngày gần nhất (gồm hôm nay).
@@ -44,13 +47,14 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
   start.setUTCDate(start.getUTCDate() - (days - 1));
   const startStr = start.toISOString().slice(0, 10);
 
+  const startInstant = new Date(startStr + "T00:00:00").toISOString();
   const [logsRes, jRes, sRes] = await Promise.all([
-    supabase.from("review_logs").select("reviewed_at").gte("reviewed_at", startStr),
+    supabase.from("review_logs").select("reviewed_at").gte("reviewed_at", startInstant),
     supabase.from("journal_entries").select("entry_date").gte("entry_date", startStr),
     supabase
       .from("shadowing_attempts")
-      .select("pronunciation_score, created_at")
-      .gte("created_at", startStr),
+      .select("pronunciation_score, created_at").eq("score_source", "azure")
+      .gte("created_at", startInstant),
   ]);
 
   if (logsRes.error) throw logsRes.error;
@@ -69,7 +73,7 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
   }
 
   for (const r of logsRes.data as { reviewed_at: string }[]) {
-    const b = buckets.get(utcDate(r.reviewed_at));
+    const b = buckets.get(activityDate(r.reviewed_at));
     if (b) b.reviews++;
   }
   for (const r of jRes.data as { entry_date: string }[]) {
@@ -78,7 +82,7 @@ export async function loadActivityTimeline(today: string, days = 14): Promise<Ac
   }
   for (const r of sRes.data as { pronunciation_score: number | null; created_at: string }[]) {
     if (r.pronunciation_score == null) continue;
-    const b = buckets.get(utcDate(r.created_at));
+    const b = buckets.get(activityDate(r.created_at));
     if (b) b.scores.push(Number(r.pronunciation_score));
   }
 
@@ -102,10 +106,11 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
     supabase.from("notes").select("id, in_review"),
     supabase
       .from("review_items")
-      .select("source_id, recognized, mastered, due_date")
+      .select("source_id, recognized, mastered, due_date, fsrs_card")
       .eq("source_type", "note"),
     supabase.from("journal_entries").select("entry_date"),
-    supabase.from("shadowing_attempts").select("pronunciation_score"),
+    supabase.from("shadowing_attempts")
+      .select("pronunciation_score, created_at").eq("score_source", "azure"),
   ]);
 
   if (notesRes.error) throw notesRes.error;
@@ -124,7 +129,7 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
   let dueToday = 0;
   for (const n of inReviewNotes) {
     const s = riBySource.get(n.id);
-    if (!s || s.due_date <= today) dueToday++;
+    if (!s || (s.fsrs_card ? new Date(s.fsrs_card.due).getTime() <= Date.now() : s.due_date <= today)) dueToday++;
   }
   const recognized = ri.filter((r) => r.recognized).length;
   const mastered = ri.filter((r) => r.mastered).length;
@@ -147,6 +152,7 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
   const scores = (sRes.data as { pronunciation_score: number | null }[])
     .map((r) => r.pronunciation_score)
     .filter((v): v is number => v != null);
+  const shadowToday = (sRes.data as { pronunciation_score: number | null; created_at: string }[]).filter(r => r.pronunciation_score != null && localDate(new Date(r.created_at)) === today).length;
   const shadowDone = scores.length;
   const shadowAvg =
     shadowDone > 0
@@ -162,6 +168,7 @@ export async function loadDashboard(today: string): Promise<DashboardStats> {
     journalStreak,
     journalTotal,
     shadowDone,
+    shadowToday,
     shadowAvg,
   };
 }

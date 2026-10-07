@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useState } from "react";
 
@@ -29,7 +30,7 @@ export default function WordDetail({ word }: { word: string }) {
     setLoading(true);
     setErr("");
     try {
-      const r = await fetch(`/api/dict?q=${encodeURIComponent(word)}`);
+      const r = await apiFetch(`/api/dict?q=${encodeURIComponent(word)}`);
       const d = await r.json();
       if (d.source === "unconfigured") setErr("Chưa cấu hình từ điển AI.");
       else if (d.source === "overloaded") setErr("Từ điển đang quá tải, thử lại sau.");

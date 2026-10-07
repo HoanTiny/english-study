@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -232,7 +233,7 @@ export default function SprintGame() {
     try {
       const qs = new URLSearchParams({ level, n: "18" });
       if (aiTopic.trim()) qs.set("topic", aiTopic.trim());
-      const res = await fetch(`/api/sprint-words?${qs}`);
+      const res = await apiFetch(`/api/sprint-words?${qs}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Không tạo được từ.");
       startWith(data.words as Word[], `AI · ${level}${aiTopic.trim() ? " · " + aiTopic.trim() : ""}`);

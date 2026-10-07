@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -138,6 +139,8 @@ async function freeDictSenses(q: string): Promise<Sense[]> {
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const q = (req.nextUrl.searchParams.get("q") ?? "").trim();
   if (!q || q.length > 60) return Response.json({ results: [], error: "invalid" }, { status: 400 });
 

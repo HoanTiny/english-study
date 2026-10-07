@@ -72,7 +72,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     refresh();
     // Cập nhật khi đăng nhập/đăng xuất hoặc token được làm mới.
     const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      refresh();
+      // Supabase invokes subscribers while holding its auth lock.
+      setTimeout(() => { if (active) void refresh(); }, 0);
     });
     return () => {
       active = false;
@@ -115,7 +116,9 @@ export function useCmsRole(): "admin" | "editor" | null {
       }
     }
     check();
-    const { data: sub } = supabase.auth.onAuthStateChange(() => check());
+    const { data: sub } = supabase.auth.onAuthStateChange(() => {
+      setTimeout(() => { if (active) void check(); }, 0);
+    });
     return () => {
       active = false;
       sub.subscription.unsubscribe();

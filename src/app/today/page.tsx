@@ -17,7 +17,7 @@ export default function TodayPage() {
           Sẵn sàng học tiếp?
         </h1>
         <p className="max-w-2xl text-xs font-semibold text-muted leading-relaxed mt-2">
-          Tổng quan tiến độ thực hành thực tế và chỉ số chuyển đổi từ <b>Hiểu (Thụ động)</b> sang <b>Nói được (Chủ động)</b>. Mục tiêu hàng ngày của chúng ta là tối ưu hóa và thu hẹp tỷ lệ này.
+          Chọn một buổi học vừa sức, ôn điều sắp quên và luyện dùng tiếng Anh từng bước. Bạn có thể tiếp tục buổi đang học bất cứ lúc nào trong hôm nay.
         </p>
       </div>
       <TodayDashboard />

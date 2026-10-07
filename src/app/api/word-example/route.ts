@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
 import { supabaseAdmin } from "@/lib/server/supabaseAdmin";
@@ -33,6 +34,8 @@ async function fdExample(word: string): Promise<string | null> {
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const word = (req.nextUrl.searchParams.get("w") ?? "").trim().toLowerCase();
   if (!word || word.length > 40 || !/^[a-z][a-z'’-]*$/.test(word)) {
     return NextResponse.json({ error: "invalid" }, { status: 400 });

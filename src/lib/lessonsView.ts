@@ -47,13 +47,13 @@ export function staticStages(): ViewStage[] {
 }
 
 /**
- * Danh sách giai đoạn ưu tiên DB (CMS): bài trong mỗi giai đoạn lấy từ DB theo
- * order_index; bài tĩnh chưa có trong DB (vd ai-roleplay) được nối thêm vào cuối.
- * Fallback hoàn toàn về tĩnh nếu DB trống/lỗi.
+ * Danh sách giai đoạn lấy từ CMS: bài trong mỗi giai đoạn sắp theo
+ * order_index; chỉ công cụ IPA/hội thoại được nối thêm vào cuối.
+ * Không phục hồi bài đã ẩn/xóa từ nội dung tĩnh.
  */
 export async function loadStages(): Promise<ViewStage[]> {
   const db = await fetchLessonList();
-  if (!db) return staticStages();
+
 
   const byStage = new Map<number, typeof db>();
   for (const m of db) {
@@ -72,17 +72,8 @@ export async function loadStages(): Promise<ViewStage[]> {
       cefr: d.cefr,
       phraseCount: d.phraseCount,
     }));
-    // Bài tĩnh chưa có nội dung trong DB (vd ai-roleplay) → giữ lại trên lộ trình.
-    for (const l of s.lessons) {
-      if (!dbSlugs.has(l.slug)) {
-        lessons.push({
-          slug: l.slug,
-          title: l.title,
-          topic: l.topic,
-          cefr: s.cefr,
-          phraseCount: staticPhraseCount(l.slug),
-        });
-      }
+    for (const l of s.lessons.filter(l => TOOL_SLUGS.has(l.slug))) {
+      if (!dbSlugs.has(l.slug)) lessons.push({ ...l, cefr: s.cefr, phraseCount: 0 });
     }
     return { id: s.id, title: s.title, cefr: s.cefr, goal: s.goal, months: s.months, lessons };
   });
@@ -90,7 +81,7 @@ export async function loadStages(): Promise<ViewStage[]> {
 
 /**
  * Tính trạng thái mở khoá động trên danh sách giai đoạn (view).
- * Bài đầu mở; bài kế mở khi bài trước "bắt đầu" (lưu ≥1 cụm); "done" khi lưu đủ cụm;
+ * Bài đầu mở; bài kế mở khi bài trước bắt đầu; "done" khi đạt quiz;
  * bài không có nội dung (phraseCount=0) → khoá & gãy chuỗi.
  */
 // Bài "công cụ" — mở thẳng sang trang luyện riêng (không phải bài học cụm/SRS).
@@ -100,10 +91,13 @@ export const TOOL_SLUGS = new Set(["ipa-sounds", "ai-roleplay"]);
 export function computeStatusesView(
   viewStages: ViewStage[],
   savedByLesson: Record<string, number>,
+  passedSlugs: string[] = [],
+  currentStage = 1,
 ): Record<string, LessonStatus> {
   const out: Record<string, LessonStatus> = {};
   let prevStarted = true;
   for (const stage of viewStages) {
+    if (stage.id === currentStage) prevStarted = true;
     for (const l of stage.lessons) {
       if (TOOL_SLUGS.has(l.slug)) {
         out[l.slug] = "available"; // công cụ: luôn mở, không ảnh hưởng chuỗi
@@ -115,13 +109,23 @@ export function computeStatusesView(
         continue;
       }
       const saved = savedByLesson[l.slug] ?? 0;
-      const done = saved >= l.phraseCount;
+      const done = passedSlugs.includes(l.slug);
       const started = saved > 0;
       if (done) out[l.slug] = "done";
-      else if (prevStarted) out[l.slug] = started ? "in_progress" : "available";
+      else if (stage.id < currentStage || prevStarted || started) out[l.slug] = started ? "in_progress" : "available";
       else out[l.slug] = "locked";
       prevStarted = started || done;
     }
   }
   return out;
+}
+
+export function suggestedLesson(
+  viewStages: ViewStage[], saved: Record<string, number>, passed: string[], currentStage: number,
+): ViewLesson | null {
+  const statuses = computeStatusesView(viewStages, saved, passed, currentStage);
+  const candidates = viewStages.filter(s => s.id >= currentStage).flatMap(s => s.lessons)
+    .filter(l => l.phraseCount > 0 && !TOOL_SLUGS.has(l.slug) && !passed.includes(l.slug));
+  return candidates.find(l => statuses[l.slug] === "in_progress")
+    ?? candidates.find(l => statuses[l.slug] === "available") ?? null;
 }

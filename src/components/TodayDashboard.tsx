@@ -6,6 +6,7 @@ import { todayKey } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { loadDashboard, loadActivityTimeline, type DashboardStats, type ActivityDay } from "@/lib/statsRepo";
 import StudyReminder from "@/components/StudyReminder";
+import StudySessionCard from "./StudySessionCard";
 import SuggestedLesson from "@/components/SuggestedLesson";
 import ProgressRing from "@/components/ProgressRing";
 
@@ -21,7 +22,7 @@ function Stage({ children }: { children: ReactNode }) {
 function WeeklyChart({ week }: { week: ActivityDay[] }) {
   const max = Math.max(1, ...week.map((d) => d.reviews));
   const totalReviews = week.reduce((s, d) => s + d.reviews, 0);
-  const activeDays = week.filter((d) => d.reviews > 0 || d.journaled).length;
+  const activeDays = week.filter((d) => d.reviews > 0 || d.journaled || d.shadowAvg !== null).length;
   const todayIdx = week.length - 1;
 
   return (
@@ -86,15 +87,21 @@ type Task = {
 };
 
 export default function TodayDashboard() {
-  const today = todayKey();
+  const [today, setToday] = useState(todayKey);
+  const [retry, setRetry] = useState(0);
+  const [loadError, setLoadError] = useState(false);
+  useEffect(() => { const timer = setInterval(() => setToday(todayKey()), 30000); return () => clearInterval(timer); }, []);
   const { userId, ready, streak } = useAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [week, setWeek] = useState<ActivityDay[]>([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready) return;
+    if (!userId) { setLoadError(true); return; }
     let active = true;
+    setLoaded(false);
+    setLoadError(false);
     Promise.all([loadDashboard(today), loadActivityTimeline(today, 7)])
       .then(([s, w]) => {
         if (active) {
@@ -103,11 +110,13 @@ export default function TodayDashboard() {
           setLoaded(true);
         }
       })
-      .catch((e) => console.error("loadDashboard", e));
+      .catch(() => { if (active) setLoadError(true); });
     return () => {
       active = false;
     };
-  }, [ready, userId, today]);
+  }, [ready, userId, today, retry]);
+
+  if (loadError) return <div role="alert" className="glass-card p-6"><p>Chưa tải được tiến độ học.</p><button className="liquid-glass-btn mt-3 px-5 py-2" onClick={() => setRetry(n => n + 1)}>Thử lại</button></div>;
 
   if (!loaded) {
     return (
@@ -135,7 +144,7 @@ export default function TodayDashboard() {
   const tasks: Task[] = [
     { href: "/review", icon: "🔁", label: "Vòng ôn tập", title: "Học & Ôn SRS", value: `${stats.dueToday}`, note: "thẻ đến hạn hôm nay", cta: stats.dueToday > 0 ? "Ôn ngay →" : "Hoàn thành ✓", done: stats.dueToday === 0 && stats.inReview > 0, tint: "emerald" },
     { href: "/journal", icon: "✍️", label: "Phản xạ viết", title: "Nhật ký cùng AI", value: `${stats.journalStreak}`, note: "ngày streak viết", cta: stats.journalToday ? "Đã viết ✓" : "Viết ngay →", done: stats.journalToday, tint: "amber" },
-    { href: "/shadowing", icon: "🗣️", label: "Luyện nói", title: "Shadowing", value: `${stats.shadowDone}`, note: "câu đã luyện", cta: "Luyện ngay →", done: stats.shadowDone > 0, tint: "violet" },
+    { href: "/shadowing", icon: "🗣️", label: "Luyện nói", title: "Shadowing", value: `${stats.shadowToday}`, note: "câu đã luyện hôm nay", cta: stats.shadowToday > 0 ? "Đã luyện ✓" : "Luyện ngay →", done: stats.shadowToday > 0, tint: "violet" },
   ];
 
   const tintCls: Record<string, { dot: string; icon: string; cta: string }> = {
@@ -147,18 +156,19 @@ export default function TodayDashboard() {
   return (
     <Stage>
       <div className="space-y-5 animate-fadeIn">
-        {/* ── Tổng quan: vòng "Nói được" + chip số liệu ── */}
+        <StudySessionCard key={userId} dueReviews={stats.dueToday} />
+        {/* ── Tổng quan: vòng "Ghi nhớ vững" + chip số liệu ── */}
         <div className={`${GLASS} flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:p-7`}>
           <ProgressRing value={gapPct} size={104} stroke={10} color="#34D399">
             <span className="font-display text-2xl font-black text-foreground leading-none">{gapPct}%</span>
-            <span className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-muted">nói được</span>
+            <span className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-muted">ghi nhớ vững</span>
           </ProgressRing>
 
           <div className="min-w-0 flex-1">
             <p className="text-[9px] font-black uppercase tracking-[0.2em] text-primary">Vốn từ chủ động</p>
             <p className="mt-1 flex flex-wrap items-baseline gap-1.5">
               <span className="font-display text-2xl font-black text-foreground leading-none">{stats.mastered}</span>
-              <span className="text-[11px] font-semibold text-muted">nói được / {stats.recognized} đã tiếp cận</span>
+              <span className="text-[11px] font-semibold text-muted">ghi nhớ vững / {stats.recognized} đã tiếp cận</span>
             </p>
             <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {chips.map((c) => (
@@ -210,7 +220,7 @@ export default function TodayDashboard() {
 
         {/* ── Nhắc học ── */}
         <div className={`${GLASS} p-5`}>
-          <StudyReminder studiedToday={stats.journalToday || (stats.inReview > 0 && stats.dueToday === 0)} />
+          <StudyReminder studiedToday={stats.journalToday || stats.shadowToday > 0 || (week.at(-1)?.reviews ?? 0) > 0} />
         </div>
 
         {empty && (

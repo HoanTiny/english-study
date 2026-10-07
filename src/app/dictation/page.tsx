@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -112,7 +113,7 @@ function DictationInner() {
       setErr("");
       setLoading(true);
       try {
-        const res = await fetch(`/api/yt-transcript?v=${encodeURIComponent(value)}`);
+        const res = await apiFetch(`/api/yt-transcript?v=${encodeURIComponent(value)}`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Không lấy được phụ đề.");
         const rows: Row[] = (data.segments as { text: string; start: number; dur: number }[]).map((s) => ({
@@ -363,15 +364,15 @@ function DictationInner() {
               Phân đoạn {idx + 1}/{segs.length}
             </span>
             <div className="flex gap-2.5">
-              <button 
-                onClick={() => listen(false)} 
+              <button
+                onClick={() => listen(false)}
                 className="liquid-glass-btn px-6 py-2.5 text-[10px] font-black uppercase tracking-wider shadow-md active:scale-95 transition-all"
               >
                 ▶ Nghe đoạn
               </button>
               {source === "bank" && (
-                <button 
-                  onClick={() => listen(true)} 
+                <button
+                  onClick={() => listen(true)}
                   className="rounded-full border border-border/80 bg-white/50 dark:bg-slate-900/60 px-5 py-2.5 text-[10px] font-black uppercase tracking-wider text-foreground hover:border-primary/55 hover:bg-primary-soft/20 cursor-pointer active:scale-95 transition-all duration-300 shadow-sm"
                 >
                   🐢 Nghe chậm
@@ -383,12 +384,12 @@ function DictationInner() {
           {/* Typing Laboratory */}
           <div>
             <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Gõ bản chép của bạn ở phía dưới</p>
-            <textarea 
-              value={typed} 
-              onChange={(e) => setTyped(e.target.value)} 
-              rows={2} 
-              placeholder="Nhập câu tiếng Anh bạn vừa nghe được…" 
-              className="w-full resize-none rounded-xl border border-border/80 bg-white/35 dark:bg-black/35 p-3.5 text-xs sm:text-sm font-semibold text-foreground outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/80 focus:bg-white/80 dark:focus:bg-slate-950/80 transition-all placeholder:text-muted/50 shadow-inner leading-relaxed" 
+            <textarea
+              value={typed}
+              onChange={(e) => setTyped(e.target.value)}
+              rows={2}
+              placeholder="Nhập câu tiếng Anh bạn vừa nghe được…"
+              className="w-full resize-none rounded-xl border border-border/80 bg-white/35 dark:bg-black/35 p-3.5 text-xs sm:text-sm font-semibold text-foreground outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/80 focus:bg-white/80 dark:focus:bg-slate-950/80 transition-all placeholder:text-muted/50 shadow-inner leading-relaxed"
             />
 
             {/* Spelling dynamic word badges */}
@@ -409,7 +410,7 @@ function DictationInner() {
                 );
               })}
             </div>
-            
+
             <p className="mt-2 text-[8px] font-black uppercase tracking-wider text-muted">* Mẹo: Mỗi từ mở bằng nhãn 👁 sẽ không được tính điểm chính xác.</p>
 
             {/* Vietnamese translation box */}
@@ -421,24 +422,24 @@ function DictationInner() {
 
             {/* Action Row */}
             <div className="mt-4.5 flex gap-3">
-              <button 
-                onClick={revealAll} 
+              <button
+                onClick={revealAll}
                 className="flex-1 rounded-full border border-amber-500/30 bg-amber-500/10 py-3.5 text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer shadow-sm active:scale-95 transition-all"
               >
                 Hiện tất cả các từ
               </button>
               {!isDone ? (
-                <button 
-                  onClick={check} 
-                  disabled={!typed.trim()} 
+                <button
+                  onClick={check}
+                  disabled={!typed.trim()}
                   className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Kiểm tra kết quả
                 </button>
               ) : (
-                <button 
-                  onClick={() => goto(idx + 1)} 
-                  disabled={idx + 1 >= segs.length} 
+                <button
+                  onClick={() => goto(idx + 1)}
+                  disabled={idx + 1 >= segs.length}
                   className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Đoạn tiếp theo →
@@ -451,7 +452,7 @@ function DictationInner() {
         {/* High-Fidelity DAW Playlist Tracks */}
         <div className="liquid-glass-card flex flex-col p-5 sm:p-6 border border-border/85 shadow-2xl relative overflow-hidden max-h-[560px]">
           <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
-          
+
           <div className="mb-3.5 flex items-center justify-between border-b border-border/40 pb-3">
             <span className="font-display text-sm font-black uppercase tracking-wider text-foreground">Bản chép chính tả</span>
             <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[9px] font-black text-primary shadow-sm">{progress}% hoàn tất</span>

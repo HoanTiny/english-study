@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useRef, useState } from "react";
 import { fetchPronounce } from "@/lib/pronounce";
@@ -31,7 +32,7 @@ async function fetchExample(word: string): Promise<Ex | null> {
   if (exampleCache.has(word)) return exampleCache.get(word)!;
   try {
     // /api/word-example: đọc/ghi cache DB (dùng chung), sinh bằng AI nếu chưa có.
-    const r = await fetch(`/api/word-example?w=${encodeURIComponent(word)}`);
+    const r = await apiFetch(`/api/word-example?w=${encodeURIComponent(word)}`);
     const d = await r.json();
     if (d.en) {
       const ex = { en: d.en as string, vi: (d.vi as string) || "" };

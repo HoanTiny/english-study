@@ -7,7 +7,7 @@
 ## Tính năng chính
 
 - **Vòng lặp lõi**: Sổ tay → Ôn tập SRS (FSRS) → Nhật ký → Shadowing.
-- **Khoá học**: 31 bài / 253 cụm, mở khoá động theo tiến độ; quiz cuối bài.
+- **Khoá học**: 40 mục trong lộ trình tĩnh; nội dung xuất bản lấy từ CMS, mở khoá động theo tiến độ; quiz cuối bài.
 - **Học từ vựng**: thư viện bộ thẻ, Active Recall đa chế độ (Flashcard / Đoán / Trắc nghiệm), ghép cụm (Lexical Approach).
 - **Ngữ pháp**: 28 cấu trúc câu + 3 thì cơ bản + luyện đặt câu (chấm bằng AI).
 - **Nghe**: Luyện nghe theo chủ đề (YouTube nhúng), Chép chính tả (kho câu TTS hoặc transcript YouTube).
@@ -33,7 +33,7 @@ cp .env.example .env.local   # rồi điền các key (xem bên dưới)
 npm run dev                  # http://localhost:3000
 ```
 
-App chạy được ngay với chế độ **ẩn danh**; các tính năng AI / phát âm / push cần key tương ứng (đều có fallback khi thiếu key).
+App chạy được ngay với chế độ **ẩn danh**; các tính năng AI / phát âm / push cần key tương ứng (thiếu key sẽ báo chưa sẵn sàng; không tạo điểm giả).
 
 ## Biến môi trường
 
@@ -42,8 +42,8 @@ Mẫu đầy đủ ở [`.env.example`](.env.example). Tóm tắt:
 | Biến | Bắt buộc | Dùng cho |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Kết nối Supabase (auth + dữ liệu) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Admin | Ghi dữ liệu ở Admin CMS (chỉ server) |
-| `ADMIN_PASSCODE` | Admin | Mật mã vào `/admin/*` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Admin / AI | CMS và hạn mức API (chỉ server) |
+| `ADMIN_EMAILS` | Admin | Email quản trị khởi tạo; quyền bổ sung trong `profiles.role` |
 | `GEMINI_API_KEY` (`GEMINI_MODEL`) | — | Nhật ký AI, roleplay, sinh câu ví dụ, từ điển |
 | `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION` | — | Chấm phát âm thật ở Shadowing |
 | `OPENAI_COMPAT_*` hoặc `ANTHROPIC_API_KEY` | — | OCR ảnh → bài tập (Admin) |
@@ -57,7 +57,8 @@ Chạy theo thứ tự trong SQL editor của Supabase (các file trong `db/`):
 
 1. `schema.sql` — bảng cốt lõi
 2. `policies.sql` — RLS policies
-3. Các migration bổ sung tính năng: `migrate_journal_shadowing.sql`, `migrate_note_meaning.sql`, `migrate_onboarding.sql`, `fix_profiles_email.sql`, `migrate_push_subscriptions.sql`, `migrate_dictation_videos.sql`, `migrate_listen_videos.sql`, `migrate_lessons_cms.sql`, `migrate_listening_exercises.sql`, `migrate_error_log.sql`
+3. Các migration bổ sung tính năng: `migrate_journal_shadowing.sql`, `migrate_note_meaning.sql`, `migrate_onboarding.sql`, `fix_profiles_email.sql`, `migrate_push_subscriptions.sql`, `migrate_dictation_videos.sql`, `migrate_listen_videos.sql`, `migrate_lessons_cms.sql`, `migrate_listening_exercises.sql`, `migrate_error_log.sql`, `migrate_roles.sql`, `migrate_word_examples.sql`
+4. `migrate_learning_integrity.sql` — bảo vệ role, quota API, ghi CMS nguyên tử, kết quả quiz, trạng thái FSRS đầy đủ
 
 Seed video Luyện nghe (sau khi đã có `migrate_listen_videos.sql` + service-role key):
 
@@ -74,6 +75,18 @@ node scripts/seed-listen-videos.mjs
 | `npm run lint` | ESLint |
 | `npm run lint:cefr` | Dò từ vượt cấp CEFR trong câu mẫu |
 | `npm test` / `npm run test:watch` | Vitest (unit test logic thuần) |
+
+## Buổi học cá nhân hóa
+
+- Xếp lớp điều chỉnh bài bắt đầu và gợi ý; bài nền tảng vẫn mở để ôn. Vào lại onboarding để kiểm tra/chọn lại trình độ; không tự đánh dấu các bài trước đó là hoàn thành.
+- Trang Hôm nay tạo buổi 10/20/30 phút theo thẻ đến hạn, bài đang học và lỗi cần ôn. Thanh tiến độ theo người học qua các trang; bỏ qua bước không tính hoàn thành. Tiến độ buổi lưu trên thiết bị theo tài khoản và ngày.
+- Sổ lỗi: tự viết lại trước khi xem gợi ý, tự đánh giá và ôn lại theo lịch. Cần 3 lần đúng cách nhau để tự đánh dấu đã nắm; dữ liệu này không phải điểm AI.
+- Chạy thêm `db/migrate_personalized_study.sql` sau migration integrity. Chức năng luyện lỗi cần migration này.
+- Kiểm tra trình duyệt tùy chọn: `node scripts/smoke-personalized.mjs` với Playwright có sẵn, app tại `http://localhost:3107` và build dùng Supabase placeholder `https://build-check.supabase.co` / `build-check-placeholder`. Test chặn toàn bộ backend bằng fixture; không kiểm tra DB thật. Có thể đặt `PLAYWRIGHT_MODULE`, `CHROME_PATH`, `SMOKE_BASE_URL` theo môi trường.
+
+## Triển khai bản sửa tính toàn vẹn (2026-10-04)
+
+Chạy migration mới trước khi triển khai code. Seed bài học từ `/admin/lessons` nếu CMS còn trống; app không phục hồi bài đã ẩn/xóa từ file tĩnh. Chi tiết vận hành và kiểm tra DB: [docs/learning-integrity.md](docs/learning-integrity.md).
 
 ## Kiểm thử
 

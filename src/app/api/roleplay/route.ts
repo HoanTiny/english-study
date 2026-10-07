@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -15,6 +16,8 @@ Quy tắc:
 }
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   let scenario = "";
   let messages: ChatMsg[] = [];
   try {
@@ -25,6 +28,8 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "invalid body" }, { status: 400 });
   }
 
+  if (messages.length > 40 || messages.some(m => !m || typeof m.text !== "string" || m.text.length > 2000 || !["user", "model"].includes(m.role)))
+    return Response.json({ error: "Hội thoại quá dài hoặc không hợp lệ." }, { status: 400 });
   if (!geminiConfigured()) {
     return Response.json({ reply: null, source: "unconfigured" });
   }

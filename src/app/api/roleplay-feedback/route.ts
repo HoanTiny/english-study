@@ -1,3 +1,4 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { generateText, parseJsonLoose, textProviderConfigured } from "@/lib/server/generateText";
 
@@ -19,6 +20,8 @@ Trả về DUY NHẤT một JSON:
 Tối đa 4 corrections (lỗi quan trọng nhất), 4 vocab. Giải thích bằng tiếng Việt, ví dụ bằng tiếng Anh. Nếu người học nói tốt, corrections có thể rỗng.`;
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   if (!textProviderConfigured())
     return NextResponse.json({ ok: false, error: "unconfigured" }, { status: 200 });
 
@@ -32,6 +35,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "invalid body" }, { status: 400 });
   }
 
+  if (messages.length > 40 || messages.some(m => !m || typeof m.text !== "string" || m.text.length > 2000 || !["user", "model"].includes(m.role)))
+    return Response.json({ error: "Hội thoại quá dài hoặc không hợp lệ." }, { status: 400 });
   const userTurns = messages.filter((m) => m.role === "user" && m.text?.trim());
   if (userTurns.length === 0)
     return NextResponse.json({ ok: false, error: "no_user_turns" });

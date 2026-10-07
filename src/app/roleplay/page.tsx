@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useRef, useState } from "react";
 import { useAuth } from "@/lib/auth";
@@ -66,10 +67,10 @@ export default function RoleplayPage() {
     setScoring(true);
     setFeedback(null);
     try {
-      const res = await fetch("/api/roleplay-feedback", {
+      const res = await apiFetch("/api/roleplay-feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scenario: scenario.en, messages }),
+        body: JSON.stringify({ scenario: scenario.en, messages: messages.slice(-30) }),
       });
       const d = await res.json();
       setFeedback(d.ok ? d.feedback : { error: d.error || "error" });
@@ -97,13 +98,13 @@ export default function RoleplayPage() {
   async function sendTo(history: Msg[], sc: (typeof scenarios)[number]) {
     setLoading(true);
     try {
-      const res = await fetch("/api/roleplay", {
+      const res = await apiFetch("/api/roleplay", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scenario: sc.en, messages: history }),
+        body: JSON.stringify({ scenario: sc.en, messages: history.slice(-30) }),
       });
       const data = (await res.json()) as { reply: string | null; source: string };
-      if (data.reply === null) {
+      if (typeof data.reply !== "string" || !data.reply.trim()) {
         setUnconfigured(true);
       } else {
         setMessages((prev) => [...prev, { role: "model", text: data.reply! }]);

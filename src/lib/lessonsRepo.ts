@@ -1,10 +1,9 @@
 "use client";
 
 import { supabase } from "@/lib/supabase";
-import { getLesson, type LessonContent, type LessonPhrase } from "@/lib/lessons";
+import { type LessonContent, type LessonPhrase } from "@/lib/lessons";
 
-// Đọc bài học: ưu tiên DB (CMS); nếu DB trống/lỗi → fallback file tĩnh lessons.ts.
-// Dùng dần ở GĐ3 (thay getLesson đồng bộ bằng bản async này).
+// CMS is authoritative. Never revive hidden/deleted lessons from static content.
 
 export type LessonPhraseDB = LessonPhrase & { audioUrl?: string | null };
 export type LessonContentDB = Omit<LessonContent, "phrases"> & {
@@ -31,29 +30,26 @@ type PhraseRow = {
   order_index: number;
 };
 
-function staticToDB(c: LessonContent | undefined): LessonContentDB | undefined {
-  if (!c) return undefined;
-  return { ...c, audioUrl: null, phrases: c.phrases.map((p) => ({ ...p, audioUrl: null })) };
-}
-
-/** Lấy 1 bài theo slug (DB trước, fallback tĩnh). */
+/** Lấy 1 bài theo slug (chỉ từ CMS). */
 export async function fetchLesson(slug: string): Promise<LessonContentDB | undefined> {
   try {
-    const { data: row } = await supabase
+    const { data: row, error } = await supabase
       .from("cms_lessons")
       .select("id, slug, title, cefr, intro, tip, audio_url, youtube_id")
       .eq("slug", slug)
       .eq("visible", true)
       .maybeSingle<LessonRow>();
-    if (!row) return staticToDB(getLesson(slug));
+    if (error) throw error;
+    if (!row) return undefined;
 
-    const { data: phrases } = await supabase
+    const { data: phrases, error: phraseError } = await supabase
       .from("cms_lesson_phrases")
       .select("en, vi, ipa, example, audio_url, order_index")
       .eq("lesson_id", row.id)
       .order("order_index", { ascending: true })
       .returns<PhraseRow[]>();
 
+    if (phraseError) throw phraseError;
     return {
       slug: row.slug,
       title: row.title,
@@ -70,8 +66,8 @@ export async function fetchLesson(slug: string): Promise<LessonContentDB | undef
         audioUrl: p.audio_url,
       })),
     };
-  } catch {
-    return staticToDB(getLesson(slug));
+  } catch (error) {
+    throw error;
   }
 }
 
@@ -86,23 +82,25 @@ export type LessonMeta = {
 
 /**
  * Danh sách bài (meta + số cụm) từ DB, sắp theo stage + order.
- * Trả null nếu DB trống/lỗi → caller dùng fallback tĩnh.
+ * Empty CMS returns []; database errors are propagated.
  */
-export async function fetchLessonList(): Promise<LessonMeta[] | null> {
+export async function fetchLessonList(): Promise<LessonMeta[]> {
   try {
-    const { data: rows } = await supabase
+    const { data: rows, error } = await supabase
       .from("cms_lessons")
       .select("id, slug, title, cefr, stage, order_index")
       .eq("visible", true)
       .order("stage", { ascending: true })
       .order("order_index", { ascending: true })
       .returns<{ id: string; slug: string; title: string; cefr: string; stage: number; order_index: number }[]>();
-    if (!rows || rows.length === 0) return null;
+    if (error) throw error;
+    if (!rows || rows.length === 0) return [];
 
-    const { data: ph } = await supabase
+    const { data: ph, error: countError } = await supabase
       .from("cms_lesson_phrases")
       .select("lesson_id")
       .returns<{ lesson_id: string }[]>();
+    if (countError) throw countError;
     const counts: Record<string, number> = {};
     for (const r of ph ?? []) counts[r.lesson_id] = (counts[r.lesson_id] ?? 0) + 1;
 
@@ -114,8 +112,8 @@ export async function fetchLessonList(): Promise<LessonMeta[] | null> {
       orderIndex: r.order_index,
       phraseCount: counts[r.id] ?? 0,
     }));
-  } catch {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 

@@ -1,13 +1,4 @@
-// Lặp lại ngắt quãng bằng FSRS (Free Spaced Repetition Scheduler) — mô hình hiện đại
-// dựa trên 3 biến: Độ khó (difficulty), Độ ổn định (stability), Khả năng nhớ lại (retrievability).
-//
-// LƯU Ý KIẾN TRÚC: để KHÔNG phải migration DB, ta tái dùng các cột SM-2 cũ:
-//   - ease_factor  ↔ FSRS difficulty (1..10)
-//   - interval_days↔ FSRS stability (làm tròn ngày)
-//   - repetitions  ↔ reps
-//   - due_date     ↔ ngày đến hạn
-// Nhờ vậy reviewRepo/giao diện giữ nguyên, chỉ thuật toán bên trong đổi sang FSRS.
-
+import { localDate } from "./calendar";
 import {
   fsrs,
   generatorParameters,
@@ -18,7 +9,10 @@ import {
   type Grade as FsrsGrade,
 } from "ts-fsrs";
 
+export type StoredCard = Omit<Card, "due" | "last_review"> & { due: string; last_review?: string };
+
 export type SrsState = {
+  card?: StoredCard;
   ease: number; // = FSRS difficulty (1..10)
   interval: number; // = FSRS stability làm tròn (ngày)
   repetitions: number; // = reps
@@ -49,8 +43,8 @@ function addDays(date: string, days: number): string {
 }
 
 // Dựng lại một thẻ FSRS từ trạng thái đã lưu (xấp xỉ last_review từ due - interval).
-function toCard(state: SrsState, today: string): Card {
-  const now = new Date(today + "T00:00:00Z");
+function toCard(state: SrsState, now: Date): Card {
+  if (state.card) return { ...state.card, due: new Date(state.card.due), last_review: state.card.last_review ? new Date(state.card.last_review) : undefined };
   if (state.repetitions === 0 && state.interval === 0) {
     return createEmptyCard(now);
   }
@@ -69,25 +63,25 @@ function toCard(state: SrsState, today: string): Card {
   };
 }
 
-export function review(state: SrsState, grade: Grade, today: string): SrsState {
-  const card = toCard(state, today);
-  const now = new Date(today + "T00:00:00Z");
+export function review(state: SrsState, grade: Grade, today: string, now = new Date(today + "T00:00:00")): SrsState {
+  const card = toCard(state, now);
   const { card: next } = scheduler.next(card, now, RATING[grade]);
   return {
-    ease: Math.round(next.difficulty * 100) / 100,
+    card: { ...next, due: next.due.toISOString(), last_review: next.last_review?.toISOString() },
+    ease: next.difficulty,
     interval: Math.max(1, Math.round(next.stability)),
     repetitions: next.reps,
-    due: next.due.toISOString().slice(0, 10),
+    due: localDate(next.due),
   };
 }
 
-export function isDue(state: SrsState, today: string): boolean {
-  return state.due <= today;
+export function isDue(state: SrsState, today: string, now = new Date()): boolean {
+  return state.card ? new Date(state.card.due).getTime() <= now.getTime() : state.due <= today;
 }
 
 // "Sức mạnh trí nhớ" 0..100 cho thanh hiển thị — từ stability (≈ interval ngày), thang log.
 // ~1 ngày → thấp, ~180 ngày → ~100%.
 export function memoryStrength(state: SrsState): number {
-  const s = Math.max(0, state.interval);
+  const s = Math.max(0, state.card?.stability ?? state.interval);
   return Math.min(100, Math.round((Math.log10(s + 1) / Math.log10(181)) * 100));
 }
