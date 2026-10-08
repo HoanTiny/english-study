@@ -53,6 +53,20 @@ Mẫu đầy đủ ở [`.env.example`](.env.example). Tóm tắt:
 
 ## Cơ sở dữ liệu (Supabase)
 
+### URL đăng nhập trên production
+
+Trong **Authentication → URL Configuration** của Supabase, đặt:
+
+- **Site URL**: `https://english-study-alpha-six.vercel.app`
+- **Redirect URLs**: thêm chính xác `https://english-study-alpha-six.vercel.app/onboarding`.
+- Khi phát triển local, thêm riêng `http://localhost:3000/onboarding`; không dùng localhost làm Site URL của dự án production. Chỉ thêm URL preview cụ thể mà bạn kiểm soát khi cần, không cho phép mọi tên miền Vercel.
+
+Google OAuth và email xác nhận đăng ký đều gửi `/onboarding` trên origin đang mở. Supabase vẫn có thể dùng Site URL nếu đích chưa được cho phép, nên chỉ deploy code không sửa được cấu hình Dashboard sai. Sau khi đổi cấu hình, bắt đầu lại đăng nhập hoặc dùng email xác nhận mới. Link xác nhận đã phát hành có thể giữ đích cũ. Xem [hướng dẫn Redirect URLs của Supabase](https://supabase.com/docs/guides/auth/redirect-urls).
+
+Kiểm tra không đăng nhập/không gửi email: `node scripts/check-auth-redirect.mjs`. Script dùng token cố ý không hợp lệ và không đi tiếp qua redirect; chỉ kiểm tra origin/path mà Auth trả về. Có thể đặt `--site-url=http://localhost:3000` để kiểm tra môi trường local. Script không xác minh trọn luồng đăng nhập Google hoặc trao đổi mã PKCE.
+
+### Schema
+
 Chạy theo thứ tự trong SQL editor của Supabase (các file trong `db/`):
 
 1. `schema.sql` — bảng cốt lõi

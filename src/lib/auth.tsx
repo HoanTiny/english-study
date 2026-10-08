@@ -176,7 +176,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data, error: err } = await supabase.auth.signUp({
       email: em,
       password: pw,
-      options: { data: name ? { display_name: name } : undefined },
+      options: {
+        data: name ? { display_name: name } : undefined,
+        emailRedirectTo: `${window.location.origin}/onboarding`,
+      },
     });
     if (err) throw new Error(err.message);
     // Nếu bật "Confirm email", session sẽ null → cần xác nhận qua email.
@@ -193,7 +196,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setError(null);
     const { error: err } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: typeof window !== "undefined" ? `${window.location.origin}/onboarding` : undefined },
+      options: { redirectTo: `${window.location.origin}/onboarding` },
     });
     if (err) throw new Error(err.message);
   }, []);
