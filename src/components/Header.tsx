@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/60 backdrop-blur-md transition-all duration-300">
+      <header className="sticky top-0 z-40 hidden w-full border-b border-border/40 bg-background/60 backdrop-blur-md transition-all duration-300 md:block">
         <div className="mx-auto flex h-16 items-center justify-between gap-4 px-6 md:px-8">
           
           {/* Left Side: Interactive Search Input (Trigger for DictionaryModal) */}

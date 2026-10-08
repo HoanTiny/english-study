@@ -51,6 +51,23 @@ export default function Nav() {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    window.addEventListener("keydown", closeOnEscape);
+    closeOnDesktop();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener("change", closeOnDesktop);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open]);
+
   // CMS admin bypass
   if (pathname?.startsWith("/admin")) return null;
 
@@ -216,7 +233,7 @@ export default function Nav() {
       {/* ==========================================
           MOBILE: Sticky Top Header & Drawer
           ========================================== */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-surface/90 backdrop-blur-md md:hidden flex items-center justify-between px-5 py-3 select-none">
+      <header className="sticky top-0 z-50 flex h-[calc(4rem+env(safe-area-inset-top))] w-full shrink-0 items-center justify-between border-b border-border/40 bg-surface/90 px-5 pt-[env(safe-area-inset-top)] backdrop-blur-md select-none md:hidden">
         
         {/* Left: Branding Logo */}
         <Link href="/" className="font-display text-xl font-bold tracking-tight text-gradient-iridescent">
@@ -227,7 +244,7 @@ export default function Nav() {
         <div className="flex items-center gap-2">
           {/* Quick Dictionary Button */}
           <button
-            onClick={() => setDictOpen(true)}
+            onClick={() => { setOpen(false); setDictOpen(true); }}
             aria-label="Tra từ điển"
             className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-surface text-sm transition-all duration-300 hover:border-primary/50 active:scale-95 cursor-pointer shadow-sm"
           >
@@ -241,6 +258,7 @@ export default function Nav() {
           <button
             onClick={() => setOpen((prev) => !prev)}
             aria-expanded={open}
+            aria-controls="mobile-navigation"
             aria-label="Menu"
             className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-surface text-foreground transition-all duration-300 hover:border-primary/50 active:scale-95 cursor-pointer shadow-sm"
           >
@@ -253,15 +271,20 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* MOBILE drawer drawer overlay */}
+      {/* Same height as the mobile header, including the device's safe area. */}
       {open && (
-        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden animate-fadeIn" onClick={() => setOpen(false)}>
+        <div className="fixed inset-x-0 bottom-0 top-[calc(4rem+env(safe-area-inset-top))] z-40 bg-black/50 backdrop-blur-sm md:hidden animate-fadeIn" onClick={() => setOpen(false)}>
           <nav
-            onClick={(e) => e.stopPropagation()}
-            className="absolute top-[53px] right-0 bottom-0 w-80 max-w-[85vw] bg-background border-l border-border/40 p-5 flex flex-col justify-between overflow-y-auto shadow-2xl animate-fadeIn"
+            id="mobile-navigation"
+            aria-label="Điều hướng trên điện thoại"
+            onClick={(event) => {
+              event.stopPropagation();
+              if ((event.target as Element).closest("a")) setOpen(false);
+            }}
+            className="absolute inset-y-0 right-0 flex w-80 max-w-[85vw] flex-col border-l border-border/40 bg-background p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] overflow-y-auto overscroll-contain shadow-2xl animate-fadeIn"
           >
-            {/* Scrollable list */}
-            <div className="space-y-6 overflow-y-auto flex-1 pr-1 scrollbar-thin">
+            {/* One scroll area for links and account actions, even on short screens. */}
+            <div className="flex-1 space-y-6 pr-1">
               
               {/* Group 1 */}
               <div className="space-y-1.5">
@@ -319,7 +342,7 @@ export default function Nav() {
             </div>
 
             {/* Profile & bottom */}
-            <div className="pt-4 border-t border-border/40 mt-4 space-y-4">
+            <div className="mt-4 shrink-0 space-y-4 border-t border-border/40 pt-4">
               <div className="flex justify-between px-3 text-[9px] font-bold text-muted/60">
                 <Link href="/privacy" className="hover:underline">Chính sách bảo mật</Link>
                 <Link href="/terms" className="hover:underline">Điều khoản</Link>

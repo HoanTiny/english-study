@@ -10,7 +10,7 @@
 - **Khoá học**: 40 mục trong lộ trình tĩnh; nội dung xuất bản lấy từ CMS, mở khoá động theo tiến độ; quiz cuối bài.
 - **Học từ vựng**: thư viện bộ thẻ, Active Recall đa chế độ (Flashcard / Đoán / Trắc nghiệm), ghép cụm (Lexical Approach).
 - **Ngữ pháp**: 28 cấu trúc câu + 3 thì cơ bản + luyện đặt câu (chấm bằng AI).
-- **Nghe**: Luyện nghe theo chủ đề (YouTube nhúng), Chép chính tả (kho câu TTS hoặc transcript YouTube).
+- **Nghe**: Luyện nghe theo chủ đề (YouTube nhúng), Chép chính tả (kho câu TTS, nhập SRT/VTT, dán bản chép YouTube có thời gian hoặc thử tải phụ đề tự động).
 - **Nói**: Shadowing + chấm phát âm thật (Azure Speech), Hội thoại AI roleplay.
 - **Trò chơi**: Sprint, Audio-call, Collocations.
 - **Hệ thống**: từ điển tra cứu (bôi đen → tra), thống kê tiến bộ, đăng nhập (ẩn danh / Email / Google OAuth), onboarding xếp lớp, nhắc học qua Web Push, Admin CMS.
@@ -101,6 +101,17 @@ node scripts/seed-listen-videos.mjs
 - Chạy thêm `db/migrate_personalized_study.sql` sau migration integrity. Chức năng luyện lỗi cần migration này.
 - Đồng bộ buổi học cần `db/migrate_study_session_sync.sql` trước khi deploy. Quy tắc xử lý xung đột, trạng thái ngoại tuyến và kiểm thử: [docs/study-session-sync.md](docs/study-session-sync.md).
 - Kiểm tra trình duyệt tùy chọn: `node scripts/smoke-personalized.mjs` với Playwright có sẵn, app tại `http://localhost:3107` và build dùng Supabase placeholder `https://build-check.supabase.co` / `build-check-placeholder`. Test chặn toàn bộ backend bằng fixture; không kiểm tra DB thật. Có thể đặt `PLAYWRIGHT_MODULE`, `CHROME_PATH`, `SMOKE_BASE_URL` theo môi trường.
+
+## Phụ đề cho bài chép chính tả
+
+- Chọn **YouTube Video**, dán link/ID, sau đó chọn file `.srt`/`.vtt` hoặc dán bản chép có mốc thời gian. Trên YouTube, mở phần mô tả → **Show transcript / Hiện bản chép lời**, giữ các mốc thời gian khi sao chép. File `.txt` chứa các mốc như `0:00`, `0:05` cũng được hỗ trợ.
+- Xem trước số đoạn và ba đoạn đầu, rồi bấm **Bắt đầu luyện với phụ đề này**. SRT/VTT giữ đúng đầu/cuối từng cue, không gửi file lên server. Bản chép chỉ có mốc bắt đầu dùng đầu đoạn kế tiếp làm điểm dừng; đoạn cuối được ước tính và giao diện báo rõ. Văn bản không có thời gian bị từ chối, không tự đoán cách khớp với audio.
+- Giới hạn 1 MB, 2.000 đoạn, 4.000 ký tự/đoạn, phạm vi 24 giờ. Phụ đề lưu trong localStorage theo tài khoản/video; link video dùng bảng `dictation_videos` hiện có. Nội dung phụ đề chưa đồng bộ giữa thiết bị. Nếu hết dung lượng hoặc không lưu được link, buổi luyện vẫn mở và báo rõ phần chưa lưu. Không cần migration hay API key mới.
+- **Thử tải phụ đề tự động** giữ nguyên nguồn lấy không chính thức; YouTube có thể từ chối. API giới hạn tổng thời gian lấy phụ đề 15 giây, trả mã lỗi `blocked`, `timeout`, `language_unavailable` hoặc `unavailable` và hướng dẫn nhập phụ đề. Không suy ra tác giả đã tắt CC chỉ từ lỗi thư viện. Cache kết quả thành công tối đa 50 video/1 giờ; không cache lỗi. Không dùng Gemini viết lại transcript.
+- Bộ gợi ý chỉ giúp chọn video, không cam kết phụ đề luôn tải tự động được. Trang Luyện nghe mở sẵn video cần dùng, không tự bắt đầu một yêu cầu lấy phụ đề khi mở trang.
+- Kiểm thử: `tests/transcript.test.ts` (SRT/VTT/bản chép, thời gian, dữ liệu sai, cache theo tài khoản) và `tests/ytTranscript.test.ts` (quyền truy cập, cache, lỗi upstream, timeout, đơn vị giây/mili giây).
+
+Tài liệu nguồn: [Hiện bản chép lời trên YouTube](https://support.google.com/youtube/answer/15930243?hl=en), [API tải caption chính thức cần quyền sửa video](https://developers.google.com/youtube/v3/docs/captions/download). Vì vậy không thể chỉ thay bằng API key YouTube để tải phụ đề của mọi video công khai.
 
 ## Luyện phát âm và thống kê
 
