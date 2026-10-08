@@ -1,19 +1,12 @@
 "use client";
-import { apiFetch } from "@/lib/apiFetch";
 
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import sentencesData from "@/data/sentences.json";
 import YtPlayer, { type YtPlayerHandle } from "@/components/YtPlayer";
 import { useAuth } from "@/lib/auth";
-import { listSavedVideos, saveVideo, deleteSavedVideo, type SavedVideo } from "@/lib/dictationVideosRepo";
-import { LISTEN_TOPICS } from "@/data/listenVideos";
-
-// Gợi ý sẵn: các video từ trang Luyện nghe CÓ phụ đề (chép chính tả được).
-const SUGGESTED = LISTEN_TOPICS.flatMap((t) => t.videos)
-  .filter((v) => v.cc)
-  .map((v) => ({ id: v.id, title: v.title, channel: v.channel, level: v.level }));
+import YouTubeDictationSetup from "@/components/YouTubeDictationSetup";
 
 type Row = { en: string; vi?: string; topic?: string; start?: number; dur?: number };
 const DATA = sentencesData as Row[];
@@ -50,27 +43,30 @@ function shuffle<T>(a: T[]): T[] {
 export default function DictationPage() {
   return (
     <Suspense fallback={null}>
-      <DictationInner />
+      <DictationRoute />
     </Suspense>
   );
 }
 
-function DictationInner() {
+function DictationRoute() {
   const sp = useSearchParams();
   const vParam = sp.get("v");
   const { userId } = useAuth();
+  // Changing account or a Listening deep link starts a fresh setup without fetching captions.
+  return <DictationInner key={`${userId ?? "guest"}:${vParam ?? ""}`} vParam={vParam} userId={userId} />;
+}
+
+function DictationInner({ vParam, userId }: { vParam: string | null; userId: string | null }) {
   const [source, setSource] = useState<Source>(vParam ? "yt" : "bank");
-  const [saved, setSaved] = useState<SavedVideo[]>([]);
   const [phase, setPhase] = useState<"setup" | "playing">("setup");
   const [diff, setDiff] = useState<Diff>("normal");
 
   // bank
   const [topic, setTopic] = useState("all");
   // yt
-  const [link, setLink] = useState("");
   const [vid, setVid] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+  const [transcriptNotice, setTranscriptNotice] = useState("");
+  const [transcriptLabel, setTranscriptLabel] = useState("");
   const ytRef = useRef<YtPlayerHandle>(null);
 
   // chung
@@ -101,62 +97,6 @@ function DictationInner() {
     begin(rows);
     setTimeout(() => speak(rows[0].en), 300);
   }
-
-  const refreshSaved = useCallback(() => {
-    listSavedVideos()
-      .then(setSaved)
-      .catch(() => {});
-  }, []);
-
-  const fetchYt = useCallback(
-    async (value: string) => {
-      setErr("");
-      setLoading(true);
-      try {
-        const res = await apiFetch(`/api/yt-transcript?v=${encodeURIComponent(value)}`);
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Không lấy được phụ đề.");
-        const rows: Row[] = (data.segments as { text: string; start: number; dur: number }[]).map((s) => ({
-          en: s.text,
-          start: s.start,
-          dur: s.dur,
-        }));
-        if (rows.length === 0) throw new Error("Phụ đề rỗng.");
-        // Lưu lại video để lần sau dùng không cần dán link.
-        if (userId && data.id) {
-          saveVideo(userId, { videoId: data.id, title: data.title ?? "", channel: data.channel ?? "" })
-            .then(refreshSaved)
-            .catch(() => {});
-        }
-        begin(rows, data.id);
-      } catch (e) {
-        setErr(e instanceof Error ? e.message : "Có lỗi xảy ra.");
-      } finally {
-        setLoading(false);
-      }
-    },
-    // begin/setX là ổn định; chỉ phụ thuộc userId & refreshSaved
-    [userId, refreshSaved],
-  );
-
-  async function removeSaved(id: string) {
-    setSaved((list) => list.filter((v) => v.id !== id));
-    deleteSavedVideo(id).catch(refreshSaved);
-  }
-
-  // Nạp danh sách video đã lưu khi đã đăng nhập.
-  useEffect(() => {
-    if (userId) refreshSaved();
-  }, [userId, refreshSaved]);
-
-  // Mở từ trang Luyện nghe với ?v=<id> → tự nạp transcript & bắt đầu
-  useEffect(() => {
-    if (vParam) {
-      setSource("yt");
-      setLink(vParam);
-      fetchYt(vParam);
-    }
-  }, [vParam, fetchYt]);
 
   const cur = segs[idx];
   const words = useMemo(() => (cur ? cur.en.split(/\s+/) : []), [cur]);
@@ -250,79 +190,10 @@ function DictationInner() {
               <button onClick={startBank} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider shadow-md">Bắt đầu ngay</button>
             </div>
           ) : (
-            <div className="w-full max-w-sm space-y-4 text-left">
-              <div>
-                <label className="text-[9px] font-black uppercase tracking-wider text-muted">Link liên kết YouTube</label>
-                <input
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                  placeholder="https://www.youtube.com/watch?v=..."
-                  className="mt-2 w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4.5 py-3 text-xs font-bold text-foreground outline-none focus:border-primary shadow-inner"
-                />
-                <p className="mt-2 text-[10px] font-semibold text-muted leading-normal">Lưu ý: Chỉ khả dụng với video có chứa phụ đề chuẩn của tác giả (CC).</p>
-              </div>
-              {err && <p className="rounded-2xl bg-rose-500/10 border border-rose-500/20 px-4 py-3 text-xs font-semibold text-rose-600 mt-2">{err}</p>}
-              <button onClick={() => fetchYt(link)} disabled={loading || !link.trim()} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider shadow-md disabled:opacity-50">
-                {loading ? "Đang lấy transcript…" : "Tải Transcript & bắt đầu"}
-              </button>
-
-              {/* Video đã lưu — bấm để dùng lại, không cần dán link */}
-              {saved.length > 0 && (
-                <div className="pt-1">
-                  <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Video đã lưu</p>
-                  <div className="max-h-60 space-y-2 overflow-y-auto pr-1">
-                    {saved.map((v) => (
-                      <div key={v.id} className="flex items-center gap-2.5 rounded-2xl border border-border/60 bg-surface/50 p-2 shadow-sm">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={`https://i.ytimg.com/vi/${v.videoId}/default.jpg`} alt="" className="h-10 w-16 shrink-0 rounded-lg object-cover" loading="lazy" />
-                        <button
-                          onClick={() => { setLink(v.videoId); fetchYt(v.videoId); }}
-                          disabled={loading}
-                          className="min-w-0 flex-1 cursor-pointer text-left disabled:opacity-50"
-                          title="Mở lại video này"
-                        >
-                          <p className="truncate text-xs font-bold text-foreground">{v.title}</p>
-                          {v.channel && <p className="truncate text-[10px] font-semibold text-muted">{v.channel}</p>}
-                        </button>
-                        <button
-                          onClick={() => removeSaved(v.id)}
-                          className="shrink-0 cursor-pointer rounded-lg px-2 py-1 text-muted hover:bg-rose-500/10 hover:text-rose-600"
-                          aria-label="Xoá video đã lưu"
-                          title="Xoá khỏi danh sách"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Gợi ý từ Luyện nghe (đều có phụ đề) */}
-              <div className="pt-1">
-                <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">
-                  📝 Gợi ý từ Luyện nghe <span className="text-emerald-600">· có phụ đề</span>
-                </p>
-                <div className="max-h-64 space-y-2 overflow-y-auto pr-1">
-                  {SUGGESTED.map((v) => (
-                    <button
-                      key={v.id}
-                      onClick={() => { setLink(v.id); fetchYt(v.id); }}
-                      disabled={loading}
-                      className="flex w-full cursor-pointer items-center gap-2.5 rounded-2xl border border-border/60 bg-surface/50 p-2 text-left shadow-sm transition-all hover:border-primary/50 disabled:opacity-50"
-                      title="Dùng video này để chép chính tả"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`https://i.ytimg.com/vi/${v.id}/default.jpg`} alt="" className="h-10 w-16 shrink-0 rounded-lg object-cover" loading="lazy" />
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-bold text-foreground">{v.title}</span>
-                        <span className="block truncate text-[10px] font-semibold text-muted">{v.channel} · {v.level}</span>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <YouTubeDictationSetup key={`${userId ?? "guest"}:${vParam ?? ""}`} initialVideo={vParam} userId={userId} onStart={data => {
+              setTranscriptNotice(data.notice); setTranscriptLabel(data.label);
+              begin(data.segments.map(segment => ({ en: segment.text, start: segment.start, dur: segment.dur })), data.videoId);
+            }} />
           )}
         </div>
       </main>
@@ -341,6 +212,7 @@ function DictationInner() {
         </div>
       </div>
 
+      {source === "yt" && <div className="mb-4 text-sm text-muted"><p>{transcriptLabel} · {segs.length} đoạn</p>{transcriptNotice && <p role="status" className="mt-1">{transcriptNotice}</p>}</div>}
       <div className="grid gap-6 lg:grid-cols-[1.14fr_0.86fr] items-start">
         {/* Cinematic Studio Work Deck */}
         <div className="liquid-glass-card p-5 sm:p-6 border border-border/85 shadow-2xl relative overflow-hidden flex flex-col gap-4">
