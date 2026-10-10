@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import ErrorPractice from "@/components/ErrorPractice";
+import { errorDue } from "@/lib/errorPractice";
 import { useAuth } from "@/lib/auth";
 import { listErrors, setResolved, deleteError, type ErrorRow } from "@/lib/errorLogRepo";
 
@@ -23,6 +25,13 @@ function speak(text: string) {
 export default function ErrorsPage() {
   const { userId, ready } = useAuth();
   const [rows, setRows] = useState<ErrorRow[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [retry, setRetry] = useState(0);
+  const [practicing, setPracticing] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => { const timer = setInterval(() => setNow(new Date()), 30000); return () => clearInterval(timer); }, []);
   const [loaded, setLoaded] = useState(false);
   const [filter, setFilter] = useState<string>("all");
   const [hideResolved, setHideResolved] = useState(true);
@@ -31,12 +40,16 @@ export default function ErrorsPage() {
     if (!ready) return;
     if (!userId) { setLoaded(true); return; }
     let active = true;
+    setRows([]);
+    setLoaded(false);
+    setLoadError(null);
+    setPracticing(null);
     listErrors()
       .then((r) => { if (active) setRows(r); })
-      .catch((e) => console.error("listErrors", e))
+      .catch(() => { if (active) setLoadError("Không tải được Sổ lỗi. Vui lòng thử lại."); })
       .finally(() => { if (active) setLoaded(true); });
     return () => { active = false; };
-  }, [ready, userId]);
+  }, [ready, userId, retry]);
 
   const filtered = useMemo(
     () => rows.filter((r) => (filter === "all" || r.source === filter) && (!hideResolved || !r.resolved)),
@@ -44,19 +57,33 @@ export default function ErrorsPage() {
   );
   const unresolved = rows.filter((r) => !r.resolved).length;
 
+  const due = filtered.filter(r => errorDue(r, now));
+  const practiceRow = rows.find(r => r.id === practicing);
   async function toggle(r: ErrorRow) {
-    setRows((rs) => rs.map((x) => (x.id === r.id ? { ...x, resolved: !x.resolved } : x)));
-    await setResolved(r.id, !r.resolved);
+    if (busy) return;
+    setBusy(true); setNotice(null);
+    try { await setResolved(r.id, !r.resolved); setRows(rs => rs.map(x => x.id === r.id ? { ...x, resolved: !x.resolved, ...(!r.resolved ? {} : { correct_streak: 0, next_review_at: new Date().toISOString() }) } : x)); }
+    catch { setNotice("Chưa lưu được thay đổi. Vui lòng thử lại."); }
+    finally { setBusy(false); }
   }
   async function remove(r: ErrorRow) {
-    setRows((rs) => rs.filter((x) => x.id !== r.id));
-    await deleteError(r.id);
+    if (busy) return;
+    setBusy(true); setNotice(null);
+    try { await deleteError(r.id); setRows(rs => rs.filter(x => x.id !== r.id)); }
+    catch { setNotice("Chưa xóa được lỗi. Vui lòng thử lại."); }
+    finally { setBusy(false); }
+  }
+  function practiced(updated: ErrorRow) {
+    setRows(rs => rs.map(r => r.id === updated.id ? updated : r));
+    setNotice(updated.resolved ? "Đã tự sửa đúng qua 3 lần ôn cách nhau." : "Đã lưu lượt luyện. Ôn tiếp vào " + new Date(updated.next_review_at).toLocaleString("vi-VN") + ".");
+    const next = due.find(r => r.id !== updated.id);
+    setPracticing(next?.id ?? null);
   }
 
   const srcLabel = (s: string) => SOURCES.find((x) => x.key === s)?.label ?? s;
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-16 animate-fadeIn">
+    <main className={`study-page ${practicing ? "study-page--focused" : ""} animate-fadeIn`}>
       <h1 className="font-display text-3xl font-black text-gradient-iridescent">Sổ lỗi cá nhân</h1>
       <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">
         Tổng hợp lỗi từ nhật ký, hội thoại AI và luyện ngữ pháp — ôn lại để không lặp lại. Còn <b className="text-foreground">{unresolved}</b> lỗi chưa nắm.
@@ -64,7 +91,7 @@ export default function ErrorsPage() {
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
         {SOURCES.map((s) => (
-          <button key={s.key} onClick={() => setFilter(s.key)} className={`rounded-full border px-3 py-1.5 text-xs font-black transition-all ${filter === s.key ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{s.label}</button>
+          <button key={s.key} disabled={!!practicing} onClick={() => setFilter(s.key)} className={`rounded-full border px-3 py-1.5 text-xs font-black transition-all ${filter === s.key ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{s.label}</button>
         ))}
         <label className="ml-auto flex items-center gap-1.5 text-[11px] font-bold text-muted cursor-pointer">
           <input type="checkbox" checked={hideResolved} onChange={(e) => setHideResolved(e.target.checked)} />
@@ -72,29 +99,39 @@ export default function ErrorsPage() {
         </label>
       </div>
 
-      {!loaded ? (
+      {notice && <p role="status" className="mt-4 text-sm">{notice}</p>}
+      {loadError && <p role="alert" className="mt-4 text-rose-600">{loadError} <button className="underline" onClick={() => setRetry(n => n + 1)}>Thử lại</button></p>}
+      {loaded && !loadError && <div className="mt-5 rounded-2xl border border-primary/20 bg-primary-soft p-4">
+        <p className="text-sm font-semibold">{due.length} lỗi đến hạn luyện trong bộ lọc hiện tại</p>
+        <p className="mt-1 text-xs text-muted">Tự viết lại → xem gợi ý → tự đánh giá → ôn lại sau một khoảng thời gian.</p>
+        <button disabled={!due.length || !!practicing || busy} onClick={() => { setPracticing(due[0].id); setNotice(null); }} className="liquid-glass-btn mt-3 px-5 py-2 text-sm disabled:opacity-50">Luyện lỗi đến hạn →</button>
+      </div>}
+      {practiceRow && userId && <ErrorPractice key={userId + practiceRow.id} row={practiceRow} userId={userId} onSaved={practiced} onClose={() => { setPracticing(null); setRetry(n => n + 1); }} />}
+
+      {practicing ? null : !loaded ? (
         <div className="mt-10 text-center"><div className="mx-auto h-7 w-7 animate-spin rounded-full border-2 border-primary/20 border-t-primary" /></div>
-      ) : filtered.length === 0 ? (
+      ) : loadError ? null : filtered.length === 0 ? (
         <div className="mt-10 rounded-3xl border border-dashed border-border/60 py-14 text-center">
           <p className="text-sm font-bold text-muted">
             {rows.length === 0 ? "Chưa có lỗi nào — viết nhật ký hoặc luyện hội thoại AI, lỗi sẽ tự gom về đây." : "Không có lỗi nào ở mục này 🎉"}
           </p>
         </div>
       ) : (
-        <div className="mt-6 space-y-3">
+        <div className="mt-6 study-grid">
           {filtered.map((r) => (
             <div key={r.id} className={`rounded-2xl border p-4 shadow-sm transition-colors ${r.resolved ? "border-border/40 bg-surface/30 opacity-60" : "border-border/70 bg-surface/60"}`}>
-              <div className="flex items-center gap-2 mb-1.5">
+              <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="rounded-full bg-black/5 dark:bg-white/5 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-muted">{srcLabel(r.source)}</span>
                 {r.resolved && <span className="text-[9px] font-black text-emerald-500">✓ đã nắm</span>}
-                <div className="ml-auto flex items-center gap-2">
+                <div className="ml-auto flex flex-wrap items-center gap-2">
                   <button onClick={() => speak(r.correction)} title="Nghe câu đúng" className="text-sm hover:scale-110 transition-transform">🔊</button>
-                  <button onClick={() => toggle(r)} className={`text-[10px] font-black px-2 py-1 rounded-lg ${r.resolved ? "bg-white/5 text-muted" : "bg-emerald-500/15 text-emerald-500"}`}>{r.resolved ? "Bỏ đánh dấu" : "✓ Đã nắm"}</button>
-                  <button onClick={() => remove(r)} className="text-xs font-black text-rose-400">✕</button>
+                  <button disabled={busy || !!practicing} onClick={() => toggle(r)} className={`text-[10px] font-black px-2 py-1 rounded-lg ${r.resolved ? "bg-white/5 text-muted" : "bg-emerald-500/15 text-emerald-500"}`}>{r.resolved ? "Bỏ đánh dấu" : "Tự đánh dấu đã nắm"}</button>
+                  <button aria-label="Xóa lỗi" disabled={busy || !!practicing} onClick={() => remove(r)} className="min-w-8 text-xs font-black text-rose-400">✕</button>
                 </div>
               </div>
               {r.original && <p className="text-sm font-bold text-rose-500/90 line-through">{r.original}</p>}
               <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">→ {r.correction}</p>
+              <p className="mt-2 text-xs text-muted">Đã luyện {r.practice_count} lần · đúng liên tiếp {r.correct_streak}/3{!r.resolved && (errorDue(r, now) ? " · Đến hạn ôn" : ` · Hẹn ôn ${new Date(r.next_review_at).toLocaleString("vi-VN")}`)}</p>
               {r.note && <p className="mt-0.5 text-xs font-semibold text-muted">{r.note}</p>}
             </div>
           ))}

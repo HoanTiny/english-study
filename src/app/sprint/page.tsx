@@ -5,9 +5,8 @@ import SprintGame from "@/components/SprintGame";
 
 export default function SprintPage() {
   return (
-    <main className="mx-auto max-w-5xl px-5 py-16 pt-24 animate-fadeIn relative">
-      <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="mb-10 text-center flex flex-col items-center gap-3">
+    <main className="study-page study-page--focused animate-fadeIn">
+      <div className="page-heading">
         <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
           ⚡ GAME PHẢN XẠ TỪ VỰNG
         </span>

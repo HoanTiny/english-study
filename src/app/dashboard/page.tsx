@@ -92,13 +92,13 @@ export default function DashboardPage() {
   const startHref = stats ? (stats.dueToday > 0 ? "/review" : !stats.journalToday ? "/journal" : "/today") : "/today";
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] w-full overflow-hidden px-4 py-10 transition-colors duration-500 sm:px-6 sm:py-14 lg:px-8 flex flex-col justify-center">
+    <div className="study-page transition-colors duration-500">
 
       {/* Soft background floor shadow */}
       <div className="pointer-events-none absolute bottom-4 left-1/2 h-10 w-[75%] -translate-x-1/2 rounded-full bg-slate-900/[0.02] blur-[40px] dark:bg-black/30" />
 
-      <div className="mx-auto w-full max-w-6xl relative z-10">
-        <div className="mb-8 flex items-end justify-between gap-3 px-2">
+      <div className="relative z-10 w-full">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 dark:text-zinc-400">Bảng điều khiển</p>
             <h1 className="font-display text-2xl font-black tracking-tight text-slate-800 dark:text-zinc-100">Mục tiêu học tập</h1>
@@ -121,10 +121,10 @@ export default function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="relative z-10 grid gap-6 md:grid-cols-12 md:items-stretch">
+          <div className="relative z-10 grid gap-6 xl:grid-cols-12 xl:items-stretch">
             
             {/* ── Trái: Phân tích nhanh (Quick Analytics) ── */}
-            <div className="glass-card relative overflow-hidden rounded-[32px] p-6 md:col-span-3 flex flex-col justify-between min-h-[290px]">
+            <div className="glass-card relative min-w-0 overflow-hidden rounded-[24px] p-5 xl:col-span-3 flex flex-col justify-between min-h-[290px]">
               <div>
                 <h3 className="font-display text-sm font-black text-slate-800 dark:text-zinc-100 text-center">Phân tích nhanh</h3>
                 <p className="text-[9px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider text-center mt-0.5">Quick Analytics</p>
@@ -203,13 +203,13 @@ export default function DashboardPage() {
             </div>
 
             {/* ── Giữa: 3 vòng chỉ số (SpeakUp Dashboard) ── */}
-            <div className="glass-card relative overflow-hidden rounded-[32px] p-6 sm:p-9 md:col-span-6 flex flex-col justify-between">
+            <div className="glass-card relative min-w-0 overflow-hidden rounded-[24px] p-4 sm:p-6 xl:col-span-6 flex flex-col justify-between">
               <div>
                 <h2 className="text-center font-display text-lg font-black tracking-tight text-slate-800 dark:text-zinc-100">SpeakUp Dashboard</h2>
                 <p className="text-[9px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider text-center mt-0.5">Tiến độ kỹ năng</p>
               </div>
               
-              <div className="mt-8 grid grid-cols-3 gap-4 relative z-10">
+              <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-4 relative z-10">
                 {rings.map((r) => (
                   <div key={r.label} className="flex flex-col items-center gap-3">
                     <ProgressRing value={r.value} size={96} stroke={9} color={r.color} track={`${r.color}2b`} glow>
@@ -226,7 +226,7 @@ export default function DashboardPage() {
             </div>
 
             {/* ── Phải: Việc cần làm (Recent Sessions / Tasks) ── */}
-            <div className="glass-card relative overflow-hidden rounded-[32px] p-6 md:col-span-3 flex flex-col justify-between min-h-[290px]">
+            <div className="glass-card relative min-w-0 overflow-hidden rounded-[24px] p-5 xl:col-span-3 flex flex-col justify-between min-h-[290px]">
               <div>
                 <h3 className="font-display text-sm font-black text-slate-800 dark:text-zinc-100 text-center">Việc cần làm</h3>
                 <p className="text-[9px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider text-center mt-0.5">Recent Tasks</p>

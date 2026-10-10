@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -167,7 +168,7 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
   if (decks.length === 0)
     return <p className="py-8 text-center text-xs font-bold text-muted bg-black/5 dark:bg-white/5 rounded-2xl border border-dashed border-border/60">Không tìm thấy bộ thẻ nào phù hợp.</p>;
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="study-grid">
       {decks.map((d) => (
         <button
           key={d.slug}
@@ -176,14 +177,14 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
         >
           {/* Subtle Background Glow inside the card */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-pink-soft/5 blur-2xl pointer-events-none" />
-          
+
           <div className="flex items-center gap-4 p-5">
             {/* Elegant glassmorphic squircle for emoji */}
             <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${grad} text-2xl shadow-inner border relative group-hover:scale-105 transition-transform duration-300`}>
               <div className="absolute inset-0 bg-white/10 dark:bg-black/10 rounded-2xl" />
               <span className="relative z-1">{d.emoji}</span>
             </div>
-            
+
             <div className="flex flex-col gap-0.5 min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-primary-soft border border-primary/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-wider text-primary">{badge ?? d.cefr}</span>
@@ -220,7 +221,7 @@ export default function VocabPage() {
   const [idx, setIdx] = useState(0);
   const [known, setKnown] = useState(0);
   const [again, setAgain] = useState(0);
-  
+
   // Trạng thái mỗi thẻ
   const [revealed, setRevealed] = useState(false); // flashcard
   const [typed, setTyped] = useState(""); // type
@@ -342,7 +343,7 @@ export default function VocabPage() {
     if (!card || loadingExtra) return;
     setLoadingExtra(true);
     try {
-      const res = await fetch("/api/example-sentence", {
+      const res = await apiFetch("/api/example-sentence", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ en: card.en, vi: card.vi }),
@@ -366,8 +367,8 @@ export default function VocabPage() {
     const term = q.trim().toLowerCase();
     const match = (d: Deck) => !term || d.title.toLowerCase().includes(term);
     return (
-      <main className="mx-auto max-w-5xl px-5 py-16 animate-fadeIn relative">
-        <div className="mb-10 text-center flex flex-col items-center gap-3">
+      <main className="study-page animate-fadeIn">
+        <div className="page-heading">
           <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
             🗂️ Thư viện Flashcards
           </span>
@@ -380,14 +381,14 @@ export default function VocabPage() {
         </div>
 
         {/* Tab danh mục lớn */}
-        <div className="mb-8 grid grid-cols-3 gap-3 p-1.5 rounded-2xl border border-border/60 bg-surface/50 backdrop-blur-md shadow-sm">
+        <div className="study-tabs mb-6">
           {CATS.map((c) => (
             <button
               key={c.key}
               onClick={() => { setCat(c.key); setQ(""); }}
               className={`flex flex-col sm:flex-row items-center justify-center gap-2 rounded-xl px-4 py-3.5 cursor-pointer transition-all duration-300 active:scale-95 ${
-                cat === c.key 
-                  ? "bg-primary text-primary-fg shadow-md scale-102 font-black text-xs uppercase tracking-wider" 
+                cat === c.key
+                  ? "bg-primary text-primary-fg shadow-md scale-102 font-black text-xs uppercase tracking-wider"
                   : "text-muted hover:text-foreground hover:bg-primary-soft/20 text-xs font-bold"
               }`}
             >
@@ -415,8 +416,8 @@ export default function VocabPage() {
               className="w-full rounded-full border border-border/60 bg-surface/80 backdrop-blur-sm pl-10 pr-4 py-3 text-xs font-semibold text-foreground outline-none focus:border-primary shadow-sm transition-all focus:bg-surface focus:ring-4 focus:ring-primary/10 placeholder:text-muted/65"
             />
           </div>
-          <Link 
-            href="/collocations" 
+          <Link
+            href="/collocations"
             className="shrink-0 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-5 py-3 text-[10px] font-black uppercase tracking-wider text-primary transition-all hover:bg-primary-soft hover:scale-102 active:scale-98 shadow-sm"
           >
             🧩 Mini-game Ghép cụm từ <span className="text-[14px]">→</span>
@@ -431,7 +432,7 @@ export default function VocabPage() {
             return (
               <section key={col.key} className="mb-12">
                 <h2 className="mb-5 font-display text-sm font-black uppercase tracking-widest text-foreground border-b border-border/30 pb-3 flex items-center gap-2">
-                  <span>{col.key === "A1" ? "🌱" : col.key === "A2" ? "🌿" : "🌳"}</span> {col.name} 
+                  <span>{col.key === "A1" ? "🌱" : col.key === "A2" ? "🌿" : "🌳"}</span> {col.name}
                   <span className="text-[9px] font-black uppercase tracking-wider text-muted bg-black/5 dark:bg-white/5 border border-border px-2.5 py-0.5 rounded-full ml-1">({decks.length})</span>
                 </h2>
                 <DeckGrid decks={decks} grad={col.grad} unit="thẻ" onPick={startDeck} />
@@ -454,25 +455,25 @@ export default function VocabPage() {
 
   // ===== STUDY =====
   return (
-    <main className="mx-auto max-w-2xl px-5 py-6 pt-20 animate-fadeIn relative">
+    <main className="study-page study-page--reading animate-fadeIn">
       {/* Toast Alert */}
       {toast && (
         <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-primary/95 backdrop-blur-md border border-white/10 px-6 py-3 text-[10px] font-black text-white shadow-xl animate-fadeIn tracking-wider uppercase">
           {toast}
         </div>
       )}
-      
+
       {/* Back button */}
       <button onClick={backToLibrary} className="mb-4 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground cursor-pointer transition-colors">
         ← Thư viện từ vựng
       </button>
-      
+
       <div className="mb-3 text-center">
         <h1 className="font-display text-2xl font-black text-foreground flex items-center justify-center gap-2">
           <span>{deck?.emoji}</span> {deck?.title}
         </h1>
       </div>
- 
+
       {/* Tab chế độ học */}
       <div className="mb-4 flex justify-center">
         <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-surface/50 backdrop-blur-sm p-1.5 shadow-sm">
@@ -481,8 +482,8 @@ export default function VocabPage() {
               key={m.key}
               onClick={() => switchMode(m.key)}
               className={`rounded-xl px-5 py-2.5 text-xs font-black transition-all cursor-pointer active:scale-95 duration-300 uppercase tracking-wider ${
-                mode === m.key 
-                  ? "bg-primary text-primary-fg shadow-sm" 
+                mode === m.key
+                  ? "bg-primary text-primary-fg shadow-sm"
                   : "text-muted hover:text-foreground hover:bg-primary-soft/20"
               }`}
             >
@@ -491,7 +492,7 @@ export default function VocabPage() {
           ))}
         </div>
       </div>
- 
+
       {phase === "playing" && card && (
         <div>
           {/* Progress bar */}
@@ -501,13 +502,13 @@ export default function VocabPage() {
             </div>
             <span className="shrink-0 text-[9px] font-black text-muted bg-surface border border-border px-2.5 py-1 rounded-full">{idx + 1}/{cards.length}</span>
           </div>
- 
+
           {/* ---- FLASHCARD ---- */}
           {mode === "flashcard" && (
             <>
               <div className="liquid-glass-card flex flex-col items-center justify-center gap-4 p-6 sm:p-7 text-center bg-white/40 dark:bg-black/20 border border-border shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent blur-xl pointer-events-none" />
-                
+
                 {!revealed ? (
                   <>
                     <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
@@ -523,7 +524,7 @@ export default function VocabPage() {
                     >
                       🔊
                     </button>
-                    
+
                     <div className="flex flex-col items-center gap-3 mt-2">
                       <p className="text-[10px] font-semibold italic text-muted">Tự dịch và phát âm to cụm từ này…</p>
                       <button onClick={() => setRevealed(true)} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider hover:scale-[1.03] active:scale-95 transition-all cursor-pointer">Hiện đáp án</button>
@@ -533,10 +534,10 @@ export default function VocabPage() {
                   <div className="w-full animate-fadeIn flex flex-col items-center gap-3.5">
                     {/* Level Badge */}
                     <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
-                    
+
                     {/* Primary English Word */}
                     <p className="font-display text-2xl sm:text-3xl font-black text-primary tracking-tight leading-none mt-0.5">{card.en}</p>
-                    
+
                     {/* IPA & Translation Details */}
                     <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted">
                       {card.pos && <span className="rounded-md bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-black text-indigo-500">{POS_VI[card.pos] ?? card.pos}</span>}
@@ -552,14 +553,14 @@ export default function VocabPage() {
                     <div className="w-full max-w-xs my-0.5">
                       <PronounceBar word={card.en} />
                     </div>
-                    
+
                     {/* Compact Example Sentence */}
                     {card.example && (
                       <div className="w-full rounded-xl bg-white/35 dark:bg-black/35 border border-border/80 p-3 text-xs italic font-semibold text-foreground/80 leading-relaxed shadow-sm text-center">
                         “{card.example}”
                       </div>
                     )}
-                    
+
                     {/* Extra AI generated sentence */}
                     {extra && (
                       <div className="w-full rounded-xl border border-primary/20 bg-primary-soft/40 p-3 text-left animate-fadeIn shadow-sm">
@@ -567,24 +568,24 @@ export default function VocabPage() {
                         {extra.vi && <p className="mt-1 text-[9px] font-bold text-muted leading-relaxed">{extra.vi}</p>}
                       </div>
                     )}
-                    
+
                     {/* Action Row */}
                     <div className="flex flex-wrap items-center justify-center gap-2.5 mt-0.5">
-                      <button 
-                        onClick={newExample} 
-                        disabled={loadingExtra} 
+                      <button
+                        onClick={newExample}
+                        disabled={loadingExtra}
                         className="rounded-full border border-primary/30 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary hover:bg-primary-soft active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
                       >
                         {loadingExtra ? "Đang tạo..." : "✨ Ví dụ AI"}
                       </button>
-                      <button 
-                        onClick={() => advance(true)} 
+                      <button
+                        onClick={() => advance(true)}
                         className="rounded-full border border-primary/30 bg-primary-soft/60 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary hover:bg-primary-soft active:scale-95 transition-all cursor-pointer"
                       >
                         ✓ Đã thuộc
                       </button>
-                      <button 
-                        onClick={() => { if (card) saveWord(card, { review: false }); }} 
+                      <button
+                        onClick={() => { if (card) saveWord(card, { review: false }); }}
                         className="rounded-full border border-border bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-foreground hover:bg-primary-soft/20 active:scale-95 transition-all cursor-pointer shadow-sm"
                       >
                         {savedSet.has(card.en) ? "✓ Đã lưu" : "🔖 Lưu sổ tay"}
@@ -593,15 +594,15 @@ export default function VocabPage() {
                   </div>
                 )}
               </div>
-              
+
               {revealed && (
                 <div className="mt-4 animate-fadeIn space-y-2.5 w-full border-t border-border/40 pt-4 px-2">
                   <p className="text-center text-[9px] font-black uppercase tracking-wider text-muted">Bạn nhớ cụm từ này tốt đến mức nào?</p>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {GRADES.map(({ g, label, when, cls }) => (
-                      <button 
-                        key={g} 
-                        onClick={() => gradeAndNext(g)} 
+                      <button
+                        key={g}
+                        onClick={() => gradeAndNext(g)}
                         className={`rounded-xl py-2 cursor-pointer transition-all duration-300 active:scale-95 shadow-sm border border-transparent flex flex-col items-center justify-center ${cls}`}
                       >
                         <span className="text-xs font-black tracking-wide leading-none">{label}</span>
@@ -626,7 +627,7 @@ export default function VocabPage() {
               ) : (
                 <p className="text-[10px] font-black text-muted uppercase mt-1 tracking-wider">Gõ cụm từ tiếng Anh tương ứng</p>
               )}
-              
+
               {hinted && (
                 <p className="text-xs font-bold text-amber-700 bg-amber-500/10 px-4 py-2 rounded-2xl border border-amber-500/20 mt-1 animate-fadeIn">
                   💡 Chữ cái đầu: <span className="font-mono text-sm tracking-wider font-extrabold">{card.en.slice(0, Math.max(2, Math.ceil(card.en.length / 3)))}…</span>
@@ -675,15 +676,15 @@ export default function VocabPage() {
             <div className="liquid-glass-card flex min-h-[360px] flex-col items-center justify-center gap-6 p-8 text-center bg-white/40 dark:bg-black/20 border border-border shadow-2xl">
               <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
               <p className="text-xl sm:text-2xl font-black text-foreground mt-2 leading-relaxed px-4">{card.vi}</p>
-              
-              <button 
-                onClick={() => play(card.en)} 
+
+              <button
+                onClick={() => play(card.en)}
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-soft border border-primary/20 text-lg text-primary shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 aria-label="Phát âm"
               >
                 🔊
               </button>
-              
+
               <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2 mt-2">
                 {options.map((opt, idx) => {
                   let cls = "border-border bg-surface/50 text-foreground hover:border-primary/60 hover:bg-primary-soft/10 shadow-sm";
@@ -694,10 +695,10 @@ export default function VocabPage() {
                   }
                   const badges = ["A", "B", "C", "D"];
                   return (
-                    <button 
-                      key={opt} 
-                      disabled={resolved !== null} 
-                      onClick={() => pick(opt)} 
+                    <button
+                      key={opt}
+                      disabled={resolved !== null}
+                      onClick={() => pick(opt)}
                       className={`rounded-2xl border-2 px-4 py-3.5 text-xs font-bold transition-all cursor-pointer active:scale-95 flex items-center gap-3 ${cls}`}
                     >
                       <span className="rounded-lg bg-black/5 dark:bg-white/5 border border-border text-[9px] font-black w-6 h-6 flex items-center justify-center shrink-0">{badges[idx]}</span>
@@ -706,7 +707,7 @@ export default function VocabPage() {
                   );
                 })}
               </div>
-              
+
               {resolved !== null && (
                 <div className="flex items-center justify-center gap-3 w-full max-w-md mt-2 animate-fadeIn">
                   <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all shadow-sm">🔖 Lưu ôn tập</button>
@@ -725,7 +726,7 @@ export default function VocabPage() {
             <h2 className="font-display text-2xl font-black text-foreground">Hoàn thành xuất sắc!</h2>
             <p className="text-[10px] font-black text-muted uppercase tracking-wider">Bộ thẻ: “{deck?.title}”</p>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4 w-full">
             <div className="rounded-2xl border border-primary/20 bg-primary-soft/30 p-5 flex flex-col items-center justify-center shadow-sm">
               <p className="font-display text-4xl font-black text-primary leading-none">{known}</p>
@@ -736,7 +737,7 @@ export default function VocabPage() {
               <p className="text-[9px] font-black uppercase tracking-wider text-rose-600 mt-2">Cần học lại</p>
             </div>
           </div>
-          
+
           <div className="flex flex-col gap-3 w-full mt-4">
             {deck && (
               <button onClick={() => startDeck(deck)} className="w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg shadow-primary/20 hover:shadow-primary/35">🔄 Học lại bộ này</button>

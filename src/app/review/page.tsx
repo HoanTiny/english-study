@@ -26,6 +26,10 @@ const grades: { g: Grade; label: string; cls: string }[] = [
 export default function ReviewPage() {
   const today = todayKey();
   const { userId, ready } = useAuth();
+  const [clock, setClock] = useState(() => Date.now());
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  useEffect(() => { const timer = setInterval(() => setClock(Date.now()), 15000); return () => clearInterval(timer); }, []);
   const [notes, setNotes] = useState<Note[]>([]);
   const [srs, setSrs] = useState<SrsMap>({});
   const [loaded, setLoaded] = useState(false);
@@ -59,23 +63,29 @@ export default function ReviewPage() {
       .filter((n) => n.inReview)
       .filter((n) => {
         const s = srs[n.id];
-        return !s || isDue(s, today);
+        return !s || isDue(s, today, new Date(clock));
       });
-  }, [notes, loaded, today, srs]);
+  }, [notes, loaded, today, srs, clock]);
 
   const current = queue[0];
 
   async function grade(g: Grade) {
-    if (!current || !userId) return;
+    if (!current || !userId || saving) return;
+    setSaving(true);
+    setSaveError(null);
     const prev = srs[current.id] ?? null;
     setRevealed(false);
     setSpeakScore(null); // reset điểm nói cho thẻ kế
-    setDoneCount((c) => c + 1);
+
     try {
       const next = await gradeNote(userId, current.id, prev, g, today);
+      setDoneCount(c => c + 1);
       setSrs((m) => ({ ...m, [current.id]: next }));
     } catch (e) {
+      setSaveError("Chưa lưu được lượt ôn. Vui lòng thử lại.");
       console.error("gradeNote", e);
+    } finally {
+      setSaving(false);
     }
   }
 
@@ -95,18 +105,21 @@ export default function ReviewPage() {
     }
   }
 
+  const errorBanner = saveError ? <p role="alert">{saveError}</p> : null;
   const totalInReview = notes.filter((n) => n.inReview).length;
 
   if (!loaded) {
     return (
       <main className="mx-auto max-w-xl px-5 py-24 text-center">
+      {errorBanner}
         <p className="text-xs font-black uppercase tracking-wider text-muted animate-pulse">Đang đồng bộ dữ liệu ôn tập… ⏳</p>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-xl px-5 py-16 animate-fadeIn relative">
+    <main className="study-page study-page--reading animate-fadeIn">
+      {errorBanner}
       <div className="mb-8 flex items-baseline justify-between border-b border-border/40 pb-4.5">
         <div>
           <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary-soft/80 border border-primary/10 px-3.5 py-1.5 rounded-full inline-flex self-start mb-2">
@@ -156,13 +169,13 @@ export default function ReviewPage() {
           </div>
 
           <span className={`inline-block rounded-full border px-3.5 py-1 text-[8.5px] font-black uppercase tracking-wider ${
-            current.kind === "structure" 
-              ? "bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400" 
+            current.kind === "structure"
+              ? "bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400"
               : "bg-primary-soft/80 border-primary/20 text-primary"
           }`}>
             {current.kind === "structure" ? "Cấu trúc câu" : "Từ vựng / Cụm từ"}
           </span>
-          
+
           <p className="mt-6 text-2xl font-extrabold text-foreground leading-relaxed px-2 tracking-tight">{current.content}</p>
           <div className="mt-2 flex justify-center">
             <PronounceMini text={current.content} />
@@ -233,7 +246,7 @@ export default function ReviewPage() {
                   {grades.map(({ g, label, cls }) => (
                     <button
                       key={g}
-                      onClick={() => grade(g)}
+                      disabled={saving} onClick={() => grade(g)}
                       className={`rounded-xl py-3 text-xs font-black transition-all duration-300 scale-100 active:scale-95 cursor-pointer shadow-sm ${cls}`}
                     >
                       {label}

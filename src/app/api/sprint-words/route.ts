@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
 
@@ -5,6 +7,8 @@ export const runtime = "nodejs";
 
 // Sinh bộ từ vựng cho game Sprint bằng Gemini, theo cấp độ CEFR (+ chủ đề tuỳ chọn).
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   if (!geminiConfigured()) {
     return NextResponse.json({ error: "Chưa cấu hình GEMINI_API_KEY." }, { status: 503 });
   }
@@ -23,7 +27,7 @@ export async function GET(req: NextRequest) {
     : `Tạo ${n} từ vựng tiếng Anh thông dụng trình độ ${level}.`;
 
   try {
-    const out = await geminiGenerate([{ role: "user", parts: [{ text: prompt }] }], {
+    const out = await geminiGenerate([{ role: "user", parts: [{ text: prompt }] }], { request: req,
       jsonMode: true,
       temperature: 0.7,
       system: sys,
@@ -37,6 +41,7 @@ export async function GET(req: NextRequest) {
     if (words.length < 4) throw new Error("Không tạo đủ từ.");
     return NextResponse.json({ level, topic, words });
   } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
     const msg = e instanceof Error ? e.message : "Lỗi tạo từ.";
     return NextResponse.json({ error: `Không tạo được bộ từ (${msg}).` }, { status: 502 });
   }

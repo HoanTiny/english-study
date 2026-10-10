@@ -1,7 +1,8 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
-import { useEffect, useMemo, useState } from "react";
-import { promptOfTheDay } from "@/lib/content";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { journalPrompts, promptOfTheDay } from "@/lib/content";
 import { countSentences, todayKey } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import {
@@ -14,42 +15,26 @@ import { addErrors } from "@/lib/errorLogRepo";
 
 const MIN = 5;
 const TARGET = 10;
+const subscribeToPrompt = () => () => {};
+const serverPrompt = () => journalPrompts[0];
 
-function mockFeedback(text: string): Feedback[] {
-  const fb: Feedback[] = [];
-  if (/\bi\s/.test(text))
-    fb.push({ fragment: "i", issue: "Viết hoa 'I'", suggestion: "Dùng 'I' thay vì 'i'." });
-  if (/\byesterday\b/i.test(text) && !/\bwas\b|\bwent\b|ed\b/i.test(text))
-    fb.push({ fragment: "yesterday", issue: "Thì quá khứ", suggestion: "Với 'yesterday' nên dùng quá khứ đơn." });
-  if (/\bi\s+like\s+very\s+much\b/i.test(text) || /\bvery much\b/i.test(text))
-    fb.push({ fragment: "very much", issue: "Tự nhiên hơn", suggestion: "Thử 'a lot' cho tự nhiên hơn." });
-  return fb.slice(0, 3);
-}
-
-// Gọi AI thật (Gemini) qua route handler; nếu chưa có key hoặc lỗi → mock.
-async function getFeedback(body: string, prompt: string): Promise<Feedback[]> {
+async function getFeedback(body: string, prompt: string): Promise<Feedback[] | null> {
   try {
-    const res = await fetch("/api/journal-feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ body, prompt }),
-    });
-    if (res.ok) {
-      const data = (await res.json()) as { feedback: Feedback[] | null };
-      if (data.feedback !== null) return data.feedback;
-    }
-  } catch {
-    // bỏ qua, dùng mock
-  }
-  return mockFeedback(body);
+    const res = await apiFetch("/api/journal-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ body, prompt }) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data.feedback) ? data.feedback : null;
+  } catch { return null; }
 }
 
 export default function JournalPage() {
-  const prompt = useMemo(() => promptOfTheDay(), []);
+  // Keep server/client first render identical when this static page was built on another day.
+  const prompt = useSyncExternalStore(subscribeToPrompt, promptOfTheDay, serverPrompt);
   const { userId, ready } = useAuth();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [body, setBody] = useState("");
   const [feedback, setFeedback] = useState<Feedback[] | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [scoring, setScoring] = useState(false);
 
   const sentences = countSentences(body);
@@ -59,11 +44,15 @@ export default function JournalPage() {
   useEffect(() => {
     if (!ready || !userId) return;
     let active = true;
+    setEntries([]);
+    setBody("");
+    setFeedback(null);
+    setNotice(null);
     listEntries()
       .then((rows) => {
         if (active) setEntries(rows);
       })
-      .catch((e) => console.error("listEntries", e));
+      .catch(() => { if (active) setNotice("Không tải được nhật ký. Vui lòng tải lại trang."); });
     return () => {
       active = false;
     };
@@ -81,33 +70,23 @@ export default function JournalPage() {
   async function save() {
     if (!userId || scoring) return;
     setScoring(true);
-    const fb = await getFeedback(body, prompt.en);
-    setFeedback(fb);
-    setScoring(false);
-    // Lưu lỗi vào Sổ lỗi cá nhân.
-    if (fb.length) {
-      addErrors(
-        userId,
-        fb.map((f) => ({ source: "journal" as const, original: f.fragment, correction: f.suggestion, note: f.issue })),
-      ).catch(() => {});
-    }
-    const entry: Entry = { date: today, prompt: prompt.en, body, sentences, feedback: fb };
-    // cập nhật lạc quan
-    setEntries((prev) => [entry, ...prev.filter((e) => e.date !== today)]);
+    setNotice(null);
     try {
+      const fb = await getFeedback(body, prompt.en);
+      const entry: Entry = { date: today, prompt: prompt.en, body, sentences, feedback: fb ?? [] };
       await saveEntry(userId, entry);
-    } catch (e) {
-      console.error("saveEntry", e);
-    }
+      setEntries(prev => [entry, ...prev.filter(e => e.date !== today)]);
+      setFeedback(fb);
+      setNotice(fb === null ? "Đã lưu nhật ký. AI chưa phản hồi; bạn có thể thử chấm lại." : "Đã lưu nhật ký và phản hồi AI.");
+      if (fb?.length) await addErrors(userId, fb.map(f => ({ source: "journal" as const, original: f.fragment, correction: f.suggestion, note: f.issue }))).catch(() => setNotice("Đã lưu nhật ký; chưa đồng bộ được Sổ lỗi."));
+    } catch {
+      setNotice("Chưa lưu được nhật ký. Nội dung vẫn ở đây; hãy thử lại.");
+    } finally { setScoring(false); }
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16 pt-24 animate-fadeIn relative">
-      {/* Background radial highlight */}
-      <div className="absolute top-10 left-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl pointer-events-none" />
-
-      <div className="mb-10 text-center sm:text-left">
+    <main className="study-page animate-fadeIn">
+      <div className="page-heading">
         <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
           ✍️ LUYỆN KỸ NĂNG VIẾT & PHẢN XẠ
         </span>
@@ -115,12 +94,13 @@ export default function JournalPage() {
           Nhật ký phản xạ
         </h1>
         <p className="mt-2.5 text-xs sm:text-sm font-semibold text-muted leading-relaxed max-w-2xl">
-          Viết tối thiểu {MIN}–{TARGET} câu mỗi ngày theo chủ đề đề xuất, nhận phân tích sửa lỗi thông minh từ trí tuệ nhân tạo (AI) và luyện đọc to để tạo phản xạ giao tiếp tự tin.
+          Viết từ {MIN} đến {TARGET} câu theo chủ đề hôm nay. Nhận gợi ý sửa từ AI, sau đó đọc lại để luyện phản xạ.
         </p>
       </div>
 
-      <div className="liquid-glass-card p-6 sm:p-8 border border-border/80 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-2xl pointer-events-none" />
+      <div className="study-workspace">
+      <div className="min-w-0">
+      <section className="study-panel" aria-label="Viết nhật ký hôm nay">
 
         <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/40 dark:bg-black/20 border border-border/80 p-5 rounded-2xl relative shadow-sm">
           <div className="min-w-0">
@@ -137,10 +117,12 @@ export default function JournalPage() {
           </button>
         </div>
 
+        <label htmlFor="journal-body" className="study-field">Bài viết của bạn</label>
         <textarea
+          id="journal-body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          rows={7}
+          rows={9}
           placeholder="Start writing your thoughts in English here..."
           className="w-full resize-none rounded-2xl border border-border/80 bg-white/35 dark:bg-black/35 p-5 text-sm font-semibold leading-relaxed outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary/80 focus:bg-white/80 dark:focus:bg-slate-950/80 transition-all text-foreground placeholder:text-muted/50 shadow-inner"
         />
@@ -182,8 +164,9 @@ export default function JournalPage() {
             🎙️ Đọc to bài viết
           </button>
         </div>
-      </div>
+      </section>
 
+      {notice && <p role="status" className="my-4">{notice}</p>}
       {feedback && (
         <div className="mt-8 liquid-glass-card p-6 sm:p-7 border border-border/85 shadow-xl animate-fadeIn relative overflow-hidden">
           <div className="absolute top-0 left-0 w-24 h-24 bg-accent/5 rounded-full filter blur-xl pointer-events-none" />
@@ -227,19 +210,23 @@ export default function JournalPage() {
           ✓ Đã lưu thành công nhật ký của hôm nay
         </p>
       )}
-
-      {entries.length > 0 && (
-        <section className="mt-16">
-          <h2 className="mb-6 text-[10px] font-black uppercase tracking-[0.2em] text-muted border-l-2 border-primary/50 pl-3">
-            Lịch sử nhật ký phản xạ
+      </div>
+        <section aria-labelledby="journal-history-heading" className="min-w-0">
+          <h2 id="journal-history-heading" className="mb-4 text-lg font-bold">
+            Nhật ký gần đây
           </h2>
+          {entries.length === 0 && <div className="study-panel text-sm leading-relaxed text-muted">
+            <p className="font-semibold text-foreground">Bắt đầu từ những điều quen thuộc</p>
+            <p className="mt-2">Kể một việc bạn đã làm, cảm xúc của bạn và một dự định cho ngày mai. Mỗi ý chỉ cần một hoặc hai câu đơn giản.</p>
+            <p className="mt-3">Bài viết sẽ xuất hiện ở đây sau khi bạn lưu.</p>
+          </div>}
           <div className="space-y-6">
             {entries.map((e) => (
               <div
                 key={e.date}
-                className="liquid-glass-card p-6 border border-border/80 shadow-lg transition-all duration-300 hover:scale-[1.01] hover:shadow-xl relative overflow-hidden"
+                className="study-panel"
               >
-                <div className="mb-4 flex items-center justify-between border-b border-border/40 pb-3">
+                <div className="mb-4 flex flex-wrap gap-2 items-center justify-between border-b border-border/40 pb-3">
                   <span className="text-[10px] font-black text-primary bg-primary-soft border border-primary/20 px-3.5 py-1 rounded-full shadow-sm">
                     {e.date}
                   </span>
@@ -257,7 +244,7 @@ export default function JournalPage() {
             ))}
           </div>
         </section>
-      )}
+      </div>
     </main>
   );
 }

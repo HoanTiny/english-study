@@ -158,6 +158,9 @@ function Shell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/5 bg-[#161619] px-4 py-3 md:hidden select-none">
         <button
           onClick={() => setOpen((v) => !v)}
+          aria-label="Menu quản trị"
+          aria-expanded={open}
+          aria-controls="admin-mobile-navigation"
           className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 text-base active:scale-95 bg-black/10"
         >
           ☰
@@ -172,7 +175,7 @@ function Shell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Drawer Menu */}
       {open && (
-        <div className="border-b border-white/5 bg-[#161619] p-3 md:hidden space-y-1 select-none">
+        <nav id="admin-mobile-navigation" aria-label="Điều hướng quản trị" className="border-b border-white/5 bg-[#161619] p-3 md:hidden space-y-1 select-none">
           {nav.map((n) => (
             <Link
               key={n.href}
@@ -189,7 +192,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           >
             ← Quay lại ứng dụng chính
           </Link>
-        </div>
+        </nav>
       )}
 
       {/* ========================================================
@@ -209,7 +212,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Page children container */}
-        <main className="p-5 md:p-8 animate-fadeIn">{children}</main>
+        <main className="admin-content min-w-0 p-4 sm:p-6 xl:p-8 animate-fadeIn">{children}</main>
       </div>
 
     </div>

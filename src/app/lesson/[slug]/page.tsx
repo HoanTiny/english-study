@@ -9,7 +9,12 @@ import { addNote, listNotes } from "@/lib/notesRepo";
 import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
 import ListeningResource from "@/components/ListeningResource";
 import LessonQuiz from "@/components/LessonQuiz";
+import LessonKnowledge from "@/components/LessonKnowledge";
 import { isLessonDone } from "@/lib/lessonDone";
+import grammarData from "@/data/grammar.json";
+
+type GrammarStruct = { structure: string; vi: string; example: string; exampleVi: string; level: string; lessons?: string[] };
+const GRAMMAR = grammarData as GrammarStruct[];
 
 // Phát audio đã upload (bucket private) qua signed-URL endpoint.
 function audioSrc(path: string) {
@@ -27,8 +32,9 @@ export default function LessonPage() {
     if (slug === "ipa-sounds") router.replace("/ipa");
   }, [slug, router]);
 
-  // Nội dung bài: đọc từ DB (CMS) trước, fallback file tĩnh.
+  // CMS quyết định bài nào được xuất bản; chỉ bổ sung kiến thức sau khi tải được bài.
   const [lesson, setLesson] = useState<LessonContentDB | undefined>(undefined);
+  const [lessonError, setLessonError] = useState(false);
   const [lessonLoading, setLessonLoading] = useState(true);
 
   // Cụm đã lưu vào ôn tập (theo nội dung trùng khớp).
@@ -37,12 +43,17 @@ export default function LessonPage() {
   const [doneBadge, setDoneBadge] = useState(false);
 
   useEffect(() => {
-    setDoneBadge(isLessonDone(slug));
-  }, [slug]);
+    let active = true;
+    setDoneBadge(false);
+    if (userId) void isLessonDone(userId, slug).then(done => { if (active) setDoneBadge(done); }).catch(() => {});
+    return () => { active = false; };
+  }, [slug, userId]);
 
   useEffect(() => {
     let active = true;
     setLessonLoading(true);
+    setLessonError(false);
+    setLesson(undefined);
     fetchLesson(slug)
       .then((l) => {
         if (active) {
@@ -50,7 +61,7 @@ export default function LessonPage() {
           setLessonLoading(false);
         }
       })
-      .catch(() => active && setLessonLoading(false));
+      .catch(() => { if (active) { setLessonError(true); setLessonLoading(false); } });
     return () => {
       active = false;
     };
@@ -132,6 +143,8 @@ export default function LessonPage() {
     );
   }
 
+  if (lessonError) return <p role="alert" className="p-8">Không tải được bài học. Vui lòng tải lại trang.</p>;
+
   if (lessonLoading) {
     return (
       <main className="mx-auto max-w-2xl px-5 py-32 text-center">
@@ -157,7 +170,7 @@ export default function LessonPage() {
   const savedCount = lesson.phrases.filter((p) => saved.has(p.en)).length;
 
   return (
-    <main className="mx-auto max-w-2xl px-6 py-16 pt-24 animate-fadeIn relative">
+    <main className="study-page study-page--focused animate-fadeIn">
       {/* Background radial highlight */}
       <div className="absolute top-10 right-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
 
@@ -209,6 +222,8 @@ export default function LessonPage() {
           </span>
         </div>
       </div>
+
+      <LessonKnowledge key={slug} slug={slug} />
 
       <div className="space-y-6">
         {lesson.phrases.map((p) => {
@@ -270,7 +285,38 @@ export default function LessonPage() {
         })}
       </div>
 
-      <LessonQuiz phrases={lesson.phrases} slug={slug} />
+      {/* Cấu trúc câu liên quan tới bài này (map trong src/data/grammar.json) */}
+      {(() => {
+        const related = GRAMMAR.filter((s) => s.lessons?.includes(slug));
+        if (related.length === 0) return null;
+        return (
+          <div className="mt-12">
+            <div className="mb-4 flex items-center gap-3">
+              <h2 className="text-xs font-black uppercase tracking-wider text-muted">🧩 Cấu trúc câu liên quan</h2>
+              <span className="text-[10px] font-bold text-muted/70">{related.length} cấu trúc</span>
+              <div className="h-px flex-1 bg-border/50" />
+            </div>
+            <div className="space-y-2.5">
+              {related.map((s) => (
+                <Link
+                  key={s.structure}
+                  href={`/grammar?q=${encodeURIComponent(s.structure)}`}
+                  className="flex items-center gap-3 rounded-2xl border border-border/60 bg-surface/60 px-4 py-3.5 shadow-sm transition-all hover:border-primary/40 hover:shadow-md active:scale-[0.99]"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="font-display text-sm font-extrabold text-foreground leading-snug">{s.structure}</p>
+                    <p className="mt-0.5 truncate text-xs font-semibold text-muted">{s.vi} · “{s.example}”</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-primary-soft border border-primary/20 px-2.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider text-primary">{s.level}</span>
+                  <span className="shrink-0 text-xs font-black text-primary">Xem →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
+      <LessonQuiz onPassed={() => setDoneBadge(true)} phrases={lesson.phrases} slug={slug} />
 
       <ListeningResource
         cefr={lesson.cefr}

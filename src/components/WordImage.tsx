@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { apiFetch } from "@/lib/apiFetch";
 
 type Pic = { image: string; creator?: string; license?: string; licenseUrl?: string; source?: string; title?: string };
 type ImgData = { found: boolean; results: Pic[] };
@@ -14,7 +15,7 @@ export async function fetchWordImage(word: string, meaning?: string): Promise<Im
   const k = mkey(word, meaning);
   if (memo.has(k)) return memo.get(k)!;
   try {
-    const r = await fetch(`/api/word-image?q=${encodeURIComponent(q)}&vi=${encodeURIComponent(meaning ?? "")}`);
+    const r = await apiFetch(`/api/word-image?q=${encodeURIComponent(q)}&vi=${encodeURIComponent(meaning ?? "")}`);
     const d = (await r.json()) as ImgData;
     const data: ImgData = { found: !!d.found, results: d.results ?? [] };
     memo.set(k, data);

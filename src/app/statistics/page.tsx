@@ -17,11 +17,14 @@ import { useAuth } from "@/lib/auth";
 import {
   loadDashboard,
   loadActivityTimeline,
+  averagePronunciation,
   type DashboardStats,
   type ActivityDay,
 } from "@/lib/statsRepo";
 import { listShadowScores } from "@/lib/shadowingRepo";
 import { shadowItems } from "@/lib/content";
+import { localDate } from "@/lib/calendar";
+import WeeklyReport from "@/components/WeeklyReport";
 
 const TEAL = "var(--primary)";
 
@@ -80,11 +83,15 @@ export default function StatisticsPage() {
   const [rangeDays, setRangeDays] = useState<7 | 14 | 30>(14);
   const [metric, setMetric] = useState<"reviews" | "pron">("reviews");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    setStats(null); setScores({}); setTimeline([]); setError(false);
+    if (!ready || !userId) { setLoading(false); return; }
+    setLoading(true);
     let active = true;
-    const today = new Date().toISOString().slice(0, 10);
+    const today = localDate();
     // Tải sẵn 30 ngày, cắt theo khoảng đang chọn ở client (không query lại).
     Promise.all([loadDashboard(today), listShadowScores(), loadActivityTimeline(today, 30)])
       .then(([d, s, t]) => {
@@ -93,20 +100,20 @@ export default function StatisticsPage() {
         setScores(s);
         setTimeline(t);
       })
-      .catch((e) => console.error("statistics", e))
+      .catch(() => { if (active) setError(true); })
       .finally(() => active && setLoading(false));
     return () => {
       active = false;
     };
-  }, [ready, userId]);
+  }, [ready, userId, retry]);
 
   const shownTimeline = useMemo(() => timeline.slice(-rangeDays), [timeline, rangeDays]);
   const totalReviews = useMemo(() => shownTimeline.reduce((n, d) => n + d.reviews, 0), [shownTimeline]);
-  const activeDays = useMemo(() => shownTimeline.filter((d) => d.reviews > 0 || d.journaled).length, [shownTimeline]);
+  const activeDays = useMemo(() => shownTimeline.filter((d) => d.reviews > 0 || d.journaled || d.shadowCount > 0).length, [shownTimeline]);
   const pronDays = useMemo(() => shownTimeline.filter((d) => d.shadowAvg != null), [shownTimeline]);
   const pronAvg = useMemo(
-    () => (pronDays.length ? Math.round(pronDays.reduce((n, d) => n + (d.shadowAvg ?? 0), 0) / pronDays.length) : null),
-    [pronDays],
+    () => averagePronunciation(shownTimeline),
+    [shownTimeline],
   );
 
   // Dữ liệu biểu đồ: điểm phát âm theo từng câu shadowing (dữ liệu thật).
@@ -123,26 +130,24 @@ export default function StatisticsPage() {
   );
 
   const wordsStudied = stats?.recognized ?? 0;
-  const correctPct =
-    stats && stats.recognized > 0
-      ? Math.round((stats.mastered / stats.recognized) * 100)
-      : 0;
 
   const dayHead = [
     { value: String(stats?.dueToday ?? 0), label: "Thẻ đến hạn hôm nay" },
     { value: stats?.journalToday ? "✓" : "—", label: "Nhật ký hôm nay" },
   ];
   const allHead = [
-    { value: String(wordsStudied), label: "Từ đã học (hiểu)" },
-    { value: `${correctPct}%`, label: "Đã phát âm đạt" },
+    { value: String(wordsStudied), label: "Thẻ đã hiểu" },
+    { value: String(stats?.mastered ?? 0), label: "Thẻ ghi nhớ vững" },
   ];
   const head = tab === "day" ? dayHead : allHead;
 
   return (
-    <main className="mx-auto max-w-6xl px-6 py-16 pt-24 animate-fadeIn relative">
+    <main className="study-page animate-fadeIn">
       {/* Background radial highlight */}
-      <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl pointer-events-none" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl" />
+      </div>
 
       {/* Tabs */}
       <div className="mb-12 flex justify-center">
@@ -189,8 +194,14 @@ export default function StatisticsPage() {
             </Link>
           </div>
         </div>
+      ) : error ? (
+        <div role="alert" className={`${GLASS} p-8 text-center`}>
+          <p>Chưa tải được thống kê. Hãy thử lại.</p>
+          <button onClick={() => setRetry(n => n + 1)} className="mt-3 underline">Thử lại</button>
+        </div>
       ) : (
         <div className="space-y-8">
+        <WeeklyReport timeline={timeline} />
         <div className="grid gap-8 lg:grid-cols-12 items-start">
           {/* Cột trái: số liệu (7 cols) */}
           <div className={`${GLASS} p-6 sm:p-8 lg:col-span-7 space-y-6`}>
@@ -228,7 +239,7 @@ export default function StatisticsPage() {
                   { v: String(stats?.shadowDone ?? 0), k: "câu đã học" },
                   {
                     v: stats?.shadowAvg != null ? `${stats.shadowAvg}đ` : "—",
-                    k: "điểm phát âm TB",
+                    k: "TB điểm mới nhất mỗi câu",
                   },
                 ]}
               />
@@ -240,7 +251,7 @@ export default function StatisticsPage() {
             <div>
               <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">Điểm phát âm</h3>
               <p className="mt-1 mb-6 text-xs font-semibold text-muted">
-                Theo dõi kết quả luyện nói shadowing của từng câu
+                Điểm mới nhất của từng câu shadowing
               </p>
             </div>
             {chartData.length === 0 ? (
@@ -297,7 +308,7 @@ export default function StatisticsPage() {
               <p className="mt-1 text-xs font-semibold text-muted">
                 {metric === "reviews"
                   ? "Số lần ôn tập mỗi ngày · chấm 📓 = ngày có viết nhật ký"
-                  : "Điểm phát âm trung bình mỗi ngày (Shadowing) · thang 0–100"}
+                  : "Trung bình tất cả lượt chấm mỗi ngày (Shadowing) · thang 0–100"}
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <div className="inline-flex rounded-full bg-white/40 dark:bg-black/35 border border-border/70 p-1 shadow-sm">
@@ -416,7 +427,10 @@ export default function StatisticsPage() {
                         boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
                       }}
                       formatter={(v) => [`${v} điểm`, "Phát âm TB"]}
-                      labelFormatter={(l) => `Ngày ${l}`}
+                      labelFormatter={(l, p) => {
+                        const day = p?.[0]?.payload as ActivityDay | undefined;
+                        return `Ngày ${l} · ${day?.shadowCount ?? 0} lượt chấm`;
+                      }}
                     />
                     <Line type="monotone" dataKey="shadowAvg" stroke={TEAL} strokeWidth={3} connectNulls dot={{ r: 4, fill: TEAL, strokeWidth: 1 }} activeDot={{ r: 6, strokeWidth: 0 }} />
                   </LineChart>

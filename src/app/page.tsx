@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       {/* ===== HEADER GỌN: chào + lối tắt ===== */}
-      <section className="mx-auto max-w-5xl px-5 pt-10 pb-2 animate-fadeIn">
+      <section className="mx-auto max-w-7xl px-4 sm:px-8 pt-8 pb-2 animate-fadeIn">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-3">
             <span className="inline-flex self-start items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
@@ -56,13 +56,13 @@ export default function Home() {
       </section>
 
       {/* ===== TRỌNG TÂM: LỘ TRÌNH HỌC ===== */}
-      <section className="mx-auto max-w-5xl px-5 pt-8 pb-20 animate-fadeIn">
+      <section className="mx-auto max-w-7xl px-4 sm:px-8 pt-8 pb-20 animate-fadeIn">
         <RoadmapPath />
       </section>
 
       {/* ===== FOOTER ===== */}
       <footer className="border-t border-border/10 bg-white/[0.03] dark:bg-black/[0.15] backdrop-blur-md py-10 text-[11px] font-black uppercase tracking-wider text-muted/80">
-        <div className="max-w-5xl mx-auto px-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>SpeakUp · Lộ trình A1 → Giao tiếp thành thạo · Học nói mỗi ngày</p>
           <div className="flex gap-6">
             <Link href="/account" className="text-primary hover:underline">Tài khoản</Link>

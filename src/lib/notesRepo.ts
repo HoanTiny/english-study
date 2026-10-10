@@ -1,5 +1,6 @@
 "use client";
 
+import { recordStudyEvent } from "./studySession";
 import { supabase } from "@/lib/supabase";
 
 export type NoteKind = "structure" | "word";
@@ -79,10 +80,14 @@ export async function addNote(
     .insert({ ...base, meaning: input.meaning?.trim() || null })
     .select(COLS)
     .single();
-  if (!error) return fromRow(data as Row);
+  if (!error) {
+    for (const slug of input.tags) recordStudyEvent(userId, { kind: "lesson", id: input.content.trim().toLowerCase(), slug });
+    return fromRow(data as Row);
+  }
   // Fallback: cột meaning chưa migrate → lưu không kèm meaning.
   const legacy = await supabase.from("notes").insert(base).select(COLS_LEGACY).single();
   if (legacy.error) throw legacy.error;
+  for (const slug of input.tags) recordStudyEvent(userId, { kind: "lesson", id: input.content.trim().toLowerCase(), slug });
   return fromRow({ ...(legacy.data as Omit<Row, "meaning">), meaning: null });
 }
 

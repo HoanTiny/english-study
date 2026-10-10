@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import type { LessonPhrase } from "@/lib/lessons";
-import { markLessonDone } from "@/lib/lessonDone";
+import { useAuth } from "@/lib/auth";
+import { markLessonDone, QUIZ_PASS_RATIO } from "@/lib/lessonDone";
 
 type Question = {
   prompt: string; // nghĩa tiếng Việt
@@ -45,10 +46,15 @@ function speak(text: string) {
 export default function LessonQuiz({
   phrases,
   slug,
+  onPassed,
 }: {
   phrases: LessonPhrase[];
   slug: string;
+  onPassed?: () => void;
 }) {
+  const { userId } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [idx, setIdx] = useState(0);
@@ -78,10 +84,18 @@ export default function LessonQuiz({
     speak(questions[idx].answer);
   }
 
-  function next() {
+  async function next() {
+    if (saving) return;
     if (idx + 1 >= questions.length) {
-      setDone(true);
-      markLessonDone(slug);
+      setSaving(true);
+      setSaveError(null);
+      try {
+        if (!userId) throw new Error("Vui lòng đăng nhập để lưu kết quả.");
+        await markLessonDone(userId, slug, score, questions.length);
+        if (score / questions.length >= QUIZ_PASS_RATIO) onPassed?.();
+        setDone(true);
+      } catch { setSaveError("Chưa lưu được kết quả. Bấm tiếp theo để thử lại."); }
+      finally { setSaving(false); }
     } else {
       setIdx((i) => i + 1);
       setPicked(null);
@@ -117,13 +131,13 @@ export default function LessonQuiz({
       <div className="mt-10 rounded-3xl border border-border/60 bg-white/70 dark:bg-zinc-900/60 p-7 text-center shadow-sm animate-fadeIn">
         <p className="text-4xl">{great ? "🎉" : "💪"}</p>
         <p className="mt-2 font-display text-2xl font-black text-foreground">
-          {score}/{total} <span className="text-base text-muted">({pct}%)</span>
+          {score}/{total} <span className="text-base text-muted">({pct}%) — {pct >= 80 ? "Đạt" : "Cần đạt 80% để hoàn thành bài"}</span>
         </p>
         <p className="mt-1 text-xs font-semibold text-muted">
           {great ? "Tuyệt vời! Bạn nắm bài tốt." : "Tốt rồi — ôn lại vài cụm và thử lại nhé."}
         </p>
         <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-teal-600 dark:text-teal-400">
-          ✓ Đã hoàn thành bài học
+          {great ? "✓ Đã hoàn thành bài học" : "Chưa đạt — hãy ôn và thử lại"}
         </p>
         <div className="mt-5">
           <button
@@ -147,6 +161,7 @@ export default function LessonQuiz({
         </span>
         <span className="text-[10px] font-black uppercase tracking-wider text-primary">
           Điểm: {score}
+          {saveError && <span role="alert">{saveError}</span>}
         </span>
       </div>
       <p className="text-xs font-bold text-muted uppercase tracking-wider mb-1">Nghĩa</p>
@@ -180,6 +195,7 @@ export default function LessonQuiz({
 
       {picked && (
         <button
+          disabled={saving}
           onClick={next}
           className="mt-5 w-full liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider active:scale-95"
         >

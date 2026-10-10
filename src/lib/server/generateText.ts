@@ -1,3 +1,4 @@
+import { TokenBudgetError } from "./tokenUsage";
 // Server-only: sinh văn bản với fallback Gemini → Groq (OpenAI-compat).
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 import { openaiCompatConfigured, openaiCompatVision } from "@/lib/server/openaiCompat";
@@ -7,6 +8,7 @@ export function textProviderConfigured(): boolean {
 }
 
 export async function generateText(opts: {
+  request: Request;
   system?: string;
   user: string;
   jsonMode?: boolean;
@@ -17,10 +19,11 @@ export async function generateText(opts: {
     try {
       const text = await geminiGenerate(
         [{ role: "user", parts: [{ text: opts.user }] }],
-        { system: opts.system, jsonMode: opts.jsonMode, temperature: opts.temperature ?? 0.4 },
+        { request: opts.request, system: opts.system, jsonMode: opts.jsonMode, temperature: opts.temperature ?? 0.4 },
       );
       return { text, provider: "gemini" };
-    } catch {
+    } catch (error) {
+      if (error instanceof TokenBudgetError) throw error;
       /* rớt sang Groq */
     }
   }

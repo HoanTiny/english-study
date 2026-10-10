@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { TokenUsagePanel, type UsageRow } from "@/components/admin/TokenUsagePanel";
 import { useAdminAuth } from "@/lib/adminAuth";
 
 type Role = "admin" | "editor" | null;
@@ -31,6 +32,20 @@ export default function AdminUsersPage() {
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState<string | null>(null); // id đang đổi role
   const [q, setQ] = useState("");
+  const [month, setMonth] = useState(() => new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Bangkok", year: "numeric", month: "2-digit" }).format(new Date()));
+  const [tokenData, setTokenData] = useState<{ usage: UsageRow[]; limits: { user_id: string; monthly_limit: number | null }[] } | null>(null);
+  const [tokenError, setTokenError] = useState("");
+  const [revision, setRevision] = useState(0);
+  function refreshTokens() { setTokenData(null); setTokenError(""); setRevision(n => n+1); }
+  useEffect(() => {
+    if (!key || !isAdmin) return;
+    let cancelled = false;
+    fetch(`/api/admin/token-usage?month=${month}`, { headers: { "x-admin-key": key } })
+      .then(async res => { const data = await res.json(); if (!res.ok) throw new Error(data.error || "Không tải được token."); return data; })
+      .then(data => { if (!cancelled) setTokenData(data); })
+      .catch(e => { if (!cancelled) setTokenError(e.message); });
+    return () => { cancelled = true; };
+  }, [key, isAdmin, month, revision]);
 
   const load = useCallback(async () => {
     setErr("");
@@ -116,6 +131,13 @@ export default function AdminUsersPage() {
         <b className="text-amber-400">Editor</b> = chỉ sửa nội dung (bài học, video, bài tập). Người dùng thường không vào được CMS.
       </div>
 
+      <section className="mt-4 rounded-xl border border-white/10 p-3 text-xs text-muted">
+        <h2 className="font-bold text-white">Token Gemini theo người dùng</h2>
+        <p className="mt-1">Tổng gồm input, output và suy luận. Hạn mức tự bắt đầu lại mỗi tháng theo giờ Việt Nam (UTC+7). Chỉ có số liệu từ khi bật tính năng; không gồm Azure Speech hoặc provider khác.</p>
+        <div className="mt-3 flex flex-wrap items-center gap-3"><label>Tháng thống kê <input aria-label="Tháng thống kê token" type="month" value={month} onChange={e => { if(e.target.value) { setTokenData(null); setTokenError(""); setMonth(e.target.value); } }} className="ml-2 rounded-lg border border-white/15 bg-black/30 p-2 text-white" /></label><button onClick={refreshTokens} className="rounded-lg border border-white/15 px-3 py-2">Làm mới token</button></div>
+        <p className="mt-2">Hạn mức bên dưới áp dụng cho tháng hiện tại và các tháng sau, kể cả khi đang xem thống kê tháng cũ.</p>
+        {tokenError ? <p role="alert" className="mt-2 text-rose-300">{tokenError}</p> : !tokenData && <p role="status" className="mt-2">Đang tải thống kê token…</p>}
+      </section>
       <div className="mt-3 space-y-2">
         {filtered.map((u) => {
           const roleKey = u.role ?? "user";
@@ -155,6 +177,7 @@ export default function AdminUsersPage() {
                   <option value="admin">Admin</option>
                 </select>
               )}
+              {tokenData && <TokenUsagePanel userId={u.id} email={u.email || u.id} rows={tokenData.usage.filter(r => r.user_id === u.id)} limit={tokenData.limits.find(r => r.user_id === u.id)?.monthly_limit ?? null} adminKey={key} onSaved={refreshTokens} />}
             </div>
           );
         })}

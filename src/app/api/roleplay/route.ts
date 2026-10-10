@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -15,16 +17,20 @@ Quy tắc:
 }
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   let scenario = "";
   let messages: ChatMsg[] = [];
   try {
     const json = await req.json();
     scenario = typeof json?.scenario === "string" ? json.scenario : "a friendly chat";
     messages = Array.isArray(json?.messages) ? json.messages : [];
-  } catch {
+  } catch (cause) {
     return Response.json({ error: "invalid body" }, { status: 400 });
   }
 
+  if (messages.length > 40 || messages.some(m => !m || typeof m.text !== "string" || m.text.length > 2000 || !["user", "model"].includes(m.role)))
+    return Response.json({ error: "Hội thoại quá dài hoặc không hợp lệ." }, { status: 400 });
   if (!geminiConfigured()) {
     return Response.json({ reply: null, source: "unconfigured" });
   }
@@ -40,12 +46,13 @@ export async function POST(req: NextRequest) {
     if (contents.length === 0) {
       contents.push({ role: "user", parts: [{ text: "Let's start the conversation." }] });
     }
-    const reply = await geminiGenerate(contents, {
+    const reply = await geminiGenerate(contents, { request: req,
       system: systemFor(scenario),
       temperature: 0.8,
     });
     return Response.json({ reply, source: "gemini" });
   } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
     console.error("roleplay gemini error", e);
     return Response.json({ reply: null, source: "error" });
   }

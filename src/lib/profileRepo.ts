@@ -24,58 +24,49 @@ export async function ensureProfile(
   const row: Record<string, unknown> = { id: userId };
   if (email) row.email = email;
   if (displayName) row.display_name = displayName;
-  await supabase.from("profiles").upsert(row, { onConflict: "id" });
+  const { error } = await supabase.from("profiles").upsert(row, { onConflict: "id" });
+  if (error) throw error;
 }
 
-// Cập nhật streak theo ngày hoạt động (gọi khi mở app/đăng nhập). Trả streak mới.
+// Called only after a learning activity has been saved successfully.
 export async function touchStreak(userId: string): Promise<number> {
-  const { data } = await supabase
-    .from("profiles")
-    .select("streak_count, last_active")
-    .eq("id", userId)
-    .maybeSingle();
-
-  const today = dateStr(new Date());
-  const y = new Date();
-  y.setDate(y.getDate() - 1);
-  const yesterday = dateStr(y);
-
-  let streak = data?.streak_count ?? 0;
-  const last = data?.last_active ?? null;
-
-  if (last === today) return streak || 1; // hôm nay đã tính
-  streak = last === yesterday ? (streak || 0) + 1 : 1; // nối tiếp hoặc reset
-  await supabase.from("profiles").update({ streak_count: streak, last_active: today }).eq("id", userId);
-  return streak;
+  const { data, error } = await supabase.rpc("record_study_day", { p_user: userId, p_day: dateStr(new Date()) });
+  if (error) throw error;
+  return data as number;
 }
 
 export async function getProfile(userId: string): Promise<Profile> {
-  const { data } = await supabase
+  const { data, error: readError } = await supabase
     .from("profiles")
     .select("display_name, email, streak_count, current_stage, last_active, onboarded")
     .eq("id", userId)
     .maybeSingle();
+  if (readError) throw readError;
   return {
     displayName: data?.display_name ?? null,
     email: data?.email ?? null,
     streak: data?.streak_count ?? 0,
-    currentStage: data?.current_stage ?? 1,
+    currentStage: data && [1, 2, 3, 4].includes(data.current_stage) ? data.current_stage : 1,
     lastActive: data?.last_active ?? null,
     onboarded: data?.onboarded ?? false,
   };
 }
 
 export async function updateDisplayName(userId: string, name: string): Promise<void> {
-  await supabase.from("profiles").update({ display_name: name }).eq("id", userId);
+  const { error } = await supabase.from("profiles").update({ display_name: name }).eq("id", userId).select("id").single();
+  if (error) throw error;
 }
 
 // Lưu trình độ đã chọn (current_stage) và đánh dấu đã onboard.
 export async function setOnboarding(userId: string, stage: number): Promise<void> {
-  await supabase.from("profiles").update({ current_stage: stage, onboarded: true }).eq("id", userId);
+  if (![1, 2, 3, 4].includes(stage)) throw new Error("Trình độ không hợp lệ.");
+  const { error } = await supabase.from("profiles").update({ current_stage: stage, onboarded: true }).eq("id", userId).select("id").single();
+  if (error) throw error;
 }
 
 // Kiểm tra đã onboard chưa (để quyết định có hiện bước chọn trình độ).
 export async function isOnboarded(userId: string): Promise<boolean> {
-  const { data } = await supabase.from("profiles").select("onboarded").eq("id", userId).maybeSingle();
+  const { data, error: readError } = await supabase.from("profiles").select("onboarded").eq("id", userId).maybeSingle();
+  if (readError) throw readError;
   return data?.onboarded ?? false;
 }

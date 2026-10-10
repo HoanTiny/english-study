@@ -1,57 +1,34 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import vocabData from "@/data/vocab.json";
+import { CEFR_WORDS, type CefrLevel } from "@/data/cefrWords";
 
 // Audio-call (theo design Figma): NGHE từ tiếng Anh (TTS) → chọn nghĩa đúng trong 5 lựa chọn.
 // Có hệ thống MẠNG (5 tim): chọn sai / "I don't know" mất 1 tim. Hết tim → kết thúc.
 // Sau khi chọn: hiện đáp án đúng (teal) + lựa chọn sai (đỏ) + nút Next. Phím 1-5 chọn, Space nghe lại.
+// Chống lặp: bốc từ theo "bộ bài" (hết từ mới rồi mới quay lại), ưu tiên từ chưa nghe ở các lượt trước.
 
-const WORDS: Record<string, { en: string; vi: string; emoji: string }[]> = {
-  A1: [
-    { en: "hello", vi: "xin chào", emoji: "👋" },
-    { en: "family", vi: "gia đình", emoji: "👨‍👩‍👧" },
-    { en: "food", vi: "đồ ăn", emoji: "🍜" },
-    { en: "friend", vi: "người bạn", emoji: "🧑‍🤝‍🧑" },
-    { en: "weather", vi: "thời tiết", emoji: "⛅" },
-    { en: "school", vi: "trường học", emoji: "🏫" },
-    { en: "water", vi: "nước", emoji: "💧" },
-    { en: "morning", vi: "buổi sáng", emoji: "🌅" },
-  ],
-  A2: [
-    { en: "depends on", vi: "phụ thuộc vào", emoji: "⚖️" },
-    { en: "routine", vi: "thói quen", emoji: "🔁" },
-    { en: "restaurant", vi: "nhà hàng", emoji: "🍽️" },
-    { en: "opinion", vi: "ý kiến", emoji: "💬" },
-    { en: "weekend", vi: "cuối tuần", emoji: "📅" },
-    { en: "expensive", vi: "đắt đỏ", emoji: "💸" },
-    { en: "delicious", vi: "ngon", emoji: "😋" },
-    { en: "ticket", vi: "vé", emoji: "🎫" },
-  ],
-  B1: [
-    { en: "conversation", vi: "cuộc hội thoại", emoji: "🗣️" },
-    { en: "confidence", vi: "sự tự tin", emoji: "💪" },
-    { en: "improve", vi: "cải thiện", emoji: "📈" },
-    { en: "recommend", vi: "gợi ý, đề xuất", emoji: "👍" },
-    { en: "experience", vi: "trải nghiệm", emoji: "✨" },
-    { en: "decision", vi: "quyết định", emoji: "🤔" },
-    { en: "journey", vi: "hành trình", emoji: "🧭" },
-    { en: "average", vi: "trung bình", emoji: "📊" },
-  ],
-  B2: [
-    { en: "fluency", vi: "sự trôi chảy", emoji: "🌊" },
-    { en: "pronunciation", vi: "sự phát âm", emoji: "🔉" },
-    { en: "rewarding", vi: "xứng đáng", emoji: "🏆" },
-    { en: "assessment", vi: "sự đánh giá", emoji: "📝" },
-    { en: "anniversary", vi: "lễ kỷ niệm", emoji: "🎉" },
-    { en: "overwhelmed", vi: "quá tải cảm xúc", emoji: "🤯" },
-    { en: "approach", vi: "cách tiếp cận", emoji: "🧩" },
-    { en: "achievement", vi: "thành tựu", emoji: "🥇" },
-  ],
+type Word = { en: string; vi: string; emoji?: string };
+type Source = "cefr" | "topic" | "ai";
+
+const VOCAB = vocabData as { en: string; vi: string; topic: string }[];
+const VOCAB_TOPICS = [...new Set(VOCAB.map((v) => v.topic))];
+const LEVELS = Object.keys(CEFR_WORDS) as CefrLevel[];
+const CEFR_TOTAL = LEVELS.reduce((n, l) => n + CEFR_WORDS[l].length, 0);
+// Kho dự phòng lấy phương án nhiễu khi bộ từ đang chơi quá nhỏ (vd. bộ AI chỉ vài từ).
+const ALL_WORDS: Word[] = [...LEVELS.flatMap((l) => CEFR_WORDS[l]), ...VOCAB];
+
+const TOPIC_EMOJI: Record<string, string> = {
+  "Con vật nuôi": "🐾", "Cơ thể người": "🫀", "Cảm xúc": "😊", "Du lịch": "✈️", "Gia đình": "👨‍👩‍👧",
+  "Kinh doanh": "💼", "Mua sắm": "🛍️", "Màu sắc": "🎨", "Máy tính & Internet": "💻", "Món ăn thực phẩm": "🍲",
+  "Môi trường": "🌍", "Ngoại hình": "🪞", "Quần áo và thời trang": "👗", "Sở thích": "🎯", "Thời tiết": "⛅",
+  "Thức uống": "🥤", "Truyền hình báo chí": "📰", "Trường học": "🏫", "Tính cách": "🧠", "Điện thoại - Thư tín": "📮",
 };
 
 const MAX_LIVES = 5;
+const SEEN_KEY = "audiocall-seen-v1";
 type Phase = "welcome" | "playing" | "results";
-type Word = { en: string; vi: string; emoji: string };
 type Hist = { en: string; vi: string; correct: boolean };
 
 function shuffle<T>(arr: T[]): T[] {
@@ -63,9 +40,82 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// Lịch sử nghe theo từng bộ từ (chỉ là tiện ích trên máy — storage lỗi/bị chặn thì coi như chưa nghe gì).
+function loadSeen(poolKey: string): string[] {
+  try {
+    const all = JSON.parse(localStorage.getItem(SEEN_KEY) || "{}");
+    return Array.isArray(all[poolKey]) ? all[poolKey] : [];
+  } catch {
+    return [];
+  }
+}
+function markSeen(poolKey: string, en: string, cap: number) {
+  try {
+    const all = JSON.parse(localStorage.getItem(SEEN_KEY) || "{}");
+    const list: string[] = (Array.isArray(all[poolKey]) ? all[poolKey] : []).filter((x: string) => x !== en);
+    list.push(en);
+    all[poolKey] = list.slice(-cap);
+    localStorage.setItem(SEEN_KEY, JSON.stringify(all));
+  } catch {
+    // bỏ qua
+  }
+}
+
+// Bộ bài: từ chưa nghe gần đây (xáo trộn) lên trước, từ đã nghe xếp sau — nghe lâu nhất thì ra trước.
+function buildDeck(pool: Word[], recent: string[], avoidFirst: string | null): Word[] {
+  const rank = new Map(recent.map((en, i) => [en, i]));
+  const fresh = shuffle(pool.filter((w) => !rank.has(w.en)));
+  const stale = pool.filter((w) => rank.has(w.en)).sort((a, b) => rank.get(a.en)! - rank.get(b.en)!);
+  const deck = [...fresh, ...stale];
+  if (avoidFirst && deck.length > 1 && deck[0].en === avoidFirst) deck.push(deck.shift()!);
+  return deck;
+}
+
+// Hai nghĩa "quá giống" (trùng một vế, hoặc vế này nằm trọn trong vế kia: "ăn" ~ "đồ ăn")
+// thì không cho cùng xuất hiện, tránh câu hỏi có 2 đáp án đều hợp lý.
+function meaningParts(vi: string): string[] {
+  return vi
+    .toLowerCase()
+    .split(/[,;]/)
+    .map((s) => s.replace(/\(.*?\)/g, "").replace(/\.\.\./g, " ").replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+}
+function tooSimilar(a: string, b: string): boolean {
+  for (const x of meaningParts(a)) {
+    for (const y of meaningParts(b)) {
+      const [s, l] = x.length < y.length ? [x, y] : [y, x];
+      if (` ${l} `.includes(` ${s} `)) return true;
+    }
+  }
+  return false;
+}
+
+function pickOptions(answer: Word, pool: Word[]): string[] {
+  const out: string[] = [];
+  const fits = (w: Word) =>
+    w.en !== answer.en && !tooSimilar(w.vi, answer.vi) && out.every((o) => !tooSimilar(o, w.vi));
+  for (const src of [pool, ALL_WORDS]) {
+    for (const w of shuffle(src)) {
+      if (out.length === 4) break;
+      if (fits(w)) out.push(w.vi);
+    }
+  }
+  return shuffle([answer.vi, ...out]);
+}
+
+function dedupe(pool: Word[]): Word[] {
+  return [...new Map(pool.map((w) => [w.en.toLowerCase(), w])).values()];
+}
+
 export default function AudioCallGame() {
   const [phase, setPhase] = useState<Phase>("welcome");
-  const [level, setLevel] = useState("A1");
+  const [source, setSource] = useState<Source>("cefr");
+  const [level, setLevel] = useState<CefrLevel>("A1");
+  const [vocabTopic, setVocabTopic] = useState(VOCAB_TOPICS[0]);
+  const [aiTopic, setAiTopic] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiErr, setAiErr] = useState("");
+  const [poolLabel, setPoolLabel] = useState("");
   const [lives, setLives] = useState(MAX_LIVES);
   const [score, setScore] = useState(0);
   const [history, setHistory] = useState<Hist[]>([]);
@@ -73,6 +123,10 @@ export default function AudioCallGame() {
   const [options, setOptions] = useState<string[]>([]);
   const [picked, setPicked] = useState<string | null>(null);
   const livesRef = useRef(MAX_LIVES);
+  const poolRef = useRef<Word[]>([]);
+  const poolKeyRef = useRef<string | null>(null);
+  const deckRef = useRef<Word[]>([]);
+  const lastEnRef = useRef<string | null>(null);
 
   const speak = useCallback((text: string) => {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
@@ -83,23 +137,61 @@ export default function AudioCallGame() {
     window.speechSynthesis.speak(u);
   }, []);
 
-  const nextQuestion = useCallback((lvl: string) => {
-    const list = WORDS[lvl] || WORDS.A1;
-    const w = list[Math.floor(Math.random() * list.length)];
-    const distractors = shuffle(list.filter((x) => x.en !== w.en)).slice(0, 4).map((x) => x.vi);
+  const nextQuestion = useCallback(() => {
+    const pool = poolRef.current;
+    // Hết bộ bài → xáo lại cả bộ, tránh từ vừa nghe lặp ngay câu kế.
+    if (deckRef.current.length === 0) deckRef.current = buildDeck(pool, [], lastEnRef.current);
+    const w = deckRef.current.shift()!;
+    lastEnRef.current = w.en;
+    if (poolKeyRef.current) markSeen(poolKeyRef.current, w.en, pool.length);
     setWord(w);
-    setOptions(shuffle([w.vi, ...distractors]));
+    setOptions(pickOptions(w, pool));
     setPicked(null);
     speak(w.en);
   }, [speak]);
 
-  function start(lvl: string) {
+  function startWith(rawPool: Word[], label: string, key: string | null) {
+    const pool = dedupe(rawPool);
+    poolRef.current = pool;
+    poolKeyRef.current = key;
+    deckRef.current = buildDeck(pool, key ? loadSeen(key) : [], null);
+    lastEnRef.current = null;
+    setPoolLabel(label);
     setHistory([]);
     setScore(0);
     setLives(MAX_LIVES);
     livesRef.current = MAX_LIVES;
     setPhase("playing");
-    nextQuestion(lvl);
+    nextQuestion();
+  }
+
+  function startCefr() {
+    startWith(CEFR_WORDS[level], `Cấp độ ${level}`, `cefr:${level}`);
+  }
+  function startTopic() {
+    const emoji = TOPIC_EMOJI[vocabTopic];
+    const pool = VOCAB.filter((v) => v.topic === vocabTopic).map(({ en, vi }) => ({ en, vi, emoji }));
+    startWith(pool, vocabTopic, `topic:${vocabTopic}`);
+  }
+  async function startAi() {
+    setAiErr("");
+    setAiLoading(true);
+    try {
+      const qs = new URLSearchParams({ level, n: "30" });
+      if (aiTopic.trim()) qs.set("topic", aiTopic.trim());
+      const res = await fetch(`/api/sprint-words?${qs}`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Không tạo được từ.");
+      startWith(data.words as Word[], `AI · ${level}${aiTopic.trim() ? " · " + aiTopic.trim() : ""}`, null);
+    } catch (e) {
+      setAiErr(e instanceof Error ? e.message : "Có lỗi xảy ra.");
+    } finally {
+      setAiLoading(false);
+    }
+  }
+  // Chơi lại đúng bộ từ hiện tại — bộ bài tiếp tục ưu tiên những từ chưa nghe.
+  function replay() {
+    startWith(poolRef.current, poolLabel, poolKeyRef.current);
   }
 
   const choose = useCallback(
@@ -124,8 +216,8 @@ export default function AudioCallGame() {
       setPhase("results");
       return;
     }
-    nextQuestion(level);
-  }, [level, nextQuestion]);
+    nextQuestion();
+  }, [nextQuestion]);
 
   // Phím tắt: 1-5 chọn, Space nghe lại, Enter sang câu kế khi đã trả lời.
   useEffect(() => {
@@ -151,6 +243,8 @@ export default function AudioCallGame() {
   const unknown = history.filter((h) => !h.correct);
   const answered = picked !== null;
 
+  const startBtn = "liquid-glass-btn w-full max-w-xs px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md disabled:opacity-50";
+
   return (
     <div className="mx-auto max-w-3xl px-2">
       {/* WELCOME */}
@@ -168,35 +262,96 @@ export default function AudioCallGame() {
               Lắng nghe phát âm từ trợ lý tiếng Anh rồi tìm nghĩa chính xác trong 5 lựa chọn. Bạn có {MAX_LIVES} mạng — chọn sai mất một mạng.
             </p>
           </div>
-          
-          <div className="space-y-2.5">
-            <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chọn trình độ CEFR</p>
-            <div className="flex justify-center gap-3">
-              {Object.keys(WORDS).map((lvl) => (
-                <button
-                  key={lvl}
-                  onClick={() => setLevel(lvl)}
-                  className={`h-11 w-11 rounded-full border-2 text-xs font-black transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${
-                    level === lvl
-                      ? "border-primary bg-primary text-primary-fg shadow-md scale-110"
-                      : "border-border/60 bg-surface/50 text-muted hover:border-primary/50"
-                  }`}
-                >
-                  {lvl}
-                </button>
-              ))}
-            </div>
+
+          {/* Nguồn từ vựng */}
+          <div className="flex w-full max-w-sm gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-[10px] font-black uppercase tracking-wider">
+            {([["cefr", "Cấp độ"], ["topic", "Chủ đề"], ["ai", "🤖 AI tạo"]] as [Source, string][]).map(([s, lbl]) => (
+              <button
+                key={s}
+                onClick={() => setSource(s)}
+                className={`flex-1 rounded-xl py-2 transition-all cursor-pointer ${source === s ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}
+              >
+                {lbl}
+              </button>
+            ))}
           </div>
-          
-          <button onClick={() => start(level)} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md">
-            Bắt đầu nghe
-          </button>
+
+          {(source === "cefr" || source === "ai") && (
+            <div className="space-y-2.5">
+              <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chọn trình độ CEFR</p>
+              <div className="flex flex-wrap justify-center gap-3">
+                {LEVELS.map((lvl) => (
+                  <button
+                    key={lvl}
+                    onClick={() => setLevel(lvl)}
+                    className={`h-11 w-11 rounded-full border-2 text-xs font-black transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${
+                      level === lvl
+                        ? "border-primary bg-primary text-primary-fg shadow-md scale-110"
+                        : "border-border/60 bg-surface/50 text-muted hover:border-primary/50"
+                    }`}
+                  >
+                    {lvl}
+                  </button>
+                ))}
+              </div>
+              {source === "cefr" && (
+                <p className="text-[10px] font-semibold text-muted">
+                  {CEFR_WORDS[level].length} từ ở cấp {level} · ưu tiên từ bạn chưa nghe ở các lượt trước
+                </p>
+              )}
+            </div>
+          )}
+
+          {source === "topic" && (
+            <div className="w-full max-w-sm space-y-2.5">
+              <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chủ đề từ vựng ({VOCAB.length} từ trong kho)</p>
+              <select
+                value={vocabTopic}
+                onChange={(e) => setVocabTopic(e.target.value)}
+                className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3 text-sm font-bold text-foreground outline-none focus:border-primary"
+              >
+                {VOCAB_TOPICS.map((t) => (
+                  <option key={t} value={t}>{t} ({VOCAB.filter((v) => v.topic === t).length})</option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {source === "ai" && (
+            <div className="w-full max-w-sm space-y-2.5">
+              <input
+                value={aiTopic}
+                onChange={(e) => setAiTopic(e.target.value)}
+                placeholder="Chủ đề (tuỳ chọn): du lịch, công sở…"
+                className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-2.5 text-sm font-bold text-foreground outline-none focus:border-primary"
+              />
+              <p className="text-[10px] font-semibold text-muted">AI tạo bộ 30 từ mới mỗi lần bấm — không lần nào giống lần nào.</p>
+              {aiErr && <p className="rounded-xl bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-600">{aiErr}</p>}
+            </div>
+          )}
+
+          {source === "cefr" && <button onClick={startCefr} className={startBtn}>Bắt đầu nghe</button>}
+          {source === "topic" && <button onClick={startTopic} className={startBtn}>Bắt đầu nghe</button>}
+          {source === "ai" && (
+            <button onClick={startAi} disabled={aiLoading} className={startBtn}>
+              {aiLoading ? "🤖 Đang tạo bộ từ…" : "🤖 Tạo bằng AI & nghe"}
+            </button>
+          )}
+
+          <p className="text-[10px] font-semibold text-muted">
+            Kho {CEFR_TOTAL} từ A1–C2 + {VOCAB.length} từ theo {VOCAB_TOPICS.length} chủ đề
+          </p>
         </div>
       )}
 
       {/* PLAYING */}
       {phase === "playing" && word && (
         <div className="liquid-glass-card flex flex-col items-center gap-6 p-6 md:p-8 text-center border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md animate-fadeIn">
+          <div className="flex w-full items-center justify-between gap-3 text-[9px] font-black uppercase tracking-wider text-muted">
+            <span className="truncate">{poolLabel}</span>
+            <span className="shrink-0">Câu {history.length + (answered ? 0 : 1)} · {score} điểm</span>
+          </div>
+
           {/* Vòng tròn Play / ảnh từ sau khi trả lời */}
           <button
             onClick={() => speak(word.en)}
@@ -204,7 +359,7 @@ export default function AudioCallGame() {
             title="Nghe lại (Phím Space)"
           >
             {answered ? (
-              <span className="text-6xl animate-bounce">{word.emoji}</span>
+              <span className="text-6xl animate-bounce">{word.emoji ?? "🎧"}</span>
             ) : (
               <>
                 <span className="text-4xl animate-pulse">🔊</span>
@@ -280,7 +435,7 @@ export default function AudioCallGame() {
           <div className="flex w-full flex-col items-center justify-center gap-4 rounded-3xl border border-border bg-surface p-6 text-center md:w-5/12 shadow-sm">
             <span className="text-6xl animate-bounce">🏆</span>
             <h3 className="font-display text-xl font-extrabold text-foreground">Kết quả đàm thoại</h3>
-            <p className="text-xs font-semibold text-muted">Bạn đã làm rất xuất sắc!</p>
+            <p className="text-xs font-semibold text-muted">{poolLabel}</p>
             <div className="mt-1">
               <p className="font-display text-4xl font-black text-primary leading-none">{score}</p>
               <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-1">điểm</p>
@@ -296,13 +451,13 @@ export default function AudioCallGame() {
               </div>
             </div>
             <div className="flex w-full flex-col gap-2.5 mt-4">
-              <button onClick={() => start(level)} className="liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider shadow-md">🔄 Chơi lại</button>
+              <button onClick={replay} className="liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider shadow-md">🔄 Chơi tiếp bộ này</button>
               <button onClick={() => setPhase("welcome")} className="rounded-full border border-border/60 bg-surface py-3 text-xs font-black uppercase tracking-wider text-foreground hover:border-primary/45 cursor-pointer shadow-sm">
-                🏠 Về sảnh chờ
+                🏠 Đổi bộ từ
               </button>
             </div>
           </div>
-          
+
           <div className="flex w-full flex-col md:w-7/12">
             <h4 className="mb-4 text-[9px] font-black uppercase tracking-[0.2em] text-muted">📋 Danh sách từ ôn luyện lại</h4>
             <div className="grid flex-1 grid-cols-2 gap-4 overflow-y-auto max-h-[45vh] pr-1">

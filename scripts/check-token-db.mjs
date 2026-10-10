@@ -1,0 +1,42 @@
+// Isolated PostgreSQL-compatible integration test. Never connects to Supabase.
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { PGlite } = require(process.env.PGLITE_MODULE || "../.next/token-db-test/node_modules/@electric-sql/pglite");
+const db = new PGlite();
+const user = "11111111-1111-4111-8111-111111111111";
+const other = "22222222-2222-4222-8222-222222222222";
+try {
+  await db.exec(`create schema auth; create table auth.users(id uuid primary key);
+    create role anon; create role authenticated; create role service_role bypassrls;
+    insert into auth.users values ('${user}'),('${other}');`);
+  const sql = await readFile("db/migrate_ai_token_usage.sql", "utf8");
+  await db.exec(sql); await db.exec(sql);
+  const reserve = async (who = user) => (await db.query("select public.reserve_ai_tokens($1,$2,100,8192,'fixture-model','roleplay') as result", [crypto.randomUUID(),who])).rows[0].result;
+  await db.query("select public.set_ai_token_limit($1,1000)",[user]);
+  const simultaneous = await Promise.all([reserve(),reserve()]);
+  assert.equal(simultaneous.filter(r=>r.allowed).length,1);
+  assert.equal(simultaneous.find(r=>r.allowed).maxOutputTokens,900);
+  const row = (await db.query("select id from public.ai_token_usage where user_id=$1",[user])).rows[0];
+  await db.query("select public.settle_ai_tokens($1,'completed',100,100,50,250)",[row.id]);
+  await db.query("select public.settle_ai_tokens($1,'completed',100,100,50,250)",[row.id]);
+  const report = (await db.query("select * from public.ai_token_report(date_trunc('month',now() at time zone 'Asia/Bangkok')::date)")).rows;
+  assert.equal(Number(report[0].total_tokens),250); assert.equal(Number(report[0].requests),1);
+  assert.equal(Number(report[0].held_tokens),0);
+  assert.equal((await reserve()).maxOutputTokens,650);
+  await db.query("select public.set_ai_token_limit($1,0)",[user]);
+  assert.equal((await reserve()).allowed,false);
+  assert.equal((await reserve(other)).allowed,true);
+  await db.query("select public.set_ai_token_limit($1,null)",[user]);
+  assert.equal((await reserve()).maxOutputTokens,8192);
+  await db.exec("set role authenticated");
+  await assert.rejects(()=>db.query("select * from public.ai_token_usage"),/permission denied/);
+  await assert.rejects(()=>db.query("select public.set_ai_token_limit($1,null)",[user]),/permission denied/);
+  await assert.rejects(()=>db.query("select * from public.ai_token_report(current_date)"),/permission denied/);
+  await db.exec("reset role");
+  await db.query("update public.ai_token_usage set month='2000-01-01' where user_id=$1",[user]);
+  await db.query("select public.set_ai_token_limit($1,1000)",[user]);
+  assert.equal((await reserve()).maxOutputTokens,900,"old-month usage does not consume current-month budget");
+  console.log("PASS token SQL: repeatable migration, reservations, settlement idempotency, isolation, zero/unlimited, month reset, RPC/table permissions");
+} finally { await db.close(); }

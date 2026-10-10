@@ -5,38 +5,27 @@ import Link from "next/link";
 import { useAuth } from "@/lib/auth";
 import { listNotes } from "@/lib/notesRepo";
 import { countSavedByLesson } from "@/lib/lessonProgress";
-import { loadStages, computeStatusesView, type ViewLesson } from "@/lib/lessonsView";
-import { isLessonDone } from "@/lib/lessonDone";
+import { loadStages, suggestedLesson } from "@/lib/lessonsView";
+import { listDoneSlugs } from "@/lib/lessonDone";
 
 type Pick = { slug: string; title: string; cefr: string; reason: string };
 
 // Gợi ý bài học nên học hôm nay: ưu tiên bài đang học dở, rồi bài mới mở khoá.
 export default function SuggestedLesson() {
-  const { userId, ready } = useAuth();
+  const { userId, ready, currentStage, profileReady } = useAuth();
   const [pick, setPick] = useState<Pick | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready || !profileReady || !userId) return;
     let active = true;
-    Promise.all([loadStages(), listNotes()])
-      .then(([vs, notes]) => {
+    setPick(null);
+    setLoaded(false);
+    Promise.all([loadStages(), listNotes(), listDoneSlugs(userId)])
+      .then(([vs, notes, passed]) => {
         if (!active) return;
-        const statuses = computeStatusesView(vs, countSavedByLesson(notes));
-        const flat: ViewLesson[] = vs.flatMap((s) => s.lessons).filter((l) => l.phraseCount > 0);
-        // 1) bài đang học dở (in_progress) & chưa hoàn thành quiz
-        let chosen = flat.find((l) => statuses[l.slug] === "in_progress" && !isLessonDone(l.slug));
-        let reason = "Bạn đang học dở bài này";
-        // 2) bài mới mở khoá (available)
-        if (!chosen) {
-          chosen = flat.find((l) => statuses[l.slug] === "available");
-          reason = "Bài mới mở khoá cho bạn";
-        }
-        // 3) bài đã mở nhưng chưa hoàn thành quiz
-        if (!chosen) {
-          chosen = flat.find((l) => statuses[l.slug] !== "locked" && !isLessonDone(l.slug));
-          reason = "Ôn lại và làm kiểm tra cuối bài";
-        }
+        const chosen = suggestedLesson(vs, countSavedByLesson(notes), passed, currentStage);
+        const reason = chosen && (countSavedByLesson(notes)[chosen.slug] ?? 0) > 0 ? "Tiếp tục bài đang học" : "Phù hợp trình độ hiện tại";
         if (chosen) {
           setPick({ slug: chosen.slug, title: chosen.title, cefr: chosen.cefr, reason });
         }
@@ -46,7 +35,7 @@ export default function SuggestedLesson() {
     return () => {
       active = false;
     };
-  }, [ready, userId]);
+  }, [ready, userId, currentStage, profileReady]);
 
   if (!loaded || !pick) return null;
 

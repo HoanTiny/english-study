@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -17,13 +19,15 @@ Trả về DUY NHẤT JSON: {
 Không thêm chữ nào ngoài JSON.`;
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   let structure = "";
   let sentence = "";
   try {
     const j = await req.json();
     structure = typeof j?.structure === "string" ? j.structure : "";
     sentence = typeof j?.sentence === "string" ? j.sentence : "";
-  } catch {
+  } catch (cause) {
     return Response.json({ error: "invalid body" }, { status: 400 });
   }
   if (!sentence.trim()) {
@@ -35,7 +39,7 @@ export async function POST(req: NextRequest) {
   try {
     const text = await geminiGenerate(
       [{ role: "user", parts: [{ text: `Cấu trúc: ${structure}\nCâu của học viên: ${sentence}` }] }],
-      { system: SYSTEM, jsonMode: true, temperature: 0.3 },
+      { request: req, system: SYSTEM, jsonMode: true, temperature: 0.3 },
     );
     const p = JSON.parse(text) as { ok?: boolean; feedback?: string; suggestion?: string };
     return Response.json({
@@ -45,6 +49,7 @@ export async function POST(req: NextRequest) {
       source: "gemini",
     });
   } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
     console.error("grammar-check error", e);
     return Response.json({ ok: null, source: "error" });
   }

@@ -12,23 +12,26 @@ export default function OnboardingPage() {
   const [step, setStep] = useState<"choose" | "test" | "result">("choose");
   const [answers, setAnswers] = useState<(number | null)[]>(PLACEMENT.map(() => null));
   const [result, setResult] = useState<{ stage: number; level: string; correct: number } | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
   // Chờ profile tải xong rồi mới quyết định (tránh đọc trạng thái cũ ngay sau đăng ký).
   useEffect(() => {
     if (!ready || !profileReady) return;
     if (isAnonymous) router.replace("/login");
-    else if (onboarded) router.replace("/today");
+    // Existing learners can revisit this page to reassess placement.
   }, [ready, profileReady, isAnonymous, onboarded, router]);
 
   async function save(stage: number) {
     if (!userId) return;
     setSaving(true);
     try {
+      setSaveError(null);
       await setOnboarding(userId, stage);
-      markOnboarded();
+      markOnboarded(stage);
       router.push("/today");
     } catch {
+      setSaveError("Chưa lưu được trình độ. Vui lòng thử lại.");
       setSaving(false);
     }
   }
@@ -41,13 +44,15 @@ export default function OnboardingPage() {
   }
 
   if (!ready) {
-    return <main className="px-6 py-24 text-center text-sm font-semibold text-muted animate-fadeIn">Đang tải…</main>;
+    return <main className="px-6 py-24 text-center text-sm font-semibold text-muted animate-fadeIn">
+      {saveError && <p role="alert">{saveError}</p>}Đang tải…</main>;
   }
 
   // ===== Chọn nhanh =====
   if (step === "choose") {
     return (
       <main className="mx-auto max-w-2xl px-6 py-16 pt-24 animate-fadeIn">
+      {saveError && <p role="alert">{saveError}</p>}
         <div className="text-center">
           <span className="text-5xl">🎯</span>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-foreground">Trình độ của bạn?</h1>
@@ -85,6 +90,7 @@ export default function OnboardingPage() {
     const allAnswered = answers.every((a) => a !== null);
     return (
       <main className="mx-auto max-w-2xl px-6 py-16 pt-24 animate-fadeIn">
+      {saveError && <p role="alert">{saveError}</p>}
         <button onClick={() => setStep("choose")} className="mb-4 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground">← Quay lại chọn nhanh</button>
         <h1 className="font-display text-2xl font-extrabold text-foreground">Bài test xếp loại</h1>
         <p className="mt-1 text-xs font-semibold text-muted">Chọn đáp án đúng. 8 câu, không tính giờ.</p>
@@ -118,6 +124,7 @@ export default function OnboardingPage() {
   // ===== Kết quả =====
   return (
     <main className="mx-auto max-w-md px-6 py-16 pt-24 animate-fadeIn">
+      {saveError && <p role="alert">{saveError}</p>}
       <div className="liquid-glass-card flex flex-col items-center gap-4 p-8 text-center border border-border/80 shadow-2xl">
         <span className="text-5xl">🎉</span>
         <h1 className="font-display text-2xl font-extrabold text-foreground">Trình độ gợi ý: {result?.level}</h1>

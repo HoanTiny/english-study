@@ -192,7 +192,7 @@ export default function AdminLessonsPage() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <p className="text-sm font-bold text-zinc-400">{lessons.length} bài · quản lý nội dung & audio</p>
         {!editing && (
           <div className="flex items-center gap-2">

@@ -7,15 +7,24 @@
 ## Tính năng chính
 
 - **Vòng lặp lõi**: Sổ tay → Ôn tập SRS (FSRS) → Nhật ký → Shadowing.
-- **Khoá học**: 31 bài / 253 cụm, mở khoá động theo tiến độ; quiz cuối bài.
+- **Khoá học**: 45 mục trong lộ trình (44 bài nội dung + công cụ IPA); nội dung xuất bản lấy từ CMS, mở khoá động theo tiến độ; quiz cuối bài. Mỗi bài có kiến thức bổ sung, cụm từ, lỗi thường gặp, bài tự luyện có lời giải và nhiệm vụ nói/viết.
 - **Học từ vựng**: thư viện bộ thẻ, Active Recall đa chế độ (Flashcard / Đoán / Trắc nghiệm), ghép cụm (Lexical Approach).
-- **Ngữ pháp**: 28 cấu trúc câu + 3 thì cơ bản + luyện đặt câu (chấm bằng AI).
+- **Ngữ pháp**: 138 cấu trúc câu + 12 mẫu thì/thể với cách dùng, ba dạng câu và ví dụ song ngữ + luyện đặt câu (chấm bằng AI).
 - **Nghe**: Luyện nghe theo chủ đề (YouTube nhúng), Chép chính tả (kho câu TTS hoặc transcript YouTube).
-- **Nói**: Shadowing + chấm phát âm thật (Azure Speech), Hội thoại AI roleplay.
+- **Hội thoại AI**: Chat chữ yên lặng hoặc luyện nói; dùng một ô nhập tiếng Anh/Việt. Khi bấm Gửi, một lượt Gemini nhận diện ngôn ngữ, dịch nếu cần, giải thích cách dùng và trả lời theo tình huống cùng câu AI gần nhất. Giữ nguyên câu tiếng Anh; câu được dịch có nhãn riêng và không dùng để chấm năng lực tự diễn đạt. Có dịch câu AI sang tiếng Việt theo yêu cầu. Lịch sử hiện chỉ giữ trong phiên.
+- **Nói**: Shadowing + chấm phát âm thật (Azure Speech). Nhận xét hội thoại từ văn bản không phải chấm phát âm.
 - **Trò chơi**: Sprint, Audio-call, Collocations.
 - **Hệ thống**: từ điển tra cứu (bôi đen → tra), thống kê tiến bộ, đăng nhập (ẩn danh / Email / Google OAuth), onboarding xếp lớp, nhắc học qua Web Push, Admin CMS.
 
-## Stack
+## Nội dung học bổ sung
+
+- `src/data/lesson-knowledge.json`: 44 bài, 88 điểm kiến thức có ví dụ song ngữ, 132 cụm từ, 44 lỗi thường gặp, 88 câu tự luyện kèm lời giải và 44 nhiệm vụ vận dụng. Đây là nội dung tự soạn; mức độ trong lộ trình là định hướng học, không phải chứng nhận CEFR.
+- Phần **Hiểu sâu & vận dụng** hiện trên bài học sau khi CMS xác nhận bài được xuất bản. Không cần seed lại CMS để thấy phần bổ sung sau khi triển khai mã mới; nội dung và audio do admin chỉnh trong CMS vẫn giữ nguyên. Bài tùy chỉnh với slug chưa có tài liệu bổ sung vẫn hoạt động bình thường.
+- 88 câu tự luyện có ô nhập, lời giải và thử lại. Các câu đáp án ngắn đã được biên soạn riêng được kiểm tra tự động; câu mở dùng tự đối chiếu, chấp nhận cách diễn đạt khác. Xem lời giải không được tính là trả lời đúng; kết quả tạm thời không tự đánh dấu hoàn thành bài. Quiz hiện có tiếp tục quản lý việc hoàn thành.
+- `npm test -- tests/lessonContent.test.ts tests/lessonsRepo.test.ts tests/learningIntegrity.test.ts` kiểm tra dữ liệu, liên kết và ranh giới xuất bản CMS.
+- `tests/knowledgePractice.test.ts` kiểm tra cách đối chiếu đáp án và biến thể hợp lệ. `scripts/check-knowledge-practice.mjs` kiểm tra trình duyệt với backend giả lập cục bộ; xem [phạm vi QA](docs/lesson-knowledge-qa.md).
+
+## Công nghệ
 
 - **Next.js 16** (App Router, Turbopack) · **React 19** · **TypeScript** · **Tailwind v4**
 - **Supabase** (Postgres + Auth + RLS)
@@ -33,7 +42,7 @@ cp .env.example .env.local   # rồi điền các key (xem bên dưới)
 npm run dev                  # http://localhost:3000
 ```
 
-App chạy được ngay với chế độ **ẩn danh**; các tính năng AI / phát âm / push cần key tương ứng (đều có fallback khi thiếu key).
+App chạy được ngay với chế độ **ẩn danh**; các tính năng AI / phát âm / push cần key tương ứng (thiếu key sẽ báo chưa sẵn sàng; không tạo điểm giả).
 
 ## Biến môi trường
 
@@ -42,8 +51,8 @@ Mẫu đầy đủ ở [`.env.example`](.env.example). Tóm tắt:
 | Biến | Bắt buộc | Dùng cho |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | Kết nối Supabase (auth + dữ liệu) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Admin | Ghi dữ liệu ở Admin CMS (chỉ server) |
-| `ADMIN_PASSCODE` | Admin | Mật mã vào `/admin/*` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Admin / AI | CMS và hạn mức API (chỉ server) |
+| `ADMIN_EMAILS` | Admin | Email quản trị khởi tạo; quyền bổ sung trong `profiles.role` |
 | `GEMINI_API_KEY` (`GEMINI_MODEL`) | — | Nhật ký AI, roleplay, sinh câu ví dụ, từ điển |
 | `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION` | — | Chấm phát âm thật ở Shadowing |
 | `OPENAI_COMPAT_*` hoặc `ANTHROPIC_API_KEY` | — | OCR ảnh → bài tập (Admin) |
@@ -57,7 +66,11 @@ Chạy theo thứ tự trong SQL editor của Supabase (các file trong `db/`):
 
 1. `schema.sql` — bảng cốt lõi
 2. `policies.sql` — RLS policies
-3. Các migration bổ sung tính năng: `migrate_journal_shadowing.sql`, `migrate_note_meaning.sql`, `migrate_onboarding.sql`, `fix_profiles_email.sql`, `migrate_push_subscriptions.sql`, `migrate_dictation_videos.sql`, `migrate_listen_videos.sql`, `migrate_lessons_cms.sql`, `migrate_listening_exercises.sql`, `migrate_error_log.sql`
+3. Các migration bổ sung tính năng: `migrate_journal_shadowing.sql`, `migrate_note_meaning.sql`, `migrate_onboarding.sql`, `fix_profiles_email.sql`, `migrate_push_subscriptions.sql`, `migrate_dictation_videos.sql`, `migrate_listen_videos.sql`, `migrate_lessons_cms.sql`, `migrate_listening_exercises.sql`, `migrate_error_log.sql`, `migrate_roles.sql`, `migrate_word_examples.sql`
+4. `migrate_learning_integrity.sql` — bảo vệ role, quota API, ghi CMS nguyên tử, kết quả quiz, trạng thái FSRS đầy đủ
+5. `migrate_personalized_study.sql` — luyện lỗi và hoạt động học theo ngày
+6. `migrate_shadowing_history.sql` — lịch sử từng lượt chấm và chi tiết phát âm (dùng cho biểu đồ hoạt động)
+7. `migrate_study_session_sync.sql` — đồng bộ buổi học theo tài khoản/ngày, chống ghi đè tiến độ và cách ly tài khoản
 
 Seed video Luyện nghe (sau khi đã có `migrate_listen_videos.sql` + service-role key):
 
@@ -74,6 +87,29 @@ node scripts/seed-listen-videos.mjs
 | `npm run lint` | ESLint |
 | `npm run lint:cefr` | Dò từ vượt cấp CEFR trong câu mẫu |
 | `npm test` / `npm run test:watch` | Vitest (unit test logic thuần) |
+
+## Buổi học cá nhân hóa
+
+- Xếp lớp điều chỉnh bài bắt đầu và gợi ý; bài nền tảng vẫn mở để ôn. Vào lại onboarding để kiểm tra/chọn lại trình độ; không tự đánh dấu các bài trước đó là hoàn thành.
+- Trang Hôm nay tạo buổi 10/20/30 phút theo thẻ đến hạn, bài đang học và lỗi cần ôn. Thanh tiến độ theo người học qua các trang; bỏ qua bước không tính hoàn thành. Tiến độ buổi đồng bộ qua Supabase theo tài khoản/ngày; bản trên thiết bị giữ thay đổi chưa gửi để thử lại khi có mạng. Cần đăng nhập cùng tài khoản để tiếp tục trên thiết bị khác.
+- Sổ lỗi: tự viết lại trước khi xem gợi ý, tự đánh giá và ôn lại theo lịch. Cần 3 lần đúng cách nhau để tự đánh dấu đã nắm; dữ liệu này không phải điểm AI.
+- Chạy thêm `db/migrate_personalized_study.sql` sau migration integrity. Chức năng luyện lỗi cần migration này.
+- Đồng bộ buổi học cần `db/migrate_study_session_sync.sql` trước khi deploy. Quy tắc xử lý xung đột, trạng thái ngoại tuyến và kiểm thử: [docs/study-session-sync.md](docs/study-session-sync.md).
+- Kiểm tra trình duyệt tùy chọn: `node scripts/smoke-personalized.mjs` với Playwright có sẵn, app tại `http://localhost:3107` và build dùng Supabase placeholder `https://build-check.supabase.co` / `build-check-placeholder`. Test chặn toàn bộ backend bằng fixture; không kiểm tra DB thật. Có thể đặt `PLAYWRIGHT_MODULE`, `CHROME_PATH`, `SMOKE_BASE_URL` theo môi trường.
+
+## Luyện phát âm và thống kê
+
+- Shadowing chuẩn bị dịch vụ trước khi mở micro. Chờ trạng thái **Đang thu** rồi nói, bấm **Dừng và chấm** khi xong; tự dừng sau 30 giây. **Hủy** bỏ bản thu và không ghi điểm.
+- Bản thu được chuyển sang WAV mono 16 kHz trước khi gửi Azure chấm. Có thể nghe lại trong phiên; lỗi lưu cho phép **Lưu lại** với cùng mã lượt để tránh nhân đôi lịch sử.
+- Bấm một từ trong kết quả để xem IPA, nghe mẫu và luyện riêng. Điểm luyện từ chỉ tồn tại trong phiên, không thay điểm cả câu và không tính hoàn thành bài.
+- Tra IPA giới hạn 5 giây cho dịch vụ từ điển, 8 giây trên trình duyệt; lỗi tạm thời không được cache. Khung luyện từ có nút **Thử lại phiên âm**.
+- Biểu đồ ngày dùng `shadowing_history`, gồm cả các lần luyện lại cùng câu. Trung bình 7/14/30 ngày tính theo số lượt, dùng ngày địa phương; phần tổng quan từng câu vẫn hiển thị điểm mới nhất. Không thể khôi phục các lượt chưa được ghi trước khi cài migration lịch sử.
+- Trang Thống kê có tổng kết 7 ngày so với 7 ngày trước: ngày hoạt động, lượt ôn, nhật ký và phát âm. Mức thay đổi phát âm chỉ so sánh các câu xuất hiện ở cả hai tuần; gợi ý luyện lại dựa trên điểm gần nhất trong tuần, dưới 80.
+- Kiểm tra tích hợp tùy chọn: `node scripts/check-shadowing-browser.mjs`, cùng bản build local và biến Playwright như `smoke-personalized.mjs`. Cần Azure trong `.env.local`; dùng một lượng nhỏ quota cho giọng tổng hợp, không mở micro thật và giả lập toàn bộ Supabase. Kiểm tra dừng/hủy, chuyển định dạng, chấm thật, lưu lại, cách ly điểm luyện từ, thống kê và giao diện mobile.
+
+## Triển khai bản sửa tính toàn vẹn (2026-10-04)
+
+Chạy migration mới trước khi triển khai code. Seed bài học từ `/admin/lessons` nếu CMS còn trống; app không phục hồi bài đã ẩn/xóa từ file tĩnh. Chi tiết vận hành và kiểm tra DB: [docs/learning-integrity.md](docs/learning-integrity.md).
 
 ## Kiểm thử
 

@@ -86,26 +86,13 @@ export async function POST(req: NextRequest) {
     const lessonId = body.lessonId as string;
     const phrases = (body.phrases ?? []) as Array<Record<string, unknown>>;
     if (!lessonId) return NextResponse.json({ error: "Thiếu lessonId." }, { status: 400 });
-    // giữ audio cụm theo en
-    const { data: old } = await db.from("cms_lesson_phrases").select("en, audio_url").eq("lesson_id", lessonId);
-    const audioByEn = new Map((old ?? []).map((p) => [p.en, p.audio_url]));
-    await db.from("cms_lesson_phrases").delete().eq("lesson_id", lessonId);
-    const rows = phrases
-      .filter((p) => (p.en as string)?.trim())
-      .map((p, idx) => ({
-        lesson_id: lessonId,
-        en: (p.en as string).trim(),
-        vi: (p.vi as string) ?? null,
-        ipa: (p.ipa as string) ?? null,
-        example: (p.example as string) ?? null,
-        audio_url: (p.audio_url as string) ?? audioByEn.get(p.en as string) ?? null,
-        order_index: idx,
-      }));
-    if (rows.length) {
-      const { error } = await db.from("cms_lesson_phrases").insert(rows);
-      if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-    return NextResponse.json({ ok: true, count: rows.length });
+    if (!Array.isArray(phrases) || phrases.length > 500 || phrases.some(p =>
+      !p || typeof p.en !== "string" || !p.en.trim() || p.en.length > 2000 ||
+      [p.vi, p.ipa, p.example, p.audio_url].some(v => v != null && (typeof v !== "string" || v.length > 8000))))
+      return NextResponse.json({ error: "Nội dung cụm từ không hợp lệ." }, { status: 400 });
+    const { error } = await db.rpc("replace_lesson_phrases", { p_lesson: lessonId, p_phrases: phrases });
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, count: phrases.length });
   }
 
   if (body.action === "toggleVisible") {

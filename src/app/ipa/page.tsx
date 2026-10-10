@@ -36,7 +36,7 @@ export default function IpaPage() {
   const [mode, setMode] = useState<Mode>("chart");
 
   return (
-    <main className="mx-auto max-w-3xl px-5 py-10 pt-24 animate-fadeIn">
+    <main className={`study-page ${mode === "chart" ? "" : "study-page--focused"} animate-fadeIn`}>
       <div className="mb-6">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary">
           🔤 IPA
@@ -48,7 +48,7 @@ export default function IpaPage() {
       </div>
 
       {/* Tabs — segmented control */}
-      <div className="mb-7 grid grid-cols-4 gap-1 rounded-2xl border border-border/60 bg-black/[0.03] p-1 dark:bg-white/5">
+      <div className="mb-7 grid grid-cols-2 sm:grid-cols-4 gap-1 rounded-2xl border border-border/60 bg-black/[0.03] p-1 dark:bg-white/5">
         {([
           ["chart", "📋", "Bảng 44 âm"],
           ["shadow", "🎧", "Nghe & nhại"],
@@ -58,13 +58,13 @@ export default function IpaPage() {
           <button
             key={m}
             onClick={() => setMode(m)}
+            aria-pressed={mode === m}
             className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-[11px] font-black uppercase tracking-wider transition-all sm:text-xs ${
               mode === m ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"
             }`}
           >
             <span>{icon}</span>
-            <span className="hidden sm:inline">{label}</span>
-            <span className="sm:hidden">{label.split(" ")[0]}</span>
+            <span>{label}</span>
           </button>
         ))}
       </div>

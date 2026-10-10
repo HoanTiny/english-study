@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { YoutubeTranscript } from "youtube-transcript";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
@@ -24,7 +26,7 @@ function parseVideoId(input: string): string | null {
     if (v) return v.slice(0, 11);
     const m = u.pathname.match(/\/(embed|shorts)\/([A-Za-z0-9_-]{11})/);
     if (m) return m[2];
-  } catch {
+  } catch (cause) {
     /* không phải URL */
   }
   return null;
@@ -142,11 +144,11 @@ function toSentencesHeuristic(words: Word[]) {
 }
 
 // Dùng Gemini chấm câu cho phụ đề ASR (không dấu câu), rồi map về timestamp theo TỪNG TỪ.
-async function toSentencesGemini(words: Word[]) {
+async function toSentencesGemini(words: Word[], req: Request) {
   const text = words.map((w) => w.w).join(" ");
   const out = await geminiGenerate(
     [{ role: "user", parts: [{ text }] }],
-    {
+    { request: req,
       jsonMode: true,
       temperature: 0,
       system:
@@ -160,7 +162,7 @@ async function toSentencesGemini(words: Word[]) {
     const parsed = JSON.parse(out);
     sentences = Array.isArray(parsed) ? parsed : parsed.sentences;
     if (!Array.isArray(sentences) || sentences.length === 0) throw new Error("empty");
-  } catch {
+  } catch (cause) {
     return null;
   }
 
@@ -194,7 +196,7 @@ async function getMeta(id: string): Promise<{ title: string; channel: string }> 
     if (!r.ok) return { title: "", channel: "" };
     const d = await r.json();
     return { title: d.title ?? "", channel: d.author_name ?? "" };
-  } catch {
+  } catch (cause) {
     return { title: "", channel: "" };
   }
 }
@@ -206,6 +208,8 @@ const cache = new Map<
 >();
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const q = req.nextUrl.searchParams.get("v") ?? "";
   const id = parseVideoId(q);
   if (!id) return NextResponse.json({ error: "Link/ID video không hợp lệ." }, { status: 400 });
@@ -220,7 +224,7 @@ export async function GET(req: NextRequest) {
         const r = await fetch(url, { headers: { "User-Agent": INNERTUBE_UA } });
         if (r.ok) words = parseSrv3(await r.text());
       }
-    } catch {
+    } catch (cause) {
       /* rơi xuống fallback */
     }
     if (words.length === 0) {
@@ -238,9 +242,10 @@ export async function GET(req: NextRequest) {
     let segments = null as ReturnType<typeof withTiming> | null;
     if (geminiConfigured() && words.length <= 800) {
       try {
-        segments = await toSentencesGemini(words);
+        segments = await toSentencesGemini(words, req);
         if (segments) source = `${source}+gemini`;
-      } catch {
+      } catch (cause) {
+      const budgetResponse = tokenErrorResponse(cause); if (budgetResponse) return budgetResponse;
         segments = null;
       }
     }
@@ -251,6 +256,7 @@ export async function GET(req: NextRequest) {
     cache.set(id, payload);
     return NextResponse.json({ id, ...payload });
   } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
     const msg = e instanceof Error ? e.message : "Không lấy được phụ đề.";
     return NextResponse.json(
       { error: `Không lấy được phụ đề (${msg}). Video có thể đã tắt phụ đề hoặc bị chặn.` },

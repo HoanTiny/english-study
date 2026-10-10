@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest, NextResponse } from "next/server";
 import { geminiGenerate, geminiConfigured } from "@/lib/server/gemini";
 import { supabaseAdmin } from "@/lib/server/supabaseAdmin";
@@ -26,13 +28,15 @@ async function fdExample(word: string): Promise<string | null> {
     for (const e of json) for (const m of e.meanings ?? []) for (const d of m.definitions ?? []) {
       if (d.example && d.example.toLowerCase().includes(word.toLowerCase())) return d.example;
     }
-  } catch {
+  } catch (cause) {
     /* ignore */
   }
   return null;
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const word = (req.nextUrl.searchParams.get("w") ?? "").trim().toLowerCase();
   if (!word || word.length > 40 || !/^[a-z][a-z'’-]*$/.test(word)) {
     return NextResponse.json({ error: "invalid" }, { status: 400 });
@@ -49,7 +53,7 @@ export async function GET(req: NextRequest) {
       if (data?.example_en) {
         return NextResponse.json({ word, en: data.example_en, vi: data.example_vi ?? "", source: "db" });
       }
-    } catch {
+    } catch (cause) {
       /* bảng chưa migrate → bỏ qua, vẫn sinh mới */
     }
   }
@@ -59,7 +63,7 @@ export async function GET(req: NextRequest) {
   let vi = "";
   if (geminiConfigured()) {
     try {
-      const t = await geminiGenerate([{ role: "user", parts: [{ text: `Từ: ${word}` }] }], {
+      const t = await geminiGenerate([{ role: "user", parts: [{ text: `Từ: ${word}` }] }], { request: req,
         system: SYSTEM,
         jsonMode: true,
         temperature: 0.5,
@@ -69,7 +73,8 @@ export async function GET(req: NextRequest) {
         en = p.en.trim();
         vi = typeof p.vi === "string" ? p.vi.trim() : "";
       }
-    } catch {
+    } catch (cause) {
+      const budgetResponse = tokenErrorResponse(cause); if (budgetResponse) return budgetResponse;
       /* fallback */
     }
   }
@@ -83,7 +88,7 @@ export async function GET(req: NextRequest) {
   if (hasServiceKey()) {
     try {
       await supabaseAdmin().from("word_examples").upsert({ word, example_en: en, example_vi: vi || null });
-    } catch {
+    } catch (cause) {
       /* bảng chưa migrate → bỏ qua */
     }
   }

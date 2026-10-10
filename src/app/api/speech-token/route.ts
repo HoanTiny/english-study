@@ -1,8 +1,11 @@
+import { guardPaidApi } from "@/lib/server/apiGuard";
 export const runtime = "nodejs";
 
 // Cấp token Azure Speech ngắn hạn (~10 phút) cho client dùng SDK chấm phát âm.
 // Key gốc (AZURE_SPEECH_KEY) chỉ nằm ở server, không bao giờ gửi xuống client.
-export async function GET() {
+export async function GET(req: Request) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const key = process.env.AZURE_SPEECH_KEY;
   const region = process.env.AZURE_SPEECH_REGION;
 
@@ -27,7 +30,7 @@ export async function GET() {
       return Response.json({ configured: false, error: "token_failed" });
     }
     const token = await res.text();
-    return Response.json({ configured: true, token, region });
+    return Response.json({ configured: true, token, region }, { headers: { "Cache-Control": "no-store" } });
   } catch (e) {
     console.error("speech-token exception", e);
     return Response.json({ configured: false, error: "exception" });

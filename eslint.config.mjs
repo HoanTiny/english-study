@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
   ]),
   {
+    files: ["src/**/*.{ts,tsx,js,jsx}"],
     rules: {
       // react-hooks v6 (Next 16) coi MỌI setState đồng bộ trong effect là lỗi.
       // Trong app này các chỗ đó là escape-hatch hợp lệ: đọc localStorage sau mount

@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -48,7 +50,7 @@ async function fetchFD(en: string): Promise<FDEntry[] | null> {
     const res = await fetch(`${FD}/${encodeURIComponent(en.trim().toLowerCase())}`, { next: { revalidate: 86400 } });
     if (!res.ok) return null;
     return (await res.json()) as FDEntry[];
-  } catch {
+  } catch (cause) {
     return null;
   }
 }
@@ -91,7 +93,7 @@ async function translateToVi(text: string): Promise<string> {
       return (data[0] as [string][]).map((seg) => seg?.[0] || "").join("").trim();
     }
     return "";
-  } catch {
+  } catch (cause) {
     return "";
   }
 }
@@ -138,6 +140,8 @@ async function freeDictSenses(q: string): Promise<Sense[]> {
 }
 
 export async function GET(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   const q = (req.nextUrl.searchParams.get("q") ?? "").trim();
   if (!q || q.length > 60) return Response.json({ results: [], error: "invalid" }, { status: 400 });
 
@@ -147,7 +151,7 @@ export async function GET(req: NextRequest) {
     try {
       const text = await geminiGenerate(
         [{ role: "user", parts: [{ text: `Tra: ${q}` }] }],
-        { system: SYSTEM, jsonMode: true, temperature: 0.2 },
+        { request: req, system: SYSTEM, jsonMode: true, temperature: 0.2 },
       );
       const parsed = JSON.parse(text);
       const arr: Sense[] = Array.isArray(parsed?.senses)
@@ -171,6 +175,7 @@ export async function GET(req: NextRequest) {
       ).filter(Boolean);
       if (enriched.length) return Response.json({ results: enriched, family, source: "gemini" });
     } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
       geminiFailed = true;
       console.error("dict gemini error", e instanceof Error ? e.message : e);
     }

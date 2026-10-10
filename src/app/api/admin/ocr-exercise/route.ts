@@ -1,3 +1,4 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
 import { NextRequest, NextResponse } from "next/server";
 import { adminConfigured, checkCms } from "@/lib/server/supabaseAdmin";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
       run: () =>
         geminiGenerate(
           [{ role: "user", parts: [{ text: userText }, { inlineData: { mimeType, data } }] }],
-          { system: SYSTEM, temperature: 0.2 },
+          { request: req, system: SYSTEM, temperature: 0.2 },
         ),
     });
   if (openaiCompatConfigured())
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
       const block = text.replace(/^```[a-z]*\s*/i, "").replace(/```\s*$/i, "").trim();
       return NextResponse.json({ ok: true, block, provider: p.name, fellBackFrom: tried });
     } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
       lastErr = e instanceof Error ? e.message : String(e);
       tried.push(p.name);
       console.error(`ocr-exercise ${p.name} lỗi → thử provider kế`, lastErr);

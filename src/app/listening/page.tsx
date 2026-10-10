@@ -58,9 +58,8 @@ export default function ListeningPage() {
 
   if (video) {
     return (
-      <main className="mx-auto max-w-3xl px-6 py-16 pt-24 animate-fadeIn relative">
+      <main className="study-page study-page--focused animate-fadeIn">
         {/* Background radial highlight */}
-        <div className="absolute top-10 left-1/4 w-72 h-72 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
 
         <button 
           onClick={() => setVideo(null)} 
@@ -127,12 +126,10 @@ export default function ListeningPage() {
 
   // ===== Thư viện video theo chủ đề =====
   return (
-    <main className="mx-auto max-w-5xl px-6 py-16 pt-24 animate-fadeIn relative">
+    <main className="study-page animate-fadeIn">
       {/* Ambient background highlights */}
-      <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-accent/5 rounded-full filter blur-3xl pointer-events-none" />
 
-      <div className="mb-10 text-center flex flex-col items-center gap-3">
+      <div className="page-heading">
         <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
           🎧 HỌC TIẾNG ANH QUA VIDEO
         </span>
@@ -154,7 +151,7 @@ export default function ListeningPage() {
             <span>📌</span> Video đã lưu của bạn
             <span className="ml-2 rounded-full border border-border/80 bg-black/5 dark:bg-white/5 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-muted">({saved.length})</span>
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="study-grid">
             {saved.map((s) => (
               <button
                 key={s.id}
@@ -201,9 +198,9 @@ export default function ListeningPage() {
       </div>
 
       {/* Bộ lọc cấp độ */}
-      <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
+      <div className="mb-8 flex flex-wrap items-center gap-3">
         <span className="text-[9px] font-black uppercase tracking-wider text-muted mr-1.5">Cấp độ CEFR:</span>
-        <div className="inline-flex rounded-full bg-white/40 dark:bg-black/35 border border-border/80 p-1 shadow-sm backdrop-blur-md">
+        <div className="flex flex-wrap gap-1 rounded-2xl bg-white/40 dark:bg-black/35 border border-border/80 p-1 shadow-sm backdrop-blur-md">
           {LEVELS.map((l) => {
             const active = level === l;
             return (
@@ -234,7 +231,7 @@ export default function ListeningPage() {
           <p className="text-xs font-bold text-muted">Không tìm thấy video nào ở chủ đề và cấp độ này.</p>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="study-grid">
           {videos.map((v) => (
             <button
               key={v.id}

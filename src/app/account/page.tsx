@@ -95,24 +95,24 @@ export default function AccountPage() {
   const recognized = stats?.recognized ?? 0;
 
   return (
-    <main className="mx-auto max-w-5xl px-5 py-8 animate-fadeIn">
+    <main className="study-page animate-fadeIn">
       
       {/* Page Title */}
       <div className="mb-6 select-none">
         <span className="text-[9px] font-black uppercase tracking-[0.25em] text-primary">
           • HỒ SƠ HỌC VIÊN
         </span>
-        <h1 className="font-display text-4.5xl font-black text-foreground tracking-tight leading-none mt-1">
+        <h1 className="font-display text-3xl sm:text-4xl font-black text-foreground tracking-tight leading-tight mt-2">
           Học viên SpeakUp
         </h1>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
         
         {/* ========================================================
             LEFT COLUMN: PROFILE IDENTITY & SETTINGS (lg:col-span-5)
             ======================================================== */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="min-w-0 xl:col-span-5 space-y-6">
           
           <div className="liquid-glass-card p-6 sm:p-7 border border-border/80 shadow-xl flex flex-col gap-6 bg-white/70 dark:bg-[#161619] backdrop-blur-md">
             
@@ -133,15 +133,16 @@ export default function AccountPage() {
 
             {/* Display Name Input */}
             <div className="space-y-2 select-none">
-              <label className="text-[9px] font-black uppercase tracking-wider text-muted">
+              <label htmlFor="account-name" className="text-xs font-semibold text-muted">
                 Tên hiển thị học viên
               </label>
               <div className="flex gap-2">
                 <input
+                  id="account-name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Nhập tên hiển thị của bạn…"
-                  className="flex-1 rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-2.5 text-xs font-bold text-foreground outline-none focus:border-primary focus:bg-background transition-all shadow-inner dark:border-white/10"
+                  className="min-w-0 flex-1 rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-2.5 text-sm font-semibold text-foreground outline-none focus:border-primary focus:bg-background transition-all shadow-inner dark:border-white/10"
                 />
                 <button
                   onClick={save}
@@ -169,10 +170,10 @@ export default function AccountPage() {
         {/* ========================================================
             RIGHT COLUMN: METRICS & TASKS (lg:col-span-7)
             ======================================================= */}
-        <div className="lg:col-span-7 space-y-7">
+        <div className="min-w-0 xl:col-span-7 space-y-7">
           
           {/* A. Clean 4-Grid Achievement Stats (No Duplicate Streaks) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 select-none">
+          <div className="grid grid-cols-2 2xl:grid-cols-4 gap-3 select-none">
             
             {/* Streak */}
             <div className="bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-border/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm hover:border-primary/20 transition-all duration-300">
@@ -264,7 +265,7 @@ export default function AccountPage() {
                   <span className="font-display text-xs font-black text-foreground">Học & Ôn SRS</span>
                 </div>
                 <div>
-                  <p className="font-display text-2.5xl font-black text-foreground leading-none">
+                  <p className="font-display text-2xl font-black text-foreground leading-none">
                     {stats?.dueToday ?? 0}
                   </p>
                   <p className="mt-1 text-[10px] font-medium text-muted">thẻ đến hạn hôm nay</p>
@@ -285,7 +286,7 @@ export default function AccountPage() {
                   <span className="font-display text-xs font-black text-foreground">Nhật ký AI</span>
                 </div>
                 <div>
-                  <p className="font-display text-2.5xl font-black text-pink leading-none">
+                  <p className="font-display text-2xl font-black text-pink leading-none">
                     🔥 {stats?.journalStreak ?? 0}
                   </p>
                   <p className="mt-1 text-[10px] font-medium text-muted">ngày streak viết nhật ký</p>
@@ -306,7 +307,7 @@ export default function AccountPage() {
                   <span className="font-display text-xs font-black text-foreground">Shadowing</span>
                 </div>
                 <div>
-                  <p className="font-display text-2.5xl font-black text-foreground leading-none">
+                  <p className="font-display text-2xl font-black text-foreground leading-none">
                     {stats?.shadowDone ?? 0}
                   </p>
                   <p className="mt-1 text-[10px] font-medium text-muted">câu đã luyện nhại giọng</p>

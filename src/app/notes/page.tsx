@@ -92,29 +92,31 @@ export default function NotesPage() {
   const shown = notes.filter((n) => filter === "all" || n.kind === filter);
 
   return (
-    <main className="mx-auto max-w-2xl px-5 py-16 animate-fadeIn relative">
-      <div className="mb-8">
+    <main className="study-page animate-fadeIn">
+      <div className="page-heading">
         <span className="shimmer-edge inline-flex self-start items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
           📓 SỔ TAY HỌC TẬP CÁ NHÂN
         </span>
         <h1 className="text-3xl font-extrabold tracking-tight text-foreground mt-3">Sổ tay từ & câu</h1>
         <p className="mt-2 text-xs sm:text-sm font-semibold text-muted leading-relaxed">
-          Không gian ghi chú các cấu trúc câu đặc sắc và cụm từ hữu dụng. Kích hoạt nút Ôn tập để tự động đồng bộ hóa chúng vào lịch lặp lại FSRS.
+          Lưu từ mới, cấu trúc câu và ví dụ của bạn. Bật “Đang ôn” để đưa ghi chú vào lịch ôn tập hằng ngày.
         </p>
       </div>
 
       {/* Form thêm */}
-      <div className="liquid-glass-card p-6 md:p-8 border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md">
-        <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
+      <div className="study-workspace study-workspace--notes">
+      <section className="study-panel" aria-labelledby="new-note-heading">
+        <h2 id="new-note-heading" className="mb-4 text-lg font-bold">Thêm ghi chú</h2>
 
-        <div className="mb-5 flex gap-3.5">
+        <div className="mb-5 flex gap-2">
           {(["structure", "word"] as NoteKind[]).map((k) => (
             <button
               key={k}
               onClick={() => setKind(k)}
-              className={`rounded-full px-5 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 border flex-1 cursor-pointer shadow-sm ${
+              aria-pressed={kind === k}
+              className={`rounded-xl px-3 py-3 text-xs font-semibold transition-colors border flex-1 cursor-pointer ${
                 kind === k 
-                  ? "bg-primary border-primary text-primary-fg shadow-md scale-102" 
+                  ? "bg-primary border-primary text-primary-fg"
                   : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"
               }`}
             >
@@ -124,30 +126,47 @@ export default function NotesPage() {
         </div>
         
         <div className="space-y-4">
+          <div>
+          <label className="study-field" htmlFor="note-content">{kind === "structure" ? "Cấu trúc câu" : "Từ / cụm từ"}</label>
           <input
+            id="note-content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={kind === "structure" ? "Ví dụ: It's worth + V-ing" : "Ví dụ: look forward to"}
             className="w-full rounded-2xl border border-border/60 bg-background/50 px-4.5 py-3 text-xs font-semibold outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all text-foreground shadow-inner placeholder:text-muted/65"
           />
+          </div>
+          <div>
+          <label className="study-field" htmlFor="note-meaning">Nghĩa tiếng Việt</label>
           <input
+            id="note-meaning"
             value={meaning}
             onChange={(e) => setMeaning(e.target.value)}
             placeholder={kind === "structure" ? "Nghĩa / cách dùng (ví dụ: đáng để làm gì đó)" : "Nghĩa tiếng Việt (ví dụ: mong đợi điều gì)"}
             className="w-full rounded-2xl border border-border/60 bg-background/50 px-4.5 py-3 text-xs font-semibold outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all text-foreground shadow-inner placeholder:text-muted/65"
           />
+          </div>
+          <div>
+          <label className="study-field" htmlFor="note-example">Ví dụ <span className="text-muted font-normal">(tùy chọn)</span></label>
           <input
+            id="note-example"
             value={example}
             onChange={(e) => setExample(e.target.value)}
             placeholder="Ví dụ đặt câu thực tế (không bắt buộc)"
             className="w-full rounded-2xl border border-border/60 bg-background/50 px-4.5 py-3 text-xs font-semibold outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all text-foreground shadow-inner placeholder:text-muted/65"
           />
+          </div>
+          <div>
+          <label className="study-field" htmlFor="note-tags">Thẻ phân loại <span className="text-muted font-normal">(tùy chọn)</span></label>
           <input
+            id="note-tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder="Gắn thẻ phân loại (ví dụ: giao_tiep, cong_viec, cách nhau bằng dấu phẩy)"
+            placeholder="Ví dụ: giao_tiep, cong_viec"
             className="w-full rounded-2xl border border-border/60 bg-background/50 px-4.5 py-3 text-xs font-semibold outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all text-foreground shadow-inner placeholder:text-muted/65"
           />
+          <p className="mt-1.5 text-xs text-muted">Ngăn cách các thẻ bằng dấu phẩy.</p>
+          </div>
         </div>
 
         <button
@@ -157,14 +176,16 @@ export default function NotesPage() {
         >
           ➕ Thêm thẻ mới vào sổ tay
         </button>
-      </div>
+      </section>
 
       {/* Bộ lọc */}
-      <div className="mt-10 flex flex-wrap items-center gap-2.5 text-xs font-black uppercase tracking-wider">
+      <section aria-label="Ghi chú đã lưu" className="min-w-0">
+      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
         {(["all", "structure", "word"] as Filter[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
+            aria-pressed={filter === f}
             className={`rounded-full px-4 py-2 transition-all duration-300 border shadow-sm cursor-pointer ${
               filter === f 
                 ? "bg-primary-soft border-primary/20 text-primary font-black" 
@@ -198,11 +219,11 @@ export default function NotesPage() {
         )}
         {!authError && loaded && shown.length === 0 && (
           <div className="liquid-glass-card border border-dashed border-border/60 py-16 text-center bg-white/10 dark:bg-black/10">
-            <p className="text-xs sm:text-sm font-bold text-muted">Sổ tay hiện đang trống. Hãy tạo ghi chú đầu tiên ở trên nhé! 📝</p>
+            <p className="px-4 text-sm font-medium text-muted">Chưa có ghi chú trong mục này. Thêm từ hoặc cấu trúc bạn muốn ghi nhớ vào sổ tay.</p>
           </div>
         )}
         {shown.map((n) => (
-          <div key={n.id} className="liquid-glass-card p-6 border border-border/80 shadow-md transition-all duration-300 hover:shadow-lg relative group">
+          <div key={n.id} className="study-panel">
             <div className="flex items-center gap-2">
               <span className={`rounded-full border px-3.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider ${
                 n.kind === "structure" 
@@ -219,8 +240,8 @@ export default function NotesPage() {
               </button>
             </div>
             
-            <div className="mt-3.5 flex items-center gap-2.5">
-              <p className="text-lg font-bold text-foreground leading-relaxed tracking-tight">{n.content}</p>
+            <div className="mt-3.5 flex flex-wrap items-center gap-2.5">
+              <p className="min-w-0 text-lg font-bold text-foreground leading-relaxed tracking-tight">{n.content}</p>
               <PronounceMini text={n.content} />
             </div>
             {n.meaning && (
@@ -252,6 +273,8 @@ export default function NotesPage() {
             </div>
           </div>
         ))}
+      </div>
+      </section>
       </div>
     </main>
   );

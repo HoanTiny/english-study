@@ -1,3 +1,4 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
 import { NextRequest, NextResponse } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 import { openaiCompatConfigured, openaiCompatVision } from "@/lib/server/openaiCompat";
@@ -22,7 +23,7 @@ Cho 1 từ tiếng Anh + nghĩa tiếng Việt, trả về DUY NHẤT một chu�
 Khử đa nghĩa dựa vào nghĩa tiếng Việt (vd: chicken + "con gà" → "hen chicken bird"; chicken + "thịt gà" → "raw chicken meat").
 Ưu tiên danh từ/vật thể cụ thể. KHÔNG dấu ngoặc, KHÔNG giải thích, chỉ trả chuỗi truy vấn.`;
 
-async function buildQuery(en: string, vi: string): Promise<string> {
+async function buildQuery(en: string, vi: string, req: Request): Promise<string> {
   const fallback = en;
   if (!vi) return fallback;
   const ck = `${en}|${vi}`;
@@ -33,13 +34,14 @@ async function buildQuery(en: string, vi: string): Promise<string> {
   // Gemini trước; hết quota/lỗi → tự rớt sang Groq (openai-compat).
   if (geminiConfigured()) {
     try {
-      out = await geminiGenerate([{ role: "user", parts: [{ text: userText }] }], { system: QSYS, temperature: 0 });
-    } catch { /* thử provider kế */ }
+      out = await geminiGenerate([{ role: "user", parts: [{ text: userText }] }], { request: req, system: QSYS, temperature: 0 });
+    } catch (cause) {
+      const budgetResponse = tokenErrorResponse(cause); if (budgetResponse) throw cause; /* thử provider kế */ }
   }
   if (!out && openaiCompatConfigured()) {
     try {
       out = await openaiCompatVision({ system: QSYS, text: userText, temperature: 0 });
-    } catch { /* fallback từ gốc */ }
+    } catch (cause) { /* fallback từ gốc */ }
   }
   const q = (out || "").replace(/["'`\n]/g, " ").replace(/\s+/g, " ").trim().toLowerCase().slice(0, 60) || fallback;
   queryCache.set(ck, q);
@@ -58,7 +60,7 @@ export async function GET(req: NextRequest) {
 
   const empty: Result = { found: false, query: en, results: [] };
   try {
-    const query = await buildQuery(en, vi);
+    const query = await buildQuery(en, vi, req);
     const url = `${API}?q=${encodeURIComponent(query)}&page_size=10&license_type=commercial&mature=false&category=photograph`;
     const res = await fetch(url, { headers: { "User-Agent": "SpeakUp-Learning/1.0 (educational)" } });
     if (!res.ok) { cache.set(key, empty); stamp.set(key, Date.now()); return NextResponse.json(empty); }
@@ -79,7 +81,8 @@ export async function GET(req: NextRequest) {
     const data: Result = { found: results.length > 0, query, results };
     cache.set(key, data); stamp.set(key, Date.now());
     return NextResponse.json(data);
-  } catch {
+  } catch (cause) {
+      const budgetResponse = tokenErrorResponse(cause); if (budgetResponse) return budgetResponse;
     cache.set(key, empty); stamp.set(key, Date.now());
     return NextResponse.json(empty);
   }

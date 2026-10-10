@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
@@ -24,6 +24,8 @@ const skillLinks = [
   { href: "/shadowing", label: "Luyện Shadowing", desc: "Nhại giọng cải thiện phát âm", icon: "🗣️" },
   { href: "/listening", label: "Luyện nghe thụ động", desc: "Nghe hội thoại theo ngữ cảnh", icon: "🎧" },
   { href: "/listening-exercises", label: "Bài tập nghe hiểu", desc: "Nghe & trả lời trắc nghiệm", icon: "📝" },
+  { href: "/dictation", label: "Chép chính tả", desc: "Nghe video & gõ lại từng câu", icon: "⌨️" },
+  { href: "/audio-call", label: "Game cuộc gọi", desc: "Nghe điện thoại & phản xạ nhanh", icon: "☎️" },
 ];
 
 const resourceLinks = [
@@ -32,6 +34,7 @@ const resourceLinks = [
   { href: "/errors", label: "Sổ lỗi cá nhân", desc: "Gom lỗi từ nhật ký/hội thoại", icon: "📕" },
   { href: "/vocab", label: "Từ vựng cốt lõi", desc: "Thư viện cụm từ thông dụng", icon: "🎒" },
   { href: "/grammar", label: "Kiến thức Ngữ pháp", desc: "Học cấu trúc & làm bài tập", icon: "📚" },
+  { href: "/collocations", label: "Cụm từ đi đôi", desc: "Collocations dùng tự nhiên", icon: "🧲" },
 ];
 
 export default function Nav() {
@@ -40,6 +43,7 @@ export default function Nav() {
   const cmsRole = useCmsRole(); // 'admin' | 'editor' | null
   const [open, setOpen] = useState(false);
   const [dictOpen, setDictOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -47,6 +51,39 @@ export default function Nav() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const content = document.getElementById("app-content");
+    const previousOverflow = document.body.style.overflow;
+    const previousInert = content?.inert ?? false;
+    document.body.style.overflow = "hidden";
+    if (content) content.inert = true;
+    const media = window.matchMedia("(min-width: 768px)");
+    const closeOnDesktop = () => { if (media.matches) setOpen(false); };
+    const focusable = () => Array.from(document.querySelectorAll<HTMLElement>(
+      "#mobile-app-header a, #mobile-app-header button, #mobile-navigation a"
+    )).filter(el => el.getClientRects().length > 0);
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+      if (event.key !== "Tab") return;
+      const elements = focusable();
+      const first = elements[0], last = elements.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }
+    document.getElementById("mobile-navigation")?.querySelector<HTMLElement>("a")?.focus();
+    document.addEventListener("keydown", onKeyDown);
+    media.addEventListener("change", closeOnDesktop);
+    const trigger = menuButton.current;
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      if (content) content.inert = previousInert;
+      document.removeEventListener("keydown", onKeyDown);
+      media.removeEventListener("change", closeOnDesktop);
+      trigger?.focus({ preventScroll: true });
+    };
+  }, [open]);
 
   // CMS admin bypass
   if (pathname?.startsWith("/admin")) return null;
@@ -213,7 +250,7 @@ export default function Nav() {
       {/* ==========================================
           MOBILE: Sticky Top Header & Drawer
           ========================================== */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-surface/90 backdrop-blur-md md:hidden flex items-center justify-between px-5 py-3 select-none">
+      <header id="mobile-app-header" className="sticky top-0 z-60 h-16 shrink-0 w-full border-b border-border/40 bg-surface/95 backdrop-blur-md md:hidden flex items-center justify-between px-4 select-none">
         
         {/* Left: Branding Logo */}
         <Link href="/" className="font-display text-xl font-bold tracking-tight text-gradient-iridescent">
@@ -224,7 +261,7 @@ export default function Nav() {
         <div className="flex items-center gap-2">
           {/* Quick Dictionary Button */}
           <button
-            onClick={() => setDictOpen(true)}
+            onClick={() => { setOpen(false); setDictOpen(true); }}
             aria-label="Tra từ điển"
             className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-surface text-sm transition-all duration-300 hover:border-primary/50 active:scale-95 cursor-pointer shadow-sm"
           >
@@ -236,8 +273,10 @@ export default function Nav() {
 
           {/* Hamburger Menu Toggle */}
           <button
+            ref={menuButton}
             onClick={() => setOpen((prev) => !prev)}
             aria-expanded={open}
+            aria-controls="mobile-navigation"
             aria-label="Menu"
             className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/60 bg-surface text-foreground transition-all duration-300 hover:border-primary/50 active:scale-95 cursor-pointer shadow-sm"
           >
@@ -252,10 +291,12 @@ export default function Nav() {
 
       {/* MOBILE drawer drawer overlay */}
       {open && (
-        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden animate-fadeIn" onClick={() => setOpen(false)}>
+        <div className="fixed inset-x-0 top-16 bottom-0 z-50 bg-black/50 backdrop-blur-sm md:hidden" onClick={() => setOpen(false)}>
           <nav
+            id="mobile-navigation"
+            aria-label="Điều hướng trên điện thoại"
             onClick={(e) => e.stopPropagation()}
-            className="absolute top-[53px] right-0 bottom-0 w-80 max-w-[85vw] bg-background border-l border-border/40 p-5 flex flex-col justify-between overflow-y-auto shadow-2xl animate-fadeIn"
+            className="absolute inset-y-0 right-0 w-80 max-w-[90vw] bg-background border-l border-border/40 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] flex flex-col justify-between overscroll-contain shadow-2xl"
           >
             {/* Scrollable list */}
             <div className="space-y-6 overflow-y-auto flex-1 pr-1 scrollbar-thin">

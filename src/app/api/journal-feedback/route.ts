@@ -1,3 +1,5 @@
+import { tokenErrorResponse } from "@/lib/server/tokenUsage";
+import { guardPaidApi } from "@/lib/server/apiGuard";
 import { NextRequest } from "next/server";
 import { geminiConfigured, geminiGenerate } from "@/lib/server/gemini";
 
@@ -14,13 +16,15 @@ Nếu bài viết không có lỗi đáng kể, trả về mảng rỗng [].
 Tuyệt đối không thêm chữ nào ngoài JSON.`;
 
 export async function POST(req: NextRequest) {
+  const denied = await guardPaidApi(req);
+  if (denied) return denied;
   let body = "";
   let prompt = "";
   try {
     const json = await req.json();
     body = typeof json?.body === "string" ? json.body : "";
     prompt = typeof json?.prompt === "string" ? json.prompt : "";
-  } catch {
+  } catch (cause) {
     return Response.json({ error: "invalid body" }, { status: 400 });
   }
 
@@ -39,7 +43,7 @@ export async function POST(req: NextRequest) {
       : `Bài viết của học viên:\n${body}`;
     const text = await geminiGenerate(
       [{ role: "user", parts: [{ text: userMsg }] }],
-      { system: SYSTEM, jsonMode: true, temperature: 0.3 },
+      { request: req, system: SYSTEM, jsonMode: true, temperature: 0.3 },
     );
     const parsed = JSON.parse(text);
     const feedback: Feedback[] = Array.isArray(parsed)
@@ -55,6 +59,7 @@ export async function POST(req: NextRequest) {
       : [];
     return Response.json({ feedback, source: "gemini" });
   } catch (e) {
+      const budgetResponse = tokenErrorResponse(e); if (budgetResponse) return budgetResponse;
     console.error("journal-feedback gemini error", e);
     // Lỗi API → để client fallback sang mock.
     return Response.json({ feedback: null, source: "error" });

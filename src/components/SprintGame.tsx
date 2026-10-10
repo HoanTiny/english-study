@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import vocabData from "@/data/vocab.json";
+import { CEFR_WORDS } from "@/data/cefrWords";
 import { useAuth } from "@/lib/auth";
 import { addNote } from "@/lib/notesRepo";
 import { gradeNote } from "@/lib/reviewRepo";
@@ -10,91 +11,8 @@ import { todayKey } from "@/lib/store";
 
 type Word = { en: string; vi: string };
 
-// Kho từ vựng phân loại theo CEFR (nguồn chuẩn) — mỗi cấp ~30 từ để đỡ lặp.
-const SPRINT_WORDS: Record<string, Word[]> = {
-  A1: [
-    { en: "hello", vi: "xin chào" }, { en: "goodbye", vi: "tạm biệt" }, { en: "family", vi: "gia đình" },
-    { en: "mother", vi: "mẹ" }, { en: "father", vi: "bố" }, { en: "friend", vi: "người bạn" },
-    { en: "food", vi: "đồ ăn" }, { en: "water", vi: "nước" }, { en: "school", vi: "trường học" },
-    { en: "teacher", vi: "giáo viên" }, { en: "book", vi: "quyển sách" }, { en: "house", vi: "ngôi nhà" },
-    { en: "dog", vi: "con chó" }, { en: "cat", vi: "con mèo" }, { en: "happy", vi: "vui vẻ" },
-    { en: "sad", vi: "buồn" }, { en: "big", vi: "to lớn" }, { en: "small", vi: "nhỏ bé" },
-    { en: "eat", vi: "ăn" }, { en: "drink", vi: "uống" }, { en: "run", vi: "chạy" },
-    { en: "walk", vi: "đi bộ" }, { en: "sleep", vi: "ngủ" }, { en: "day", vi: "ngày" },
-    { en: "night", vi: "đêm" }, { en: "today", vi: "hôm nay" }, { en: "weather", vi: "thời tiết" },
-    { en: "hot", vi: "nóng" }, { en: "cold", vi: "lạnh" }, { en: "morning", vi: "buổi sáng" },
-  ],
-  A2: [
-    { en: "depends on", vi: "phụ thuộc vào" }, { en: "looking forward to", vi: "mong đợi" },
-    { en: "routine", vi: "thói quen hằng ngày" }, { en: "restaurant", vi: "nhà hàng" },
-    { en: "opinion", vi: "ý kiến" }, { en: "weekend", vi: "cuối tuần" }, { en: "hobby", vi: "sở thích" },
-    { en: "travel", vi: "du lịch" }, { en: "ticket", vi: "vé" }, { en: "airport", vi: "sân bay" },
-    { en: "busy", vi: "bận rộn" }, { en: "tired", vi: "mệt mỏi" }, { en: "expensive", vi: "đắt đỏ" },
-    { en: "cheap", vi: "rẻ" }, { en: "borrow", vi: "mượn" }, { en: "invite", vi: "mời" },
-    { en: "decide", vi: "quyết định" }, { en: "prepare", vi: "chuẩn bị" }, { en: "arrive", vi: "đến nơi" },
-    { en: "message", vi: "tin nhắn" }, { en: "comfortable", vi: "thoải mái" }, { en: "neighbor", vi: "hàng xóm" },
-    { en: "advice", vi: "lời khuyên" }, { en: "healthy", vi: "khỏe mạnh" }, { en: "dangerous", vi: "nguy hiểm" },
-    { en: "fix", vi: "sửa chữa" }, { en: "recommend", vi: "giới thiệu, gợi ý" }, { en: "delicious", vi: "ngon" },
-    { en: "remember", vi: "nhớ" }, { en: "forget", vi: "quên" },
-  ],
-  B1: [
-    { en: "conversation", vi: "cuộc hội thoại" }, { en: "confidence", vi: "sự tự tin" },
-    { en: "improve", vi: "cải thiện" }, { en: "structure", vi: "cấu trúc" }, { en: "I'd rather", vi: "tôi thà... hơn" },
-    { en: "achieve", vi: "đạt được" }, { en: "behavior", vi: "hành vi" }, { en: "complain", vi: "phàn nàn" },
-    { en: "describe", vi: "miêu tả" }, { en: "encourage", vi: "khuyến khích" }, { en: "environment", vi: "môi trường" },
-    { en: "experience", vi: "kinh nghiệm" }, { en: "however", vi: "tuy nhiên" }, { en: "manage", vi: "xoay xở, quản lý" },
-    { en: "opportunity", vi: "cơ hội" }, { en: "persuade", vi: "thuyết phục" }, { en: "realize", vi: "nhận ra" },
-    { en: "responsible", vi: "chịu trách nhiệm" }, { en: "suggest", vi: "đề xuất" }, { en: "although", vi: "mặc dù" },
-    { en: "accurate", vi: "chính xác" }, { en: "deadline", vi: "hạn chót" }, { en: "negotiate", vi: "đàm phán" },
-    { en: "schedule", vi: "lịch trình" }, { en: "prove", vi: "chứng minh" }, { en: "attitude", vi: "thái độ" },
-    { en: "average", vi: "trung bình" }, { en: "generation", vi: "thế hệ" }, { en: "confident", vi: "tự tin" },
-    { en: "achievement", vi: "thành tựu" },
-  ],
-  B2: [
-    { en: "fluency", vi: "sự trôi chảy" }, { en: "pronunciation", vi: "sự phát âm" },
-    { en: "assessment", vi: "sự đánh giá" }, { en: "appreciate", vi: "trân trọng" },
-    { en: "assume", vi: "cho là, giả định" }, { en: "consequence", vi: "hậu quả" },
-    { en: "contribute", vi: "đóng góp" }, { en: "demonstrate", vi: "thể hiện, chứng minh" },
-    { en: "efficient", vi: "hiệu quả" }, { en: "estimate", vi: "ước tính" }, { en: "flexible", vi: "linh hoạt" },
-    { en: "inevitable", vi: "không thể tránh khỏi" }, { en: "influence", vi: "ảnh hưởng" },
-    { en: "maintain", vi: "duy trì" }, { en: "obstacle", vi: "trở ngại" }, { en: "perspective", vi: "góc nhìn" },
-    { en: "priority", vi: "ưu tiên" }, { en: "reluctant", vi: "miễn cưỡng" }, { en: "significant", vi: "đáng kể" },
-    { en: "sufficient", vi: "đủ, đầy đủ" }, { en: "tendency", vi: "xu hướng" }, { en: "thorough", vi: "kỹ lưỡng" },
-    { en: "valuable", vi: "có giá trị" }, { en: "overcome", vi: "vượt qua" }, { en: "reliable", vi: "đáng tin cậy" },
-    { en: "complicated", vi: "phức tạp" }, { en: "emphasize", vi: "nhấn mạnh" }, { en: "anniversary", vi: "lễ kỷ niệm" },
-    { en: "adapt", vi: "thích nghi" }, { en: "consistent", vi: "nhất quán" },
-  ],
-  C1: [
-    { en: "comprehension", vi: "sự thấu hiểu sâu" }, { en: "meticulous", vi: "tỉ mỉ, kỹ càng" },
-    { en: "acquisition", vi: "sự tiếp thu" }, { en: "aesthetic", vi: "tính thẩm mỹ" },
-    { en: "compelling", vi: "cuốn hút, thuyết phục" }, { en: "ambiguous", vi: "mơ hồ, đa nghĩa" },
-    { en: "coherent", vi: "mạch lạc" }, { en: "deteriorate", vi: "xấu đi, suy giảm" },
-    { en: "diminish", vi: "giảm sút" }, { en: "elaborate", vi: "tỉ mỉ, chi tiết" }, { en: "inherent", vi: "vốn có" },
-    { en: "intricate", vi: "phức tạp tinh vi" }, { en: "nonetheless", vi: "tuy nhiên" }, { en: "plausible", vi: "hợp lý, có vẻ đúng" },
-    { en: "profound", vi: "sâu sắc" }, { en: "prone", vi: "dễ bị, có xu hướng" }, { en: "redundant", vi: "dư thừa" },
-    { en: "resilient", vi: "kiên cường" }, { en: "scrutiny", vi: "sự xem xét kỹ" }, { en: "subtle", vi: "tinh tế, khó nhận ra" },
-    { en: "viable", vi: "khả thi" }, { en: "advocate", vi: "ủng hộ, biện hộ" }, { en: "comprehensive", vi: "toàn diện" },
-    { en: "conscientious", vi: "tận tâm" }, { en: "discrepancy", vi: "sự chênh lệch" }, { en: "eloquent", vi: "hùng biện" },
-    { en: "feasible", vi: "khả thi, thực hiện được" }, { en: "implication", vi: "hàm ý, hệ quả" },
-    { en: "notion", vi: "khái niệm, quan niệm" }, { en: "robust", vi: "vững chắc, mạnh mẽ" },
-  ],
-  C2: [
-    { en: "mastery", vi: "sự tinh thông" }, { en: "linguistic intuition", vi: "trực giác ngôn ngữ" },
-    { en: "spontaneous", vi: "bộc phát tự nhiên" }, { en: "immersion", vi: "sự đắm chìm" },
-    { en: "indispensable", vi: "không thể thiếu" }, { en: "ubiquitous", vi: "ở khắp mọi nơi" },
-    { en: "nuance", vi: "sắc thái tinh tế" }, { en: "paramount", vi: "tối quan trọng" },
-    { en: "ephemeral", vi: "phù du, chóng tàn" }, { en: "juxtapose", vi: "đặt cạnh để so sánh" },
-    { en: "idiosyncratic", vi: "riêng biệt, kỳ lạ" }, { en: "quintessential", vi: "tinh túy, điển hình" },
-    { en: "surreptitious", vi: "lén lút" }, { en: "vicarious", vi: "trải nghiệm gián tiếp" },
-    { en: "esoteric", vi: "khó hiểu, bí truyền" }, { en: "pragmatic", vi: "thực dụng" },
-    { en: "cogent", vi: "thuyết phục, chặt chẽ" }, { en: "tenacious", vi: "kiên trì, bền bỉ" },
-    { en: "innate", vi: "bẩm sinh" }, { en: "candid", vi: "thẳng thắn" }, { en: "prolific", vi: "năng suất cao" },
-    { en: "astute", vi: "sắc sảo" }, { en: "articulate", vi: "diễn đạt rõ ràng" }, { en: "meticulousness", vi: "sự tỉ mỉ" },
-    { en: "profundity", vi: "sự sâu sắc" }, { en: "lucid", vi: "sáng sủa, rõ ràng" },
-    { en: "salient", vi: "nổi bật, đáng chú ý" }, { en: "intrinsic", vi: "thuộc về bản chất" },
-    { en: "discern", vi: "phân biệt, nhận thấy" }, { en: "nuanced", vi: "đa sắc thái, tinh tế" },
-  ],
-};
+// Kho từ vựng phân loại theo CEFR — dùng chung với Audio-call (60–90+ từ mỗi cấp để đỡ lặp).
+const SPRINT_WORDS: Record<string, Word[]> = CEFR_WORDS;
 
 const VOCAB = vocabData as { en: string; vi: string; topic: string }[];
 const VOCAB_TOPICS = [...new Set(VOCAB.map((v) => v.topic))];

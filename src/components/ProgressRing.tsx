@@ -24,8 +24,8 @@ export default function ProgressRing({
   const dash = (v / 100) * c;
 
   return (
-    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90" aria-hidden>
+    <div className="relative inline-flex items-center justify-center" style={{ width: size, maxWidth: "100%", aspectRatio: "1" }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="h-auto w-full -rotate-90" aria-hidden>
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track} strokeWidth={stroke} />
         <circle
           cx={size / 2}

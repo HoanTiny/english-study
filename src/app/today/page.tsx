@@ -8,7 +8,7 @@ export default function TodayPage() {
   const name = isAnonymous ? "Học viên" : (displayName || email || "Học viên");
 
   return (
-    <main className="mx-auto max-w-4xl px-5 py-10 animate-fadeIn relative">
+    <main className="study-page animate-fadeIn">
       <div className="mb-8 text-left flex flex-col gap-2 select-none">
         <span className="text-[9px] font-black uppercase tracking-[0.25em] text-primary">
           • XIN CHÀO, {name.split("@")[0].toUpperCase()}
@@ -17,7 +17,7 @@ export default function TodayPage() {
           Sẵn sàng học tiếp?
         </h1>
         <p className="max-w-2xl text-xs font-semibold text-muted leading-relaxed mt-2">
-          Tổng quan tiến độ thực hành thực tế và chỉ số chuyển đổi từ <b>Hiểu (Thụ động)</b> sang <b>Nói được (Chủ động)</b>. Mục tiêu hàng ngày của chúng ta là tối ưu hóa và thu hẹp tỷ lệ này.
+          Chọn một buổi học vừa sức, ôn điều sắp quên và luyện dùng tiếng Anh từng bước. Bạn có thể tiếp tục buổi đang học bất cứ lúc nào trong hôm nay.
         </p>
       </div>
       <TodayDashboard />

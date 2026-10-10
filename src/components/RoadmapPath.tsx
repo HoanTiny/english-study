@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { type LessonStatus } from "@/lib/curriculum";
 import { useAuth } from "@/lib/auth";
+import { listDoneSlugs } from "@/lib/lessonDone";
+import { TOOL_SLUGS } from "@/lib/lessonsView";
 import { listNotes } from "@/lib/notesRepo";
 import { countSavedByLesson } from "@/lib/lessonProgress";
 import {
-  staticStages,
   loadStages,
   computeStatusesView,
   type ViewStage,
@@ -34,37 +35,46 @@ const statusIcon: Record<LessonStatus, string> = {
 };
 
 export default function RoadmapPath() {
-  const { userId, ready } = useAuth();
-  // Khởi tạo bằng dữ liệu tĩnh để render ngay; thay bằng DB sau khi tải.
-  const [viewStages, setViewStages] = useState<ViewStage[]>(() => staticStages());
+  const { userId, ready, currentStage, profileReady } = useAuth();
+  // Published CMS lessons, unlocked relative to the placement level.
+  const [viewStages, setViewStages] = useState<ViewStage[]>([]);
+  const [loadError, setLoadError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [dyn, setDyn] = useState<Record<string, LessonStatus>>({});
 
   useEffect(() => {
-    if (!ready || !userId) return;
+    if (!ready || !profileReady || !userId) return;
     let active = true;
-    Promise.all([loadStages(), listNotes()])
-      .then(([vs, notes]) => {
+    setViewStages([]);
+    setLoaded(false);
+    setLoadError(false);
+    Promise.all([loadStages(), listNotes(), listDoneSlugs(userId)])
+      .then(([vs, notes, passed]) => {
         if (!active) return;
+        setLoaded(true);
         setViewStages(vs);
-        setDyn(computeStatusesView(vs, countSavedByLesson(notes)));
+        setDyn(computeStatusesView(vs, countSavedByLesson(notes), passed, currentStage));
       })
-      .catch((e) => console.error("roadmap load", e));
+      .catch(() => { if (active) setLoadError(true); });
     return () => {
       active = false;
     };
-  }, [ready, userId]);
+  }, [ready, userId, currentStage, profileReady]);
 
   const statusOf = (slug: string): LessonStatus => dyn[slug] ?? "locked";
 
+  if (loadError) return <p role="alert">Không tải được lộ trình. Vui lòng tải lại trang.</p>;
+  if (!loaded) return <p role="status">Đang tải lộ trình…</p>;
   return (
     <div className="space-y-12">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm"><p>Bắt đầu ở {viewStages.find(s => s.id === currentStage)?.cefr ?? "A1"}. Các bài nền tảng vẫn mở để bạn ôn lại.</p><Link href="/onboarding" className="font-bold text-primary underline">Kiểm tra lại trình độ</Link></div>
       {viewStages.map((stage) => {
-        const total = stage.lessons.length;
+        const total = stage.lessons.filter(l => !TOOL_SLUGS.has(l.slug)).length;
         const done = stage.lessons.filter((l) => statusOf(l.slug) === "done").length;
         const pct = total ? Math.round((done / total) * 100) : 0;
         return (
-          <section 
-            key={stage.id} 
+          <section
+            key={stage.id}
             className="liquid-glass-card p-6 md:p-8 relative overflow-hidden transition-all duration-500 hover:shadow-lg"
           >
             {/* Glowing background hint inside stage card */}
@@ -81,12 +91,12 @@ export default function RoadmapPath() {
               <span className="rounded-lg bg-black/5 dark:bg-white/5 px-2.5 py-0.5 text-xs font-medium text-muted">
                 {stage.months}
               </span>
-              
+
               <span className="ml-auto text-xs font-bold text-muted bg-white/20 dark:bg-white/5 border border-border px-3 py-1 rounded-full">
                 {done}/{total} bài học · <span className="text-primary font-black">{pct}%</span>
               </span>
             </div>
-            
+
             <p className="mb-6 max-w-2xl text-sm font-medium text-muted/90 leading-relaxed">
               {stage.goal}
             </p>

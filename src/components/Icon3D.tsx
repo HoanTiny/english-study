@@ -67,6 +67,10 @@ export default function Icon3D({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
+      ref={(node) => {
+        // A cached/network failure may happen before hydration attaches onError.
+        if (node?.complete && node.naturalWidth === 0) setFailed(true);
+      }}
       src={encodeURI(src)}
       alt=""
       aria-hidden

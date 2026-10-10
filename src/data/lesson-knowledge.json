@@ -1,0 +1,313 @@
+{
+  "greetings": {
+    "concepts": [
+      ["Giới thiệu với be", "Dùng I am, you/we/they are, he/she/it is. Đưa be lên trước chủ ngữ để hỏi; thêm not sau be để phủ định. Tên nghề số ít thường cần a/an.", "I'm a teacher. Are you a student?", "Tôi là giáo viên. Bạn là sinh viên phải không?"],
+      ["Chọn lời chào theo quan hệ", "Nice to meet you dùng khi mới làm quen; Nice to see you dùng khi gặp lại. What's up? thân mật. Hỏi nghề bằng What do you do?, hỏi việc đang làm bằng What are you doing?", "Nice to see you again, Linh.", "Rất vui được gặp lại bạn, Linh."]
+    ],
+    "vocabulary": [["first name", "tên riêng"], ["last name", "họ"], ["introduce yourself", "tự giới thiệu"]],
+    "mistake": ["I am come from Vietnam.", "I come from Vietnam.", "Come là động từ chính: dùng I come from hoặc I'm from; không ghép am come."],
+    "practice": [["Điền be: My name ___ Mai, and I ___ a student.", "is; am", "Name là số ít nên dùng is; I đi với am."], ["Đặt câu hỏi nghề nghiệp từ câu trả lời: I'm an engineer.", "What do you do?", "Đây là cách hỏi nghề trong hội thoại; What is your job? cũng đúng."]],
+    "task": "Tự giới thiệu bằng 6 câu: tên, quê quán, nơi ở, nghề, sở thích và lời chào. Đóng vai người mới quen và đặt 3 câu hỏi tiếp nối; tránh tự động hỏi tuổi hoặc lương."
+  },
+  "family": {
+    "concepts": [["Sở hữu", "My/your/his/her/our/their đứng trước danh từ; mine/yours/hers/ours/theirs thay cho cả cụm danh từ. Dùng 's sau tên hoặc danh từ số ít chỉ người sở hữu.", "This is my sister's bag. It is hers.", "Đây là túi của chị tôi. Nó là của chị ấy."], ["This, that, these, those", "This/these chỉ người hoặc vật ở gần; that/those thường ở xa hơn. This/that số ít đi với is; these/those số nhiều đi với are.", "These are my cousins.", "Đây là các anh chị em họ của tôi."]],
+    "vocabulary": [["an only child", "con một"], ["younger brother", "em trai"], ["get along with", "hòa thuận với"]],
+    "mistake": ["She is my brother wife.", "She is my brother's wife.", "Cần 's để biểu thị quan hệ sở hữu: vợ của anh/em trai tôi."],
+    "practice": [["Chọn: These (is/are) my parents.", "are", "These và parents đều là số nhiều."], ["Thay phần lặp: This is her phone. The phone is her phone.", "This is her phone. The phone is hers.", "Hers đứng độc lập, không thêm danh từ phía sau."]],
+    "task": "Vẽ cây gia đình rồi mô tả 5 người: quan hệ, tên, nghề và một tính cách. Dùng ít nhất hai cụm sở hữu với 's."
+  },
+  "numbers-time": {
+    "concepts": [["Giờ và giới từ", "Dùng at với giờ, on với thứ/ngày cụ thể, in với tháng/năm. Half past là hơn 30 phút; a quarter to là kém 15 phút.", "The class starts at a quarter to nine on Monday.", "Lớp bắt đầu lúc 9 giờ kém 15 vào thứ Hai."], ["Ngày và số thứ tự", "First, second, third là các dạng đặc biệt; nhiều số khác thêm -th. Ngày dạng 03/04 dễ gây nhầm giữa các quốc gia, nên viết rõ tên tháng khi hẹn.", "My birthday is on the third of April.", "Sinh nhật tôi vào ngày 3 tháng 4."]],
+    "vocabulary": [["half past seven", "7 giờ rưỡi"], ["a quarter past eight", "8 giờ 15"], ["every other day", "cách ngày"]],
+    "mistake": ["See you in Monday at morning.", "See you on Monday morning.", "Dùng on với một buổi của ngày cụ thể; in the morning khi nói chung."],
+    "practice": [["Viết 6:45 bằng to.", "a quarter to seven", "Còn 15 phút nữa tới 7 giờ."], ["Điền: ___ July, ___ Friday, ___ noon.", "in; on; at", "Tháng dùng in, thứ dùng on, noon dùng at."]],
+    "task": "Lập lịch 5 cuộc hẹn, đọc to giờ và ngày. Tập phân biệt thirteen/thirty, fourteen/forty bằng cách nhấn âm và đọc số trong giá tiền."
+  },
+  "daily-routine": {
+    "concepts": [["Hiện tại đơn", "I/you/we/they dùng động từ nguyên mẫu; he/she/it thêm -s hoặc -es. Phủ định dùng don't/doesn't + nguyên mẫu, câu hỏi dùng Do/Does + chủ ngữ + nguyên mẫu.", "She works from home, but she doesn't work on Sundays.", "Cô ấy làm việc tại nhà nhưng không làm vào Chủ nhật."], ["Vị trí trạng từ tần suất", "Usually, often, never thường đứng trước động từ thường nhưng sau be. Every day thường ở đầu hoặc cuối câu. Never đã mang nghĩa phủ định.", "I usually walk to work. I am never late.", "Tôi thường đi bộ đi làm. Tôi không bao giờ đến muộn."]],
+    "vocabulary": [["wake up", "tỉnh giấc"], ["get dressed", "mặc quần áo"], ["do the dishes", "rửa bát"]],
+    "mistake": ["Does she goes to work by bus?", "Does she go to work by bus?", "Does đã thể hiện ngôi thứ ba; go trở về nguyên mẫu."],
+    "practice": [["Chia động từ: He usually (have) breakfast at seven.", "has", "Have có dạng ngôi thứ ba số ít là has."], ["Sắp xếp: never / late / are / we.", "We are never late.", "Never đứng sau động từ be."]],
+    "task": "Kể một ngày thường trong 60 giây. Sau đó kể lịch của một người thân để luyện đổi I thành he/she và chia động từ."
+  },
+  "free-time": {
+    "concepts": [["Sở thích và hoạt động", "Like/love/enjoy + V-ing là mẫu dễ dùng khi nói hoạt động yêu thích. Like/love cũng có thể đi với to + động từ; enjoy thì không dùng mẫu đó.", "I enjoy swimming, but I don't like running.", "Tôi thích bơi nhưng không thích chạy."], ["Khả năng với can", "Can/can't + động từ nguyên mẫu, không thêm to hoặc -s. Câu hỏi đảo can lên đầu; trả lời ngắn bằng Yes, I can hoặc No, I can't.", "Can your sister play tennis?", "Chị bạn có biết chơi quần vợt không?"]],
+    "vocabulary": [["go swimming", "đi bơi"], ["play badminton", "chơi cầu lông"], ["do yoga", "tập yoga"]],
+    "mistake": ["She can to swim.", "She can swim.", "Sau can dùng nguyên mẫu không to."],
+    "practice": [["Điền: I enjoy ___ (read) in my free time.", "reading", "Enjoy đi với V-ing."], ["Sửa: He cans play football.", "He can play football.", "Can không thay đổi theo ngôi."]],
+    "task": "Nói về 3 sở thích, tần suất và người cùng tham gia. Rủ một người bạn tham gia bằng Let's hoặc Would you like to…?"
+  },
+  "food": {
+    "concepts": [["Đếm được và không đếm được", "Apple/egg có dạng số nhiều; rice/water thường không đếm trực tiếp. Dùng a bowl of, a glass of để chỉ lượng. Some thường ở câu khẳng định; any thường ở phủ định hoặc câu hỏi.", "I'd like a bowl of rice and some water.", "Tôi muốn một bát cơm và một ít nước."], ["Gọi món lịch sự", "I'd like + danh từ để gọi món, I'd like to + động từ để nói mong muốn làm gì. Would you like some…? là lời mời, nên some vẫn tự nhiên trong câu hỏi này.", "Would you like some tea?", "Bạn có muốn dùng chút trà không?"]],
+    "vocabulary": [["a slice of bread", "một lát bánh mì"], ["a bottle of water", "một chai nước"], ["have breakfast", "ăn sáng"]],
+    "mistake": ["I'd like two breads.", "I'd like two slices of bread.", "Khi gọi hai lát bánh mì, đếm bằng slices; bread thường không đếm được."],
+    "practice": [["Chọn: How (much/many) rice do you need?", "much", "Rice không đếm được trong cách dùng này."], ["Điền: I'd like ___ order a sandwich.", "to", "I'd like to + động từ; I'd like + danh từ."]],
+    "task": "Soạn hội thoại gọi bữa sáng 8 lượt, gồm hỏi món, số lượng, đồ uống, giá và cảm ơn. Thay món ăn để luyện lại."
+  },
+  "places-directions": {
+    "concepts": [["There is và there are", "There is dùng với danh từ số ít hoặc không đếm được; there are với số nhiều. Câu hỏi: Is there…? / Are there…?", "There is a bank next to the station.", "Có một ngân hàng cạnh nhà ga."], ["Chỉ đường theo từng bước", "Dùng mệnh lệnh với động từ nguyên mẫu: go, turn, cross. At chỉ mốc, into chỉ hướng vào, along chỉ dọc theo. Nêu mốc dễ thấy để người nghe kiểm tra đường.", "Go straight, then turn left at the traffic lights.", "Đi thẳng rồi rẽ trái ở đèn giao thông."]],
+    "vocabulary": [["across from", "đối diện"], ["next to", "bên cạnh"], ["on your right", "ở bên phải bạn"]],
+    "mistake": ["There have two shops here.", "There are two shops here.", "Diễn đạt sự tồn tại bằng there is/are, không dịch 'có' thành have."],
+    "practice": [["Điền: ___ there a pharmacy near here?", "Is", "A pharmacy là số ít."], ["Dịch: Rẽ phải ở ngân hàng.", "Turn right at the bank.", "At đánh dấu địa điểm thực hiện việc rẽ."]],
+    "task": "Vẽ bản đồ có 5 địa điểm. Chỉ đường từ nhà tới hai nơi khác nhau bằng ít nhất 4 bước, rồi hỏi lại để xác nhận."
+  },
+  "health-body": {
+    "concepts": [["Mô tả cảm giác", "Dùng have + danh từ chỉ triệu chứng, feel + tính từ hoặc bộ phận cơ thể + hurts. Đây là mẫu ngôn ngữ để trình bày, không phải hướng dẫn tự chẩn đoán.", "I have a headache and my neck hurts.", "Tôi bị đau đầu và đau cổ."], ["Hỏi và trả lời ngắn", "What's wrong? hỏi có chuyện gì; Where does it hurt? hỏi vị trí đau. Trả lời bằng vị trí, thời điểm bắt đầu và mức độ thay vì chỉ nói bad.", "My back hurts. It started this morning.", "Tôi đau lưng. Nó bắt đầu từ sáng nay."]],
+    "vocabulary": [["a sore throat", "đau họng"], ["feel tired", "cảm thấy mệt"], ["make an appointment", "đặt lịch hẹn"]],
+    "mistake": ["I have a pain head.", "I have a headache.", "Headache là danh từ thông dụng cho đau đầu."],
+    "practice": [["Chọn: My legs (hurt/hurts).", "hurt", "Legs số nhiều nên không thêm -s."], ["Điền: I ___ tired today. (feel/have)", "feel", "Feel đi với tính từ tired."]],
+    "task": "Đóng vai đặt lịch khám: nói tên, thời gian mong muốn và mô tả triệu chứng giả định bằng 3 câu. Luyện yêu cầu người nghe nhắc lại."
+  },
+  "clothes-appearance": {
+    "concepts": [["Be, have và wear", "Be + tính từ để tả vóc dáng; have + danh từ để tả tóc/mắt; wear + quần áo. Is wearing nhấn mạnh trang phục đang mặc.", "She is tall, has short hair and is wearing a blue coat.", "Cô ấy cao, tóc ngắn và đang mặc áo khoác xanh."], ["Số nhiều trong trang phục", "Trousers, jeans, shorts thường dùng số nhiều. A pair of trousers là một chiếc quần; this pair dùng is, these trousers dùng are.", "These jeans are new.", "Chiếc quần bò này mới."]],
+    "vocabulary": [["try on a jacket", "thử áo khoác"], ["a pair of shoes", "một đôi giày"], ["curly hair", "tóc xoăn"]],
+    "mistake": ["She has a long hair.", "She has long hair.", "Hair chỉ toàn bộ mái tóc thường không đếm được; a hair là một sợi tóc."],
+    "practice": [["Chọn: He (is/has) brown eyes.", "has", "Eyes là danh từ chỉ bộ phận cơ thể."], ["Điền: This pair of shoes ___ too small.", "is", "Chủ ngữ chính là pair số ít."]],
+    "task": "Tả trang phục của 3 người trong một ảnh bằng 2 câu mỗi người. Dùng màu sắc, loại đồ và ít nhất một cụm a pair of."
+  },
+  "house-home": {
+    "concepts": [["Miêu tả nhà theo thứ tự", "Bắt đầu bằng loại nhà và số phòng, sau đó nói vị trí đồ vật. There is/are giới thiệu đồ vật; it/they giúp tránh lặp ở câu tiếp theo.", "There is a desk in my room. It is next to the window.", "Có một bàn học trong phòng tôi. Nó ở cạnh cửa sổ."], ["Giới từ vị trí", "In là bên trong, on là trên bề mặt, under là bên dưới, between thường nối hai mốc bằng and. Phân biệt in front of với opposite: phía trước và đối diện.", "The sofa is between the lamp and the table.", "Ghế sofa nằm giữa đèn và bàn."]],
+    "vocabulary": [["living room", "phòng khách"], ["on the wall", "trên tường"], ["move house", "chuyển nhà"]],
+    "mistake": ["There are a kitchen.", "There is a kitchen.", "A kitchen là danh từ số ít."],
+    "practice": [["Điền: The keys are ___ the table. (trên mặt bàn)", "on", "On dùng cho vật trên bề mặt."], ["Chuyển sang số nhiều: There is a chair.", "There are chairs.", "Đổi is thành are, bỏ a và thêm -s."]],
+    "task": "Miêu tả phòng mình để một người khác vẽ lại. Dùng 6 đồ vật và ít nhất 4 giới từ vị trí."
+  },
+  "school-study": {
+    "concepts": [["Xin phép và nhờ giúp", "Can I…? xin phép mình làm gì; Can you…? nhờ người khác làm. Thêm please giúp lời yêu cầu mềm hơn; could thường lịch sự hơn can.", "Could you explain this word, please?", "Bạn giải thích từ này giúp tôi được không?"], ["Mệnh lệnh trong lớp", "Mệnh lệnh bắt đầu bằng động từ nguyên mẫu; phủ định dùng Don't + nguyên mẫu. Để hỏi nghĩa, dùng What does … mean?", "Open your books. Don't write the answer yet.", "Mở sách ra. Đừng viết đáp án vội."]],
+    "vocabulary": [["take notes", "ghi chép"], ["do homework", "làm bài tập về nhà"], ["hand in an assignment", "nộp bài tập"]],
+    "mistake": ["What means this word?", "What does this word mean?", "Câu hỏi hiện tại đơn dùng does trước chủ ngữ và mean ở dạng nguyên mẫu."],
+    "practice": [["Dịch: Tôi có thể mượn bút của bạn không?", "Can I borrow your pen?", "Borrow là người nói nhận vật để dùng tạm; lend là cho mượn."], ["Sửa: I do my homeworks at night.", "I do my homework at night.", "Homework không đếm được, không thêm -s."]],
+    "task": "Tập 5 tình huống trong lớp: đến muộn, không nghe rõ, chưa hiểu, mượn đồ và xin thêm thời gian. Mỗi tình huống nói một câu lịch sự."
+  },
+  "present-continuous": {
+    "concepts": [["Be + V-ing", "Không bỏ am/is/are. Động từ kết thúc bằng e thường bỏ e trước -ing: make → making; một số động từ gấp đôi phụ âm: run → running.", "They are making dinner now.", "Họ đang nấu bữa tối."], ["Tạm thời và thường xuyên", "Hiện tại tiếp diễn tả việc đang diễn ra hoặc tạm thời; hiện tại đơn tả thói quen. Các động từ trạng thái như know, own, believe thường không dùng tiếp diễn trong nghĩa cơ bản.", "I usually work in Hanoi, but I'm working in Hue this week.", "Tôi thường làm ở Hà Nội nhưng tuần này đang làm ở Huế."]],
+    "vocabulary": [["at the moment", "ngay lúc này"], ["right now", "ngay bây giờ"], ["this week", "tuần này"]],
+    "mistake": ["She cooking now.", "She is cooking now.", "Thì tiếp diễn cần be và V-ing."],
+    "practice": [["Chia: Look! The dog (run) towards us.", "is running", "Việc đang diễn ra; run gấp đôi n trước -ing."], ["Chọn: I (know/am knowing) the answer.", "know", "Know là động từ trạng thái ở nghĩa biết."]],
+    "task": "Quan sát một ảnh có nhiều người và nói 8 câu về việc đang diễn ra, gồm 2 câu phủ định và 2 câu hỏi."
+  },
+  "past-simple": {
+    "concepts": [["Quá khứ đã kết thúc", "Dùng V2/V-ed ở khẳng định, didn't + nguyên mẫu ở phủ định và Did + chủ ngữ + nguyên mẫu ở câu hỏi. Be có dạng was/were và không dùng did.", "Did you go out yesterday? No, I stayed home.", "Hôm qua bạn có ra ngoài không? Không, tôi ở nhà."], ["Phát âm đuôi -ed", "Đọc /ɪd/ sau âm /t/ và /d/ như wanted, needed; /t/ sau âm vô thanh khác như watched; /d/ sau các âm hữu thanh khác như played. Xét âm cuối, không chỉ chữ viết.", "We watched a film and played a game.", "Chúng tôi đã xem phim và chơi một trò chơi."]],
+    "vocabulary": [["last night", "tối qua"], ["two days ago", "hai ngày trước"], ["go → went → gone", "đi: nguyên mẫu → quá khứ → phân từ"]],
+    "mistake": ["I didn't went out.", "I didn't go out.", "Sau didn't dùng nguyên mẫu go."],
+    "practice": [["Chia: They (be) tired, so they (go) home.", "were; went", "They đi với were; quá khứ của go là went."], ["Đặt câu hỏi: She bought a new bag yesterday.", "Did she buy a new bag yesterday?", "Did + chủ ngữ + buy nguyên mẫu."]],
+    "task": "Kể lại hôm qua theo thứ tự first, then, after that, finally. Dùng 5 động từ bất quy tắc và nêu một việc bạn không làm."
+  },
+  "describe-compare": {
+    "concepts": [["So sánh hơn", "Tính từ ngắn thường thêm -er; tính từ dài dùng more. Dùng than trước đối tượng so sánh. Good → better, bad → worse; không dùng đồng thời more và -er.", "This room is bigger than mine, but it is more expensive.", "Phòng này lớn hơn phòng tôi nhưng đắt hơn."], ["So sánh nhất và ngang bằng", "So sánh nhất thường dùng the + -est/most khi xét một nhóm. As + tính từ + as diễn đạt ngang bằng; not as…as diễn đạt kém hơn về đặc điểm đó.", "This is the cheapest hotel, but it isn't as quiet as that one.", "Đây là khách sạn rẻ nhất nhưng không yên tĩnh bằng khách sạn kia."]],
+    "vocabulary": [["much better", "tốt hơn nhiều"], ["a little cheaper", "rẻ hơn một chút"], ["the most useful", "hữu ích nhất"]],
+    "mistake": ["This bag is more cheaper.", "This bag is cheaper.", "Cheap dùng cheaper; more cheaper là đánh dấu so sánh hai lần."],
+    "practice": [["Điền dạng so sánh: Today is ___ (hot) than yesterday.", "hotter", "Hot gấp đôi t trước -er."], ["Viết so sánh ngang bằng: A và B đắt như nhau.", "A is as expensive as B.", "Mẫu as + tính từ nguyên dạng + as."]],
+    "task": "So sánh hai nơi ở bằng giá, diện tích, vị trí và độ yên tĩnh; kết luận nơi phù hợp hơn với bạn và giải thích lý do."
+  },
+  "future-plans": {
+    "concepts": [["Will và going to", "Will thường dùng cho quyết định ngay lúc nói, lời hứa hoặc dự đoán. Going to thường diễn đạt dự định đã có hoặc dự đoán dựa trên dấu hiệu hiện tại; đây là xu hướng dùng, không phải ranh giới tuyệt đối.", "Look at those clouds. It's going to rain.", "Nhìn những đám mây kia. Trời sắp mưa."], ["Kế hoạch đã sắp xếp", "Hiện tại tiếp diễn có thể nói cuộc hẹn đã thu xếp. Hiện tại đơn dùng cho lịch trình. Thêm mốc tương lai để ngữ cảnh rõ ràng.", "I'm meeting Lan tomorrow. The train leaves at eight.", "Ngày mai tôi gặp Lan. Tàu khởi hành lúc 8 giờ."]],
+    "vocabulary": [["make plans", "lên kế hoạch"], ["book in advance", "đặt trước"], ["next weekend", "cuối tuần tới"]],
+    "mistake": ["I will to call you.", "I will call you.", "Will đi với động từ nguyên mẫu không to."],
+    "practice": [["Điền: We are going ___ visit Hue.", "to", "Be going to + động từ nguyên mẫu."], ["Bạn vừa quyết định nghe máy. Hoàn thành: I'll ___ it.", "answer", "Will diễn đạt quyết định tại thời điểm nói."]],
+    "task": "Nêu 3 dự định, 2 cuộc hẹn đã thu xếp và 1 lời hứa cho tuần tới. Giải thích cách chọn dạng tương lai ở từng câu."
+  },
+  "present-perfect": {
+    "concepts": [["Have/has + V3", "Dùng để nói trải nghiệm tính đến hiện tại hoặc kết quả liên quan hiện tại. Không ghép với một thời điểm quá khứ đã kết thúc như yesterday; khi nêu thời điểm đó, thường dùng quá khứ đơn.", "I've visited Hue twice. I went there last year.", "Tôi đã đến Huế hai lần. Tôi đến đó năm ngoái."], ["Since, for, yet và already", "Since + mốc bắt đầu; for + khoảng thời gian. Yet thường ở cuối câu hỏi/phủ định; already thường nằm giữa have/has và V3. Chọn thì theo nghĩa và mốc thời gian, không chỉ từ khóa.", "She has lived here for three years, since 2023.", "Cô ấy đã sống ở đây được ba năm, từ năm 2023."]],
+    "vocabulary": [["have been to", "đã từng đến và đã trở về"], ["have gone to", "đã đi đến và chưa trở về"], ["so far", "cho đến nay"]],
+    "mistake": ["I have seen him yesterday.", "I saw him yesterday.", "Yesterday chỉ thời gian quá khứ đã kết thúc nên dùng quá khứ đơn."],
+    "practice": [["Điền: Have you ever ___ (eat) sushi?", "eaten", "Eaten là phân từ quá khứ của eat."], ["Chọn: I've known her (since/for) ten years.", "for", "Ten years là khoảng thời gian."]],
+    "task": "Viết 5 trải nghiệm với have/has, rồi thêm một câu quá khứ đơn nói khi nào hoặc ở đâu mỗi trải nghiệm xảy ra."
+  },
+  "adverbs-manner": {
+    "concepts": [["Tính từ và trạng từ", "Tính từ mô tả người/vật; trạng từ mô tả cách hành động diễn ra. Nhiều trạng từ thêm -ly: careful → carefully. Good → well; fast và hard giữ nguyên hình thức.", "She is a careful driver. She drives carefully.", "Cô ấy là người lái xe cẩn thận. Cô ấy lái xe cẩn thận."], ["Vị trí và từ dễ nhầm", "Trạng từ cách thức thường đứng sau động từ hoặc sau tân ngữ. Hardly nghĩa là hầu như không, khác hard là chăm chỉ/vất vả. Sau look/seem/feel chỉ trạng thái thường dùng tính từ.", "He works hard, but he hardly ever takes a break.", "Anh ấy làm việc chăm chỉ nhưng hầu như không nghỉ."]],
+    "vocabulary": [["speak clearly", "nói rõ ràng"], ["listen carefully", "nghe chăm chú"], ["drive safely", "lái xe an toàn"]],
+    "mistake": ["She speaks English good.", "She speaks English well.", "Well bổ nghĩa cho hành động speaks; good là tính từ."],
+    "practice": [["Đổi sang trạng từ: easy; quiet; good.", "easily; quietly; well", "Easy đổi y thành i; good có dạng bất quy tắc."], ["Chọn: You look (happy/happily).", "happy", "Look ở đây là động từ liên kết mô tả trạng thái."]],
+    "task": "Mô tả cách 5 người thực hiện một việc. Ghép mỗi cặp câu tính từ/trạng từ: a slow speaker → speaks slowly."
+  },
+  "first-conditional": {
+    "concepts": [["Điều kiện có thể xảy ra", "If + hiện tại đơn, will + nguyên mẫu diễn đạt một khả năng tương lai. Đặt dấu phẩy khi mệnh đề if đứng đầu; thường không cần khi đứng sau.", "If it rains, we'll stay home.", "Nếu trời mưa, chúng tôi sẽ ở nhà."], ["Biến thể của kết quả", "Mệnh đề kết quả có thể dùng can, may hoặc mệnh lệnh tùy ý nghĩa. Unless thường nghĩa là if…not; tránh thêm not nếu làm đảo nghĩa ngoài ý muốn.", "If you finish early, call me.", "Nếu xong sớm, hãy gọi tôi."]],
+    "vocabulary": [["unless it rains", "trừ khi trời mưa"], ["if necessary", "nếu cần"], ["in that case", "trong trường hợp đó"]],
+    "mistake": ["If I will see her, I'll tell her.", "If I see her, I'll tell her.", "Ở mẫu điều kiện tương lai cơ bản, mệnh đề if dùng hiện tại đơn."],
+    "practice": [["Chia: If he (study), he (pass) the test.", "studies; will pass", "Điều kiện hiện tại đơn; kết quả will + nguyên mẫu."], ["Viết lại: If you don't hurry, you'll be late. Dùng unless.", "Unless you hurry, you'll be late.", "Unless thay cho if…not."]],
+    "task": "Lập 5 phương án cho một chuyến dã ngoại: mưa, đến muộn, hết vé, quên đồ và kết thúc sớm. Dùng if với các kiểu kết quả khác nhau."
+  },
+  "shopping-money": {
+    "concepts": [["Hỏi giá và số lượng", "How much is…? hỏi giá một món; How much are…? hỏi nhiều món. How many + danh từ đếm được số nhiều; how much + danh từ không đếm được.", "How much are these shoes?", "Đôi giày này giá bao nhiêu?"], ["Size, fit và thanh toán", "Size là cỡ; fit nói về kích thước vừa; suit nói về việc hợp với người mặc. Can I pay by card? hỏi hình thức thanh toán; pay in cash là trả tiền mặt.", "The jacket fits me, but the colour doesn't suit me.", "Áo khoác vừa với tôi nhưng màu không hợp."]],
+    "vocabulary": [["keep the receipt", "giữ hóa đơn"], ["get a refund", "được hoàn tiền"], ["on sale", "đang giảm giá / đang được bán, tùy ngữ cảnh"]],
+    "mistake": ["How much these shoes cost?", "How much do these shoes cost?", "Câu hỏi với cost cần do; cũng có thể hỏi How much are these shoes?"],
+    "practice": [["Điền: Can I pay ___ card?", "by", "Cụm cố định pay by card, đối chiếu pay in cash."], ["Sửa: This shoes is too small.", "These shoes are too small.", "Shoes số nhiều cần these và are."]],
+    "task": "Đóng vai mua một áo khoác: hỏi cỡ, thử, nhận xét độ vừa, hỏi giá và thanh toán. Thêm tình huống đổi hàng vì sai cỡ."
+  },
+  "weather-seasons": {
+    "concepts": [["It làm chủ ngữ", "Tiếng Anh thường cần it khi mô tả thời tiết: It's hot, It's raining. Rain có thể là danh từ hoặc động từ; rainy là tính từ.", "It rains a lot here in summer.", "Ở đây mùa hè mưa nhiều."], ["Dự báo và mức độ", "Dùng going to khi dự đoán từ dấu hiệu hiện tại, may/might khi chưa chắc chắn. A little, quite, very diễn đạt mức độ; không ghép very trực tiếp với động từ rain.", "It might rain later, so I'll take an umbrella.", "Lát nữa có thể mưa nên tôi sẽ mang ô."]],
+    "vocabulary": [["heavy rain", "mưa to"], ["strong winds", "gió mạnh"], ["weather forecast", "dự báo thời tiết"]],
+    "mistake": ["Today is very rain.", "It's raining heavily today.", "Rain không phải tính từ; dùng rainy hoặc động từ raining với trạng từ heavily."],
+    "practice": [["Chọn: It's (sun/sunny) today.", "sunny", "Sau is cần tính từ để tả thời tiết."], ["Điền: It usually ___ (snow) here in winter.", "snows", "Thói quen dùng hiện tại đơn; it thêm -s."]],
+    "task": "Soạn bản tin thời tiết giả định cho 3 ngày, gồm nhiệt độ, mưa/gió và một kế hoạch phù hợp cho mỗi ngày."
+  },
+  "feelings-emotions": {
+    "concepts": [["-ed và -ing", "Bored/interested/excited thường chỉ cảm xúc của người; boring/interesting/exciting mô tả thứ gây cảm xúc. Một người cũng có thể boring nếu họ gây chán cho người khác.", "I'm excited because the trip sounds exciting.", "Tôi háo hức vì chuyến đi nghe có vẻ thú vị."], ["Nêu nguyên nhân và phản hồi", "Feel + tính từ mô tả cảm xúc; because + mệnh đề giải thích lý do; because of + danh từ/cụm danh từ. Phản hồi bằng câu công nhận cảm xúc trước khi đưa ý kiến.", "I feel nervous because I have an exam tomorrow.", "Tôi thấy lo vì ngày mai có bài thi."]],
+    "vocabulary": [["feel relieved", "cảm thấy nhẹ nhõm"], ["be worried about", "lo lắng về"], ["cheer someone up", "làm ai vui lên"]],
+    "mistake": ["I'm boring because I have nothing to do.", "I'm bored because I have nothing to do.", "Bored diễn đạt cảm giác chán của bản thân."],
+    "practice": [["Chọn: The news was (surprised/surprising).", "surprising", "Tin tức gây ngạc nhiên."], ["Điền: I'm worried ___ the interview.", "about", "Cụm worried about + danh từ."]],
+    "task": "Viết nhật ký 5 câu về cảm xúc trong ngày, mỗi câu có nguyên nhân. Tập hai cách đáp lại một người đang lo lắng."
+  },
+  "jobs-ambitions": {
+    "concepts": [["Nghề và nơi làm việc", "Dùng a/an trước tên nghề số ít; work as + nghề, work for + tổ chức, work in + lĩnh vực/nơi. Không thêm a trước tên lĩnh vực chung.", "She works as an engineer for a software company.", "Cô ấy làm kỹ sư cho một công ty phần mềm."], ["Mục tiêu và lý do", "Want/hope/plan + to + động từ; would like to diễn đạt mong muốn mềm hơn. Dùng because để nối lý do cụ thể với mục tiêu.", "I'd like to become a teacher because I enjoy helping children.", "Tôi muốn trở thành giáo viên vì thích giúp trẻ em."]],
+    "vocabulary": [["apply for a job", "ứng tuyển việc làm"], ["gain experience", "tích lũy kinh nghiệm"], ["work full-time", "làm toàn thời gian"]],
+    "mistake": ["I want become doctor.", "I want to become a doctor.", "Want cần to trước động từ; doctor số ít cần a."],
+    "practice": [["Điền: He works ___ a nurse ___ a hospital.", "as; in", "As giới thiệu vai trò; in giới thiệu nơi làm việc."], ["Dịch: Tôi hy vọng sẽ học một kỹ năng mới.", "I hope to learn a new skill.", "Hope to + động từ nguyên mẫu."]],
+    "task": "Nói 60 giây về nghề mong muốn: nhiệm vụ, kỹ năng, lý do và hai bước chuẩn bị bạn dự định thực hiện."
+  },
+  "making-plans": {
+    "concepts": [["Ba cách đề xuất", "Let's + nguyên mẫu, Why don't we + nguyên mẫu?, How about + V-ing/danh từ? Cả ba cùng đề xuất nhưng cấu trúc theo sau khác nhau.", "How about having lunch together?", "Hay mình cùng ăn trưa nhé?"], ["Nhận lời và từ chối", "Nhận lời bằng That sounds good. Từ chối bằng I'd love to, but + lý do; đưa ra thời gian khác nếu vẫn muốn gặp. By là hạn chót, at là thời điểm hẹn.", "I'd love to, but I'm busy on Friday. How about Saturday?", "Tôi rất muốn, nhưng thứ Sáu bận rồi. Thứ Bảy thì sao?"]],
+    "vocabulary": [["meet up", "gặp nhau"], ["make it", "đến/tham gia được"], ["reschedule a meeting", "đổi lịch cuộc gặp"]],
+    "mistake": ["Let's to go out.", "Let's go out.", "Let's đi với nguyên mẫu không to."],
+    "practice": [["Điền: How about ___ (watch) a film?", "watching", "How about đi với V-ing."], ["Viết lời từ chối có đề xuất khác cho cuộc hẹn tối nay.", "I'd love to, but I'm busy tonight. How about tomorrow?", "Đáp án mẫu gồm thiện chí, lý do và thời gian thay thế."]],
+    "task": "Viết hội thoại 8 lượt chốt một cuộc hẹn: đề xuất, vướng lịch, đổi ngày, thống nhất giờ và địa điểm, xác nhận lại."
+  },
+  "transport": {
+    "concepts": [["Phương tiện và giới từ", "By bus/train/car nói cách di chuyển, không thêm the. On foot là đi bộ. Get on/off thường dùng với bus/train/plane; get in/out of với car/taxi.", "I go to work by bus and get off near the office.", "Tôi đi làm bằng xe buýt và xuống gần văn phòng."], ["Hỏi tuyến và thời gian", "Which bus goes to…? chọn tuyến; How long does it take? hỏi thời lượng; How often…? hỏi tần suất. Phân biệt leave là khởi hành và arrive là đến.", "How long does it take to get to the airport?", "Đi đến sân bay mất bao lâu?"]],
+    "vocabulary": [["a single ticket", "vé một chiều"], ["a return ticket", "vé khứ hồi, thường dùng ở Anh"], ["miss the bus", "lỡ xe buýt"]],
+    "mistake": ["I go by foot.", "I go on foot.", "Cụm chuẩn là on foot; cũng có thể nói I walk."],
+    "practice": [["Điền: Get ___ the bus at the next stop.", "off", "Get off chỉ xuống xe buýt."], ["Đặt câu hỏi để nhận câu trả lời: It takes twenty minutes.", "How long does it take?", "How long hỏi khoảng thời gian."]],
+    "task": "Luyện mua vé cho một hành trình giả định: nơi đến, một chiều/khứ hồi, giờ khởi hành, sân ga và chỗ đổi tuyến."
+  },
+  "phone-calls": {
+    "concepts": [["Mở đầu cuộc gọi", "Trên điện thoại dùng This is + tên để giới thiệu; May I speak to…? để xin gặp. Who's calling, please? hỏi người gọi lịch sự hơn Who are you?", "Hello, this is Mai. May I speak to Mr Brown?", "Xin chào, tôi là Mai. Tôi có thể nói chuyện với ông Brown không?"], ["Xác nhận thông tin", "Khi nghe không rõ, yêu cầu lặp lại hoặc đánh vần; đọc lại số và thời gian để xác nhận. Take a message là ghi lời nhắn; leave a message là để lại lời nhắn.", "Could you spell your last name, please?", "Bạn đánh vần họ của mình giúp tôi được không?"]],
+    "vocabulary": [["hold on", "chờ máy"], ["call back", "gọi lại"], ["a bad connection", "đường truyền kém"]],
+    "mistake": ["Please say me your number.", "Please tell me your number.", "Tell + người nhận + thông tin; say không nhận trực tiếp me theo mẫu này."],
+    "practice": [["Điền: Can I ___ a message for her? (để lại)", "leave", "Người gọi leave a message; người nhận take a message."], ["Viết câu xin người nghe nói chậm hơn.", "Could you speak more slowly, please?", "More slowly là so sánh hơn của trạng từ slowly."]],
+    "task": "Ghi một lời nhắn thoại 30 giây: tên, lý do gọi, số điện thoại giả định và thời gian có thể gọi lại. Đọc các số theo nhóm."
+  },
+  "restaurant": {
+    "concepts": [["Yêu cầu lịch sự", "Could I have…? yêu cầu món; Could you…? nhờ nhân viên làm gì. Would you mind + V-ing mềm hơn; với lời yêu cầu này, Not at all là đồng ý giúp.", "Could you bring us some water, please?", "Bạn mang giúp chúng tôi chút nước được không?"], ["Nêu vấn đề cụ thể", "Nêu vấn đề bằng I'm afraid… rồi đề nghị cách giải quyết. Khi nói về thành phần hoặc dị ứng, dùng câu rõ ràng và hỏi lại để xác nhận thay vì chỉ nói I don't like…", "I'm allergic to peanuts. Does this dish contain any?", "Tôi dị ứng với đậu phộng. Món này có đậu phộng không?"]],
+    "vocabulary": [["book a table", "đặt bàn"], ["the bill / the check", "hóa đơn, thường dùng ở Anh / Mỹ"], ["split the bill", "chia tiền hóa đơn"]],
+    "mistake": ["I would like ordering soup.", "I would like to order soup.", "Would like đi với to + động từ, khác enjoy + V-ing."],
+    "practice": [["Điền: Would you mind ___ (check) our order?", "checking", "Sau mind dùng V-ing."], ["Viết yêu cầu đổi món vì món bị nguội.", "I'm afraid the soup is cold. Could you heat it up, please?", "Đáp án mẫu nêu vấn đề và yêu cầu cụ thể."]],
+    "task": "Đóng vai bữa ăn từ đặt bàn đến thanh toán. Thêm một món hết hàng và một yêu cầu đổi món; luyện phản hồi lịch sự ở cả hai vai."
+  },
+  "travel": {
+    "concepts": [["Trình tự hành trình", "Dùng first, after that, before và finally để tổ chức lời kể. Before/after đi với danh từ, V-ing hoặc mệnh đề đầy đủ; không dùng nguyên mẫu đơn ngay sau chúng.", "Before boarding, I checked the gate number.", "Trước khi lên máy bay, tôi kiểm tra số cửa ra máy bay."], ["Hỏi thông tin gián tiếp", "Could you tell me + từ hỏi + chủ ngữ + động từ giúp lời hỏi lịch sự. Phần bên trong dùng trật tự câu kể, không đảo trợ động từ.", "Could you tell me where the check-in desk is?", "Bạn cho tôi biết quầy làm thủ tục ở đâu được không?"]],
+    "vocabulary": [["boarding pass", "thẻ lên máy bay"], ["carry-on luggage", "hành lý xách tay"], ["a connecting flight", "chuyến bay nối chuyến"]],
+    "mistake": ["Could you tell me where is gate ten?", "Could you tell me where gate ten is?", "Câu hỏi gián tiếp giữ thứ tự chủ ngữ rồi động từ."],
+    "practice": [["Viết câu hỏi gián tiếp: Where does the bus stop?", "Could you tell me where the bus stops?", "Bỏ does; động từ stops chia với bus."], ["Điền: My luggage ___ missing. (is/are)", "is", "Luggage không đếm được, dùng is."]],
+    "task": "Luyện xử lý chuyến bay bị hoãn: hỏi lý do, giờ mới, chuyến nối tiếp và nơi nhận thông tin. Tóm tắt lại phương án để xác nhận."
+  },
+  "hotel-accommodation": {
+    "concepts": [["Đặt phòng và xác nhận", "A reservation under + tên nói đặt phòng đứng tên ai. For + số đêm chỉ thời lượng; from…to… chỉ ngày. Hỏi rõ included để biết khoản nào đã nằm trong giá.", "I have a reservation under Nguyen for two nights.", "Tôi có đặt phòng tên Nguyen trong hai đêm."], ["Báo sự cố với hiện tại hoàn thành", "Dùng hiện tại hoàn thành cho vấn đề kéo dài tới hiện tại, tiếp diễn cho sự cố đang diễn ra. Nêu ảnh hưởng và một yêu cầu cụ thể.", "The hot water hasn't worked since this morning. Could someone check it?", "Nước nóng không hoạt động từ sáng nay. Có người kiểm tra giúp được không?"]],
+    "vocabulary": [["check in", "nhận phòng"], ["check out", "trả phòng"], ["a quiet room", "phòng yên tĩnh"]],
+    "mistake": ["I have a booking during three nights.", "I have a booking for three nights.", "For chỉ khoảng thời gian; during thường đi với một giai đoạn/sự kiện được gọi tên."],
+    "practice": [["Điền: Is breakfast included ___ the price?", "in", "Included in nghĩa là được bao gồm trong."], ["Viết yêu cầu đổi sang phòng yên tĩnh hơn.", "Could I move to a quieter room, please?", "Quieter so sánh với phòng hiện tại."]],
+    "task": "Viết hội thoại 10 lượt từ nhận phòng, hỏi tiện ích, báo sự cố đến xin trả phòng muộn. Nêu rõ ngày và giờ giả định."
+  },
+  "opinions": {
+    "concepts": [["Ý kiến có lý do", "Trình bày quan điểm, lý do, ví dụ và kết luận ngắn. I think/I believe đánh dấu ý kiến; from my experience giới hạn phạm vi nhận xét theo trải nghiệm cá nhân.", "I think public transport is useful because it saves space.", "Tôi nghĩ giao thông công cộng hữu ích vì tiết kiệm không gian."], ["Đồng ý một phần", "I see your point, but… công nhận trước khi phản biện. Although + mệnh đề; despite + danh từ/V-ing. Không dùng although và but để nối cùng một cặp mệnh đề.", "Although online classes are convenient, I prefer studying with others.", "Mặc dù lớp trực tuyến tiện lợi, tôi thích học cùng người khác hơn."]],
+    "vocabulary": [["from my point of view", "theo quan điểm của tôi"], ["a valid point", "một ý kiến có cơ sở"], ["weigh the options", "cân nhắc các lựa chọn"]],
+    "mistake": ["I am agree with you.", "I agree with you.", "Agree là động từ, không cần am."],
+    "practice": [["Nối bằng although: It is expensive. It is useful.", "Although it is expensive, it is useful.", "Although giới thiệu mệnh đề nhượng bộ."], ["Sửa: In my opinion, I think that this is better.", "In my opinion, this is better.", "Câu gốc không sai ngữ pháp nghiêm trọng nhưng lặp chức năng đánh dấu ý kiến."]],
+    "task": "Nói 90 giây về học trực tuyến, gồm quan điểm, 2 lý do, ví dụ và một hạn chế. Sau đó thử bảo vệ quan điểm ngược lại."
+  },
+  "technology-phone": {
+    "concepts": [["Mô tả sự cố theo thời gian", "Nêu thiết bị, hành động đã thực hiện, kết quả và thời điểm bắt đầu lỗi. Hiện tại hoàn thành giúp nói những cách đã thử; quá khứ đơn dùng cho lần xảy ra cụ thể.", "I've restarted the phone, but the app still won't open.", "Tôi đã khởi động lại điện thoại nhưng ứng dụng vẫn không mở được."], ["Phrasal verbs có tân ngữ", "Với turn on/off, đại từ tân ngữ nằm giữa: turn it off. Danh từ có thể đứng giữa hoặc sau. Log in thường đi với to khi theo sau là dịch vụ.", "Turn the router off, then turn it on again.", "Tắt bộ định tuyến rồi bật lại."]],
+    "vocabulary": [["back up files", "sao lưu tệp"], ["reset a password", "đặt lại mật khẩu"], ["run out of battery", "hết pin"]],
+    "mistake": ["Please turn off it.", "Please turn it off.", "Đại từ it phải đứng giữa động từ và tiểu từ trong cụm tách được này."],
+    "practice": [["Thay the laptop bằng it: Switch on the laptop.", "Switch it on.", "Đại từ đứng giữa switch và on."], ["Điền: I haven't installed the update ___. (already/yet)", "yet", "Yet thường ở cuối câu phủ định về việc chưa làm."]],
+    "task": "Viết yêu cầu hỗ trợ 80 từ về lỗi giả định: thiết bị, triệu chứng, bước tái hiện và cách đã thử. Không dùng mật khẩu hay dữ liệu thật."
+  },
+  "work-office": {
+    "concepts": [["Yêu cầu kèm thời hạn", "Could you + động từ + by + hạn chót giúp yêu cầu rõ ràng. By Friday nghĩa là không muộn hơn thứ Sáu; until Friday chỉ sự kéo dài tới thứ Sáu.", "Could you send me the draft by Friday?", "Bạn gửi tôi bản nháp chậm nhất vào thứ Sáu được không?"], ["Cập nhật tiến độ", "Dùng have finished cho kết quả, am working on cho việc đang làm, will cho bước tiếp theo. Nêu trở ngại và sự hỗ trợ cần thiết để người nghe hành động được.", "I've finished the report, and I'm checking the figures.", "Tôi đã viết xong báo cáo và đang kiểm tra các số liệu."]],
+    "vocabulary": [["meet a deadline", "hoàn thành đúng hạn"], ["follow up on", "theo dõi/trao đổi tiếp về"], ["take responsibility for", "chịu trách nhiệm về"]],
+    "mistake": ["We discussed about the plan.", "We discussed the plan.", "Discuss nhận tân ngữ trực tiếp; talk about thì có about."],
+    "practice": [["Chọn: Please finish it (by/until) noon.", "by", "Đây là hạn chót hoàn thành."], ["Dịch: Tôi chịu trách nhiệm đào tạo nhân viên mới.", "I'm responsible for training new staff.", "Responsible for + danh từ/V-ing."]],
+    "task": "Soạn email 100 từ cập nhật dự án: việc xong, việc đang làm, trở ngại, yêu cầu cụ thể và hạn chót. Đọc thành bản cập nhật họp 60 giây."
+  },
+  "job-interview": {
+    "concepts": [["Kể trải nghiệm có kết quả", "Dùng STAR: tình huống, nhiệm vụ, hành động của bạn và kết quả. Quá khứ đơn tả sự kiện đã xong; hiện tại hoàn thành nói kinh nghiệm tổng quát tính đến nay.", "I improved the checklist, which reduced errors in our reports.", "Tôi cải tiến danh sách kiểm tra, giúp giảm lỗi trong báo cáo."] , ["Năng lực và ví dụ", "Be good at + V-ing nói điểm mạnh; have experience in + lĩnh vực/V-ing nói kinh nghiệm. Luôn thêm ví dụ cụ thể và tránh tuyên bố chung không có minh chứng.", "I'm good at explaining complex ideas in simple language.", "Tôi giỏi giải thích ý tưởng phức tạp bằng ngôn ngữ đơn giản."]],
+    "vocabulary": [["relevant experience", "kinh nghiệm phù hợp"], ["solve a problem", "giải quyết vấn đề"], ["work under pressure", "làm việc dưới áp lực"]],
+    "mistake": ["I have three years experience in manage teams.", "I have three years of experience in managing teams.", "Dùng years of experience và in + V-ing; three years' experience cũng đúng."],
+    "practice": [["Điền: I'm good ___ ___ (organise) events.", "at organising", "Good at + V-ing; organizing là cách viết Mỹ."], ["Viết lại cho cụ thể: I am a good team player.", "I helped two new colleagues learn our process and finish their first project.", "Đáp án mẫu thay nhận xét chung bằng hành động có thể mô tả."]],
+    "task": "Chuẩn bị 3 câu chuyện STAR dài 90 giây về giải quyết vấn đề, làm việc nhóm và học từ sai sót; dùng trải nghiệm thật, không tự tạo thành tích."
+  },
+  "environment-nature": {
+    "concepts": [["Nguyên nhân và kết quả", "Because + mệnh đề nêu nguyên nhân; lead to/result in + danh từ hoặc V-ing nêu kết quả. Phân biệt cause với effect để lập luận không bị đảo chiều.", "Using fewer disposable bags can reduce waste.", "Dùng ít túi dùng một lần hơn có thể giảm rác thải."], ["Lượng và giải pháp", "Fewer + danh từ đếm được số nhiều; less + danh từ không đếm được. Should đề xuất, could nêu lựa chọn; tránh dùng must nếu bạn chỉ đưa ý kiến nhẹ.", "We could use less water and buy fewer plastic bottles.", "Chúng ta có thể dùng ít nước hơn và mua ít chai nhựa hơn."]],
+    "vocabulary": [["reduce waste", "giảm rác thải"], ["save energy", "tiết kiệm năng lượng"], ["protect wildlife", "bảo vệ động vật hoang dã"]],
+    "mistake": ["We should use less plastic bags.", "We should use fewer plastic bags.", "Bags đếm được số nhiều nên dùng fewer trong văn viết chuẩn."],
+    "practice": [["Chọn: (Less/Fewer) pollution would improve the area.", "Less", "Pollution không đếm được."], ["Điền: This can lead ___ more waste.", "to", "Lead to + danh từ/V-ing."]],
+    "task": "Đề xuất một thay đổi cho trường/nơi làm việc: vấn đề, nguyên nhân, giải pháp, lợi ích và khó khăn. Dùng ví dụ giả định, không bịa số liệu."
+  },
+  "present-perfect-continuous": {
+    "concepts": [["Quá trình nối tới hiện tại", "Have/has been + V-ing nhấn mạnh thời lượng hoặc quá trình bắt đầu trước hiện tại, có thể vẫn tiếp tục hoặc vừa dừng và còn dấu hiệu.", "I've been studying for two hours, so I need a break.", "Tôi đã học suốt hai giờ nên cần nghỉ."], ["Quá trình và kết quả", "Have written three emails nhấn mạnh số lượng đã hoàn thành; have been writing emails nhấn mạnh hoạt động. Động từ trạng thái như know thường dùng hiện tại hoàn thành đơn.", "I've been reading all morning, but I've only read twenty pages.", "Tôi đọc suốt buổi sáng nhưng mới đọc được hai mươi trang."]],
+    "vocabulary": [["all morning", "suốt buổi sáng"], ["for a while", "được một lúc"], ["lately", "gần đây"]],
+    "mistake": ["I've been knowing her for years.", "I've known her for years.", "Know ở nghĩa biết/quen là trạng thái, thường không dùng tiếp diễn."],
+    "practice": [["Chia: She (wait) since eight and is still here.", "has been waiting", "Nhấn mạnh quá trình chờ vẫn tiếp tục."], ["Chọn: I've (written/been writing) five pages so far.", "written", "Five pages là kết quả định lượng đã hoàn thành."]],
+    "task": "Nói về 3 hoạt động gần đây. Với mỗi hoạt động, viết một câu nhấn mạnh quá trình và một câu nhấn mạnh kết quả."
+  },
+  "second-conditional": {
+    "concepts": [["Giả định hiện tại/tương lai", "If + quá khứ đơn, would + nguyên mẫu diễn đạt tình huống tưởng tượng hoặc ít khả năng. Dạng quá khứ ở đây biểu thị khoảng cách với thực tế, không nhất thiết chỉ thời gian quá khứ.", "If I had more time, I would learn another language.", "Nếu có nhiều thời gian hơn, tôi sẽ học thêm một ngoại ngữ."], ["Were và lời khuyên", "If I were you là cụm thông dụng để đưa lời khuyên. Were dùng được với mọi ngôi trong giả định trang trọng; was cũng xuất hiện trong lời nói với I/he/she/it.", "If I were you, I'd ask for more information.", "Nếu là bạn, tôi sẽ hỏi thêm thông tin."]],
+    "vocabulary": [["in your position", "ở vị trí của bạn"], ["given the chance", "nếu có cơ hội"], ["imagine living abroad", "tưởng tượng việc sống ở nước ngoài"]],
+    "mistake": ["If I would have time, I would help.", "If I had time, I would help.", "Mẫu cơ bản dùng quá khứ đơn trong mệnh đề if, không dùng would have."],
+    "practice": [["Chia: If she (live) nearer, we (meet) more often.", "lived; would meet", "Giả định hiện tại theo mẫu loại 2."], ["Viết lời khuyên dùng If I were you: hỏi giáo viên.", "If I were you, I'd ask the teacher.", "I'd là I would."]],
+    "task": "Trả lời 5 câu hỏi What would you do if…? về thời gian, việc làm, du lịch, kỹ năng và nơi ở; mỗi đáp án có lý do."
+  },
+  "modals-deduction": {
+    "concepts": [["Mức độ chắc chắn", "Must + nguyên mẫu diễn đạt suy luận rất chắc dựa trên bằng chứng; might/may/could diễn đạt khả năng; can't diễn đạt suy luận rằng điều đó không thể đúng. Đây không phải các phần trăm cố định.", "The lights are on. Someone might be at home.", "Đèn đang sáng. Có thể có người ở nhà."], ["Suy đoán quá khứ", "Modal + have + V3 dùng để suy đoán về quá khứ. Must have không đồng nghĩa với had to: một bên suy luận, một bên nghĩa vụ trong quá khứ.", "She must have left early; her desk is empty.", "Chắc cô ấy đã về sớm; bàn cô ấy trống rồi."]],
+    "vocabulary": [["based on the evidence", "dựa trên bằng chứng"], ["a possible explanation", "một cách giải thích có thể đúng"], ["rule out", "loại trừ"]],
+    "mistake": ["He mustn't be at home; his car is gone.", "He might not be at home; his car is gone.", "Mustn't thường mang nghĩa cấm; might not thể hiện chưa chắc, phù hợp với bằng chứng không quyết định này."],
+    "practice": [["Điền để suy đoán quá khứ: He must ___ forgotten.", "have", "Must have + V3."], ["Bạn chưa chắc vật đó là chìa khóa của Lan. Viết câu với might.", "It might be Lan's key.", "Might biểu thị khả năng, không khẳng định chắc chắn."]],
+    "task": "Tạo 4 tình huống có bằng chứng. Với mỗi tình huống, nêu hai cách giải thích bằng modal khác nhau và nói điều gì còn chưa biết."
+  },
+  "passive-simple": {
+    "concepts": [["Be + V3", "Chuyển tân ngữ của câu chủ động thành chủ ngữ bị động; chia be theo thì và số; động từ chính ở V3. Chỉ các động từ có tân ngữ phù hợp mới chuyển theo mẫu này.", "The rooms are cleaned every morning.", "Các phòng được dọn mỗi sáng."], ["Khi nào thêm by", "By + người/tác nhân làm hành động chỉ cần khi thông tin đó quan trọng. Bị động hữu ích khi không biết hoặc không cần nêu người làm, không phải lúc nào cũng tốt hơn chủ động.", "This bridge was designed by a local engineer.", "Cây cầu này được thiết kế bởi một kỹ sư địa phương."]],
+    "vocabulary": [["be made of wood", "được làm bằng gỗ"], ["be built in", "được xây vào/tại"], ["be known for", "được biết đến vì"]],
+    "mistake": ["The window was broke.", "The window was broken.", "Bị động dùng phân từ broken, không dùng quá khứ đơn broke."],
+    "practice": [["Đổi sang bị động: They make these shoes in Vietnam.", "These shoes are made in Vietnam.", "Shoes số nhiều dùng are; make → made."], ["Chia: The email (send) yesterday.", "was sent", "Yesterday chọn quá khứ đơn bị động; send → sent."]],
+    "task": "Mô tả quy trình làm một vật quen thuộc bằng 5 câu bị động. Sau đó chuyển 2 câu sang chủ động để so sánh trọng tâm thông tin."
+  },
+  "reported-speech": {
+    "concepts": [["Say và tell", "Say + (that) + mệnh đề; tell + người nhận + (that) + mệnh đề. Khi động từ tường thuật ở quá khứ, thường lùi thì và đổi đại từ theo người nói thực tế; không thay máy móc.", "Lan said she was tired. She told me she needed a break.", "Lan nói cô ấy mệt. Cô ấy bảo tôi rằng cô ấy cần nghỉ."], ["Câu hỏi và giới hạn lùi thì", "Ask + if/whether cho câu hỏi có/không; giữ từ hỏi với câu hỏi wh-. Dùng trật tự câu kể. Có thể giữ thì khi sự thật vẫn đúng hoặc lời tường thuật còn phù hợp hiện tại.", "He asked where I lived.", "Anh ấy hỏi tôi sống ở đâu."]],
+    "vocabulary": [["the following day", "ngày hôm sau"], ["the day before", "ngày trước đó"], ["at that time", "vào lúc đó"]],
+    "mistake": ["She told that she was busy.", "She told me that she was busy.", "Tell trong mẫu này cần người nhận; hoặc đổi told thành said."],
+    "practice": [["Tường thuật sau đó: Mai said to me, 'I will call you.'", "Mai told me she would call me.", "Will thường đổi thành would; I chỉ Mai, you chỉ người kể."], ["Tường thuật: He asked me, 'Are you ready?'", "He asked me if I was ready.", "Câu hỏi yes/no dùng if và trật tự câu kể."]],
+    "task": "Viết đoạn hội thoại 6 lượt rồi thuật lại cho người thứ ba. Kiểm tra ai nói, nói với ai và thời điểm trước khi đổi đại từ/thì."
+  },
+  "small-talk": {
+    "concepts": [["Mở và duy trì chủ đề", "Bắt đầu từ hoàn cảnh chung, thêm một chi tiết về mình và hỏi tiếp câu mở. Tránh biến hội thoại thành một chuỗi câu hỏi riêng tư; cho đối phương cơ hội đổi chủ đề.", "This is my first time here. How did you hear about the event?", "Đây là lần đầu tôi đến đây. Bạn biết sự kiện này qua đâu?"], ["Phản hồi và kết thúc", "That sounds… phản hồi trải nghiệm, Speaking of… chuyển chủ đề có liên quan. Kết thúc bằng lời cảm ơn, lý do rời đi ngắn và lời chào; không cần bịa lời hứa gặp lại.", "It was lovely talking to you. I'm going to get some water.", "Rất vui được trò chuyện với bạn. Tôi đi lấy chút nước."]],
+    "vocabulary": [["break the ice", "phá vỡ sự ngượng ngùng ban đầu"], ["have something in common", "có điểm chung"], ["keep in touch", "giữ liên lạc"]],
+    "mistake": ["You look boring at this event.", "Are you enjoying the event?", "Câu đầu nói người nghe gây chán; câu hỏi trung tính giúp mở chuyện lịch sự hơn."],
+    "practice": [["Đáp lại và hỏi tiếp: I moved here last month.", "Oh, welcome! How are you finding the city so far?", "Đáp án mẫu công nhận thông tin rồi mở rộng chủ đề."], ["Thêm câu hỏi đuôi: It's a lovely day, ___?", "isn't it", "Mệnh đề khẳng định với is dùng đuôi phủ định isn't it."]],
+    "task": "Tạo ba hội thoại 8 lượt ở sự kiện, nơi làm việc và quán cà phê. Mỗi đoạn có mở đầu, câu hỏi tiếp nối và kết thúc tự nhiên."
+  },
+  "think-in-english": {
+    "concepts": [["Diễn đạt vòng khi thiếu từ", "Mô tả chức năng, hình dáng, vị trí hoặc ví dụ thay vì dừng lại để dịch một từ. It's something you use to… và It's a kind of… giúp giữ dòng nói.", "It's something you use to open a bottle.", "Đó là thứ dùng để mở chai."], ["Tự sửa và chia ý", "Nói từng ý ngắn, dùng what I mean is để làm rõ và let me rephrase that để diễn đạt lại. Nghĩ bằng tiếng Anh là kỹ năng luyện dần, không đòi hỏi loại bỏ hoàn toàn tiếng mẹ đẻ.", "Let me rephrase that: I need more time, not more help.", "Để tôi nói lại: tôi cần thêm thời gian, không phải thêm sự giúp đỡ."]],
+    "vocabulary": [["in other words", "nói cách khác"], ["what I mean is", "ý tôi là"], ["a word for", "một từ để chỉ"]],
+    "mistake": ["How to say this in English?", "How do you say this in English?", "Câu hỏi trực tiếp đầy đủ cần chủ ngữ và trợ động từ; How to… phù hợp hơn với tiêu đề/hướng dẫn."],
+    "practice": [["Miêu tả umbrella mà không dùng chính từ đó.", "It's something you hold over your head to stay dry in the rain.", "Đáp án mẫu dùng chức năng và hoàn cảnh sử dụng."], ["Thay very very big bằng một tính từ rõ hơn.", "enormous", "Một lựa chọn tự nhiên; huge cũng được, tùy ngữ cảnh."]],
+    "task": "Nói liên tục 2 phút về căn phòng. Khi quên từ, mô tả nó bằng tiếng Anh; sau đó ghi lại 3 từ cần tra và nói lại lần hai."
+  },
+  "narrative-tenses": {
+    "concepts": [["Sự kiện, bối cảnh, việc xảy ra trước", "Quá khứ đơn kể sự kiện chính; quá khứ tiếp diễn dựng bối cảnh; quá khứ hoàn thành đánh dấu việc xảy ra trước một mốc quá khứ khác. Không phải mọi hành động cũ đều cần had.", "I was walking home when I realised I had lost my keys.", "Tôi đang đi bộ về nhà thì nhận ra mình đã mất chìa khóa."], ["Liên kết thời gian", "While thường mở bối cảnh kéo dài; when có thể mở sự kiện xen vào. By the time nhấn mạnh tới lúc một mốc xảy ra thì một việc khác đã hoàn thành.", "By the time we arrived, the film had started.", "Lúc chúng tôi đến thì phim đã bắt đầu."]],
+    "vocabulary": [["all of a sudden", "đột nhiên"], ["meanwhile", "trong lúc đó"], ["eventually", "cuối cùng, sau một quá trình"]],
+    "mistake": ["When I arrived, he has already left.", "When I arrived, he had already left.", "Mốc arrived ở quá khứ; việc rời đi xảy ra trước mốc đó dùng had left."],
+    "practice": [["Chia: I (cook) when the phone (ring).", "was cooking; rang", "Hoạt động nền đang diễn ra bị xen vào bởi sự kiện ngắn."], ["Nối hai việc: She lost her ticket. Later, she reached the station.", "When she reached the station, she realised she had lost her ticket.", "Đáp án mẫu làm rõ lost xảy ra trước reached."]],
+    "task": "Kể một sự cố giả định trong 150 từ với mở đầu, bối cảnh, bước ngoặt và kết thúc. Gạch chân mỗi thì và giải thích mốc thời gian."
+  },
+  "third-conditional": {
+    "concepts": [["Giả định trái quá khứ", "If + had + V3, would have + V3 tưởng tượng điều kiện và kết quả quá khứ khác thực tế. Could/might have diễn đạt khả năng thay vì kết quả chắc theo giả định.", "If I had left earlier, I would have caught the train.", "Nếu đi sớm hơn, tôi đã bắt kịp tàu."], ["Điều kiện hỗn hợp", "Điều kiện quá khứ có thể dẫn tới kết quả hiện tại: if + had + V3, would + nguyên mẫu. Ngược lại, đặc điểm hiện tại có thể giải thích kết quả quá khứ; cần xác định mốc nghĩa trước khi chọn mẫu.", "If I had studied medicine, I would be a doctor now.", "Nếu trước đây học y, bây giờ tôi đã là bác sĩ."]],
+    "vocabulary": [["in hindsight", "khi nhìn lại"], ["a missed opportunity", "một cơ hội đã bỏ lỡ"], ["learn from a mistake", "rút kinh nghiệm từ sai lầm"]],
+    "mistake": ["If I would have known, I would have helped.", "If I had known, I would have helped.", "Mẫu chuẩn dùng had + V3 trong mệnh đề if."],
+    "practice": [["Chia: If we (book) earlier, we (pay) less.", "had booked; would have paid", "Cả điều kiện và kết quả đều thuộc chuyến đi đã kết thúc."], ["Hoàn thành kết quả hiện tại: If I had slept well, I ___ so tired now.", "wouldn't be", "Now xác định kết quả ở hiện tại, dùng would + be."]],
+    "task": "Viết 3 giả định quá khứ và 3 giả định hỗn hợp. Với mỗi câu, viết thêm một câu nêu thực tế để tự kiểm tra nghĩa."
+  },
+  "relative-clauses": {
+    "concepts": [["Xác định và bổ sung", "Mệnh đề xác định giúp nhận diện đối tượng, thường không có dấu phẩy. Mệnh đề không xác định bổ sung thông tin, dùng dấu phẩy và không dùng that thay who/which.", "My sister, who lives in Hue, is a teacher.", "Chị tôi, người sống ở Huế, là giáo viên."], ["Lược đại từ và whose", "Trong mệnh đề xác định, có thể bỏ đại từ quan hệ khi nó làm tân ngữ, nhưng không khi làm chủ ngữ. Whose + danh từ thể hiện sở hữu; where chỉ nơi chốn.", "The book I bought is about a writer whose family moved abroad.", "Cuốn sách tôi mua nói về một nhà văn có gia đình chuyển ra nước ngoài."]],
+    "vocabulary": [["the person who", "người mà"], ["the place where", "nơi mà"], ["the reason why", "lý do tại sao"]],
+    "mistake": ["My car, that I bought last year, is blue.", "My car, which I bought last year, is blue.", "Không dùng that trong mệnh đề quan hệ không xác định có dấu phẩy."],
+    "practice": [["Có thể bỏ who không? The woman who called is my manager.", "Không.", "Who là chủ ngữ của called, không được lược."], ["Nối: I met a man. His daughter is a pilot.", "I met a man whose daughter is a pilot.", "Whose nối quan hệ sở hữu với daughter."]],
+    "task": "Miêu tả 5 người/vật bằng mệnh đề quan hệ. Viết hai cặp câu có/không có dấu phẩy và giải thích thông tin nào giúp nhận diện đối tượng."
+  },
+  "ai-roleplay": {
+    "concepts": [["Mục tiêu giao tiếp", "Trước khi đóng vai, xác định vai, bối cảnh, điều cần đạt và một trở ngại. Đánh giá việc trao đổi đủ thông tin và phản hồi phù hợp, không chỉ đếm lỗi ngữ pháp.", "I'd like to change my booking because my plans have changed.", "Tôi muốn đổi đặt chỗ vì kế hoạch đã thay đổi."], ["Làm rõ và thương lượng", "Dùng Do you mean…? kiểm tra cách hiểu, Could you clarify…? hỏi rõ và Would it be possible to…? đề xuất phương án. Tóm tắt thỏa thuận trước khi kết thúc.", "So, just to confirm, we're meeting at ten rather than nine.", "Vậy để xác nhận, mình gặp lúc 10 giờ thay vì 9 giờ."]],
+    "vocabulary": [["reach an agreement", "đạt thỏa thuận"], ["suggest an alternative", "đề xuất phương án khác"], ["clear up a misunderstanding", "làm rõ hiểu lầm"]],
+    "mistake": ["Explain me the problem.", "Explain the problem to me.", "Explain + điều cần giải thích + to + người nghe."],
+    "practice": [["Viết câu xác nhận bạn đã hiểu đúng một thời hạn.", "Just to confirm, the deadline is Friday, isn't it?", "Đáp án mẫu nêu lại thông tin và mời đối phương xác nhận."], ["Viết yêu cầu làm rõ thay vì đoán nghĩa.", "Could you clarify what you mean by flexible hours?", "Hỏi đúng cụm chưa hiểu giúp giữ cuộc trao đổi tiếp tục."]],
+    "task": "Đóng vai 12 lượt về đổi lịch, khiếu nại dịch vụ hoặc phỏng vấn. Sau đó tự ghi 3 chỗ giao tiếp hiệu quả, 3 câu cần sửa và diễn lại tình huống."
+  }
+}

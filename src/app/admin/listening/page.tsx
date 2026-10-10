@@ -107,9 +107,9 @@ export default function AdminListeningPage() {
   // ===== CMS =====
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm font-bold text-zinc-400">{videos.length} video · kho luyện nghe</p>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link href="/listening" className="rounded-full border border-white/15 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-zinc-300 hover:text-white">Xem trang ↗</Link>
           <button onClick={recheck} disabled={busy} className="rounded-full bg-primary/20 border border-primary/30 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-primary disabled:opacity-50">
             🔄 Kiểm tra phụ đề
