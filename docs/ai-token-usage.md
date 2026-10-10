@@ -13,7 +13,7 @@ Mặc định các tài khoản không giới hạn. Chưa có cơ chế hạn m
 
 - Dùng `usageMetadata` của Gemini: `promptTokenCount`, `candidatesTokenCount`, `thoughtsTokenCount`, `totalTokenCount`. Suy luận hiển thị riêng để không nhầm với văn bản đầu ra. Tổng lấy từ nhà cung cấp; không quy đổi thành tiền.
 - Dữ liệu bắt đầu từ khi bật tính năng, không khôi phục lịch sử chưa ghi nhận. Lưu user ID, model, tính năng, thời gian và số token; không lưu prompt, câu trả lời, email hoặc API key trong bảng usage.
-- Áp dụng mọi đường gọi qua `geminiGenerate`, gồm hội thoại, dịch, nhận xét, nhật ký, ngữ pháp, từ điển, ví dụ, truy vấn ảnh, transcript và OCR dùng Gemini. Azure Speech, OpenAI-compatible và Anthropic chưa có thống kê/hạn mức token ở đây. Nếu Gemini báo lỗi hạn mức nội bộ, ứng dụng không tự chuyển provider để né giới hạn đó.
+- Áp dụng mọi đường gọi qua `geminiGenerate`, gồm hội thoại, dịch, nhận xét, nhật ký, ngữ pháp, từ điển, ví dụ, truy vấn ảnh và OCR dùng Gemini. Azure Speech, OpenAI-compatible và Anthropic chưa có thống kê/hạn mức token ở đây. Nếu Gemini báo lỗi hạn mức nội bộ, ứng dụng không tự chuyển provider để né giới hạn đó.
 - Đọc nội dung cache không gọi Gemini nên không phát sinh dòng token mới.
 
 ## Trước và sau khi gọi Gemini

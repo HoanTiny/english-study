@@ -75,6 +75,7 @@ export default function Nav() {
     document.getElementById("mobile-navigation")?.querySelector<HTMLElement>("a")?.focus();
     document.addEventListener("keydown", onKeyDown);
     media.addEventListener("change", closeOnDesktop);
+    closeOnDesktop();
     const trigger = menuButton.current;
     return () => {
       document.body.style.overflow = previousOverflow;
@@ -250,7 +251,7 @@ export default function Nav() {
       {/* ==========================================
           MOBILE: Sticky Top Header & Drawer
           ========================================== */}
-      <header id="mobile-app-header" className="sticky top-0 z-60 h-16 shrink-0 w-full border-b border-border/40 bg-surface/95 backdrop-blur-md md:hidden flex items-center justify-between px-4 select-none">
+      <header id="mobile-app-header" className="sticky top-0 z-60 h-[calc(4rem+env(safe-area-inset-top))] pt-[env(safe-area-inset-top)] shrink-0 w-full border-b border-border/40 bg-surface/95 backdrop-blur-md md:hidden flex items-center justify-between px-4 select-none">
         
         {/* Left: Branding Logo */}
         <Link href="/" className="font-display text-xl font-bold tracking-tight text-gradient-iridescent">
@@ -289,17 +290,17 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* MOBILE drawer drawer overlay */}
+      {/* Same height as the mobile header, including the device's safe area. */}
       {open && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-50 bg-black/50 backdrop-blur-sm md:hidden" onClick={() => setOpen(false)}>
+        <div className="fixed inset-x-0 top-[calc(4rem+env(safe-area-inset-top))] bottom-0 z-50 bg-black/50 backdrop-blur-sm md:hidden" onClick={() => setOpen(false)}>
           <nav
             id="mobile-navigation"
             aria-label="Điều hướng trên điện thoại"
-            onClick={(e) => e.stopPropagation()}
-            className="absolute inset-y-0 right-0 w-80 max-w-[90vw] bg-background border-l border-border/40 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] flex flex-col justify-between overscroll-contain shadow-2xl"
+            onClick={(e) => { e.stopPropagation(); if ((e.target as Element).closest("a")) setOpen(false); }}
+            className="absolute inset-y-0 right-0 w-80 max-w-[90vw] bg-background border-l border-border/40 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] flex flex-col justify-between overflow-y-auto overscroll-contain shadow-2xl"
           >
-            {/* Scrollable list */}
-            <div className="space-y-6 overflow-y-auto flex-1 pr-1 scrollbar-thin">
+            {/* One scroll area for links and account actions, even on short screens. */}
+            <div className="flex-1 space-y-6 pr-1">
               
               {/* Group 1 */}
               <div className="space-y-1.5">
@@ -357,7 +358,7 @@ export default function Nav() {
             </div>
 
             {/* Profile & bottom */}
-            <div className="pt-4 border-t border-border/40 mt-4 space-y-4">
+            <div className="mt-4 shrink-0 space-y-4 border-t border-border/40 pt-4">
               <div className="flex justify-between px-3 text-[9px] font-bold text-muted/60">
                 <Link href="/privacy" className="hover:underline">Chính sách bảo mật</Link>
                 <Link href="/terms" className="hover:underline">Điều khoản</Link>

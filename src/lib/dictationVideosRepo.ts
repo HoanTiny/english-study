@@ -54,6 +54,7 @@ export async function saveVideo(
       },
       { onConflict: "user_id,video_id" },
     )
+    .abortSignal(AbortSignal.timeout(5000))
     .select("id, video_id, title, channel, last_used")
     .single();
   if (error) throw error;

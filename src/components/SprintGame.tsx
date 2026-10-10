@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -150,7 +151,7 @@ export default function SprintGame() {
     try {
       const qs = new URLSearchParams({ level, n: "18" });
       if (aiTopic.trim()) qs.set("topic", aiTopic.trim());
-      const res = await fetch(`/api/sprint-words?${qs}`);
+      const res = await apiFetch(`/api/sprint-words?${qs}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Không tạo được từ.");
       startWith(data.words as Word[], `AI · ${level}${aiTopic.trim() ? " · " + aiTopic.trim() : ""}`);
@@ -233,6 +234,16 @@ export default function SprintGame() {
               <p className="text-sm font-medium text-muted leading-relaxed">
                 Rèn phản xạ dịch nghĩa siêu tốc. Chọn xem nghĩa hiển thị có khớp với từ tiếng Anh hay không.
               </p>
+            </div>
+
+            {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
+            <div className="rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
+              <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+              <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
+                <li>1️⃣ Màn hình hiện <b>từ tiếng Anh + một nghĩa Việt</b> — chọn <b>Đúng</b> nếu khớp, <b>Sai</b> nếu không.</li>
+                <li>2️⃣ Bạn có <b>30 giây</b>; trả lời đúng 4 câu liên tiếp để nhân điểm <b>×2, ×4</b>.</li>
+                <li>⌨️ Phím tắt: <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">←</kbd> Sai · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">→</kbd> Đúng.</li>
+              </ul>
             </div>
 
             {/* Nguồn từ vựng */}
