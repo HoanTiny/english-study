@@ -243,7 +243,7 @@ export default function AudioCallGame() {
   const unknown = history.filter((h) => !h.correct);
   const answered = picked !== null;
 
-  const startBtn = "liquid-glass-btn w-full max-w-xs px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md disabled:opacity-50";
+  const startBtn = "liquid-glass-btn w-full max-w-xs px-8 py-3.5 text-xs font-bold tracking-normal shadow-md disabled:opacity-50";
 
   return (
     <div className="mx-auto max-w-3xl px-2">
@@ -253,7 +253,7 @@ export default function AudioCallGame() {
           <div className="flex h-24 w-24 items-center justify-center rounded-full bg-primary-soft border border-primary/20 text-5xl shadow-inner animate-bounce">🎧</div>
           <div className="space-y-2.5">
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+              <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
                 ⚡ LUYỆN THÍNH GIÁC PHẢN XẠ
               </span>
               <h2 className="font-display text-3xl font-extrabold text-foreground sm:text-4xl leading-none mt-2 w-full">Audio-call</h2>
@@ -264,7 +264,7 @@ export default function AudioCallGame() {
           </div>
 
           {/* Nguồn từ vựng */}
-          <div className="flex w-full max-w-sm gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-[10px] font-black uppercase tracking-wider">
+          <div className="flex w-full max-w-sm gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-xs font-bold tracking-normal">
             {([["cefr", "Cấp độ"], ["topic", "Chủ đề"], ["ai", "🤖 AI tạo"]] as [Source, string][]).map(([s, lbl]) => (
               <button
                 key={s}
@@ -278,13 +278,13 @@ export default function AudioCallGame() {
 
           {(source === "cefr" || source === "ai") && (
             <div className="space-y-2.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chọn trình độ CEFR</p>
+              <p className="text-xs font-bold tracking-normal text-muted">Chọn trình độ CEFR</p>
               <div className="flex flex-wrap justify-center gap-3">
                 {LEVELS.map((lvl) => (
                   <button
                     key={lvl}
                     onClick={() => setLevel(lvl)}
-                    className={`h-11 w-11 rounded-full border-2 text-xs font-black transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${
+                    className={`h-11 w-11 rounded-full border-2 text-xs font-bold transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${
                       level === lvl
                         ? "border-primary bg-primary text-primary-fg shadow-md scale-110"
                         : "border-border/60 bg-surface/50 text-muted hover:border-primary/50"
@@ -295,7 +295,7 @@ export default function AudioCallGame() {
                 ))}
               </div>
               {source === "cefr" && (
-                <p className="text-[10px] font-semibold text-muted">
+                <p className="text-xs font-semibold text-muted">
                   {CEFR_WORDS[level].length} từ ở cấp {level} · ưu tiên từ bạn chưa nghe ở các lượt trước
                 </p>
               )}
@@ -304,7 +304,7 @@ export default function AudioCallGame() {
 
           {source === "topic" && (
             <div className="w-full max-w-sm space-y-2.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-muted">Chủ đề từ vựng ({VOCAB.length} từ trong kho)</p>
+              <p className="text-xs font-bold tracking-normal text-muted">Chủ đề từ vựng ({VOCAB.length} từ trong kho)</p>
               <select
                 value={vocabTopic}
                 onChange={(e) => setVocabTopic(e.target.value)}
@@ -325,7 +325,7 @@ export default function AudioCallGame() {
                 placeholder="Chủ đề (tuỳ chọn): du lịch, công sở…"
                 className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-2.5 text-sm font-bold text-foreground outline-none focus:border-primary"
               />
-              <p className="text-[10px] font-semibold text-muted">AI tạo bộ 30 từ mới mỗi lần bấm — không lần nào giống lần nào.</p>
+              <p className="text-xs font-semibold text-muted">AI tạo bộ 30 từ mới mỗi lần bấm — không lần nào giống lần nào.</p>
               {aiErr && <p className="rounded-xl bg-rose-500/10 px-3 py-2 text-xs font-semibold text-rose-600">{aiErr}</p>}
             </div>
           )}
@@ -338,7 +338,7 @@ export default function AudioCallGame() {
             </button>
           )}
 
-          <p className="text-[10px] font-semibold text-muted">
+          <p className="text-xs font-semibold text-muted">
             Kho {CEFR_TOTAL} từ A1–C2 + {VOCAB.length} từ theo {VOCAB_TOPICS.length} chủ đề
           </p>
         </div>
@@ -347,7 +347,7 @@ export default function AudioCallGame() {
       {/* PLAYING */}
       {phase === "playing" && word && (
         <div className="liquid-glass-card flex flex-col items-center gap-6 p-6 md:p-8 text-center border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md animate-fadeIn">
-          <div className="flex w-full items-center justify-between gap-3 text-[9px] font-black uppercase tracking-wider text-muted">
+          <div className="flex w-full items-center justify-between gap-3 text-xs font-bold tracking-normal text-muted">
             <span className="truncate">{poolLabel}</span>
             <span className="shrink-0">Câu {history.length + (answered ? 0 : 1)} · {score} điểm</span>
           </div>
@@ -363,7 +363,7 @@ export default function AudioCallGame() {
             ) : (
               <>
                 <span className="text-4xl animate-pulse">🔊</span>
-                <span className="mt-1.5 text-[9px] font-black uppercase tracking-widest">Nghe lại</span>
+                <span className="mt-1.5 text-xs font-bold tracking-normal">Nghe lại</span>
               </>
             )}
           </button>
@@ -372,7 +372,7 @@ export default function AudioCallGame() {
           {answered && (
             <div className="flex items-center gap-2 rounded-full bg-primary-soft/80 border border-primary/20 px-5 py-2 shadow-sm animate-fadeIn">
               <span className="text-base">🎵</span>
-              <span className="text-sm font-black text-primary tracking-tight">{word.en}</span>
+              <span className="text-sm font-bold text-primary tracking-tight">{word.en}</span>
               <span className="text-xs font-semibold text-muted">- {word.vi}</span>
             </div>
           )}
@@ -389,8 +389,8 @@ export default function AudioCallGame() {
             {options.map((opt, i) => {
               let cls = "border-border/60 bg-surface/50 text-foreground hover:border-primary/60 hover:scale-[1.02] shadow-sm";
               if (answered) {
-                if (opt === word.vi) cls = "border-primary bg-primary-soft text-primary font-black shadow-sm";
-                else if (opt === picked) cls = "border-pink bg-pink-soft text-pink font-black shadow-sm";
+                if (opt === word.vi) cls = "border-primary bg-primary-soft text-primary font-bold shadow-sm";
+                else if (opt === picked) cls = "border-pink bg-pink-soft text-pink font-bold shadow-sm";
                 else cls = "border-border bg-surface/20 text-muted opacity-50";
               }
               return (
@@ -398,9 +398,9 @@ export default function AudioCallGame() {
                   key={opt}
                   disabled={answered}
                   onClick={() => choose(opt)}
-                  className={`rounded-full border-2 px-5 py-3 text-xs font-black transition-all cursor-pointer active:scale-95 flex items-center gap-2 ${cls}`}
+                  className={`rounded-full border-2 px-5 py-3 text-xs font-bold transition-all cursor-pointer active:scale-95 flex items-center gap-2 ${cls}`}
                 >
-                  <span className="rounded-lg bg-black/5 dark:bg-white/5 border border-border/40 text-[9px] font-black w-5 h-5 flex items-center justify-center shrink-0">{i + 1}</span>
+                  <span className="rounded-lg bg-black/5 dark:bg-white/5 border border-border/40 text-xs font-bold w-5 h-5 flex items-center justify-center shrink-0">{i + 1}</span>
                   {opt}
                 </button>
               );
@@ -412,18 +412,18 @@ export default function AudioCallGame() {
             {!answered ? (
               <button
                 onClick={() => choose(null)}
-                className="rounded-full border border-primary/20 bg-primary-soft px-8 py-3 text-xs font-black uppercase tracking-wider text-primary transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
+                className="rounded-full border border-primary/20 bg-primary-soft px-8 py-3 text-xs font-bold tracking-normal text-primary transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm"
               >
                 Bỏ qua
               </button>
             ) : (
-              <button onClick={next} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md">
+              <button onClick={next} className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal shadow-md">
                 {lives <= 0 ? "Xem kết quả →" : "Đoạn tiếp →"}
               </button>
             )}
           </div>
 
-          <p className="text-[10px] font-black uppercase tracking-wider text-muted mt-2">
+          <p className="text-xs font-bold tracking-normal text-muted mt-2">
             * Bấm phím 1–{options.length} để chọn nhanh · Phím Space để nghe lại · Phím Enter để đi tiếp
           </p>
         </div>
@@ -437,49 +437,49 @@ export default function AudioCallGame() {
             <h3 className="font-display text-xl font-extrabold text-foreground">Kết quả đàm thoại</h3>
             <p className="text-xs font-semibold text-muted">{poolLabel}</p>
             <div className="mt-1">
-              <p className="font-display text-4xl font-black text-primary leading-none">{score}</p>
-              <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-1">điểm</p>
+              <p className="font-display text-4xl font-bold text-primary leading-none">{score}</p>
+              <p className="text-xs font-bold tracking-normal text-muted mt-1">điểm</p>
             </div>
             <div className="grid w-full grid-cols-2 gap-3 mt-2">
               <div className="rounded-2xl border border-pink/20 bg-pink-soft py-3 shadow-sm">
-                <p className="text-xl font-black text-pink">❤ {Math.max(0, lives)}</p>
-                <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-0.5">mạng còn</p>
+                <p className="text-xl font-bold text-pink">❤ {Math.max(0, lives)}</p>
+                <p className="text-xs font-bold tracking-normal text-muted mt-0.5">mạng còn</p>
               </div>
               <div className="rounded-2xl border border-primary/20 bg-primary-soft py-3 shadow-sm">
-                <p className="text-xl font-black text-primary">{history.length}</p>
-                <p className="text-[9px] font-black uppercase tracking-wider text-muted mt-0.5">từ đã nghe</p>
+                <p className="text-xl font-bold text-primary">{history.length}</p>
+                <p className="text-xs font-bold tracking-normal text-muted mt-0.5">từ đã nghe</p>
               </div>
             </div>
             <div className="flex w-full flex-col gap-2.5 mt-4">
-              <button onClick={replay} className="liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider shadow-md">🔄 Chơi tiếp bộ này</button>
-              <button onClick={() => setPhase("welcome")} className="rounded-full border border-border/60 bg-surface py-3 text-xs font-black uppercase tracking-wider text-foreground hover:border-primary/45 cursor-pointer shadow-sm">
+              <button onClick={replay} className="liquid-glass-btn py-3 text-xs font-bold tracking-normal shadow-md">🔄 Chơi tiếp bộ này</button>
+              <button onClick={() => setPhase("welcome")} className="rounded-full border border-border/60 bg-surface py-3 text-xs font-bold tracking-normal text-foreground hover:border-primary/45 cursor-pointer shadow-sm">
                 🏠 Đổi bộ từ
               </button>
             </div>
           </div>
 
           <div className="flex w-full flex-col md:w-7/12">
-            <h4 className="mb-4 text-[9px] font-black uppercase tracking-[0.2em] text-muted">📋 Danh sách từ ôn luyện lại</h4>
+            <h4 className="mb-4 text-xs font-bold tracking-normal text-muted">📋 Danh sách từ ôn luyện lại</h4>
             <div className="grid flex-1 grid-cols-2 gap-4 overflow-y-auto max-h-[45vh] pr-1">
               <div className="space-y-2">
-                <p className="rounded-lg bg-primary-soft border border-primary/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-primary sticky top-0 bg-background/95 z-1 shadow-sm">✓ Đúng ({known.length})</p>
+                <p className="rounded-lg bg-primary-soft border border-primary/10 px-2.5 py-1 text-xs font-bold tracking-normal text-primary sticky top-0 bg-background/95 z-1 shadow-sm">✓ Đúng ({known.length})</p>
                 {known.length === 0 ? (
-                  <p className="p-2 text-center text-[10px] italic text-muted">Chưa có.</p>
+                  <p className="p-2 text-center text-xs italic text-muted">Chưa có.</p>
                 ) : known.map((it, i) => (
                   <div key={i} onClick={() => speak(it.en)} className="cursor-pointer rounded-xl border border-border/40 bg-surface/50 p-2.5 transition-all hover:border-primary/45 shadow-sm flex flex-col gap-0.5" title="Bấm nghe lại">
-                    <span className="block text-xs font-black text-foreground">{it.en}</span>
-                    <span className="text-[10px] text-muted">{it.vi}</span>
+                    <span className="block text-xs font-bold text-foreground">{it.en}</span>
+                    <span className="text-xs text-muted">{it.vi}</span>
                   </div>
                 ))}
               </div>
               <div className="space-y-2">
-                <p className="rounded-lg bg-pink-soft border border-pink/15 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-pink sticky top-0 bg-background/95 z-1 shadow-sm">✗ Sai ({unknown.length})</p>
+                <p className="rounded-lg bg-pink-soft border border-pink/15 px-2.5 py-1 text-xs font-bold tracking-normal text-pink sticky top-0 bg-background/95 z-1 shadow-sm">✗ Sai ({unknown.length})</p>
                 {unknown.length === 0 ? (
-                  <p className="p-2 text-center text-[10px] font-black text-primary bg-primary-soft border border-primary/10 rounded-xl">✓ Hoàn hảo!</p>
+                  <p className="p-2 text-center text-xs font-bold text-primary bg-primary-soft border border-primary/10 rounded-xl">✓ Hoàn hảo!</p>
                 ) : unknown.map((it, i) => (
                   <div key={i} onClick={() => speak(it.en)} className="cursor-pointer rounded-xl border border-border/40 bg-surface/50 p-2.5 transition-all hover:border-pink/45 shadow-sm flex flex-col gap-0.5" title="Bấm nghe lại">
-                    <span className="block text-xs font-black text-foreground">{it.en}</span>
-                    <span className="text-[10px] text-muted">{it.vi}</span>
+                    <span className="block text-xs font-bold text-foreground">{it.en}</span>
+                    <span className="text-xs text-muted">{it.vi}</span>
                   </div>
                 ))}
               </div>

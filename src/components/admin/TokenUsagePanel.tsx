@@ -23,15 +23,15 @@ export function TokenUsagePanel({ userId, email, rows, limit, adminKey, onSaved 
     } catch (e) { setMessage(e instanceof Error ? e.message : "Không lưu được hạn mức."); }
     finally { setSaving(false); }
   }
-  return <div className="w-full border-t border-white/10 pt-3 text-xs text-zinc-300">
+  return <div className="w-full border-t border-border pt-3 text-xs text-foreground">
     <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      {[["Input",sums.input],["Output",sums.output],["Suy luận",sums.thinking],["Tổng token",sums.total]].map(([label,value]) => <div key={label}><dt className="text-muted">{label}</dt><dd className="mt-1 font-bold text-white">{fmt(Number(value))}</dd></div>)}
+      {[["Input",sums.input],["Output",sums.output],["Suy luận",sums.thinking],["Tổng token",sums.total]].map(([label,value]) => <div key={label}><dt className="text-muted">{label}</dt><dd className="mt-1 font-bold text-foreground">{fmt(Number(value))}</dd></div>)}
     </dl>
     <p className="mt-2">{fmt(sums.requests)} lượt Gemini đã ghi nhận · Hạn mức hàng tháng: {limit === null ? "Không giới hạn" : fmt(limit)}</p>
-    {sums.held > 0 && <p className="mt-2 text-amber-300">{fmt(sums.held)} token tạm giữ cho yêu cầu đang chạy hoặc chưa xác định kết quả. Chưa cộng vào số dùng thực tế.</p>}
+    {sums.held > 0 && <p className="mt-2 text-amber-700 dark:text-amber-300">{fmt(sums.held)} token tạm giữ cho yêu cầu đang chạy hoặc chưa xác định kết quả. Chưa cộng vào số dùng thực tế.</p>}
     <div className="mt-3 flex flex-wrap items-end gap-2">
       <label className="flex flex-col gap-1">Hạn mức token/tháng
-        <input aria-label={`Hạn mức token của ${email}`} inputMode="numeric" value={draft} onChange={e => setDraft(e.target.value)} disabled={saving} placeholder="Không giới hạn" className="w-44 rounded-lg border border-white/15 bg-black/25 px-3 py-2 text-white" />
+        <input aria-label={`Hạn mức token của ${email}`} inputMode="numeric" value={draft} onChange={e => setDraft(e.target.value)} disabled={saving} placeholder="Không giới hạn" className="w-44 rounded-lg border border-border bg-background px-3 py-2 text-foreground" />
       </label>
       <button disabled={saving} onClick={save} className="rounded-lg border border-primary/40 px-3 py-2 text-primary disabled:opacity-50">{saving ? "Đang lưu…" : "Lưu hạn mức"}</button>
     </div>

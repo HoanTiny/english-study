@@ -29,14 +29,13 @@ import WeeklyReport from "@/components/WeeklyReport";
 const TEAL = "var(--primary)";
 
 // Thẻ kính frosted tối giản — đồng bộ với Bảng điều khiển & Nhiệm vụ hôm nay.
-const GLASS =
-  "rounded-3xl border border-white/60 bg-white/55 shadow-[0_10px_40px_-14px_rgba(70,70,110,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none";
+const GLASS = "glass-card";
 
 function StatBlock({ value, label }: { value: string; label: string }) {
   return (
     <div className="min-w-[120px] flex-1 rounded-2xl border border-border/50 bg-white/45 px-5 py-4 backdrop-blur-md dark:bg-white/5">
-      <span className="font-display text-3xl font-black tracking-tight text-foreground">{value}</span>
-      <p className="mt-1.5 text-[9px] font-black uppercase tracking-wider text-muted leading-tight">{label}</p>
+      <span className="font-display text-3xl font-bold tracking-tight text-foreground">{value}</span>
+      <p className="mt-1.5 text-xs font-bold tracking-normal text-muted leading-tight">{label}</p>
     </div>
   );
 }
@@ -58,15 +57,15 @@ function ActivityRow({
         <h3 className="flex items-center gap-2 font-display text-sm font-extrabold text-foreground">
           <span className="text-lg">{emoji}</span> {name}
         </h3>
-        <span className="rounded-full border border-primary/20 bg-primary-soft/60 px-3 py-0.5 text-[9px] font-black uppercase tracking-wider text-primary">
+        <span className="rounded-full border border-primary/20 bg-primary-soft/60 px-3 py-0.5 text-xs font-bold tracking-normal text-primary">
           {tag}
         </span>
       </div>
       <div className="flex flex-wrap gap-2.5">
         {rows.map((r) => (
           <div key={r.k} className="min-w-[88px] flex-1 rounded-xl border border-border/40 bg-white/40 px-3 py-2 text-center dark:bg-black/20">
-            <p className="font-display text-base font-black tracking-tight text-foreground">{r.v}</p>
-            <p className="mt-0.5 text-[9px] font-black uppercase tracking-wider text-muted">{r.k}</p>
+            <p className="font-display text-base font-bold tracking-tight text-foreground">{r.v}</p>
+            <p className="mt-0.5 text-xs font-bold tracking-normal text-muted">{r.k}</p>
           </div>
         ))}
       </div>
@@ -143,6 +142,7 @@ export default function StatisticsPage() {
 
   return (
     <main className="study-page animate-fadeIn">
+      <header className="page-heading"><p className="eyebrow">Nhìn lại để tiến xa hơn</p><h1>Tiến độ học tập</h1><p>Mỗi từ nhớ được, mỗi câu nói rõ hơn đều là một bước tiến.</p></header>
       {/* Background radial highlight */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-10 left-1/4 w-80 h-80 bg-primary/5 rounded-full filter blur-3xl" />
@@ -150,7 +150,7 @@ export default function StatisticsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="mb-12 flex justify-center">
+      <div className="mb-6 flex justify-start">
         <div className="inline-flex rounded-full bg-white/40 dark:bg-black/35 border border-border/80 p-1.5 shadow-sm backdrop-blur-md">
           {(
             [
@@ -165,7 +165,7 @@ export default function StatisticsPage() {
                 onClick={() => setTab(t.k)}
                 className={`rounded-full px-6 py-2.5 font-display text-sm font-bold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
                   active
-                    ? "bg-primary text-white shadow-md shadow-primary/20"
+                    ? "bg-primary text-primary-fg"
                     : "text-muted hover:text-foreground"
                 }`}
               >
@@ -185,11 +185,11 @@ export default function StatisticsPage() {
         <div className="mx-auto max-w-xl">
           <div className={`${GLASS} flex flex-col items-center gap-5 p-10 text-center`}>
             <span className="text-6xl animate-bounce">📊</span>
-            <h2 className="font-display text-2xl font-black text-foreground">Chưa có thống kê 😕</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground">Chưa có thống kê 😕</h2>
             <p className="max-w-sm font-semibold text-muted text-xs sm:text-sm leading-relaxed">
               Hãy bắt đầu chặng đường học tập của bạn để theo dõi tiến độ và lưu trữ kết quả nhé.
             </p>
-            <Link href="/today" className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-lg active:scale-95">
+            <Link href="/today" className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal shadow-lg active:scale-95">
               Bắt đầu học ngay →
             </Link>
           </div>
@@ -206,7 +206,7 @@ export default function StatisticsPage() {
           {/* Cột trái: số liệu (7 cols) */}
           <div className={`${GLASS} p-6 sm:p-8 lg:col-span-7 space-y-6`}>
             <div>
-              <h2 className="font-display text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
                 {tab === "day" ? "Thống kê hôm nay" : "Thống kê tổng quan"}
               </h2>
               <p className="mt-1 text-xs font-semibold text-muted">
@@ -249,7 +249,7 @@ export default function StatisticsPage() {
           {/* Cột phải: biểu đồ (5 cols) */}
           <div className={`${GLASS} flex flex-col p-6 sm:p-8 lg:col-span-5 min-h-[420px]`}>
             <div>
-              <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">Điểm phát âm</h3>
+              <h3 className="font-display text-lg sm:text-xl font-bold text-foreground tracking-tight">Điểm phát âm</h3>
               <p className="mt-1 mb-6 text-xs font-semibold text-muted">
                 Điểm mới nhất của từng câu shadowing
               </p>
@@ -302,7 +302,7 @@ export default function StatisticsPage() {
         <div className={`${GLASS} p-6 sm:p-8`}>
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <h3 className="font-display text-lg sm:text-xl font-black text-foreground tracking-tight">
+              <h3 className="font-display text-lg sm:text-xl font-bold text-foreground tracking-tight">
                 Hoạt động {rangeDays} ngày gần đây
               </h3>
               <p className="mt-1 text-xs font-semibold text-muted">
@@ -316,7 +316,7 @@ export default function StatisticsPage() {
                     <button
                       key={d}
                       onClick={() => setRangeDays(d)}
-                      className={`rounded-full px-3.5 py-1 text-[11px] font-black tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
+                      className={`rounded-full px-3.5 py-1 text-xs font-bold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
                         rangeDays === d ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
                       }`}
                     >
@@ -332,7 +332,7 @@ export default function StatisticsPage() {
                     <button
                       key={m.k}
                       onClick={() => setMetric(m.k)}
-                      className={`rounded-full px-3.5 py-1 text-[11px] font-black tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
+                      className={`rounded-full px-3.5 py-1 text-xs font-bold tracking-wide transition-all duration-300 active:scale-95 cursor-pointer ${
                         metric === m.k ? "bg-primary text-white shadow-sm" : "text-muted hover:text-foreground"
                       }`}
                     >
@@ -344,19 +344,19 @@ export default function StatisticsPage() {
             </div>
             <div className="flex gap-2.5">
               <div className="rounded-2xl border border-border/60 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
-                <p className="text-lg font-black text-primary leading-none">{totalReviews}</p>
-                <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Lượt ôn</p>
+                <p className="text-lg font-bold text-primary leading-none">{totalReviews}</p>
+                <p className="text-xs font-bold tracking-normal text-muted mt-1">Lượt ôn</p>
               </div>
               <div className="rounded-2xl border border-border/60 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
                 {metric === "reviews" ? (
                   <>
-                    <p className="text-lg font-black text-accent leading-none">{activeDays}</p>
-                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Ngày học</p>
+                    <p className="text-lg font-bold text-accent leading-none">{activeDays}</p>
+                    <p className="text-xs font-bold tracking-normal text-muted mt-1">Ngày học</p>
                   </>
                 ) : (
                   <>
-                    <p className="text-lg font-black text-accent leading-none">{pronAvg != null ? `${pronAvg}đ` : "—"}</p>
-                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Phát âm TB</p>
+                    <p className="text-lg font-bold text-accent leading-none">{pronAvg != null ? `${pronAvg}đ` : "—"}</p>
+                    <p className="text-xs font-bold tracking-normal text-muted mt-1">Phát âm TB</p>
                   </>
                 )}
               </div>

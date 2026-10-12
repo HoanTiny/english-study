@@ -1,0 +1,4164 @@
+{
+  "checkedAt": "2026-10-11T17:58:21.859Z",
+  "note": "A flag is not a confirmed pronunciation error; the recognizer also flags legitimate accent and vowel variants.",
+  "recordings": [
+    {
+      "word": "entrepreneurship",
+      "accent": "uk",
+      "ipa": "/ˌɒntrəprəˈnɜːʃɪp/",
+      "sha256": "43102f9fc753183e7783e3ed58ae310e95ceb37bbcc20fb7858bb996e48e1fe1",
+      "expectedPhones": "ɑ n t ɹ ə p ɹ ə n ɝ ʃ ɪ p",
+      "detectedPhones": "oʊ n t ɝ p ɝ n aɪ ʃ ɛ b ɪ",
+      "screeningEdits": 9
+    },
+    {
+      "word": "entrepreneur",
+      "accent": "uk",
+      "ipa": "/ˌɒntrəprəˈnɜː/",
+      "sha256": "2e269f92ca9f805b3eb6e98709d835c21186262581fe7753f16d12b042ed7132",
+      "expectedPhones": "ɑ n t ɹ ə p ɹ ə n ɝ",
+      "detectedPhones": "ʊ n t ɝ p ɪ n aɪ z",
+      "screeningEdits": 7
+    },
+    {
+      "word": "entrepreneur",
+      "accent": "us",
+      "ipa": "/ˌɑntrəprəˈnɜr/",
+      "sha256": "df47bb9e38cf35e2bf8b985c541d83a98c5581a47d559e15333fc7fe03347eda",
+      "expectedPhones": "ɑ n t ɹ ə p ɹ ə n ʊ ɹ",
+      "detectedPhones": "ɑ n ʧ ɝ p ɝ n u ɝ",
+      "screeningEdits": 7
+    },
+    {
+      "word": "hot chocolate",
+      "accent": "uk",
+      "ipa": "/hɒt ˈtʃɒk(ə)lət/",
+      "sha256": "ba16b5fdf4b4ea6fcbd5b5589d1116dbbd6036959031b76877fdca45cfbc6ddd",
+      "expectedPhones": "h ɑ t ʧ ɑ k ə l ə t",
+      "detectedPhones": "h ə ʧ ʊ k ɪ l ɪ t ɪ",
+      "screeningEdits": 6
+    },
+    {
+      "word": "perfume pagoda festival",
+      "accent": "us",
+      "ipa": "/ˈpɜrfjuːm pəˈɡoʊdə ˈfɛstəvəl/",
+      "sha256": "c7c93a973fa63c7fd119e288b21e504392f878e444ff9be0bcc5c277c68fa94a",
+      "expectedPhones": "p ɝ ɹ f j u m p ə g oʊ d ə f ɛ s t ə v ə l",
+      "detectedPhones": "p ɝ f j u m p ɪ g oʊ ɾ ɪ f ɛ s t ɪ v l",
+      "screeningEdits": 6
+    },
+    {
+      "word": "personal development",
+      "accent": "us",
+      "ipa": "/ˈpɜrsənəl dɪˈvɛləpmənt/",
+      "sha256": "8e85e9f04b8d073ae9a1887ee24b3aa59b54dc3e0d94d391069756d329048cb5",
+      "expectedPhones": "p ɝ ɹ s ə n ə l d ə v ɛ l ə p m ə n t",
+      "detectedPhones": "p ɝ s n l d ɪ v ɛ l ə m ɪ n t",
+      "screeningEdits": 6
+    },
+    {
+      "word": "adaptability",
+      "accent": "us",
+      "ipa": "/əˌdæptəˈbɪləti/",
+      "sha256": "c5b19ee747546ca9c794a1a04f4b47238a1bf0a0a9c085b12899c71f2187de48",
+      "expectedPhones": "ə d æ p t ə b ɪ l ə ɾ i",
+      "detectedPhones": "ɪ d ɑ t ɪ b ɪ l ɪ ɾ i",
+      "screeningEdits": 5
+    },
+    {
+      "word": "appointment",
+      "accent": "uk",
+      "ipa": "/əˈpɔɪntmənt/",
+      "sha256": "27883c28efc614f4f11800dafb0364110fe0a13b0c69bc645649cc215318cd00",
+      "expectedPhones": "ə p ɑ ɪ n t m ə n t",
+      "detectedPhones": "ə p ɔɪ n m ɪ n t ɛ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "carefulness",
+      "accent": "uk",
+      "ipa": "/ˈkeəfəlnəs/",
+      "sha256": "f7cc9db657ec68e1b78968c11967f3bfcb290f9c63938d15b02dc677df12c93b",
+      "expectedPhones": "k ɛ f ʊ l n ə s",
+      "detectedPhones": "k æ f l n ɪ s ɪ z",
+      "screeningEdits": 5
+    },
+    {
+      "word": "cauliflower",
+      "accent": "uk",
+      "ipa": "/ˈkɒlɪflaʊə/",
+      "sha256": "9bf7a97937977726d120b1432d253908c6760639d0965d5f55e8a9fddd746060",
+      "expectedPhones": "k ɑ l ɪ f l aʊ ə",
+      "detectedPhones": "k oʊ l i f l aʊ w ɪ z",
+      "screeningEdits": 5
+    },
+    {
+      "word": "ceramics",
+      "accent": "uk",
+      "ipa": "/səˈræmɪks/",
+      "sha256": "9090e4a6fdc61df6ccbc78dabf7d721d5d4f5e00d744ea5f6ee62f469beb552e",
+      "expectedPhones": "s ɪ ɹ æ m ɪ k s",
+      "detectedPhones": "ð ə s ɪ ɹ ɑ m eɪ k s ɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "collecting stamps",
+      "accent": "uk",
+      "ipa": "/kəˈlɛktɪŋ stæmps/",
+      "sha256": "911a00a8465d89c91945bf6b8311c6bde9040c73f7a4e278746ad264753a0d8c",
+      "expectedPhones": "k ə l ɛ k t ɪ ŋ s t æ m p s",
+      "detectedPhones": "k ə l ɛ t i ŋ s t ɑ m p z ɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "diarrhea",
+      "accent": "uk",
+      "ipa": "/ˌdaɪəˈriːə/",
+      "sha256": "dc70685d2fa1f8abf963299559b61c6a854973e66083323b0deff60b9d12e163",
+      "expectedPhones": "d aɪ ɝ ɪ ə",
+      "detectedPhones": "d aɪ ɪ ɹ i ɛ s",
+      "screeningEdits": 5
+    },
+    {
+      "word": "emotional intelligence",
+      "accent": "us",
+      "ipa": "/ɪˈmoʊʃənəl ɪnˈtɛlɪdʒəns/",
+      "sha256": "40627ce36b12cffdc85da243cd6b369cf57f52cd0e253c2f7cada4b97b5174fe",
+      "expectedPhones": "ə m oʊ ʃ ə n ə l ɪ n t ɛ l ə ʤ ə n s",
+      "detectedPhones": "ɛ m oʊ ʃ n l ɪ n t ɛ l ɪ ʤ ɪ n s",
+      "screeningEdits": 5
+    },
+    {
+      "word": "endearment",
+      "accent": "uk",
+      "ipa": "/ɪnˈdɪəmənt/",
+      "sha256": "b06dde11eba175d6c2f6f454c80c9b80fa68e09a3dbc1e1de77ebeaf436f803c",
+      "expectedPhones": "ɪ n d ɪ ə m ə n t",
+      "detectedPhones": "ɪ n d i ɪ m ɪ n t h ə",
+      "screeningEdits": 5
+    },
+    {
+      "word": "family reunion",
+      "accent": "uk",
+      "ipa": "/ˈfæm(ɪ)li riːˈjuːnjən/",
+      "sha256": "c92c31d9c2ad1e620ffaabc0c51e53fb2f624217d5b36b365d21c921470cfaf9",
+      "expectedPhones": "f æ m ɪ l i ɹ i j u n ɪ ə n",
+      "detectedPhones": "f æ m ə l i ɹ i j u n i j ɪ n z",
+      "screeningEdits": 5
+    },
+    {
+      "word": "helicopter",
+      "accent": "uk",
+      "ipa": "/ˈhelɪkɒptə/",
+      "sha256": "a3e60679049a4384eca6042dbc0394e83e147d2d1de373f08e782d1848f460a0",
+      "expectedPhones": "h ɛ l ɪ k ɑ p t ə",
+      "detectedPhones": "h æ l i k oʊ m p t ʊ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "hot air balloon",
+      "accent": "uk",
+      "ipa": "/hɒt ɛː bəˈluːn/",
+      "sha256": "0fbc7fbd8ddfdb672dd3e13318b5c68dbcbb23ca393136d4eba466ade5b968c7",
+      "expectedPhones": "h ɑ t ɛ b ə l u n",
+      "detectedPhones": "h ʊ t s æ b ɪ l u n z",
+      "screeningEdits": 5
+    },
+    {
+      "word": "lobster",
+      "accent": "uk",
+      "ipa": "/ˈlɒbstə/",
+      "sha256": "110238094b9873dba39f3ceb9d0c42d10415dbfda85ba9a84450214e1567811a",
+      "expectedPhones": "l ɑ b s t ə",
+      "detectedPhones": "l ə p z d eɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "maroon",
+      "accent": "uk",
+      "ipa": "/məˈruːn/",
+      "sha256": "9a387c6849f815e47a020a234400aaa1b59feccc828a00c57b8944eaa3e286f5",
+      "expectedPhones": "m ɝ u n",
+      "detectedPhones": "m aɪ ɹ u u n ɪ z",
+      "screeningEdits": 5
+    },
+    {
+      "word": "mathematics",
+      "accent": "uk",
+      "ipa": "/mæθ(ə)ˈmætɪks/",
+      "sha256": "7ea641b5f604940c6b52c9c356fcc9a0e021738382e75768ba778ec45c24c8cb",
+      "expectedPhones": "m æ θ ə m æ t ɪ k s",
+      "detectedPhones": "m ɑ θ ð ə m ɑ t eɪ k s ɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "mussels",
+      "accent": "uk",
+      "ipa": "/ˈmʌsəlz/",
+      "sha256": "30896f2377c6a2d68468cc784744ef681975f25d27f219e97a11e7c0b79af53c",
+      "expectedPhones": "m ə s ə l z",
+      "detectedPhones": "ð ɪ m ɑ s ʊ l z ɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "physical education",
+      "accent": "uk",
+      "ipa": "/ˌfɪzɪkəl edʒuˈkeɪʃən/",
+      "sha256": "85baafeb908b83ccd11c3245b5210b5f44c8062ee069b2f5fbc1c446a29e6910",
+      "expectedPhones": "f ɪ z ɪ k ə l ɛ d j ʊ k eɪ ʃ ə n",
+      "detectedPhones": "f ɪ z ɪ k l ɛ ʤ u k eɪ ʃ ɪ n",
+      "screeningEdits": 5
+    },
+    {
+      "word": "slip dress",
+      "accent": "uk",
+      "ipa": "/ˈslɪp dres/",
+      "sha256": "d4a40b154726db6c5367a17ebb3b4d0d50f998741015e024da030200be1c30dd",
+      "expectedPhones": "s l ɪ p d ɹ ɛ s",
+      "detectedPhones": "ð ɪ s l ɪ d ɹ aɪ s ɪ",
+      "screeningEdits": 5
+    },
+    {
+      "word": "tank top",
+      "accent": "uk",
+      "ipa": "/ˈtæŋk tɒp/",
+      "sha256": "24d2124939149c71e2e89ddfcfd659cee541f2386b5d278a8b896b802a749e5a",
+      "expectedPhones": "t æ ŋ k t ɑ p",
+      "detectedPhones": "ð ɪ t æ ŋ g t ʊ m p",
+      "screeningEdits": 5
+    },
+    {
+      "word": "asparagus",
+      "accent": "uk",
+      "ipa": "/əˈspærəɡəs/",
+      "sha256": "ece1299c3a7bc28057967d23abfc1cd19767e52771862d50bbf28620f7ee50af",
+      "expectedPhones": "ə s p æ ɹ ə g ə s",
+      "detectedPhones": "ɪ s p aɪ ɹ ɪ g ɪ s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "avocado",
+      "accent": "uk",
+      "ipa": "/ˌævəˈkɑːdəʊ/",
+      "sha256": "ca41ae27f5f415429501790047393f37529c2d5dd910c899c422082aa8c09e9b",
+      "expectedPhones": "æ v ə k ɑ d oʊ",
+      "detectedPhones": "æ v ɪ k ə ə d eɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "banana",
+      "accent": "uk",
+      "ipa": "/bəˈnɑːnə/",
+      "sha256": "e1d881039015af6616143ee04ba77fd7a6df842855bbc3165c3b537845590984",
+      "expectedPhones": "b ə n ɑ n ə",
+      "detectedPhones": "b ɪ n ɑ ə n ɪ s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "bus stop",
+      "accent": "uk",
+      "ipa": "/bʌs stɒp/",
+      "sha256": "f65bcee2418aceecde2520ce63683e083f74c26b8d21f7260a6eebf2a47e08a1",
+      "expectedPhones": "b ə s s t ɑ p",
+      "detectedPhones": "b ə s ɪ s t oʊ ə p ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "colleague",
+      "accent": "uk",
+      "ipa": "/ˈkɒliːɡ/",
+      "sha256": "810b0ef2b3b44a6a6656fea23066e59d4ff47e1aaaf9bfe87ae2677483c809af",
+      "expectedPhones": "k ɑ l i g",
+      "detectedPhones": "k ɑ l ɾ ɪ j i g ɛ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "compassion",
+      "accent": "uk",
+      "ipa": "/kəmˈpæʃən/",
+      "sha256": "2d5b3530ee99ce96f02584511321b83a2687aea637de69c84a5fee19b436925e",
+      "expectedPhones": "k ə m p æ ʃ ə n",
+      "detectedPhones": "k ɪ m p ɑ ʃ ɪ n ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "computer science",
+      "accent": "uk",
+      "ipa": "/kəmˈpjuːtə ˈsaɪəns/",
+      "sha256": "13465422a4c8ecc7e4714214a0f2d40d5e1cd398e1f6f66567203becf934512b",
+      "expectedPhones": "k ə m p j u t ə s aɪ ə n s",
+      "detectedPhones": "k ɪ m p j u t ɪ s aɪ ɛ n t s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "conflict resolution",
+      "accent": "uk",
+      "ipa": "/ˈkɒnflɪkt ˌrezəˈluːʃən/",
+      "sha256": "d4e21a3eadcacd2788de007e7dc8c1579ddcd313e838e2e4bc5c3b4e82ee0204",
+      "expectedPhones": "k ɑ n f l ɪ k t ɹ ɛ z ə l j u ʃ ə n",
+      "detectedPhones": "k ɑ n f l ɪ t ɹ ɛ z ɪ l u ʃ ɪ n",
+      "screeningEdits": 4
+    },
+    {
+      "word": "crab noodle soup",
+      "accent": "uk",
+      "ipa": "/kræb ˈnuːdəl suːp/",
+      "sha256": "73d5e39af181b4c072a4fb8482c384cec0df039991f720de4b7911470cb7034b",
+      "expectedPhones": "k ɹ æ b n u d ə l s u p",
+      "detectedPhones": "k ɹ ɑ b n i d l s i p",
+      "screeningEdits": 4
+    },
+    {
+      "word": "curriculum",
+      "accent": "uk",
+      "ipa": "/kəˈrɪkjʊləm/",
+      "sha256": "b0749f9530aac082ce7e855c04585cb87ee9efdf862d259f658f0fd46ce5c484",
+      "expectedPhones": "k ɝ ɪ k j ʊ l ə m",
+      "detectedPhones": "k ɝ ɹ ɪ k j ɪ l ɪ m ə",
+      "screeningEdits": 4
+    },
+    {
+      "word": "detour",
+      "accent": "us",
+      "ipa": "/ˈditor/",
+      "sha256": "18d197a2c7b5b02d99828062abe36d910b534716751f10dc48176801f77ddc47",
+      "expectedPhones": "d i t ʊ ɹ",
+      "detectedPhones": "ð ɪ d i t ɑ ɝ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "dragon dance",
+      "accent": "uk",
+      "ipa": "/ˈdræɡən dɑːns/",
+      "sha256": "ef18b4f27d184bf4654aafa9cc749f05f216c831574c5adf8e7e09e7313a4522",
+      "expectedPhones": "d ɹ æ g ə n d ɑ n s",
+      "detectedPhones": "d ɹ æ k ɪ n d ɑ ə n s i",
+      "screeningEdits": 4
+    },
+    {
+      "word": "eggplant",
+      "accent": "uk",
+      "ipa": "/ˈɛɡplænt/",
+      "sha256": "8c730243bd66cffaa29b1aa4ba135bcdfbc5529e512a085c992aa9823d1d5573",
+      "expectedPhones": "ɛ g p l ɑ n t",
+      "detectedPhones": "eɪ g p l ɑ ə n t s ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "endurance",
+      "accent": "uk",
+      "ipa": "/ɪnˈdjʊərəns/",
+      "sha256": "923e3f754ff58cfaafce74a5eff48d91d893ba9a203bb3d6ada4fd6cae72ce5a",
+      "expectedPhones": "ɪ n d j ʊ ɝ ə n s",
+      "detectedPhones": "ɪ n ʤ j ʊ ɹ ɪ n s ə",
+      "screeningEdits": 4
+    },
+    {
+      "word": "fresh spring rolls",
+      "accent": "uk",
+      "ipa": "/frɛʃ ˈsprɪŋ rəʊlz/",
+      "sha256": "48dc94d3edde3966f35fd7b298c967f1e0c61d2f0a5d842a8b9ba3e68b2c4e41",
+      "expectedPhones": "f ɹ ɛ ʃ s p ɹ ɪ ŋ ɹ oʊ l z",
+      "detectedPhones": "b ɪ f ɹ ɛ ʃ s p ɹ ɪ ŋ ɹ oʊ z ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "fruit punch",
+      "accent": "uk",
+      "ipa": "/fruːt pʌntʃ/",
+      "sha256": "a1bd510172629f2e019a1a947c525d7aa877fb4dccd7c25d02c8f9285ae4210b",
+      "expectedPhones": "f ɹ u t p ə n ʧ",
+      "detectedPhones": "ð ə f ɹ u t p ə n ʤ ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "geography",
+      "accent": "uk",
+      "ipa": "/dʒiˈɒɡrəfi/",
+      "sha256": "ee7d81cf6afa05869a51688ef4326d0b34f1466e9bab499a71e47dec6ba6b4b1",
+      "expectedPhones": "ʤ ɪ ɑ g ɹ ə f i",
+      "detectedPhones": "ʤ i l oʊ g ɹ ɝ f i",
+      "screeningEdits": 4
+    },
+    {
+      "word": "horror",
+      "accent": "uk",
+      "ipa": "/ˈhɒrə/",
+      "sha256": "4d192be4f9ec5e155fbff99a912b4ab0e693725df19c13e8af4b4047788bb2b0",
+      "expectedPhones": "h ɑ ɹ ə",
+      "detectedPhones": "h ə l ə ɹ eɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "infatuation",
+      "accent": "uk",
+      "ipa": "/ɪnˌfætʃuˈeɪʃən/",
+      "sha256": "d74723834a45a1c4f7c3cfade5e8a3153114f1e3b80332471432ea6176cf9b32",
+      "expectedPhones": "ɪ n f æ t j ʊ eɪ ʃ ə n",
+      "detectedPhones": "ɪ n f æ ʧ u eɪ ʃ ɪ n",
+      "screeningEdits": 4
+    },
+    {
+      "word": "itinerary",
+      "accent": "uk",
+      "ipa": "/aɪˈtɪnə(rə)ri/",
+      "sha256": "dc41b90a7c63f2a88903e2931af24805a5bac5b91ab69761b52914becb68fe98",
+      "expectedPhones": "aɪ t ɪ n ɝ ɝ i",
+      "detectedPhones": "ə t ɪ n ɹ ɝ ɹ i h",
+      "screeningEdits": 4
+    },
+    {
+      "word": "lantern procession",
+      "accent": "uk",
+      "ipa": "/ˈlæntən prəˈsɛʃən/",
+      "sha256": "14a3496febe11c698ad8d05565fc65dc72868589796c62c8893f273f90eaeed7",
+      "expectedPhones": "l æ n t ə n p ɹ ə s ɛ ʃ ə n",
+      "detectedPhones": "l ɑ n t ɪ n p ɹ ɝ s ɛ ʃ ɪ n",
+      "screeningEdits": 4
+    },
+    {
+      "word": "lunar new year",
+      "accent": "uk",
+      "ipa": "/ˈluːnə njuː jɪə/",
+      "sha256": "c5f5f36911ad2714b7b006daeaffb225a9713e337d4c7c99dc773f78f5c65cd6",
+      "expectedPhones": "l u n ə n j u j ɪ ə",
+      "detectedPhones": "l u n ɪ n u j ɛ s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "nigeria",
+      "accent": "uk",
+      "ipa": "/naɪˈdʒɪə̯riə/",
+      "sha256": "f4f039eacc911f57df4b9c0585902df153d62ea82bb4fabd0e81bb8283d56706",
+      "expectedPhones": "n aɪ ʤ ɪ ɝ ɪ ə",
+      "detectedPhones": "n aɪ ʤ ɪ ɹ i ɛ s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "non-fiction",
+      "accent": "uk",
+      "ipa": "/ˌnɒnˈfɪkʃən/",
+      "sha256": "c2baec55408c4f39d0fd53d53288bc74e323dfe3ec76a8445a4e0f09263e125e",
+      "expectedPhones": "n ɑ n f ɪ k ʃ ə n",
+      "detectedPhones": "n oʊ m f ɪ k ʃ ɪ n ə",
+      "screeningEdits": 4
+    },
+    {
+      "word": "nutrition",
+      "accent": "uk",
+      "ipa": "/njuːˈtrɪʃən/",
+      "sha256": "c8b7dd7a3ad331dfc2b28fda3ae2027147c4397504a49681f8ad14afa374a495",
+      "expectedPhones": "n j ʊ t ɹ ɪ ʃ ə n",
+      "detectedPhones": "n u t ɹ ɪ ʃ ɪ n ə",
+      "screeningEdits": 4
+    },
+    {
+      "word": "octopus",
+      "accent": "uk",
+      "ipa": "/ˈɒktəpəs/",
+      "sha256": "f61c1e7ba70068754bf4dca46411bdf1d3de62da96cd6074c03d03b36ac27da0",
+      "expectedPhones": "ɑ k t ə p ə s",
+      "detectedPhones": "oʊ k t ɪ p eɪ s ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "openness",
+      "accent": "uk",
+      "ipa": "/ˈəʊpənnəs/",
+      "sha256": "eef27d911e2d810e066c88fe5dc43c8e720926a77f63599f2f16ca5e46777c1c",
+      "expectedPhones": "oʊ p ə n n ə s",
+      "detectedPhones": "oʊ p ɪ n ɪ s ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "performance",
+      "accent": "uk",
+      "ipa": "/pəˈfɔːmən(t)s/",
+      "sha256": "e3990afe4363e7a8d5aa230e7abdd94980d78d47220fb8318df710098fdcaac3",
+      "expectedPhones": "p ə f ɑ m ə n s",
+      "detectedPhones": "p ə f ʊ l m ɪ n s eɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "physical education",
+      "accent": "us",
+      "ipa": "/ˌfɪzɪkəl edʒuˈkeɪʃən/",
+      "sha256": "d1f773198864b39eef24ebfa5f0038845ed44286afc12d7f583ceea91a71017c",
+      "expectedPhones": "f ɪ z ə k ə l ɛ ʤ ə k eɪ ʃ ə n",
+      "detectedPhones": "f ɪ z ɪ k l ɛ ʤ ɪ k eɪ ʃ ɪ n",
+      "screeningEdits": 4
+    },
+    {
+      "word": "political science",
+      "accent": "us",
+      "ipa": "/pəˈlɪtəkəl ˈsaɪəns/",
+      "sha256": "904d64863b7176667b7fdfc07b4cca405de74515befa131cb5e57f6fabfaff4a",
+      "expectedPhones": "p ə l ɪ ɾ ə k ə l s aɪ ə n s",
+      "detectedPhones": "p ə l ɪ ɾ ɪ k l s aɪ ɪ n t s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "reunification day",
+      "accent": "us",
+      "ipa": "/ˌriːjuːnɪfɪˈkeɪʃən deɪ/",
+      "sha256": "4a4af4711e300b9add2d3b60dda75d5235a0252b19ac1229f06ef9ac8b63cf88",
+      "expectedPhones": "ɹ i j u n ə f ə k eɪ ʃ ə n d eɪ",
+      "detectedPhones": "ɹ i u n ɪ f ɪ k eɪ ʃ ɪ n d eɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "shop",
+      "accent": "uk",
+      "ipa": "/ʃɒp/",
+      "sha256": "07af18ef436f929f012cf2d76504328f33ef48ab4e0a6409d3570cf266fb39d1",
+      "expectedPhones": "ʃ ɑ p",
+      "detectedPhones": "ʃ ɑ n p ɪ ɾ ɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "shorts",
+      "accent": "uk",
+      "ipa": "/ʃɔːts/",
+      "sha256": "82c0df5589a3c9ee326ba479c257220e3b8e3359ff489e76a0ccdbd708cebbae",
+      "expectedPhones": "ʃ ɑ t s",
+      "detectedPhones": "b ɪ ʃ ʊ ʊ s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "shuttlecock",
+      "accent": "uk",
+      "ipa": "/ˈʃʌtl̩ˌkɒk/",
+      "sha256": "a59ca216d1bd0588b98fc6eb47387e579efaf08409dd9110bb16f1c351dcf72a",
+      "expectedPhones": "ʃ ə t l k ɑ k",
+      "detectedPhones": "ʃ ɛ l t ʊ k ʊ k",
+      "screeningEdits": 4
+    },
+    {
+      "word": "soft drink",
+      "accent": "uk",
+      "ipa": "/sɒft ˈdrɪŋk/",
+      "sha256": "0c330caf874bf43649731eb045c3fe99570282047a13ead96449a281a55c60f5",
+      "expectedPhones": "s ɑ f t d ɹ ɪ ŋ k",
+      "detectedPhones": "s ɛ l f d d ɹ ɪ ŋ k eɪ",
+      "screeningEdits": 4
+    },
+    {
+      "word": "sport",
+      "accent": "uk",
+      "ipa": "/spɔːt/",
+      "sha256": "6c0baaa47ab63fb44deb929a4d700d7bd47804991fad3009c7b62397a5c56c0e",
+      "expectedPhones": "s p ɑ t",
+      "detectedPhones": "ð ɪ s p ʊ ə t",
+      "screeningEdits": 4
+    },
+    {
+      "word": "suspense",
+      "accent": "us",
+      "ipa": "/səˈspɛns/",
+      "sha256": "02fb6502ee0d5f2e10233756024528f93e7875dd852e6d692c1a1d3738869aa2",
+      "expectedPhones": "s ə s p ɛ n s",
+      "detectedPhones": "ɪ z ɪ s p æ n s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "tackle",
+      "accent": "uk",
+      "ipa": "/ˈtækəl/",
+      "sha256": "35fb7ae3e21f9af9feeab171d88632c11397250a70a975e7e9901beb8a96b52b",
+      "expectedPhones": "t æ k ə l",
+      "detectedPhones": "n t aɪ k oʊ d",
+      "screeningEdits": 4
+    },
+    {
+      "word": "tournament",
+      "accent": "us",
+      "ipa": "/ˈtɜrnəmənt/",
+      "sha256": "4c6d0d45cc300278f3852a6e09f047b1321ffd314b581c61caadd3a44974e98e",
+      "expectedPhones": "t ɝ ɹ n ə m ə n t",
+      "detectedPhones": "t ɝ n ɪ m ɛ n t s",
+      "screeningEdits": 4
+    },
+    {
+      "word": "vietnamese pancake",
+      "accent": "uk",
+      "ipa": "/ˌvjetnəˈmiːz ˈpænkeɪk/",
+      "sha256": "e5d12356363ffa6bc2bf8cc5c7bac51a02167d3dec5ad3e8b4a08ef19757d765",
+      "expectedPhones": "v j ɛ t n ə m i z p æ n k eɪ k",
+      "detectedPhones": "v j ɛ n ɪ m i z p ə ŋ k eɪ k",
+      "screeningEdits": 4
+    },
+    {
+      "word": "watermelon",
+      "accent": "uk",
+      "ipa": "/ˈwɔːtəˌmɛlən/",
+      "sha256": "0ec85d336318be20c4aa8217382e0ed76920f9efa39b52ad9ab26fc40bfb19df",
+      "expectedPhones": "w ɑ t ə m ɛ l ə n",
+      "detectedPhones": "w ɑ t ɪ m æ l ɪ n z",
+      "screeningEdits": 4
+    },
+    {
+      "word": "accommodation",
+      "accent": "us",
+      "ipa": "/əˌkɑməˈdeɪʃən/",
+      "sha256": "0366c68f0ab10082cd551d9f3652d227bc8fe8a83f95cdf8090cde01088ad832",
+      "expectedPhones": "ə k ɑ m ə d eɪ ʃ ə n",
+      "detectedPhones": "ɪ k ɑ m ɪ d eɪ ʃ ɪ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "accountant",
+      "accent": "us",
+      "ipa": "/əˈkaʊntənt/",
+      "sha256": "15fabc65af5ef03a3b4aefaf4dcc2dd19581666b26c224e56918f0099bcb0a06",
+      "expectedPhones": "ə k aʊ n t ə n t",
+      "detectedPhones": "ɪ k aʊ n t ɪ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "aisle",
+      "accent": "uk",
+      "ipa": "/aɪ̯l/",
+      "sha256": "6a6a45b9ac07d6cb56620527af4745b21ab9de74d5089b8b4ebc0323aaf074b4",
+      "expectedPhones": "aɪ l",
+      "detectedPhones": "aɪ ɾ oʊ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "ancestor worship",
+      "accent": "uk",
+      "ipa": "/ˈænsɛstə ˈwɜːʃɪp/",
+      "sha256": "ea4c6c146acc079255fa86677b23738aec1c32958ce39b957aee6ef991f9db24",
+      "expectedPhones": "æ n s ɛ s t ə w ɝ ʃ ɪ p",
+      "detectedPhones": "ə n s ɛ s t ʊ w ʊ ʃ ɪ p",
+      "screeningEdits": 3
+    },
+    {
+      "word": "ancestral altar",
+      "accent": "uk",
+      "ipa": "/ænˈsestrəl ˈɔːltə/",
+      "sha256": "929b7a4dce176473ab3fc36f3270ff24c3cb7118b10a809299b5646fe4b61da8",
+      "expectedPhones": "æ n s ɛ s t ɹ ə l ɑ l t ə",
+      "detectedPhones": "ə n s ɛ s t ɹ ə l u l t ɛ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "anchovy",
+      "accent": "uk",
+      "ipa": "/ˈæntʃəvi/",
+      "sha256": "d2afd4fd74e3ea5cb892576b20fec6ba60e398c800d5322afa0f5b0a9887241b",
+      "expectedPhones": "æ n ʧ ə v i",
+      "detectedPhones": "ɑ n ʃ ɪ v i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "appetizer",
+      "accent": "uk",
+      "ipa": "/ˈæpɪˌtaɪzə/",
+      "sha256": "6464d388adb45b41c9ef82e9817843423755fccafd5a3ee0eb9b872bb418970c",
+      "expectedPhones": "æ p ɪ t aɪ z ə",
+      "detectedPhones": "ɑ p ɪ t ɔɪ z ʊ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "audience",
+      "accent": "uk",
+      "ipa": "/ˈɔːdiəns/",
+      "sha256": "aa39b93a04974eefbd7a06391c9214806141d789737c9a4f3a5a61e6cff5bd21",
+      "expectedPhones": "ɑ d ɪ ə n s",
+      "detectedPhones": "oʊ d i ɪ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "autobiography",
+      "accent": "uk",
+      "ipa": "/ˌɔːtəbaɪˈɒɡrəfi/",
+      "sha256": "affd47649e92f17f9f13a99c506f09c99ef2780c22b2ed6b1739f845a877db01",
+      "expectedPhones": "ɑ t oʊ b aɪ ɑ g ɹ ə f i",
+      "detectedPhones": "ʊ t eɪ b aɪ ɑ g ɹ ɝ f i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "balanced",
+      "accent": "uk",
+      "ipa": "/ˈbælənst/",
+      "sha256": "9d2f034d295ae847754202cb3a71f4c9ef79e896c1ce5a5e51d7a6a683e321a1",
+      "expectedPhones": "b æ l ə n s t",
+      "detectedPhones": "b æ l ɪ n s d ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "bib overalls",
+      "accent": "uk",
+      "ipa": "/bɪb ˈəʊvərɔːlz/",
+      "sha256": "3254018eb29b8061cf6e478a5f24330352575a3969e7adc360c80e46abadb322",
+      "expectedPhones": "b ɪ b oʊ v ɝ ɑ l z",
+      "detectedPhones": "b ɪ b ɪ oʊ v ɝ ɑ l z ɪ t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "boiling",
+      "accent": "uk",
+      "ipa": "/ˈbɔɪlɪŋ/",
+      "sha256": "11918d3033a592da2b9d1ff104b9135fa32534f3b24fdf54432b82dfe698289c",
+      "expectedPhones": "b ɑ ɪ l ɪ ŋ",
+      "detectedPhones": "b ɔɪ l ɪ ŋ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "buffalo fighting festival",
+      "accent": "us",
+      "ipa": "/ˈbʌfəloʊ ˈfaɪtɪŋ ˈfɛstəvəl/",
+      "sha256": "0a9dbc92d7bd4fbb4bbbef0e58c239c14621f832917482b4cc923647064f8dec",
+      "expectedPhones": "b ə f ə l oʊ f aɪ ɾ ɪ ŋ f ɛ s t ə v ə l",
+      "detectedPhones": "b ə f ə l oʊ f aɪ ɾ i ŋ f ɛ s t ɪ v l",
+      "screeningEdits": 3
+    },
+    {
+      "word": "buffet",
+      "accent": "uk",
+      "ipa": "/ˈbʊfeɪ/",
+      "sha256": "3a35579a68fd8b3d90b672b3e9fe284c9aff7854bcf2ab76a75f1879d8cfbc38",
+      "expectedPhones": "b ə f eɪ",
+      "detectedPhones": "b aʊ s eɪ t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "cabinet",
+      "accent": "us",
+      "ipa": "/ˈkæbənət/",
+      "sha256": "2d5abb9f70c09d0f144de961e5148d1d47f04f292874e9af596b570418d5d06e",
+      "expectedPhones": "k æ b ə n ə t",
+      "detectedPhones": "k æ b ɪ n ɛ s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "cardigan",
+      "accent": "us",
+      "ipa": "/ˈkɑːrdɪɡən/",
+      "sha256": "67adb2b7c56634031197b5a41758b7966c02341c8c40fa70ba8a78198b318887",
+      "expectedPhones": "k ɑ ɹ d ə g ə n",
+      "detectedPhones": "k ɑ ɹ ɾ ɪ g ɛ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "cat's cradle",
+      "accent": "uk",
+      "ipa": "/ˈkæts ˌkreɪdəl/",
+      "sha256": "95e1985b20b846f7c774db7c8d3be9279f0183eae83c37606ea1e7bd0cb8e9a3",
+      "expectedPhones": "k æ t s k ɹ eɪ d ə l",
+      "detectedPhones": "k æ s k ɹ eɪ d ɪ l ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "champion",
+      "accent": "uk",
+      "ipa": "/ˈtʃæmpiən/",
+      "sha256": "7165d073eafd07a18cb0ce8ea7df588c3304458f4618f78f10a7e6b3c2ebcb22",
+      "expectedPhones": "ʧ æ m p ɪ ə n",
+      "detectedPhones": "ʧ æ m p i ɪ n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "coconut",
+      "accent": "uk",
+      "ipa": "/ˈkəʊkənʌt/",
+      "sha256": "ae510b1daabf2842b09c7addcd86c7dc047dce7851cd7e207d37f23b1dccd5d0",
+      "expectedPhones": "k oʊ k ə n ə t",
+      "detectedPhones": "k ʊ k ɪ n ɑ t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "coconut",
+      "accent": "us",
+      "ipa": "/ˈkoʊkəˌnʌt/",
+      "sha256": "f37d379473ef81dd99f571e28ebfd514a2ac919b6bc16357de47995632f1f17e",
+      "expectedPhones": "k oʊ k ə n ə t",
+      "detectedPhones": "k oʊ k ɪ n ɑ t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "coffee",
+      "accent": "uk",
+      "ipa": "/ˈkɒfi/",
+      "sha256": "4ac94266f0e2bdc1be4be457656713446520d6310f39adde0a90f90ccbde192f",
+      "expectedPhones": "k ɑ f i",
+      "detectedPhones": "k oʊ m s i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "commitment",
+      "accent": "us",
+      "ipa": "/kəˈmɪtmənt/",
+      "sha256": "4118e7f5a9f902171ce0c4c241814c7ca93dc70ef340d0a43c0a96a51ea7e162",
+      "expectedPhones": "k ə m ɪ t m ə n t",
+      "detectedPhones": "k ə m ɪ m ɛ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "companion",
+      "accent": "uk",
+      "ipa": "/kəmˈpænjən/",
+      "sha256": "62f17ebb0bb650f17c8895fce9c4f1ce9bcae11f553be744b2d9aa495bd638c6",
+      "expectedPhones": "k ə m p æ n j ə n",
+      "detectedPhones": "k ɪ m p æ n j ɪ n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "composition",
+      "accent": "uk",
+      "ipa": "/ˌkɒmpəˈzɪʃən/",
+      "sha256": "34602e5d910bafa38ef5be108a47e7bf068458a168e70a02e635a5cd6bd9c144",
+      "expectedPhones": "k ɑ m p ə z ɪ ʃ ə n",
+      "detectedPhones": "k ɑ m p ɪ z ɪ ʃ ɪ n ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "conductor",
+      "accent": "uk",
+      "ipa": "/kənˈdʌktə/",
+      "sha256": "f16fc50c86d44d669d3d4e329e98d4072dea47a5c127ec3a85306cb7d02fc4b5",
+      "expectedPhones": "k ə n d ə k t ə",
+      "detectedPhones": "ɪ k ɪ n d ə k t ʊ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "conflict management",
+      "accent": "uk",
+      "ipa": "/ˈkɒnflɪkt ˈmænɪdʒmənt/",
+      "sha256": "3ab9f200888f5d73f094e52e7b3c717d82061c55f90378ef59714c9ee89fc2d0",
+      "expectedPhones": "k ɑ n f l ɪ k t m æ n ɪ ʤ m ə n t",
+      "detectedPhones": "k ɑ n f l ɪ t m æ n ɪ ʤ m ɪ n t ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "corner",
+      "accent": "uk",
+      "ipa": "/ˈkɔːnə/",
+      "sha256": "d946201c8b34a6a073af84fb5140966db8c06b209c0d695e61124cc99d6a85d6",
+      "expectedPhones": "k ɑ n ə",
+      "detectedPhones": "k oʊ n ɪ h",
+      "screeningEdits": 3
+    },
+    {
+      "word": "courage",
+      "accent": "uk",
+      "ipa": "/ˈkʌrɪdʒ/",
+      "sha256": "60b739c8bf58a88eed76854b70ff08db6837569c8a089b18b235fba26ddd4e1d",
+      "expectedPhones": "k ɝ ɪ ʤ",
+      "detectedPhones": "k aʊ ɹ ɪ ʤ ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "crab noodle soup",
+      "accent": "us",
+      "ipa": "/kræb ˈnuːdəl suːp/",
+      "sha256": "877772c86ca5ffb984167fd0f68e1f831d4fa4f1f047959d78969f7b5cb7f012",
+      "expectedPhones": "k ɹ æ b n u d ə l s u p",
+      "detectedPhones": "k ɹ ɑ b n u ɾ l s u p",
+      "screeningEdits": 3
+    },
+    {
+      "word": "critical thinking",
+      "accent": "us",
+      "ipa": "/ˈkrɪtɪkəl ˈθɪŋkɪŋ/",
+      "sha256": "2a6e0789c115977947aa97aa8468c3d54cf3e2ebf8eb91332587f0101ae29636",
+      "expectedPhones": "k ɹ ɪ ɾ ə k ə l θ ɪ ŋ k ɪ ŋ",
+      "detectedPhones": "k ɹ ɪ ɾ ɪ k l θ i ŋ k ɪ ŋ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "crop top",
+      "accent": "uk",
+      "ipa": "/ˈkrɒp tɒp/",
+      "sha256": "01bedee4eadf0a740f6a04c94498f648e6460ff2bfb3281bdc40e9567367acd7",
+      "expectedPhones": "k ɹ ɑ p t ɑ p",
+      "detectedPhones": "g ɹ oʊ p t oʊ p",
+      "screeningEdits": 3
+    },
+    {
+      "word": "cultural heritage",
+      "accent": "us",
+      "ipa": "/ˈkʌltʃ(ə)rəl ˈhɛrətɪdʒ/",
+      "sha256": "24bd4e8f7a8e81253d966e02df09c59c4e8bf5d27adb1d8177ef7da1cd613d60",
+      "expectedPhones": "k ə l ʧ ɝ ə l h ɛ ɹ ə ɾ ɪ ʤ",
+      "detectedPhones": "k ə l ʧ ɝ l h ɛ ɹ ɪ d ɪ ʤ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "decision-making",
+      "accent": "us",
+      "ipa": "/dɪˈsɪʒn̩ ˈmeɪkɪŋ/",
+      "sha256": "0804602fcc287020c1b543e132e55a61caacbef8eb1ca4fa2bb0d39edf88022f",
+      "expectedPhones": "d ə s ɪ ʒ ə n m eɪ k ɪ ŋ",
+      "detectedPhones": "d ɪ s ɪ ʃ ɪ n m eɪ k ɪ ŋ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "decorations",
+      "accent": "uk",
+      "ipa": "/ˌdɛkəˈreɪʃənz/",
+      "sha256": "b9c4481bd2f3ce962454f81ac7a4d5ce4919cec0c3cd26071ae6072caaca637d",
+      "expectedPhones": "d ɛ k ɝ eɪ ʃ ə n z",
+      "detectedPhones": "d ɛ k ɝ ɹ eɪ ʃ ɪ n z ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "descendant",
+      "accent": "uk",
+      "ipa": "/dɪˈsɛndənt/",
+      "sha256": "23d68c8a76b9ba51b4579191d4433eb65f65f4a5f2b4647644a2c62a34325f8d",
+      "expectedPhones": "d ɪ s ɛ n d ə n t",
+      "detectedPhones": "d i s ɛ n d ɪ n t ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "diligence",
+      "accent": "us",
+      "ipa": "/ˈdɪlɪdʒəns/",
+      "sha256": "36cc83fc390b7ba628f2cb5c31d0c324ade53dab5dba756d271c3ac1abea0ffc",
+      "expectedPhones": "d ɪ l ə ʤ ə n s",
+      "detectedPhones": "d ɪ l ɪ ʤ ɛ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "diversity",
+      "accent": "us",
+      "ipa": "/dɪˈvɜːrsɪti/",
+      "sha256": "2133cbc8d0644aa4f50807423fdad979bf8f901c68a4b8b66a2fb53bce048e30",
+      "expectedPhones": "d ə v ɝ ɹ s ə ɾ i",
+      "detectedPhones": "d ɪ v ɝ s ɪ ɾ i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "drawing",
+      "accent": "uk",
+      "ipa": "/ˈdrɔːɪŋ/",
+      "sha256": "a7a0d4e6823ae0f2b20e44f2289f247b7a1ba1dffb59399383fa5e2298873aa1",
+      "expectedPhones": "d ɹ ɑ ɪ ŋ",
+      "detectedPhones": "d ɹ oʊ ɾ ɪ ŋ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "dribble",
+      "accent": "uk",
+      "ipa": "/ˈdrɪbəl/",
+      "sha256": "ca39084bb85d7720350f1ea8c5e1ea72e20cbabc261d5c6ab75fb0dfa05186de",
+      "expectedPhones": "d ɹ ɪ b ə l",
+      "detectedPhones": "ʤ ɹ ɪ b l z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "elegant",
+      "accent": "us",
+      "ipa": "/ˈɛləɡənt/",
+      "sha256": "1c70b66bb834e91543e0d2da202272c1aa91db992fcbacc1a0e494dc583f1551",
+      "expectedPhones": "ɛ l ə g ə n t",
+      "detectedPhones": "æ l ɪ g ɪ n t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "emotional intelligence",
+      "accent": "uk",
+      "ipa": "/ɪˈməʊʃənəl ɪnˈtɛlɪdʒəns/",
+      "sha256": "a56a5bd1769626a1c79fc004acad85409534597de474d8eab547aa3139405935",
+      "expectedPhones": "ɪ m oʊ ʃ ə n ə l ɪ n t ɛ l ɪ ʤ ə n s",
+      "detectedPhones": "ɪ m oʊ ʃ n l ɪ n t ɛ l ɪ ʤ ɪ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "energy drink",
+      "accent": "uk",
+      "ipa": "/ˈɛnədʒi ˈdrɪŋk/",
+      "sha256": "3d836b052bcf9abb313863f49f69ef9e0aa9da9e59c71e433aa45fd857f8e65b",
+      "expectedPhones": "ɛ n ə ʤ i d ɹ ɪ ŋ k",
+      "detectedPhones": "ɛ n ɪ ʤ i d ɹ ɪ ŋ k h ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "entertainment",
+      "accent": "uk",
+      "ipa": "/ˌɛntəˈteɪnmənt/",
+      "sha256": "5cdee7b93ce7ea6632803ef1b9f7e1706cc07f7415648327f0da7f97a9ad8a72",
+      "expectedPhones": "ɛ n t ə t eɪ n m ə n t",
+      "detectedPhones": "ɛ n t ɪ t eɪ n m ɪ n t ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "environmentalist",
+      "accent": "us",
+      "ipa": "/ɪnˌvaɪrənˈmentəlɪst/",
+      "sha256": "e73524e8fa1233f468be5ecc9fb7b57ba0f6fb8ae6cb8a28a3ca5b636f3677bf",
+      "expectedPhones": "ə n v aɪ ɹ ə n m ɛ n t ə l ɪ s t",
+      "detectedPhones": "ɪ n v aɪ ɝ n m ɛ n t ə l ɪ s t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "equipment",
+      "accent": "uk",
+      "ipa": "/ɪˈkwɪpmənt/",
+      "sha256": "7eb1b3f4597dde161fc552874cd3c9f9ebf38c00061ab82f4f2399b9e0dddeb7",
+      "expectedPhones": "ɪ k w ɪ p m ə n t",
+      "detectedPhones": "ɪ k w ɪ m ɪ n t eɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "erosion",
+      "accent": "uk",
+      "ipa": "/ɪˈrəʊʒən/",
+      "sha256": "0fd33da73314bfb1471840d4be9a587589e1e627930be8fe7cf123523c476960",
+      "expectedPhones": "ɪ ɹ oʊ ʒ ə n",
+      "detectedPhones": "ɪ ɹ oʊ ʃ ɪ n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "extracurricular",
+      "accent": "us",
+      "ipa": "/ˌɛkstrəkəˈrɪkjʊlər/",
+      "sha256": "87c2fdf211500a0d72ee893f2a46d5ed700597b70e433a74fc8ef76ed8c56031",
+      "expectedPhones": "ɛ k s t ɹ ə k ɝ ɪ k j ə l ɝ",
+      "detectedPhones": "ɛ k s t ɝ k ɝ ɪ k j ɪ l ɝ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "faithfulness",
+      "accent": "uk",
+      "ipa": "/ˈfeɪθfəlnəs/",
+      "sha256": "c52bceb6a045d5fb9f0dc2a6e825bc6b0a49bc235371023ba3cee4866c7d7273",
+      "expectedPhones": "f eɪ θ f ʊ l n ə s",
+      "detectedPhones": "f eɪ θ f l n ɛ s ɛ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "festive atmosphere",
+      "accent": "us",
+      "ipa": "/ˈfɛstɪv ˈætməsˌfɪr/",
+      "sha256": "807eb4de8087d8996f76a08c444c1aaf28c037e82bfb761b0137d6b30387e3b5",
+      "expectedPhones": "f ɛ s t ɪ v æ t m ə s f ɪ ɹ",
+      "detectedPhones": "f ɛ s t ɪ v æ m ɪ s f ɪ ɝ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "firecrackers",
+      "accent": "uk",
+      "ipa": "/ˈfaɪəkrækəz/",
+      "sha256": "6fef7a7fb0b37655f07f8f7c02c9195598f11435fca60704bb9360396d5ffc97",
+      "expectedPhones": "f aɪ ə k ɹ æ k ə z",
+      "detectedPhones": "f aɪ ɪ k ɹ æ k ʊ z ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "fish",
+      "accent": "us",
+      "ipa": "/fɪʃ/",
+      "sha256": "d56d85733ac263ae33b610cdaca62ed40b116a7118526321576574f43cde90ef",
+      "expectedPhones": "f ɪ ʃ",
+      "detectedPhones": "v æ ʃ i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "fitting room",
+      "accent": "uk",
+      "ipa": "/ˈfɪtɪŋ ruːm/",
+      "sha256": "37181596e30a80b49847228cedc1842f083551c291b03aa3aa74d2e34ee3a8a8",
+      "expectedPhones": "f ɪ t ɪ ŋ ɹ u m",
+      "detectedPhones": "f ɪ t i ŋ ɹ ʊ m ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "fondness",
+      "accent": "us",
+      "ipa": "/ˈfɑndnəs/",
+      "sha256": "a1d432c220969a5207352342a3a8a3c8b642befbe2e12349e74fa7d37fbf73c0",
+      "expectedPhones": "f ɑ n d n ə s",
+      "detectedPhones": "f ɑ n ɛ s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "godfather",
+      "accent": "uk",
+      "ipa": "/ˈɡɒdfɑːðə/",
+      "sha256": "77197d9cd20f8d65550579213a2ef578417e6e264ce90a962d372e9243cb2414",
+      "expectedPhones": "g ɑ d f ɑ ð ə",
+      "detectedPhones": "g oʊ ʤ f ɑ ð eɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "grandparent",
+      "accent": "us",
+      "ipa": "/ˈɡrænperənt/",
+      "sha256": "1380d4bda04c4073c9b1c8c87358796c04cba3567c4020464c76b10424180e39",
+      "expectedPhones": "g ɹ æ n d p ɛ ɹ ə n t",
+      "detectedPhones": "g ɹ æ n p ɛ ɹ ɪ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "gratitude",
+      "accent": "uk",
+      "ipa": "/ˈɡrætɪtjuːd/",
+      "sha256": "ad01853ce54b3c9a49a0c8cb4e62bdd2f93ea224a32f487472ded49e01e7eee4",
+      "expectedPhones": "g ɹ æ t ɪ t j u d",
+      "detectedPhones": "g ɹ æ t ɪ ʧ u d ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "green papaya salad",
+      "accent": "uk",
+      "ipa": "/ɡriːn pəˈpaɪə ˈsæləd/",
+      "sha256": "56250dca794cf4a26b73ded519428db59c22ca8e9c25bdcaa2ecabefc4398893",
+      "expectedPhones": "g ɹ i n p ə p aɪ ə s æ l ə d",
+      "detectedPhones": "g ɹ i n p ɪ p aɪ ɪ s æ l ɪ d",
+      "screeningEdits": 3
+    },
+    {
+      "word": "grilled pork with noodles",
+      "accent": "uk",
+      "ipa": "/ɡrɪld pɔːk wɪð ˈnuːd(ə)lz/",
+      "sha256": "255bc2797db444c8f00e43532458af0221dea9180b23efc811dd41b5016faa9b",
+      "expectedPhones": "g ɹ ɪ l d p ɑ k w ɪ ð n u d ə l z",
+      "detectedPhones": "g ɹ ɪ l d p oʊ k w ɪ θ n u d l z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "guitar",
+      "accent": "uk",
+      "ipa": "/ɡɪˈtɑː/",
+      "sha256": "6029ffd57c180ca47b3b4edc1046f2c2a241214644dc60de63c5f7e82dcb7c48",
+      "expectedPhones": "g ɪ t ɑ",
+      "detectedPhones": "g ɪ t h oʊ m",
+      "screeningEdits": 3
+    },
+    {
+      "word": "haddock",
+      "accent": "us",
+      "ipa": "/ˈhædək/",
+      "sha256": "76517314f7b17bfe4b63fa2314f8b0c1c965024c4faed5380c3369153d855564",
+      "expectedPhones": "h æ d ə k",
+      "detectedPhones": "h aʊ ɾ ɪ k",
+      "screeningEdits": 3
+    },
+    {
+      "word": "happiness",
+      "accent": "uk",
+      "ipa": "/ˈhæpinɪs/",
+      "sha256": "8f09e1169b824d66918efd5c9cb663e8a8921cb0ce11efa16c54a9f522e97f2d",
+      "expectedPhones": "h æ p ɪ n ɪ s",
+      "detectedPhones": "h aʊ p i n ɪ s ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "harmony",
+      "accent": "uk",
+      "ipa": "/ˈhɑːməni/",
+      "sha256": "bbcb39878a36346d3d3040ce8eef8a35d74bf6f3e97bd4de484cfd2a05cb3d3d",
+      "expectedPhones": "h ɑ m ə n i",
+      "detectedPhones": "h ɑ m ɪ n i z i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "heartthrob",
+      "accent": "us",
+      "ipa": "/ˈhɑrtˌθrɑb/",
+      "sha256": "7fcf05c58e7ee7ce080edbe4667d2b1357acaaf1dfa0f0f1b6a33dff3e3053d1",
+      "expectedPhones": "h ɑ ɹ t θ ɹ ɑ b",
+      "detectedPhones": "h ɹ s ɹ ɑ b",
+      "screeningEdits": 3
+    },
+    {
+      "word": "historical fiction",
+      "accent": "us",
+      "ipa": "/hɪˈstɔrɪkəl ˈfɪkʃən/",
+      "sha256": "deb98e806d6442cab9d19ec005defeaa9dc9f13fab7602c5a907678f71d4ab58",
+      "expectedPhones": "h ɪ s t ɑ ɹ ə k ə l f ɪ k ʃ ə n",
+      "detectedPhones": "h ɪ s t ɑ ɹ ɪ k l f ɪ k ʃ ɪ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "historical romance",
+      "accent": "us",
+      "ipa": "/hɪˈstɔrɪkəl ˈroʊˌmæn(t)s/",
+      "sha256": "88d2ba37fc4c4a3abf344e8ce61300fa21f79948e84f3fad0c7909844a206e7f",
+      "expectedPhones": "h ɪ s t ɑ ɹ ə k ə l ɹ oʊ m æ n s",
+      "detectedPhones": "h ɪ s t ɑ ɹ ɪ k l ɹ oʊ m æ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "hostel",
+      "accent": "uk",
+      "ipa": "/ˈhɒstəl/",
+      "sha256": "aba26125868ad98a13faa092eead462e024cae7613e8ea1bec62f290702a0da8",
+      "expectedPhones": "h ɑ s t ə l",
+      "detectedPhones": "h oʊ s t ʊ l i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "hot chocolate",
+      "accent": "us",
+      "ipa": "/hɑt ˈtʃɔk(ə)lɪt/",
+      "sha256": "053f6350dd3108dc941a6c64e68e9080474dfe048a6d4f5e8d7eec8b633d54bb",
+      "expectedPhones": "h ɑ t ʧ ɑ k ə l ə t",
+      "detectedPhones": "h ɑ ʧ ɑ k l ɪ t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "humility",
+      "accent": "us",
+      "ipa": "/hjuːˈmɪlɪti/",
+      "sha256": "7d6f8006415d59b29bfa3bd4a967ff404bea191eab229e0f74ca62efc03f5c20",
+      "expectedPhones": "h j u m ɪ l ə ɾ i",
+      "detectedPhones": "h j u m ɛ l ɪ d i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "indigo",
+      "accent": "us",
+      "ipa": "/ˈɪndɪˌɡoʊ/",
+      "sha256": "5d04fe7318f991ea05deedba1fa0a797578eccc836813cebf1f70ba82b37da07",
+      "expectedPhones": "ɪ n d ə g oʊ",
+      "detectedPhones": "ɪ n t ɪ g aʊ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "instrument",
+      "accent": "uk",
+      "ipa": "/ˈɪnstrʊmənt/",
+      "sha256": "934e4b0bf1989cfe256e3e1827bb0fe898e89b9b49b1ff0e18ce32c251a30b12",
+      "expectedPhones": "ɪ n s t ɹ ʊ m ə n t",
+      "detectedPhones": "ɪ n s t ɹ ɝ m ɛ n t eɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "interpersonal skills",
+      "accent": "uk",
+      "ipa": "/ˌɪntəˈpɜːsənəl skɪlz/",
+      "sha256": "645565ddfb8c2e1ed800b6c43e01a2176a8ae822a5358068afd7604f6dea977a",
+      "expectedPhones": "ɪ n t ə p ɝ s ə n ə l s k ɪ l z",
+      "detectedPhones": "ɪ n t ɪ p ɝ s n l s k ɪ l z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "joint pain",
+      "accent": "uk",
+      "ipa": "/dʒɔɪnt peɪ̯n/",
+      "sha256": "415c688e5f529d4b7e0bf05cae625f836a487ec578bb81277d0578ed3916a788",
+      "expectedPhones": "ʤ ɑ ɪ n t p eɪ n",
+      "detectedPhones": "ʤ ɔɪ n t p eɪ n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "joint pain",
+      "accent": "us",
+      "ipa": "/dʒɔɪnt peɪ̯n/",
+      "sha256": "66f276e31cb7e4075dec5c9cb295d46dd139622f8b229697cfb0fdc1bfb770bf",
+      "expectedPhones": "ʤ ɑ ɪ n t p eɪ n",
+      "detectedPhones": "ʤ ɔɪ n p eɪ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "kiwi",
+      "accent": "uk",
+      "ipa": "/ˈkiːwi/",
+      "sha256": "8fdaf4a9664291bd44bb55f455076ccf794a55114e831264fd9e1d660494128a",
+      "expectedPhones": "k i w i",
+      "detectedPhones": "s k i w eɪ h",
+      "screeningEdits": 3
+    },
+    {
+      "word": "lantern",
+      "accent": "uk",
+      "ipa": "/ˈlæntən/",
+      "sha256": "e9aa2588f142f219f2c53f6dc55ba9601a6afb6d01c55eb2477778baaa5dfc11",
+      "expectedPhones": "l æ n t ə n",
+      "detectedPhones": "l ɑ n t ɪ n h",
+      "screeningEdits": 3
+    },
+    {
+      "word": "lawyer",
+      "accent": "uk",
+      "ipa": "/ˈlɔɪə/",
+      "sha256": "aa07134b5059fee9b283a701fd37a1c8c900c963a92a5762e142b76a53692c75",
+      "expectedPhones": "l ɑ ɪ ə",
+      "detectedPhones": "l ʊ j ɛ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "mall",
+      "accent": "uk",
+      "ipa": "/mɔːl/",
+      "sha256": "a86ece76ea6f1f5cc4af3e18262871af2696360d057c9b234f0f4efa4663b437",
+      "expectedPhones": "m æ l",
+      "detectedPhones": "s m aɪ l h",
+      "screeningEdits": 3
+    },
+    {
+      "word": "mango",
+      "accent": "uk",
+      "ipa": "/ˈmæŋɡəʊ/",
+      "sha256": "665e7a2bd4a24b5370d09bb4b57c23c4856a3d170e1bc089f5b6e412b37a6a28",
+      "expectedPhones": "m æ ŋ g oʊ",
+      "detectedPhones": "z m aɪ ŋ g ʊ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "marbles",
+      "accent": "uk",
+      "ipa": "/ˈmɑːbəlz/",
+      "sha256": "1355fe890fcdba010a80b899ae38440026430c28f669417cb40ed8b8993cdb9c",
+      "expectedPhones": "m ɑ b ə l z",
+      "detectedPhones": "m ɑ b ʊ z ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "marinating",
+      "accent": "us",
+      "ipa": "/ˈmærɪneɪtɪŋ/",
+      "sha256": "0fd45350c303bcff15521f9dd5d7c3f1515b663ad5981aa6f4f6bcb003d4d4c9",
+      "expectedPhones": "m æ ɹ ᵻ n eɪ ɾ ɪ ŋ",
+      "detectedPhones": "m ɛ ɹ ɪ n eɪ d ɪ ŋ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "maternity dress",
+      "accent": "us",
+      "ipa": "/məˈtɜrnəti drɛs/",
+      "sha256": "4493c4b10105ed02102ae60433e6b56473e43ded2264ee890163cf2ddd7af582",
+      "expectedPhones": "m ə t ɝ ɹ n ə ɾ i d ɹ ɛ s",
+      "detectedPhones": "m ɪ t ɝ n ɪ ɾ i d ɹ ɛ s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "maxi",
+      "accent": "uk",
+      "ipa": "/ˈmæksi/",
+      "sha256": "9b3fa4742e5d7bd7d46cbaafa189025a76aafce5a1f3c10047c84bbb40c1ee85",
+      "expectedPhones": "m æ k s i",
+      "detectedPhones": "ð ə m ə k s i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "megapixel",
+      "accent": "uk",
+      "ipa": "/ˈmeɡəpɪksəl/",
+      "sha256": "17b3f36540bf8b17b3ec21318c067c1291dafbfc65331b914451cea61f020274",
+      "expectedPhones": "m ɛ g ə p ɪ k s ə l",
+      "detectedPhones": "m eɪ g ɪ p ɪ k s ə l ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "mid-autumn festival",
+      "accent": "us",
+      "ipa": "/mɪd ˈɔtəm ˈfɛstəvəl/",
+      "sha256": "33c0d86d52f6628f99ef4a760f97a11ae9c227423031c2f333481d8ad0f434ce",
+      "expectedPhones": "m ɪ d ɑ ɾ ə m f ɛ s t ə v ə l",
+      "detectedPhones": "m ɪ d ɑ ɾ ɪ m f ɛ s t ɪ v l",
+      "screeningEdits": 3
+    },
+    {
+      "word": "monkey",
+      "accent": "uk",
+      "ipa": "/ˈmʌŋki/",
+      "sha256": "1a42927932547613ab416b96bb3b27c381f9628d5a3b10ad0959cb123caac665",
+      "expectedPhones": "m ə ŋ k i",
+      "detectedPhones": "ð ə m ə ŋ t i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "mother",
+      "accent": "uk",
+      "ipa": "/ˈmʌðə/",
+      "sha256": "a7f129797f85bebe97b988f47c725ed646b1031b6c413016dba0cd65117e2273",
+      "expectedPhones": "m ə ð ə",
+      "detectedPhones": "d m ə ð ʊ h",
+      "screeningEdits": 3
+    },
+    {
+      "word": "multicultural",
+      "accent": "uk",
+      "ipa": "/ˌmʌltiˈkʌltʃərəl/",
+      "sha256": "afdc7f58b8c832cb68ddb8fb5e8c981b14a5c6f6215a41f1bb1b940ad2c4d390",
+      "expectedPhones": "m ə l t ɪ k ə l ʧ ɝ ə l",
+      "detectedPhones": "m ə l t i k ə l ʧ ɝ ɪ l z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "openness",
+      "accent": "us",
+      "ipa": "/ˈoʊpənnəs/",
+      "sha256": "2d2b9aebf03228e9b6feb78b425212ab73bcdb67453759085647e7961dc3dce5",
+      "expectedPhones": "oʊ p ə n n ə s",
+      "detectedPhones": "oʊ p ɪ n ɛ s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "ornaments",
+      "accent": "uk",
+      "ipa": "/ˈɔːnəmənts/",
+      "sha256": "fe6af0f54472218b6105f5cf78f228cb1d74d896c2162aced41067d105fad825",
+      "expectedPhones": "ɑ n ə m ə n t s",
+      "detectedPhones": "oʊ n ɪ m ɪ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "over the moon",
+      "accent": "uk",
+      "ipa": "/ˈəʊ̯və ðə muːn/",
+      "sha256": "81e2f7d3ff2079c59a7cec47bb04e7fa180ae028c13205b3ee98bab039cc094d",
+      "expectedPhones": "oʊ v ə ð ə m u n",
+      "detectedPhones": "oʊ v ɪ ð ɪ m u n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "oyster",
+      "accent": "uk",
+      "ipa": "/ˈɔɪstə/",
+      "sha256": "1cfc095f333adf284dbaac25a6bfc04a8386c06ad16f774ed3edd4e639f08c46",
+      "expectedPhones": "ɑ ɪ s t ə",
+      "detectedPhones": "w ɔɪ s t ʊ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "pants",
+      "accent": "uk",
+      "ipa": "/pænts/",
+      "sha256": "822bb273ff6d62656f95d355100255e8d908110772817023699e7da63a171e3c",
+      "expectedPhones": "p æ n t s",
+      "detectedPhones": "p ə n z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "parking garage",
+      "accent": "us",
+      "ipa": "/ˈpɑrkɪŋ ɡəˈrɑʒ/",
+      "sha256": "5b15de4730c4ef702934815c7904bc5d33f1d8ef419aaa8d0267617cb8511c61",
+      "expectedPhones": "p ɑ ɹ k ɪ ŋ g ɝ ɑ ʒ",
+      "detectedPhones": "p ɑ ɹ k i ŋ g ɝ ɹ ɑ ʃ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "partnership",
+      "accent": "uk",
+      "ipa": "/ˈpɑːtnəʃɪp/",
+      "sha256": "b652352acb8f0fb7caef8d51894bcb08f63ad92d8450937b87c8455c8f697def",
+      "expectedPhones": "p ɑ t n ə ʃ ɪ p",
+      "detectedPhones": "p ɑ n ɪ ʃ ɪ p ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "perfume pagoda festival",
+      "accent": "uk",
+      "ipa": "/ˈpɜːfjuːm pəˈɡəʊdə ˈfɛstɪvəl/",
+      "sha256": "310b518f04ef78ec2a92326923b2c9142ec7a57fb98de7de03ad8bbbc30abec0",
+      "expectedPhones": "p ɝ f j u m p ə g oʊ d ə f ɛ s t ɪ v ə l",
+      "detectedPhones": "p ɝ f j u m p ɪ g oʊ d ɪ f ɛ s t ɪ v l",
+      "screeningEdits": 3
+    },
+    {
+      "word": "personal development",
+      "accent": "uk",
+      "ipa": "/ˈpɜːsənəl dɪˈvɛləpmənt/",
+      "sha256": "88349602a6c89dbd9027c19c3643edd29842ef67de3dda44c3de783b610779e8",
+      "expectedPhones": "p ɝ s ə n ə l d ɪ v ɛ l ə p m ə n t",
+      "detectedPhones": "p ɝ s n ə l d ɪ v ɛ l ə m ɪ n t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "pho",
+      "accent": "uk",
+      "ipa": "/fɜː/",
+      "sha256": "c93bf536be826c14f080a4a506dbda9432cb6b02afd44f8865400b4fe72c23b9",
+      "expectedPhones": "f ɝ",
+      "detectedPhones": "s eɪ t",
+      "screeningEdits": 3
+    },
+    {
+      "word": "photography",
+      "accent": "uk",
+      "ipa": "/fəˈtɒɡrəfi/",
+      "sha256": "93b02cb67d39fddb05a39e78718ec30cdf273ea79992817e0d1be5fabc8fdadf",
+      "expectedPhones": "f ə t ɑ g ɹ ə f i",
+      "detectedPhones": "f ʊ t ʊ g ɹ ɝ f i",
+      "screeningEdits": 3
+    },
+    {
+      "word": "piano",
+      "accent": "uk",
+      "ipa": "/piˈænəʊ/",
+      "sha256": "88697cfd695c1d4f3269780ef068d24af9d821f11174946ada9fbe182d141ee9",
+      "expectedPhones": "p ɪ æ n oʊ",
+      "detectedPhones": "p i ɑ n oʊ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "playing piano",
+      "accent": "uk",
+      "ipa": "/ˈpleɪɪŋ piˈænəʊ/",
+      "sha256": "d462675b380f8dcf4ea535d51794593a1ce5f74942891628da1930b3667510d7",
+      "expectedPhones": "p l eɪ ɪ ŋ p ɪ æ n oʊ",
+      "detectedPhones": "p l eɪ ɪ ŋ p i ɑ n oʊ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "political science",
+      "accent": "uk",
+      "ipa": "/pəˈlɪtɪkəl ˈsaɪəns/",
+      "sha256": "9a7c14fd65c138dcd56ec3250c8e9ac67ab94d8042b233df2824df06e0cfdf52",
+      "expectedPhones": "p ə l ɪ t ɪ k ə l s aɪ ə n s",
+      "detectedPhones": "p ə l ɪ t ɪ k l s aɪ ɪ n s ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "purple",
+      "accent": "uk",
+      "ipa": "/ˈpɜːpl̩/",
+      "sha256": "6120f38d2809dbab25a98f0ac91054a67150e2eee78a259ae905f38662250efb",
+      "expectedPhones": "p ɝ p ə l",
+      "detectedPhones": "p ʊ p ʊ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "radiant",
+      "accent": "us",
+      "ipa": "/ˈreɪdiənt/",
+      "sha256": "4853266a9e80f16b2f6f064ed3ac225f6abe2c31c7d4a66bd10b19e027dbb68a",
+      "expectedPhones": "ɹ eɪ d i ə n t",
+      "detectedPhones": "ɹ eɪ ɾ i ɛ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "road work ahead",
+      "accent": "us",
+      "ipa": "/roʊd wɜrk əˈhɛd/",
+      "sha256": "381db4e180803a39024a1b4dc3dc9991bb7c0ae00eb045e5f092ccc61b2a9f90",
+      "expectedPhones": "ɹ oʊ d w ɝ ɹ k ə h ɛ d",
+      "detectedPhones": "ɹ oʊ d w ɝ k ɪ h æ d",
+      "screeningEdits": 3
+    },
+    {
+      "word": "salesperson",
+      "accent": "us",
+      "ipa": "/ˈseɪlzpɜːrsən/",
+      "sha256": "f0f23c8508711def7529d6ffdb9a1b8a8a3dc7c2d99aa8c45b709a7c0f737eff",
+      "expectedPhones": "s eɪ l z p ɝ ɹ s ə n",
+      "detectedPhones": "s ɪ l z p ɝ s ɪ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "scholarships",
+      "accent": "uk",
+      "ipa": "/ˈskɒləʃɪps/",
+      "sha256": "56013cc2ffd04d11c17f096984515e72164f555942bc942ca514cfc341cda085",
+      "expectedPhones": "s k ɑ l ə ʃ ɪ p s",
+      "detectedPhones": "s k ɑ l ɪ ʃ ɪ p z ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "science",
+      "accent": "uk",
+      "ipa": "/ˈsaɪəns/",
+      "sha256": "1bf484a1aceb9294f0e2057592abb1368092e8a3da2da325a26b48bd0b8697b4",
+      "expectedPhones": "s aɪ ə n s",
+      "detectedPhones": "b ɪ s aɪ ɪ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "science fiction",
+      "accent": "us",
+      "ipa": "/ˈsaɪəns ˌfɪkʃən/",
+      "sha256": "f32a88dbc43d3ca4323c0c7cfc6c5c25cf10b9fca4cc5156b4d9d08cf2903a8e",
+      "expectedPhones": "s aɪ ə n s f ɪ k ʃ ə n",
+      "detectedPhones": "s aɪ ɪ n t s f ɪ k ʃ ɪ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "seasoning",
+      "accent": "uk",
+      "ipa": "/ˈsiːzənɪŋ/",
+      "sha256": "c7d39451fd5248b7851e2b8e1ac4c0def2daeec78673f7ddfcb94e82dac0121d",
+      "expectedPhones": "s i z ə n ɪ ŋ",
+      "detectedPhones": "s i z ɪ n ɪ ŋ h ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "self-care",
+      "accent": "uk",
+      "ipa": "/ˈsɛlf kɛə/",
+      "sha256": "20d2efef5e156a7aaa7897231dfe50242476de8931ac95c194c5379ed7a6b8d5",
+      "expectedPhones": "s ɛ l f k ɛ",
+      "detectedPhones": "s ɛ l f k æ ɹ ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "self-motivation",
+      "accent": "us",
+      "ipa": "/ˌself ˌmoʊtɪˈveɪʃən/",
+      "sha256": "f10edac53952ac79b108e7086386b9b56bc6417899604aed9b8f45f7b0a4c59f",
+      "expectedPhones": "s ɛ l f m oʊ ɾ ə v eɪ ʃ ə n",
+      "detectedPhones": "s æ l f m oʊ ɾ ɪ v eɪ ʃ ɛ n",
+      "screeningEdits": 3
+    },
+    {
+      "word": "shopping mall",
+      "accent": "uk",
+      "ipa": "/ˈʃɒpɪŋ mɔːl/",
+      "sha256": "d3bbbb2720fa02e68b2f3ed951fbf4aada01ada48d1c36cc4cf74d57e67dc746",
+      "expectedPhones": "ʃ ɑ p ɪ ŋ m æ l",
+      "detectedPhones": "ʃ ʊ p ɪ ŋ m aʊ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "shortness of breath",
+      "accent": "uk",
+      "ipa": "/ˈʃɔːtnəs əv breθ/",
+      "sha256": "16227e5fce0dd32f2226b9c076e412a6d302bdd5dd55f8081323768f1979dd5a",
+      "expectedPhones": "ʃ ɑ t n ə s ɑ v b ɹ ɛ θ",
+      "detectedPhones": "ʃ ɑ n ɪ s ɪ v b ɹ ɛ θ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "shrimp cocktail",
+      "accent": "uk",
+      "ipa": "/ʃrɪmp ˈkɒkteɪl/",
+      "sha256": "105bc9e9b360a02f53aa583bd60ebf51fd8a519ecf2bae3e6803e0889fde7dd9",
+      "expectedPhones": "ʃ ɹ ɪ m p k ɑ k t eɪ l",
+      "detectedPhones": "ʃ ɹ i m p k ʊ k t eɪ l ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "shutter speed",
+      "accent": "uk",
+      "ipa": "/ˈʃʌtə spiːd/",
+      "sha256": "4815701820f8796ac5b806155cd8d7ea9079a5854fd144f6ca4f886487af3234",
+      "expectedPhones": "ʃ ə t ə s p i d",
+      "detectedPhones": "ʃ ɑ t ɪ s p i d ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "sophisticated",
+      "accent": "us",
+      "ipa": "/səˈfɪstɪkeɪtɪd/",
+      "sha256": "7bd9e8b882dfed0a3bf3002bc4bd18d0098114f4e7e1c4093fd7c4505972f50b",
+      "expectedPhones": "s ə f ɪ s t ə k eɪ ɾ ᵻ d",
+      "detectedPhones": "s ə f ɪ s t ɪ k h eɪ ɾ ɪ d",
+      "screeningEdits": 3
+    },
+    {
+      "word": "stick and hoop",
+      "accent": "uk",
+      "ipa": "/stɪk ˈand huːp/",
+      "sha256": "01390cc0f3bae397f6da6596da93d3428fbe5e3956d8d259d418d01e48c4e0a7",
+      "expectedPhones": "s t ɪ k æ n d h u p",
+      "detectedPhones": "s t ɪ k ɪ n h u p ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "stock",
+      "accent": "uk",
+      "ipa": "/stɒk/",
+      "sha256": "8e35726a19785a8ee6e5113a183ad0adcc4373274cd9f8a33fc6d48695110935",
+      "expectedPhones": "s t ɑ k",
+      "detectedPhones": "ð ə s t oʊ k",
+      "screeningEdits": 3
+    },
+    {
+      "word": "student",
+      "accent": "uk",
+      "ipa": "/ˈstjuːdn̩t/",
+      "sha256": "f2c34a8add83c62dcdaa66d9ffebd9d21725ccb77ec013b3acb6e8ba081bfae8",
+      "expectedPhones": "s t j u d n t",
+      "detectedPhones": "s t i u d ɪ n t ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "tenderness",
+      "accent": "uk",
+      "ipa": "/ˈtɛndənɪs/",
+      "sha256": "a36265dc320016e679b2cc1431f61c9a709857509e5b6e184a570cd4ec6cbe0e",
+      "expectedPhones": "t ɛ n d ə n ə s",
+      "detectedPhones": "t ɛ n d ɪ n ɛ s ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "tet",
+      "accent": "us",
+      "ipa": "/tet/",
+      "sha256": "3c688e89d71154c21c529b989df37a417e13eaeb3f52ad15fec167301c4417f1",
+      "expectedPhones": "t ɛ t",
+      "detectedPhones": "t æ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "time management",
+      "accent": "uk",
+      "ipa": "/taɪm ˈmænɪdʒmənt/",
+      "sha256": "61b99267ef8428f0ef924a88a1f64fc07f61d9aeb1e7fe08bf705c6d0897cd1a",
+      "expectedPhones": "t aɪ m m æ n ɪ ʤ m ə n t",
+      "detectedPhones": "t aɪ m æ n ɪ ʤ m ɪ n t ɪ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "tradition",
+      "accent": "uk",
+      "ipa": "/trəˈdɪʃən/",
+      "sha256": "51b922c6a9144c4c03eba13ad6fcba7d70a61751ef1f6bf20b0ee72726ce3f5a",
+      "expectedPhones": "t ɹ ə d ɪ ʃ ə n",
+      "detectedPhones": "t ɹ ɝ d ɪ ʃ ɪ n ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "traditional food",
+      "accent": "us",
+      "ipa": "/trəˈdɪʃənəl fuːd/",
+      "sha256": "6ed8eb30eaf40c2e884d3b3b4a476234e8d9ff32e1b68068cd9ab4b76b943e25",
+      "expectedPhones": "t ɹ ə d ɪ ʃ ə n ə l f u d",
+      "detectedPhones": "t ɹ ɝ d ɪ ʃ n l f u d",
+      "screeningEdits": 3
+    },
+    {
+      "word": "truck",
+      "accent": "uk",
+      "ipa": "/trʌk/",
+      "sha256": "c2c7d56f122ae065c2fa91a7a067a0ac6f1ecf6a23b71204001892aac20da8df",
+      "expectedPhones": "t ɹ ə k",
+      "detectedPhones": "n ʃ ɹ ə ŋ k",
+      "screeningEdits": 3
+    },
+    {
+      "word": "tug of war",
+      "accent": "uk",
+      "ipa": "/ˈtʌɡ əv ˌwɔː/",
+      "sha256": "58b119de0c90977cbeca2f974e11fed02304275d0cf21cb05459f31137a80166",
+      "expectedPhones": "t ə g ɑ v w ɑ",
+      "detectedPhones": "t ə g ʊ v w ʊ ð",
+      "screeningEdits": 3
+    },
+    {
+      "word": "turquoise",
+      "accent": "uk",
+      "ipa": "/ˈtɜːkwɔɪz/",
+      "sha256": "32043156246644da2a993f33a7fc9acef78620b6f555d15318f8ae4c25696a5c",
+      "expectedPhones": "t ɝ k w ɑ ɪ z",
+      "detectedPhones": "t ʊ k w i z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "turquoise",
+      "accent": "us",
+      "ipa": "/ˈtɜrk(w)ɔɪz/",
+      "sha256": "2e4d8d01a531624cdea7cf8d7e93bccc8a08722acce84878f86c434f310fa672",
+      "expectedPhones": "t ɝ ɹ k w ɑ ɪ z",
+      "detectedPhones": "t ɝ k w eɪ z",
+      "screeningEdits": 3
+    },
+    {
+      "word": "vietnamese new year",
+      "accent": "uk",
+      "ipa": "/ˌvjetnəˈmiːz njuː jɪə/",
+      "sha256": "6e2e10d83fe238d8c02ab78a1b89377c8af8a1d7776ded9ac9bc2d29f27a9ddb",
+      "expectedPhones": "v j ɛ t n ə m i z n j u j ɪ ə",
+      "detectedPhones": "v i ɛ t n ɪ m i z n u j ɪ ə",
+      "screeningEdits": 3
+    },
+    {
+      "word": "vietnamese new year",
+      "accent": "us",
+      "ipa": "/ˌvjetnəˈmiːz nuː jɪr/",
+      "sha256": "61c8b16689108f918391db0a1cdff968479b2399a29fee57b51ddbaa572f48f6",
+      "expectedPhones": "v i ɛ t n ə m i z n u j ɪ ɹ",
+      "detectedPhones": "v i ɛ n ɪ m i z n u j ɪ ɝ",
+      "screeningEdits": 3
+    },
+    {
+      "word": "white balance",
+      "accent": "us",
+      "ipa": "/ˈwaɪt ˈbæləns/",
+      "sha256": "f3516254956bc3c6c2d5067e7c2257e08b22de3c093512bf015255ca398e0fa5",
+      "expectedPhones": "w aɪ t b æ l ə n s",
+      "detectedPhones": "w aɪ v æ l ɪ n s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "work-life balance",
+      "accent": "us",
+      "ipa": "/ˈwɜːrk ˈlaɪf ˈbæləns/",
+      "sha256": "712139afae85bf61b49187d7b544558b5217bf35fe345dcce658ec2806e1711d",
+      "expectedPhones": "w ɝ ɹ k l aɪ f b æ l ə n s",
+      "detectedPhones": "w ɝ k l aɪ f b æ l ɪ n t s",
+      "screeningEdits": 3
+    },
+    {
+      "word": "actress",
+      "accent": "us",
+      "ipa": "/ˈæktrəs/",
+      "sha256": "9faf14d515f4e115c6247aba03a11e7eebc7eabad51d01752645ee8b0043d13f",
+      "expectedPhones": "æ k t ɹ ə s",
+      "detectedPhones": "æ t ɹ ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "adventure",
+      "accent": "uk",
+      "ipa": "/ədˈvɛntʃə/",
+      "sha256": "8110972469401c99ca69c400b90311dbd5462c9ac9fff11ddf1babf87fb0cc04",
+      "expectedPhones": "ə d v ɛ n ʧ ə",
+      "detectedPhones": "ɪ d v ɛ n ʧ ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "airplane",
+      "accent": "uk",
+      "ipa": "/ˈɛəˌpleɪ̯n/",
+      "sha256": "a137cf4d85cc23b8551046be343f50da529d8604b9904bb436ade98c164f32ed",
+      "expectedPhones": "ɛ p l eɪ n",
+      "detectedPhones": "æ p l eɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "alluring",
+      "accent": "uk",
+      "ipa": "/əˈlʊərɪŋ/",
+      "sha256": "ac4ceb8f87890838dffb73398f70da8c49fe2a8cf22e02ccac159c6498b2b946",
+      "expectedPhones": "ə l j ʊ ɝ ɪ ŋ",
+      "detectedPhones": "ə l j ʊ ɹ ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "alternative energy",
+      "accent": "uk",
+      "ipa": "/ɔːlˈtɜːnətɪv ˈenədʒi/",
+      "sha256": "9ed1ab991df70c021d0a481e6d5fd32fd21e680587f3a690afefdf3b660e4eef",
+      "expectedPhones": "ɑ l t ɝ n ə t ɪ v ɛ n ə ʤ i",
+      "detectedPhones": "ɑ l t ɝ n ɪ t ɪ v ɛ n ɪ ʤ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "alternative energy",
+      "accent": "us",
+      "ipa": "/ɔːlˈtɜːrnətɪv ˈenərdʒi/",
+      "sha256": "3928ac4662fb4b7c0904a9ceb8c52bc485763be296271b21eb2b417fef37c7ef",
+      "expectedPhones": "ɑ l t ɝ ɹ n ə ɾ ɪ v ɛ n ɝ ʤ i",
+      "detectedPhones": "ɑ l t ɝ n ɪ ɾ ɪ v ɛ n ɝ ʤ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "amused",
+      "accent": "uk",
+      "ipa": "/əˈmjuːzd/",
+      "sha256": "61aeb48e28ea51afb41bcd9235029433c1d74d76f54dc4634257650e79248e72",
+      "expectedPhones": "ə m j u z d",
+      "detectedPhones": "ə m j u z d ɪ ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "ancestor",
+      "accent": "uk",
+      "ipa": "/ˈænsɛstə/",
+      "sha256": "c84055c1f095b799a587a496a0b3c117e28a1ecb5de6a0d49793910ecd503f75",
+      "expectedPhones": "æ n s ɛ s t ə",
+      "detectedPhones": "æ n z ɛ s t ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "animation",
+      "accent": "uk",
+      "ipa": "/ˌænɪˈmeɪʃən/",
+      "sha256": "a02b337cd30dce323e624b98f6889356f091c024b1fec20bd5c28e0059bb3524",
+      "expectedPhones": "æ n ɪ m eɪ ʃ ə n",
+      "detectedPhones": "æ n ɪ m eɪ ʃ ɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "aperture",
+      "accent": "us",
+      "ipa": "/ˈæpərˌtʃʊr/",
+      "sha256": "077544190851918c2f29bbfd2e5677581edf479662159abc5d0e74f4a21ab332",
+      "expectedPhones": "æ p ɝ ʧ ʊ ɹ",
+      "detectedPhones": "aʊ p ɝ ʧ ʊ ɝ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "applause",
+      "accent": "uk",
+      "ipa": "/əˈplɔːz/",
+      "sha256": "4424c0a16a73c5e572244b3874ae2a185862e92d041418f5831f33e8ff7722d0",
+      "expectedPhones": "ə p l ɑ z",
+      "detectedPhones": "ə p l oʊ z ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "architect",
+      "accent": "uk",
+      "ipa": "/ˈɑːkɪˌtɛkt/",
+      "sha256": "90b393599ff42f68623c74cb3cabf982a51c0ed8dd57b71b3e984433d8e38671",
+      "expectedPhones": "ɑ k ɪ t ɛ k t",
+      "detectedPhones": "ɑ k ɪ t eɪ k t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "artifacts",
+      "accent": "uk",
+      "ipa": "/ˈɑːtɪfækts/",
+      "sha256": "dfe5f6818f9e86e28e91ec552f96dfcc3a8f3a6c4b32578972284b139bb37fb3",
+      "expectedPhones": "ɑ t ɪ f æ k t s",
+      "detectedPhones": "oʊ t ɪ f æ k t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "artifacts",
+      "accent": "us",
+      "ipa": "/ˈɑːrtɪfækts/",
+      "sha256": "36eb7bb9d24c1e63e0aec3aadf483e18e4643a7dea1b51db5d0a254f32df6056",
+      "expectedPhones": "ɑ ɹ ɾ ə f æ k t s",
+      "detectedPhones": "ɑ ɹ ɾ ɪ f æ k s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "artwork",
+      "accent": "us",
+      "ipa": "/ˈɑrtˌwɜrk/",
+      "sha256": "0cac4bbfaa89592bca354b6720e3b1653fbd505acb71cc5303c38efec7dd0720",
+      "expectedPhones": "ɑ ɹ t w ɝ ɹ k",
+      "detectedPhones": "ɑ ɹ ɪ w ɝ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "assignment",
+      "accent": "uk",
+      "ipa": "/əˈsaɪnmənt/",
+      "sha256": "3d63e1b078827c67db0df9f70f4b91eedf7e030d64f449515a0e509cd2adf1e0",
+      "expectedPhones": "ə s aɪ n m ə n t",
+      "detectedPhones": "ə s aɪ n m ɪ n t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "assurance",
+      "accent": "uk",
+      "ipa": "/əˈʃɔːrəns/",
+      "sha256": "b97d1c6c139703367549502eb5f0b0f7cd2a2effc6b3e697004838e6560ef0f2",
+      "expectedPhones": "ə ʃ ɑ ɹ ə n s",
+      "detectedPhones": "ə ʃ ʊ ɹ ɪ n s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "astronaut",
+      "accent": "uk",
+      "ipa": "/ˈæstrəˌnɔːt/",
+      "sha256": "a19858d3d29f1b785588319465a3136becf1a88cd70774dfe7c1f8e2e8d1eeab",
+      "expectedPhones": "æ s t ɹ ə n ɑ t",
+      "detectedPhones": "æ s t ɹ ɪ n oʊ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "attraction",
+      "accent": "uk",
+      "ipa": "/əˈtrækʃn̩/",
+      "sha256": "854891646d61516ee84135dc130c97ba29edccb127d9cc3a64db4a0bf4fcddfd",
+      "expectedPhones": "ə t ɹ æ k ʃ ə n",
+      "detectedPhones": "ə t ɹ æ k ʃ ɪ n i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "aunt",
+      "accent": "uk",
+      "ipa": "/ɑːnt/",
+      "sha256": "9c06b340c3a025237669abc3f365d07f91df946077121db9a3f325c9dfdc4aac",
+      "expectedPhones": "ɑ n t",
+      "detectedPhones": "oʊ n t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "avenue",
+      "accent": "uk",
+      "ipa": "/ˈævəˌnjuː/",
+      "sha256": "239b10f8c8ad204b411904bb98d815619100630b93665cd65479f2e9f22dc614",
+      "expectedPhones": "æ v ɪ n j u",
+      "detectedPhones": "ɑ v ɪ n j u z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bamboo stilts",
+      "accent": "uk",
+      "ipa": "/ˌbæmˈbuː stɪlts/",
+      "sha256": "050662e0f56fcc95b1161cabe53688f34b41beb6cbc826658775becc5e8fc23e",
+      "expectedPhones": "b æ m b u s t ɪ l t s",
+      "detectedPhones": "b ɑ m b u s t ɪ l t s ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "banh mi",
+      "accent": "uk",
+      "ipa": "/ˌbɑːn ˈmiː/",
+      "sha256": "ba0f8d24c505a4cc18a5184d9ac13c01c9a6357294d0cd84b8d3d15c3a9804ca",
+      "expectedPhones": "b ɑ n m i",
+      "detectedPhones": "b ə n m i z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bear",
+      "accent": "uk",
+      "ipa": "/bɛː/",
+      "sha256": "9785132b0814492ab1ca2fd6c01f0f02a428c94718688978b87abb3af6230def",
+      "expectedPhones": "b ɛ",
+      "detectedPhones": "b æ ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "beef stew",
+      "accent": "uk",
+      "ipa": "/biːf stjuː/",
+      "sha256": "f2c95c90d9f499c9c3fce178ca9b687b13a8e35ebef2612438a020549b3a3f29",
+      "expectedPhones": "b i f s t j u",
+      "detectedPhones": "b i f s d u",
+      "screeningEdits": 2
+    },
+    {
+      "word": "beef stew",
+      "accent": "us",
+      "ipa": "/biːf stuː/",
+      "sha256": "0991c6d3842a396019b60d5bada824965735df9ec5c97057e1cedc0f3581b02e",
+      "expectedPhones": "b i f s t u",
+      "detectedPhones": "b i f s t ɪ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "beet",
+      "accent": "us",
+      "ipa": "/biːt/",
+      "sha256": "1d70baf1301ad0c08519f0ea74d8cefb2fc8050bba72e22dad9a00b44b9f49cd",
+      "expectedPhones": "b i t",
+      "detectedPhones": "b i ɪ t s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bell pepper",
+      "accent": "uk",
+      "ipa": "/ˈbel pepə/",
+      "sha256": "ee311bcd7677ed822b8e8d5c94a9a26de8f4ec39f75575f70e54cb10a1af8fbc",
+      "expectedPhones": "b ɛ l p ɛ p ə",
+      "detectedPhones": "b ɛ l p ɛ p ʊ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bell pepper",
+      "accent": "us",
+      "ipa": "/ˈbel pepər/",
+      "sha256": "1c66ac101aead026c99e66e0c69a10cfeb9bc5b029827302e395b6135e45bb99",
+      "expectedPhones": "b ɛ l p ɛ p ɝ",
+      "detectedPhones": "b ɛ l t h ɛ p ɝ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bicycle lane",
+      "accent": "uk",
+      "ipa": "/ˈbaɪsɪk(ə)l leɪn/",
+      "sha256": "c32bdb8a2335cfa9e8c2f4f12ebc00100e3ec6fc268b2c8ebdb0f38acc116562",
+      "expectedPhones": "b aɪ s ɪ k ə l l eɪ n",
+      "detectedPhones": "b aɪ s ɪ k l l eɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "bicycle lane",
+      "accent": "us",
+      "ipa": "/ˈbaɪsɪk(ə)l leɪn/",
+      "sha256": "812968c841b8e513d9b099770d9d7b1bf5402e4fee1b86a4cb13ce2be8663725",
+      "expectedPhones": "b aɪ s ə k ə l l eɪ n",
+      "detectedPhones": "b aɪ s ɪ k l l eɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "biography",
+      "accent": "uk",
+      "ipa": "/baɪˈɒɡrəfi/",
+      "sha256": "02940fdc9ebe6c40c44618ade8ffde95b8599e99d6fd065e179c7c7dae1ba18d",
+      "expectedPhones": "b aɪ ɑ g ɹ ə f i",
+      "detectedPhones": "b aɪ ɑ g ɹ ɝ s i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "blender",
+      "accent": "uk",
+      "ipa": "/ˈblɛndə/",
+      "sha256": "a8a9e8a53cab2104123f881f6553b1686cd3b9ec96783be97be87213da48bf15",
+      "expectedPhones": "b l ɛ n d ə",
+      "detectedPhones": "p l ɛ n d ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "brand",
+      "accent": "uk",
+      "ipa": "/ˈbrand/",
+      "sha256": "5da166874a168946d6721bab1559e1d38792343c90211de9a58d98f63cc1207f",
+      "expectedPhones": "b ɹ æ n d",
+      "detectedPhones": "b ɹ ə n d ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "broccoli",
+      "accent": "uk",
+      "ipa": "/ˈbrɒkəli/",
+      "sha256": "c8e1d2578179482a209267ce5407716c42c64136604088efbfb019e59fc8018f",
+      "expectedPhones": "b ɹ ɑ k ə l i",
+      "detectedPhones": "b ɹ ʊ k ɪ l i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "buffalo fighting festival",
+      "accent": "uk",
+      "ipa": "/ˈbʌfələʊ ˈfaɪtɪŋ ˈfɛstɪvəl/",
+      "sha256": "3bc82176bcd203fa2675acf60fb1be082c6d480c0f0b9f68290e50aa0ef116e9",
+      "expectedPhones": "b ə f ə l oʊ f aɪ t ɪ ŋ f ɛ s t ɪ v ə l",
+      "detectedPhones": "b ə f ə l oʊ f aɪ t i ŋ f ɛ s t ɪ v l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "camera",
+      "accent": "uk",
+      "ipa": "/ˈkæmərə/",
+      "sha256": "976bbbe3982b0135061e0eb8cd0631e158e0ec3ed6ca59fa12383b37fc77e05b",
+      "expectedPhones": "k æ m ɝ ə",
+      "detectedPhones": "k æ m ɝ ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "carefulness",
+      "accent": "us",
+      "ipa": "/ˈkerfəlnəs/",
+      "sha256": "2c068a27e3fed7c6ad7c3aa8f644da9bf4fae001b2a7c473fbe23acd28b471fa",
+      "expectedPhones": "k ɛ ɹ f ə l n ə s",
+      "detectedPhones": "k ɛ ɹ f l n ɛ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "carnation",
+      "accent": "uk",
+      "ipa": "/kɑːˈneɪʃən/",
+      "sha256": "4ded2c304381881bc3386956884e8f841960a75bb132b54f572b659933562f4e",
+      "expectedPhones": "k ɑ n eɪ ʃ ə n",
+      "detectedPhones": "k ɑ n eɪ ʃ ɪ n d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "carrot",
+      "accent": "uk",
+      "ipa": "/ˈkærət/",
+      "sha256": "744f0e94bccaa775592c4d3dccad0fa7473c27404dab66cf2092df09b17a3f13",
+      "expectedPhones": "k æ ɹ ə t",
+      "detectedPhones": "k aɪ ɹ ɪ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cart",
+      "accent": "uk",
+      "ipa": "/kɑːt/",
+      "sha256": "bf429f86c8abbdc2b493f640da20a655761a7cd2f358ac1b3c922850336cceb7",
+      "expectedPhones": "k ɑ t",
+      "detectedPhones": "k ə ə t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "catastrophe",
+      "accent": "uk",
+      "ipa": "/kəˈtæstrəfi/",
+      "sha256": "1b3ea8bc64acef5e985fecf131ac27d89ebacc7f2327d169bf2a0389c349c600",
+      "expectedPhones": "k ə t æ s t ɹ ə f i",
+      "detectedPhones": "k ɪ t æ s t ɹ ɝ f i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "children's",
+      "accent": "uk",
+      "ipa": "/ˈtʃɪldrənz/",
+      "sha256": "e85053ec8d3f53c5f08b2390f6b76c71bcba0d561bf9fb13377501ac8ae056a1",
+      "expectedPhones": "ʧ ɪ l d ɹ ə n z",
+      "detectedPhones": "ʧ ɪ l d ɹ ɪ n z ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "clam",
+      "accent": "uk",
+      "ipa": "/klæm/",
+      "sha256": "aac88a5ef1178c83cbd59d4cac1f9fd577af40682e21510a7b4914ba12db922d",
+      "expectedPhones": "k l æ m",
+      "detectedPhones": "d ɪ k l æ m",
+      "screeningEdits": 2
+    },
+    {
+      "word": "climate",
+      "accent": "uk",
+      "ipa": "/ˈklaɪmɪt/",
+      "sha256": "faf5b4eb8738f01636081acbc5458a895ce42c76f0c96d33086dbdeb8965d6da",
+      "expectedPhones": "k l aɪ m ɪ t",
+      "detectedPhones": "ð ə k l aɪ m ɪ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cockfighting",
+      "accent": "uk",
+      "ipa": "/ˈkɒkfaɪtɪŋ/",
+      "sha256": "9a9c09123582171a90e2c4b7962febdee297df6dfb120e736ffb8426d9690c6d",
+      "expectedPhones": "k ɑ k f aɪ t ɪ ŋ",
+      "detectedPhones": "k ʊ k f aɪ t ɪ ŋ ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cocktail",
+      "accent": "uk",
+      "ipa": "/ˈkɒkteɪl/",
+      "sha256": "2b0aa09afbc1778289ff06af8538e1292d145f6a986593f54201d725817bb6ee",
+      "expectedPhones": "k ɑ k t eɪ l",
+      "detectedPhones": "k ʊ k t eɪ l ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cod",
+      "accent": "uk",
+      "ipa": "/kɒd/",
+      "sha256": "de1cf9ae846556f9889420d95735a236758c0350ff9c5dacebdc0590ee64c276",
+      "expectedPhones": "k ɑ d",
+      "detectedPhones": "k ə d ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "communication",
+      "accent": "uk",
+      "ipa": "/kəˌmjuːnɪˈkeɪʃən/",
+      "sha256": "22c9f413c5a937db4161b12b96e4bcc74d7ed6fc93f495b11b1847788b4b029a",
+      "expectedPhones": "k ə m j u n ɪ k eɪ ʃ ə n",
+      "detectedPhones": "k ɪ m j u n ɪ k eɪ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "conference",
+      "accent": "us",
+      "ipa": "/ˈkɑnf(ə)rəns/",
+      "sha256": "54d525f1c43c05ac6888e2d500dd4482c6e0bda7a28bffc7823dbe55f0f2c85e",
+      "expectedPhones": "k ɑ n f ɝ ə n s",
+      "detectedPhones": "k ɑ n f ɝ ɪ n t s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "confidence",
+      "accent": "uk",
+      "ipa": "/ˈkɒnfɪdəns/",
+      "sha256": "ef88c4e520113eeea1e4f23d2e2776cf3bb8da726eedd39ef4fb33942e9129e1",
+      "expectedPhones": "k ɑ n f ɪ d ə n s",
+      "detectedPhones": "k ɑ n f ɪ d ɛ n s ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "conflict management",
+      "accent": "us",
+      "ipa": "/ˈkɑːnflɪkt ˈmænɪdʒmənt/",
+      "sha256": "d6d4acf5210ecfceae495ff942819f4862aa5862017a5dc8701deed9efbf9a54",
+      "expectedPhones": "k ɑ n f l ɪ k t m æ n ɪ ʤ m ə n t",
+      "detectedPhones": "k ɑ n f l ɪ t m æ n ɪ ʤ m ɪ n t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "conflict resolution",
+      "accent": "us",
+      "ipa": "/ˈkɑːnflɪkt ˌrezəˈluːʃən/",
+      "sha256": "6ca9cca08fc4e8e3da080488b9bc3ecb86222cafe7c6995b2e2299f562449cb7",
+      "expectedPhones": "k ɑ n f l ɪ k t ɹ ɛ z ə l u ʃ ə n",
+      "detectedPhones": "k ɑ n f l ɪ t ɹ ɛ z ə l u ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "countertop",
+      "accent": "uk",
+      "ipa": "/ˈkaʊntətɒp/",
+      "sha256": "3a53899b2b7f1bed8172540d7eb376898e96dd779afebe68a1a65a53a14b54b0",
+      "expectedPhones": "k aʊ n t ə t ɑ p",
+      "detectedPhones": "k aʊ n t ɪ t oʊ p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "courtship",
+      "accent": "us",
+      "ipa": "/ˈkɔrtʃɪp/",
+      "sha256": "9a9469f7d41c23dbb77863bb09f35f9663bb678ffcc47aa19a54b26c52696840",
+      "expectedPhones": "k ɑ ɹ t ʃ ɪ p",
+      "detectedPhones": "k ɑ ɹ ʧ ɪ p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cousin",
+      "accent": "uk",
+      "ipa": "/ˈkʌzn̩/",
+      "sha256": "9f2b66597cd5f39ba0270546cd68a3c6bf157a2441cbca1bcf03df71c79313b2",
+      "expectedPhones": "k ə z ə n",
+      "detectedPhones": "k ə z ɪ n ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "critical thinking",
+      "accent": "uk",
+      "ipa": "/ˈkrɪtɪkəl ˈθɪŋkɪŋ/",
+      "sha256": "a0e3a952584940f793f5c798ad2ffe4d401d9d9d57838cd0ce3a1f0de121a1c9",
+      "expectedPhones": "k ɹ ɪ t ɪ k ə l θ ɪ ŋ k ɪ ŋ",
+      "detectedPhones": "k ɹ ɪ t ɪ k l θ i ŋ k ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "crosswalk",
+      "accent": "uk",
+      "ipa": "/ˈkrɒswɔːk/",
+      "sha256": "c0993511211d082b2f4b18a76535154bc02d8c2a6277ccac37fe3462bcae938e",
+      "expectedPhones": "k ɹ ɑ s w ɑ k",
+      "detectedPhones": "n k ɹ ɑ s w ʊ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "cultural exchange",
+      "accent": "uk",
+      "ipa": "/ˈkʌltʃ(ʊ)rəl ɪksˈtʃeɪndʒ/",
+      "sha256": "d41f7c83a07e7bee6a974fa726b112169096307d71e8ab885b6008019ff15d03",
+      "expectedPhones": "k ə l ʧ ɝ ə l ɪ k s ʧ eɪ n ʤ",
+      "detectedPhones": "k ə l ʧ ɝ ɪ l ɪ k s ʧ eɪ n ʤ ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "curriculum",
+      "accent": "us",
+      "ipa": "/kəˈrɪkjələm/",
+      "sha256": "7ce666a554f1b6d62b40c350a4470d4b79253aaca65eaeb93c9a997df677a619",
+      "expectedPhones": "k ɝ ɪ k j ə l ə m",
+      "detectedPhones": "k ɝ ɹ ɪ k j ɪ l ə m",
+      "screeningEdits": 2
+    },
+    {
+      "word": "customer",
+      "accent": "us",
+      "ipa": "/ˈkʌstəmər/",
+      "sha256": "a258cc48b6e55bfae2abb4dc0326e0dec71d96da0c6b3f790f51e15fad53ef48",
+      "expectedPhones": "k ə s t ə m ɝ",
+      "detectedPhones": "k ə s t ɪ m ɝ ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "customs",
+      "accent": "uk",
+      "ipa": "/ˈkʌstəmz/",
+      "sha256": "7fdee1152d98ea94394b0439d0103a7d1508f4ad891eb6f8f2fa11dbcc3b315a",
+      "expectedPhones": "k ə s t ə m z",
+      "detectedPhones": "k ə s t ʊ m z eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "daughter-in-law",
+      "accent": "uk",
+      "ipa": "/ˈdɔːtəɪnˌlɔː/",
+      "sha256": "b2db5322864788b0faddb28a815b9cd3358de158d9422e8c3584fa21e673f96d",
+      "expectedPhones": "d ɑ t ɝ ɪ n l ɑ",
+      "detectedPhones": "d ɑ ʧ ɝ ɪ n l ɑ θ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "decision-making",
+      "accent": "uk",
+      "ipa": "/dɪˈsɪʒn̩ ˈmeɪkɪŋ/",
+      "sha256": "3fd3964605c38003123dd8c6bb655ba5e182ac867823ec71fcef9abfceaff0bb",
+      "expectedPhones": "d ɪ s ɪ ʒ ə n m eɪ k ɪ ŋ",
+      "detectedPhones": "d ɪ s ɪ ʃ ɪ n m eɪ k ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "decisiveness",
+      "accent": "uk",
+      "ipa": "/dɪˈsaɪsɪvnəs/",
+      "sha256": "6bd375b6e53d2e963e8dffa37935afbd274089727c61527480605f5dc27a65a4",
+      "expectedPhones": "d ɪ s aɪ s ɪ v n ɪ s",
+      "detectedPhones": "d ɪ s aɪ s ɪ v n ɛ s ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "delicious",
+      "accent": "uk",
+      "ipa": "/dɪˈlɪʃəs/",
+      "sha256": "a88644865f787321b257fc059d1a98936c039e3a46025c9231be1973a418ab65",
+      "expectedPhones": "d ɪ l ɪ ʃ ə s",
+      "detectedPhones": "d ɪ l ɪ ʃ ʊ s ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "destruction",
+      "accent": "uk",
+      "ipa": "/dɪsˈtrʌkʃən/",
+      "sha256": "aaa2bce787d65abe7eae998f1c6051c9569e2aff6a941e9de36264104b94bfb0",
+      "expectedPhones": "d ɪ s t ɹ ə k ʃ ə n",
+      "detectedPhones": "d ɪ s t ɹ ə k ʃ ɪ n ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "disposal",
+      "accent": "us",
+      "ipa": "/dɪsˈpoʊzəl/",
+      "sha256": "b1250d32cf567eda7a66bfdd12bd575105b21d9e488b47d8443a7524636dc0d8",
+      "expectedPhones": "d ə s p oʊ z ə l",
+      "detectedPhones": "d ɪ s p oʊ z l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "distance learning",
+      "accent": "us",
+      "ipa": "/ˈdɪst(ə)n(t)s ˈlɜrnɪŋ/",
+      "sha256": "5bf337747c73b79683b4b11fefee72a92291363994dfa8d1be3a29cfc1e4263b",
+      "expectedPhones": "d ɪ s t ə n s l ɝ ɹ n ɪ ŋ",
+      "detectedPhones": "d ɪ s t ɪ n s l ɝ n ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "drama",
+      "accent": "uk",
+      "ipa": "/ˈdrɑːmə/",
+      "sha256": "9fbcfddd525020df08675b3d53b4d9684e8a3211589deee774274c1d60dd64b5",
+      "expectedPhones": "d ɹ ɑ m ə",
+      "detectedPhones": "d ɹ ɑ m ɪ h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "drawing",
+      "accent": "us",
+      "ipa": "/ˈdrɑɪŋ/",
+      "sha256": "d364616eb20933618c1ac102ead0fbb270a69810d077dedcea799a20106b378b",
+      "expectedPhones": "d ɹ ɑ ɪ ŋ",
+      "detectedPhones": "d d ɹ aɪ ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "duet",
+      "accent": "us",
+      "ipa": "/duˈɛt/",
+      "sha256": "e4ea3901f6204cfe608b571be95eb270f0ba83414aa81e15435dacb7cfb8214c",
+      "expectedPhones": "d u ɛ t",
+      "detectedPhones": "d u w æ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "earthquake",
+      "accent": "uk",
+      "ipa": "/ˈɜːθkweɪk/",
+      "sha256": "dcd5877bd0c948a82d4495f1dc9d1323957f9e0556593705eb03945455320ff9",
+      "expectedPhones": "ɝ θ k w eɪ k",
+      "detectedPhones": "ə s k w eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "ecstatic",
+      "accent": "uk",
+      "ipa": "/ɛkˈstætɪk/",
+      "sha256": "a0c71b298568206ef57320823674f6174c62d6770d68515f9689dcd4bdfb20ef",
+      "expectedPhones": "ɪ k s t æ t ɪ k",
+      "detectedPhones": "ɪ k s t ɑ t ɪ k ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "egg rolling",
+      "accent": "uk",
+      "ipa": "/eɡ ˈrəʊlɪŋ/",
+      "sha256": "ab64da993e5752c9e173adca385f5c730921071537f22c2c0cd076d2a690f735",
+      "expectedPhones": "ɛ g ɹ oʊ l ɪ ŋ",
+      "detectedPhones": "eɪ g ɹ oʊ l ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "electrician",
+      "accent": "us",
+      "ipa": "/əˌlɛkˈtrɪʃən/",
+      "sha256": "442ef62daa4e7e5bfb183816635e8dfbf1b798890bb592019b7d66470f97f81d",
+      "expectedPhones": "ə l ɛ k t ɹ ɪ ʃ ə n",
+      "detectedPhones": "ə l ɛ t ɹ ɪ ʃ ɛ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "elephant",
+      "accent": "us",
+      "ipa": "/ˈɛləfənt/",
+      "sha256": "9b73e164fb4a437892c7d69ef6532fe9f6d2756cbe23b74a09f6d92347496ee4",
+      "expectedPhones": "ɛ l ə f ə n t",
+      "detectedPhones": "æ l ə f ɪ n t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "empathy",
+      "accent": "us",
+      "ipa": "/ˈɛmpəθi/",
+      "sha256": "913a4630d48f92ab403ff9dd36c9d9fd27668eb609ac0baace21f256f91cd40e",
+      "expectedPhones": "ɛ m p ə θ i",
+      "detectedPhones": "æ m p ɪ θ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "english",
+      "accent": "uk",
+      "ipa": "/ˈɪŋɡlɪʃ/",
+      "sha256": "8e013f25f2082061c297035b7383fba4dff9677544dd78329944666a5dbcdeba",
+      "expectedPhones": "ɪ ŋ g l ɪ ʃ",
+      "detectedPhones": "ð i ŋ g l ɪ ʃ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "enthusiastic",
+      "accent": "uk",
+      "ipa": "/ɪnˌθjuːzɪˈæstɪk/",
+      "sha256": "befc5b5e748a3395e6e222d4e94c6020ae7f1571dff258e8fe5b031d23c400e6",
+      "expectedPhones": "ɪ n θ j u z ɪ æ s t ɪ k",
+      "detectedPhones": "ɪ n θ j u z i ɑ s t ɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "exposure",
+      "accent": "uk",
+      "ipa": "/ɪkˈspəʊʒə/",
+      "sha256": "ef301c5cd615134672e8e34d3c8665403f7f4213de07d3cb597a4a25ef6843ad",
+      "expectedPhones": "ɪ k s p oʊ ʒ ə",
+      "detectedPhones": "ɪ k s p oʊ ʃ ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "faithfulness",
+      "accent": "us",
+      "ipa": "/ˈfeɪθfəlnəs/",
+      "sha256": "c2b3b11e8982f2307f0df75ae1c3b9bad6a2b45d984a2d41b813c25d7c447b55",
+      "expectedPhones": "f eɪ θ f ə l n ə s",
+      "detectedPhones": "f eɪ θ f l n ɛ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fan dancing",
+      "accent": "uk",
+      "ipa": "/fæn ˈdɑːnsɪŋ/",
+      "sha256": "e1540004824af9efa17a6943faf3e0d504b460bc94e90941d0f78555dfc091ca",
+      "expectedPhones": "f æ n d ɑ n s ɪ ŋ",
+      "detectedPhones": "f æ n d ɑ n s ɪ ŋ g g",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fantasy",
+      "accent": "uk",
+      "ipa": "/ˈfæntəsi/",
+      "sha256": "acacba8ad6a50a0a21615b9edd08fa997b191cdaa5392dc4b73ea63ca7ddd669",
+      "expectedPhones": "f æ n t ə s i",
+      "detectedPhones": "f ə n t ɪ s i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "father-in-law",
+      "accent": "uk",
+      "ipa": "/ˈfɑːðərɪnˌlɔː/",
+      "sha256": "9a88458307716d89e244e29c20141ce31c2a0cefd25e255f58c9f1ab3c782edc",
+      "expectedPhones": "f ɑ ð ɝ ɪ n l ɑ",
+      "detectedPhones": "f ɑ ð ɝ ɹ ɪ n l ɑ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fatigue",
+      "accent": "uk",
+      "ipa": "/fəˈtiːɡ/",
+      "sha256": "e149fc21d730dee9262e16281f13fa7e15ea4fc00d98cfaf1bae84e1de3e6366",
+      "expectedPhones": "f ə t i g",
+      "detectedPhones": "f ɪ t i g ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "festivals",
+      "accent": "uk",
+      "ipa": "/ˈfestɪvəlz/",
+      "sha256": "40cb1aae61caa5e70d4a99f7bc32393a67a4a5c566f42674fc654b11c0404012",
+      "expectedPhones": "f ɛ s t ɪ v ə l z",
+      "detectedPhones": "f ɛ s t ɪ v l z ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "festivals",
+      "accent": "us",
+      "ipa": "/ˈfestɪvəlz/",
+      "sha256": "f2df7a3a3733526558af7c0245dc1df3bdf60cbfd2542992ebfd9d1a18452491",
+      "expectedPhones": "f ɛ s t ə v ə l z",
+      "detectedPhones": "f ɛ s t ɪ v l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "festive atmosphere",
+      "accent": "uk",
+      "ipa": "/ˈfɛstɪv ˈætməsˌfɪə/",
+      "sha256": "5eb5d9e57988c89f464086fed4889cacc8fcd2ae0ccf3be659ac86f65054699b",
+      "expectedPhones": "f ɛ s t ɪ v æ t m ə s f ɪ ə",
+      "detectedPhones": "f ɛ s t ɪ v æ m ɪ s f ɪ ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fiction",
+      "accent": "uk",
+      "ipa": "/ˈfɪkʃən/",
+      "sha256": "75c8f7a1de36203637c086efb687beebeb7911ea7f562edb33adf4ee91009fd1",
+      "expectedPhones": "f ɪ k ʃ ə n",
+      "detectedPhones": "v ɪ k ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fidelity",
+      "accent": "us",
+      "ipa": "/fɪˈdɛləti/",
+      "sha256": "fff195731f8a5620484500bbbbed9f2bff1c9440c716c110053f4eb9d2d3ecac",
+      "expectedPhones": "f ə d ɛ l ə ɾ i",
+      "detectedPhones": "f ɪ d ɛ l ɪ ɾ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "fitness",
+      "accent": "uk",
+      "ipa": "/ˈfɪtnəs/",
+      "sha256": "13751d0e5acb1ffbdf7dc22aa4b499441fdd6c21d4f36b78cf2107f07371610b",
+      "expectedPhones": "f ɪ t n ɪ s",
+      "detectedPhones": "f ɪ n ɪ s ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "flawless",
+      "accent": "uk",
+      "ipa": "/ˈflɔːləs/",
+      "sha256": "574596cda726239e49fbad2d1edddaa32c074d8f30a7f3abbf15e0c96e6afcb6",
+      "expectedPhones": "f l ɑ l ə s",
+      "detectedPhones": "f l ʊ l ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "forgiveness",
+      "accent": "uk",
+      "ipa": "/fəˈɡɪvnəs/",
+      "sha256": "46bff9154f4ae0ee9c77c1cc799aae896ea60f01ef5c7030481bf3ecf02c1a0b",
+      "expectedPhones": "f ə g ɪ v n ɪ s",
+      "detectedPhones": "f ɪ g ɪ v n ɪ s ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "frame",
+      "accent": "uk",
+      "ipa": "/freɪ̯m/",
+      "sha256": "ce35a40be5f0da0aac4d47a28a328524d0ad4785e10457fa62dcd16e1377fe8c",
+      "expectedPhones": "f ɹ eɪ m",
+      "detectedPhones": "ð ə f ɹ eɪ m",
+      "screeningEdits": 2
+    },
+    {
+      "word": "full moon",
+      "accent": "uk",
+      "ipa": "/fʊl muːn/",
+      "sha256": "9d7ee5c5185abe47d6ded89f0ad3c3038437ea505b50561260a26750989f23f6",
+      "expectedPhones": "f ʊ l m u n",
+      "detectedPhones": "f ʊ l m u n ɪ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "furniture",
+      "accent": "uk",
+      "ipa": "/ˈfɜːnɪtʃə/",
+      "sha256": "eca2ebd009b108b10152436f96f9cb4cb88ecee669f093a2dc31f7ab1898485d",
+      "expectedPhones": "f ɝ n ɪ ʧ ə",
+      "detectedPhones": "f ʊ n ɪ ʧ ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "gentleness",
+      "accent": "us",
+      "ipa": "/ˈdʒɛntl̩nəs/",
+      "sha256": "e454c7a30475d2f65d77e4fee16619207b63c9002f40b940f9d58fc773f29921",
+      "expectedPhones": "ʤ ɛ n t ə l n ə s",
+      "detectedPhones": "ʤ ɛ n t l n ɛ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "germany",
+      "accent": "uk",
+      "ipa": "/ˈdʒɜːməni/",
+      "sha256": "c58e8f77a51a86bb678d5ad40253fe1c3f1a8a96f9116245ca89ba32c06ca934",
+      "expectedPhones": "ʤ ɝ m ə n i",
+      "detectedPhones": "ʤ ɝ m ɪ n i h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "gifts",
+      "accent": "uk",
+      "ipa": "/ɡɪfts/",
+      "sha256": "d13a01b2251708406b328db587b3cf06d6a33f8261cdf72641c3f0eb0adc1b8d",
+      "expectedPhones": "g ɪ f t s",
+      "detectedPhones": "g ɪ f t ɪ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "gourmet",
+      "accent": "us",
+      "ipa": "/ɡʊrˈmeɪ/",
+      "sha256": "ed00d2b2a972cbe18916d0d1fcd2327d408c5b5d4fc4b0a43ee4ed50640c0369",
+      "expectedPhones": "g ʊ ɹ m eɪ",
+      "detectedPhones": "g w ɝ m eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "grandson",
+      "accent": "uk",
+      "ipa": "/ˈɡræn(d)sʌn/",
+      "sha256": "3d9f632d02d9825f2d183ff383a5e58e6c97443a5a5215e1028752a6a8608f34",
+      "expectedPhones": "g ɹ æ n d s ə n",
+      "detectedPhones": "g ɹ æ n s ə n h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "green papaya salad",
+      "accent": "us",
+      "ipa": "/ɡriːn pəˈpaɪə ˈsæləd/",
+      "sha256": "627130ebb322465a09e9917e5e54a0c70f43d850a43acf07ecc762e606dc3d28",
+      "expectedPhones": "g ɹ i n p ə p aɪ ə s æ l ə d",
+      "detectedPhones": "g ɹ i n p ə p aɪ ɪ s æ l ɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "grilled chicken",
+      "accent": "uk",
+      "ipa": "/ɡrɪld ˈtʃɪkɪn/",
+      "sha256": "8c1ac55406843989ec34ffe397538fca9a17658158e448b2a8b077d90da8a289",
+      "expectedPhones": "g ɹ ɪ l d ʧ ɪ k ɪ n",
+      "detectedPhones": "g ɹ ɪ l ʧ ɪ k ɪ n ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "grilled chicken",
+      "accent": "us",
+      "ipa": "/ɡrɪld ˈtʃɪkən/",
+      "sha256": "ad721f1b385fa439bbd9636d43fa10d4febac7ed696e043b2f51d878ff9af2ba",
+      "expectedPhones": "g ɹ ɪ l d ʧ ɪ k ə n",
+      "detectedPhones": "g ɹ ɪ l ʧ ɪ k ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "grilled pork with noodles",
+      "accent": "us",
+      "ipa": "/ɡrɪld pork wɪð ˈnuːd(ə)lz/",
+      "sha256": "d01534b29036b89dc70d7c39aaa17aa6534def72ce67ac0d6b4fd47ea3bf75b2",
+      "expectedPhones": "g ɹ ɪ l d p ɑ ɹ k w ɪ ð n u d ə l z",
+      "detectedPhones": "g ɹ ɪ l d p ɑ ɹ k w ɪ θ n u ɾ ə l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "headache",
+      "accent": "uk",
+      "ipa": "/ˈhɛdeɪk/",
+      "sha256": "ef93d30466eb8e6a0414e43f45fbe15d1b36e8660660166297be907981e261f0",
+      "expectedPhones": "h ɛ d eɪ k",
+      "detectedPhones": "ð h æ d eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "headache",
+      "accent": "us",
+      "ipa": "/ˈhɛdeɪk/",
+      "sha256": "66cfc32b5fe3fc0e82b7ed122efb2d88d3e652659af0ef61a1fbf181f45ba1a4",
+      "expectedPhones": "h ɛ d eɪ k",
+      "detectedPhones": "h ə ɾ eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "heartthrob",
+      "accent": "uk",
+      "ipa": "/ˈhɑːtˌθrɒb/",
+      "sha256": "8e2c91b2f9d1abbe1fa56092dd4c93cac68d3914c17c739cbf87725e462b2d31",
+      "expectedPhones": "h ɑ t θ ɹ ɑ b",
+      "detectedPhones": "h ɑ t θ ɹ ə b i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "herbal tea",
+      "accent": "uk",
+      "ipa": "/ˈhɜːbəl tiː/",
+      "sha256": "50a7daee98532cdd476ed233eae052abbb4f00dd1c0378286a6e55282d6b4422",
+      "expectedPhones": "h ɝ b ə l t i",
+      "detectedPhones": "h ə b l t i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "herbal tea",
+      "accent": "us",
+      "ipa": "/ˈɜrbəl ti/",
+      "sha256": "c2619b47748f6a340d75529d906ec19998526523e5d4301e6d530800d49af561",
+      "expectedPhones": "h ɝ ɹ b ə l t i",
+      "detectedPhones": "h ɝ b l t i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "heritage",
+      "accent": "uk",
+      "ipa": "/ˈhɛrɪtɪdʒ/",
+      "sha256": "c72852fe5771e2380eb40cd3cf8a4806b347d094d7cefec9c437a19c43f00b77",
+      "expectedPhones": "h ɛ ɹ ɪ t ɪ ʤ",
+      "detectedPhones": "h aɪ ɹ ɪ t ɪ ʤ u",
+      "screeningEdits": 2
+    },
+    {
+      "word": "hibiscus",
+      "accent": "uk",
+      "ipa": "/hɪˈbɪskəs/",
+      "sha256": "566b32476eaf44d3bda06dc51405ea678a23ecdef4725b010a2b631046872eff",
+      "expectedPhones": "h ɪ b ɪ s k ə s",
+      "detectedPhones": "h ɪ b ɪ s k ʊ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "historical fiction",
+      "accent": "uk",
+      "ipa": "/hɪˈstɒrɪkəl ˈfɪkʃən/",
+      "sha256": "4206896378aad1b038e2ec2244aeb127d533030e5e30fd5edb2f341665d2dfa4",
+      "expectedPhones": "h ɪ s t ɑ ɹ ɪ k ə l f ɪ k ʃ ə n",
+      "detectedPhones": "h ɪ s t ɑ ɹ ɪ k l f ɪ k ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "historical romance",
+      "accent": "uk",
+      "ipa": "/hɪˈstɒrɪkəl rə(ʊ)ˈman(t)s/",
+      "sha256": "77e44637c16f6d5d787ef607cd5b5abb3a1cbe1cbc9e6bd3b5c6bd2ed2e8e203",
+      "expectedPhones": "h ɪ s t ɑ ɹ ɪ k ə l ɹ oʊ m æ n s",
+      "detectedPhones": "h ɪ s t ɑ ɹ ɪ k l ɹ oʊ m æ n t s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "hotel",
+      "accent": "uk",
+      "ipa": "/həʊˈtɛl/",
+      "sha256": "6c29c537a42b61297067e722c09053a85838d47b95bfaeaefcc0e75ce707e0a0",
+      "expectedPhones": "h oʊ t ɛ l",
+      "detectedPhones": "d h ʊ t ɛ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "house dress",
+      "accent": "uk",
+      "ipa": "/haʊ̯s dres/",
+      "sha256": "58339d0f06724a35b1c01b3641a77823135b3e29e4435352fa5795aca6736f6a",
+      "expectedPhones": "h aʊ s d ɹ ɛ s",
+      "detectedPhones": "h aʊ z d ɹ ɛ s ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "industrial waste",
+      "accent": "uk",
+      "ipa": "/ɪnˈdʌstriəl ˈweɪ̯st/",
+      "sha256": "64493ace6f158c61a17a87b5d0a5335af5b9b8049a91643ea834227846c24510",
+      "expectedPhones": "ɪ n d ə s t ɹ ɪ ə l w eɪ s t",
+      "detectedPhones": "ɪ n d ə s t ɹ i ɪ l w eɪ s t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "infatuation",
+      "accent": "us",
+      "ipa": "/ɪnˌfætʃuˈeɪʃən/",
+      "sha256": "e7d298ed6b64284969ce4df79dbcc317b5833f32827d285a74898e61eb25f59c",
+      "expectedPhones": "ɪ n f æ ʧ ə w eɪ ʃ ə n",
+      "detectedPhones": "ɪ n f æ ʧ u w eɪ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "innovation",
+      "accent": "us",
+      "ipa": "/ˌɪnəˈveɪʃən/",
+      "sha256": "e9b262006ab6abc62f3437a974d7ff25dde77d7c759c0f60c81572a3b98d3b5e",
+      "expectedPhones": "ɪ n ə v eɪ ʃ ə n",
+      "detectedPhones": "ɪ n ɪ v eɪ ʃ ɛ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "interpersonal skills",
+      "accent": "us",
+      "ipa": "/ˌɪntərˈpɜːrsənəl skɪlz/",
+      "sha256": "6dbaacf4c5b73193cf243146b149f00091193c335cef5a8eed5745a5e1f72cf5",
+      "expectedPhones": "ɪ n t ɝ p ɝ ɹ s ə n ə l s k ɪ l z",
+      "detectedPhones": "ɪ n t ɝ p ɝ s n ə l s k ɪ l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "investment",
+      "accent": "uk",
+      "ipa": "/ɪnˈvɛstmənt/",
+      "sha256": "dd24639f89e6488e16f336c61603d8db3aa297d9931c44407cd7fba3afa31cd6",
+      "expectedPhones": "ɪ n v ɛ s t m ə n t",
+      "detectedPhones": "ɪ n v ɛ s t m ɪ n t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "japan",
+      "accent": "uk",
+      "ipa": "/dʒəˈpæn/",
+      "sha256": "8397f237bbb34b8a0dc2b00252fc5aa91cc97d673280d04f1103fc94f6e3fded",
+      "expectedPhones": "ʤ ə p æ n",
+      "detectedPhones": "ʤ ɪ p ə n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "jasmine",
+      "accent": "us",
+      "ipa": "/ˈdʒæzmən/",
+      "sha256": "2cb3402ef22ebc1d75488bab6348f3930727b616d53172836d0f366594869b6b",
+      "expectedPhones": "ʤ æ z m ə n",
+      "detectedPhones": "ʤ ɑ z m ɛ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "joy",
+      "accent": "uk",
+      "ipa": "/dʒɔɪ/",
+      "sha256": "e2c0e4733bbe6b36b5ee0e7f6db348d6978a246f4b6538eff6d4d95e63b77247",
+      "expectedPhones": "ʤ ɑ ɪ",
+      "detectedPhones": "ʤ ɔɪ θ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "kiwi",
+      "accent": "us",
+      "ipa": "/ˈkiːwi/",
+      "sha256": "12f64538e933de31a3dbfd74011756121ff51c342781387303a0967a40188358",
+      "expectedPhones": "k i w i",
+      "detectedPhones": "t ɪ w i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "knowledge",
+      "accent": "uk",
+      "ipa": "/ˈnɒlɪdʒ/",
+      "sha256": "f50ed2374b318dd747e54b4be442f85192aa36114b70f41c3bbdd0931b364354",
+      "expectedPhones": "n ɑ l ɪ ʤ",
+      "detectedPhones": "n oʊ l ɪ ʤ ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "knowledge",
+      "accent": "us",
+      "ipa": "/ˈnɑlɪdʒ/",
+      "sha256": "19f921d7c707b1b100ef9a15c6644e2fb0b63a1029f0b8f974bbcc4aed4c96a1",
+      "expectedPhones": "n ɑ l ə ʤ",
+      "detectedPhones": "n ɑ l ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "lantern festival",
+      "accent": "us",
+      "ipa": "/ˌlæn(t)ərn ˈfɛstəv(ə)l/",
+      "sha256": "2a52e07bca7cd9a579c3e097155c94f0a9143e9f1474c67dd995d106f1c59f4b",
+      "expectedPhones": "l æ n t ɝ n f ɛ s t ə v ə l",
+      "detectedPhones": "l æ n t ɝ n f ɛ s t ɪ v l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "lantern procession",
+      "accent": "us",
+      "ipa": "/ˈlæntərn prəˈsɛʃən/",
+      "sha256": "a775bc4e258875c4546dfbae96ae9c41f4a6ba2258fd18eaa80d23120bf31d2f",
+      "expectedPhones": "l æ n t ɝ n p ɹ ə s ɛ ʃ ə n",
+      "detectedPhones": "l æ n t ɝ n p ɹ ɝ s ɛ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "lantern riddles",
+      "accent": "uk",
+      "ipa": "/ˈlæntən ˈrɪdəlz/",
+      "sha256": "383efd82603c0b7bf1a982a443dd40896da090ad26257d015d66b012cc233dcd",
+      "expectedPhones": "l æ n t ə n ɹ ɪ d ə l z",
+      "detectedPhones": "l ə n t ɪ n ɹ ɪ d ə l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "learning",
+      "accent": "uk",
+      "ipa": "/ˈlɜːnɪŋ/",
+      "sha256": "8c09f7050a0760d937f1c5884a5a265846f8f3b976b9dfdc372e3010a0e37aee",
+      "expectedPhones": "l ɝ n ɪ ŋ",
+      "detectedPhones": "l ʊ n ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "leggings",
+      "accent": "uk",
+      "ipa": "/ˈleɡɪŋz/",
+      "sha256": "1f7e0eb494013bfe79da963b1bfe08e562cac9218b77e3ee9feef55bbc28b328",
+      "expectedPhones": "l ɛ g ɪ ŋ z",
+      "detectedPhones": "l ɛ k ɪ ŋ z ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "leisure",
+      "accent": "uk",
+      "ipa": "/ˈlɛʒə/",
+      "sha256": "36758858d418e966dfce42201acdd4bbdfd2a5e6c00d4ed7e54293ee5e8e051f",
+      "expectedPhones": "l ɛ ʒ ə",
+      "detectedPhones": "l ɛ ʃ ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "lemon",
+      "accent": "us",
+      "ipa": "/ˈlɛmən/",
+      "sha256": "3cb72b89501378bf2dd19bcfd4af21a6cac0548f6d19e1819c7c73e82d5fc919",
+      "expectedPhones": "l ɛ m ə n",
+      "detectedPhones": "ə l ɛ m ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "library",
+      "accent": "uk",
+      "ipa": "/ˈlaɪbrəri/",
+      "sha256": "c79557121aba9055642ec6d7a605f5a012c99c7b73dfd378430b9a19f0ab3acb",
+      "expectedPhones": "l aɪ b ɹ ɝ i",
+      "detectedPhones": "l aɪ b ɹ ɝ ɹ i z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "lion",
+      "accent": "uk",
+      "ipa": "/ˈlaɪən/",
+      "sha256": "3327140ea5f3a2467726a79d6bd617e0f3b3373201713dd16317ca1858fde960",
+      "expectedPhones": "l aɪ ə n",
+      "detectedPhones": "l aɪ ɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "loss",
+      "accent": "uk",
+      "ipa": "/lɒs/",
+      "sha256": "cce60ac9f81bda4af3c332cc74f6fa8432050cfa1a0251b88c04c49103c7a508",
+      "expectedPhones": "l ɑ s",
+      "detectedPhones": "n oʊ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "loyalty",
+      "accent": "uk",
+      "ipa": "/ˈlɔɪəlti/",
+      "sha256": "f9ee4ee6fbadad447ff7ecd674a67ec008235a5cf8104eaea27c18f8551b7665",
+      "expectedPhones": "l ɑ ɪ ə l t i",
+      "detectedPhones": "l ɔɪ ɪ l t i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "mancala",
+      "accent": "uk",
+      "ipa": "/mænˈkɑːlə/",
+      "sha256": "f72d6210427ab39194c714d0708e99b5f76c0cc434434660f95ee6d89228dec3",
+      "expectedPhones": "m æ n k ɑ l ə",
+      "detectedPhones": "m æ n k ɑ l ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "mancala",
+      "accent": "us",
+      "ipa": "/mɑːnˈkɑːlə/",
+      "sha256": "cb6af16f56fa68edc1f1c9cbf4b55cfb8cf071ec85d1fff62219661fecf53c8a",
+      "expectedPhones": "m ɑ n k ɑ l ə",
+      "detectedPhones": "m aɪ n k ɑ l eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "megapixel",
+      "accent": "us",
+      "ipa": "/ˈmeɡəpɪksəl/",
+      "sha256": "b2deb6a318a10ad71431cdd670942b51a79675e754311dda3f54846cb2061140",
+      "expectedPhones": "m ɛ g ə p ɪ k s ə l",
+      "detectedPhones": "m ɛ g ɪ p ɪ k s ʊ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "mid-autumn festival",
+      "accent": "uk",
+      "ipa": "/mɪd ˈɔːtəm ˈfɛstɪvəl/",
+      "sha256": "9ee010423c044dcdb8bc7af93b0b67d86b22f9f7dd4710d091befa357b1842b6",
+      "expectedPhones": "m ɪ d ɑ t ə m f ɛ s t ɪ v ə l",
+      "detectedPhones": "m ɪ d oʊ t ɪ m f ɛ s t ɪ v ə l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "mistletoe",
+      "accent": "us",
+      "ipa": "/ˈmɪsəlˌtoʊ/",
+      "sha256": "047caaea33fee99522ea30f5123e4ffce4e9d40b052b3a874fe5a3baf029f9c3",
+      "expectedPhones": "m ɪ s ə l t oʊ",
+      "detectedPhones": "m ɪ s l t h oʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "modesty",
+      "accent": "us",
+      "ipa": "/ˈmɑːdəsti/",
+      "sha256": "12056e65bfd7ddc0f6cfec1b9c2a4dd0058d405e326c33d6065f318cd5ffd942",
+      "expectedPhones": "m ɑ d ə s t i",
+      "detectedPhones": "m ɑ ɾ ɪ s t i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "moon festival games",
+      "accent": "us",
+      "ipa": "/mun ˈfɛstəvəl ɡeɪmz/",
+      "sha256": "e9e851aaa04748a355c40b6c56a2b3a772f1ed02c6338737e4c9f331ba14cc8f",
+      "expectedPhones": "m u n f ɛ s t ə v ə l g eɪ m z",
+      "detectedPhones": "m u n f ɛ s t ɪ v l g eɪ m z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "moon worship",
+      "accent": "us",
+      "ipa": "/mun ˈwɜrʃɪp/",
+      "sha256": "e715155292298d0405489c85b2be2d258289004f7aadbee467f99d4f68b43584",
+      "expectedPhones": "m u n w ɝ ɹ ʃ ə p",
+      "detectedPhones": "m u n w ɝ ʃ ɪ p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "mother-in-law",
+      "accent": "uk",
+      "ipa": "/ˈmʌðərɪnˌlɔː/",
+      "sha256": "56a624094061202841ab082a8bb3e1be77d9128ef33038b73a527cc63eb8eec5",
+      "expectedPhones": "m ə ð ɝ ɪ n l ɑ",
+      "detectedPhones": "ð m ə ð ɝ ɪ n l ɑ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "negotiation",
+      "accent": "uk",
+      "ipa": "/nɪˌɡəʊʃiˈeɪʃən/",
+      "sha256": "fcfcbe2dcc998408ffcb075fb8fb8d175608fdd8ff65f2168cfe3d51a29f51cf",
+      "expectedPhones": "n ɪ g oʊ ʃ ɪ eɪ ʃ ə n",
+      "detectedPhones": "n ɪ g oʊ ʃ i eɪ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "nephew",
+      "accent": "uk",
+      "ipa": "/ˈnefjuː/",
+      "sha256": "edfd0eb78f869895108da3cc52929fc01936584ef5d03efd9420a585fe4f0be2",
+      "expectedPhones": "n ɛ v j u",
+      "detectedPhones": "n oʊ v j u h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "networking",
+      "accent": "uk",
+      "ipa": "/ˈnetwɜːkɪŋ/",
+      "sha256": "b5b8b6c712047c305cc0d70ddcc75c508f9b05c601a20b05f9b66f9136231874",
+      "expectedPhones": "n ɛ t w ə k ɪ ŋ",
+      "detectedPhones": "n ɛ t w ɝ k ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "night gown",
+      "accent": "uk",
+      "ipa": "/naɪ̯t ˈɡaʊ̯n/",
+      "sha256": "7cdba7cbc61b0ebd865ec3f7c7a8a59aa6261f26c7ed6d3bc84d91863d327346",
+      "expectedPhones": "n aɪ t g aʊ n",
+      "detectedPhones": "n aɪ t s g aʊ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "no overtaking",
+      "accent": "uk",
+      "ipa": "/nəʊ ˌəʊvəˈteɪkɪŋ/",
+      "sha256": "d6a725c9594674ba75b0b4756b56a852c01bd0f21d5a2538d01854197f520b30",
+      "expectedPhones": "n oʊ oʊ v ə t eɪ k ɪ ŋ",
+      "detectedPhones": "n oʊ oʊ v ɪ t eɪ k ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "no u-turn",
+      "accent": "uk",
+      "ipa": "/nəʊ ˈjuː tɜːn/",
+      "sha256": "87ad15ffec810ba658d338bb9363452eab5bb126ff46dc44a80275ab943cfa3f",
+      "expectedPhones": "n oʊ j u t ɝ n",
+      "detectedPhones": "n oʊ j u t ə n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "numbness",
+      "accent": "uk",
+      "ipa": "/ˈnʌmnəs/",
+      "sha256": "0c0118a615024aa3bf27a321727eea2000b611875c9eba3210e5d552de73f00d",
+      "expectedPhones": "n ə m n ə s",
+      "detectedPhones": "n ə m n ɪ s eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "offside",
+      "accent": "uk",
+      "ipa": "/ˌɒfˈsaɪd/",
+      "sha256": "13c3a3af7ffc8716e6a080003a3bd5427ba82844b37b2d7cbba27fc7aefe91d3",
+      "expectedPhones": "ɑ f s aɪ d",
+      "detectedPhones": "m oʊ f s aɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "orchid",
+      "accent": "us",
+      "ipa": "/ˈɔrkɪd/",
+      "sha256": "9a6dcb26eb26b17f65e256145a6021245f516da9785820b28490939494681f0c",
+      "expectedPhones": "ɑ ɹ k ɪ d",
+      "detectedPhones": "w ɝ k ɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "ornaments",
+      "accent": "us",
+      "ipa": "/ˈɔːrnəmənts/",
+      "sha256": "d25f1bf0eea844786f5296bab36f92f387eb907e30e2130fcbcecff3f865ee13",
+      "expectedPhones": "ɑ ɹ n ə m ə n t s",
+      "detectedPhones": "ɑ ɹ n ɪ m ɛ n t s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "oven",
+      "accent": "uk",
+      "ipa": "/ˈʌvən/",
+      "sha256": "3f7edad230e562236130310753094249e6f43f855d4d92556d59380b6270a828",
+      "expectedPhones": "ə v ə n",
+      "detectedPhones": "ə v ɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "overjoyed",
+      "accent": "us",
+      "ipa": "/ˌoʊvərˈdʒɔɪd/",
+      "sha256": "33be77871b27bfc2197203a095556354bb54de30617944b3e4011736305eeb19",
+      "expectedPhones": "oʊ v ɝ ʤ ɑ ɪ d",
+      "detectedPhones": "oʊ v ɝ ʤ ɔɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "overwhelmed",
+      "accent": "uk",
+      "ipa": "/ˌəʊvəˈwelmd/",
+      "sha256": "0fa5cc109de4367af8d79937a6e7b1426252942b3ae02fa740811524834f1c55",
+      "expectedPhones": "oʊ v ə w ɛ l m d",
+      "detectedPhones": "oʊ v ʊ w ɛ l m d ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "park",
+      "accent": "uk",
+      "ipa": "/pɑːk/",
+      "sha256": "c708409b09958830f7b037d5e0106063036f937911ab91ad8dc575af93dd7b39",
+      "expectedPhones": "p ɑ k",
+      "detectedPhones": "p ə k t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "payment",
+      "accent": "uk",
+      "ipa": "/ˈpeɪmənt/",
+      "sha256": "2aaca10315840e25f1b23f956749bfa3a099545f14a88baa3ec86ae6a6e19ff9",
+      "expectedPhones": "p eɪ m ə n t",
+      "detectedPhones": "p eɪ m ɪ n t ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "peach",
+      "accent": "uk",
+      "ipa": "/ˈpiːtʃ/",
+      "sha256": "217ea8f0772d9d0624d7dd8ba7ffe2d475ec67ed27b7d579133ba60e804d8749",
+      "expectedPhones": "p i ʧ",
+      "detectedPhones": "p i ʧ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pedestrian",
+      "accent": "uk",
+      "ipa": "/pəˈdɛstriən/",
+      "sha256": "cb7cf71c3376136b15f2d83e11671aaec7478af2b5e2983c572c972f4ae7d9df",
+      "expectedPhones": "p ɪ d ɛ s t ɹ ɪ ə n",
+      "detectedPhones": "p ɪ d ɛ s t ɹ i ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pedestrian crossing",
+      "accent": "uk",
+      "ipa": "/pəˈdɛstriən ˈkrɒsɪŋ/",
+      "sha256": "ad72293ca023f1bd540a823f02a1f2ecbde06d8e3273af5341ad555e021658f7",
+      "expectedPhones": "p ɪ d ɛ s t ɹ ɪ ə n k ɹ ɑ s ɪ ŋ",
+      "detectedPhones": "p ɪ d ɛ s t ɹ i ɪ n k ɹ ɑ s ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pedestrian crossing",
+      "accent": "us",
+      "ipa": "/pəˈdɛstriən ˈkrɔsɪŋ/",
+      "sha256": "e8d38a88d44da140b867cb09cbb42a42263348e0cd751905889dcc44d999976b",
+      "expectedPhones": "p ə d ɛ s t ɹ i ə n k ɹ ɑ s ɪ ŋ",
+      "detectedPhones": "p ɪ d ɛ s t ɹ i ɪ n k ɹ ɑ s ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "peony",
+      "accent": "uk",
+      "ipa": "/ˈpiːəni/",
+      "sha256": "66b6d7472cb2f189ece8265ec1dceca84498f862115258337e67aef3a47271cc",
+      "expectedPhones": "p i ə n i",
+      "detectedPhones": "p i ɪ n i h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pesticide",
+      "accent": "us",
+      "ipa": "/ˈpɛstɪˌsaɪd/",
+      "sha256": "b1d043ebb913e31a8db44bc5ceb88ec482262f834c276b1ef4bac2ec1995e433",
+      "expectedPhones": "p ɛ s t ə s aɪ d",
+      "detectedPhones": "p æ s t ɪ s aɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "photographer",
+      "accent": "us",
+      "ipa": "/fəˈtɑɡrəfər/",
+      "sha256": "5ead13c4e593f360f8072b543a0ce10c6223f1ea497fb26c5c46f853c2c8c163",
+      "expectedPhones": "f ə t ɑ g ɹ ə f ɝ",
+      "detectedPhones": "f ɪ t ɑ g ɹ ɝ f ɝ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pickled vegetables",
+      "accent": "uk",
+      "ipa": "/ˈpɪkəld ˈvedʒtəbəlz/",
+      "sha256": "1651ba6d9367ad826368804225942237afe580e5ab3001b059714d64e573b560",
+      "expectedPhones": "p ɪ k l d v ɛ ʤ ɪ t ə b ə l z",
+      "detectedPhones": "p ɪ k l d v ɛ ʤ ɪ t ɪ b l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pickled vegetables",
+      "accent": "us",
+      "ipa": "/ˈpɪkəld ˈvedʒtəbəlz/",
+      "sha256": "417fd06aeebf99b273425468f5fbdd6ebe371721d4f8619d3721bee5dd56aa6a",
+      "expectedPhones": "p ɪ k ə l d v ɛ ʤ t ə b ə l z",
+      "detectedPhones": "p ɪ k l d v ɛ ʤ t ə b l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pineapple",
+      "accent": "uk",
+      "ipa": "/ˈpaɪnæpəl/",
+      "sha256": "c7ec106009fd339ff1af88320e6f8c4fcc406c5a66a8fbccf82a11c75d1b8ecb",
+      "expectedPhones": "p aɪ n æ p ə l",
+      "detectedPhones": "p aɪ n æ p oʊ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pink",
+      "accent": "us",
+      "ipa": "/ˈpɪŋk/",
+      "sha256": "d43662130691e6ed5e7272ab31e980e114625ef8f0aa4b9860b4886ee8322186",
+      "expectedPhones": "p ɪ ŋ k",
+      "detectedPhones": "p i ŋ k ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "playing tennis",
+      "accent": "us",
+      "ipa": "/ˈpleɪɪŋ ˈtɛnɪs/",
+      "sha256": "c1f19755965d66a7cd08a1eb52d03f18b8f803af27b7ff80f8912742cd1e9d00",
+      "expectedPhones": "p l eɪ ɪ ŋ t ɛ n ə s",
+      "detectedPhones": "p l eɪ i ŋ t ɛ n ɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pleated skirt",
+      "accent": "uk",
+      "ipa": "/ˈpliːtɪd skɜːt/",
+      "sha256": "de3c9a2af5eb12c679846712ffd166d9b35d4c78aa0f1eeacf944308531dcfb3",
+      "expectedPhones": "p l i t ɪ d s k ɝ t",
+      "detectedPhones": "p l i t ɪ d s k ə t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pleated skirt",
+      "accent": "us",
+      "ipa": "/ˈpliːtɪd skɜːrt/",
+      "sha256": "9f4883bfb6ca662467d5becf6466568d56e12b1cd3d56a11af4f02bd3b2e28c9",
+      "expectedPhones": "p l i ɾ ᵻ d s k ɝ ɹ t",
+      "detectedPhones": "p l i ɾ ɪ d s k ɝ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pomegranate",
+      "accent": "uk",
+      "ipa": "/ˈpɒmɪ(ˌ)ɡrænɪt/",
+      "sha256": "8bc452053c8e7a5059cb0ef3d6a41942fb26809dcefd8b3aa7b5898d1e9698bf",
+      "expectedPhones": "p ɑ m ɪ g ɹ æ n ɪ t",
+      "detectedPhones": "p oʊ m ɪ g ɹ æ n ɪ t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pomelo",
+      "accent": "uk",
+      "ipa": "/ˈpɒmɪləʊ/",
+      "sha256": "7685679f191822e0774129cfb6da6d044d7a6b43f24a6413381f0258e2768b2f",
+      "expectedPhones": "p ɑ m ɪ l oʊ",
+      "detectedPhones": "p oʊ m ɪ l eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "portrait",
+      "accent": "uk",
+      "ipa": "/ˈpɔːtreɪt/",
+      "sha256": "bf8e76c3ca1379f994ab8eddbe6865f82122646036a2be714039e69e600e5013",
+      "expectedPhones": "p ɑ t ɹ eɪ t",
+      "detectedPhones": "p ʊ ə t ɹ eɪ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "pot",
+      "accent": "uk",
+      "ipa": "/pɒt/",
+      "sha256": "e804872761338fcb43c7f44da7dd6c570392f4cf4ea158f705d5db29407d1f52",
+      "expectedPhones": "p ɑ t",
+      "detectedPhones": "p oʊ ə t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "prescription",
+      "accent": "uk",
+      "ipa": "/prəˈskrɪpʃən/",
+      "sha256": "6ab643122ae6603b91f2ed8b848e9d232d985fab4eaf6ca9cb4bddae64572d5e",
+      "expectedPhones": "p ɹ ɪ s k ɹ ɪ p ʃ ə n",
+      "detectedPhones": "p ɹ ɪ s k ɹ ɪ p ʃ ɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "presentation",
+      "accent": "uk",
+      "ipa": "/ˌprɛzənˈteɪʃən/",
+      "sha256": "9e2b87b44ef4a9812c1bae971514e8762b68d5417dfbd21068d5f501397d0050",
+      "expectedPhones": "p ɹ ɛ z ə n t eɪ ʃ ə n",
+      "detectedPhones": "p ɹ ɛ z ɪ n t eɪ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "presentation skills",
+      "accent": "uk",
+      "ipa": "/ˌprɛzənˈteɪʃən skɪlz/",
+      "sha256": "c1f5d93a64b335cf78ecd6840a5075826d9bfc5619b85b3277f53dea30229028",
+      "expectedPhones": "p ɹ ɛ z ə n t eɪ ʃ ə n s k ɪ l z",
+      "detectedPhones": "p ɹ ɛ z ɪ n t eɪ ʃ ɪ n s k ɪ l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "presentation skills",
+      "accent": "us",
+      "ipa": "/ˌprɛzənˈteɪʃən skɪlz/",
+      "sha256": "27859e5efca4117f803a0fcb367faca37a15eae0438b9e77e788b21f8d9a9e98",
+      "expectedPhones": "p ɹ ɛ z ə n t eɪ ʃ ə n s k ɪ l z",
+      "detectedPhones": "p ɹ ɛ z ɪ n t eɪ ʃ ɪ n s k ɪ l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "problem-solving",
+      "accent": "uk",
+      "ipa": "/ˈprɒbləm ˌsɒlvɪŋ/",
+      "sha256": "5ad00a7e857b712e50af7f06c414fc720918fe7ec0901486155b8aa1e059f1f4",
+      "expectedPhones": "p ɹ ɑ b l ə m s ɑ l v ɪ ŋ",
+      "detectedPhones": "p ɹ ɑ b l ɪ m s oʊ l v ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "productivity",
+      "accent": "uk",
+      "ipa": "/ˌprɒdʌkˈtɪvəti/",
+      "sha256": "9cac78be35a1fdea931ad96c70208e0612d324ac685dd0704337a25a5689b2d9",
+      "expectedPhones": "p ɹ ɑ d ə k t ɪ v ɪ t i",
+      "detectedPhones": "p ɹ oʊ d ə t ɪ v ɪ t i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "promotion",
+      "accent": "uk",
+      "ipa": "/prəˈməʊʃn̩/",
+      "sha256": "b44e349831b76488e936fefd43541535566605226fd6b64dbf0293474fc78d6d",
+      "expectedPhones": "p ɹ ə m oʊ ʃ ə n",
+      "detectedPhones": "p ɹ ɝ m oʊ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "public transport",
+      "accent": "uk",
+      "ipa": "/ˌpʌblɪk ˈtrænspɔːt/",
+      "sha256": "35a52c18b2bbf16ff8478dd1d02c67da6fe1483255c01e18b039d52f8ab8e8f3",
+      "expectedPhones": "p ə b l ɪ k t ɹ ɑ n s p ɑ t",
+      "detectedPhones": "p ə b l ɪ k t ɹ æ n s p ɑ t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "radish",
+      "accent": "us",
+      "ipa": "/ˈrædɪʃ/",
+      "sha256": "41b09ba35194b61c1bb3703df09b1b64923ac3faa9f665969927d87a9689b709",
+      "expectedPhones": "ɹ æ d ɪ ʃ",
+      "detectedPhones": "ɹ æ ɾ ɪ ʃ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "referee",
+      "accent": "uk",
+      "ipa": "/ˌrɛfəˈriː/",
+      "sha256": "2adeada83e0fe670fa91fe1e0b0cbff0b1039e68ecaba06530ae2c5ea7961135",
+      "expectedPhones": "ɹ ɛ f ɝ i",
+      "detectedPhones": "ɹ ɛ s ɝ i h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "relaxation",
+      "accent": "us",
+      "ipa": "/rəˌlækˈseɪʃən/",
+      "sha256": "49ec61dd2d4f38f9d9e152480b0ac0ccba0ad7fb01973ad8892de4af73d46449",
+      "expectedPhones": "ɹ ə l æ k s eɪ ʃ ə n",
+      "detectedPhones": "ɹ ɪ l æ k s eɪ ʃ ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "report",
+      "accent": "uk",
+      "ipa": "/rɪˈpɔːt/",
+      "sha256": "2a3de84441d2629a8d058e8ee9f78b437a88a646be9df55786d4427357a837b0",
+      "expectedPhones": "ɹ ɪ p ɑ t",
+      "detectedPhones": "ɹ ɪ p ʊ ɪ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "research",
+      "accent": "uk",
+      "ipa": "/rɪˈsɜːtʃ/",
+      "sha256": "9711cfd24d4249b009c20133d935105c57e1635900de1a670b07aa27277954f5",
+      "expectedPhones": "ɹ ɪ s ɝ ʧ",
+      "detectedPhones": "ɹ i s ɝ ʧ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "reunion",
+      "accent": "us",
+      "ipa": "/riːˈjuːnjən/",
+      "sha256": "257cc8bed1b97abd15eef2af2aafaabc1a055a90e45ed2155aa18cad26b6c66d",
+      "expectedPhones": "ɹ i j u n j ə n",
+      "detectedPhones": "ɹ i j ʊ n j ɛ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "rhythm",
+      "accent": "uk",
+      "ipa": "/ˈrɪðəm/",
+      "sha256": "535251ade1d45b85c71d3873ad6e4a2c9d9e2ede8e0add0a9ffda44f04022100",
+      "expectedPhones": "ɹ ɪ ð ə m",
+      "detectedPhones": "ɹ ɪ ð ɪ m z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "ritual",
+      "accent": "uk",
+      "ipa": "/ˈrɪtʃuəl/",
+      "sha256": "2598495ff81a412f3a88f453afb0ed50d73686c03ae21c0ad331ada1f0ec795c",
+      "expectedPhones": "ɹ ɪ ʧ ʊ ə l",
+      "detectedPhones": "ɹ ɪ ʧ u ʊ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "roller skates",
+      "accent": "uk",
+      "ipa": "/ˈrəʊlə skeɪts/",
+      "sha256": "bbfa9ce14f0036ea0fdfda66e3f13542cdef3851181613984cffcb00d2ff51b0",
+      "expectedPhones": "ɹ oʊ l ə s k eɪ t s",
+      "detectedPhones": "ɹ oʊ l ɪ s k eɪ t s ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "romantic comedy",
+      "accent": "us",
+      "ipa": "/roʊˈmæn(t)ɪk ˈkɑmədi/",
+      "sha256": "1b64c0de30dcd36561080ea354f89e7e02b7bbe105bb250b0aa51649a2c6901c",
+      "expectedPhones": "ɹ oʊ m æ n t ɪ k k ɑ m ə d i",
+      "detectedPhones": "ɹ oʊ m æ n t ɪ k h ɑ m ɪ d i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "roof",
+      "accent": "uk",
+      "ipa": "/ruːf/",
+      "sha256": "9265e8e42c3d7155bda4f4101ae01c7b26b27c5a7ada8e4a1b6354702612c75b",
+      "expectedPhones": "ɹ u f",
+      "detectedPhones": "ɹ i θ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sales",
+      "accent": "uk",
+      "ipa": "/seɪlz/",
+      "sha256": "640f6f0709cad481a1b27718987cc0a20de26b22fef422d663c82ba1565621db",
+      "expectedPhones": "s eɪ l z",
+      "detectedPhones": "b ɪ s eɪ l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "salmon",
+      "accent": "uk",
+      "ipa": "/ˈsæmən/",
+      "sha256": "68e18305f521539fba96acd2bdcf8c897da76932db8282b865c1893945821588",
+      "expectedPhones": "s æ m ə n",
+      "detectedPhones": "s ə m ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "scooter",
+      "accent": "uk",
+      "ipa": "/ˈskuːtə/",
+      "sha256": "011b260d39cad1c3689fb4caa152245894b17cd0c5c2f4bd58feb85c911142ba",
+      "expectedPhones": "s k u t ə",
+      "detectedPhones": "ð ə s k u t ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "shortness of breath",
+      "accent": "us",
+      "ipa": "/ˈʃɔːrtnəs əv breθ/",
+      "sha256": "e98f7e1f6f784bccb7d15f379882f047472e1f0aff98a5c06fb6bd31a07f74d7",
+      "expectedPhones": "ʃ ɑ ɹ t n ə s ə v b ɹ ɛ θ",
+      "detectedPhones": "ʃ ɑ ɹ n ɪ s ə v b ɹ ɛ θ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "shrimp",
+      "accent": "uk",
+      "ipa": "/ʃrɪmp/",
+      "sha256": "2c87294cd8995034ce41186f4da9af6bb98b9900b0017972ead228cefa9df539",
+      "expectedPhones": "ʃ ɹ ɪ m p",
+      "detectedPhones": "ʃ ɹ ɪ n d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "shutter",
+      "accent": "uk",
+      "ipa": "/ˈʃʌtə/",
+      "sha256": "6eacb1c37ea7df960fc5476927d8a811d73227de82f3f7a1f8aa7ac702057bab",
+      "expectedPhones": "ʃ ə t ə",
+      "detectedPhones": "ʃ ɑ t ɛ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sketch",
+      "accent": "uk",
+      "ipa": "/ˈskɛtʃ/",
+      "sha256": "520ca80683714492734d770be41176c2ba7cd9ba73db724bc2b6b3a0d5227ca2",
+      "expectedPhones": "s k ɛ ʧ",
+      "detectedPhones": "ð ə s k ɛ ʧ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "slip dress",
+      "accent": "us",
+      "ipa": "/ˈslɪp drɛs/",
+      "sha256": "5063bd101aff29603fd2344dc47763ca04e01a79c2c37947cc40f8ac9512cabd",
+      "expectedPhones": "s l ɪ p d ɹ ɛ s",
+      "detectedPhones": "ɪ s l ɪ m p d ɹ ɛ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sneezing",
+      "accent": "uk",
+      "ipa": "/ˈsniːzɪŋ/",
+      "sha256": "6076bf8e8ed6140adbd410d03932fb6b0acc3b2e101ec99ae5822bc84bd6953e",
+      "expectedPhones": "s n i z ɪ ŋ",
+      "detectedPhones": "ð ə s n i z ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "soda water",
+      "accent": "us",
+      "ipa": "/ˈsoʊdə ˈwɔːtər/",
+      "sha256": "960cc7be8d707b22bffdf9336fa1fc319c55e935ed9771a4df0465fcad64c137",
+      "expectedPhones": "s oʊ d ə w ɑ ɾ ɝ",
+      "detectedPhones": "s oʊ ɾ ʊ w ɑ ɾ ɝ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sophisticated",
+      "accent": "uk",
+      "ipa": "/səˈfɪstɪkeɪtɪd/",
+      "sha256": "11c6a2fa84009bdd4506013bcd58e9fe2c029939f0954e47e906b7eac961512d",
+      "expectedPhones": "s ə f ɪ s t ɪ k eɪ t ɪ d",
+      "detectedPhones": "s ɪ f ɪ s t ɪ k eɪ t ɪ d ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sore throat",
+      "accent": "uk",
+      "ipa": "/sɔː ˈθrəʊt/",
+      "sha256": "eb83f6b41bebba74c0807f2ccf98d45f9ee7159cd20987dfd55b3ec862835f26",
+      "expectedPhones": "s ɑ θ ɹ oʊ t",
+      "detectedPhones": "s ʊ l θ ɹ oʊ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sour soup",
+      "accent": "uk",
+      "ipa": "/ˈsaʊə suːp/",
+      "sha256": "13497739eaaa66f29c76235bdaa8921eb8115910cbd88ca8ce2562c1ed73adfd",
+      "expectedPhones": "s aʊ ə s u p",
+      "detectedPhones": "ð s aʊ ə s i p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "squid",
+      "accent": "uk",
+      "ipa": "/skwɪd/",
+      "sha256": "0cdbabf70a21396397baadc664d692ecc0d678873bc3990988a8343a34be43e7",
+      "expectedPhones": "s k w ɪ d",
+      "detectedPhones": "ð ə s k w ɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "stadium",
+      "accent": "uk",
+      "ipa": "/ˈsteɪdiəm/",
+      "sha256": "407300bd7f4b9b8c20de2e8eee50204eb4246a5120da62934656f8c8744dabb3",
+      "expectedPhones": "s t eɪ d ɪ ə m",
+      "detectedPhones": "s t eɪ d i ɪ m",
+      "screeningEdits": 2
+    },
+    {
+      "word": "stick and hoop",
+      "accent": "us",
+      "ipa": "/stɪk ˈænd huːp/",
+      "sha256": "13d16519ce17615ee46d07ea2c05b745760f313b04f6dc959048700302ab9783",
+      "expectedPhones": "s t ɪ k æ n d h u p",
+      "detectedPhones": "s t ɪ k ɪ n h u p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "stir-fried noodles",
+      "accent": "uk",
+      "ipa": "/stɜː fraɪd ˈnuːd(ə)lz/",
+      "sha256": "764efcf35afcf588fe90e70b62b04b07284751b33ab1163488554cba9184360a",
+      "expectedPhones": "s t ɝ f ɹ aɪ d n u d ə l z",
+      "detectedPhones": "s t ə f ɹ aɪ d n u d l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "stir-fried noodles",
+      "accent": "us",
+      "ipa": "/stɜr fraɪd ˈnuːd(ə)lz/",
+      "sha256": "8cf9a9da7bfead0c8eb66b96819e3017aded56e13eda4757e2b4a18c54ba5362",
+      "expectedPhones": "s t ɝ ɹ f ɹ aɪ d n u d ə l z",
+      "detectedPhones": "s t ɝ f ɹ aɪ n u d ə l z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "strategy",
+      "accent": "us",
+      "ipa": "/ˈstrætədʒi/",
+      "sha256": "35ca84844213bac6bff805bf1343fd6f002e93738a1e65ffc7008b486fd0ef02",
+      "expectedPhones": "s t ɹ æ ɾ ə ʤ i",
+      "detectedPhones": "s t ɹ ɑ ɾ ɪ ʤ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "student",
+      "accent": "us",
+      "ipa": "/ˈstudn̩t/",
+      "sha256": "938a2de7fc992134054f0589c2ce73dea9fa530cf3a7244632eda65b8d443b8c",
+      "expectedPhones": "s t u d ə n t",
+      "detectedPhones": "s t u ɾ ɛ n t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "substitution",
+      "accent": "us",
+      "ipa": "/ˌsʌbstɪˈtuʃən/",
+      "sha256": "9233b90d374727f154463414d5f30e72325ad250b6d31d4f37288e672d00dc3d",
+      "expectedPhones": "s ə b s t ə t u ʃ ə n",
+      "detectedPhones": "s ə b s t ɪ t u ʃ ɛ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "suburb",
+      "accent": "uk",
+      "ipa": "/ˈsʌbɜːb/",
+      "sha256": "f9f002ae913971d9d740ee05eee489673e8632f045d3a9240a36ef3ed995e2fc",
+      "expectedPhones": "s ə b ə b",
+      "detectedPhones": "s ə b ʊ b i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "surgery",
+      "accent": "uk",
+      "ipa": "/ˈsɜːdʒəri/",
+      "sha256": "bef75db66f9094f518ab53c869886ea554004b2f1d39060d3f3e20af2f4f346f",
+      "expectedPhones": "s ɝ ʤ ɝ i",
+      "detectedPhones": "s ʊ ʤ ɝ ɹ i",
+      "screeningEdits": 2
+    },
+    {
+      "word": "surprised",
+      "accent": "uk",
+      "ipa": "/səˈpraɪzd/",
+      "sha256": "f3f17a30b8d8a61e29c7b4a7b7fc6b3b14ffd0792d71329bab79d07ea1b0523d",
+      "expectedPhones": "s ə p ɹ aɪ z d",
+      "detectedPhones": "s ɪ p ɹ aɪ z d ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "suspense",
+      "accent": "uk",
+      "ipa": "/səˈspɛns/",
+      "sha256": "96ead57b5f9df5fec2b64025b40bee48a4666be055e39422b48212e8fa4ff2cb",
+      "expectedPhones": "s ə s p ɛ n s",
+      "detectedPhones": "s ɪ s p ɛ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "sweet potato",
+      "accent": "us",
+      "ipa": "/ˈswit pəˈteɪtoʊ/",
+      "sha256": "773cf146e3f825163b5593854eb5adc27969f0f2af1d904cc6b6afdd11941829",
+      "expectedPhones": "s w i t p ə t eɪ ɾ oʊ",
+      "detectedPhones": "s w i p ɪ t eɪ ɾ oʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "swimsuit",
+      "accent": "uk",
+      "ipa": "/ˈswɪms(j)ut/",
+      "sha256": "13de4b8e973dc72e162297eccb4810994ce1f152b8e88518bb1b2f12fcd01e76",
+      "expectedPhones": "s w ɪ m s j u t",
+      "detectedPhones": "s w ɪ m z j u t ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "symbols",
+      "accent": "uk",
+      "ipa": "/ˈsɪmbəlz/",
+      "sha256": "5fe637d904ca2f480d7a63a19f8ef468223fc8eb027510a51bffb2f00fad02b5",
+      "expectedPhones": "s ɪ m b ə l z",
+      "detectedPhones": "s ɪ m b l z ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tenant",
+      "accent": "us",
+      "ipa": "/ˈtɛnənt/",
+      "sha256": "ca243f5978b7e053d6cc8749ebbcf04168cb15fddf192029f14a739a5d709f06",
+      "expectedPhones": "t ɛ n ə n t",
+      "detectedPhones": "t ɛ n ɪ n t s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tet",
+      "accent": "uk",
+      "ipa": "/tet/",
+      "sha256": "c08864741e32cac7ac4084fce3f906b6492503c394cc3b3d8bb2bda1e83c6b7b",
+      "expectedPhones": "t ɛ t",
+      "detectedPhones": "n t æ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tet holiday",
+      "accent": "us",
+      "ipa": "/tet ˈhɑləˌdeɪ/",
+      "sha256": "92867f46e8d20460356da432090cf0a25ff79bed717f7d620441dacda31ca711",
+      "expectedPhones": "t ɛ t h ɑ l ə d eɪ",
+      "detectedPhones": "t æ h ɑ l ə d eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "thick noodle soup",
+      "accent": "uk",
+      "ipa": "/θɪk ˈnuːdəl suːp/",
+      "sha256": "e70dd13aeb159d25e7ef980bc9dec8235c3b5cca086add68052d5093d09aca19",
+      "expectedPhones": "θ ɪ k n u d ə l s u p",
+      "detectedPhones": "θ ɪ k n u d l s u p ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "thick noodle soup",
+      "accent": "us",
+      "ipa": "/θɪk ˈnuːdəl suːp/",
+      "sha256": "5d2ba72b2d691652de9d0a286dfe479935c3e7e0e83660d3419cc4bd8843a870",
+      "expectedPhones": "θ ɪ k n u d ə l s u p",
+      "detectedPhones": "θ ɪ k n u ɾ l s u p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "thriller",
+      "accent": "uk",
+      "ipa": "/ˈθrɪlə/",
+      "sha256": "8fbe79849a08fc758c6971c2f5df7f87c0ddf64c3c216edce055ea108b5365da",
+      "expectedPhones": "θ ɹ ɪ l ə",
+      "detectedPhones": "θ ɝ ɹ ɪ l ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "thriller",
+      "accent": "us",
+      "ipa": "/ˈθrɪlər/",
+      "sha256": "01addc84a2c8103966a02feec9ccd52431af7f22592754ebffdbfdbb5aac6e95",
+      "expectedPhones": "θ ɹ ɪ l ɝ",
+      "detectedPhones": "z ə ɹ ɪ l ɝ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tiger",
+      "accent": "uk",
+      "ipa": "/ˈtaɪɡə/",
+      "sha256": "819752f855f0de65c80f2bff9d57be604026fd7b6044a956229e9b955cbdd122",
+      "expectedPhones": "t aɪ g ə",
+      "detectedPhones": "t h aɪ g ʊ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "time management",
+      "accent": "us",
+      "ipa": "/taɪm ˈmænɪdʒmənt/",
+      "sha256": "9c070c648bf47112ce15ab37707e4f2921948854b7d6c39ff3ed14f5485e2900",
+      "expectedPhones": "t aɪ m m æ n ɪ ʤ m ə n t",
+      "detectedPhones": "t aɪ m æ n ɪ ʤ m ɛ n t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tomato",
+      "accent": "uk",
+      "ipa": "/təˈmɑːtəʊ/",
+      "sha256": "cb75f8f10cdac83ece6a72305ff470f98f78736a9b3ef89ced08ff0477ae6ec6",
+      "expectedPhones": "t ə m ɑ t oʊ",
+      "detectedPhones": "t ɪ m ɑ t eɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "traditional food",
+      "accent": "uk",
+      "ipa": "/trəˈdɪʃənəl fuːd/",
+      "sha256": "b71093b3f955dad159f2c6ddfce25bd6a3054d03ddcebb3e7840e534c61b306f",
+      "expectedPhones": "t ɹ ə d ɪ ʃ ə n ə l f u d",
+      "detectedPhones": "t ɹ ɪ d ɪ ʃ n ə l f u d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "traffic",
+      "accent": "uk",
+      "ipa": "/ˈtræfɪk/",
+      "sha256": "1f9eb717a3f00ec383a5d8f264a84dd59b57acb92dc7d45331eb7eaa4c3eacf1",
+      "expectedPhones": "t ɹ æ f ɪ k",
+      "detectedPhones": "d ɹ ɑ f ɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "travel",
+      "accent": "uk",
+      "ipa": "/ˈtrævəl/",
+      "sha256": "cf733cb507633f81251c921437456584ee54e24ceb573dd7dc573051a9b55a29",
+      "expectedPhones": "t ɹ æ v ə l",
+      "detectedPhones": "t ɹ æ v ʊ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "triplet",
+      "accent": "uk",
+      "ipa": "/ˈtrɪplət/",
+      "sha256": "68235a132e5cea34c8ee393bb3261dd831564a6bd3b18e4c484c51b4b0f369ad",
+      "expectedPhones": "t ɹ ɪ p l ə t",
+      "detectedPhones": "t ɹ ɪ p l eɪ t ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "trout",
+      "accent": "uk",
+      "ipa": "/traʊt/",
+      "sha256": "ded839ee98ac205c1b32ea2926efc21dd7de14231393e81aec8ec2c5455e7a5e",
+      "expectedPhones": "t ɹ aʊ t",
+      "detectedPhones": "n d ɹ aʊ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tulip",
+      "accent": "uk",
+      "ipa": "/ˈtjuːlɪp/",
+      "sha256": "9990c36572cfe0facbe12d02dfe7c9ab01b7980bad126ab7d6649f3b02fbc671",
+      "expectedPhones": "t j u l ɪ p",
+      "detectedPhones": "ʧ i u l ɪ p",
+      "screeningEdits": 2
+    },
+    {
+      "word": "tuna",
+      "accent": "uk",
+      "ipa": "/ˈtjuːnə/",
+      "sha256": "91c856d14aea772fd3b35a152b7f540b244d40d940f7545fdc879e054e59ddd7",
+      "expectedPhones": "t j u n ə",
+      "detectedPhones": "ʤ i u n ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "turtle",
+      "accent": "uk",
+      "ipa": "/ˈtɜːtl̩/",
+      "sha256": "e453394837c573b54908a0c25175f4aa46837a71bcd36b157324bf7eaec1b7a9",
+      "expectedPhones": "t ɝ t ə l",
+      "detectedPhones": "t ʊ t ʊ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "united kingdom",
+      "accent": "uk",
+      "ipa": "/juːˌnaɪtɪd ˈkɪŋdəm/",
+      "sha256": "03266bac20cb0f5712767577c12bd7f7f856e60b471a683a7f5957d99f23038c",
+      "expectedPhones": "j u n aɪ t ɪ d k ɪ ŋ d ə m",
+      "detectedPhones": "j u n aɪ t ɪ d k ɪ ŋ d ɪ m ə",
+      "screeningEdits": 2
+    },
+    {
+      "word": "urban",
+      "accent": "us",
+      "ipa": "/ˈɜrbən/",
+      "sha256": "45688489a9d768590c603d5477c8cc602f13c075ce801a540a0b2fc8a7b49eb2",
+      "expectedPhones": "ɝ ɹ b ə n",
+      "detectedPhones": "ɝ b ɪ n",
+      "screeningEdits": 2
+    },
+    {
+      "word": "vietnamese pancake",
+      "accent": "us",
+      "ipa": "/ˌvjetnəˈmiːz ˈpænkeɪk/",
+      "sha256": "103259f69e098a71f43bd9bc490bafbbf66c25e048519eeab436d23612e58991",
+      "expectedPhones": "v i ɛ t n ə m i z p æ n k eɪ k",
+      "detectedPhones": "v i ɛ n ɪ m i z p æ n k eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "violet",
+      "accent": "us",
+      "ipa": "/ˈvaɪələt/",
+      "sha256": "0f33aba8db9a2d6b6b7f8abc45fea13ae0fd06b776f4c3fc3fc3c86464d97f1b",
+      "expectedPhones": "v aɪ ə l ə t",
+      "detectedPhones": "v aɪ l ɪ t",
+      "screeningEdits": 2
+    },
+    {
+      "word": "violin",
+      "accent": "uk",
+      "ipa": "/ˌvaɪəˈlɪn/",
+      "sha256": "283168433ee045d306ffea7175e4eec683bc8a0f4247e9f7133c8010abc1ca5f",
+      "expectedPhones": "v aɪ ə l ɪ n",
+      "detectedPhones": "v aɪ ɪ l ɪ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "voice",
+      "accent": "uk",
+      "ipa": "/vɔɪs/",
+      "sha256": "b4d5b270278163fcb55a1e4772619cea501bea3c068ad78ffba30d9c20efaeac",
+      "expectedPhones": "v ɑ ɪ s",
+      "detectedPhones": "v ɔɪ s",
+      "screeningEdits": 2
+    },
+    {
+      "word": "vomiting",
+      "accent": "us",
+      "ipa": "/ˈvɑːmɪtɪŋ/",
+      "sha256": "de065be04133d2c376179162a432d986d5b07385d63f1ef3ba53e0a64581fcda",
+      "expectedPhones": "v ɑ m ə ɾ ɪ ŋ",
+      "detectedPhones": "v ɑ m ɪ d ɪ ŋ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "water fern cake",
+      "accent": "uk",
+      "ipa": "/ˈwɔːtə fɜːn keɪk/",
+      "sha256": "cb464604242aaed331f64ea7856b4984fcb19858821883d3aab985d9ce1626db",
+      "expectedPhones": "w ɑ t ə f ɝ n k eɪ k",
+      "detectedPhones": "w ɑ t ʊ f ə n k eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "water fern cake",
+      "accent": "us",
+      "ipa": "/ˈwɔːtər fɜrn keɪk/",
+      "sha256": "5cdc04410e73d556e1a192d54bd167494c1071a94f3f81a4ebdc973a70492234",
+      "expectedPhones": "w ɑ ɾ ɝ f ɝ ɹ n k eɪ k",
+      "detectedPhones": "w ɑ ɾ ɝ f ɝ n t eɪ k",
+      "screeningEdits": 2
+    },
+    {
+      "word": "water puppetry",
+      "accent": "uk",
+      "ipa": "/ˈwɔːtə ˈpʌpɪtri/",
+      "sha256": "c02bb3f900eabc953803675b9db75cee15f95424f621a747e39fff62b5a9abb9",
+      "expectedPhones": "w ɑ t ə p ə p ɪ t ɹ i",
+      "detectedPhones": "w ɑ t ɪ p ə p ɪ t ɹ i h",
+      "screeningEdits": 2
+    },
+    {
+      "word": "wedding gown",
+      "accent": "uk",
+      "ipa": "/ˈwɛdɪŋ ˈɡaʊ̯n/",
+      "sha256": "05361de140b7af45682cddf141939f63d17f799f2284d80353b7a34558836e21",
+      "expectedPhones": "w ɛ d ɪ ŋ g aʊ n",
+      "detectedPhones": "w ɛ ʤ ɪ ŋ g aʊ n z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "western",
+      "accent": "uk",
+      "ipa": "/ˈwɛstən/",
+      "sha256": "874b51adf5abf3f938547a3520baa922e684da3e0e2c4bb64242fd72f62efb3f",
+      "expectedPhones": "w ɛ s t ə n",
+      "detectedPhones": "w ɛ s t ɪ n ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "white balance",
+      "accent": "uk",
+      "ipa": "/ˈwaɪt ˈbæləns/",
+      "sha256": "6ffd39fc0b013862df95c82ecee360c320d038e000c335c822e861f38ca67cb2",
+      "expectedPhones": "w aɪ t b æ l ə n s",
+      "detectedPhones": "w aɪ t b æ l ɪ n s ɪ",
+      "screeningEdits": 2
+    },
+    {
+      "word": "wholesome",
+      "accent": "us",
+      "ipa": "/ˈhoʊlsəm/",
+      "sha256": "b1940e26d670533c1f4c89d1fd7d025e3b4dd7ac9dc48c7ca204027cbdf7f5f7",
+      "expectedPhones": "h oʊ l s ə m",
+      "detectedPhones": "k oʊ l s ɪ m",
+      "screeningEdits": 2
+    },
+    {
+      "word": "workload",
+      "accent": "uk",
+      "ipa": "/ˈwɜːkləʊd/",
+      "sha256": "0a52efa100894fb4c3e8547aaa31d928f4790d2b8c196f314be5ecefc07eff92",
+      "expectedPhones": "w ɝ k l oʊ d",
+      "detectedPhones": "w ə k l eɪ d",
+      "screeningEdits": 2
+    },
+    {
+      "word": "yearning",
+      "accent": "uk",
+      "ipa": "/ˈjɜːnɪŋ/",
+      "sha256": "cdcad70d3c560fdc78ccdf6f10c140f36f24b74eec7332b9587b81ffc095c7df",
+      "expectedPhones": "j ɝ n ɪ ŋ",
+      "detectedPhones": "j ə n ɪ ŋ z",
+      "screeningEdits": 2
+    },
+    {
+      "word": "youthful",
+      "accent": "us",
+      "ipa": "/ˈjuθfəl/",
+      "sha256": "2b81403fd1eae7690a8c90433cd7d20304f283fb4a30836dfe28a9070f7625b9",
+      "expectedPhones": "j u θ f ə l",
+      "detectedPhones": "j u s f ʊ l",
+      "screeningEdits": 2
+    },
+    {
+      "word": "zoom",
+      "accent": "us",
+      "ipa": "/zuːm/",
+      "sha256": "fad96d472d017a4ed40665f819577fda72ed5b49a3e7cf23df383ee72198cabd",
+      "expectedPhones": "z u m",
+      "detectedPhones": "z i oʊ m",
+      "screeningEdits": 2
+    }
+  ]
+}

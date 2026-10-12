@@ -38,7 +38,7 @@ export default function IpaPage() {
   return (
     <main className={`study-page ${mode === "chart" ? "" : "study-page--focused"} animate-fadeIn`}>
       <div className="mb-6">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-soft px-3 py-1 text-xs font-bold tracking-normal text-primary">
           🔤 IPA
         </span>
         <h1 className="mt-2.5 font-display text-2xl font-extrabold text-foreground sm:text-3xl">Học phát âm IPA</h1>
@@ -59,7 +59,7 @@ export default function IpaPage() {
             key={m}
             onClick={() => setMode(m)}
             aria-pressed={mode === m}
-            className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-[11px] font-black uppercase tracking-wider transition-all sm:text-xs ${
+            className={`flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-xs font-bold tracking-normal transition-all sm:text-xs ${
               mode === m ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"
             }`}
           >
@@ -96,7 +96,7 @@ function ChartMode() {
     <div className="space-y-6">
       {TYPES.map((type) => (
         <div key={type}>
-          <h2 className="mb-2.5 text-xs font-black uppercase tracking-wider text-muted">{TYPE_LABEL[type]}</h2>
+          <h2 className="mb-2.5 text-xs font-bold tracking-normal text-muted">{TYPE_LABEL[type]}</h2>
           <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4 md:grid-cols-6">
             {IPA_SOUNDS.filter((s) => s.type === type).map((s) => (
               <button
@@ -105,8 +105,8 @@ function ChartMode() {
                 className="group relative flex min-h-[72px] flex-col items-center justify-center gap-1 rounded-2xl border border-black/10 bg-white/80 px-1.5 py-2.5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary-soft/40 hover:shadow-md dark:border-white/10 dark:bg-zinc-900/60"
                 title={s.tip}
               >
-                <span className="font-display text-xl font-black leading-none text-foreground group-hover:text-primary">{s.symbol.replace(/\//g, "")}</span>
-                <span className="max-w-full truncate text-[10px] font-semibold leading-none text-muted">{s.words[0]}</span>
+                <span className="font-display text-xl font-bold leading-none text-foreground group-hover:text-primary">{s.symbol.replace(/\//g, "")}</span>
+                <span className="max-w-full truncate text-xs font-semibold leading-none text-muted">{s.words[0]}</span>
                 {s.hard && <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-pink" title="Người Việt hay sai" />}
               </button>
             ))}
@@ -114,7 +114,7 @@ function ChartMode() {
         </div>
       ))}
 
-      <p className="text-center text-[11px] font-medium text-muted">💡 Chấm <span className="inline-block h-1.5 w-1.5 translate-y-[-1px] rounded-full bg-pink align-middle" /> = âm người Việt hay sai. Bấm 1 ô để xem chi tiết & nghe.</p>
+      <p className="text-center text-xs font-medium text-muted">💡 Chấm <span className="inline-block h-1.5 w-1.5 translate-y-[-1px] rounded-full bg-pink align-middle" /> = âm người Việt hay sai. Bấm 1 ô để xem chi tiết & nghe.</p>
 
       {/* Modal chi tiết âm — render qua portal ra body để không bị "nhốt" trong layout */}
       {sel && typeof document !== "undefined" && createPortal(
@@ -130,17 +130,17 @@ function ChartMode() {
 
             {/* Hero: ký hiệu lớn căn giữa */}
             <div className="flex flex-col items-center text-center">
-              <span className="font-display text-6xl font-black leading-none text-primary">{sel.symbol}</span>
+              <span className="font-display text-6xl font-bold leading-none text-primary">{sel.symbol}</span>
               <div className="mt-3 flex items-center gap-1.5">
-                <span className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-muted dark:border-white/10 dark:bg-white/5">
+                <span className="rounded-full border border-black/10 bg-black/[0.03] px-2.5 py-0.5 text-xs font-bold tracking-normal text-muted dark:border-white/10 dark:bg-white/5">
                   {TYPE_LABEL[sel.type].replace(/\s*\(\d+\)/, "")}
                 </span>
-                {sel.hard && <span className="rounded-full bg-pink-soft px-2.5 py-0.5 text-[10px] font-black text-pink">⚠ Hay sai</span>}
+                {sel.hard && <span className="rounded-full bg-pink-soft px-2.5 py-0.5 text-xs font-bold text-pink">⚠ Hay sai</span>}
               </div>
               <p className="mt-3 max-w-xs text-sm font-medium leading-relaxed text-muted">{sel.tip}</p>
             </div>
 
-            <button onClick={() => playWord(sel.words[0])} className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-black text-primary-fg shadow-md shadow-primary/20 transition-transform active:scale-95">
+            <button onClick={() => playWord(sel.words[0])} className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-fg shadow-md shadow-primary/20 transition-transform active:scale-95">
               🔊 Nghe âm mẫu
             </button>
 
@@ -160,14 +160,14 @@ function ChartMode() {
                 href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`BBC Learning English the sounds of English ${sel.symbol}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-white/60 py-3 text-xs font-black text-foreground transition-colors hover:border-primary/40 dark:bg-white/5"
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-white/60 py-3 text-xs font-bold text-foreground transition-colors hover:border-primary/40 dark:bg-white/5"
               >
                 🎬 Xem video khẩu hình để nhại (YouTube)
               </a>
             )}
 
             {/* Từ ví dụ — bộ thẻ trượt (mỗi từ + IPA + câu ví dụ, vuốt để chuyển) */}
-            <p className="mt-5 text-center text-[10px] font-black uppercase tracking-wider text-muted">Luyện nghe từ ví dụ · vuốt để chuyển</p>
+            <p className="mt-5 text-center text-xs font-bold tracking-normal text-muted">Luyện nghe từ ví dụ · vuốt để chuyển</p>
             <div className="mt-3">
               <WordCardDeck key={sel.symbol} words={sel.words} />
             </div>
@@ -227,15 +227,15 @@ function ShadowMode() {
     <div className="space-y-5">
       <div className="flex flex-wrap justify-center gap-2">
         {([["hard", "⚠ Âm hay sai"], ["consonant", "Phụ âm"], ["monophthong", "Nguyên âm đơn"], ["diphthong", "Nguyên âm đôi"]] as [SoundType | "hard", string][]).map(([t, l]) => (
-          <button key={t} onClick={() => { setType(t); setIdx(0); setRecUrl(null); }} className={`rounded-full border px-3.5 py-1.5 text-[11px] font-bold transition-all ${type === t ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>
+          <button key={t} onClick={() => { setType(t); setIdx(0); setRecUrl(null); }} className={`rounded-full border px-3.5 py-1.5 text-xs font-bold transition-all ${type === t ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>
             {l}
           </button>
         ))}
       </div>
 
       <div className="liquid-glass-card border border-border/40 p-8 text-center">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-muted">Âm {idx + 1}/{list.length}</p>
-        <p className="mt-2 font-display text-5xl font-black text-primary">{cur.symbol}</p>
+        <p className="text-xs font-bold tracking-normal text-muted">Âm {idx + 1}/{list.length}</p>
+        <p className="mt-2 font-display text-5xl font-bold text-primary">{cur.symbol}</p>
         <p className="mx-auto mt-3 max-w-md text-sm font-medium text-muted leading-relaxed">{cur.tip}</p>
 
         <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -246,7 +246,7 @@ function ShadowMode() {
 
         {/* Thu âm & nghe lại */}
         <div className="mt-6 flex flex-col items-center gap-3">
-          <button onClick={toggleRecord} className={`rounded-full px-6 py-3 text-sm font-black text-white transition-all ${recording ? "bg-pink animate-pulse" : "bg-primary"}`}>
+          <button onClick={toggleRecord} className={`rounded-full px-6 py-3 text-sm font-bold text-white transition-all ${recording ? "bg-pink animate-pulse" : "bg-primary"}`}>
             {recording ? "⏹ Dừng thu" : "🎙️ Thu âm nhại lại"}
           </button>
           {recUrl && (
@@ -256,11 +256,11 @@ function ShadowMode() {
 
         <div className="mt-6 flex items-center justify-center gap-3">
           <button onClick={() => go(-1)} disabled={idx === 0} className="rounded-full border border-border/60 px-5 py-2 text-xs font-bold text-muted disabled:opacity-40">← Trước</button>
-          <button onClick={() => go(1)} disabled={idx >= list.length - 1} className="rounded-full bg-primary px-5 py-2 text-xs font-black text-primary-fg disabled:opacity-40">Tiếp →</button>
+          <button onClick={() => go(1)} disabled={idx >= list.length - 1} className="rounded-full bg-primary px-5 py-2 text-xs font-bold text-primary-fg disabled:opacity-40">Tiếp →</button>
         </div>
       </div>
 
-      <p className="text-center text-[11px] font-medium text-muted">💡 Nghe mẫu → nhại NGAY (phóng đại khẩu hình) → thu âm → nghe lại so sánh. Muốn chấm điểm tự động → <Link href="/shadowing" className="font-bold text-primary underline">Shadowing</Link>.</p>
+      <p className="text-center text-xs font-medium text-muted">💡 Nghe mẫu → nhại NGAY (phóng đại khẩu hình) → thu âm → nghe lại so sánh. Muốn chấm điểm tự động → <Link href="/shadowing" className="font-bold text-primary underline">Shadowing</Link>.</p>
     </div>
   );
 }
@@ -302,23 +302,23 @@ function DiscriminateMode() {
     <div className="space-y-5">
       {/* Chọn cặp */}
       <div className="flex flex-wrap justify-center gap-2">
-        <button onClick={() => { setPairIdx(-1); }} className={`rounded-full border px-3.5 py-1.5 text-[11px] font-bold ${pairIdx === -1 ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>🔀 Trộn tất cả</button>
+        <button onClick={() => { setPairIdx(-1); }} className={`rounded-full border px-3.5 py-1.5 text-xs font-bold ${pairIdx === -1 ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>🔀 Trộn tất cả</button>
         {MINIMAL_PAIRS.map((p, i) => (
-          <button key={i} onClick={() => setPairIdx(i)} className={`rounded-full border px-3 py-1.5 text-[11px] font-bold ${pairIdx === i ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>
+          <button key={i} onClick={() => setPairIdx(i)} className={`rounded-full border px-3 py-1.5 text-xs font-bold ${pairIdx === i ? "border-primary bg-primary-soft text-primary" : "border-border/60 text-muted hover:text-foreground"}`}>
             {p.a.word}/{p.b.word}
           </button>
         ))}
       </div>
 
       <div className="liquid-glass-card border border-border/40 p-8 text-center">
-        <div className="mb-4 flex items-center justify-center gap-4 text-xs font-black uppercase tracking-wider text-muted">
+        <div className="mb-4 flex items-center justify-center gap-4 text-xs font-bold tracking-normal text-muted">
           <span>Đúng: <b className="text-primary">{score}/{total}</b></span>
           <span>🔥 Chuỗi: <b className="text-pink">{streak}</b></span>
-          <span className="rounded-full bg-surface px-2 py-0.5 text-[10px]">{activePair.sound}</span>
+          <span className="rounded-full bg-surface px-2 py-0.5 text-xs">{activePair.sound}</span>
         </div>
 
         <p className="text-sm font-bold text-foreground">Bạn nghe được từ nào?</p>
-        <p className="mt-1 text-[11px] font-medium text-muted">{activePair.tip}</p>
+        <p className="mt-1 text-xs font-medium text-muted">{activePair.tip}</p>
 
         <button onClick={() => playWord(activePair[target].word)} className="mx-auto my-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl text-primary-fg shadow-lg transition-transform hover:scale-105 active:scale-95" title="Nghe lại">
           🔊
@@ -337,7 +337,7 @@ function DiscriminateMode() {
             }
             return (
               <button key={key} onClick={() => pick(key)} disabled={!!picked} className={`rounded-2xl border-2 p-4 transition-all ${cls}`}>
-                <span className="block font-display text-lg font-black">{w.word}</span>
+                <span className="block font-display text-lg font-bold">{w.word}</span>
                 <span className="block text-xs font-semibold text-muted">{w.ipa}</span>
               </button>
             );
@@ -346,18 +346,18 @@ function DiscriminateMode() {
 
         {picked && (
           <div className="mt-5">
-            <p className={`text-sm font-black ${picked === target ? "text-primary" : "text-pink"}`}>
+            <p className={`text-sm font-bold ${picked === target ? "text-primary" : "text-pink"}`}>
               {picked === target ? "✓ Chính xác!" : `✗ Sai — đáp án: ${activePair[target].word}`}
             </p>
-            <button onClick={() => newRound()} className="mt-3 rounded-full bg-primary px-6 py-2.5 text-xs font-black text-primary-fg">Câu tiếp →</button>
+            <button onClick={() => newRound()} className="mt-3 rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-primary-fg">Câu tiếp →</button>
           </div>
         )}
         {!picked && total === 0 && (
-          <button onClick={() => newRound()} className="mt-2 rounded-full bg-primary px-6 py-2.5 text-xs font-black text-primary-fg">▶ Bắt đầu nghe</button>
+          <button onClick={() => newRound()} className="mt-2 rounded-full bg-primary px-6 py-2.5 text-xs font-bold text-primary-fg">▶ Bắt đầu nghe</button>
         )}
       </div>
 
-      <p className="text-center text-[11px] font-medium text-muted">💡 Bấm 🔊 nghe rồi chọn — luyện TAI phân biệt trước (phương pháp HVPT). Nghe lại nhiều lần nếu cần.</p>
+      <p className="text-center text-xs font-medium text-muted">💡 Bấm 🔊 nghe rồi chọn — luyện TAI phân biệt trước (phương pháp HVPT). Nghe lại nhiều lần nếu cần.</p>
     </div>
   );
 }
@@ -443,11 +443,11 @@ function QuizMode() {
     return (
       <div className="rounded-3xl border border-primary/20 bg-primary-soft/30 p-7 text-center shadow-sm">
         <p className="text-4xl">📝</p>
-        <p className="mt-2 font-display text-lg font-black text-foreground">Kiểm tra nhận âm</p>
+        <p className="mt-2 font-display text-lg font-bold text-foreground">Kiểm tra nhận âm</p>
         <p className="mt-1.5 text-xs font-semibold text-muted leading-relaxed">
           {QN_SOUND + QN_PAIR} câu trộn 2 dạng: <b>nhận âm</b> (âm /X/ có trong từ nào) và <b>phân biệt cặp âm giống nhau</b> (nghe → chọn đúng từ). Vừa nhớ ký hiệu, vừa luyện tai.
         </p>
-        <button onClick={start} className="mt-5 rounded-full bg-primary px-7 py-3 text-xs font-black uppercase tracking-wider text-primary-fg active:scale-95">
+        <button onClick={start} className="mt-5 rounded-full bg-primary px-7 py-3 text-xs font-bold tracking-normal text-primary-fg active:scale-95">
           Bắt đầu kiểm tra →
         </button>
       </div>
@@ -460,13 +460,13 @@ function QuizMode() {
     return (
       <div className="rounded-3xl border border-border/60 bg-white/70 p-8 text-center shadow-sm animate-fadeIn dark:bg-zinc-900/60">
         <p className="text-4xl">{great ? "🎉" : "💪"}</p>
-        <p className="mt-2 font-display text-2xl font-black text-foreground">
+        <p className="mt-2 font-display text-2xl font-bold text-foreground">
           {score}/{qs.length} <span className="text-base text-muted">({pct}%)</span>
         </p>
         <p className="mt-1 text-xs font-semibold text-muted">
           {great ? "Tuyệt vời! Tai bạn nhận âm tốt." : "Tốt rồi — nghe lại Bảng âm vài lần rồi thử lại nhé."}
         </p>
-        <button onClick={start} className="mt-5 rounded-full border border-border/80 bg-white/50 px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-muted transition-all hover:border-primary/40 hover:text-foreground active:scale-95 dark:bg-black/30">
+        <button onClick={start} className="mt-5 rounded-full border border-border/80 bg-white/50 px-6 py-2.5 text-xs font-bold tracking-normal text-muted transition-all hover:border-primary/40 hover:text-foreground active:scale-95 dark:bg-black/30">
           ↻ Làm lại
         </button>
       </div>
@@ -476,20 +476,20 @@ function QuizMode() {
   const q = qs[idx];
   return (
     <div className="rounded-3xl border border-border/60 bg-white/70 p-6 shadow-sm dark:bg-zinc-900/60 sm:p-7">
-      <div className="mb-4 flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
+      <div className="mb-4 flex items-center justify-between text-xs font-bold tracking-normal">
         <span className="text-muted">Câu {idx + 1}/{qs.length}</span>
         <span className="text-primary">Điểm: {score}</span>
       </div>
 
       {q.kind === "sound" ? (
         <>
-          <p className="text-xs font-bold uppercase tracking-wider text-muted">Âm nào dưới đây có trong từ?</p>
-          <p className="mt-1 font-display text-4xl font-black text-primary">{q.symbol}</p>
-          <p className="mt-1 text-[11px] font-medium text-muted">{q.tip}</p>
+          <p className="text-xs font-bold tracking-normal text-muted">Âm nào dưới đây có trong từ?</p>
+          <p className="mt-1 font-display text-4xl font-bold text-primary">{q.symbol}</p>
+          <p className="mt-1 text-xs font-medium text-muted">{q.tip}</p>
         </>
       ) : (
         <>
-          <p className="text-xs font-bold uppercase tracking-wider text-muted">Nghe và chọn từ bạn nghe được</p>
+          <p className="text-xs font-bold tracking-normal text-muted">Nghe và chọn từ bạn nghe được</p>
           <div className="mt-2 flex items-center gap-3">
             <button
               onClick={() => playWord(q.answer)}
@@ -498,9 +498,9 @@ function QuizMode() {
             >
               🔊
             </button>
-            <span className="rounded-full bg-surface px-2.5 py-1 text-[11px] font-black text-muted">{q.label}</span>
+            <span className="rounded-full bg-surface px-2.5 py-1 text-xs font-bold text-muted">{q.label}</span>
           </div>
-          <p className="mt-2 text-[11px] font-medium text-muted">{q.tip}</p>
+          <p className="mt-2 text-xs font-medium text-muted">{q.tip}</p>
         </>
       )}
 
@@ -519,7 +519,7 @@ function QuizMode() {
               key={opt}
               onClick={() => pick(opt)}
               disabled={!!picked}
-              className={`rounded-2xl border-2 px-4 py-3.5 text-center font-display text-base font-black transition-all active:scale-[0.98] ${cls} ${picked ? "cursor-default" : "cursor-pointer"}`}
+              className={`rounded-2xl border-2 px-4 py-3.5 text-center font-display text-base font-bold transition-all active:scale-[0.98] ${cls} ${picked ? "cursor-default" : "cursor-pointer"}`}
             >
               {opt}
               {picked && isAnswer && <span className="ml-1.5">✓</span>}
@@ -530,7 +530,7 @@ function QuizMode() {
       </div>
 
       {picked && (
-        <button onClick={next} className="mt-5 w-full rounded-full bg-primary py-3 text-xs font-black uppercase tracking-wider text-primary-fg active:scale-95">
+        <button onClick={next} className="mt-5 w-full rounded-full bg-primary py-3 text-xs font-bold tracking-normal text-primary-fg active:scale-95">
           {idx + 1 >= qs.length ? "Xem kết quả →" : "Câu tiếp →"}
         </button>
       )}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nghe thử 20 từ · SpeakUp</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#182b49;background:#f4f7ff;font-synthesis:none;color-scheme:light}
+    *{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:28px 24px 64px}a{color:#0056db;text-underline-offset:3px}button,select{font:inherit}button,select{min-height:44px;border:1px solid #cbdafb;border-radius:10px;padding:10px 13px;background:white;color:#173354;cursor:pointer}button:hover{border-color:#0065ff;background:#f0f6ff}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #76a9ff;outline-offset:3px}button:disabled{opacity:.45;cursor:default}.primary{background:#0065ff;color:white;border-color:#0065ff}.primary:hover{background:#0053d6;color:white}.eyebrow{font-size:12px;color:#0065ff;font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin-top:30px}h1{font-size:clamp(26px,4vw,40px);letter-spacing:-.04em;line-height:1.2;margin:10px 0}h2{margin:0 0 6px;font-size:24px}p{line-height:1.65;margin:8px 0}.subtle{color:#516781}.summary{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pill{background:#e7efff;color:#064cbd;border-radius:20px;padding:7px 12px;font-size:13px;font-weight:650}.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.player{position:sticky;top:0;z-index:2;background:#fff;border:1px solid #cbdafb;border-radius:14px;padding:14px 18px;margin:20px 0;box-shadow:0 4px 18px #13336a08}.player-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}#now{font-weight:650;font-size:14px}.player audio{width:min(100%,440px);height:42px}.error{color:#a12922}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:#fff;border:1px solid #d2dffc;border-radius:16px;padding:22px;min-width:0}.card.playing{border-color:#0065ff;box-shadow:0 0 0 1px #0065ff}.head{display:flex;gap:12px;justify-content:space-between;align-items:start}.number{font-size:12px;color:#657c99;font-variant-numeric:tabular-nums}.meaning{font-size:14px;color:#3c526c}.ipa{font-family:"Segoe UI",sans-serif;font-size:16px;color:#294f7f;overflow-wrap:anywhere}.small{font-size:12px;color:#546a85;line-height:1.55}.focus{min-height:44px;font-size:13px;background:#f5f8ff;border-radius:8px;padding:10px 12px;margin:12px 0}.accent{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;border-top:1px solid #e8edf7;padding:12px 0}.accent-label{color:#0065ff;font-size:13px;font-weight:750;padding-top:12px}.buttons{display:flex;flex-wrap:wrap;gap:7px}.buttons button{font-size:13px;padding:9px 10px}.phonemes{font-size:12px;margin:7px 0 0;color:#566c87;overflow-wrap:anywhere}.rating{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #e8edf7;padding-top:12px;font-size:13px}.rating select{max-width:190px;font-size:13px}details{margin-top:12px;font-size:12px;line-height:1.7}summary{cursor:pointer;color:#536a87;padding:5px 0}.credits{overflow-wrap:anywhere}.notice{padding:16px 18px;border:1px solid #d2dffc;border-radius:12px;margin:16px 0 20px;background:#fff;font-size:14px}.footer{font-size:13px;margin-top:24px}#loading{padding:20px 0}.hidden{display:none!important}
+    @media(max-width:700px){main{padding:20px 14px 40px}.grid{grid-template-columns:1fr;gap:14px}.card{padding:18px}.player{padding:12px}.player-row{display:block}.player audio{margin-top:9px;width:100%}.toolbar button{flex:1;white-space:nowrap}.toolbar .stop{flex:0}.focus{min-height:0}h2{font-size:22px}}
+    @media(prefers-reduced-motion:no-preference){button{transition:background .15s,border-color .15s}}
+  </style>
+</head>
+<body>
+<main>
+  <a href="/vocab">← Thư viện từ vựng</a>
+  <div class="eyebrow">SpeakUp · Phòng nghe thử</div>
+  <h1>20 từ, hai giọng đọc.</h1>
+  <p class="subtle">Nghe bản đang dùng trong bài học, xem IPA US / UK và so sánh với mẫu AI cũ.</p>
+  <div id="summary" class="summary"></div>
+  <div class="notice">
+    <strong>Audio được lưu sẵn cho bài học.</strong>
+    <p>Ưu tiên bản thu người thật có nguồn và nhãn giọng rõ ràng. Những giọng chưa có bản thay thế vẫn dùng Kokoro, không tốn token Gemini khi nghe.</p>
+    <p class="small">IPA đã được hiệu đính riêng cho US/UK. Kiểm tra file và đối chiếu nguồn không thay thế nghe duyệt; bạn có thể đánh dấu những từ cần chỉnh thêm bên dưới.</p>
+  </div>
+  <div id="batch" class="notice hidden"><strong>Kho audio bài học</strong><p id="batch-text"></p><p id="batch-time" class="small"></p></div>
+  <div id="findings" class="notice hidden"></div>
+  <div class="toolbar" aria-label="Nghe theo danh sách">
+    <button id="all-us" class="primary" disabled>▶ Nghe 20 từ US</button>
+    <button id="all-uk" disabled>▶ Nghe 20 từ UK</button>
+    <button id="stop" class="stop">Dừng</button>
+    <button id="export" disabled>Tải đánh giá</button>
+  </div>
+  <div class="player">
+    <div class="player-row"><div id="now" role="status" aria-live="polite">Chọn một bản đọc để bắt đầu.</div><audio id="audio" controls preload="none" aria-label="Trình phát âm thanh thử nghiệm"></audio></div>
+  </div>
+  <div id="loading" role="status">Đang tải danh sách…</div>
+  <div id="cards" class="grid"></div>
+  <div class="footer subtle">
+    <p>Đánh giá được lưu trên trình duyệt này. “Tải đánh giá” xuất kết quả thành file JSON.</p>
+    <p><a href="https://huggingface.co/hexgrad/Kokoro-82M" target="_blank" rel="noopener noreferrer">Kokoro</a> · <a href="KOKORO-LICENSE.txt">Giấy phép Apache-2.0</a> · <a href="manifest.json">Thông số & nguồn từng file</a></p>
+    <p id="technical"></p>
+  </div>
+</main>
+<script>
+  const audio=document.getElementById('audio'),now=document.getElementById('now'),cards=document.getElementById('cards');
+  const ratingKey='speakup-audio-trial-v3';
+  let manifest,queue=[],sequence=0,gapTimer,current=null,ratings={};
+  try{ratings=JSON.parse(localStorage.getItem(ratingKey)||'{}')}catch{}
+  function el(tag,text,className){const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(className)x.className=className;return x}
+  async function batchProgress(){try{const response=await fetch('batch-progress.json',{cache:'no-store'});if(!response.ok)return;const p=await response.json();document.getElementById('batch').classList.remove('hidden');const recent=Date.now()-Date.parse(p.updatedAt)<120000;document.getElementById('batch-text').textContent=(p.running&&recent?'Đang tạo và lưu: ':'Đã lưu: ')+p.storedRecordings+' / '+p.targetRecordings+' file · '+p.completeWords+' mục đủ US và UK. '+(p.heldRecordings/2)+' mục cần duyệt cách đọc riêng.';document.getElementById('batch-time').textContent='Cập nhật '+new Date(p.updatedAt).toLocaleString('vi-VN')+' · File đã lưu có thể nghe ngay trong bài học.'}catch{}}
+  batchProgress();setInterval(()=>{if(!document.hidden)batchProgress()},15000);
+  function stop(){sequence++;clearTimeout(gapTimer);queue=[];audio.pause();audio.removeAttribute('src');audio.load();current=null;document.querySelectorAll('.playing').forEach(x=>x.classList.remove('playing'));now.textContent='Đã dừng.';now.classList.remove('error')}
+  function highlight(word){document.querySelectorAll('.playing').forEach(x=>x.classList.remove('playing'));document.getElementById('word-'+word)?.classList.add('playing')}
+  async function playNext(){const token=sequence;const item=queue.shift();if(!item){if(current)now.textContent='Đã nghe xong · '+current.label;return}current=item;highlight(item.word);now.textContent=item.label;now.classList.remove('error');audio.src=item.path;try{await audio.play()}catch(error){if(token!==sequence)return;queue=[];now.textContent='Chưa phát được. Bấm nút Play trên thanh âm thanh để thử lại.';now.classList.add('error')}}
+  function start(items){stop();queue=items;playNext()}
+  audio.addEventListener('ended',()=>{const token=sequence;gapTimer=setTimeout(()=>{if(token===sequence)playNext()},650)});
+  audio.addEventListener('error',()=>{if(!audio.getAttribute('src'))return;queue=[];now.textContent='Không tải được file. Vui lòng chọn lại bản đọc.';now.classList.add('error')});
+  function track(word,accent,kind){const entry=word[kind]?.[accent];return entry?{word:word.word,path:entry.path,label:word.word+' · '+accent.toUpperCase()+' · '+(kind==='generated'?'Mẫu AI cũ':entry.synthetic?'Bản đang dùng · AI':'Bản thu người thật')}:null}
+  function button(label,action){const b=el('button',label);b.type='button';b.addEventListener('click',action);return b}
+  function sourceLink(text,url){try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol))return el('span',text);const a=el('a',text);a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';return a}catch{return el('span',text)}}
+  function renderWord(word,index){
+    const card=el('article',undefined,'card');card.id='word-'+word.word;
+    const head=el('div',undefined,'head'),title=el('div');title.append(el('h2',word.word),el('div',word.vi,'meaning'));head.append(title,el('span',String(index+1).padStart(2,'0')+'/20','number'));card.append(head);
+    card.append(el('p',word.focus,'focus'));
+    for(const finding of word.reviewFindings||[]){const note=el('p',(finding.status==='corrected'?'Đã sửa ':'Cần đối chiếu ')+finding.accents.map(a=>a.toUpperCase()).join('/')+': '+finding.note,finding.status==='corrected'?'small':'error small');if(finding.sourceUrl){note.append(document.createTextNode(' '),sourceLink('Từ điển đối chiếu',finding.sourceUrl))}card.append(note)}
+    for(const accent of ['us','uk']){
+      const row=el('div',undefined,'accent'),content=el('div'),buttons=el('div',undefined,'buttons');
+      const generated=track(word,accent,'generated'),reference=track(word,accent,'reference'),current=track(word,accent,'current')||generated;
+      buttons.append(button('▶ Bản đang dùng '+accent.toUpperCase(),()=>start([current])));
+      if(reference){buttons.append(button('So sánh AI cũ → người thật',()=>start([generated,reference])))}
+      content.append(el('p',word.ipa?.[accent]||'IPA chưa được cập nhật','ipa'),buttons,el('p',!word.current?.[accent]||word.current[accent].synthetic?'Giọng AI tổng hợp':'Bản thu người thật','small'));
+      if(!reference)content.append(el('p','Chưa có bản thu người thật để đối chiếu giọng này.','small'));
+      if(word.generated[accent].warnings.length)content.append(el('p','Cần nghe lại: '+word.generated[accent].warnings.join(', '),'error small'));
+      row.append(el('div',accent.toUpperCase(),'accent-label'),content);card.append(row);
+    }
+    const rating=el('label',undefined,'rating');rating.append(el('span','Bạn nghe thấy thế nào?'));const select=el('select');select.setAttribute('aria-label','Đánh giá '+word.word);
+    for(const [value,text] of [['','Chưa đánh giá'],['good','Ổn cả hai giọng'],['us-review','Cần sửa US'],['uk-review','Cần sửa UK'],['both-review','Cần sửa cả hai']]){const option=el('option',text);option.value=value;select.append(option)}
+    select.value=ratings[word.word]||'';select.addEventListener('change',()=>{ratings[word.word]=select.value;try{localStorage.setItem(ratingKey,JSON.stringify(ratings))}catch{now.textContent='Trình duyệt chưa cho lưu đánh giá. Bạn có thể dùng Tải đánh giá.'}});rating.append(select);card.append(rating);
+    if(Object.keys(word.reference).length){const details=el('details'),credits=el('div',undefined,'credits');details.append(el('summary','Nguồn bản thu đối chiếu'));
+      for(const [accent,reference] of Object.entries(word.reference)){const a=reference.attribution||{},p=el('p');p.append(document.createTextNode(accent.toUpperCase()+': '+(a.creator||'Bản thu đã lưu')+' · '),sourceLink('Nguồn',a.sourceUrl),document.createTextNode(' · '),sourceLink(a.license||'Giấy phép',a.licenseUrl));credits.append(p)}details.append(credits);card.append(details)}
+    return card;
+  }
+  document.getElementById('stop').addEventListener('click',stop);
+  document.getElementById('all-us').addEventListener('click',()=>start(manifest.words.map(w=>track(w,'us','current')||track(w,'us','generated'))));
+  document.getElementById('all-uk').addEventListener('click',()=>start(manifest.words.map(w=>track(w,'uk','current')||track(w,'uk','generated'))));
+  document.getElementById('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({trialCreatedAt:manifest.createdAt,reviewedAt:new Date().toISOString(),ratings},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download='danh-gia-audio-20-tu.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+  fetch('manifest.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('manifest');return r.json()}).then(data=>{
+    manifest=data;const s=data.summary;for(const text of [s.words+' từ trong bài học','Hai giọng US/UK','IPA đã hiệu đính','0 token Gemini'])document.getElementById('summary').append(el('span',text,'pill'));
+    if(data.currentSummary){const findings=document.getElementById('findings');findings.classList.remove('hidden');findings.append(el('strong','Bản đang dùng: '+data.currentSummary.human+' bản người thật · '+data.currentSummary.synthetic+' bản AI'),el('p','IPA phiên bản '+data.ipaRevision+' · Cập nhật '+new Date(data.reviewedAt).toLocaleString('vi-VN'),'small'))}
+    data.words.forEach((w,i)=>cards.append(renderWord(w,i)));document.getElementById('loading').classList.add('hidden');for(const id of ['all-us','all-uk','export'])document.getElementById(id).disabled=false;
+    document.getElementById('technical').textContent='Kiểm tra kỹ thuật: '+(s.generated-s.flagged.length)+'/'+s.generated+' file không có cảnh báo tự động. Thời lượng '+s.minSeconds+'–'+s.maxSeconds+' giây/file. Tổng WAV: '+(s.generatedBytes/1048576).toFixed(2)+' MB. Kiểm tra này chưa thay thế việc nghe duyệt.';
+  }).catch(()=>{document.getElementById('loading').textContent='Chưa tải được bộ thử. Hãy mở trang qua localhost sau khi tạo đủ file.'});
+</script>
+</body>
+</html>

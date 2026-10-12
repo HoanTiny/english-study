@@ -1,129 +1,55 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import { fetchPronounce, isSingleWord, type Pronounce } from "@/lib/pronounce";
 
-// Thanh phát âm: nút nghe giọng Anh-Anh (UK) & Anh-Mỹ (US) để đối chiếu accent,
-// + thu âm giọng mình và nghe lại (luyện shadowing theo accent yêu thích).
+// Recording remains local to the device; accent playback lives on the flashcard.
 export default function PronounceBar({ word }: { word: string }) {
-  const [p, setP] = useState<Pronounce | null>(null);
   const [recording, setRecording] = useState(false);
   const [recUrl, setRecUrl] = useState<string | null>(null);
-  const [recErr, setRecErr] = useState(false);
-  const mediaRef = useRef<MediaRecorder | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
-
+  const [error, setError] = useState("");
+  const media = useRef<MediaRecorder | null>(null);
+  const recordingUrl = useRef<string | null>(null);
+  const player = useRef<HTMLAudioElement | null>(null);
+  const active = useRef(true);
+  const starting = useRef(false);
   useEffect(() => {
-    let active = true;
-    setP(null);
-    setRecUrl((u) => {
-      if (u) URL.revokeObjectURL(u);
-      return null;
-    });
-    if (isSingleWord(word)) {
-      fetchPronounce(word).then((d) => active && setP(d));
-    }
+    active.current = true;
     return () => {
-      active = false;
+      active.current = false;
+      if (media.current?.state === "recording") media.current.stop();
+      media.current?.stream.getTracks().forEach(track => track.stop());
+      player.current?.pause();
+      if (recordingUrl.current) URL.revokeObjectURL(recordingUrl.current);
     };
-  }, [word]);
-
-  function speakFallback() {
-    if (typeof window === "undefined" || !window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = "en-US";
-    u.rate = 0.95;
-    window.speechSynthesis.speak(u);
-  }
-  function playUrl(url?: string) {
-    if (url) new Audio(url).play().catch(() => {});
-    else speakFallback();
-  }
-
+  }, []);
   async function startRec() {
+    if (starting.current) return;
+    starting.current = true;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mr = new MediaRecorder(stream);
-      chunksRef.current = [];
-      mr.ondataavailable = (e) => chunksRef.current.push(e.data);
-      mr.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: mr.mimeType || "audio/webm" });
-        setRecUrl((old) => {
-          if (old) URL.revokeObjectURL(old);
-          return URL.createObjectURL(blob);
-        });
-        stream.getTracks().forEach((t) => t.stop());
+      if (!active.current) { stream.getTracks().forEach(track => track.stop()); return; }
+      let recorder: MediaRecorder;
+      try { recorder = new MediaRecorder(stream); } catch (e) { stream.getTracks().forEach(track => track.stop()); throw e; }
+      const chunks: Blob[] = [];
+      recorder.ondataavailable = event => chunks.push(event.data);
+      recorder.onstop = () => {
+        stream.getTracks().forEach(track => track.stop());
+        if (!active.current) return;
+        if (recordingUrl.current) URL.revokeObjectURL(recordingUrl.current);
+        recordingUrl.current = URL.createObjectURL(new Blob(chunks, { type: recorder.mimeType || "audio/webm" }));
+        setRecUrl(recordingUrl.current); setRecording(false);
       };
-      mr.start();
-      mediaRef.current = mr;
-      setRecording(true);
-      setRecErr(false);
-    } catch {
-      setRecErr(true);
-    }
+      recorder.start(); media.current = recorder; setRecording(true); setError("");
+    } catch { if (active.current) setError("Chưa mở được micro. Kiểm tra quyền truy cập và thử lại."); }
+    finally { starting.current = false; }
   }
-  function stopRec() {
-    mediaRef.current?.stop();
-    setRecording(false);
+  function listen() {
+    if (!recUrl) return;
+    player.current?.pause(); player.current = new Audio(recUrl);
+    player.current.play().catch(() => setError("Chưa phát được bản thu. Vui lòng thử lại."));
   }
-
-  const us = p?.us;
-  const uk = p?.uk;
-  const hasAccents = !!(us?.audio || uk?.audio);
-
-  return (
-    <div className="flex flex-col items-center gap-3">
-      {/* Đối chiếu accent UK / US */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {hasAccents ? (
-          <>
-            {uk?.audio && (
-              <button onClick={() => playUrl(uk.audio)} className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary/50">
-                🔊 UK {uk.ipa && <span className="text-[10px] font-medium text-muted">{uk.ipa}</span>}
-              </button>
-            )}
-            {us?.audio && (
-              <button onClick={() => playUrl(us.audio)} className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary/50">
-                🔊 US {us.ipa && <span className="text-[10px] font-medium text-muted">{us.ipa}</span>}
-              </button>
-            )}
-          </>
-        ) : (
-          <button onClick={() => playUrl(p?.audio)} className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-bold text-foreground hover:border-primary/50">
-            🔊 Nghe
-          </button>
-        )}
-      </div>
-
-      {/* Thu âm & nghe lại */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        {!recording ? (
-          <button onClick={startRec} className="flex items-center gap-1.5 rounded-full bg-pink-soft px-4 py-1.5 text-xs font-bold text-pink hover:opacity-90">
-            🎙️ Thu âm
-          </button>
-        ) : (
-          <button onClick={stopRec} className="flex items-center gap-1.5 rounded-full bg-pink px-4 py-1.5 text-xs font-bold text-white hover:opacity-90 animate-pulse">
-            ⏹ Dừng
-          </button>
-        )}
-        {recUrl && (
-          <button onClick={() => playUrl(recUrl)} className="flex items-center gap-1.5 rounded-full bg-primary-soft px-4 py-1.5 text-xs font-bold text-primary hover:opacity-90">
-            ▶️ Nghe lại
-          </button>
-        )}
-      </div>
-      {recErr && <p className="text-[10px] font-medium text-pink">Cần cấp quyền micro để thu âm.</p>}
-
-      {/* Tra trên Cambridge (Anh–Việt) — mở tab mới, hợp lệ (chỉ link) */}
-      <a
-        href={`https://dictionary.cambridge.org/vi/dictionary/english-vietnamese/${encodeURIComponent(word.trim().toLowerCase())}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[11px] font-bold text-primary hover:underline"
-      >
-        📖 Tra trên Cambridge ↗
-      </a>
-    </div>
-  );
+  return <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-wrap items-center gap-2"><button onClick={() => recording ? media.current?.stop() : startRec()} className="rounded-xl bg-primary-soft px-4 py-2 text-sm font-semibold text-primary">{recording ? "⏹ Dừng thu âm" : "🎙 Thu âm"}</button>{recUrl && <button onClick={listen} className="rounded-xl border border-border px-4 py-2 text-sm">Nghe lại</button>}</div>
+    {error && <p role="status" className="text-xs text-muted">{error}</p>}
+    <a href={`https://dictionary.cambridge.org/vi/dictionary/english-vietnamese/${encodeURIComponent(word.trim().toLowerCase())}`} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-primary hover:underline">Tra trên Cambridge ↗</a>
+  </div>;
 }

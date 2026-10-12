@@ -217,7 +217,7 @@ export default function GrammarPage() {
   return (
     <main className={`study-page ${mode === "browse" ? "" : "study-page--focused"} animate-fadeIn`}>
       <div className="page-heading">
-        <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+        <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
           🧩 CẤU TRÚC NGỮ PHÁP CỐT LÕI
         </span>
         <h1 className="font-display text-3xl font-extrabold text-foreground sm:text-4xl">Cấu trúc câu</h1>
@@ -229,13 +229,13 @@ export default function GrammarPage() {
       {/* Toggle chế độ */}
       <div className="mb-6">
         <div className="study-tabs">
-          <button onClick={() => setMode("browse")} aria-pressed={mode === "browse"} className={`rounded-xl px-5 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer active:scale-95 ${mode === "browse" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
+          <button onClick={() => setMode("browse")} aria-pressed={mode === "browse"} className={`rounded-xl px-5 py-3 text-xs font-bold tracking-normal transition-all duration-300 cursor-pointer active:scale-95 ${mode === "browse" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
             📖 Cấu trúc
           </button>
-          <button onClick={() => setMode("tenses")} aria-pressed={mode === "tenses"} className={`rounded-xl px-5 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer active:scale-95 ${mode === "tenses" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
+          <button onClick={() => setMode("tenses")} aria-pressed={mode === "tenses"} className={`rounded-xl px-5 py-3 text-xs font-bold tracking-normal transition-all duration-300 cursor-pointer active:scale-95 ${mode === "tenses" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
             🕐 {TENSES.length} thì & thể
           </button>
-          <button onClick={() => (mode === "practice" ? null : startPractice())} aria-pressed={mode === "practice"} className={`rounded-xl px-5 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer active:scale-95 ${mode === "practice" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
+          <button onClick={() => (mode === "practice" ? null : startPractice())} aria-pressed={mode === "practice"} className={`rounded-xl px-5 py-3 text-xs font-bold tracking-normal transition-all duration-300 cursor-pointer active:scale-95 ${mode === "practice" ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
             ✍️ Luyện tập đặt câu
           </button>
         </div>
@@ -254,7 +254,7 @@ export default function GrammarPage() {
               className="w-full rounded-full border border-border/60 bg-surface/70 py-3 pl-11 pr-10 text-sm font-semibold text-foreground shadow-sm outline-none transition-all placeholder:text-muted/60 focus:border-primary focus:ring-4 focus:ring-primary/10"
             />
             {query && (
-              <button onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full bg-border/60 text-[10px] font-black text-muted hover:text-foreground cursor-pointer" title="Xóa tìm kiếm">✕</button>
+              <button onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full bg-border/60 text-xs font-bold text-muted hover:text-foreground cursor-pointer" title="Xóa tìm kiếm">✕</button>
             )}
           </div>
 
@@ -263,7 +263,7 @@ export default function GrammarPage() {
             {LEVELS.map((l) => {
               const n = l.key === "all" ? ALL.length : ALL.filter((s) => s.level === l.key).length;
               return (
-                <button key={l.key} onClick={() => { setLevel(l.key); setOpen(null); }} className={`rounded-full border px-4 py-2 text-xs font-black transition-all duration-300 active:scale-95 cursor-pointer ${level === l.key ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground shadow-sm"}`}>
+                <button key={l.key} onClick={() => { setLevel(l.key); setOpen(null); }} className={`rounded-full border px-4 py-2 text-xs font-bold transition-all duration-300 active:scale-95 cursor-pointer ${level === l.key ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground shadow-sm"}`}>
                   {l.label} <span className={level === l.key ? "opacity-80" : "opacity-60"}>· {n}</span>
                 </button>
               );
@@ -276,11 +276,11 @@ export default function GrammarPage() {
             <span aria-hidden>{filtersOpen ? "−" : "+"}</span>
           </button>
           <div id="grammar-categories" className={`${filtersOpen ? "flex" : "hidden"} mb-6 gap-2 flex-wrap md:flex`}>
-            <button onClick={() => { setCat("all"); setOpen(null); }} className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all active:scale-95 cursor-pointer ${cat === "all" ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground"}`}>
+            <button onClick={() => { setCat("all"); setOpen(null); }} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-all active:scale-95 cursor-pointer ${cat === "all" ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground"}`}>
               Tất cả mục đích
             </button>
             {CATS.map((c) => (
-              <button key={c.key} onClick={() => { setCat(cat === c.key ? "all" : c.key); setOpen(null); }} className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all active:scale-95 cursor-pointer ${cat === c.key ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground"}`}>
+              <button key={c.key} onClick={() => { setCat(cat === c.key ? "all" : c.key); setOpen(null); }} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-all active:scale-95 cursor-pointer ${cat === c.key ? "border-primary bg-primary text-primary-fg shadow-sm" : "border-border/60 bg-surface text-muted hover:border-primary/50 hover:text-foreground"}`}>
                 {c.label}
               </button>
             ))}
@@ -289,15 +289,15 @@ export default function GrammarPage() {
           {list.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border/60 py-14 text-center">
               <p className="text-sm font-bold text-muted">Không tìm thấy cấu trúc nào khớp “{query}”.</p>
-              <button onClick={() => setQuery("")} className="mt-3 text-xs font-black text-primary underline cursor-pointer">Xóa tìm kiếm</button>
+              <button onClick={() => setQuery("")} className="mt-3 text-xs font-bold text-primary underline cursor-pointer">Xóa tìm kiếm</button>
             </div>
           ) : (
             <div className="space-y-8">
               {groups.map(([lv, items]) => (
                 <section key={lv}>
                   <div className="mb-3 flex items-center gap-3">
-                    <h2 className="text-xs font-black uppercase tracking-wider text-muted">{CAT_LABEL[lv] ?? lv}</h2>
-                    <span className="text-[10px] font-bold text-muted/70">{items.length} cấu trúc</span>
+                    <h2 className="text-xs font-bold tracking-normal text-muted">{CAT_LABEL[lv] ?? lv}</h2>
+                    <span className="text-xs font-bold text-muted/70">{items.length} cấu trúc</span>
                     <div className="h-px flex-1 bg-border/50" />
                   </div>
                   <div className="study-grid">
@@ -314,7 +314,7 @@ export default function GrammarPage() {
                               </p>
                               {!expanded && <p className="mt-1 truncate text-xs font-semibold text-muted">{s.vi}</p>}
                             </div>
-                            <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider ${LEVEL_CLS[s.level] ?? "bg-primary-soft border border-primary/20 text-primary"}`}>{s.level}</span>
+                            <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold tracking-normal ${LEVEL_CLS[s.level] ?? "bg-primary-soft border border-primary/20 text-primary"}`}>{s.level}</span>
                             <span className={`shrink-0 text-xs text-muted transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}>▾</span>
                           </button>
 
@@ -327,15 +327,15 @@ export default function GrammarPage() {
                                   <button onClick={() => speak(s.example)} className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-xs text-primary transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-sm" title="Nghe câu mẫu">🔊</button>
                                   <div>
                                     <p className="text-xs sm:text-sm font-bold italic text-foreground">“{s.example}”</p>
-                                    {s.exampleVi && <p className="mt-1 text-[10px] font-bold text-muted">{s.exampleVi}</p>}
+                                    {s.exampleVi && <p className="mt-1 text-xs font-bold text-muted">{s.exampleVi}</p>}
                                   </div>
                                 </div>
                               )}
                               {(s.lessons?.length ?? 0) > 0 && (
                                 <div className="mt-3 flex flex-wrap items-center gap-1.5">
-                                  <span className="text-[10px] font-black uppercase tracking-wider text-muted">Học trong bài:</span>
+                                  <span className="text-xs font-bold tracking-normal text-muted">Học trong bài:</span>
                                   {s.lessons!.map((sl) => (
-                                    <Link key={sl} href={`/lesson/${sl}`} className="rounded-full border border-accent/25 bg-accent/5 px-2.5 py-1 text-[10px] font-bold text-accent hover:bg-accent/10 transition-colors">
+                                    <Link key={sl} href={`/lesson/${sl}`} className="rounded-full border border-accent/25 bg-accent/5 px-2.5 py-1 text-xs font-bold text-accent hover:bg-accent/10 transition-colors">
                                       📖 {lessonTitle(sl)}
                                     </Link>
                                   ))}
@@ -346,7 +346,7 @@ export default function GrammarPage() {
                                   <button
                                     onClick={() => saveToReview(s)}
                                     disabled={savedSet.has(s.structure) || savingNote === s.structure}
-                                    className={`rounded-full px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-all active:scale-95 cursor-pointer ${
+                                    className={`rounded-full px-4 py-2.5 text-xs font-bold tracking-normal transition-all active:scale-95 cursor-pointer ${
                                       savedSet.has(s.structure)
                                         ? "bg-teal-500/10 border border-teal-500/25 text-teal-600 dark:text-teal-400 cursor-default"
                                         : "border border-border bg-surface text-muted hover:text-foreground hover:border-primary/40 shadow-sm"
@@ -355,7 +355,7 @@ export default function GrammarPage() {
                                     {savedSet.has(s.structure) ? "✓ Đã lưu ôn tập" : savingNote === s.structure ? "Đang lưu…" : "+ Lưu ôn tập"}
                                   </button>
                                 )}
-                                <button onClick={() => startPractice(s)} className="rounded-full bg-primary px-5 py-2.5 text-[11px] font-black uppercase tracking-wider text-primary-fg shadow-sm active:scale-95 transition-transform cursor-pointer">
+                                <button onClick={() => startPractice(s)} className="rounded-full bg-primary px-5 py-2.5 text-xs font-bold tracking-normal text-primary-fg shadow-sm active:scale-95 transition-transform cursor-pointer">
                                   ✍️ Luyện cấu trúc này
                                 </button>
                               </div>
@@ -391,8 +391,8 @@ export default function GrammarPage() {
               <div className="space-y-3.5">
                 {t.form.map((f) => (
                   <div key={f.label} className="flex flex-col gap-2 rounded-2xl bg-surface border border-border p-4 sm:flex-row sm:items-center sm:gap-4.5 shadow-sm">
-                    <span className="w-20 shrink-0 text-[9px] font-black uppercase tracking-wider text-muted">{f.label}</span>
-                    <code className="font-display text-xs font-black text-foreground bg-black/5 dark:bg-white/5 border border-border/40 px-2.5 py-1 rounded-lg">{f.formula}</code>
+                    <span className="w-20 shrink-0 text-xs font-bold tracking-normal text-muted">{f.label}</span>
+                    <code className="font-display text-xs font-bold text-foreground bg-black/5 dark:bg-white/5 border border-border/40 px-2.5 py-1 rounded-lg">{f.formula}</code>
                     <span className="text-xs italic font-semibold text-muted sm:ml-auto leading-relaxed">{f.example}</span>
                   </div>
                 ))}
@@ -400,7 +400,7 @@ export default function GrammarPage() {
 
               {/* Khi nào dùng */}
               <div className="mt-5 border-t border-border/40 pt-5">
-                <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Khi nào dùng</p>
+                <p className="mb-2 text-xs font-bold tracking-normal text-muted">Khi nào dùng</p>
                 <ul className="list-inside list-disc space-y-1 text-xs font-semibold text-foreground/90">
                   {t.when.map((w) => <li key={w} className="leading-relaxed">{w}</li>)}
                 </ul>
@@ -408,9 +408,9 @@ export default function GrammarPage() {
 
               {/* Dấu hiệu */}
               <div className="mt-5 flex flex-wrap items-center gap-2">
-                <span className="text-[9px] font-black uppercase tracking-wider text-muted">Từ/cụm gợi ý theo ngữ cảnh:</span>
+                <span className="text-xs font-bold tracking-normal text-muted">Từ/cụm gợi ý theo ngữ cảnh:</span>
                 {t.signals.map((s) => (
-                  <span key={s} className="rounded-full bg-primary-soft border border-primary/10 px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-primary">{s}</span>
+                  <span key={s} className="rounded-full bg-primary-soft border border-primary/10 px-2.5 py-1 text-xs font-bold tracking-normal text-primary">{s}</span>
                 ))}
               </div>
 
@@ -421,7 +421,7 @@ export default function GrammarPage() {
                     <button onClick={() => speak(ex.en)} className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-xs text-primary cursor-pointer shadow-sm">🔊</button>
                     <div>
                       <p className="text-xs sm:text-sm font-bold italic text-foreground">“{ex.en}”</p>
-                      <p className="text-[10px] font-bold text-muted mt-0.5">{ex.vi}</p>
+                      <p className="text-xs font-bold text-muted mt-0.5">{ex.vi}</p>
                     </div>
                   </div>
                 ))}
@@ -429,7 +429,7 @@ export default function GrammarPage() {
             </div>
           ))}
           <p className="text-center text-xs font-bold text-muted">
-            Đã nắm rõ lý thuyết? Thử ngay <button onClick={() => setMode("practice")} className="text-primary font-black underline cursor-pointer">Luyện tập đặt câu</button> với AI.
+            Đã nắm rõ lý thuyết? Thử ngay <button onClick={() => setMode("practice")} className="text-primary font-bold underline cursor-pointer">Luyện tập đặt câu</button> với AI.
           </p>
         </div>
       )}
@@ -441,12 +441,12 @@ export default function GrammarPage() {
             <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border border border-border/40 shadow-inner">
               <div className="h-full rounded-full bg-primary transition-all duration-300 animate-pulse" style={{ width: `${(idx / deck.length) * 100}%` }} />
             </div>
-            <span className="shrink-0 text-[10px] font-black text-muted bg-surface border border-border px-2.5 py-1 rounded-full shadow-sm">{idx + 1}/{deck.length}</span>
+            <span className="shrink-0 text-xs font-bold text-muted bg-surface border border-border px-2.5 py-1 rounded-full shadow-sm">{idx + 1}/{deck.length}</span>
           </div>
 
           <div className="liquid-glass-card flex flex-col gap-5 p-6 md:p-8 text-center shadow-2xl bg-white/20 dark:bg-black/10 border border-border/80">
-            <p className="text-[9px] font-black uppercase tracking-wider text-muted">Đặt câu thực tế chứa cấu trúc:</p>
-            <p className="font-display text-2xl font-black text-primary tracking-tight leading-normal"><StructureText text={cur.structure} /></p>
+            <p className="text-xs font-bold tracking-normal text-muted">Đặt câu thực tế chứa cấu trúc:</p>
+            <p className="font-display text-2xl font-bold text-primary tracking-tight leading-normal"><StructureText text={cur.structure} /></p>
             <p className="text-xs sm:text-sm font-bold text-muted leading-relaxed px-4">{cur.vi}</p>
 
             {result === null ? (
@@ -460,8 +460,8 @@ export default function GrammarPage() {
                   className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3.5 text-center text-sm font-semibold text-foreground outline-none focus:border-primary shadow-inner placeholder:text-muted/60 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all"
                 />
                 <div className="flex items-center justify-center gap-3 mt-2">
-                  <button onClick={nextItem} className="rounded-full border border-border bg-surface px-6 py-3.5 text-xs font-black uppercase tracking-wider text-muted hover:text-foreground active:scale-95 transition-all shadow-sm cursor-pointer">Bỏ qua</button>
-                  <button onClick={check} disabled={!typed.trim() || checking} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider active:scale-95 disabled:opacity-50">
+                  <button onClick={nextItem} className="rounded-full border border-border bg-surface px-6 py-3.5 text-xs font-bold tracking-normal text-muted hover:text-foreground active:scale-95 transition-all shadow-sm cursor-pointer">Bỏ qua</button>
+                  <button onClick={check} disabled={!typed.trim() || checking} className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal active:scale-95 disabled:opacity-50">
                     {checking ? "Đang chấm câu…" : "Kiểm tra với AI"}
                   </button>
                 </div>
@@ -469,7 +469,7 @@ export default function GrammarPage() {
             ) : (
               <div className="animate-fadeIn space-y-4 border-t border-border/40 pt-5 text-left">
                 <p className="rounded-2xl bg-surface border border-border p-4 text-xs italic font-semibold text-foreground/90 shadow-sm">“{typed}”</p>
-                <p className={`font-display text-lg font-black ${result.ok === true ? "text-primary animate-pulse" : result.ok === false ? "text-pink" : "text-muted"}`}>
+                <p className={`font-display text-lg font-bold ${result.ok === true ? "text-primary animate-pulse" : result.ok === false ? "text-pink" : "text-muted"}`}>
                   {result.ok === true ? "✓ Đặt câu tốt!" : result.ok === false ? "✗ Cần cải thiện" : "ℹ️ Nhận xét"}
                 </p>
                 <p className="text-xs sm:text-sm font-semibold text-muted leading-relaxed">{result.feedback}</p>
@@ -480,7 +480,7 @@ export default function GrammarPage() {
                   </div>
                 )}
                 <div className="flex justify-center pt-2">
-                  <button onClick={nextItem} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider">Câu tiếp theo →</button>
+                  <button onClick={nextItem} className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal">Câu tiếp theo →</button>
                 </div>
               </div>
             )}

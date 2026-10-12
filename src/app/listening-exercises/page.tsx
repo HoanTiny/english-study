@@ -31,12 +31,12 @@ export default function ListeningExercisesPage() {
 
   return (
     <main className="study-page animate-fadeIn">
-      <h1 className="font-display text-3xl font-black text-gradient-iridescent">Bài tập nghe</h1>
+      <h1 className="font-display text-3xl font-bold text-gradient-iridescent">Bài tập nghe</h1>
       <p className="mt-2 text-sm font-semibold text-muted">Nghe audio và trả lời câu hỏi — chấm điểm tự động, xem lại transcript sau khi làm.</p>
 
       <div className="mt-5 flex flex-wrap gap-2">
         {LEVELS.map((l) => (
-          <button key={l} onClick={() => setLevel(l)} className={`rounded-full border px-3 py-1.5 text-xs font-black transition-all ${level === l ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{l}</button>
+          <button key={l} onClick={() => setLevel(l)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-all ${level === l ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{l}</button>
         ))}
       </div>
 
@@ -53,9 +53,9 @@ export default function ListeningExercisesPage() {
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 text-lg">🎧</span>
               <div className="flex-1 min-w-0">
                 <p className="font-bold text-sm text-foreground truncate">{e.title}</p>
-                <p className="text-[11px] font-semibold text-muted">{e.unit ? `Unit ${e.unit} · ` : ""}{e.section ?? ""} · {e.level} · {e.items.length} câu</p>
+                <p className="text-xs font-semibold text-muted">{e.unit ? `Unit ${e.unit} · ` : ""}{e.section ?? ""} · {e.level} · {e.items.length} câu</p>
               </div>
-              <span className="text-xs font-black text-primary shrink-0">Làm →</span>
+              <span className="text-xs font-bold text-primary shrink-0">Làm →</span>
             </button>
           ))}
         </div>
@@ -180,24 +180,24 @@ function TtsPlayer({ transcript }: { transcript: string }) {
         <button
           onClick={() => seek(idxRef.current - 1)}
           title="Câu trước"
-          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-black hover:border-primary/40 active:scale-90 transition-all"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-bold hover:border-primary/40 active:scale-90 transition-all"
         >
           ⏮
         </button>
         <button
           onClick={playing ? stop : () => playFrom(idxRef.current)}
-          className="rounded-full bg-primary px-4 py-2 text-xs font-black text-primary-fg active:scale-95 transition-transform"
+          className="rounded-full bg-primary px-4 py-2 text-xs font-bold text-primary-fg active:scale-95 transition-transform"
         >
           {playing ? "⏹ Dừng" : "▶ Nghe (giọng máy)"}
         </button>
         <button
           onClick={() => seek(idxRef.current + 1)}
           title="Câu sau"
-          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-black hover:border-primary/40 active:scale-90 transition-all"
+          className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface text-xs font-bold hover:border-primary/40 active:scale-90 transition-all"
         >
           ⏭
         </button>
-        <span className="ml-auto text-[11px] font-black text-muted tabular-nums">
+        <span className="ml-auto text-xs font-bold text-muted tabular-nums">
           Câu {idx + 1}/{lines.length}
         </span>
       </div>
@@ -210,7 +210,7 @@ function TtsPlayer({ transcript }: { transcript: string }) {
         className="mt-2.5 w-full accent-[var(--primary,#6366f1)]"
         aria-label="Tua tới câu"
       />
-      <p className="mt-1.5 text-[11px] font-semibold text-muted leading-snug">
+      <p className="mt-1.5 text-xs font-semibold text-muted leading-snug">
         Bài này chưa có file thu âm — giọng đọc trình duyệt theo transcript. Kéo thanh trượt hoặc bấm ⏮/⏭ để tua theo câu.
       </p>
     </div>
@@ -259,8 +259,8 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
 
   return (
     <main className="study-page study-page--focused animate-fadeIn">
-      <button onClick={onBack} className="text-xs font-black text-muted">← Danh sách bài tập</button>
-      <h1 className="mt-3 font-display text-2xl font-black text-foreground">{ex.title}</h1>
+      <button onClick={onBack} className="text-xs font-bold text-muted">← Danh sách bài tập</button>
+      <h1 className="mt-3 font-display text-2xl font-bold text-foreground">{ex.title}</h1>
       {ex.instructions && <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">{ex.instructions}</p>}
 
       {/* Audio — file thật nếu có; chưa có thì đọc transcript bằng giọng máy (TTS) */}
@@ -283,7 +283,7 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
           return (
             <div key={i} className={`rounded-2xl border p-4 transition-colors ${correct ? "border-teal-500/40 bg-teal-500/5" : wrong ? "border-rose-500/40 bg-rose-500/5" : "border-border/60 bg-surface/50"}`}>
               <div className="flex items-start gap-2">
-                <span className="text-xs font-black text-muted mt-0.5">{pos + 1}</span>
+                <span className="text-xs font-bold text-muted mt-0.5">{pos + 1}</span>
                 <div className="flex-1">
                   {it.image && (
                     /* eslint-disable-next-line @next/next/no-img-element */
@@ -326,7 +326,7 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
                           >
                             <input type="radio" disabled={submitted} checked={isPicked} onChange={() => setAnswers({ ...answers, [i]: oi })} />
                             {opt}
-                            {isWrongPick && <span className="ml-1 text-[10px] font-black uppercase tracking-wider text-rose-500">bạn chọn</span>}
+                            {isWrongPick && <span className="ml-1 text-xs font-bold tracking-normal text-rose-500">bạn chọn</span>}
                           </label>
                         );
                       })}
@@ -353,7 +353,7 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
                           >
                             <input type="radio" disabled={submitted} checked={isPicked} onChange={() => setAnswers({ ...answers, [i]: v })} />
                             {v ? "Đúng (right)" : "Sai (wrong)"}
-                            {isWrongPick && <span className="ml-1 text-[10px] font-black uppercase tracking-wider text-rose-500">bạn chọn</span>}
+                            {isWrongPick && <span className="ml-1 text-xs font-bold tracking-normal text-rose-500">bạn chọn</span>}
                           </label>
                         );
                       })}
@@ -387,16 +387,16 @@ function Player({ ex, onBack }: { ex: ListeningExercise; onBack: () => void }) {
       </div>
 
       {!submitted ? (
-        <button onClick={() => setSubmitted(true)} disabled={ex.items.length === 0} className="mt-6 w-full liquid-glass-btn py-3 text-sm font-black uppercase tracking-wider disabled:opacity-40">
+        <button onClick={() => setSubmitted(true)} disabled={ex.items.length === 0} className="mt-6 w-full liquid-glass-btn py-3 text-sm font-bold tracking-normal disabled:opacity-40">
           {gradable ? "Nộp & chấm điểm" : "Hoàn thành"}
         </button>
       ) : (
         <div className="mt-6 rounded-3xl border border-border/60 bg-surface/60 p-5 text-center">
-          {gradable && <p className="font-display text-2xl font-black text-foreground">{score}/{ex.items.length} đúng</p>}
+          {gradable && <p className="font-display text-2xl font-bold text-foreground">{score}/{ex.items.length} đúng</p>}
           <div className="mt-3 flex flex-wrap justify-center gap-2">
-            <button onClick={() => { setSubmitted(false); setAnswers({}); }} className="rounded-full border border-border px-4 py-2 text-xs font-black text-muted hover:text-foreground">↻ Làm lại</button>
-            {ex.transcript && <button onClick={() => setShowScript((v) => !v)} className="rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black text-primary">{showScript ? "Ẩn transcript" : "📄 Xem transcript"}</button>}
-            <button onClick={onBack} className="rounded-full bg-primary text-primary-fg px-4 py-2 text-xs font-black">Bài khác →</button>
+            <button onClick={() => { setSubmitted(false); setAnswers({}); }} className="rounded-full border border-border px-4 py-2 text-xs font-bold text-muted hover:text-foreground">↻ Làm lại</button>
+            {ex.transcript && <button onClick={() => setShowScript((v) => !v)} className="rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-bold text-primary">{showScript ? "Ẩn transcript" : "📄 Xem transcript"}</button>}
+            <button onClick={onBack} className="rounded-full bg-primary text-primary-fg px-4 py-2 text-xs font-bold">Bài khác →</button>
           </div>
           {showScript && ex.transcript && (
             <p className="mt-4 whitespace-pre-wrap text-left text-sm font-medium text-foreground/90 bg-background/50 border border-border/40 rounded-xl p-4">{ex.transcript}</p>

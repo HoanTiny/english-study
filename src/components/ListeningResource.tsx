@@ -21,7 +21,7 @@ export default function ListeningResource({ cefr, topic, youtubeId }: Props) {
     <section className="mt-10">
       <div className="mb-3 flex items-center gap-2">
         <h2 className="text-lg font-bold tracking-tight">🎧 Luyện nghe với người bản xứ</h2>
-        <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-[10px] font-bold text-accent">
+        <span className="rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-accent">
           {ch.levelLabel}
         </span>
       </div>
@@ -61,7 +61,7 @@ export default function ListeningResource({ cefr, topic, youtubeId }: Props) {
         </a>
       )}
 
-      <p className="mt-2 text-[11px] font-medium text-muted">
+      <p className="mt-2 text-xs font-medium text-muted">
         Mẹo: nghe 1 lần không phụ đề → nghe lại có phụ đề → nhại theo (shadowing).
       </p>
     </section>

@@ -177,7 +177,7 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
           </p>
           <button
             onClick={() => setShowBanner(false)}
-            className="w-8 h-8 rounded-full border border-border/80 bg-white/50 dark:bg-black/25 flex items-center justify-center text-xs font-black text-muted hover:text-foreground active:scale-95 transition-all cursor-pointer"
+            className="w-8 h-8 rounded-full border border-border/80 bg-white/50 dark:bg-black/25 flex items-center justify-center text-xs font-bold text-muted hover:text-foreground active:scale-95 transition-all cursor-pointer"
             aria-label="Đóng nhắc nhở"
           >
             ✕
@@ -195,8 +195,8 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
             <span className="relative z-1 animate-pulse">🔔</span>
           </div>
           <div className="flex-1">
-            <p className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Nhắc học hằng ngày</p>
-            <p className="text-[10px] sm:text-xs font-semibold text-muted mt-0.5">
+            <p className="text-xs sm:text-sm font-bold text-foreground tracking-normal">Nhắc học hằng ngày</p>
+            <p className="text-xs sm:text-xs font-semibold text-muted mt-0.5">
               {settings.enabled
                 ? `Đang bật · Báo lúc ${settings.time} mỗi ngày`
                 : "Đang tắt · Bật nhắc nhở để giữ vững chuỗi học của bạn"}
@@ -210,7 +210,7 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
         {open && (
           <div className="mt-5 space-y-4.5 border-t border-border/10 pt-5 animate-fadeIn">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Bật nhắc nhở</span>
+              <span className="text-xs sm:text-sm font-bold text-foreground tracking-normal">Bật nhắc nhở</span>
               <button
                 onClick={toggleEnabled}
                 role="switch"
@@ -228,18 +228,18 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
             </div>
 
             <div className="flex items-center justify-between gap-3">
-              <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Giờ nhắc nhở</span>
+              <span className="text-xs sm:text-sm font-bold text-foreground tracking-normal">Giờ nhắc nhở</span>
               <input
                 type="time"
                 value={settings.time}
                 onChange={(e) => changeTime(e.target.value)}
-                className="rounded-xl border border-border bg-white/60 dark:bg-black/20 px-4.5 py-2 text-xs sm:text-sm font-black text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
+                className="rounded-xl border border-border bg-white/60 dark:bg-black/20 px-4.5 py-2 text-xs sm:text-sm font-bold text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
               />
             </div>
 
             {perm === "denied" && (
               <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20">
-                <p className="text-[10px] sm:text-xs font-bold text-amber-600 dark:text-amber-400 leading-relaxed">
+                <p className="text-xs sm:text-xs font-bold text-amber-600 dark:text-amber-400 leading-relaxed">
                   ⚠️ Trình duyệt của bạn đang chặn thông báo. Vui lòng cấp quyền nhận thông báo cho SpeakUp trong phần Cài đặt trang web của trình duyệt để có thể nhận nhắc nhở hằng ngày nhé.
                 </p>
               </div>
@@ -247,22 +247,22 @@ export default function StudyReminder({ studiedToday }: { studiedToday: boolean 
             
             {settings.enabled && (
               <div className="flex items-center justify-between gap-3">
-                <span className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wider">Kiểm tra</span>
+                <span className="text-xs sm:text-sm font-bold text-foreground tracking-normal">Kiểm tra</span>
                 <button
                   onClick={sendTest}
                   disabled={busy}
-                  className="rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black text-primary hover:bg-primary/15 active:scale-95 transition-all disabled:opacity-40 cursor-pointer"
+                  className="rounded-xl border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-bold text-primary hover:bg-primary/15 active:scale-95 transition-all disabled:opacity-40 cursor-pointer"
                 >
                   {busy ? "Đang gửi…" : "🔔 Gửi thử thông báo"}
                 </button>
               </div>
             )}
             {testMsg && (
-              <p className="text-[10px] sm:text-xs font-bold text-primary text-right">{testMsg}</p>
+              <p className="text-xs sm:text-xs font-bold text-primary text-right">{testMsg}</p>
             )}
 
             <div className="p-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-border/10">
-              <p className="text-[11px] sm:text-xs font-semibold text-muted leading-relaxed">
+              <p className="text-xs sm:text-xs font-semibold text-muted leading-relaxed">
                 {canPush
                   ? "* Đã bật Push Notification hệ thống: bạn sẽ được nhắc đúng giờ ngay cả khi đã đóng tab SpeakUp (cần trình duyệt còn chạy nền). Nếu không có push, app vẫn nhắc khi tab đang mở."
                   : "* Trình duyệt này chưa hỗ trợ Push nền — nhắc nhở sẽ hoạt động khi tab SpeakUp đang mở."}

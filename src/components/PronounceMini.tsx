@@ -52,7 +52,7 @@ export default function PronounceMini({ text }: { text: string }) {
         🔊
       </button>
       {data?.pos?.map((p) => (
-        <span key={p} className="rounded-md bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 text-[9px] font-black lowercase text-indigo-500">
+        <span key={p} className="rounded-md bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 text-xs font-bold lowercase text-indigo-500">
           {p}
         </span>
       ))}

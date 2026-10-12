@@ -15,10 +15,10 @@ import {
 } from "@/lib/lessonsView";
 
 const statusStyles: Record<LessonStatus, string> = {
-  done: "border-accent/40 bg-accent/10 dark:bg-accent/15 text-accent hover:border-accent/80 hover:shadow-[0_0_16px_rgba(6,182,212,0.3)]",
-  in_progress: "border-primary/50 bg-primary/15 dark:bg-primary/20 text-primary shadow-[0_0_12px_rgba(99,102,241,0.2)] animate-[pulse_2s_infinite] hover:border-primary/80",
-  available: "border-border bg-white/20 dark:bg-white/5 text-foreground hover:border-primary/40 hover:bg-white/30 dark:hover:bg-white/10 hover:shadow-md",
-  locked: "border-border/40 bg-black/5 dark:bg-white/5 text-muted opacity-50 cursor-not-allowed",
+  done: "border-primary/20 bg-primary-soft text-primary hover:border-primary/60",
+  in_progress: "border-primary bg-primary-soft text-primary hover:border-primary/80",
+  available: "border-border bg-surface text-foreground hover:border-primary/40 hover:bg-primary-soft",
+  locked: "border-border bg-background text-muted cursor-not-allowed",
 };
 
 // Bài "công cụ" → mở thẳng trang luyện riêng (không phải bài cụm/SRS).
@@ -75,13 +75,13 @@ export default function RoadmapPath() {
         return (
           <section
             key={stage.id}
-            className="liquid-glass-card p-6 md:p-8 relative overflow-hidden transition-all duration-500 hover:shadow-lg"
+            className="liquid-glass-card p-4 sm:p-6 relative overflow-hidden"
           >
             {/* Glowing background hint inside stage card */}
             <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 filter blur-2xl pointer-events-none" />
 
             <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-purple-600 text-sm font-black text-white shadow-[0_4px_12px_rgba(99,102,241,0.3)]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-sm font-semibold text-primary-fg">
                 {stage.id}
               </span>
               <h3 className="text-xl font-extrabold tracking-tight">{stage.title}</h3>
@@ -93,7 +93,7 @@ export default function RoadmapPath() {
               </span>
 
               <span className="ml-auto text-xs font-bold text-muted bg-white/20 dark:bg-white/5 border border-border px-3 py-1 rounded-full">
-                {done}/{total} bài học · <span className="text-primary font-black">{pct}%</span>
+                {done}/{total} bài học · <span className="text-primary font-bold">{pct}%</span>
               </span>
             </div>
 
@@ -112,7 +112,7 @@ export default function RoadmapPath() {
                   >
                     <span className="text-sm font-extrabold shrink-0">{statusIcon[st]}</span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-foreground">
+                      <p className="text-sm font-semibold text-foreground leading-relaxed">
                         {lesson.title}
                       </p>
                       <p className="truncate text-xs font-semibold text-muted">

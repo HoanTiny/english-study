@@ -166,13 +166,13 @@ export default function WordCardDeck({ words }: { words: string[] }) {
             >
               {top && (
                 <>
-                  <span className="font-display text-2xl font-black text-foreground">{w}</span>
+                  <span className="font-display text-2xl font-bold text-foreground">{w}</span>
                   <span className="mt-1 text-sm font-semibold text-muted">/{ipas[w] ?? "…"}/</span>
                   <button
                     type="button"
                     onPointerDown={(e) => e.stopPropagation()}
                     onClick={(e) => { e.stopPropagation(); playWord(w); }}
-                    className="mt-3 flex items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-black text-primary-fg active:scale-95"
+                    className="mt-3 flex items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-xs font-bold text-primary-fg active:scale-95"
                   >
                     🔊 Nghe
                   </button>
@@ -198,7 +198,7 @@ export default function WordCardDeck({ words }: { words: string[] }) {
       <div className="mt-4 flex items-center justify-center gap-3">
         <button
           onClick={toggleRecord}
-          className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-[11px] font-black text-white transition-all active:scale-95 ${recording ? "bg-pink animate-pulse" : "bg-foreground/80 hover:bg-foreground"}`}
+          className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold text-white transition-all active:scale-95 ${recording ? "bg-pink animate-pulse" : "bg-foreground/80 hover:bg-foreground"}`}
         >
           {recording ? "⏹ Dừng thu" : "🎙️ Thu âm nhại lại"}
         </button>
@@ -219,7 +219,7 @@ export default function WordCardDeck({ words }: { words: string[] }) {
           {example ? (
             <>
               <p className="text-sm font-medium italic leading-snug text-foreground/90">“{example.en}”</p>
-              {example.vi && <p className="mt-0.5 text-[11px] font-medium text-muted">{example.vi}</p>}
+              {example.vi && <p className="mt-0.5 text-xs font-medium text-muted">{example.vi}</p>}
             </>
           ) : (
             <p className="text-xs font-medium text-muted">{exLoading ? "Đang tải câu ví dụ…" : "Chưa có câu ví dụ cho từ này."}</p>

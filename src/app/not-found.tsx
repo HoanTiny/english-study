@@ -9,9 +9,9 @@ export default function NotFound() {
       {/* Nền highlight nhẹ cho đồng bộ với các trang khác */}
       <div className="pointer-events-none absolute top-1/4 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
 
-      <p className="font-display text-7xl font-black text-gradient-iridescent sm:text-8xl">404</p>
+      <p className="font-display text-7xl font-bold text-gradient-iridescent sm:text-8xl">404</p>
 
-      <h1 className="mt-4 font-display text-xl font-black text-foreground sm:text-2xl">
+      <h1 className="mt-4 font-display text-xl font-bold text-foreground sm:text-2xl">
         Ốp! Trang này không tồn tại
       </h1>
       <p className="mt-3 max-w-md text-sm font-semibold leading-relaxed text-muted">
@@ -22,19 +22,19 @@ export default function NotFound() {
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/"
-          className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
+          className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal active:scale-95"
         >
           🎯 Về lộ trình học
         </Link>
         <Link
           href="/today"
-          className="rounded-full border border-border bg-surface px-6 py-3.5 text-xs font-black uppercase tracking-wider text-muted shadow-sm transition-all hover:border-primary/40 hover:text-foreground active:scale-95"
+          className="rounded-full border border-border bg-surface px-6 py-3.5 text-xs font-bold tracking-normal text-muted shadow-sm transition-all hover:border-primary/40 hover:text-foreground active:scale-95"
         >
           📅 Nhiệm vụ hôm nay
         </Link>
       </div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-2 text-[11px] font-bold">
+      <div className="mt-10 flex flex-wrap items-center justify-center gap-2 text-xs font-bold">
         <span className="text-muted/70">Hoặc đi nhanh tới:</span>
         <Link href="/vocab" className="rounded-full border border-border/60 bg-surface px-3 py-1.5 text-muted transition-colors hover:text-primary hover:border-primary/40">🎒 Từ vựng</Link>
         <Link href="/grammar" className="rounded-full border border-border/60 bg-surface px-3 py-1.5 text-muted transition-colors hover:text-primary hover:border-primary/40">📚 Cấu trúc câu</Link>

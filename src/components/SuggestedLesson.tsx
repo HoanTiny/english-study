@@ -49,11 +49,11 @@ export default function SuggestedLesson() {
           📘
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-primary">Gợi ý học hôm nay · {pick.reason}</p>
-          <p className="font-display text-base font-black text-foreground truncate">{pick.title}</p>
-          <p className="text-[11px] sm:text-xs font-bold text-muted">{pick.cefr}</p>
+          <p className="text-xs sm:text-xs font-bold tracking-normal text-primary">Gợi ý học hôm nay · {pick.reason}</p>
+          <p className="font-display text-base font-bold text-foreground truncate">{pick.title}</p>
+          <p className="text-xs sm:text-xs font-bold text-muted">{pick.cefr}</p>
         </div>
-        <span className="shrink-0 text-xs font-black text-primary flex items-center gap-1.5 whitespace-nowrap">
+        <span className="shrink-0 text-xs font-bold text-primary flex items-center gap-1.5 whitespace-nowrap">
           Học ngay
           <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 font-sans">→</span>
         </span>

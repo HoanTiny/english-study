@@ -2,11 +2,14 @@
 import { apiFetch } from "@/lib/apiFetch";
 
 import { useEffect, useMemo, useState } from "react";
+import { clearPronunciationPreloads, prefetchPronunciation } from "@/lib/pronunciationPreload";
 import Link from "next/link";
 import { lessonContent } from "@/lib/lessons";
-import { fetchPronounce, isSingleWord } from "@/lib/pronounce";
+import { canPronounce, fetchPronounce, isSingleWord } from "@/lib/pronounce";
+import { vocabularyIpa } from "@/lib/vocabularyPronunciation";
 import PronounceBar from "@/components/PronounceBar";
-import WordImage, { fetchWordImage } from "@/components/WordImage";
+import WordImage from "@/components/WordImage";
+import WordPronunciation from "@/components/WordPronunciation";
 import { useAuth } from "@/lib/auth";
 import { addNote } from "@/lib/notesRepo";
 import { gradeNote } from "@/lib/reviewRepo";
@@ -14,6 +17,9 @@ import { todayKey } from "@/lib/store";
 import type { Grade } from "@/lib/srs";
 import vocabWords from "@/data/vocab.json";
 import sentencesData from "@/data/sentences.json";
+import AppIcon from "@/components/AppIcon";
+import styles from "./vocab.module.css";
+import { basicLessons, basicVocabularySource, isStandaloneWord, wordsFromPhrases } from "@/lib/basicVocabulary";
 
 // Nhãn thời gian cho 4 nút đánh giá (xấp xỉ FSRS cho thẻ mới).
 const GRADES: { g: Grade; label: string; when: string; cls: string }[] = [
@@ -23,14 +29,15 @@ const GRADES: { g: Grade; label: string; when: string; cls: string }[] = [
   { g: "easy", label: "Dễ", when: "~1 tuần", cls: "bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white" },
 ];
 
-type Card = { en: string; vi: string; ipa?: string; example?: string; cefr: string; pos?: string };
+type Card = { en: string; vi: string; ipa?: string; example?: string; cefr: string; pos?: string; page?: number };
 
 // Loại từ (vocab.json dùng tiếng Anh) → nhãn ngắn tiếng Việt.
 const POS_VI: Record<string, string> = {
   noun: "danh từ", verb: "động từ", adjective: "tính từ", adverb: "trạng từ",
   pronoun: "đại từ", preposition: "giới từ", conjunction: "liên từ", interjection: "thán từ", determiner: "từ hạn định",
+  number: "số từ", "modal auxiliary": "động từ khuyết thiếu", "infinitive-to": "dấu hiệu nguyên mẫu", "be-verb": "động từ", "do-verb": "động từ", "have-verb": "động từ",
 };
-type Deck = { slug: string; title: string; cefr: string; emoji: string; cards: Card[]; isWord?: boolean };
+type Deck = { slug: string; title: string; cefr: string; emoji: string; cards: Card[]; isWord?: boolean; parent?: Deck; number?: number };
 type Mode = "flashcard" | "type" | "choice";
 
 // Emoji theo chủ đề (tên file Excel = chủ đề tiếng Việt)
@@ -75,7 +82,7 @@ const SENTENCE_DECKS: Deck[] = (() => {
     cefr: "Giao tiếp",
     emoji: "💬",
     cards,
-    isWord: true,
+    isWord: false,
   }));
 })();
 
@@ -94,6 +101,7 @@ const DECKS: Deck[] = Object.values(lessonContent).map((l) => ({
   emoji: EMOJI[l.slug] ?? "📘",
   cards: l.phrases.map((p) => ({ ...p, cefr: l.cefr })),
 }));
+const BASIC_DECKS: Deck[] = basicLessons.map(lesson => ({ slug: lesson.id, title: lesson.title, number: lesson.number, cefr: "Theo chủ đề", emoji: "📘", isWord: true, cards: lesson.words }));
 
 function bucket(cefr: string): "A1" | "A2" | "B1" {
   const c = cefr.toUpperCase();
@@ -133,6 +141,10 @@ function norm(s: string): string {
   return s.toLowerCase().replace(/…|\.\.\./g, "").replace(/[.,!?"'’]/g, "").replace(/\s+/g, " ").trim();
 }
 
+function maskAnswer(example: string, answer: string): string {
+  return example.replace(new RegExp(answer.replace(/[.*+?^{}$()|[\]\\]/g, "\\$&"), "gi"), "_____");
+}
+
 function speak(text: string, rate = 0.95) {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
   window.speechSynthesis.cancel();
@@ -143,7 +155,8 @@ function speak(text: string, rate = 0.95) {
 }
 
 async function play(text: string) {
-  if (isSingleWord(text)) {
+  if (vocabularyIpa(text)?.needsReview) return;
+  if (canPronounce(text)) {
     try {
       const p = await fetchPronounce(text);
       if (p.audio) {
@@ -187,12 +200,13 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
 
             <div className="flex flex-col gap-0.5 min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-primary-soft border border-primary/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-wider text-primary">{badge ?? d.cefr}</span>
-                <span className="text-[9px] font-bold text-muted">{d.cards.length} {unit}</span>
+                <span className="rounded-full bg-primary-soft border border-primary/10 px-2 py-0.5 text-xs font-bold tracking-normal text-primary">{badge ?? d.cefr}</span>
+                <span className="text-xs font-bold text-muted">{d.cards.length} {unit}</span>
               </div>
-              <h3 className="font-display text-sm font-bold leading-tight text-foreground truncate mt-1.5">{d.title}</h3>
-              <span className="text-[9px] font-black uppercase tracking-wider text-primary inline-flex items-center gap-1 mt-1.5 group-hover:translate-x-1 transition-all duration-300">
-                Luyện tập <span className="text-[11px]">→</span>
+              <h3 className="font-display text-sm font-bold leading-snug text-foreground mt-1.5">{d.number ? `Bài ${String(d.number).padStart(2, "0")} · ` : ""}{d.title}</h3>
+              {d.number && <p className="mt-2 text-xs text-muted font-normal leading-relaxed">{d.cards.slice(0, 4).map(card => card.en).join(" · ")}…</p>}
+              <span className="text-xs font-bold tracking-normal text-primary inline-flex items-center gap-1 mt-1.5 group-hover:translate-x-1 transition-all duration-300">
+                Luyện tập <span className="text-xs">→</span>
               </span>
             </div>
           </div>
@@ -203,6 +217,7 @@ function DeckGrid({ decks, grad, badge, unit, onPick }: {
 }
 
 const CATS = [
+  { key: "basic" as const, label: "1000 từ tiếng anh thông dụng", icon: "📘", count: BASIC_DECKS.length },
   { key: "lesson" as const, label: "Theo bài học", icon: "📗", count: DECKS.length },
   { key: "word" as const, label: "Từ chủ đề", icon: "🔤", count: WORD_DECKS.length },
   { key: "sentence" as const, label: "Mẫu câu giao tiếp", icon: "💬", count: SENTENCE_DECKS.length },
@@ -210,8 +225,9 @@ const CATS = [
 
 export default function VocabPage() {
   const { userId } = useAuth();
-  const [cat, setCat] = useState<"lesson" | "word" | "sentence">("lesson");
+  const [cat, setCat] = useState<"basic" | "lesson" | "word" | "sentence">("basic");
   const [q, setQ] = useState("");
+  const [singleOnly, setSingleOnly] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [savedSet, setSavedSet] = useState<Set<string>>(new Set());
   const [deck, setDeck] = useState<Deck | null>(null);
@@ -232,17 +248,24 @@ export default function VocabPage() {
   const [loadingExtra, setLoadingExtra] = useState(false);
 
   const card = cards[idx];
-
-  // Prefetch ảnh thẻ kế tiếp (làm ấm cache → chuyển thẻ có ảnh ngay).
+  const nextWord = phase === "playing" && mode === "flashcard" ? cards[idx + 1]?.en : undefined;
   useEffect(() => {
-    const nxt = cards[idx + 1];
-    if (nxt?.en) fetchWordImage(nxt.en, nxt.vi);
-  }, [idx, cards]);
+    const request = new AbortController();
+    if (nextWord) void prefetchPronunciation(nextWord, request.signal);
+    return () => request.abort();
+  }, [nextWord]);
+  useEffect(() => {
+    if (phase !== "playing") clearPronunciationPreloads();
+    return () => clearPronunciationPreloads();
+  }, [phase]);
+  const relatedWords = useMemo(() => deck && !deck.isWord ? wordsFromPhrases(deck.cards.map(card => card.en)) : [], [deck]);
 
   // Lựa chọn trắc nghiệm (ổn định theo từng thẻ)
   const options = useMemo(() => {
     if (!card || cards.length === 0) return [];
-    const others = shuffle(cards.filter((c) => c.en !== card.en)).slice(0, 3).map((c) => c.en);
+    // The PDF repeats some headwords. Choices must remain distinct.
+    const distinct = new Map(cards.filter(c => c.en.toLowerCase() !== card.en.toLowerCase()).map(c => [c.en.toLowerCase(), c.en]));
+    const others = shuffle([...distinct.values()]).slice(0, 3);
     return shuffle([card.en, ...others]);
   }, [card, cards]);
 
@@ -265,7 +288,6 @@ export default function VocabPage() {
     setAgain(0);
     resetCard();
     setPhase("playing");
-    play(c[0].en);
   }
 
   function advance(ok: boolean) {
@@ -278,7 +300,6 @@ export default function VocabPage() {
     }
     setIdx(next);
     resetCard();
-    play(cards[next].en);
   }
 
   function checkType() {
@@ -365,40 +386,41 @@ export default function VocabPage() {
   // ===== LIBRARY =====
   if (phase === "library") {
     const term = q.trim().toLowerCase();
-    const match = (d: Deck) => !term || d.title.toLowerCase().includes(term);
+    const match = (d: Deck) => !term || d.title.toLowerCase().includes(term) || (d.number && d.cards.some(card => `${card.en} ${card.vi}`.toLowerCase().includes(term)));
+    const courseDecks = (singleOnly ? BASIC_DECKS.map(d => ({ ...d, cards: d.cards.filter(c => isStandaloneWord(c.en)) })).filter(d => d.cards.length > 0) : BASIC_DECKS).filter(match);
     return (
       <main className="study-page animate-fadeIn">
         <div className="page-heading">
-          <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+          <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
             🗂️ Thư viện Flashcards
           </span>
           <h1 className="font-display text-3xl font-extrabold text-foreground sm:text-5xl tracking-tight leading-none mt-1">
             Học từ vựng tiếng Anh
           </h1>
           <p className="max-w-md text-xs sm:text-sm font-semibold text-muted leading-relaxed">
-            Chọn danh mục, bộ thẻ thông minh và bắt đầu phản xạ qua Flashcard, Đoán gõ hoặc Trắc nghiệm đa chiều.
+            Học từng từ nền tảng, rồi ghép thành câu. Luyện nhớ nghĩa, phát âm, đoán gõ và trắc nghiệm.
           </p>
         </div>
 
         {/* Tab danh mục lớn */}
-        <div className="study-tabs mb-6">
+        <div className={`study-tabs mb-6 ${styles.libraryTabs}`}>
           {CATS.map((c) => (
             <button
               key={c.key}
               onClick={() => { setCat(c.key); setQ(""); }}
               className={`flex flex-col sm:flex-row items-center justify-center gap-2 rounded-xl px-4 py-3.5 cursor-pointer transition-all duration-300 active:scale-95 ${
                 cat === c.key
-                  ? "bg-primary text-primary-fg shadow-md scale-102 font-black text-xs uppercase tracking-wider"
+                  ? "bg-primary text-primary-fg shadow-md scale-102 font-bold text-xs tracking-normal"
                   : "text-muted hover:text-foreground hover:bg-primary-soft/20 text-xs font-bold"
               }`}
             >
               <span className="text-xl shrink-0">{c.icon}</span>
               <div className="text-center sm:text-left min-w-0">
-                <p className={`text-xs font-black leading-tight ${cat === c.key ? "text-primary-fg" : "text-foreground"}`}>
+                <p className={`text-xs font-bold leading-tight ${cat === c.key ? "text-primary-fg" : "text-foreground"}`}>
                   {c.label}
                 </p>
-                <p className={`text-[8.5px] font-black uppercase tracking-widest mt-0.5 leading-none ${cat === c.key ? "text-primary-fg/80" : "text-muted"}`}>
-                  {c.count} bộ thẻ
+                <p className={`text-xs font-bold tracking-normal mt-0.5 leading-none ${cat === c.key ? "text-primary-fg/80" : "text-muted"}`}>
+                  {c.count} {c.key === "basic" ? "bài học" : "bộ thẻ"}
                 </p>
               </div>
             </button>
@@ -418,22 +440,28 @@ export default function VocabPage() {
           </div>
           <Link
             href="/collocations"
-            className="shrink-0 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-5 py-3 text-[10px] font-black uppercase tracking-wider text-primary transition-all hover:bg-primary-soft hover:scale-102 active:scale-98 shadow-sm"
+            className="shrink-0 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-5 py-3 text-xs font-bold tracking-normal text-primary transition-all hover:bg-primary-soft hover:scale-102 active:scale-98 shadow-sm"
           >
             🧩 Mini-game Ghép cụm từ <span className="text-[14px]">→</span>
           </Link>
         </div>
 
         {/* Theo bài học — gom A1/A2/B1 */}
+        {cat === "basic" && <section>
+          <div className={styles.courseIntro}><div><h2>Học theo chủ đề, nhớ qua phiên âm.</h2><p>{basicVocabularySource.topics} chủ đề · {BASIC_DECKS.length} bài · {basicVocabularySource.entries.toLocaleString("vi-VN")} thẻ từ và cụm từ. Mỗi bài tối đa 20 thẻ, đủ nghĩa Việt, IPA và nghe phát âm.</p></div><span className={styles.level}>IPA đầy đủ</span></div>
+          <div className={styles.courseFilter}><label><input type="checkbox" checked={singleOnly} onChange={e => setSingleOnly(e.target.checked)} />Chỉ học từ đơn / từ ghép viết liền</label><span>{courseDecks.length} bài phù hợp</span></div>
+          <DeckGrid decks={courseDecks} grad="from-primary-soft to-primary-soft border-primary/15 text-primary" badge="Có IPA" unit="thẻ" onPick={startDeck} />
+          <p className={styles.sourceNote}>Nguồn: PDF “{basicVocabularySource.name}”. Giữ nguyên từ, nghĩa và IPA theo tài liệu; một số mục được lặp lại theo chủ đề.</p>
+        </section>}
         {cat === "lesson" &&
           COLLECTIONS.map((col) => {
             const decks = DECKS.filter((d) => bucket(d.cefr) === col.key && match(d));
             if (decks.length === 0) return null;
             return (
               <section key={col.key} className="mb-12">
-                <h2 className="mb-5 font-display text-sm font-black uppercase tracking-widest text-foreground border-b border-border/30 pb-3 flex items-center gap-2">
+                <h2 className="mb-5 font-display text-sm font-bold tracking-normal text-foreground border-b border-border/30 pb-3 flex items-center gap-2">
                   <span>{col.key === "A1" ? "🌱" : col.key === "A2" ? "🌿" : "🌳"}</span> {col.name}
-                  <span className="text-[9px] font-black uppercase tracking-wider text-muted bg-black/5 dark:bg-white/5 border border-border px-2.5 py-0.5 rounded-full ml-1">({decks.length})</span>
+                  <span className="text-xs font-bold tracking-normal text-muted bg-black/5 dark:bg-white/5 border border-border px-2.5 py-0.5 rounded-full ml-1">({decks.length})</span>
                 </h2>
                 <DeckGrid decks={decks} grad={col.grad} unit="thẻ" onPick={startDeck} />
               </section>
@@ -455,296 +483,139 @@ export default function VocabPage() {
 
   // ===== STUDY =====
   return (
-    <main className="study-page study-page--reading animate-fadeIn">
-      {/* Toast Alert */}
-      {toast && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-primary/95 backdrop-blur-md border border-white/10 px-6 py-3 text-[10px] font-black text-white shadow-xl animate-fadeIn tracking-wider uppercase">
-          {toast}
+    <main className={`study-page ${styles.page}`}>
+      {toast && <div role="status" className={styles.toast}>{toast}</div>}
+
+      <button onClick={backToLibrary} className={styles.back}>← Thư viện từ vựng</button>
+      <header className={styles.header}>
+        <div className={styles.heading}>
+          <h1><span aria-hidden="true">{deck?.emoji}</span>{deck?.title}</h1>
+          <p>{phase === "done" ? "Nhìn lại buổi luyện tập của bạn" : deck?.isWord ? `${deck.number ? `Bài ${deck.number}/${BASIC_DECKS.length} · ` : ""}Nhớ nghĩa, đọc IPA, nghe và luyện phát âm.` : "Ghi nhớ cách nói, luyện phát âm và dùng trong ngữ cảnh."}</p>
+          {phase === "playing" && (relatedWords.length > 0 || deck?.parent) && <div className={styles.contentSwitch} role="group" aria-label="Nội dung học"><button aria-pressed={!deck?.parent} onClick={() => { if (deck?.parent) startDeck(deck.parent); }}>Cụm từ</button><button aria-pressed={!!deck?.parent} onClick={() => { if (deck && !deck.parent) startDeck({ slug: `${deck.slug}-words`, title: deck.title, cefr: "Từ vựng", emoji: "📘", isWord: true, cards: relatedWords, parent: deck }); }}>Từng từ ({deck?.parent ? deck.cards.length : relatedWords.length})</button></div>}
         </div>
-      )}
-
-      {/* Back button */}
-      <button onClick={backToLibrary} className="mb-4 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground cursor-pointer transition-colors">
-        ← Thư viện từ vựng
-      </button>
-
-      <div className="mb-3 text-center">
-        <h1 className="font-display text-2xl font-black text-foreground flex items-center justify-center gap-2">
-          <span>{deck?.emoji}</span> {deck?.title}
-        </h1>
-      </div>
-
-      {/* Tab chế độ học */}
-      <div className="mb-4 flex justify-center">
-        <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-surface/50 backdrop-blur-sm p-1.5 shadow-sm">
-          {MODES.map((m) => (
-            <button
-              key={m.key}
-              onClick={() => switchMode(m.key)}
-              className={`rounded-xl px-5 py-2.5 text-xs font-black transition-all cursor-pointer active:scale-95 duration-300 uppercase tracking-wider ${
-                mode === m.key
-                  ? "bg-primary text-primary-fg shadow-sm"
-                  : "text-muted hover:text-foreground hover:bg-primary-soft/20"
-              }`}
-            >
-              <span className="mr-1.5">{m.icon}</span> {m.label}
+        {phase === "playing" && <div className={styles.modes} role="group" aria-label="Chế độ học">
+          {MODES.map(m => (
+            <button key={m.key} onClick={() => switchMode(m.key)} aria-pressed={mode === m.key}>
+              <span aria-hidden="true">{m.icon}</span>{m.label}
             </button>
           ))}
-        </div>
-      </div>
+        </div>}
+      </header>
 
       {phase === "playing" && card && (
-        <div>
-          {/* Progress bar */}
-          <div className="mb-4 flex items-center gap-4">
-            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border/60 shadow-inner border border-border/40">
-              <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-300" style={{ width: `${(idx / cards.length) * 100}%` }} />
+        <>
+          <div className={styles.progress}>
+            <div className={styles.progressTrack} role="progressbar" aria-label="Số thẻ đã hoàn thành" aria-valuemin={0} aria-valuemax={cards.length} aria-valuenow={idx}>
+              <span style={{ transform: `scaleX(${idx / cards.length})` }} />
             </div>
-            <span className="shrink-0 text-[9px] font-black text-muted bg-surface border border-border px-2.5 py-1 rounded-full">{idx + 1}/{cards.length}</span>
+            <span className={styles.progressLabel}>Thẻ <strong>{idx + 1}</strong> / {cards.length}</span>
           </div>
 
-          {/* ---- FLASHCARD ---- */}
-          {mode === "flashcard" && (
-            <>
-              <div className="liquid-glass-card flex flex-col items-center justify-center gap-4 p-6 sm:p-7 text-center bg-white/40 dark:bg-black/20 border border-border shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent blur-xl pointer-events-none" />
-
-                {!revealed ? (
-                  <>
-                    <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
-                    <p className="text-xl sm:text-2xl font-bold text-foreground mt-1 leading-relaxed px-4">{card.vi}</p>
-
-                    {/* Ảnh minh hoạ ngay mặt trước (gợi nhớ trực quan) */}
-                    <WordImage word={card.en} meaning={card.vi} />
-
-                    <button
-                      onClick={() => play(card.en)}
-                      className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-xl text-white shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer my-2"
-                      aria-label="Phát âm tiếng Anh"
-                    >
-                      🔊
-                    </button>
-
-                    <div className="flex flex-col items-center gap-3 mt-2">
-                      <p className="text-[10px] font-semibold italic text-muted">Tự dịch và phát âm to cụm từ này…</p>
-                      <button onClick={() => setRevealed(true)} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider hover:scale-[1.03] active:scale-95 transition-all cursor-pointer">Hiện đáp án</button>
-                    </div>
-                  </>
-                ) : (
-                  <div className="w-full animate-fadeIn flex flex-col items-center gap-3.5">
-                    {/* Level Badge */}
-                    <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
-
-                    {/* Primary English Word */}
-                    <p className="font-display text-2xl sm:text-3xl font-black text-primary tracking-tight leading-none mt-0.5">{card.en}</p>
-
-                    {/* IPA & Translation Details */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-muted">
-                      {card.pos && <span className="rounded-md bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-black text-indigo-500">{POS_VI[card.pos] ?? card.pos}</span>}
-                      {card.ipa && <span className="font-mono text-accent">{fmtIpa(card.ipa)}</span>}
-                      <span>·</span>
-                      <span className="text-foreground/90 font-bold">{card.vi}</span>
-                    </div>
-
-                    {/* Ảnh minh hoạ (Openverse, CC) */}
-                    <WordImage word={card.en} meaning={card.vi} />
-
-                    {/* Compact Pronunciation Widget */}
-                    <div className="w-full max-w-xs my-0.5">
-                      <PronounceBar word={card.en} />
-                    </div>
-
-                    {/* Compact Example Sentence */}
-                    {card.example && (
-                      <div className="w-full rounded-xl bg-white/35 dark:bg-black/35 border border-border/80 p-3 text-xs italic font-semibold text-foreground/80 leading-relaxed shadow-sm text-center">
-                        “{card.example}”
-                      </div>
-                    )}
-
-                    {/* Extra AI generated sentence */}
-                    {extra && (
-                      <div className="w-full rounded-xl border border-primary/20 bg-primary-soft/40 p-3 text-left animate-fadeIn shadow-sm">
-                        <p className="text-xs font-semibold italic text-foreground leading-relaxed">✨ “{extra.sentence}”</p>
-                        {extra.vi && <p className="mt-1 text-[9px] font-bold text-muted leading-relaxed">{extra.vi}</p>}
-                      </div>
-                    )}
-
-                    {/* Action Row */}
-                    <div className="flex flex-wrap items-center justify-center gap-2.5 mt-0.5">
-                      <button
-                        onClick={newExample}
-                        disabled={loadingExtra}
-                        className="rounded-full border border-primary/30 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary hover:bg-primary-soft active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
-                      >
-                        {loadingExtra ? "Đang tạo..." : "✨ Ví dụ AI"}
-                      </button>
-                      <button
-                        onClick={() => advance(true)}
-                        className="rounded-full border border-primary/30 bg-primary-soft/60 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary hover:bg-primary-soft active:scale-95 transition-all cursor-pointer"
-                      >
-                        ✓ Đã thuộc
-                      </button>
-                      <button
-                        onClick={() => { if (card) saveWord(card, { review: false }); }}
-                        className="rounded-full border border-border bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-foreground hover:bg-primary-soft/20 active:scale-95 transition-all cursor-pointer shadow-sm"
-                      >
-                        {savedSet.has(card.en) ? "✓ Đã lưu" : "🔖 Lưu sổ tay"}
-                      </button>
-                    </div>
+          {mode === "flashcard" ? (
+            <div className={styles.workspace}>
+              <article className={styles.wordCard} aria-label="Thẻ từ vựng">
+                <div className={styles.cardMeta}><span className={styles.level}>{card.cefr}</span><span>{revealed ? "Đối chiếu nghĩa & luyện đọc" : "Bạn nhớ nghĩa của thẻ này không?"}</span></div>
+                <div className={styles.wordVisual}>
+                  <div className={styles.wordCopy} aria-live="polite">
+                    <h2 className={styles.word} lang="en">{card.en}</h2>
+                    {card.pos && <div className={styles.wordDetails}><span>{POS_VI[card.pos] ?? card.pos}</span></div>}
+                    <WordPronunciation word={card.en} ipa={card.ipa} />
+                    {revealed && <div className={styles.revealedMeaning}><span>Nghĩa tiếng Việt</span><p className={styles.meaning}>{card.vi}</p>{card.page && <p className={styles.sourcePage}>Tài liệu PDF · trang {card.page}</p>}</div>}
                   </div>
-                )}
-              </div>
-
-              {revealed && (
-                <div className="mt-4 animate-fadeIn space-y-2.5 w-full border-t border-border/40 pt-4 px-2">
-                  <p className="text-center text-[9px] font-black uppercase tracking-wider text-muted">Bạn nhớ cụm từ này tốt đến mức nào?</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {GRADES.map(({ g, label, when, cls }) => (
-                      <button
-                        key={g}
-                        onClick={() => gradeAndNext(g)}
-                        className={`rounded-xl py-2 cursor-pointer transition-all duration-300 active:scale-95 shadow-sm border border-transparent flex flex-col items-center justify-center ${cls}`}
-                      >
-                        <span className="text-xs font-black tracking-wide leading-none">{label}</span>
-                        <span className="text-[8px] font-bold opacity-80 mt-1 leading-none">{when}</span>
-                      </button>
-                    ))}
-                  </div>
+                  <div className={styles.illustration}><WordImage word={card.en} meaning={card.vi} /></div>
                 </div>
-              )}
-            </>
-          )}
-
-          {/* ---- ĐOÁN (gõ từ) ---- */}
-          {mode === "type" && (
-            <div className="liquid-glass-card flex min-h-[360px] flex-col items-center justify-center gap-6 p-8 text-center bg-white/40 dark:bg-black/20 border border-border shadow-2xl">
-              <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
-              <p className="text-xl sm:text-2xl font-black text-foreground mt-2 leading-relaxed">{card.vi}</p>
-              {card.example ? (
-                <p className="text-xs font-semibold italic text-muted max-w-md mt-1 leading-relaxed">
-                  “{card.example.replace(new RegExp(card.en.replace(/[.*+?^${}()|[\]\\…]/g, "\\$&"), "i"), "_____")}”
-                </p>
-              ) : (
-                <p className="text-[10px] font-black text-muted uppercase mt-1 tracking-wider">Gõ cụm từ tiếng Anh tương ứng</p>
-              )}
-
-              {hinted && (
-                <p className="text-xs font-bold text-amber-700 bg-amber-500/10 px-4 py-2 rounded-2xl border border-amber-500/20 mt-1 animate-fadeIn">
-                  💡 Chữ cái đầu: <span className="font-mono text-sm tracking-wider font-extrabold">{card.en.slice(0, Math.max(2, Math.ceil(card.en.length / 3)))}…</span>
-                </p>
-              )}
-
-              {resolved === null ? (
-                <div className="w-full max-w-sm flex flex-col gap-4 mt-4">
-                  <input
-                    autoFocus
-                    value={typed}
-                    onChange={(e) => setTyped(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && typed.trim() && checkType()}
-                    placeholder="Nhập cụm từ tiếng Anh..."
-                    className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3.5 text-center text-lg font-bold text-foreground outline-none focus:border-primary shadow-inner focus:bg-background transition-all focus:ring-4 focus:ring-primary/10"
-                  />
-                  <div className="flex gap-2.5">
-                    <button onClick={() => setHinted(true)} className="w-1/3 rounded-xl bg-amber-500/10 border border-amber-500/20 py-3 text-xs font-black text-amber-700 dark:text-amber-400 active:scale-95 cursor-pointer transition-all hover:bg-amber-500/20">💡 Gợi ý</button>
-                    <button onClick={() => advance(false)} className="w-1/3 rounded-xl bg-rose-500/10 border border-rose-500/20 py-3 text-xs font-black text-rose-600 active:scale-95 cursor-pointer transition-all hover:bg-rose-500/20">✕ Bỏ qua</button>
-                    <button onClick={checkType} disabled={!typed.trim()} className="w-1/3 liquid-glass-btn py-3 text-xs font-black disabled:opacity-50 cursor-pointer">✓ Kiểm tra</button>
-                  </div>
+                <div className={styles.cardFooter}>
+                  {revealed ? <>
+                    <button onClick={() => saveWord(card, { review: false })} className={styles.secondary}><AppIcon name={savedSet.has(card.en) ? "check" : "book"} size={17} />{savedSet.has(card.en) ? "Đã lưu" : "Lưu sổ tay"}</button>
+                    <button onClick={() => setRevealed(false)} className={styles.secondary}>Ẩn nghĩa</button>
+                    <button onClick={() => advance(true)} className="liquid-glass-btn"><AppIcon name="check" size={17} />Đã thuộc</button>
+                  </> : <>
+                    <p>Đọc từ, nghe phát âm và thử nhớ nghĩa.</p>
+                    <button onClick={() => setRevealed(true)} className="liquid-glass-btn">Hiện nghĩa <AppIcon name="arrow" size={17} /></button>
+                  </>}
                 </div>
-              ) : (
-                <div className="w-full animate-fadeIn space-y-4 border-t border-border/40 pt-6">
-                  <p className={`font-display text-2xl font-black ${resolved ? "text-primary animate-pulse" : "text-rose-600"}`}>
-                    {resolved ? "✓ Chính xác!" : "✗ Chưa chính xác"}
-                  </p>
-                  <div className="bg-background/40 rounded-2xl p-5 border border-border inline-flex flex-col items-center">
-                    <p className="font-display text-xl font-bold text-foreground">{card.en}</p>
-                    <div className="mt-1.5 flex items-center justify-center gap-2">
-                      {card.pos && <span className="rounded-md bg-indigo-500/10 px-1.5 py-0.5 text-[10px] font-black text-indigo-500">{POS_VI[card.pos] ?? card.pos}</span>}
-                      {card.ipa && <span className="text-xs font-mono font-bold text-accent">{fmtIpa(card.ipa)}</span>}
+              </article>
+
+              <aside className={styles.support} aria-label="Phát âm và ngữ cảnh">
+                <h2><AppIcon name="headphones" size={20} />{revealed ? "Nghe & luyện nói" : "Một chút gợi ý"}</h2>
+                {revealed ? <>
+                  <p className={styles.supportIntro}>Bấm US hoặc UK trên thẻ để nghe, sau đó thu âm và nghe lại cách bạn phát âm.</p>
+                  <div className={styles.pronunciation}><PronounceBar key={card.en} word={card.en} /></div>
+                  {card.example && <section className={styles.example}><h3>Dùng trong ngữ cảnh</h3><blockquote lang="en">“{card.example}”</blockquote></section>}
+                  {extra && <div className={styles.extra} role="status"><p lang="en">{extra.sentence}</p>{extra.vi && <p>{extra.vi}</p>}</div>}
+                  <button onClick={newExample} disabled={loadingExtra} className={`${styles.secondary} ${styles.exampleButton}`}><AppIcon name="bolt" size={17} />{loadingExtra ? "Đang tạo..." : "Ví dụ AI"}</button>
+                </> : <>
+                  <p className={styles.supportIntro}>Phiên âm nằm ngay dưới từ. Bấm US hoặc UK để nghe từng giọng và đọc theo.</p>
+                  <ol className={styles.hintSteps}><li>Nhìn từ và thử nhớ nghĩa tiếng Việt.</li><li>Đọc IPA, nghe mẫu rồi nhắc lại.</li><li>Bấm Hiện nghĩa để kiểm tra trí nhớ.</li></ol>
+                </>}
+              </aside>
+
+              {revealed && <section className={styles.rating} aria-label="Đánh giá trí nhớ">
+                <div><h2>Bạn nhớ {deck?.isWord ? "từ" : "câu"} này thế nào?</h2><p>Chọn mức độ để lưu vào lịch ôn tập phù hợp.</p></div>
+                <div className={styles.grades}>{GRADES.map(({ g, label, when, cls }) => <button key={g} onClick={() => gradeAndNext(g)} className={cls}><strong>{label}</strong><small>{when}</small></button>)}</div>
+              </section>}
+            </div>
+          ) : (
+            <div className={styles.workspace}>
+              <article className={styles.wordCard} aria-label="Câu hỏi">
+                <div className={styles.cardMeta}><span className={styles.level}>{card.cefr}</span><span>{mode === "type" ? "Nhớ và viết lại" : "Chọn cách nói đúng"}</span></div>
+                <h2 className={styles.question}>{card.vi}</h2>
+                {mode === "type" && card.example && <div className={styles.example}>
+                  <h3>Gợi ý ngữ cảnh</h3>
+                  <blockquote lang="en">“{maskAnswer(card.example, card.en)}”</blockquote>
+                </div>}
+                <p className={styles.supportIntro}>{mode === "type" ? "Viết từ hoặc cụm từ tiếng Anh tương ứng. Bạn có thể xem gợi ý nếu chưa nhớ ra." : "Đọc nghĩa và chọn câu tiếng Anh phù hợp trong các đáp án."}</p>
+                {mode === "choice" && !vocabularyIpa(card.en)?.needsReview && <div className={styles.cardFooter}><button onClick={() => play(card.en)} className={styles.secondary} aria-label="Phát âm"><AppIcon name="headphones" size={17} />Nghe gợi ý</button></div>}
+              </article>
+
+              <section className={styles.answerPanel} aria-label="Trả lời">
+                <h2><AppIcon name={mode === "type" ? "edit" : "grid"} size={20} />{mode === "type" ? "Câu trả lời của bạn" : "Chọn một đáp án"}</h2>
+                {mode === "type" ? <>
+                  {hinted && resolved === null && <p className={styles.hint}>Chữ cái đầu: <strong lang="en">{card.en.slice(0, Math.max(2, Math.ceil(card.en.length / 3)))}…</strong></p>}
+                  {resolved === null && <>
+                    <label className={styles.answerInput}>Viết bằng tiếng Anh
+                      <input autoFocus value={typed} onChange={e => setTyped(e.target.value)} onKeyDown={e => { if (e.key === "Enter" && !e.nativeEvent.isComposing && typed.trim()) checkType(); }} placeholder="Nhập cụm từ tiếng Anh..." autoComplete="off" />
+                    </label>
+                    <div className={styles.answerActions}>
+                      <button onClick={() => setHinted(true)} className={styles.secondary}>Gợi ý</button>
+                      <button onClick={() => advance(false)} className={styles.secondary}>Bỏ qua</button>
+                      <button onClick={checkType} disabled={!typed.trim()} className="liquid-glass-btn">Kiểm tra</button>
                     </div>
+                  </>}
+                </> : <div className={styles.answerOptions}>{options.map((opt, optionIndex) => {
+                  const statusClass = resolved === null ? "" : opt === card.en ? styles.optionCorrect : opt === chosen ? styles.optionWrong : styles.optionMuted;
+                  return <button key={opt} disabled={resolved !== null} onClick={() => pick(opt)} className={`${styles.option} ${statusClass}`}>
+                    <span aria-hidden="true">{["A", "B", "C", "D"][optionIndex]}</span><span lang="en">{opt}</span>
+                    {resolved !== null && opt === card.en && <AppIcon name="check" size={17} />}
+                  </button>;
+                })}</div>}
+                {resolved !== null && <div className={styles.feedback} data-correct={resolved} role="status">
+                  <strong>{resolved ? "✓ Chính xác!" : "Chưa chính xác — mình thử lại nhé."}</strong>
+                  <p lang="en">{card.en}</p>
+                  {card.ipa && <p className={styles.ipa} aria-label="Phiên âm IPA"><span>IPA</span><span lang="en-fonipa">{fmtIpa(card.ipa)}</span></p>}
+                  {card.pos && <div className={styles.wordDetails}><span>{POS_VI[card.pos] ?? card.pos}</span></div>}
+                  <div className={styles.answerActions}>
+                    <button onClick={() => saveWord(card, { review: true, grade: resolved ? "good" : "again" })} className={styles.secondary}>Lưu ôn tập</button>
+                    <button onClick={() => advance(!!resolved)} className="liquid-glass-btn">Tiếp theo <AppIcon name="arrow" size={17} /></button>
                   </div>
-                  <div className="mt-3 flex items-center justify-center gap-3 w-full max-w-sm mx-auto">
-                    <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all">🔖 Lưu ôn tập</button>
-                    <button onClick={() => advance(!!resolved)} className="w-1/2 liquid-glass-btn py-3 text-xs font-black cursor-pointer">Tiếp theo →</button>
-                  </div>
-                </div>
-              )}
+                </div>}
+              </section>
             </div>
           )}
-
-          {/* ---- TRẮC NGHIỆM ---- */}
-          {mode === "choice" && (
-            <div className="liquid-glass-card flex min-h-[360px] flex-col items-center justify-center gap-6 p-8 text-center bg-white/40 dark:bg-black/20 border border-border shadow-2xl">
-              <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[8.5px] font-black uppercase tracking-wider text-primary">{card.cefr}</span>
-              <p className="text-xl sm:text-2xl font-black text-foreground mt-2 leading-relaxed px-4">{card.vi}</p>
-
-              <button
-                onClick={() => play(card.en)}
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-soft border border-primary/20 text-lg text-primary shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                aria-label="Phát âm"
-              >
-                🔊
-              </button>
-
-              <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2 mt-2">
-                {options.map((opt, idx) => {
-                  let cls = "border-border bg-surface/50 text-foreground hover:border-primary/60 hover:bg-primary-soft/10 shadow-sm";
-                  if (resolved !== null) {
-                    if (opt === card.en) cls = "border-primary bg-primary-soft text-primary shadow-sm font-extrabold";
-                    else if (opt === chosen) cls = "border-pink bg-pink-soft text-pink shadow-sm font-extrabold";
-                    else cls = "border-border bg-surface/20 text-muted opacity-50";
-                  }
-                  const badges = ["A", "B", "C", "D"];
-                  return (
-                    <button
-                      key={opt}
-                      disabled={resolved !== null}
-                      onClick={() => pick(opt)}
-                      className={`rounded-2xl border-2 px-4 py-3.5 text-xs font-bold transition-all cursor-pointer active:scale-95 flex items-center gap-3 ${cls}`}
-                    >
-                      <span className="rounded-lg bg-black/5 dark:bg-white/5 border border-border text-[9px] font-black w-6 h-6 flex items-center justify-center shrink-0">{badges[idx]}</span>
-                      <span className="truncate text-left">{opt}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {resolved !== null && (
-                <div className="flex items-center justify-center gap-3 w-full max-w-md mt-2 animate-fadeIn">
-                  <button onClick={() => { if (card) saveWord(card, { review: true, grade: resolved ? "good" : "again" }); }} className="w-1/2 rounded-xl border border-border bg-surface py-3 text-xs font-black text-foreground hover:bg-primary-soft/20 active:scale-95 cursor-pointer transition-all shadow-sm">🔖 Lưu ôn tập</button>
-                  <button onClick={() => advance(!!resolved)} className="w-1/2 liquid-glass-btn py-3 text-xs font-black cursor-pointer">Tiếp theo →</button>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+        </>
       )}
 
       {phase === "done" && (
-        <div className="liquid-glass-card flex flex-col items-center gap-6 p-10 text-center border border-border shadow-2xl bg-white/40 dark:bg-black/20 backdrop-blur-sm max-w-md mx-auto">
-          <span className="text-6xl animate-bounce">🎉</span>
-          <div className="flex flex-col gap-2">
-            <h2 className="font-display text-2xl font-black text-foreground">Hoàn thành xuất sắc!</h2>
-            <p className="text-[10px] font-black text-muted uppercase tracking-wider">Bộ thẻ: “{deck?.title}”</p>
+        <section className={styles.result}>
+          <span className={styles.level}><AppIcon name="check" size={18} />Đã hoàn thành</span>
+          <h2>Thêm một bước tiến hôm nay.</h2>
+          <p>Bạn đã luyện xong {cards.length} thẻ trong bộ “{deck?.title}”.</p>
+          <div className={styles.resultStats}><div><strong>{known}</strong><span>Đã thuộc</span></div><div><strong>{again}</strong><span>Cần học lại</span></div></div>
+          <div className={styles.answerActions}>
+            {deck && <button onClick={() => startDeck(deck)} className="liquid-glass-btn"><AppIcon name="repeat" size={17} />Học lại bộ này</button>}
+            <button onClick={backToLibrary} className={styles.secondary}>Chọn bộ học khác</button>
           </div>
-
-          <div className="grid grid-cols-2 gap-4 w-full">
-            <div className="rounded-2xl border border-primary/20 bg-primary-soft/30 p-5 flex flex-col items-center justify-center shadow-sm">
-              <p className="font-display text-4xl font-black text-primary leading-none">{known}</p>
-              <p className="text-[9px] font-black uppercase tracking-wider text-primary mt-2">Đã thuộc</p>
-            </div>
-            <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 p-5 flex flex-col items-center justify-center shadow-sm">
-              <p className="font-display text-4xl font-black text-rose-600 leading-none">{again}</p>
-              <p className="text-[9px] font-black uppercase tracking-wider text-rose-600 mt-2">Cần học lại</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 w-full mt-4">
-            {deck && (
-              <button onClick={() => startDeck(deck)} className="w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider cursor-pointer shadow-lg shadow-primary/20 hover:shadow-primary/35">🔄 Học lại bộ này</button>
-            )}
-            <button onClick={backToLibrary} className="w-full rounded-full border border-border bg-surface py-3.5 text-xs font-black uppercase tracking-wider text-foreground hover:bg-primary-soft/20 active:scale-95 transition-all cursor-pointer">← Chọn bộ học khác</button>
-          </div>
-        </div>
+        </section>
       )}
     </main>
   );

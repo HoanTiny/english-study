@@ -229,7 +229,7 @@ export default function SprintGame() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">Sprint</h2>
-                <span className="rounded bg-accent/15 border border-accent/30 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-accent">SpeakUp Game</span>
+                <span className="rounded bg-accent/15 border border-accent/30 px-2 py-0.5 text-xs font-bold tracking-normal text-accent">SpeakUp Game</span>
               </div>
               <p className="text-sm font-medium text-muted leading-relaxed">
                 Rèn phản xạ dịch nghĩa siêu tốc. Chọn xem nghĩa hiển thị có khớp với từ tiếng Anh hay không.
@@ -238,16 +238,16 @@ export default function SprintGame() {
 
             {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
             <div className="rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
-              <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+              <p className="mb-2 text-xs font-bold tracking-normal text-muted">📖 Cách chơi</p>
               <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
                 <li>1️⃣ Màn hình hiện <b>từ tiếng Anh + một nghĩa Việt</b> — chọn <b>Đúng</b> nếu khớp, <b>Sai</b> nếu không.</li>
                 <li>2️⃣ Bạn có <b>30 giây</b>; trả lời đúng 4 câu liên tiếp để nhân điểm <b>×2, ×4</b>.</li>
-                <li>⌨️ Phím tắt: <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">←</kbd> Sai · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-[10px]">→</kbd> Đúng.</li>
+                <li>⌨️ Phím tắt: <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-xs">←</kbd> Sai · <kbd className="rounded border border-border bg-surface px-1.5 font-mono text-xs">→</kbd> Đúng.</li>
               </ul>
             </div>
 
             {/* Nguồn từ vựng */}
-            <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-[10px] font-black uppercase tracking-wider">
+            <div className="flex gap-1.5 rounded-2xl border border-border/60 bg-background/50 p-1 text-xs font-bold tracking-normal">
               {([["cefr", "Cấp độ"], ["topic", "Chủ đề"], ["ai", "🤖 AI tạo"]] as [Source, string][]).map(([s, lbl]) => (
                 <button key={s} onClick={() => setSource(s)} className={`flex-1 rounded-xl py-2 transition-all ${source === s ? "bg-primary text-primary-fg shadow-sm" : "text-muted hover:text-foreground"}`}>
                   {lbl}
@@ -258,13 +258,13 @@ export default function SprintGame() {
             {/* CEFR */}
             {source === "cefr" && (
               <div className="space-y-2.5">
-                <p className="text-xs font-black uppercase tracking-wider text-muted">Lựa chọn trình độ</p>
+                <p className="text-xs font-bold tracking-normal text-muted">Lựa chọn trình độ</p>
                 <div className="grid grid-cols-6 gap-2">
                   {Object.keys(SPRINT_WORDS).map((lvl) => {
                     const active = level === lvl;
                     return (
                       <button key={lvl} onClick={() => setLevel(lvl)} style={{ borderColor: ring[lvl], color: active ? "#fff" : ring[lvl], background: active ? ring[lvl] : "transparent" }}
-                        className={`h-10 w-10 rounded-full border-2 text-xs font-black transition-all duration-300 flex items-center justify-center ${active ? "scale-110 shadow-md" : "hover:scale-105"}`}>
+                        className={`h-10 w-10 rounded-full border-2 text-xs font-bold transition-all duration-300 flex items-center justify-center ${active ? "scale-110 shadow-md" : "hover:scale-105"}`}>
                         {lvl}
                       </button>
                     );
@@ -279,7 +279,7 @@ export default function SprintGame() {
             {/* Chủ đề (kho app) */}
             {source === "topic" && (
               <div className="space-y-2.5">
-                <p className="text-xs font-black uppercase tracking-wider text-muted">Chủ đề từ vựng ({VOCAB.length} từ trong kho)</p>
+                <p className="text-xs font-bold tracking-normal text-muted">Chủ đề từ vựng ({VOCAB.length} từ trong kho)</p>
                 <select value={vocabTopic} onChange={(e) => setVocabTopic(e.target.value)} className="w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4 py-3 text-sm font-bold text-foreground outline-none focus:border-primary">
                   {VOCAB_TOPICS.map((t) => <option key={t} value={t}>{t} ({VOCAB.filter((v) => v.topic === t).length})</option>)}
                 </select>
@@ -292,13 +292,13 @@ export default function SprintGame() {
             {/* AI tạo mới */}
             {source === "ai" && (
               <div className="space-y-2.5">
-                <p className="text-xs font-black uppercase tracking-wider text-muted">AI tạo bộ từ mới theo trình độ</p>
+                <p className="text-xs font-bold tracking-normal text-muted">AI tạo bộ từ mới theo trình độ</p>
                 <div className="grid grid-cols-6 gap-2">
                   {Object.keys(SPRINT_WORDS).map((lvl) => {
                     const active = level === lvl;
                     return (
                       <button key={lvl} onClick={() => setLevel(lvl)} style={{ borderColor: ring[lvl], color: active ? "#fff" : ring[lvl], background: active ? ring[lvl] : "transparent" }}
-                        className={`h-9 w-9 rounded-full border-2 text-[11px] font-black transition-all duration-300 flex items-center justify-center ${active ? "scale-110 shadow-md" : "hover:scale-105"}`}>
+                        className={`h-9 w-9 rounded-full border-2 text-xs font-bold transition-all duration-300 flex items-center justify-center ${active ? "scale-110 shadow-md" : "hover:scale-105"}`}>
                         {lvl}
                       </button>
                     );
@@ -319,7 +319,7 @@ export default function SprintGame() {
       {phase === "playing" && currentQuestion && (
         <div className="liquid-glass-card p-6 md:p-10 text-center relative overflow-hidden transition-all duration-500 max-w-xl mx-auto shadow-xl">
           <div className="absolute -top-12 -left-12 w-24 h-24 bg-accent/10 rounded-full filter blur-xl pointer-events-none" />
-          {poolLabel && <span className="absolute top-3 right-4 text-[9px] font-black uppercase tracking-wider text-muted">{poolLabel}</span>}
+          {poolLabel && <span className="absolute top-3 right-4 text-xs font-bold tracking-normal text-muted">{poolLabel}</span>}
 
           <div className="flex flex-col items-center justify-center py-2 relative">
             <svg className="w-32 h-32 transform -rotate-90">
@@ -328,15 +328,15 @@ export default function SprintGame() {
                 strokeDasharray={`${2 * Math.PI * 52}`} strokeDashoffset={`${2 * Math.PI * 52 * (1 - timeLeft / 30)}`} />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-[10px] font-black uppercase tracking-wider text-muted mt-1">x{multiplier} Multiplier</span>
-              <span className="text-xl font-black text-foreground">{timeLeft}s</span>
+              <span className="text-xs font-bold tracking-normal text-muted mt-1">x{multiplier} Multiplier</span>
+              <span className="text-xl font-bold text-foreground">{timeLeft}s</span>
               <span className="text-xs font-bold text-accent">{score} pts</span>
             </div>
           </div>
 
           <div className="my-8 space-y-3 bg-white/20 dark:bg-black/25 border border-border p-6 rounded-3xl shadow-sm relative">
             {streak > 0 && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent text-white px-3 py-0.5 text-[9px] font-black uppercase tracking-wider animate-bounce shadow-md">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent text-white px-3 py-0.5 text-xs font-bold tracking-normal animate-bounce shadow-md">
                 🔥 Chuỗi Đúng x{streak}
               </span>
             )}
@@ -346,10 +346,10 @@ export default function SprintGame() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <button onClick={() => handleAnswer(false)} className="py-4 px-6 rounded-2xl bg-pink-soft text-pink border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-black active:scale-95 flex items-center justify-center gap-1">◀ Wrong (Sai)</button>
-            <button onClick={() => handleAnswer(true)} className="py-4 px-6 rounded-2xl bg-primary-soft text-primary border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-black active:scale-95 flex items-center justify-center gap-1">Right (Đúng) ▶</button>
+            <button onClick={() => handleAnswer(false)} className="py-4 px-6 rounded-2xl bg-pink-soft text-pink border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-bold active:scale-95 flex items-center justify-center gap-1">◀ Wrong (Sai)</button>
+            <button onClick={() => handleAnswer(true)} className="py-4 px-6 rounded-2xl bg-primary-soft text-primary border border-transparent hover:opacity-90 transition-all duration-300 text-sm font-bold active:scale-95 flex items-center justify-center gap-1">Right (Đúng) ▶</button>
           </div>
-          <p className="mt-5 text-[10px] text-muted font-semibold">💡 Mẹo: nhấn phím mũi tên <b>Trái (Wrong)</b> / <b>Phải (Right)</b> trên bàn phím!</p>
+          <p className="mt-5 text-xs text-muted font-semibold">💡 Mẹo: nhấn phím mũi tên <b>Trái (Wrong)</b> / <b>Phải (Right)</b> trên bàn phím!</p>
         </div>
       )}
 
@@ -370,19 +370,19 @@ export default function SprintGame() {
               <Image src="/books_grad_cap.png" alt="Kết quả" width={96} height={96} className="object-contain drop-shadow-md shrink-0" />
               <div className="flex-1 text-center sm:text-left">
                 <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-tight text-foreground">Hoàn thành Sprint! 🎉</h3>
-                {poolLabel && <p className="text-[11px] font-bold uppercase tracking-wider text-muted mt-0.5">{poolLabel}</p>}
+                {poolLabel && <p className="text-xs font-bold tracking-normal text-muted mt-0.5">{poolLabel}</p>}
                 <div className="mt-4 flex justify-center sm:justify-start gap-2.5">
                   <div className="rounded-2xl border border-border/50 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
-                    <p className="text-lg font-black text-primary leading-none">{score}</p>
-                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Điểm</p>
+                    <p className="text-lg font-bold text-primary leading-none">{score}</p>
+                    <p className="text-xs font-bold tracking-normal text-muted mt-1">Điểm</p>
                   </div>
                   <div className="rounded-2xl border border-border/50 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
-                    <p className="text-lg font-black text-accent leading-none">{correct}/{total}</p>
-                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Đúng</p>
+                    <p className="text-lg font-bold text-accent leading-none">{correct}/{total}</p>
+                    <p className="text-xs font-bold tracking-normal text-muted mt-1">Đúng</p>
                   </div>
                   <div className="rounded-2xl border border-border/50 bg-white/40 dark:bg-white/5 px-4 py-2 text-center shadow-sm">
-                    <p className="text-lg font-black text-foreground leading-none">{accuracy}%</p>
-                    <p className="text-[8.5px] font-black uppercase tracking-wider text-muted mt-1">Chính xác</p>
+                    <p className="text-lg font-bold text-foreground leading-none">{accuracy}%</p>
+                    <p className="text-xs font-bold tracking-normal text-muted mt-1">Chính xác</p>
                   </div>
                 </div>
               </div>
@@ -391,15 +391,15 @@ export default function SprintGame() {
                 <button onClick={() => setPhase("welcome")} className="flex-1 sm:flex-none py-2.5 px-5 rounded-2xl border border-border bg-white/40 dark:bg-white/5 text-xs font-bold text-foreground transition-all duration-300 hover:border-primary/40 active:scale-95 whitespace-nowrap">🏠 Đổi bộ từ</button>
               </div>
             </div>
-            {saveMsg && <p className="mt-4 rounded-xl bg-accent/10 px-3 py-2 text-[11px] font-bold text-accent text-center">{saveMsg}</p>}
+            {saveMsg && <p className="mt-4 rounded-xl bg-accent/10 px-3 py-2 text-xs font-bold text-accent text-center">{saveMsg}</p>}
           </div>
 
           {/* Danh sách ôn lại */}
           <div className="liquid-glass-card p-5 md:p-6 shadow-xl">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-              <h4 className="text-sm font-black uppercase tracking-wider text-foreground flex items-center gap-1.5">📋 Danh sách ôn luyện lại</h4>
+              <h4 className="text-sm font-bold tracking-normal text-foreground flex items-center gap-1.5">📋 Danh sách ôn luyện lại</h4>
               {unknown.length > 0 && (
-                <button onClick={saveAllUnknown} disabled={savingAll || allSaved} className="rounded-xl border border-primary/30 bg-primary-soft/70 px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-primary hover:bg-primary-soft disabled:opacity-60">
+                <button onClick={saveAllUnknown} disabled={savingAll || allSaved} className="rounded-xl border border-primary/30 bg-primary-soft/70 px-4 py-1.5 text-xs font-bold tracking-normal text-primary hover:bg-primary-soft disabled:opacity-60">
                   {savingAll ? "Đang lưu…" : allSaved ? "✓ Đã lưu Ôn tập" : `🔖 Lưu ${unknown.length} từ chưa thuộc`}
                 </button>
               )}
@@ -409,12 +409,12 @@ export default function SprintGame() {
               <div className="space-y-2">
                 <p className="text-xs font-extrabold text-accent bg-accent/10 border border-accent/20 px-2.5 py-1.5 rounded-lg shrink-0 sticky top-0 z-1 backdrop-blur">✓ Đã biết ({known.length})</p>
                 {known.length === 0 ? (
-                  <p className="text-[11px] text-muted italic p-2 text-center">Chưa có từ nào.</p>
+                  <p className="text-xs text-muted italic p-2 text-center">Chưa có từ nào.</p>
                 ) : (
                   known.map((item, idx) => (
                     <div key={idx} onClick={() => speak(item.en)} className="text-xs font-medium p-2.5 rounded-xl border border-border/40 bg-white/20 dark:bg-white/5 hover:border-accent/40 hover:bg-accent/5 cursor-pointer transition-all duration-300 shadow-sm flex flex-col gap-0.5" title="Click để phát âm">
                       <span className="font-extrabold text-foreground">{item.en}</span>
-                      <span className="text-muted text-[10px]">{item.correctVi}</span>
+                      <span className="text-muted text-xs">{item.correctVi}</span>
                     </div>
                   ))
                 )}
@@ -423,13 +423,13 @@ export default function SprintGame() {
               <div className="space-y-2">
                 <p className="text-xs font-extrabold text-rose-500 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1.5 rounded-lg shrink-0 sticky top-0 z-1 backdrop-blur">✗ Chưa thuộc ({unknown.length})</p>
                 {unknown.length === 0 ? (
-                  <p className="text-[11px] italic p-2 text-center text-accent font-bold">✓ Tuyệt vời! Không sai từ nào.</p>
+                  <p className="text-xs italic p-2 text-center text-accent font-bold">✓ Tuyệt vời! Không sai từ nào.</p>
                 ) : (
                   unknown.map((item, idx) => (
                     <div key={idx} className="text-xs font-medium p-2.5 rounded-xl border border-border/40 bg-white/20 dark:bg-white/5 hover:border-rose-500/40 hover:bg-rose-500/5 transition-all duration-300 shadow-sm flex items-center gap-2 animate-fadeIn">
                       <div className="min-w-0 flex-1 cursor-pointer" onClick={() => speak(item.en)} title="Click để phát âm">
                         <span className="block font-extrabold text-foreground truncate">{item.en}</span>
-                        <span className="block text-muted text-[10px] truncate">{item.correctVi}</span>
+                        <span className="block text-muted text-xs truncate">{item.correctVi}</span>
                       </div>
                       {savedSet.has(item.en) ? (
                         <span className="shrink-0 text-accent text-sm" title="Đã lưu">✓</span>

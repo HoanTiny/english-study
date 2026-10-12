@@ -94,7 +94,7 @@ export default function NotesPage() {
   return (
     <main className="study-page animate-fadeIn">
       <div className="page-heading">
-        <span className="shimmer-edge inline-flex self-start items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+        <span className="shimmer-edge inline-flex self-start items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
           📓 SỔ TAY HỌC TẬP CÁ NHÂN
         </span>
         <h1 className="text-3xl font-extrabold tracking-tight text-foreground mt-3">Sổ tay từ & câu</h1>
@@ -115,7 +115,7 @@ export default function NotesPage() {
               onClick={() => setKind(k)}
               aria-pressed={kind === k}
               className={`rounded-xl px-3 py-3 text-xs font-semibold transition-colors border flex-1 cursor-pointer ${
-                kind === k 
+                kind === k
                   ? "bg-primary border-primary text-primary-fg"
                   : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"
               }`}
@@ -124,7 +124,7 @@ export default function NotesPage() {
             </button>
           ))}
         </div>
-        
+
         <div className="space-y-4">
           <div>
           <label className="study-field" htmlFor="note-content">{kind === "structure" ? "Cấu trúc câu" : "Từ / cụm từ"}</label>
@@ -172,7 +172,7 @@ export default function NotesPage() {
         <button
           onClick={add}
           disabled={!content.trim()}
-          className="mt-5 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="mt-5 w-full liquid-glass-btn py-3.5 text-xs font-bold tracking-normal flex items-center justify-center gap-1 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           ➕ Thêm thẻ mới vào sổ tay
         </button>
@@ -187,16 +187,16 @@ export default function NotesPage() {
             onClick={() => setFilter(f)}
             aria-pressed={filter === f}
             className={`rounded-full px-4 py-2 transition-all duration-300 border shadow-sm cursor-pointer ${
-              filter === f 
-                ? "bg-primary-soft border-primary/20 text-primary font-black" 
+              filter === f
+                ? "bg-primary-soft border-primary/20 text-primary font-bold"
                 : "border-transparent text-muted hover:text-foreground"
             }`}
           >
             {f === "all" ? "Tất cả" : f === "structure" ? "Cấu trúc" : "Từ vựng"}
           </button>
         ))}
-        <span className="ml-auto text-[9px] font-black text-muted bg-surface border border-border px-3.5 py-2 rounded-full shadow-sm">
-          💡 <span className="text-accent font-black">{notes.filter((n) => n.inReview).length}</span> thẻ đang ôn tập
+        <span className="ml-auto text-xs font-bold text-muted bg-surface border border-border px-3.5 py-2 rounded-full shadow-sm">
+          💡 <span className="text-accent font-bold">{notes.filter((n) => n.inReview).length}</span> thẻ đang ôn tập
         </span>
       </div>
 
@@ -207,14 +207,14 @@ export default function NotesPage() {
             <p className="text-xs font-bold text-rose-500">
               Chưa kết nối tài khoản đồng bộ: {authError}
             </p>
-            <p className="mt-1.5 text-[10px] font-medium text-muted">
+            <p className="mt-1.5 text-xs font-medium text-muted">
               Vui lòng kiểm tra cấu hình Supabase Anonymous Sign-ins.
             </p>
           </div>
         )}
         {!authError && !loaded && (
           <div className="liquid-glass-card border border-dashed border-border/60 py-16 text-center bg-white/15 dark:bg-black/10">
-            <p className="text-xs font-black uppercase tracking-wider text-muted animate-pulse">Đang tải dữ liệu sổ tay… ⏳</p>
+            <p className="text-xs font-bold tracking-normal text-muted animate-pulse">Đang tải dữ liệu sổ tay… ⏳</p>
           </div>
         )}
         {!authError && loaded && shown.length === 0 && (
@@ -225,21 +225,21 @@ export default function NotesPage() {
         {shown.map((n) => (
           <div key={n.id} className="study-panel">
             <div className="flex items-center gap-2">
-              <span className={`rounded-full border px-3.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider ${
-                n.kind === "structure" 
-                  ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-500" 
+              <span className={`rounded-full border px-3.5 py-0.5 text-xs font-bold tracking-normal ${
+                n.kind === "structure"
+                  ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-500"
                   : "bg-primary-soft border border-primary/20 text-primary"
               }`}>
                 {n.kind === "structure" ? "Cấu trúc" : "Từ vựng"}
               </span>
               <button
                 onClick={() => remove(n.id)}
-                className="ml-auto text-[10px] font-black uppercase tracking-wider text-muted/60 hover:text-rose-600 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="ml-auto text-xs font-bold tracking-normal text-muted/60 hover:text-rose-600 hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 Xóa bỏ
               </button>
             </div>
-            
+
             <div className="mt-3.5 flex flex-wrap items-center gap-2.5">
               <p className="min-w-0 text-lg font-bold text-foreground leading-relaxed tracking-tight">{n.content}</p>
               <PronounceMini text={n.content} />
@@ -253,16 +253,16 @@ export default function NotesPage() {
                 “{n.example}”
               </p>
             )}
-            
+
             <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border/40 pt-4">
               {n.tags.map((t) => (
-                <span key={t} className="rounded-full bg-black/5 dark:bg-white/5 border border-border/40 px-3 py-1 text-[10px] font-bold text-muted">
+                <span key={t} className="rounded-full bg-black/5 dark:bg-white/5 border border-border/40 px-3 py-1 text-xs font-bold text-muted">
                   #{t}
                 </span>
               ))}
               <button
                 onClick={() => toggleReview(n.id)}
-                className={`ml-auto rounded-full px-4 py-2 text-xs font-black transition-all duration-300 flex items-center gap-1 active:scale-95 cursor-pointer shadow-sm ${
+                className={`ml-auto rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 flex items-center gap-1 active:scale-95 cursor-pointer shadow-sm ${
                   n.inReview
                     ? "bg-primary border border-primary/25 text-primary-fg shadow-md shadow-primary/20"
                     : "border border-border/60 bg-surface/50 text-muted hover:border-primary/45 hover:text-foreground hover:scale-[1.02]"

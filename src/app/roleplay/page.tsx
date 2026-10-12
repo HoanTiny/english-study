@@ -213,7 +213,7 @@ export default function RoleplayPage() {
   }
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} data-active={!!scenario}>
       <header className={styles.heading}>
         <div>
           <p className={styles.eyebrow}>Luyện giao tiếp mỗi ngày</p>
@@ -289,7 +289,7 @@ export default function RoleplayPage() {
                   </div>
                 </article>
               ))}
-              {(loading || translating) && <div role="status" className={styles.typing}><span aria-hidden="true">•••</span>{messages.length === 0 ? "AI đang mở đầu câu chuyện…" : "AI đang chuẩn bị câu trả lời…"}</div>}
+              {(loading || translating) && <div role="status" className={styles.typing}><span className={styles.typingDots} aria-hidden="true"><i /><i /><i /></span>{messages.length === 0 ? "AI đang mở đầu câu chuyện…" : "AI đang chuẩn bị câu trả lời…"}</div>}
             </div>
 
             <div className={styles.composer}>
@@ -322,8 +322,8 @@ export default function RoleplayPage() {
           <details className={styles.phrase}><summary>Một cách mở lời</summary><p lang="en">“{activeScenario.phrase}”</p><small>{activeScenario.meaning}</small></details>
           <div className={styles.sessionSummary}>
             <h3>Buổi luyện của bạn</h3>
-            <p>{independentTurns} câu tự diễn đạt · {userTurns - independentTurns} câu có hỗ trợ dịch</p>
             <button onClick={getFeedback} disabled={!scenario || busy || !independentTurns || pending !== null || listening} className={styles.secondaryButton}>{scoring ? "Đang chấm…" : "⭐ Nhận xét hội thoại"}</button>
+            <p>{independentTurns} câu tự diễn đạt · {userTurns - independentTurns} câu có hỗ trợ dịch</p>
             <small>{independentTurns ? "Nhận xét trên các câu bạn tự diễn đạt, không chấm phát âm." : "Tự diễn đạt ít nhất một câu để nhận xét cách dùng từ và ngữ pháp."}</small>
           </div>
         </aside>

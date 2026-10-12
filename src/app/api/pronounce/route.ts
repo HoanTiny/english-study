@@ -1,4 +1,7 @@
 import { NextRequest } from "next/server";
+import { storedPronunciation } from "@/lib/server/storedPronunciation";
+import { validAudioWord } from "@/lib/server/wordAudioSource.mjs";
+import { applyPronunciationReference } from "@/lib/server/pronunciationReference";
 
 export const runtime = "nodejs";
 
@@ -85,6 +88,17 @@ function extract(entries: DictEntry[]): PronounceResult {
 export async function GET(req: NextRequest) {
   const raw = req.nextUrl.searchParams.get("word") ?? "";
   const word = raw.trim().toLowerCase();
+  const reference = applyPronunciationReference(word);
+  if (reference?.needsReview) return Response.json(reference, { headers: { "Cache-Control": "no-store" } });
+
+  // Read persistent recordings before the dictionary cache, including stored phrases.
+  // Viewing a flashcard never imports audio or generates paid speech.
+  if (validAudioWord(word)) {
+    const stored = await storedPronunciation(word).catch(() => null);
+    if (stored) return Response.json(applyPronunciationReference(word, stored), { headers: { "x-cache": "storage", "Cache-Control": "no-store" } });
+  }
+  // Known course IPA remains available offline from the dictionary service.
+  if (reference) return Response.json(reference, { headers: { "x-cache": "reference", "Cache-Control": "no-store" } });
 
   // Free Dictionary API chỉ tra được TỪ ĐƠN; chặn chuỗi rỗng/quá dài/nhiều từ.
   if (!word || word.length > 40 || /\s/.test(word) || !/^[a-z][a-z'’-]*$/.test(word)) {

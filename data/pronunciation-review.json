@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-11T17:58:21.859Z",
+  "ipaRevision": "2026-10-12.1",
+  "uniqueHeadwords": 943,
+  "ipaBothAccents": 933,
+  "storedRecordings": 1866,
+  "completeAudioPairs": 933,
+  "replacedSynthetic": 818,
+  "humanRecordings": 841,
+  "syntheticRecordings": 1025,
+  "originalHumanRecordingsPreserved": 23,
+  "metadataMatchesReference": 1843,
+  "remoteFileChecksumsVerified": 12,
+  "liveApiCasesVerified": 10,
+  "heldHeadwords": [
+    "banh tet",
+    "hung kings' temple festival",
+    "hue festival",
+    "da lat flower festival",
+    "nguyen tieu festival",
+    "cau ngu festival",
+    "giong festival",
+    "kate festival",
+    "do son buffalo fighting festival",
+    "congkak"
+  ],
+  "limitations": "IPA/source and technical audio checks completed. Remaining synthetic recordings are not all human-listening approved. Automatic phoneme screening cannot certify stress, accent or naturalness.",
+  "syntheticScreening": {
+    "checked": 1025,
+    "flaggedForListening": 462,
+    "note": "A flag is not a confirmed pronunciation error; the recognizer also flags legitimate accent and vowel variants."
+  }
+}

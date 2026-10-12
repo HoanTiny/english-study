@@ -54,3 +54,17 @@ it("keeps invalid lookups away from the upstream service", async () => {
   expect((await GET(new NextRequest("https://local.test/api/pronounce?word=two%20words"))).status).toBe(422);
   expect(fetcher).not.toHaveBeenCalled();
 });
+
+it("keeps US and UK IPA paired with their own recording and never guesses a missing accent", async () => {
+  const fetcher = vi.fn().mockResolvedValueOnce(Response.json([{ word: "example", phonetic: "/general/", phonetics: [
+    { text: "/us-ipa/", audio: "https://dictionary.test/example-us.mp3" },
+    { text: "/uk-ipa/", audio: "https://dictionary.test/example-uk.mp3" },
+  ] }])).mockResolvedValueOnce(Response.json([{ word: "uncatalogued", phonetic: "/source-ipa/", phonetics: [{ text: "/us-only/", audio: "https://dictionary.test/uncatalogued-us.mp3" }] }]));
+  vi.stubGlobal("fetch", fetcher);
+  const { GET } = await import("@/app/api/pronounce/route");
+  const both = await (await GET(new NextRequest("https://local.test/api/pronounce?word=example"))).json();
+  expect(both.us).toEqual({ ipa: "us-ipa", audio: "https://dictionary.test/example-us.mp3" });
+  expect(both.uk).toEqual({ ipa: "uk-ipa", audio: "https://dictionary.test/example-uk.mp3" });
+  const partial = await (await GET(new NextRequest("https://local.test/api/pronounce?word=uncatalogued"))).json();
+  expect(partial.uk).toBeUndefined();
+});

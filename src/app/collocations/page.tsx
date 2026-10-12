@@ -4,7 +4,7 @@ export default function CollocationsPage() {
   return (
     <main className="study-page study-page--focused animate-fadeIn">
       <div className="page-heading">
-        <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+        <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
           🧩 HỌC QUA THỰC HÀNH CỤM TỪ
         </span>
         <h1 className="font-display text-3xl font-extrabold text-foreground sm:text-4xl">Ghép cụm từ thông dụng</h1>

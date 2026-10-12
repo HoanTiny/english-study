@@ -50,20 +50,20 @@ export default function WordDetail({ word }: { word: string }) {
     <div className="mt-2.5">
       <button
         onClick={toggle}
-        className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-surface/50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-muted transition-all hover:border-primary/50 hover:text-primary"
+        className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-surface/50 px-3 py-1 text-xs font-bold tracking-normal text-muted transition-all hover:border-primary/50 hover:text-primary"
       >
         📖 Loại từ & nghĩa khác {open ? "▲" : "▼"}
       </button>
 
       {open && (
         <div className="mt-2 space-y-2 animate-fadeIn">
-          {loading && <p className="text-[11px] font-semibold text-muted animate-pulse">Đang tra…</p>}
-          {err && <p className="text-[11px] font-semibold text-muted">{err}</p>}
+          {loading && <p className="text-xs font-semibold text-muted animate-pulse">Đang tra…</p>}
+          {err && <p className="text-xs font-semibold text-muted">{err}</p>}
 
           {/* Họ từ liên quan */}
           {family.length > 0 && (
             <div className="rounded-xl border border-border/40 bg-primary-soft/20 p-3">
-              <p className="mb-2 text-[10px] font-black uppercase tracking-wider text-muted">🧩 Họ từ liên quan</p>
+              <p className="mb-2 text-xs font-bold tracking-normal text-muted">🧩 Họ từ liên quan</p>
               <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
                 {family.map((f, i) => (
                   <button
@@ -74,9 +74,9 @@ export default function WordDetail({ word }: { word: string }) {
                   >
                     <span className="flex items-center gap-1">
                       <span className="text-[12px] font-bold text-foreground">{f.word}</span>
-                      {f.pos && <span className="rounded bg-indigo-500/10 px-1 text-[9px] font-black text-indigo-500">{f.pos}</span>}
+                      {f.pos && <span className="rounded bg-indigo-500/10 px-1 text-xs font-bold text-indigo-500">{f.pos}</span>}
                     </span>
-                    {f.vi && <span className="mt-0.5 text-[10px] font-medium text-muted leading-tight">{f.vi}</span>}
+                    {f.vi && <span className="mt-0.5 text-xs font-medium text-muted leading-tight">{f.vi}</span>}
                   </button>
                 ))}
               </div>
@@ -87,15 +87,15 @@ export default function WordDetail({ word }: { word: string }) {
             <div key={i} className="rounded-xl border border-border/40 bg-black/[0.03] dark:bg-white/5 p-3">
               <div className="flex items-center gap-2">
                 {s.pos && (
-                  <span className="rounded-md bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-indigo-500">
+                  <span className="rounded-md bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 text-xs font-bold tracking-normal text-indigo-500">
                     {s.pos}
                   </span>
                 )}
                 {s.vi && <span className="text-sm font-bold text-foreground">{s.vi}</span>}
               </div>
-              {s.definition && <p className="mt-1 text-[11px] font-medium text-muted leading-relaxed">{s.definition}</p>}
+              {s.definition && <p className="mt-1 text-xs font-medium text-muted leading-relaxed">{s.definition}</p>}
               {s.example && (
-                <p className="mt-1.5 text-[11px] italic text-muted/90">
+                <p className="mt-1.5 text-xs italic text-muted/90">
                   “{s.example}”{s.exampleVi ? ` — ${s.exampleVi}` : ""}
                 </p>
               )}

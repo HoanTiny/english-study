@@ -12,9 +12,14 @@
 
 # testing
 /coverage
+/data/vocabulary-audio-report.json
+/data/vocabulary-audio-report.json.tmp
+/public/audio-trial/
+/.audio-cache/
 
 # next.js
 /.next/
+/.next-ui-qa/
 /out/
 
 # production

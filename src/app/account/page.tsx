@@ -42,7 +42,7 @@ export default function AccountPage() {
       <main className="mx-auto max-w-xl px-6 py-32 text-center select-none">
         <div className="flex flex-col items-center justify-center gap-3">
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
-          <p className="text-[10px] font-black uppercase tracking-wider text-muted">Đang tải hồ sơ…</p>
+          <p className="text-xs font-bold tracking-normal text-muted">Đang tải hồ sơ…</p>
         </div>
       </main>
     );
@@ -56,10 +56,10 @@ export default function AccountPage() {
           <span className="text-5xl filter drop-shadow-sm animate-bounce">👤</span>
           
           <div className="space-y-2">
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-pink bg-pink-soft/80 px-3 py-1 rounded-full border border-pink/10">
+            <span className="text-xs font-bold tracking-normal text-pink bg-pink-soft/80 px-3 py-1 rounded-full border border-pink/10">
               Chế độ khách
             </span>
-            <h1 className="font-display text-2xl font-black text-foreground tracking-tight">
+            <h1 className="font-display text-2xl font-bold text-foreground tracking-tight">
               Tài khoản khách ẩn danh
             </h1>
             <p className="text-xs font-semibold text-muted max-w-md mx-auto leading-relaxed">
@@ -81,7 +81,7 @@ export default function AccountPage() {
 
           <Link
             href="/login"
-            className="liquid-glass-btn w-full max-w-sm py-4 text-xs font-black uppercase tracking-wider shadow-lg active:scale-98"
+            className="liquid-glass-btn w-full max-w-sm py-4 text-xs font-bold tracking-normal shadow-lg active:scale-98"
           >
             Đăng nhập / Đăng ký ngay
           </Link>
@@ -99,10 +99,10 @@ export default function AccountPage() {
       
       {/* Page Title */}
       <div className="mb-6 select-none">
-        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-primary">
+        <span className="text-xs font-bold tracking-normal text-primary">
           • HỒ SƠ HỌC VIÊN
         </span>
-        <h1 className="font-display text-3xl sm:text-4xl font-black text-foreground tracking-tight leading-tight mt-2">
+        <h1 className="font-display text-3xl sm:text-4xl font-bold text-foreground tracking-tight leading-tight mt-2">
           Học viên SpeakUp
         </h1>
       </div>
@@ -118,14 +118,14 @@ export default function AccountPage() {
             
             {/* Identity badge */}
             <div className="flex items-center gap-4 border-b border-border/30 pb-5">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-lg font-black text-white shadow-inner select-none">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-lg font-bold text-white shadow-inner select-none">
                 {(displayName || email || "U").charAt(0).toUpperCase()}
               </span>
               <div className="min-w-0">
-                <h3 className="truncate font-display text-lg font-black text-foreground leading-tight">
+                <h3 className="truncate font-display text-lg font-bold text-foreground leading-tight">
                   {displayName || "Học viên"}
                 </h3>
-                <p className="truncate text-[11px] font-bold text-muted/90 mt-1.5 leading-none">
+                <p className="truncate text-xs font-bold text-muted/90 mt-1.5 leading-none">
                   {email}
                 </p>
               </div>
@@ -147,7 +147,7 @@ export default function AccountPage() {
                 <button
                   onClick={save}
                   disabled={!name.trim() || name.trim() === displayName}
-                  className="liquid-glass-btn px-5 text-xs font-black uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="liquid-glass-btn px-5 text-xs font-bold tracking-normal disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {saved ? "✓" : "Lưu"}
                 </button>
@@ -159,7 +159,7 @@ export default function AccountPage() {
               onClick={() => {
                 signOut().then(() => router.push("/"));
               }}
-              className="w-full rounded-2xl border border-rose-500/30 bg-rose-500/5 py-3 text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-500 hover:text-white active:scale-98 transition-all duration-300 cursor-pointer shadow-sm"
+              className="w-full rounded-2xl border border-rose-500/30 bg-rose-500/5 py-3 text-xs font-bold tracking-normal text-rose-500 hover:bg-rose-500 hover:text-white active:scale-98 transition-all duration-300 cursor-pointer shadow-sm"
             >
               Đăng xuất tài khoản
             </button>
@@ -178,10 +178,10 @@ export default function AccountPage() {
             {/* Streak */}
             <div className="bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-border/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm hover:border-primary/20 transition-all duration-300">
               <div>
-                <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-muted">
+                <p className="text-xs sm:text-xs font-bold tracking-normal text-muted">
                   Streak học tập
                 </p>
-                <p className="font-display text-lg font-black text-orange-600 dark:text-orange-400 mt-1 leading-none">
+                <p className="font-display text-lg font-bold text-orange-600 dark:text-orange-400 mt-1 leading-none">
                   {streakVal} ngày
                 </p>
               </div>
@@ -191,10 +191,10 @@ export default function AccountPage() {
             {/* Stage */}
             <div className="bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-border/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm hover:border-primary/20 transition-all duration-300">
               <div>
-                <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-muted">
+                <p className="text-xs sm:text-xs font-bold tracking-normal text-muted">
                   Lớp lộ trình
                 </p>
-                <p className="font-display text-lg font-black text-foreground mt-1 leading-none">
+                <p className="font-display text-lg font-bold text-foreground mt-1 leading-none">
                   Lớp {profile?.currentStage ?? 1}
                 </p>
               </div>
@@ -204,10 +204,10 @@ export default function AccountPage() {
             {/* Active Vocab */}
             <div className="bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-border/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm hover:border-primary/20 transition-all duration-300">
               <div>
-                <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-muted">
+                <p className="text-xs sm:text-xs font-bold tracking-normal text-muted">
                   Vốn từ chủ động
                 </p>
-                <p className="font-display text-lg font-black text-foreground mt-1 leading-none">
+                <p className="font-display text-lg font-bold text-foreground mt-1 leading-none">
                   {mastered} cụm
                 </p>
               </div>
@@ -217,10 +217,10 @@ export default function AccountPage() {
             {/* Total words */}
             <div className="bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-border/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm hover:border-primary/20 transition-all duration-300">
               <div>
-                <p className="text-[8px] sm:text-[9px] font-black uppercase tracking-wider text-muted">
+                <p className="text-xs sm:text-xs font-bold tracking-normal text-muted">
                   Từ tiếp cận
                 </p>
-                <p className="font-display text-lg font-black text-foreground mt-1 leading-none">
+                <p className="font-display text-lg font-bold text-foreground mt-1 leading-none">
                   {recognized} từ
                 </p>
               </div>
@@ -232,7 +232,7 @@ export default function AccountPage() {
           {/* B. Integrated Progress Bar */}
           {recognized > 0 && (
             <div className="bg-white/40 dark:bg-zinc-900/40 border border-border/30 rounded-2xl p-5 select-none space-y-3">
-              <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-wider">
+              <div className="flex justify-between items-center text-xs font-bold tracking-normal">
                 <span className="text-primary">Hiệu suất tích lũy vốn từ chủ động</span>
                 <span className="text-foreground">
                   {Math.round((mastered / recognized) * 100)}% chuyển hóa
@@ -249,7 +249,7 @@ export default function AccountPage() {
 
           {/* C. 3 Clean Action Task Cards (Compact & High Contrast) */}
           <div className="space-y-4">
-            <h2 className="flex items-center gap-2 font-display text-base font-black text-foreground select-none">
+            <h2 className="flex items-center gap-2 font-display text-base font-bold text-foreground select-none">
               🎯 Nhiệm vụ ôn tập hôm nay
             </h2>
             
@@ -262,17 +262,17 @@ export default function AccountPage() {
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-lg">🔁</span>
-                  <span className="font-display text-xs font-black text-foreground">Học & Ôn SRS</span>
+                  <span className="font-display text-xs font-bold text-foreground">Học & Ôn SRS</span>
                 </div>
                 <div>
-                  <p className="font-display text-2xl font-black text-foreground leading-none">
+                  <p className="font-display text-2xl font-bold text-foreground leading-none">
                     {stats?.dueToday ?? 0}
                   </p>
-                  <p className="mt-1 text-[10px] font-medium text-muted">thẻ đến hạn hôm nay</p>
+                  <p className="mt-1 text-xs font-medium text-muted">thẻ đến hạn hôm nay</p>
                 </div>
-                <div className="border-t border-border/30 pt-2.5 text-[9px] font-bold text-muted flex justify-between items-center">
+                <div className="border-t border-border/30 pt-2.5 text-xs font-bold text-muted flex justify-between items-center">
                   <span>Đã học {stats?.inReview ?? 0} thẻ</span>
-                  <span className="text-primary font-black group-hover:translate-x-0.5 transition-transform">→</span>
+                  <span className="text-primary font-bold group-hover:translate-x-0.5 transition-transform">→</span>
                 </div>
               </Link>
 
@@ -283,17 +283,17 @@ export default function AccountPage() {
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-lg">📔</span>
-                  <span className="font-display text-xs font-black text-foreground">Nhật ký AI</span>
+                  <span className="font-display text-xs font-bold text-foreground">Nhật ký AI</span>
                 </div>
                 <div>
-                  <p className="font-display text-2xl font-black text-pink leading-none">
+                  <p className="font-display text-2xl font-bold text-pink leading-none">
                     🔥 {stats?.journalStreak ?? 0}
                   </p>
-                  <p className="mt-1 text-[10px] font-medium text-muted">ngày streak viết nhật ký</p>
+                  <p className="mt-1 text-xs font-medium text-muted">ngày streak viết nhật ký</p>
                 </div>
-                <div className="border-t border-border/30 pt-2.5 text-[9px] font-bold text-muted flex justify-between items-center">
+                <div className="border-t border-border/30 pt-2.5 text-xs font-bold text-muted flex justify-between items-center">
                   <span>{stats?.journalToday ? "Đã viết hôm nay ✓" : "Chưa viết hôm nay"}</span>
-                  <span className="text-pink font-black group-hover:translate-x-0.5 transition-transform">→</span>
+                  <span className="text-pink font-bold group-hover:translate-x-0.5 transition-transform">→</span>
                 </div>
               </Link>
 
@@ -304,17 +304,17 @@ export default function AccountPage() {
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-lg">🎙️</span>
-                  <span className="font-display text-xs font-black text-foreground">Shadowing</span>
+                  <span className="font-display text-xs font-bold text-foreground">Shadowing</span>
                 </div>
                 <div>
-                  <p className="font-display text-2xl font-black text-foreground leading-none">
+                  <p className="font-display text-2xl font-bold text-foreground leading-none">
                     {stats?.shadowDone ?? 0}
                   </p>
-                  <p className="mt-1 text-[10px] font-medium text-muted">câu đã luyện nhại giọng</p>
+                  <p className="mt-1 text-xs font-medium text-muted">câu đã luyện nhại giọng</p>
                 </div>
-                <div className="border-t border-border/30 pt-2.5 text-[9px] font-bold text-muted flex justify-between items-center">
+                <div className="border-t border-border/30 pt-2.5 text-xs font-bold text-muted flex justify-between items-center">
                   <span>Điểm phát âm: {stats?.shadowAvg ?? "—"}</span>
-                  <span className="text-primary font-black group-hover:translate-x-0.5 transition-transform">→</span>
+                  <span className="text-primary font-bold group-hover:translate-x-0.5 transition-transform">→</span>
                 </div>
               </Link>
 

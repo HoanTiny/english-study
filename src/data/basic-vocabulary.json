@@ -1,0 +1,7827 @@
+{
+  "source": "1000 từ vựng tiếng Anh theo chủ đề thông dụng",
+  "sourceFile": "1000-tu-vung-tieng-anh-theo-chu-de-thong-dung.pdf",
+  "sourceSha256": "d216703a8ea160e984ff623b9671c42fcadaa2e70d68edd19a40648fc32aca3e",
+  "topicCount": 50,
+  "entryCount": 1046,
+  "uniqueHeadwords": 943,
+  "lessons": [
+    {
+      "id": "pdf-01-1",
+      "number": 1,
+      "topicNumber": 1,
+      "topic": "Gia đình",
+      "title": "Gia đình · Phần 1/2",
+      "words": [
+        {
+          "en": "Parent",
+          "ipa": "/'peərənt/",
+          "vi": "Bố hoặc mẹ",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Father",
+          "ipa": "/ˈfɑː.ðər/",
+          "vi": "Bố",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mother",
+          "ipa": "/ˈmʌð.ər/",
+          "vi": "Mẹ",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "A child",
+          "ipa": "/tʃaɪld/",
+          "vi": "Con cái (số ít)",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Children",
+          "ipa": "/ˈtʃɪl.drən/",
+          "vi": "Con cái (số nhiều)",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Son",
+          "ipa": "/sʌn/",
+          "vi": "Con trai",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Daughter",
+          "ipa": "/ˈdɔː.tər/",
+          "vi": "Con gái",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Twin",
+          "ipa": "/twin/",
+          "vi": "sinh đôi",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Triplet",
+          "ipa": "/ˈtrɪp.lət/",
+          "vi": "sinh ba",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sibling",
+          "ipa": "/ˈsɪb.lɪŋ/",
+          "vi": "Anh/ chị/ em ruột",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sister",
+          "ipa": "/ˈsɪs.tər/",
+          "vi": "Chị gái",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brother",
+          "ipa": "/ˈbrʌð.ər/",
+          "vi": "Anh trai",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Husband",
+          "ipa": "/ˈhʌz.bənd/",
+          "vi": "Chồng",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Wife",
+          "ipa": "/waɪf/",
+          "vi": "Vợ",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grandparent",
+          "ipa": "/ˈɡrænpeərənt/",
+          "vi": "Ông hoặc bà",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grandmother",
+          "ipa": "/ˈɡrænmʌðə(r)/",
+          "vi": "Bà ngoại/ bà nội",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grandfather",
+          "ipa": "/ˈɡrænfɑːðə(r)/",
+          "vi": "Ông ngoại/ ông nội",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grandchild",
+          "ipa": "/ˈɡræn.tʃaɪld/",
+          "vi": "Cháu",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grandson",
+          "ipa": "/ˈɡræn.sʌn/",
+          "vi": "Cháu trai",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Granddaughter",
+          "ipa": "/ˈɡræn.dɔː.tər/",
+          "vi": "Cháu gái",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-01-2",
+      "number": 2,
+      "topicNumber": 1,
+      "topic": "Gia đình",
+      "title": "Gia đình · Phần 2/2",
+      "words": [
+        {
+          "en": "Nephew",
+          "ipa": "/ˈnev.juː/",
+          "vi": "Cháu trai",
+          "page": 7,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Niece",
+          "ipa": "/niːs/",
+          "vi": "Cháu gái",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cousin",
+          "ipa": "/ˈkʌz.ən/",
+          "vi": "Anh chị em họ",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Uncle",
+          "ipa": "/ˈʌŋ.kəl/",
+          "vi": "Chú/ bác trai/ cậu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Aunt",
+          "ipa": "/ɑːnt/",
+          "vi": "Cô/ dì/ bác gái",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Godfather",
+          "ipa": "/ˈɡɒdˌfɑː.ðər/",
+          "vi": "Bố đỡ đầu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Godmother",
+          "ipa": "/ˈɡɒdˌmʌð.ər/",
+          "vi": "Mẹ đỡ đầu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Godson",
+          "ipa": "/ˈɡɒd.sʌn/",
+          "vi": "Con trai đỡ đầu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Goddaughter",
+          "ipa": "/ˈɡɒdˌdɔː.tər/",
+          "vi": "Con gái đỡ đầu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Father-in-law",
+          "ipa": "/ˈfɑː.ðər.ɪn.lɔː/",
+          "vi": "Bố chồng/ bố vợ",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mother-in-law",
+          "ipa": "/ˈmʌð.ə.rɪn.lɔː/",
+          "vi": "Mẹ chồng/ mẹ vợ",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Son-in-law",
+          "ipa": "/ˈsʌn.ɪn.lɔː/",
+          "vi": "Con rể",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Daughter-in-law",
+          "ipa": "/ˈdɔː.tər.ɪn.lɔː/",
+          "vi": "Con dâu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sister-in-law",
+          "ipa": "/ˈsɪs.tə.rɪn.lɔː/",
+          "vi": "Chị dâu/ em dâu",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brother-in-law",
+          "ipa": "/ˈbrʌð.ə.rɪn.lɔː/",
+          "vi": "Anh rể/ em rể",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Relative",
+          "ipa": "/ˈrel.ə.tɪv/",
+          "vi": "Họ hàng",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-02-1",
+      "number": 3,
+      "topicNumber": 2,
+      "topic": "Quần áo",
+      "title": "Quần áo · Phần 1/2",
+      "words": [
+        {
+          "en": "Shirt",
+          "ipa": "/ʃɜːt/",
+          "vi": "Áo sơ mi",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "T-shirt",
+          "ipa": "/ˈtiː ʃɜːt/",
+          "vi": "Áo phông",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Trousers",
+          "ipa": "/ˈtraʊzəz/",
+          "vi": "Quần dài",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Dress",
+          "ipa": "/dres/",
+          "vi": "Đầm",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Skirt",
+          "ipa": "/skɜːt/",
+          "vi": "Chân váy",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Coat",
+          "ipa": "/kəʊt/",
+          "vi": "Áo khoác dài",
+          "page": 8,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Jacket",
+          "ipa": "/ˈdʒækɪt/",
+          "vi": "Áo khoác",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sweater",
+          "ipa": "/ˈswetə(r)/",
+          "vi": "Áo len",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Jeans",
+          "ipa": "/dʒiːnz/",
+          "vi": "Quần jeans",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cardigan",
+          "ipa": "/ˈkɑːdɪɡən/",
+          "vi": "Áo ca-đi-gan",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pants",
+          "ipa": "/pænts/",
+          "vi": "Quần dài",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Shorts",
+          "ipa": "/ʃɔːts/",
+          "vi": "Quần đùi",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "House dress",
+          "ipa": "/haus dres/",
+          "vi": "Váy mặc ở nhà",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Maternity dress",
+          "ipa": "/mə’təniti dres/",
+          "vi": "Váy bầu",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Wedding gown",
+          "ipa": "/ˈwedɪŋ ɡaʊn/",
+          "vi": "Váy cưới",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Blouse",
+          "ipa": "/blaʊz/",
+          "vi": "Áo sơ mi nữ",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Miniskirt",
+          "ipa": "/ˈmɪniskɜːt/",
+          "vi": "Chân váy ngắn",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Night gown",
+          "ipa": "/naɪt ɡaʊn/",
+          "vi": "Đầm ngủ",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bib overalls",
+          "ipa": "/ˈbɪb əʊvərɔːlz/",
+          "vi": "Quần sạc lô",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pyjamas",
+          "ipa": "/pəˈdʒɑːməz/",
+          "vi": "Đồ pi-ya-ma",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-02-2",
+      "number": 4,
+      "topicNumber": 2,
+      "topic": "Quần áo",
+      "title": "Quần áo · Phần 2/2",
+      "words": [
+        {
+          "en": "Bathrobe",
+          "ipa": "/ˈbɑːθrəʊb/",
+          "vi": "Áo choàng tắm",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Swimsuit",
+          "ipa": "/ˈswɪmsuːt/",
+          "vi": "Đồ bơi",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pleated skirt",
+          "ipa": "/plit kət/",
+          "vi": "Váy xếp ly",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Blazer",
+          "ipa": "/ˈbleɪzə(r)/",
+          "vi": "Áo khoác blazer",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Tank top",
+          "ipa": "/ˈtæŋk tɒp/",
+          "vi": "Áo ba lỗ",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Evening dress",
+          "ipa": "/ˈiːvnɪŋ dres/",
+          "vi": "Đầm dạ hội",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Slip dress",
+          "ipa": "/slɪp dres/",
+          "vi": "Đầm hai dây",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Crop top",
+          "ipa": "/ˈkrɒp tɒp/",
+          "vi": "Áo crop top",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Leggings",
+          "ipa": "/leɡɪŋz/",
+          "vi": "Quần ôm sát",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Maxi",
+          "ipa": "/ˈmæksi/",
+          "vi": "Đầm maxi",
+          "page": 9,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-03-1",
+      "number": 5,
+      "topicNumber": 3,
+      "topic": "Môi trường",
+      "title": "Môi trường · Phần 1/2",
+      "words": [
+        {
+          "en": "acid rain",
+          "ipa": "/ˈæsɪd reɪn/",
+          "vi": "mưa a xít",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "atmosphere",
+          "ipa": "/ˈætməsfɪə/",
+          "vi": "khí quyển",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "biodiversity",
+          "ipa": "/ˌbaɪoʊdəˈvərsət̮i/",
+          "vi": "sự đa dạng sinh học",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "catastrophe",
+          "ipa": "/kəˈtæstrəfi/",
+          "vi": "thảm họa",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "climate",
+          "ipa": "/ˈklaɪmət/",
+          "vi": "khí hậu",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "climate change",
+          "ipa": "/ˈklaɪmət ʧeɪnʤ/",
+          "vi": "hiện tượng biến đổi khí hậu",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "creature",
+          "ipa": "/ˈkriːʧə/",
+          "vi": "sinh vật",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "destruction",
+          "ipa": "/dɪsˈtrʌkʃən/",
+          "vi": "sự phá hủy",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "disposal",
+          "ipa": "/dɪsˈpəʊzəl/",
+          "vi": "sự vứt bỏ",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "desertification",
+          "ipa": "/dɪˌzɜːtɪfɪˈkeɪʃən/",
+          "vi": "quá trình sa mạc hóa",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "deforestation",
+          "ipa": "/dɪˌfɒrɪˈsteɪʃ(ə)n/",
+          "vi": "sự phá rừng",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dust",
+          "ipa": "/dʌst/",
+          "vi": "bụi bẩn",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "earthquake",
+          "ipa": "/ˈɜːθkweɪk/",
+          "vi": "cơn động đất",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ecology",
+          "ipa": "/ɪˈkɒləʤi/",
+          "vi": "sinh thái học",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ecosystem",
+          "ipa": "/ˈiːkəʊˌsɪstəm/",
+          "vi": "hệ sinh thái",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "alternative energy",
+          "ipa": "/ɔːlˈtɜːnətɪv ˈɛnəʤi/",
+          "vi": "năng lượng thay thế",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "environment",
+          "ipa": "/ɪnˈvaɪrənmənt/",
+          "vi": "môi trường",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "environmentalist",
+          "ipa": "/ɪnˌvaɪrənˈmentəlɪst/",
+          "vi": "nhà môi trường học",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "erosion",
+          "ipa": "/ɪˈrəʊʒən/",
+          "vi": "sự xói mòn",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exhaust",
+          "ipa": "/ɪgˈzɔːst/",
+          "vi": "khí thải",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-03-2",
+      "number": 6,
+      "topicNumber": 3,
+      "topic": "Môi trường",
+      "title": "Môi trường · Phần 2/2",
+      "words": [
+        {
+          "en": "famine",
+          "ipa": "/ˈfæmɪn/",
+          "vi": "nạn đói",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pesticide",
+          "ipa": "/ˈpɛstɪsaɪd/",
+          "vi": "thuốc trừ sâu",
+          "page": 10,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fertilizer",
+          "ipa": "/ˈfɜːtɪlaɪzə/",
+          "vi": "phân bón",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "greenhouse effect",
+          "ipa": "/ˈgriːnhaʊs ɪˈfɛkt/",
+          "vi": "hiệu ứng nhà kính",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "industrial waste",
+          "ipa": "/ɪnˈdʌstrɪəl weɪst/",
+          "vi": "chất thải công nghiệp",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-04-1",
+      "number": 7,
+      "topicNumber": 4,
+      "topic": "Tính cách",
+      "title": "Tính cách · Phần 1/2",
+      "words": [
+        {
+          "en": "Affection",
+          "ipa": "/əˈfɛkʃən/",
+          "vi": "Sự yêu mến, sự quý trọng",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ambition",
+          "ipa": "/æmˈbɪʃən/",
+          "vi": "Ước mơ, khát vọng",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Assurance",
+          "ipa": "/əˈʃʊrəns/",
+          "vi": "Sự tin tưởng, sự đảm bảo",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Authenticity",
+          "ipa": "/ɔːˌθɛntɪˈsɪti/",
+          "vi": "Sự chân thật, tính xác thực",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Boldness",
+          "ipa": "/ˈbəʊldnəs/",
+          "vi": "Sự dũng cảm, gan dạ",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bravery",
+          "ipa": "/ˈbreɪvri/",
+          "vi": "Sự can đảm, lòng dũng cảm",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Calmness",
+          "ipa": "/ˈkɑːmnəs/",
+          "vi": "Sự bình tĩnh",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Carefulness",
+          "ipa": "/ˈkeəfʊlnəs/",
+          "vi": "Sự cẩn thận",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Charity",
+          "ipa": "/ˈtʃærəti/",
+          "vi": "Sự từ thiện, tình người",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Compassion",
+          "ipa": "/kəmˈpæʃən/",
+          "vi": "Sự thông cảm, lòng trắc ẩn",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Confidence",
+          "ipa": "/ˈkɒnfɪdəns/",
+          "vi": "Sự tự tin, sự tin tưởng",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Courage",
+          "ipa": "/ˈkʌrɪdʒ/",
+          "vi": "Sự can đảm, sự dũng mãnh",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Creativity",
+          "ipa": "/ˌkriːeɪˈtɪvəti/",
+          "vi": "Sự sáng tạo, tính sáng tạo",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Decisiveness",
+          "ipa": "/dɪˈsaɪsɪvnəs/",
+          "vi": "Sự quả quyết, sự kiên quyết",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Determination",
+          "ipa": "/dɪˌtɜːmɪˈneɪʃn/",
+          "vi": "Sự quả quyết, sự kiên định",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Diligence",
+          "ipa": "/ˈdɪlɪdʒəns/",
+          "vi": "Sự cần cù, sự siêng năng",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Empathy",
+          "ipa": "/ˈɛmpəθi/",
+          "vi": "Sự đồng cảm, sự thông cảm",
+          "page": 11,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Enthusiasm",
+          "ipa": "/ɪnˈθjuːziæzəm/",
+          "vi": "Sự nhiệt tình, sự hăng hái",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Faithfulness",
+          "ipa": "/ˈfeɪθfʊlnəs/",
+          "vi": "Sự trung thành, lòng trung thành",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Flexibility",
+          "ipa": "/ˌfleksəˈbɪləti/",
+          "vi": "Sự linh hoạt, tính linh hoạt",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-04-2",
+      "number": 8,
+      "topicNumber": 4,
+      "topic": "Tính cách",
+      "title": "Tính cách · Phần 2/2",
+      "words": [
+        {
+          "en": "Forgiveness",
+          "ipa": "/fəˈɡɪvnəs/",
+          "vi": "Sự tha thứ, sự khoan dung",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Generosity",
+          "ipa": "/ˌdʒenəˈrɒsəti/",
+          "vi": "Sự rộng lượng, sự hào phóng",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gentleness",
+          "ipa": "/ˈdʒentlnəs/",
+          "vi": "Sự nhẹ nhàng, sự hiền dịu",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gratitude",
+          "ipa": "/ˈɡrætɪtjuːd/",
+          "vi": "Sự biết ơn, lòng biết ơn",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Happiness",
+          "ipa": "/ˈhæpɪnəs/",
+          "vi": "Sự hạnh phúc, niềm vui",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Harmony",
+          "ipa": "/ˈhɑːməni/",
+          "vi": "Sự hòa thuận, sự hài hòa",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Honesty",
+          "ipa": "/ˈɒnɪsti/",
+          "vi": "Sự thật thà, tính trung thực",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Humility",
+          "ipa": "/hjuːˈmɪləti/",
+          "vi": "Sự khiêm tốn, tính khiêm tốn",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Humor",
+          "ipa": "/ˈhjuːmə/",
+          "vi": "Sự hài hước, tính hài hước",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Innovation",
+          "ipa": "/ˌɪnəʊˈveɪʃn/",
+          "vi": "Sự đổi mới, tính đổi mới",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Integrity",
+          "ipa": "/ɪnˈteɡrəti/",
+          "vi": "Sự toàn vẹn, tính liêm chính",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Joy",
+          "ipa": "/dʒɔɪ/",
+          "vi": "Sự vui mừng, sự hạnh phúc",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Kindness",
+          "ipa": "/ˈkaɪndnəs/",
+          "vi": "Sự tử tế, tính nhân từ",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Loyalty",
+          "ipa": "/ˈlɔɪəlti/",
+          "vi": "Sự trung thành, tính trung thành",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mindfulness",
+          "ipa": "/ˈmaɪndfʊlnəs/",
+          "vi": "Sự tỉnh táo, tính tỉnh táo",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Modesty",
+          "ipa": "/ˈmɒdəsti/",
+          "vi": "Sự khiêm nhường, tính khiêm nhường",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Openness",
+          "ipa": "/ˈəʊpənəs/",
+          "vi": "Sự cởi mở, tính cởi mở",
+          "page": 12,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-05-1",
+      "number": 9,
+      "topicNumber": 5,
+      "topic": "Cảm xúc",
+      "title": "Cảm xúc",
+      "words": [
+        {
+          "en": "Amused",
+          "ipa": "/ə’mju:zd/",
+          "vi": "vui vẻ",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Delighted",
+          "ipa": "/dɪˈlaɪtɪd/",
+          "vi": "rất hạnh phúc",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ecstatic",
+          "ipa": "/ɪkˈstætɪk/",
+          "vi": "vô cùng hạnh phúc",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Enthusiastic",
+          "ipa": "/ɪnθju:zi’æstɪk/",
+          "vi": "nhiệt tình",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Excited",
+          "ipa": "/ɪkˈsaɪtɪd/",
+          "vi": "hứng thú",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Great",
+          "ipa": "/ɡreɪt/",
+          "vi": "tuyệt vời",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Happy",
+          "ipa": "/’hæpi/",
+          "vi": "hạnh phúc",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Intrigued",
+          "ipa": "/ɪnˈtriːɡd/",
+          "vi": "hiếu kỳ",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Keen",
+          "ipa": "/kiːn/",
+          "vi": "ham thích, tha thiết",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nonplussed",
+          "ipa": "/ˌnɒnˈplʌst/",
+          "vi": "ngạc nhiên đến nỗi không biết phải làm gì",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Overwhelmed",
+          "ipa": "/ˌoʊvərˈwelmd/",
+          "vi": "choáng ngợp",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Over the moon",
+          "ipa": "/ˈoʊvər ðə muːn /",
+          "vi": "rất sung sướng",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Overjoyed",
+          "ipa": "/ˌoʊvərˈdʒɔɪd/",
+          "vi": "cực kỳ hứng thú",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Positive",
+          "ipa": "/ˈpɑːzətɪv/",
+          "vi": "lạc quan",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Relaxed",
+          "ipa": "/ rɪˈlækst/",
+          "vi": "thư giãn, thoải mái",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Seething",
+          "ipa": "/ siːðɪŋ /",
+          "vi": "rất tức giận nhưng giấu kín",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Surprised",
+          "ipa": "/sə’praɪzd/",
+          "vi": "ngạc nhiên",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Terrific",
+          "ipa": "/təˈrɪfɪk/",
+          "vi": "tuyệt vời",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Wonderful",
+          "ipa": "/ˈwʌndərfl/",
+          "vi": "tuyệt vời",
+          "page": 13,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-06-1",
+      "number": 10,
+      "topicNumber": 6,
+      "topic": "Mối quan hệ",
+      "title": "Mối quan hệ · Phần 1/2",
+      "words": [
+        {
+          "en": "mother",
+          "ipa": "/ˈmʌð.ər/",
+          "vi": "mẹ",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "father",
+          "ipa": "/ˈfɑː.ðər/",
+          "vi": "ba",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "brother",
+          "ipa": "/ˈbrʌð.ər/",
+          "vi": "anh/em trai",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sister",
+          "ipa": "/ˈsɪs.tər/",
+          "vi": "chị/em gái",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sibling",
+          "ipa": "/ˈsɪb.lɪŋ/",
+          "vi": "anh/chị/em ruột",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "uncle",
+          "ipa": "/ˈʌŋ.kəl/",
+          "vi": "chú/bác",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "aunt",
+          "ipa": "/ɑːnt/",
+          "vi": "cô/dì",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "nephew",
+          "ipa": "/ˈnef.juː/",
+          "vi": "cháu trai",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "niece",
+          "ipa": "/niːs/",
+          "vi": "cháu gái",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cousin",
+          "ipa": "/ˈkʌz.ən/",
+          "vi": "anh/chị/em họ hàng",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "relative",
+          "ipa": "/ˈrel.ə.tɪv/",
+          "vi": "họ hàng",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ancestor",
+          "ipa": "/ ˈæn.ses.tər/",
+          "vi": "tổ tiên",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "descendant",
+          "ipa": "/dɪˈsen.dənt/",
+          "vi": "hậu duệ",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "wedding",
+          "ipa": "/ˈwed.ɪŋ/",
+          "vi": "đám cưới",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "reunion",
+          "ipa": "/ˌriːˈjuː.njən/",
+          "vi": "tụ họp",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "holiday",
+          "ipa": "/ˈhɒl.ə.deɪ/",
+          "vi": "ngày lễ",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "funeral",
+          "ipa": "/ˈfjuː.nər.əl/",
+          "vi": "tang lễ",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "inherit",
+          "ipa": "/ɪnˈher.ɪt/",
+          "vi": "thừa kế",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "adopt",
+          "ipa": "/əˈdɒpt/",
+          "vi": "nhận nuôi",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "nurture",
+          "ipa": "/ˈnɜː.tʃər/",
+          "vi": "nuôi nấng",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-06-2",
+      "number": 11,
+      "topicNumber": 6,
+      "topic": "Mối quan hệ",
+      "title": "Mối quan hệ · Phần 2/2",
+      "words": [
+        {
+          "en": "acquaintance",
+          "ipa": "/əˈkweɪn.təns/",
+          "vi": "người quen",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "companion",
+          "ipa": "/kəmˈpæn.jən/",
+          "vi": "bạn đồng hành",
+          "page": 14,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "classmate",
+          "ipa": "/ˈklɑːs.meɪt/",
+          "vi": "bạn cùng lớp",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "schoolmate",
+          "ipa": "/ˈskuːl.meɪt/",
+          "vi": "bạn cùng trường",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-07-1",
+      "number": 12,
+      "topicNumber": 7,
+      "topic": "Tình yêu",
+      "title": "Tình yêu",
+      "words": [
+        {
+          "en": "affection",
+          "ipa": "/əˈfɛkʃən/",
+          "vi": "tình yêu, tình cảm",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "passion",
+          "ipa": "/ˈpæʃən/",
+          "vi": "đam mê, say mê",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "devotion",
+          "ipa": "/dɪˈvoʊʃən/",
+          "vi": "tận tụy, sự tận hiến",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "infatuation",
+          "ipa": "/ɪnˌfætʃʊˈeɪʃən/",
+          "vi": "sự mê hoặc, say đắm",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "intimacy",
+          "ipa": "/ˈɪntəməsi/",
+          "vi": "sự gần gũi, thân mật",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "romance",
+          "ipa": "/roʊˈmæns/",
+          "vi": "tình yêu lãng mạn",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "adoration",
+          "ipa": "/ˌædəˈreɪʃən/",
+          "vi": "sự sùng bái, tôn kính",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cherish",
+          "ipa": "/ˈʧɛrɪʃ/",
+          "vi": "yêu thương, quý trọng",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "attraction",
+          "ipa": "/əˈtrækʃən/",
+          "vi": "sự hấp dẫn, lôi cuốn",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "commitment",
+          "ipa": "/kəˈmɪtmənt/",
+          "vi": "sự cam kết, tận tụy",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "enamored",
+          "ipa": "/ɪˈnæmərd/",
+          "vi": "mê muội, si mê",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "endearment",
+          "ipa": "/ɪnˈdɪrmənt/",
+          "vi": "lời yêu thương, lời quý mến",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fondness",
+          "ipa": "/ˈfɑːndnəs/",
+          "vi": "tình cảm, tình thương",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "heartthrob",
+          "ipa": "/ˈhɑːrtθrɑːb/",
+          "vi": "người khiến tim đập thình",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "courtship",
+          "ipa": "/ˈkɔːrtʃɪp/",
+          "vi": "sự cầu hôn, sự tán tỉnh",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "yearning",
+          "ipa": "/ˈjɜːrnɪŋ/",
+          "vi": "sự khát khao, sự mong mỏi",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tenderness",
+          "ipa": "/ˈtɛndərnəs/",
+          "vi": "sự ân cần, sự nhẹ nhàng",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fidelity",
+          "ipa": "/fɪˈdɛlɪti/",
+          "vi": "lòng trung thành, trung thực",
+          "page": 15,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "soulmate",
+          "ipa": "/ˈsoʊlmeɪt/",
+          "vi": "bạn tâm giao, hợp tâm hồn",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "enamored",
+          "ipa": "/ɪˈnæmərd/",
+          "vi": "mê muội, si mê",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-08-1",
+      "number": 13,
+      "topicNumber": 8,
+      "topic": "Đồ ăn",
+      "title": "Đồ ăn",
+      "words": [
+        {
+          "en": "appetizer",
+          "ipa": "/ˈæpɪtaɪzər/",
+          "vi": "món khai vị",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "entree",
+          "ipa": "/ˈɑːntreɪ/",
+          "vi": "món chính",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cuisine",
+          "ipa": "/kwɪˈzin/",
+          "vi": "ẩm thực",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "recipe",
+          "ipa": "/ˈrɛsɪpi/",
+          "vi": "công thức nấu ăn",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ingredient",
+          "ipa": "/ɪnˈɡridiənt/",
+          "vi": "nguyên liệu",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "savory",
+          "ipa": "/ˈseɪvəri/",
+          "vi": "ngon mồm, đậm đà",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "spicy",
+          "ipa": "/ˈspaɪsi/",
+          "vi": "cay",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "indulgent",
+          "ipa": "/ɪnˈdʌlʤənt/",
+          "vi": "phung phí, thỏa mãn",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "wholesome",
+          "ipa": "/ˈhoʊl.səm/",
+          "vi": "lành mạnh, bổ dưỡng",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "gourmet",
+          "ipa": "/ˈɡʊrmeɪ/",
+          "vi": "ẩm thực tinh hoa",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cuisine",
+          "ipa": "/kwɪˈzin/",
+          "vi": "ẩm thực",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "delicious",
+          "ipa": "/dɪˈlɪʃəs/",
+          "vi": "ngon miệng, thơm ngon",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "buffet",
+          "ipa": "/ˈbʊfeɪ/",
+          "vi": "tiệc tự chọn",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "presentation",
+          "ipa": "/ˌprɛzənˈteɪʃən/",
+          "vi": "cách trình bày, thể hiện",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "simmer",
+          "ipa": "/ˈsɪmər/",
+          "vi": "ninh nhỏ lửa",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bake",
+          "ipa": "/beɪk/",
+          "vi": "nướng",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "grill",
+          "ipa": "/ɡrɪl/",
+          "vi": "nướng trên lửa than",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "steam",
+          "ipa": "/stim/",
+          "vi": "hấp",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sauté",
+          "ipa": "/sɔːˈteɪ/",
+          "vi": "xào",
+          "page": 16,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "garnish",
+          "ipa": "/ˈɡɑːrnɪʃ/",
+          "vi": "trang trí, điểm tô",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-09-1",
+      "number": 14,
+      "topicNumber": 9,
+      "topic": "Đồ uống",
+      "title": "Đồ uống",
+      "words": [
+        {
+          "en": "coffee",
+          "ipa": "/ˈkɒfi/",
+          "vi": "cà phê",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tea",
+          "ipa": "/tiː/",
+          "vi": "trà",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "juice",
+          "ipa": "/dʒuːs/",
+          "vi": "nước trái cây",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "water",
+          "ipa": "/ˈwɔːtər/",
+          "vi": "nước",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "soda",
+          "ipa": "/ˈsoʊdə/",
+          "vi": "nước có ga",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "milk",
+          "ipa": "/mɪlk/",
+          "vi": "sữa",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "smoothie",
+          "ipa": "/ˈsmuːði/",
+          "vi": "sinh tố",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cocktail",
+          "ipa": "/ˈkɑːkteɪl/",
+          "vi": "cocktail",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "beer",
+          "ipa": "/bɪr/",
+          "vi": "bia",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "wine",
+          "ipa": "/waɪn/",
+          "vi": "rượu vang",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "champagne",
+          "ipa": "/ʃæmˈpeɪn/",
+          "vi": "rượu sâm banh",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "whiskey",
+          "ipa": "/ˈwɪski/",
+          "vi": "rượu whiskey",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "soda water",
+          "ipa": "/ˈsoʊdə ˈwɔːtər/",
+          "vi": "nước suối có ga",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lemonade",
+          "ipa": "/ˌlɛməˈneɪd/",
+          "vi": "nước chanh",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hot chocolate",
+          "ipa": "/ˌhɒt ˈtʃɔːklət/",
+          "vi": "sữa nóng cacao",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "iced tea",
+          "ipa": "/aɪst tiː/",
+          "vi": "trà đá",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "energy drink",
+          "ipa": "/ˈɛnərdʒi drɪŋk/",
+          "vi": "nước giải khát",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fruit punch",
+          "ipa": "/fruːt pʌntʃ/",
+          "vi": "nước trái cây có rượu",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "herbal tea",
+          "ipa": "/ˈhɜːrbəl tiː/",
+          "vi": "trà thảo dược",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "soft drink",
+          "ipa": "/sɒft drɪŋk/",
+          "vi": "nước ngọt, nước có ga",
+          "page": 17,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-10-1",
+      "number": 15,
+      "topicNumber": 10,
+      "topic": "Trái cây",
+      "title": "Trái cây",
+      "words": [
+        {
+          "en": "apple",
+          "ipa": "/ˈæpəl/",
+          "vi": "quả táo",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "banana",
+          "ipa": "/bəˈnænə/",
+          "vi": "quả chuối",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "orange",
+          "ipa": "/ˈɔːrɪndʒ/",
+          "vi": "quả cam",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "strawberry",
+          "ipa": "/ˈstrɔːbəri/",
+          "vi": "quả dâu tây",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "watermelon",
+          "ipa": "/ˈwɔːtərmɛlən/",
+          "vi": "dưa hấu",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pineapple",
+          "ipa": "/ˈpaɪnˌæpəl/",
+          "vi": "quả dứa",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mango",
+          "ipa": "/ˈmæŋɡoʊ/",
+          "vi": "quả xoài",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "grape",
+          "ipa": "/ɡreɪp/",
+          "vi": "quả nho",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lemon",
+          "ipa": "/ˈlɛmən/",
+          "vi": "quả chanh",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cherry",
+          "ipa": "/ˈʧɛri/",
+          "vi": "quả anh đào",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "peach",
+          "ipa": "/piːʧ/",
+          "vi": "quả đào",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pear",
+          "ipa": "/pɛr/",
+          "vi": "quả lê",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "kiwi",
+          "ipa": "/ˈkiwi/",
+          "vi": "quả kiwi",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "blueberry",
+          "ipa": "/ˈbluːˌbɛri/",
+          "vi": "quả việt quất",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "raspberry",
+          "ipa": "/ˈræzˌbɛri/",
+          "vi": "quả mâm xôi",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "avocado",
+          "ipa": "/ˌævəˈkɑːdoʊ/",
+          "vi": "quả bơ",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "coconut",
+          "ipa": "/ˈkoʊkəˌnʌt/",
+          "vi": "quả dừa",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pomegranate",
+          "ipa": "/ˈpɑːmɪɡrænɪt/",
+          "vi": "quả lựu",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "passion fruit",
+          "ipa": "/ˈpæʃən ˌfruːt/",
+          "vi": "quả chanh dây",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "apricot",
+          "ipa": "/ˈeɪprɪkɑːt/",
+          "vi": "quả mơ",
+          "page": 18,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-11-1",
+      "number": 16,
+      "topicNumber": 11,
+      "topic": "Rau củ quả",
+      "title": "Rau củ quả",
+      "words": [
+        {
+          "en": "carrot",
+          "ipa": "/ˈkærət/",
+          "vi": "cà rốt",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "broccoli",
+          "ipa": "/ˈbrɒkəli/",
+          "vi": "súp lơ xanh",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lettuce",
+          "ipa": "/ˈlɛtɪs/",
+          "vi": "rau diếp",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cucumber",
+          "ipa": "/ˈkjuːkʌmbər/",
+          "vi": "dưa chuột",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tomato",
+          "ipa": "/təˈmeɪtoʊ/",
+          "vi": "cà chua",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "spinach",
+          "ipa": "/ˈspɪnɪʤ/",
+          "vi": "rau bina",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cabbage",
+          "ipa": "/ˈkæbɪʤ/",
+          "vi": "bắp cải",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "onion",
+          "ipa": "/ˈʌnjən/",
+          "vi": "hành tây",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "garlic",
+          "ipa": "/ˈɡɑːrlɪk/",
+          "vi": "tỏi",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "potato",
+          "ipa": "/pəˈteɪtoʊ/",
+          "vi": "khoai tây",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bell pepper",
+          "ipa": "/bɛl ˈpɛpər/",
+          "vi": "ớt chuông",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "zucchini",
+          "ipa": "/zuːˈkiːni/",
+          "vi": "bí đỏ",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "eggplant",
+          "ipa": "/ˈɛɡˌplænt/",
+          "vi": "cà tím",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cauliflower",
+          "ipa": "/ˈkɑːlɪˌflaʊər/",
+          "vi": "bông cải trắng",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pumpkin",
+          "ipa": "/ˈpʌmpkɪn/",
+          "vi": "bí ngô",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sweet potato",
+          "ipa": "/swiːt pəˈteɪtoʊ/",
+          "vi": "khoai lang",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "asparagus",
+          "ipa": "/əˈspærəɡəs/",
+          "vi": "măng tây",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "radish",
+          "ipa": "/ˈrædɪʃ/",
+          "vi": "củ cải đỏ",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "beet",
+          "ipa": "/bit/",
+          "vi": "củ cải đường",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "green bean",
+          "ipa": "/ɡrin bin/",
+          "vi": "đậu bắp",
+          "page": 19,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-12-1",
+      "number": 17,
+      "topicNumber": 12,
+      "topic": "Tên các loại hải sản",
+      "title": "Tên các loại hải sản",
+      "words": [
+        {
+          "en": "shrimp",
+          "ipa": "/ʃrɪmp/",
+          "vi": "tôm",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "crab",
+          "ipa": "/kræb/",
+          "vi": "cua",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lobster",
+          "ipa": "/ˈlɑːbstər/",
+          "vi": "tôm hùm",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "oyster",
+          "ipa": "/ˈɔɪstər/",
+          "vi": "hàu",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "scallop",
+          "ipa": "/ˈskɒləp/",
+          "vi": "sò điệp",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "clam",
+          "ipa": "/klæm/",
+          "vi": "nghêu",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "squid",
+          "ipa": "/skwɪd/",
+          "vi": "mực",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "octopus",
+          "ipa": "/ˈɒktəpəs/",
+          "vi": "bạch tuộc",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mussels",
+          "ipa": "/ˈmʌsəlz/",
+          "vi": "con trai",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fish",
+          "ipa": "/fɪʃ/",
+          "vi": "cá",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "salmon",
+          "ipa": "/ˈsæmən/",
+          "vi": "cá hồi",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tuna",
+          "ipa": "/ˈtuːnə/",
+          "vi": "cá ngừ",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cod",
+          "ipa": "/kɒd/",
+          "vi": "cá tuyết",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "haddock",
+          "ipa": "/ˈhædək/",
+          "vi": "cá tuyết trắng",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sardine",
+          "ipa": "/sɑːrˈdiːn/",
+          "vi": "cá mòi",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "anchovy",
+          "ipa": "/ˈænʧəvi/",
+          "vi": "cá cơm",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "trout",
+          "ipa": "/traʊt/",
+          "vi": "cá hồi nướng",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shrimp cocktail",
+          "ipa": "/ʃrɪmp ˈkɒkteɪl/",
+          "vi": "món tôm sốt cocktail",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "caviar",
+          "ipa": "/ˈkæviɑːr/",
+          "vi": "trứng cá hồi",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "calamari",
+          "ipa": "/kəˈlæməri/",
+          "vi": "mực nướng",
+          "page": 20,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-13-1",
+      "number": 18,
+      "topicNumber": 13,
+      "topic": "Tên các món ăn Việt Nam",
+      "title": "Tên các món ăn Việt Nam",
+      "words": [
+        {
+          "en": "Pho",
+          "ipa": "/foʊ/",
+          "vi": "Pho",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Banh mi",
+          "ipa": "/bæn miː/",
+          "vi": "Banh mi",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fresh spring rolls",
+          "ipa": "/frɛʃ sprɪŋ rəʊlz/",
+          "vi": "Gỏi cuốn",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grilled pork with noodles",
+          "ipa": "/ɡrɪld pɔːk wɪð ˈnuːdlz/",
+          "vi": "Bún chả",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Braised fish",
+          "ipa": "/breɪzd fɪʃ/",
+          "vi": "Cá kho",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Shaking beef",
+          "ipa": "/ˈʃeɪkɪŋ biːf/",
+          "vi": "Bò lúc lắc",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Broken rice",
+          "ipa": "/ˈbrəʊkən raɪs/",
+          "vi": "Cơm tấm",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Vietnamese pancake",
+          "ipa": "/ˌvjɛtnəˈmiːz ˈpænkeɪk/",
+          "vi": "Bánh xèo",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grilled chicken",
+          "ipa": "/ɡrɪld ˈʧɪkɪn/",
+          "vi": "Gà nướng",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fried spring rolls",
+          "ipa": "/fraɪd sprɪŋ rəʊlz/",
+          "vi": "Nem rán",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Crab noodle soup",
+          "ipa": "/kræb ˈnuːdl suːp/",
+          "vi": "Bún riêu",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sour soup",
+          "ipa": "/ˈsaʊə suːp/",
+          "vi": "Canh chua",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Green papaya salad",
+          "ipa": "/ɡriːn pəˈpaɪə ˈsæləd/",
+          "vi": "Gỏi đu đủ",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Steamed rice rolls",
+          "ipa": "/stiːmd raɪs rəʊlz/",
+          "vi": "Bánh cuốn",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fried fish",
+          "ipa": "/fraɪd fɪʃ/",
+          "vi": "Cá chiên",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Beef stew",
+          "ipa": "/biːf stjuː/",
+          "vi": "Bò kho",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stir-fried noodles",
+          "ipa": "/stɜː-fraɪd ˈnuːdlz/",
+          "vi": "Mì xào",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fish cake",
+          "ipa": "/fɪʃ keɪk/",
+          "vi": "Chả cá",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Water fern cake",
+          "ipa": "/ˈwɔːtə fɜːn keɪk/",
+          "vi": "Bánh bèo",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Thick Noodle Soup",
+          "ipa": "/θɪk ˈnuːdl suːp/",
+          "vi": "Bánh canh",
+          "page": 21,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-14-1",
+      "number": 19,
+      "topicNumber": 14,
+      "topic": "Nấu ăn",
+      "title": "Nấu ăn",
+      "words": [
+        {
+          "en": "recipe",
+          "ipa": "/ˈrɛsəpi/",
+          "vi": "công thức nấu ăn",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ingredient",
+          "ipa": "/ɪnˈɡriːdiənt/",
+          "vi": "nguyên liệu",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "utensil",
+          "ipa": "/juːˈtɛnsəl/",
+          "vi": "dụng cụ nấu ăn",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "chopping board",
+          "ipa": "/ˈʧɑːpɪŋ bɔːrd/",
+          "vi": "thớt cắt",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "knife",
+          "ipa": "/naɪf/",
+          "vi": "dao",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cutting",
+          "ipa": "/ˈkʌtɪŋ/",
+          "vi": "cắt",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "peeling",
+          "ipa": "/ˈpiːlɪŋ/",
+          "vi": "gọt",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "boiling",
+          "ipa": "/ˈbɔɪlɪŋ/",
+          "vi": "sôi",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "frying",
+          "ipa": "/ˈfraɪɪŋ/",
+          "vi": "chiên",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "baking",
+          "ipa": "/ˈbeɪkɪŋ/",
+          "vi": "nướng",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "grilling",
+          "ipa": "/ˈɡrɪlɪŋ/",
+          "vi": "nướng (lưới)",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sautéing",
+          "ipa": "/sɔːˈteɪɪŋ/",
+          "vi": "xào",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "simmering",
+          "ipa": "/ˈsɪmərɪŋ/",
+          "vi": "ninh",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stirring",
+          "ipa": "/ˈstɜːrɪŋ/",
+          "vi": "khuấy",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "whisking",
+          "ipa": "/ˈwɪskɪŋ/",
+          "vi": "đánh (trứng, kem)",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "marinating",
+          "ipa": "/ˈmærɪneɪtɪŋ/",
+          "vi": "ướp (thịt)",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "seasoning",
+          "ipa": "/ˈsiːzənɪŋ/",
+          "vi": "gia vị",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tasting",
+          "ipa": "/ˈteɪstɪŋ/",
+          "vi": "nếm thử",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "garnish",
+          "ipa": "/ˈɡɑːrnɪʃ/",
+          "vi": "trang trí",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "plating",
+          "ipa": "/ˈpleɪtɪŋ/",
+          "vi": "dọn đĩa",
+          "page": 22,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-15-1",
+      "number": 20,
+      "topicNumber": 15,
+      "topic": "Sở thích",
+      "title": "Sở thích",
+      "words": [
+        {
+          "en": "painting",
+          "ipa": "/ˈpeɪntɪŋ/",
+          "vi": "hội họa",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "photography",
+          "ipa": "/fəˈtɑːɡrəfi/",
+          "vi": "nhiếp ảnh",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "gardening",
+          "ipa": "/ˈɡɑːrdnɪŋ/",
+          "vi": "làm vườn",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cooking",
+          "ipa": "/ˈkʊkɪŋ/",
+          "vi": "nấu ăn",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "reading",
+          "ipa": "/ˈriːdɪŋ/",
+          "vi": "đọc sách",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "writing",
+          "ipa": "/ˈraɪtɪŋ/",
+          "vi": "viết",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "drawing",
+          "ipa": "/ˈdrɔːɪŋ/",
+          "vi": "vẽ",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hiking",
+          "ipa": "/ˈhaɪkɪŋ/",
+          "vi": "leo núi",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fishing",
+          "ipa": "/ˈfɪʃɪŋ/",
+          "vi": "câu cá",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "knitting",
+          "ipa": "/ˈnɪtɪŋ/",
+          "vi": "đan len",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dancing",
+          "ipa": "/ˈdænsɪŋ/",
+          "vi": "khiêu vũ",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "playing guitar",
+          "ipa": "/ˈpleɪɪŋ ɡɪˈtɑːr/",
+          "vi": "chơi guitar",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "playing piano",
+          "ipa": "/ˈpleɪɪŋ piˈænoʊ/",
+          "vi": "chơi piano",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "playing chess",
+          "ipa": "/ˈpleɪɪŋ ʧɛs/",
+          "vi": "chơi cờ",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "playing tennis",
+          "ipa": "/ˈpleɪɪŋ ˈtɛnɪs/",
+          "vi": "chơi quần vợt",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "collecting stamps",
+          "ipa": "/kəˈlɛktɪŋ stæmps/",
+          "vi": "sưu tập tem",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "birdwatching",
+          "ipa": "/ˈbɜːrdˌwɑːʧɪŋ/",
+          "vi": "quan sát chim",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "playing video games",
+          "ipa": "/ˈpleɪɪŋ ˈvɪdi.oʊ ɡeɪmz/",
+          "vi": "chơi game",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cycling",
+          "ipa": "/ˈsaɪklɪŋ/",
+          "vi": "đi xe đạp",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hiking",
+          "ipa": "/ˈhaɪkɪŋ/",
+          "vi": "đi bộ đường dài",
+          "page": 23,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-16-1",
+      "number": 21,
+      "topicNumber": 16,
+      "topic": "Âm nhạc",
+      "title": "Âm nhạc",
+      "words": [
+        {
+          "en": "melody",
+          "ipa": "/ˈmɛlədi/",
+          "vi": "giai điệu",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "rhythm",
+          "ipa": "/ˈrɪðəm/",
+          "vi": "nhịp điệu",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "harmony",
+          "ipa": "/ˈhɑːrməni/",
+          "vi": "âm điệu",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tempo",
+          "ipa": "/ˈtɛmpoʊ/",
+          "vi": "nhịp độ",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "beat",
+          "ipa": "/biːt/",
+          "vi": "nhịp",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lyrics",
+          "ipa": "/ˈlɪrɪks/",
+          "vi": "lời bài hát",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "chorus",
+          "ipa": "/ˈkɔːrəs/",
+          "vi": "đoạn hợp xướng",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "verse",
+          "ipa": "/vɜːrs/",
+          "vi": "đoạn hợp ca",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "solo",
+          "ipa": "/ˈsoʊloʊ/",
+          "vi": "màn trình diễn đơn",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "duet",
+          "ipa": "/ˈduːɛt/",
+          "vi": "hòa âm đôi",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "orchestra",
+          "ipa": "/ˈɔːrkɪstrə/",
+          "vi": "dàn nhạc",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "conductor",
+          "ipa": "/kənˈdʌktər/",
+          "vi": "người chỉ huy dàn nhạc",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "instrument",
+          "ipa": "/ˈɪnstrəmənt/",
+          "vi": "nhạc cụ",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "piano",
+          "ipa": "/piˈænoʊ/",
+          "vi": "đàn piano",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "guitar",
+          "ipa": "/ɡɪˈtɑːr/",
+          "vi": "đàn guitar",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "violin",
+          "ipa": "/ˈvaɪəlɪn/",
+          "vi": "đàn vi-ô-lông",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "trumpet",
+          "ipa": "/ˈtrʌmpɪt/",
+          "vi": "kèn trumpet",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "drums",
+          "ipa": "/drʌmz/",
+          "vi": "trống",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "voice",
+          "ipa": "/vɔɪs/",
+          "vi": "giọng",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "concert",
+          "ipa": "/ˈkɑːnsərt/",
+          "vi": "buổi hòa nhạc",
+          "page": 24,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-17-1",
+      "number": 22,
+      "topicNumber": 17,
+      "topic": "Shopping",
+      "title": "Shopping",
+      "words": [
+        {
+          "en": "shop",
+          "ipa": "/ʃɑːp/",
+          "vi": "cửa hàng",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "store",
+          "ipa": "/stɔːr/",
+          "vi": "cửa hàng",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mall",
+          "ipa": "/mɔːl/",
+          "vi": "trung tâm mua sắm",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "market",
+          "ipa": "/ˈmɑːrkɪt/",
+          "vi": "chợ",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "customer",
+          "ipa": "/ˈkʌstəmər/",
+          "vi": "khách hàng",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sale",
+          "ipa": "/seɪl/",
+          "vi": "giảm giá",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "discount",
+          "ipa": "/ˈdɪskaʊnt/",
+          "vi": "giảm giá",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cashier",
+          "ipa": "/kæˈʃɪər/",
+          "vi": "thu ngân",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "receipt",
+          "ipa": "/rɪˈsiːpt/",
+          "vi": "biên lai",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "basket",
+          "ipa": "/ˈbæskɪt/",
+          "vi": "giỏ",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cart",
+          "ipa": "/kɑːrt/",
+          "vi": "xe đẩy hàng",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "aisle",
+          "ipa": "/aɪl/",
+          "vi": "lối đi",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "checkout",
+          "ipa": "/ˈtʃɛkaʊt/",
+          "vi": "quầy thanh toán",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "payment",
+          "ipa": "/ˈpeɪmənt/",
+          "vi": "thanh toán",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "size",
+          "ipa": "/saɪz/",
+          "vi": "kích cỡ",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fitting room",
+          "ipa": "/ˈfɪtɪŋ ruːm/",
+          "vi": "phòng thử đồ",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "receipt",
+          "ipa": "/rɪˈsiːpt/",
+          "vi": "biên lai",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sale",
+          "ipa": "/seɪl/",
+          "vi": "giảm giá",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hanger",
+          "ipa": "/ˈhæŋər/",
+          "vi": "móc treo áo",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shelf",
+          "ipa": "/ʃɛlf/",
+          "vi": "kệ",
+          "page": 25,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-18-1",
+      "number": 23,
+      "topicNumber": 18,
+      "topic": "Du lịch",
+      "title": "Du lịch",
+      "words": [
+        {
+          "en": "travel",
+          "ipa": "/ˈtrævəl/",
+          "vi": "du lịch",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "trip",
+          "ipa": "/trɪp/",
+          "vi": "chuyến đi",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "destination",
+          "ipa": "/ˌdɛstɪˈneɪʃən/",
+          "vi": "điểm đến",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "itinerary",
+          "ipa": "/aɪˈtɪnərəri/",
+          "vi": "lịch trình",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tourist",
+          "ipa": "/ˈtʊrɪst/",
+          "vi": "du khách",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sightseeing",
+          "ipa": "/ˈsaɪtˌsiːɪŋ/",
+          "vi": "tham quan",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "explore",
+          "ipa": "/ɪkˈsplɔːr/",
+          "vi": "khám phá",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "adventure",
+          "ipa": "/ədˈvɛnʧər/",
+          "vi": "cuộc phiêu lưu",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "accommodation",
+          "ipa": "/əˌkɑːməˈdeɪʃən/",
+          "vi": "chỗ ở",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hotel",
+          "ipa": "/hoʊˈtɛl/",
+          "vi": "khách sạn",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hostel",
+          "ipa": "/ˈhɑːstəl/",
+          "vi": "nhà trọ",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "passport",
+          "ipa": "/ˈpæspɔːrt/",
+          "vi": "hộ chiếu",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "visa",
+          "ipa": "/ˈviːzə/",
+          "vi": "visa",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "luggage",
+          "ipa": "/ˈlʌɡɪdʒ/",
+          "vi": "hành lý",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "airport",
+          "ipa": "/ˈɛrˌpɔːrt/",
+          "vi": "sân bay",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "departure",
+          "ipa": "/dɪˈpɑːrʧər/",
+          "vi": "khởi hành",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "arrival",
+          "ipa": "/əˈraɪvəl/",
+          "vi": "đến nơi",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "currency",
+          "ipa": "/ˈkɜːrənsi/",
+          "vi": "tiền tệ",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exchange",
+          "ipa": "/ɪksˈʧeɪndʒ/",
+          "vi": "trao đổi",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "guide",
+          "ipa": "/ɡaɪd/",
+          "vi": "hướng dẫn viên",
+          "page": 26,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-19-1",
+      "number": 24,
+      "topicNumber": 19,
+      "topic": "Chụp ảnh",
+      "title": "Chụp ảnh",
+      "words": [
+        {
+          "en": "photography",
+          "ipa": "/fəˈtɑːɡrəfi/",
+          "vi": "nhiếp ảnh",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "camera",
+          "ipa": "/ˈkæmərə/",
+          "vi": "máy ảnh",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lens",
+          "ipa": "/lɛnz/",
+          "vi": "ống kính",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shutter",
+          "ipa": "/ˈʃʌtər/",
+          "vi": "cửa khẩu (trong máy ảnh)",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "focus",
+          "ipa": "/ˈfoʊkəs/",
+          "vi": "lấy nét",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exposure",
+          "ipa": "/ɪkˈspoʊʒər/",
+          "vi": "chụp sáng",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "aperture",
+          "ipa": "/ˈæpərʧər/",
+          "vi": "khẩu độ",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ISO",
+          "ipa": "/ˌaɪɛsˈoʊ/",
+          "vi": "độ nhạy sáng ISO",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shutter speed",
+          "ipa": "/ˈʃʌtər spid/",
+          "vi": "tốc độ chụp",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "white balance",
+          "ipa": "/waɪt ˈbæləns/",
+          "vi": "cân bằng trắng",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "composition",
+          "ipa": "/ˌkɑːmpəˈzɪʃən/",
+          "vi": "cách bố trí",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "frame",
+          "ipa": "/freɪm/",
+          "vi": "khung ảnh",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exposure",
+          "ipa": "/ɪkˈspoʊʒər/",
+          "vi": "sự tiếp xúc ánh sáng",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "zoom",
+          "ipa": "/zuːm/",
+          "vi": "thu phóng",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "portrait",
+          "ipa": "/ˈpɔːrtrɪt/",
+          "vi": "chân dung",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "landscape",
+          "ipa": "/ˈlændskeɪp/",
+          "vi": "phong cảnh",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "aperture",
+          "ipa": "/ˈæpərʧər/",
+          "vi": "giới hạn (trong ống kính)",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "megapixel",
+          "ipa": "/ˈmɛɡəˌpɪksəl/",
+          "vi": "triệu điểm ảnh",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exposure",
+          "ipa": "/ɪkˈspoʊʒər/",
+          "vi": "ánh sáng tiếp xúc",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "editing",
+          "ipa": "/ˈɛdɪtɪŋ/",
+          "vi": "chỉnh sửa",
+          "page": 27,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-20-1",
+      "number": 25,
+      "topicNumber": 20,
+      "topic": "Giải trí",
+      "title": "Giải trí",
+      "words": [
+        {
+          "en": "entertainment",
+          "ipa": "/ˌɛntərˈteɪnmənt/",
+          "vi": "giải trí",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "movie",
+          "ipa": "/ˈmuːvi/",
+          "vi": "phim",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "theater",
+          "ipa": "/ˈθiːətər/",
+          "vi": "rạp hát, nhà hát",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "concert",
+          "ipa": "/ˈkɑːnsərt/",
+          "vi": "buổi hòa nhạc",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "performance",
+          "ipa": "/pərˈfɔːrməns/",
+          "vi": "biểu diễn",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "music",
+          "ipa": "/ˈmjuːzɪk/",
+          "vi": "âm nhạc",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dance",
+          "ipa": "/dæns/",
+          "vi": "khiêu vũ",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "festival",
+          "ipa": "/ˈfɛstəvəl/",
+          "vi": "lễ hội",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exhibition",
+          "ipa": "/ˌɛksɪˈbɪʃən/",
+          "vi": "triển lãm",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "art",
+          "ipa": "/ɑːrt/",
+          "vi": "nghệ thuật",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "comedy",
+          "ipa": "/ˈkɑːmədi/",
+          "vi": "hài kịch",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "drama",
+          "ipa": "/ˈdrɑːmə/",
+          "vi": "kịch",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "performance",
+          "ipa": "/pərˈfɔːrməns/",
+          "vi": "sự biểu diễn",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "actor",
+          "ipa": "/ˈæktər/",
+          "vi": "diễn viên",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "actress",
+          "ipa": "/ˈæktrəs/",
+          "vi": "nữ diễn viên",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "audience",
+          "ipa": "/ˈɔːdiəns/",
+          "vi": "khán giả",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ticket",
+          "ipa": "/ˈtɪkɪt/",
+          "vi": "vé",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "applause",
+          "ipa": "/əˈplɔːz/",
+          "vi": "tràng pháo tay",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "performer",
+          "ipa": "/pərˈfɔːrmər/",
+          "vi": "nghệ sĩ",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "show",
+          "ipa": "/ʃoʊ/",
+          "vi": "chương trình",
+          "page": 28,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-21-1",
+      "number": 26,
+      "topicNumber": 21,
+      "topic": "Các thể loại phim",
+      "title": "Các thể loại phim",
+      "words": [
+        {
+          "en": "action",
+          "ipa": "/ˈækʃən/",
+          "vi": "hành động",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "adventure",
+          "ipa": "/ədˈvɛnʧər/",
+          "vi": "phiêu lưu",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "comedy",
+          "ipa": "/ˈkɑːmədi/",
+          "vi": "hài",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "drama",
+          "ipa": "/ˈdrɑːmə/",
+          "vi": "kịch, tình cảm",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "thriller",
+          "ipa": "/ˈθrɪlər/",
+          "vi": "hồi hộp",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "horror",
+          "ipa": "/ˈhɔːrər/",
+          "vi": "kinh dị",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "romance",
+          "ipa": "/ˈroʊmæns/",
+          "vi": "tình cảm",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "science fiction",
+          "ipa": "/ˈsaɪəns ˈfɪkʃən/",
+          "vi": "khoa học viễn tưởng",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fantasy",
+          "ipa": "/ˈfæntəsi/",
+          "vi": "huyền bí, ảo tưởng",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "animation",
+          "ipa": "/ˌænɪˈmeɪʃən/",
+          "vi": "hoạt hình",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "musical",
+          "ipa": "/ˈmjuːzɪkəl/",
+          "vi": "nhạc kịch",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "documentary",
+          "ipa": "/ˌdɑːkjəˈmɛntəri/",
+          "vi": "phim tài liệu",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "crime",
+          "ipa": "/kraɪm/",
+          "vi": "tội phạm",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "suspense",
+          "ipa": "/səˈspɛns/",
+          "vi": "căng thẳng, hồi hộp",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "western",
+          "ipa": "/ˈwɛstərn/",
+          "vi": "phim miền Tây",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "historical",
+          "ipa": "/hɪˈstɔːrɪkəl/",
+          "vi": "lịch sử",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "thriller",
+          "ipa": "/ˈθrɪlər/",
+          "vi": "ly kỳ",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "war",
+          "ipa": "/wɔːr/",
+          "vi": "chiến tranh",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "romantic comedy",
+          "ipa": "/roʊˈmæntɪk ˈkɑːmədi/",
+          "vi": "hài lãng mạn",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "biopic",
+          "ipa": "/ˈbaɪɑːpɪk/",
+          "vi": "phim truyện tiểu sử",
+          "page": 29,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-22-1",
+      "number": 27,
+      "topicNumber": 22,
+      "topic": "Các thể loại sách",
+      "title": "Các thể loại sách",
+      "words": [
+        {
+          "en": "fiction",
+          "ipa": "/ˈfɪkʃən/",
+          "vi": "tiểu thuyết",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "non-fiction",
+          "ipa": "/nɑnˈfɪkʃən/",
+          "vi": "phi hư cấu",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mystery",
+          "ipa": "/ˈmɪstəri/",
+          "vi": "bí ẩn, trinh thám",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "romance",
+          "ipa": "/ˈroʊmæns/",
+          "vi": "tình cảm",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "science fiction",
+          "ipa": "/ˈsaɪəns ˈfɪkʃən/",
+          "vi": "khoa học viễn tưởng",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fantasy",
+          "ipa": "/ˈfæntəsi/",
+          "vi": "huyền bí",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "thriller",
+          "ipa": "/ˈθrɪlər/",
+          "vi": "ly kỳ",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "horror",
+          "ipa": "/ˈhɔːrər/",
+          "vi": "kinh dị",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "biography",
+          "ipa": "/baɪˈɑːɡrəfi/",
+          "vi": "tiểu sử",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "autobiography",
+          "ipa": "/ˌɔːtoʊbaɪˈɑːɡrəfi/",
+          "vi": "tự truyện",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "historical fiction",
+          "ipa": "/hɪˈstɔːrɪkəl ˈfɪkʃən/",
+          "vi": "tiểu thuyết lịch sử",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "poetry",
+          "ipa": "/ˈpoʊətri/",
+          "vi": "thơ",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "drama",
+          "ipa": "/ˈdrɑːmə/",
+          "vi": "kịch",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "comedy",
+          "ipa": "/ˈkɑːmədi/",
+          "vi": "hài",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "thriller",
+          "ipa": "/ˈθrɪlər/",
+          "vi": "căng thẳng, hồi hộp",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "adventure",
+          "ipa": "/ədˈvɛnʧər/",
+          "vi": "phiêu lưu",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "young adult",
+          "ipa": "/jʌŋ ˈædʌlt/",
+          "vi": "thanh thiếu niên",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "children's",
+          "ipa": "/ˈtʃɪldrənz/",
+          "vi": "thiếu nhi",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "self-help",
+          "ipa": "/ˌsɛlf ˈhɛlp/",
+          "vi": "tự giúp bản thân",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "historical romance",
+          "ipa": "/hɪˈstɔːrɪkəl ˈroʊmæns/",
+          "vi": "tình cảm lịch sử",
+          "page": 30,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-23-1",
+      "number": 28,
+      "topicNumber": 23,
+      "topic": "Làm đẹp",
+      "title": "Làm đẹp",
+      "words": [
+        {
+          "en": "beauty",
+          "ipa": "/ˈbjuːti/",
+          "vi": "vẻ đẹp",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "attractive",
+          "ipa": "/əˈtræktɪv/",
+          "vi": "hấp dẫn",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "radiant",
+          "ipa": "/ˈreɪdiənt/",
+          "vi": "rực rỡ, tươi sáng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "glamorous",
+          "ipa": "/ˈɡlæmərəs/",
+          "vi": "quyến rũ, sang trọng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "elegant",
+          "ipa": "/ˈɛlɪɡənt/",
+          "vi": "thanh lịch, tao nhã",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stunning",
+          "ipa": "/ˈstʌnɪŋ/",
+          "vi": "ngoạn mục, gây ấn tượng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "graceful",
+          "ipa": "/ˈɡreɪsfəl/",
+          "vi": "duyên dáng, uyển chuyển",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "charming",
+          "ipa": "/ˈʧɑːrmɪŋ/",
+          "vi": "quyến rũ, thu hút",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "flawless",
+          "ipa": "/ˈflɔːlɪs/",
+          "vi": "hoàn hảo, không tỳ vết",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "youthful",
+          "ipa": "/ˈjuːθfəl/",
+          "vi": "trẻ trung, tươi trẻ",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "vibrant",
+          "ipa": "/ˈvaɪbrənt/",
+          "vi": "sôi động, sáng láng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "alluring",
+          "ipa": "/əˈljʊrɪŋ/",
+          "vi": "quyến rũ, lôi cuốn",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sophisticated",
+          "ipa": "/səˈfɪstɪkeɪtɪd/",
+          "vi": "tinh vi, phức tạp",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "charming",
+          "ipa": "/ˈʧɑːrmɪŋ/",
+          "vi": "duyên dáng, lịch thiệp",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "glamorous",
+          "ipa": "/ˈɡlæmərəs/",
+          "vi": "hào nhoáng, sang trọng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stylish",
+          "ipa": "/ˈstaɪlɪʃ/",
+          "vi": "phong cách, lịch lãm",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "radiant",
+          "ipa": "/ˈreɪdiənt/",
+          "vi": "tươi sáng, tỏa sáng",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "attractive",
+          "ipa": "/əˈtræktɪv/",
+          "vi": "hấp dẫn, lôi cuốn",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "charming",
+          "ipa": "/ˈʧɑːrmɪŋ/",
+          "vi": "quyến rũ, dễ thương",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "graceful",
+          "ipa": "/ˈɡreɪsfəl/",
+          "vi": "duyên dáng, thanh nhã",
+          "page": 31,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-24-1",
+      "number": 29,
+      "topicNumber": 24,
+      "topic": "Các môn thể thao",
+      "title": "Các môn thể thao",
+      "words": [
+        {
+          "en": "sport",
+          "ipa": "/spɔːrt/",
+          "vi": "môn thể thao",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "athlete",
+          "ipa": "/ˈæθliːt/",
+          "vi": "vận động viên",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "team",
+          "ipa": "/tiːm/",
+          "vi": "đội",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "competition",
+          "ipa": "/ˌkɒmpɪˈtɪʃən/",
+          "vi": "cuộc thi, cạnh tranh",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tournament",
+          "ipa": "/ˈtʊərnəmənt/",
+          "vi": "giải đấu, giải thể thao",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "referee",
+          "ipa": "/ˈrɛfəriː/",
+          "vi": "trọng tài",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stadium",
+          "ipa": "/ˈsteɪdiəm/",
+          "vi": "sân vận động",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "coach",
+          "ipa": "/koʊʧ/",
+          "vi": "huấn luyện viên",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "champion",
+          "ipa": "/ˈʧæmpiən/",
+          "vi": "nhà vô địch",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "victory",
+          "ipa": "/ˈvɪktəri/",
+          "vi": "chiến thắng",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "defeat",
+          "ipa": "/dɪˈfiːt/",
+          "vi": "thất bại",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "medal",
+          "ipa": "/ˈmɛdl/",
+          "vi": "huy chương",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "record",
+          "ipa": "/ˈrɛkɔːrd/",
+          "vi": "kỷ lục",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "athlete",
+          "ipa": "/ˈæθliːt/",
+          "vi": "vận động viên",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "equipment",
+          "ipa": "/ɪˈkwɪpmənt/",
+          "vi": "trang thiết bị",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fitness",
+          "ipa": "/ˈfɪtnəs/",
+          "vi": "thể lực",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "endurance",
+          "ipa": "/ɪnˈdʊrəns/",
+          "vi": "sức bền",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "agility",
+          "ipa": "/əˈʤɪləti/",
+          "vi": "sự nhanh nhẹn",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "strength",
+          "ipa": "/strɛŋθ/",
+          "vi": "sức mạnh",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "flexibility",
+          "ipa": "/ˌflɛksəˈbɪlɪti/",
+          "vi": "sự linh hoạt",
+          "page": 32,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-25-1",
+      "number": 30,
+      "topicNumber": 25,
+      "topic": "Bóng đá",
+      "title": "Bóng đá",
+      "words": [
+        {
+          "en": "football",
+          "ipa": "/ˈfʊtbɔːl/",
+          "vi": "bóng đá",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "goal",
+          "ipa": "/ɡoʊl/",
+          "vi": "bàn thắng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "player",
+          "ipa": "/ˈpleɪər/",
+          "vi": "cầu thủ",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "referee",
+          "ipa": "/ˈrɛfəriː/",
+          "vi": "trọng tài",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "team",
+          "ipa": "/tiːm/",
+          "vi": "đội",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "coach",
+          "ipa": "/koʊʧ/",
+          "vi": "huấn luyện viên",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "captain",
+          "ipa": "/ˈkæptən/",
+          "vi": "đội trưởng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "match",
+          "ipa": "/mætʃ/",
+          "vi": "trận đấu",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stadium",
+          "ipa": "/ˈsteɪdiəm/",
+          "vi": "sân vận động",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dribble",
+          "ipa": "/ˈdrɪbəl/",
+          "vi": "đi bóng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pass",
+          "ipa": "/pæs/",
+          "vi": "chuyền bóng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shoot",
+          "ipa": "/ʃuːt/",
+          "vi": "sút bóng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tackle",
+          "ipa": "/ˈtækəl/",
+          "vi": "phá bóng, cắt bóng",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "penalty",
+          "ipa": "/ˈpɛnəlti/",
+          "vi": "đá phạt đền",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "corner",
+          "ipa": "/ˈkɔːrnər/",
+          "vi": "quả phạt góc",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "header",
+          "ipa": "/ˈhɛdər/",
+          "vi": "đánh đầu",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "foul",
+          "ipa": "/faʊl/",
+          "vi": "vi phạm",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "offside",
+          "ipa": "/ˈɔfˌsaɪd/",
+          "vi": "việt vị",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "substitution",
+          "ipa": "/ˌsʌbstɪˈtuːʃən/",
+          "vi": "thay người",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "league",
+          "ipa": "/liːɡ/",
+          "vi": "giải bóng đá",
+          "page": 33,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-26-1",
+      "number": 31,
+      "topicNumber": 26,
+      "topic": "Nhà cửa",
+      "title": "Nhà cửa",
+      "words": [
+        {
+          "en": "house",
+          "ipa": "/haʊs/",
+          "vi": "nhà",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "apartment",
+          "ipa": "/əˈpɑːrtmənt/",
+          "vi": "căn hộ",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bedroom",
+          "ipa": "/ˈbɛdruːm/",
+          "vi": "phòng ngủ",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "living room",
+          "ipa": "/ˈlɪvɪŋ ruːm/",
+          "vi": "phòng khách",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "kitchen",
+          "ipa": "/ˈkɪʧɪn/",
+          "vi": "nhà bếp",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bathroom",
+          "ipa": "/ˈbæθruːm/",
+          "vi": "phòng tắm",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "balcony",
+          "ipa": "/ˈbælkəni/",
+          "vi": "ban công",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "backyard",
+          "ipa": "/ˈbækjɑːrd/",
+          "vi": "sân sau",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "garden",
+          "ipa": "/ˈɡɑːrdən/",
+          "vi": "vườn",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "garage",
+          "ipa": "/ˈɡærɑːʒ/",
+          "vi": "nhà để xe",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "roof",
+          "ipa": "/ruːf/",
+          "vi": "mái nhà",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "wall",
+          "ipa": "/wɔːl/",
+          "vi": "bức tường",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "floor",
+          "ipa": "/flɔːr/",
+          "vi": "sàn",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "window",
+          "ipa": "/ˈwɪndoʊ/",
+          "vi": "cửa sổ",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "door",
+          "ipa": "/dɔːr/",
+          "vi": "cửa",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "staircase",
+          "ipa": "/ˈstɛrkeɪs/",
+          "vi": "cầu thang",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "furniture",
+          "ipa": "/ˈfɜːrnɪʧər/",
+          "vi": "nội thất",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "rent",
+          "ipa": "/rɛnt/",
+          "vi": "thuê, tiền thuê",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "landlord",
+          "ipa": "/ˈlændlɔːrd/",
+          "vi": "chủ nhà, chủ nhà trọ",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tenant",
+          "ipa": "/ˈtɛnənt/",
+          "vi": "người thuê nhà",
+          "page": 34,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-27-1",
+      "number": 32,
+      "topicNumber": 27,
+      "topic": "Nhà bếp",
+      "title": "Nhà bếp",
+      "words": [
+        {
+          "en": "kitchen",
+          "ipa": "/ˈkɪʧɪn/",
+          "vi": "nhà bếp",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stove",
+          "ipa": "/stoʊv/",
+          "vi": "bếp",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "oven",
+          "ipa": "/ˈʌvən/",
+          "vi": "lò nướng",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "refrigerator",
+          "ipa": "/rɪˈfrɪʤəreɪtər/",
+          "vi": "tủ lạnh",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "microwave",
+          "ipa": "/ˈmaɪkrəˌweɪv/",
+          "vi": "lò vi sóng",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sink",
+          "ipa": "/sɪŋk/",
+          "vi": "bồn rửa",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "faucet",
+          "ipa": "/ˈfɔːsɪt/",
+          "vi": "vòi nước",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dishwasher",
+          "ipa": "/ˈdɪʃˌwɑːʃər/",
+          "vi": "máy rửa chén",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "countertop",
+          "ipa": "/ˈkaʊntərˌtɑːp/",
+          "vi": "mặt bếp",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cabinet",
+          "ipa": "/ˈkæbənɪt/",
+          "vi": "tủ",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cutting board",
+          "ipa": "/ˈkʌtɪŋ bɔːrd/",
+          "vi": "thớt cắt",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "knife",
+          "ipa": "/naɪf/",
+          "vi": "con dao",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "spoon",
+          "ipa": "/spuːn/",
+          "vi": "cái thìa",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fork",
+          "ipa": "/fɔːrk/",
+          "vi": "cái nĩa",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "plate",
+          "ipa": "/pleɪt/",
+          "vi": "đĩa",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bowl",
+          "ipa": "/boʊl/",
+          "vi": "tô",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pot",
+          "ipa": "/pɒt/",
+          "vi": "nồi",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pan",
+          "ipa": "/pæn/",
+          "vi": "chảo",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "whisk",
+          "ipa": "/wɪsk/",
+          "vi": "cái đánh trứng",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "blender",
+          "ipa": "/ˈblɛndər/",
+          "vi": "máy xay",
+          "page": 35,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-28-1",
+      "number": 33,
+      "topicNumber": 28,
+      "topic": "Tết",
+      "title": "Tết",
+      "words": [
+        {
+          "en": "Tet holiday",
+          "ipa": "/tɛt ˈhɑlədeɪ/",
+          "vi": "Tết",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lunar New Year",
+          "ipa": "/ˈlunər njuː jɪr/",
+          "vi": "Tết Nguyên đán",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "celebration",
+          "ipa": "/ˌsɛləˈbreɪʃən/",
+          "vi": "lễ kỷ niệm",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "family reunion",
+          "ipa": "/ˈfæməli riːˈjunjən/",
+          "vi": "sum họp gia đình",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "red envelope",
+          "ipa": "/rɛd ɪnˈvɛloʊp/",
+          "vi": "phong bì đỏ",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "firecrackers",
+          "ipa": "/ˈfaɪərˌkrækərz/",
+          "vi": "pháo hoa",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "traditional",
+          "ipa": "/trəˈdɪʃənəl/",
+          "vi": "truyền thống",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "customs",
+          "ipa": "/ˈkʌstəmz/",
+          "vi": "phong tục",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lion dance",
+          "ipa": "/ˈlaɪən dæns/",
+          "vi": "múa lân",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dragon dance",
+          "ipa": "/ˈdrægən dæns/",
+          "vi": "múa rồng",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ancestor worship",
+          "ipa": "/ˈænsɛstər ˈwɜːrʃɪp/",
+          "vi": "thờ cúng tổ tiên",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "traditional food",
+          "ipa": "/trəˈdɪʃənəl fuːd/",
+          "vi": "đồ ăn truyền thống",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sticky rice cake",
+          "ipa": "/ˈstɪki raɪs keɪk/",
+          "vi": "bánh chưng/bánh dày",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "pickled vegetables",
+          "ipa": "/ˈpɪkl̩d ˈvɛdʒtəbəlz/",
+          "vi": "dưa hành",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "banh tet",
+          "ipa": "/bʌn tɛt/",
+          "vi": "bánh tét",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "five-fruit tray",
+          "ipa": "/faɪv-fruːt treɪ/",
+          "vi": "mâm ngũ quả",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "ancestral altar",
+          "ipa": "/ænˈsɛstərəl ˈɔːltər/",
+          "vi": "bàn thờ tổ tiên",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "wishes",
+          "ipa": "/ˈwɪʃɪz/",
+          "vi": "lời chúc",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cultural heritage",
+          "ipa": "/ˈkʌlʧərəl ˈhɛrɪtɪʤ/",
+          "vi": "di sản văn hóa",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "festive atmosphere",
+          "ipa": "/ˈfɛstɪv ˈætˌmɑːsfɪr/",
+          "vi": "không khí lễ hội",
+          "page": 36,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-29-1",
+      "number": 34,
+      "topicNumber": 29,
+      "topic": "Đời sống",
+      "title": "Đời sống",
+      "words": [
+        {
+          "en": "lifestyle",
+          "ipa": "/ˈlaɪfˌstaɪl/",
+          "vi": "lối sống",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "routine",
+          "ipa": "/ruˈtin/",
+          "vi": "lịch trình",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "healthy",
+          "ipa": "/ˈhɛlθi/",
+          "vi": "lành mạnh",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "exercise",
+          "ipa": "/ˈɛksərˌsaɪz/",
+          "vi": "tập luyện",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "diet",
+          "ipa": "/ˈdaɪət/",
+          "vi": "chế độ ăn uống",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "balanced",
+          "ipa": "/ˈbælənst/",
+          "vi": "cân đối",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "stress",
+          "ipa": "/strɛs/",
+          "vi": "căng thẳng",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "relaxation",
+          "ipa": "/ˌriːlækˈseɪʃən/",
+          "vi": "thư giãn",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "meditation",
+          "ipa": "/ˌmɛdɪˈteɪʃən/",
+          "vi": "thiền",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mindfulness",
+          "ipa": "/ˈmaɪndfəlnəs/",
+          "vi": "tỉnh thức",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sleep",
+          "ipa": "/sliːp/",
+          "vi": "giấc ngủ",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hobbies",
+          "ipa": "/ˈhɑbiz/",
+          "vi": "sở thích",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "socialize",
+          "ipa": "/ˈsoʊʃəˌlaɪz/",
+          "vi": "giao lưu",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "leisure",
+          "ipa": "/ˈliʒər/",
+          "vi": "thời gian rảnh rỗi",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "self-care",
+          "ipa": "/sɛlf-kɛr/",
+          "vi": "chăm sóc bản thân",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "mindfulness",
+          "ipa": "/ˈmaɪndfəlnəs/",
+          "vi": "tỉnh thức",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "work-life balance",
+          "ipa": "/wɜrk-laɪf ˈbæləns/",
+          "vi": "cân bằng công việc và cuộc sống",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "productivity",
+          "ipa": "/ˌproʊˌdʌkˈtɪvəti/",
+          "vi": "năng suất",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "well-being",
+          "ipa": "/wɛl ˈbiɪŋ/",
+          "vi": "sự khỏe mạnh",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "personal development",
+          "ipa": "/ˈpɜrsənəl dɪˈvɛləpmənt/",
+          "vi": "phát triển cá nhân",
+          "page": 37,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-30-1",
+      "number": 35,
+      "topicNumber": 30,
+      "topic": "Con vật",
+      "title": "Con vật",
+      "words": [
+        {
+          "en": "dog",
+          "ipa": "/dɔɡ/",
+          "vi": "chó",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cat",
+          "ipa": "/kæt/",
+          "vi": "mèo",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lion",
+          "ipa": "/ˈlaɪən/",
+          "vi": "sư tử",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tiger",
+          "ipa": "/ˈtaɪɡər/",
+          "vi": "hổ",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "elephant",
+          "ipa": "/ˈɛləfənt/",
+          "vi": "voi",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "giraffe",
+          "ipa": "/dʒəˈræf/",
+          "vi": "hươu cao cổ",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "monkey",
+          "ipa": "/ˈmʌŋki/",
+          "vi": "khỉ",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bear",
+          "ipa": "/bɛr/",
+          "vi": "gấu",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dolphin",
+          "ipa": "/ˈdɒlfɪn/",
+          "vi": "cá heo",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "shark",
+          "ipa": "/ʃɑrk/",
+          "vi": "cá mập",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "horse",
+          "ipa": "/hɔrs/",
+          "vi": "ngựa",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cow",
+          "ipa": "/kaʊ/",
+          "vi": "bò",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sheep",
+          "ipa": "/ʃip/",
+          "vi": "cừu",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "rabbit",
+          "ipa": "/ˈræbɪt/",
+          "vi": "thỏ",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "bird",
+          "ipa": "/bɜrd/",
+          "vi": "chim",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "butterfly",
+          "ipa": "/ˈbʌtərflaɪ/",
+          "vi": "bướm",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "fish",
+          "ipa": "/fɪʃ/",
+          "vi": "cá",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "snake",
+          "ipa": "/sneɪk/",
+          "vi": "rắn",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "spider",
+          "ipa": "/ˈspaɪdər/",
+          "vi": "nhện",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "turtle",
+          "ipa": "/ˈtɜrtl̩/",
+          "vi": "rùa",
+          "page": 38,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-31-1",
+      "number": 36,
+      "topicNumber": 31,
+      "topic": "Hoa",
+      "title": "Hoa",
+      "words": [
+        {
+          "en": "rose",
+          "ipa": "/roʊz/",
+          "vi": "hoa hồng",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "sunflower",
+          "ipa": "/ˈsʌnˌflaʊər/",
+          "vi": "hoa hướng dương",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "daisy",
+          "ipa": "/ˈdeɪzi/",
+          "vi": "cúc",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "tulip",
+          "ipa": "/ˈtjuːlɪp/",
+          "vi": "hoa tulip",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lily",
+          "ipa": "/ˈlɪli/",
+          "vi": "hoa huệ",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "orchid",
+          "ipa": "/ˈɔrkɪd/",
+          "vi": "hoa lan",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "daffodil",
+          "ipa": "/ˈdæfəˌdɪl/",
+          "vi": "hoa thuỷ tiên",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "carnation",
+          "ipa": "/kɑrˈneɪʃən/",
+          "vi": "hoa cẩm chướng",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lavender",
+          "ipa": "/ˈlævəndər/",
+          "vi": "hoa oải hương",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "peony",
+          "ipa": "/ˈpiːni/",
+          "vi": "hoa mẫu đơn",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "hibiscus",
+          "ipa": "/hɪˈbɪskəs/",
+          "vi": "hoa bụp giấm",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "cherry blossom",
+          "ipa": "/ˈtʃɛri ˈblɑsəm/",
+          "vi": "hoa anh đào",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "marigold",
+          "ipa": "/ˈmærɪˌgoʊld/",
+          "vi": "hoa cúc vạn thọ",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "jasmine",
+          "ipa": "/ˈdʒæzmɪn/",
+          "vi": "hoa nhài",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "chrysanthemum",
+          "ipa": "/krɪˈsænθəməm/",
+          "vi": "hoa cúc",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "violet",
+          "ipa": "/ˈvaɪələt/",
+          "vi": "hoa violet",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "geranium",
+          "ipa": "/dʒəˈreɪniəm/",
+          "vi": "hoa giấy",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "iris",
+          "ipa": "/ˈaɪrɪs/",
+          "vi": "hoa diên vĩ",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "lotus",
+          "ipa": "/ˈloʊtəs/",
+          "vi": "hoa sen",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "dahlia",
+          "ipa": "/ˈdeɪliə/",
+          "vi": "hoa huệ tây",
+          "page": 39,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-32-1",
+      "number": 37,
+      "topicNumber": 32,
+      "topic": "Giáng sinh",
+      "title": "Giáng sinh",
+      "words": [
+        {
+          "en": "Christmas",
+          "ipa": "/ˈkrɪsməs/",
+          "vi": "Giáng sinh",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Santa Claus",
+          "ipa": "/ˈsæntə klɔz/",
+          "vi": "Ông già Noel",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Christmas tree",
+          "ipa": "/ˈkrɪsməs triː/",
+          "vi": "Cây thông Noel",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Decorations",
+          "ipa": "/ˌdɛkəˈreɪʃənz/",
+          "vi": "Trang trí",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gifts",
+          "ipa": "/ɡɪfts/",
+          "vi": "Quà tặng",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stockings",
+          "ipa": "/ˈstɑkɪŋz/",
+          "vi": "Ống túi đựng quà",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Reindeer",
+          "ipa": "/ˈreɪnˌdɪr/",
+          "vi": "Tuần lộc",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sleigh",
+          "ipa": "/sleɪ/",
+          "vi": "Xe trượt tuyết",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Snowman",
+          "ipa": "/ˈsnoʊˌmæn/",
+          "vi": "Người tuyết",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mistletoe",
+          "ipa": "/ˈmɪsəlˌtoʊ/",
+          "vi": "Cây phù dung",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Holly",
+          "ipa": "/ˈhɑli/",
+          "vi": "Cây nguyệt quế",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Wreath",
+          "ipa": "/riːθ/",
+          "vi": "Vòng hoa",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Carols",
+          "ipa": "/ˈkærəlz/",
+          "vi": "Bài hát Giáng sinh",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nativity",
+          "ipa": "/nəˈtɪvəti/",
+          "vi": "Màn trình diễn Giáng sinh",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Candles",
+          "ipa": "/ˈkændəlz/",
+          "vi": "Nến",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gingerbread",
+          "ipa": "/ˈdʒɪndʒərˌbrɛd/",
+          "vi": "Bánh quy gừng",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Eggnog",
+          "ipa": "/ˈɛɡˌnɔɡ/",
+          "vi": "Rượu trứng",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fireplace",
+          "ipa": "/ˈfaɪərˌpleɪs/",
+          "vi": "Lò sưởi, lò lửa",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ornaments",
+          "ipa": "/ˈɔrnəmənts/",
+          "vi": "Đồ trang trí",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Snowflake",
+          "ipa": "/ˈsnoʊˌfleɪk/",
+          "vi": "Tuyết rơi",
+          "page": 40,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-33-1",
+      "number": 38,
+      "topicNumber": 33,
+      "topic": "Màu sắc",
+      "title": "Màu sắc",
+      "words": [
+        {
+          "en": "Blue",
+          "ipa": "/bluː/",
+          "vi": "Màu xanh dương",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Green",
+          "ipa": "/ɡriːn/",
+          "vi": "Màu xanh lá cây",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Yellow",
+          "ipa": "/ˈjɛloʊ/",
+          "vi": "Màu vàng",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Orange",
+          "ipa": "/ˈɔrɪndʒ/",
+          "vi": "Màu cam",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pink",
+          "ipa": "/pɪŋk/",
+          "vi": "Màu hồng",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Purple",
+          "ipa": "/ˈpɜrpl̩/",
+          "vi": "Màu tím",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Black",
+          "ipa": "/blæk/",
+          "vi": "Màu đen",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "White",
+          "ipa": "/waɪt/",
+          "vi": "Màu trắng",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gray",
+          "ipa": "/ɡreɪ/",
+          "vi": "Màu xám",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brown",
+          "ipa": "/braʊn/",
+          "vi": "Màu nâu",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Silver",
+          "ipa": "/ˈsɪlvər/",
+          "vi": "Màu bạc",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gold",
+          "ipa": "/ɡoʊld/",
+          "vi": "Màu vàng (vàng óng)",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Turquoise",
+          "ipa": "/ˈtɜrkwɔɪz/",
+          "vi": "Màu ngọc lam",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Magenta",
+          "ipa": "/məˈdʒɛntə/",
+          "vi": "Màu đỏ hồng",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Indigo",
+          "ipa": "/ˈɪndɪɡoʊ/",
+          "vi": "Màu chàm",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Coral",
+          "ipa": "/ˈkɔrəl/",
+          "vi": "Màu san hô",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Beige",
+          "ipa": "/beɪʒ/",
+          "vi": "Màu be",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lavender",
+          "ipa": "/ˈlævəndər/",
+          "vi": "Màu oải hương",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Maroon",
+          "ipa": "/məˈrun/",
+          "vi": "Màu đỏ nâu",
+          "page": 41,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-34-1",
+      "number": 39,
+      "topicNumber": 34,
+      "topic": "Phương tiện giao thông",
+      "title": "Phương tiện giao thông",
+      "words": [
+        {
+          "en": "Car",
+          "ipa": "/kɑr/",
+          "vi": "Xe hơi",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bus",
+          "ipa": "/bʌs/",
+          "vi": "Xe buýt",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Train",
+          "ipa": "/treɪn/",
+          "vi": "Tàu hỏa",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bicycle",
+          "ipa": "/ˈbaɪsɪkəl/",
+          "vi": "Xe đạp",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Motorcycle",
+          "ipa": "/ˈmoʊtərˌsaɪkəl/",
+          "vi": "Xe máy",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Taxi",
+          "ipa": "/ˈtæksi/",
+          "vi": "Xe taxi",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Subway",
+          "ipa": "/ˈsʌbˌweɪ/",
+          "vi": "Xe điện ngầm",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Tram",
+          "ipa": "/træm/",
+          "vi": "Xe điện",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Airplane",
+          "ipa": "/ˈɛrˌpleɪn/",
+          "vi": "Máy bay",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Helicopter",
+          "ipa": "/ˈhɛlɪˌkɑptər/",
+          "vi": "Trực thăng",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ship",
+          "ipa": "/ʃɪp/",
+          "vi": "Tàu",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Boat",
+          "ipa": "/boʊt/",
+          "vi": "Thuyền",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ferry",
+          "ipa": "/ˈfɛri/",
+          "vi": "Phà",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Truck",
+          "ipa": "/trʌk/",
+          "vi": "Xe tải",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Van",
+          "ipa": "/væn/",
+          "vi": "Xe bán tải",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Scooter",
+          "ipa": "/ˈskutər/",
+          "vi": "Xe tay ga",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Skateboard",
+          "ipa": "/ˈskeɪtˌbɔrd/",
+          "vi": "Ván trượt",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Roller skates",
+          "ipa": "/ˈroʊlər skeɪts/",
+          "vi": "Giày trượt bánh xe",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Segway",
+          "ipa": "/ˈsɛɡweɪ/",
+          "vi": "Xe điện tự cân bằng",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Hot air balloon",
+          "ipa": "/hɑt ɛr bəˈlun/",
+          "vi": "Khinh khí cầu",
+          "page": 42,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-35-1",
+      "number": 40,
+      "topicNumber": 35,
+      "topic": "Biển báo giao thông",
+      "title": "Biển báo giao thông",
+      "words": [
+        {
+          "en": "Stop sign",
+          "ipa": "/stɑp saɪn/",
+          "vi": "Biển stop",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Yield sign",
+          "ipa": "/jild saɪn/",
+          "vi": "Biển nhường đường",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Speed limit",
+          "ipa": "/spid ˈlɪmɪt/",
+          "vi": "Giới hạn tốc độ",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "No entry",
+          "ipa": "/noʊ ˈɛntri/",
+          "vi": "Cấm vào",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "One-way",
+          "ipa": "/wʌn-weɪ/",
+          "vi": "Đường một chiều",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "No parking",
+          "ipa": "/noʊ ˈpɑrkɪŋ/",
+          "vi": "Cấm đỗ xe",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pedestrian crossing",
+          "ipa": "/pəˈdɛstriən ˈkrɔsɪŋ/",
+          "vi": "Vạch qua đường cho người đi bộ",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "School zone",
+          "ipa": "/skul zoʊn/",
+          "vi": "Khu vực trường học",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Road work ahead",
+          "ipa": "/roʊd wɜrk əˈhɛd/",
+          "vi": "Công trường trên đường",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "No U-turn",
+          "ipa": "/noʊ ˈjuˈtɜrn/",
+          "vi": "Cấm quay đầu",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Railroad crossing",
+          "ipa": "/ˈreɪlˌroʊd ˈkrɔsɪŋ/",
+          "vi": "Vạch chung cầu đường",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Traffic light",
+          "ipa": "/ˈtræfɪk laɪt/",
+          "vi": "Đèn giao thông",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bicycle lane",
+          "ipa": "/ˈbaɪsɪkəl leɪn/",
+          "vi": "Làn đường cho xe đạp",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "No overtaking",
+          "ipa": "/noʊ ˈoʊvərˌteɪkɪŋ/",
+          "vi": "Cấm vượt",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Detour",
+          "ipa": "/ˈdiːtʊr/",
+          "vi": "Đường vòng qua",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bus stop",
+          "ipa": "/bʌs stɑp/",
+          "vi": "Bến xe buýt",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Airport",
+          "ipa": "/ˈɛrˌpɔrt/",
+          "vi": "Sân bay",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Train station",
+          "ipa": "/treɪn ˈsteɪʃən/",
+          "vi": "Ga tàu",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Parking garage",
+          "ipa": "/ˈpɑrkɪŋ ˈɡærɪdʒ/",
+          "vi": "Nhà để xe",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Crosswalk",
+          "ipa": "/ˈkrɔswɔk/",
+          "vi": "Vạch dành cho người đi bộ",
+          "page": 43,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-36-1",
+      "number": 41,
+      "topicNumber": 36,
+      "topic": "Các nghề nghiệp",
+      "title": "Các nghề nghiệp",
+      "words": [
+        {
+          "en": "Doctor",
+          "ipa": "/ˈdɑktər/",
+          "vi": "Bác sĩ",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Teacher",
+          "ipa": "/ˈtiːʧər/",
+          "vi": "Giáo viên",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Engineer",
+          "ipa": "/ˌɛnʤɪˈnɪr/",
+          "vi": "Kỹ sư",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lawyer",
+          "ipa": "/ˈlɔjər/",
+          "vi": "Luật sư",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nurse",
+          "ipa": "/nɜrs/",
+          "vi": "Y tá",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Police officer",
+          "ipa": "/pəˈlis ˈɔfɪsər/",
+          "vi": "Cảnh sát",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Firefighter",
+          "ipa": "/ˈfaɪrˌfaɪtər/",
+          "vi": "Lính cứu hỏa",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Chef",
+          "ipa": "/ʃɛf/",
+          "vi": "Đầu bếp",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Accountant",
+          "ipa": "/əˈkaʊntənt/",
+          "vi": "Kế toán viên",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Architect",
+          "ipa": "/ˈɑr.kɪ.tɛkt/",
+          "vi": "Kiến trúc sư",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Programmer",
+          "ipa": "/ˈproʊˌɡræmər/",
+          "vi": "Lập trình viên",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Writer",
+          "ipa": "/ˈraɪtər/",
+          "vi": "Nhà văn",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Actor",
+          "ipa": "/ˈæktər/",
+          "vi": "Diễn viên",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Singer",
+          "ipa": "/ˈsɪŋər/",
+          "vi": "Ca sĩ",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mechanic",
+          "ipa": "/məˈkænɪk/",
+          "vi": "Thợ máy",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Electrician",
+          "ipa": "/ɪˌlɛkˈtrɪʃən/",
+          "vi": "Thợ điện",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Carpenter",
+          "ipa": "/ˈkɑrpəntər/",
+          "vi": "Thợ mộc",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Photographer",
+          "ipa": "/fəˈtɑːɡrəfər/",
+          "vi": "Nhiếp ảnh gia",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Salesperson",
+          "ipa": "/ˈseɪlzˌpɜrsən/",
+          "vi": "Nhân viên bán hàng",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Astronaut",
+          "ipa": "/ˈæstrəˌnɔt/",
+          "vi": "Phi hành gia",
+          "page": 44,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-37-1",
+      "number": 42,
+      "topicNumber": 37,
+      "topic": "Sức khỏe",
+      "title": "Sức khỏe",
+      "words": [
+        {
+          "en": "Doctor",
+          "ipa": "/ˈdɑktər/",
+          "vi": "Bác sĩ",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Patient",
+          "ipa": "/ˈpeɪʃənt/",
+          "vi": "Bệnh nhân",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nurse",
+          "ipa": "/nɜrs/",
+          "vi": "Y tá",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Hospital",
+          "ipa": "/ˈhɑːspɪtəl/",
+          "vi": "Bệnh viện",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Medicine",
+          "ipa": "/ˈmɛdɪsɪn/",
+          "vi": "Thuốc",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pharmacy",
+          "ipa": "/ˈfɑrməsi/",
+          "vi": "Hiệu thuốc",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Appointment",
+          "ipa": "/əˈpɔɪntmənt/",
+          "vi": "Cuộc hẹn",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Diagnosis",
+          "ipa": "/ˌdaɪəɡˈnoʊsɪs/",
+          "vi": "Chẩn đoán",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Prescription",
+          "ipa": "/prɪˈskrɪpʃən/",
+          "vi": "Đơn thuốc",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Surgery",
+          "ipa": "/ˈsɜrdʒəri/",
+          "vi": "Phẫu thuật",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Vaccine",
+          "ipa": "/ˈvæksiːn/",
+          "vi": "Vắc-xin",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Health",
+          "ipa": "/hɛlθ/",
+          "vi": "Sức khỏe",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fitness",
+          "ipa": "/ˈfɪtnɪs/",
+          "vi": "Sức khỏe, thể chất",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Exercise",
+          "ipa": "/ˈɛksərˌsaɪz/",
+          "vi": "Tập thể dục",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nutrition",
+          "ipa": "/nuˈtrɪʃən/",
+          "vi": "Dinh dưỡng",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Wellness",
+          "ipa": "/ˈwɛlnəs/",
+          "vi": "Sự khỏe mạnh, sự an lành",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Allergy",
+          "ipa": "/ˈælərʤi/",
+          "vi": "Dị ứng",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fever",
+          "ipa": "/ˈfiːvər/",
+          "vi": "Sốt",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Headache",
+          "ipa": "/ˈhɛdˌeɪk/",
+          "vi": "Đau đầu",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stress",
+          "ipa": "/strɛs/",
+          "vi": "Căng thẳng",
+          "page": 45,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-38-1",
+      "number": 43,
+      "topicNumber": 38,
+      "topic": "Các loại bệnh",
+      "title": "Các loại bệnh",
+      "words": [
+        {
+          "en": "Fever",
+          "ipa": "/ˈfiːvər/",
+          "vi": "Sốt",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cough",
+          "ipa": "/kɑf/",
+          "vi": "Ho",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Headache",
+          "ipa": "/ˈhɛdˌeɪk/",
+          "vi": "Đau đầu",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sore throat",
+          "ipa": "/sɔr θroʊt/",
+          "vi": "Đau họng",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Runny nose",
+          "ipa": "/ˈrʌni noʊz/",
+          "vi": "Sổ mũi",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sneezing",
+          "ipa": "/ˈsnizɪŋ/",
+          "vi": "Hắt hơi",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fatigue",
+          "ipa": "/fəˈtiːɡ/",
+          "vi": "Mệt mỏi",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nausea",
+          "ipa": "/ˈnɔːziə/",
+          "vi": "Buồn nôn",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Dizziness",
+          "ipa": "/ˈdɪznəs/",
+          "vi": "Chóng mặt",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Vomiting",
+          "ipa": "/ˈvɑmɪtɪŋ/",
+          "vi": "Nôn mửa",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Diarrhea",
+          "ipa": "/daɪəˈriə/",
+          "vi": "Tiêu chảy",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Rash",
+          "ipa": "/ræʃ/",
+          "vi": "Nổi mẩn",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Swelling",
+          "ipa": "/ˈswɛlɪŋ/",
+          "vi": "Sưng",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fatigue",
+          "ipa": "/fəˈtiːɡ/",
+          "vi": "Mệt mỏi",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Chills",
+          "ipa": "/ʧɪlz/",
+          "vi": "Rùng mình",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Shortness of breath",
+          "ipa": "/ˈʃɔrtnəs ʌv brɛθ/",
+          "vi": "Khó thở",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stomachache",
+          "ipa": "/ˈstʌməkˌeɪk/",
+          "vi": "Đau bụng",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Back pain",
+          "ipa": "/bæk peɪn/",
+          "vi": "Đau lưng",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Joint pain",
+          "ipa": "/ʤɔɪnt peɪn/",
+          "vi": "Đau khớp",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Numbness",
+          "ipa": "/ˈnʌmnəs/",
+          "vi": "Tê liệt",
+          "page": 46,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-39-1",
+      "number": 44,
+      "topicNumber": 39,
+      "topic": "Giáo dục",
+      "title": "Giáo dục",
+      "words": [
+        {
+          "en": "Curriculum",
+          "ipa": "/kəˈrɪkjələm/",
+          "vi": "Chương trình học",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Classroom",
+          "ipa": "/ˈklæsruːm/",
+          "vi": "Lớp học",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Teacher",
+          "ipa": "/ˈtiːʧər/",
+          "vi": "Giáo viên",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Student",
+          "ipa": "/ˈstjuːdənt/",
+          "vi": "Học sinh",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Learning",
+          "ipa": "/ˈlɜːrnɪŋ/",
+          "vi": "Việc học",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Knowledge",
+          "ipa": "/ˈnɑːlɪdʒ/",
+          "vi": "Kiến thức",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Homework",
+          "ipa": "/ˈhoʊmwɜːrk/",
+          "vi": "Bài tập về nhà",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Assignment",
+          "ipa": "/əˈsaɪnmənt/",
+          "vi": "Bài tập được giao",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Test",
+          "ipa": "/tɛst/",
+          "vi": "Bài kiểm tra",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Exam",
+          "ipa": "/ɪɡˈzæm/",
+          "vi": "Kỳ thi",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Grade",
+          "ipa": "/ɡreɪd/",
+          "vi": "Điểm số",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "School",
+          "ipa": "/skuːl/",
+          "vi": "Trường học",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "University",
+          "ipa": "/ˌjuːnɪˈvɜːrsɪti/",
+          "vi": "Đại học",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lecture",
+          "ipa": "/ˈlɛkʧər/",
+          "vi": "Bài giảng",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Research",
+          "ipa": "/rɪˈsɜːrtʃ/",
+          "vi": "Nghiên cứu",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Library",
+          "ipa": "/ˈlaɪbrəri/",
+          "vi": "Thư viện",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Degree",
+          "ipa": "/dɪˈɡriː/",
+          "vi": "Bằng cấp",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Scholarships",
+          "ipa": "/ˈskɒlərʃɪps/",
+          "vi": "Học bổng",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Distance learning",
+          "ipa": "/ˈdɪstəns ˈlɜːrnɪŋ/",
+          "vi": "Học từ xa",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Extracurricular",
+          "ipa": "/ˌɛkstrəkəˈrɪkjələr/",
+          "vi": "Ngoại khóa",
+          "page": 47,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-40-1",
+      "number": 45,
+      "topicNumber": 40,
+      "topic": "Các môn học",
+      "title": "Các môn học",
+      "words": [
+        {
+          "en": "Mathematics",
+          "ipa": "/ˌmæθəˈmætɪks/",
+          "vi": "Toán học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Science",
+          "ipa": "/ˈsaɪəns/",
+          "vi": "Khoa học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "History",
+          "ipa": "/ˈhɪstəri/",
+          "vi": "Lịch sử",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Geography",
+          "ipa": "/dʒiˈɑːɡrəfi/",
+          "vi": "Địa lý",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Literature",
+          "ipa": "/ˈlɪtərətʃər/",
+          "vi": "Văn học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "English",
+          "ipa": "/ˈɪŋɡlɪʃ/",
+          "vi": "Tiếng Anh",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Art",
+          "ipa": "/ɑːrt/",
+          "vi": "Mỹ thuật",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Music",
+          "ipa": "/ˈmjuːzɪk/",
+          "vi": "m nhạc",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Physical Education",
+          "ipa": "/ˈfɪzɪkəl ˌɛdjuˈkeɪʃən/",
+          "vi": "Giáo dục thể chất",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Chemistry",
+          "ipa": "/ˈkɛmɪstri/",
+          "vi": "Hóa học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Physics",
+          "ipa": "/ˈfɪzɪks/",
+          "vi": "Vật lý",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Biology",
+          "ipa": "/baɪˈɑːlədʒi/",
+          "vi": "Sinh học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Economics",
+          "ipa": "/ˌiːkəˈnɑːmɪks/",
+          "vi": "Kinh tế",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Psychology",
+          "ipa": "/saɪˈkɒlədʒi/",
+          "vi": "Tâm lý học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sociology",
+          "ipa": "/ˌsoʊsiˈɒlədʒi/",
+          "vi": "Xã hội học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Computer Science",
+          "ipa": "/kəmˈpjuːtər ˈsaɪəns/",
+          "vi": "Khoa học máy tính",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Foreign Language",
+          "ipa": "/ˈfɔːrən ˈlæŋɡwɪdʒ/",
+          "vi": "Ngoại ngữ",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ethics",
+          "ipa": "/ˈɛθɪks/",
+          "vi": "Đạo đức",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Philosophy",
+          "ipa": "/fɪˈlɒsəfi/",
+          "vi": "Triết học",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Political Science",
+          "ipa": "/pəˈlɪtɪkəl ˈsaɪəns/",
+          "vi": "Khoa học chính trị",
+          "page": 48,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-41-1",
+      "number": 46,
+      "topicNumber": 41,
+      "topic": "Kỹ năng",
+      "title": "Kỹ năng",
+      "words": [
+        {
+          "en": "Communication",
+          "ipa": "/kəˌmjuːnɪˈkeɪʃən/",
+          "vi": "Giao tiếp",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Leadership",
+          "ipa": "/ˈliːdərʃɪp/",
+          "vi": "Lãnh đạo",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Teamwork",
+          "ipa": "/ˈtiːmwɜːrk/",
+          "vi": "Làm việc nhóm",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Problem-solving",
+          "ipa": "/ˈprɒbləm ˈsɒlvɪŋ/",
+          "vi": "Giải quyết vấn đề",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Adaptability",
+          "ipa": "/əˌdæptəˈbɪləti/",
+          "vi": "Tính thích nghi",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Time management",
+          "ipa": "/taɪm ˈmænɪdʒmənt/",
+          "vi": "Quản lý thời gian",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Critical thinking",
+          "ipa": "/ˈkrɪtɪkəl ˈθɪŋkɪŋ/",
+          "vi": "Tư duy phản biện",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Creativity",
+          "ipa": "/kriːeɪˈtɪvɪti/",
+          "vi": "Sáng tạo",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Emotional intelligence",
+          "ipa": "/ɪˌmoʊʃənəl ˌɪnˈtɛlɪdʒəns/",
+          "vi": "Trí tuệ cảm xúc",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Collaboration",
+          "ipa": "/kəˌlæbəˈreɪʃən/",
+          "vi": "Hợp tác",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Conflict resolution",
+          "ipa": "/ˈkɒnflɪkt ˌrɛzəˈluːʃən/",
+          "vi": "Giải quyết xung đột",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Decision-making",
+          "ipa": "/dɪˈsɪʒən ˌmeɪkɪŋ/",
+          "vi": "Quyết định",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Negotiation",
+          "ipa": "/nɪˌɡoʊʃiˈeɪʃən/",
+          "vi": "Đàm phán",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Presentation skills",
+          "ipa": "/ˌprɛzənˈteɪʃən ˈskɪlz/",
+          "vi": "Kỹ năng thuyết trình",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Interpersonal skills",
+          "ipa": "/ˌɪntərˈpɜːrsənəl ˈskɪlz/",
+          "vi": "Kỹ năng giao tiếp",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Networking",
+          "ipa": "/ˈnɛtˌwɜːrkɪŋ/",
+          "vi": "Mạng lưới",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Self-motivation",
+          "ipa": "/ˌsɛlf ˌmoʊtɪˈveɪʃən/",
+          "vi": "Tự thúc đẩy",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Empathy",
+          "ipa": "/ˈɛmpəθi/",
+          "vi": "Đồng cảm",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Conflict management",
+          "ipa": "/ˈkɒnflɪkt ˈmænɪdʒmənt/",
+          "vi": "Quản lý xung đột",
+          "page": 49,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-42-1",
+      "number": 47,
+      "topicNumber": 42,
+      "topic": "Các lễ hội ở Việt Nam",
+      "title": "Các lễ hội ở Việt Nam",
+      "words": [
+        {
+          "en": "Tet",
+          "ipa": "/tɛt/",
+          "vi": "Tết",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mid-Autumn Festival",
+          "ipa": "/mɪd ˈɔːtən ˈfɛstəvəl/",
+          "vi": "Tết Trung Thu",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Hung Kings' Temple Festival",
+          "ipa": "/hʌŋ kɪŋz ˈtɛmpəl ˈfɛstəvəl/",
+          "vi": "Lễ hội Đền Hùng",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lantern Festival",
+          "ipa": "/ˈlæntərn ˈfɛstəvəl/",
+          "vi": "Lễ hội đèn lồng",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Hue Festival",
+          "ipa": "/hjuː ˈfɛstəvəl/",
+          "vi": "Festival Huế",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Da Lat Flower Festival",
+          "ipa": "/dɑː lɑːt ˈflaʊər ˈfɛstəvəl/",
+          "vi": "Lễ hội hoa Đà Lạt",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Buffalo Fighting Festival",
+          "ipa": "/ˈbʌfəloʊ ˈfaɪtɪŋ ˈfɛstəvəl/",
+          "vi": "Lễ hội đấu trâu",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Reunification Day",
+          "ipa": "/ˌriːjunɪfɪˈkeɪʃən ˈdeɪ/",
+          "vi": "Ngày Thống nhất",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Victory Day",
+          "ipa": "/ˈvɪktəri ˈdeɪ/",
+          "vi": "Ngày Chiến thắng",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lantern Festival",
+          "ipa": "/ˈlæntərn ˈfɛstəvəl/",
+          "vi": "Lễ hội đèn lồng",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Vietnamese New Year",
+          "ipa": "/viˌɛtnəˈmis njuː ˈjɪr/",
+          "vi": "Năm mới theo lịch Việt",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nguyen Tieu Festival",
+          "ipa": "/nʊjɛn tiːˈjuː ˈfɛstəvəl/",
+          "vi": "Lễ hội Nguyên Tiêu",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cau Ngu Festival",
+          "ipa": "/kɑː nuː ˈfɛstəvəl/",
+          "vi": "Lễ hội Cầu Ngư",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Perfume Pagoda Festival",
+          "ipa": "/pərˈfjuːm pəˈɡoʊdə ˈfɛstəvəl/",
+          "vi": "Lễ hội Chùa Hương",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Giong Festival",
+          "ipa": "/ɡiːɒŋ ˈfɛstəvəl/",
+          "vi": "Lễ hội Gióng",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Kate Festival",
+          "ipa": "/keɪt ˈfɛstəvəl/",
+          "vi": "Lễ hội Kate",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Do Son Buffalo Fighting Festival",
+          "ipa": "/duː sʌn ˈbʌfəloʊ ˈfaɪtɪŋ ˈfɛstəvəl/",
+          "vi": "Lễ hội đấu trâu",
+          "page": 50,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-43-1",
+      "number": 48,
+      "topicNumber": 43,
+      "topic": "Tết trung thu",
+      "title": "Tết trung thu",
+      "words": [
+        {
+          "en": "Mooncake",
+          "ipa": "/ˈmuːnkeɪk/",
+          "vi": "Bánh trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lantern",
+          "ipa": "/ˈlæntərn/",
+          "vi": "Đèn lồng",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mid-Autumn Festival",
+          "ipa": "/mɪd ˈɔːtən ˈfɛstəvəl/",
+          "vi": "Lễ hội Trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Full moon",
+          "ipa": "/fʊl mun/",
+          "vi": "Trăng tròn",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Family reunion",
+          "ipa": "/ˈfæməli ˌriːˈjunjən/",
+          "vi": "Đoàn tụ gia đình",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Moon gazing",
+          "ipa": "/mun ˈɡeɪzɪŋ/",
+          "vi": "Nhìn trăng",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mooncake making",
+          "ipa": "/ˈmuːnkeɪk ˌmeɪkɪŋ/",
+          "vi": "Làm bánh trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Festival",
+          "ipa": "/ˈfɛstəvəl/",
+          "vi": "Lễ hội",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Tradition",
+          "ipa": "/trəˈdɪʃən/",
+          "vi": "Truyền thống",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lantern procession",
+          "ipa": "/ˈlæntərn prəˈsɛʃən/",
+          "vi": "Diễu hành đèn lồng",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Moon worship",
+          "ipa": "/mun ˈwɜːrʃɪp/",
+          "vi": "Tế thần trăng",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Harvest",
+          "ipa": "/ˈhɑːrvɪst/",
+          "vi": "Mùa thu hoạch",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Moon festival games",
+          "ipa": "/mun ˈfɛstəvəl ɡeɪmz/",
+          "vi": "Trò chơi trong lễ hội Trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mooncake exchange",
+          "ipa": "/ˈmuːnkeɪk ɪksˈtʃeɪndʒ/",
+          "vi": "Trao đổi bánh trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Delicious",
+          "ipa": "/dɪˈlɪʃəs/",
+          "vi": "Ngon",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mooncake box",
+          "ipa": "/ˈmuːnkeɪk bɒks/",
+          "vi": "Hộp bánh trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lantern riddles",
+          "ipa": "/ˈlæntərn ˈrɪdəlz/",
+          "vi": "Đố đèn lồng",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Lotus",
+          "ipa": "/ˈloʊtəs/",
+          "vi": "Sen",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pomelo",
+          "ipa": "/ˈpɒməloʊ/",
+          "vi": "Bưởi",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mooncake filling",
+          "ipa": "/ˈmuːnkeɪk ˈfɪlɪŋ/",
+          "vi": "Nhân bánh trung thu",
+          "page": 51,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-44-1",
+      "number": 49,
+      "topicNumber": 44,
+      "topic": "Trò chơi dân gian",
+      "title": "Trò chơi dân gian",
+      "words": [
+        {
+          "en": "Folk Games",
+          "ipa": "/foʊk ɡeɪmz/",
+          "vi": "Trò chơi dân gian",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Tug of War",
+          "ipa": "/tʌɡ ʌv wɔːr/",
+          "vi": "Kéo co",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Blind Man's Bluff",
+          "ipa": "/blaɪnd mænz blʌf/",
+          "vi": "Trò chơi Bịp bợm",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Shuttlecock",
+          "ipa": "/ˈʃʌtl̩kɒk/",
+          "vi": "Cầu lông",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Hopscotch",
+          "ipa": "/ˈhɑːpskɑːtʃ/",
+          "vi": "Nhảy chân",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Marbles",
+          "ipa": "/ˈmɑːrbəlz/",
+          "vi": "Bi gỗ",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Skipping Rope",
+          "ipa": "/ˈskɪpɪŋ roʊp/",
+          "vi": "Thảy dây",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Bamboo Stilts",
+          "ipa": "/ˈbæmbuː stɪlts/",
+          "vi": "Giày gỗ",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mancala",
+          "ipa": "/mæŋˈkɑːlə/",
+          "vi": "Cờ cá ngựa",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Kite Flying",
+          "ipa": "/kaɪt ˈflaɪɪŋ/",
+          "vi": "Lao diều",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cockfighting",
+          "ipa": "/ˈkɒkˌfaɪtɪŋ/",
+          "vi": "Đá gà",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fan Dancing",
+          "ipa": "/fæn ˈdænsɪŋ/",
+          "vi": "Múa quạt",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Water Puppetry",
+          "ipa": "/ˈwɔːtər ˈpʌpɪtri/",
+          "vi": "Múa rối nước",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Jackstones",
+          "ipa": "/ˈdʒækstənz/",
+          "vi": "Bài tát",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Five Stones",
+          "ipa": "/faɪv stoʊnz/",
+          "vi": "Ném gạch",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Congkak",
+          "ipa": "/ˈtʃɒŋkæk/",
+          "vi": "Cờ cau",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stick and Hoop",
+          "ipa": "/stɪk ænd hup/",
+          "vi": "Đu quay",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cat's Cradle",
+          "ipa": "/kæts ˈkreɪdəl/",
+          "vi": "Dây nhảy cầu",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pinata",
+          "ipa": "/pɪˈnɑːtə/",
+          "vi": "Búp bê đập",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Egg Rolling",
+          "ipa": "/ɛɡ ˈroʊlɪŋ/",
+          "vi": "Lăn trứng",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-45-1",
+      "number": 50,
+      "topicNumber": 45,
+      "topic": "Văn hóa",
+      "title": "Văn hóa",
+      "words": [
+        {
+          "en": "Culture",
+          "ipa": "/ˈkʌltʃər/",
+          "vi": "Văn hóa",
+          "page": 52,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Tradition",
+          "ipa": "/trəˈdɪʃən/",
+          "vi": "Truyền thống",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Customs",
+          "ipa": "/ˈkʌstəmz/",
+          "vi": "Phong tục",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Heritage",
+          "ipa": "/ˈherɪtɪdʒ/",
+          "vi": "Di sản",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ritual",
+          "ipa": "/ˈrɪtʃuəl/",
+          "vi": "Nghi lễ",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ceremony",
+          "ipa": "/ˈsɛrəˌmoʊni/",
+          "vi": "Lễ nghi",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Folklore",
+          "ipa": "/ˈfoʊklɔːr/",
+          "vi": "Văn hóa dân gian",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Artifacts",
+          "ipa": "/ˈɑːrtɪˌfækts/",
+          "vi": "Đồ cổ",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cultural Exchange",
+          "ipa": "/ˈkʌltʃərəl ɪksˈʧeɪndʒ/",
+          "vi": "Trao đổi văn hóa",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Diversity",
+          "ipa": "/daɪˈvɜrsɪti/",
+          "vi": "Đa dạng",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Multicultural",
+          "ipa": "/ˌmʌltiˈkʌltʃərəl/",
+          "vi": "Đa văn hóa",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ethnicity",
+          "ipa": "/ɛθˈnɪsɪti/",
+          "vi": "Dân tộc",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Language",
+          "ipa": "/ˈlæŋɡwɪʤ/",
+          "vi": "Ngôn ngữ",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cuisine",
+          "ipa": "/kwɪˈzin/",
+          "vi": "Ẩm thực",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Festivals",
+          "ipa": "/ˈfɛstəvəlz/",
+          "vi": "Lễ hội",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Symbols",
+          "ipa": "/ˈsɪmbəlz/",
+          "vi": "Biểu tượng",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cultural Identity",
+          "ipa": "/ˈkʌltʃərəl aɪˈdɛntɪti/",
+          "vi": "Nhận thức văn hóa",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Cultural Heritage",
+          "ipa": "/ˈkʌltʃərəl ˈhɛrɪtɪdʒ/",
+          "vi": "Di sản văn hóa",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Artistic",
+          "ipa": "/ɑːrˈtɪstɪk/",
+          "vi": "Mỹ thuật",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Values",
+          "ipa": "/ˈvæljuːz/",
+          "vi": "Giá trị",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-46-1",
+      "number": 51,
+      "topicNumber": 46,
+      "topic": "Nghệ thuật",
+      "title": "Nghệ thuật",
+      "words": [
+        {
+          "en": "Art",
+          "ipa": "/ɑːrt/",
+          "vi": "Nghệ thuật",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Painting",
+          "ipa": "/ˈpeɪntɪŋ/",
+          "vi": "Tranh",
+          "page": 53,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sculpture",
+          "ipa": "/ˈskʌlpʧər/",
+          "vi": "Điêu khắc",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Drawing",
+          "ipa": "/ˈdrɔːɪŋ/",
+          "vi": "Vẽ",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Photography",
+          "ipa": "/fəˈtɑːɡrəfi/",
+          "vi": "Nhiếp ảnh",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Gallery",
+          "ipa": "/ˈɡæləri/",
+          "vi": "Phòng trưng bày",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Exhibit",
+          "ipa": "/ɪɡˈzɪbɪt/",
+          "vi": "Triển lãm",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sculptor",
+          "ipa": "/ˈskʌlpʧər/",
+          "vi": "Nhà điêu khắc",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brush",
+          "ipa": "/brʌʃ/",
+          "vi": "Cọ",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Palette",
+          "ipa": "/ˈpælɪt/",
+          "vi": "Bảng màu",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Canvas",
+          "ipa": "/ˈkænvəs/",
+          "vi": "Bức tranh",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sketch",
+          "ipa": "/skɛtʃ/",
+          "vi": "Bản phác thảo",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pottery",
+          "ipa": "/ˈpɑːtəri/",
+          "vi": "Gốm sứ",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Ceramics",
+          "ipa": "/səˈræmɪks/",
+          "vi": "Gốm sứ",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Abstract",
+          "ipa": "/ˈæbstrækt/",
+          "vi": "Trừu tượng",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Landscape",
+          "ipa": "/ˈlændskeɪp/",
+          "vi": "Phong cảnh",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Portrait",
+          "ipa": "/ˈpɔːrtrət/",
+          "vi": "Chân dung",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Artistic",
+          "ipa": "/ɑːrˈtɪstɪk/",
+          "vi": "Mỹ thuật",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Composition",
+          "ipa": "/ˌkɑːmpəˈzɪʃən/",
+          "vi": "Cách bố trí",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Artwork",
+          "ipa": "/ˈɑːrtwɜːrk/",
+          "vi": "Tác phẩm nghệ thuật",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-47-1",
+      "number": 52,
+      "topicNumber": 47,
+      "topic": "Kinh doanh",
+      "title": "Kinh doanh",
+      "words": [
+        {
+          "en": "Entrepreneur",
+          "ipa": "/ˌɑːntrəprəˈnər/",
+          "vi": "Doanh nhân",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Start-up",
+          "ipa": "/ˈstɑːrtʌp/",
+          "vi": "Công ty khởi nghiệp",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Investor",
+          "ipa": "/ɪnˈvɛstər/",
+          "vi": "Nhà đầu tư",
+          "page": 54,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Profit",
+          "ipa": "/ˈprɒfɪt/",
+          "vi": "Lợi nhuận",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Loss",
+          "ipa": "/lɔːs/",
+          "vi": "Lỗ",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Market",
+          "ipa": "/ˈmɑrkɪt/",
+          "vi": "Thị trường",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sales",
+          "ipa": "/seɪlz/",
+          "vi": "Doanh số",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Customer",
+          "ipa": "/ˈkʌstəmər/",
+          "vi": "Khách hàng",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Advertising",
+          "ipa": "/ˈædvərˌtaɪzɪŋ/",
+          "vi": "Quảng cáo",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brand",
+          "ipa": "/brænd/",
+          "vi": "Thương hiệu",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Partnership",
+          "ipa": "/ˈpɑrtnərˌʃɪp/",
+          "vi": "Đối tác",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Investment",
+          "ipa": "/ɪnˈvɛstmənt/",
+          "vi": "Đầu tư",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Competition",
+          "ipa": "/ˌkɑmpəˈtɪʃən/",
+          "vi": "Cạnh tranh",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Strategy",
+          "ipa": "/ˈstrætəʤi/",
+          "vi": "Chiến lược",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Entrepreneurship",
+          "ipa": "/ˌɑːntrəprəˈnɜrʃɪp/",
+          "vi": "Tinh thần khởi nghiệp",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Stock",
+          "ipa": "/stɑk/",
+          "vi": "Cổ phiếu",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Revenue",
+          "ipa": "/ˈrɛvəˌnjuː/",
+          "vi": "Doanh thu",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Partnership",
+          "ipa": "/ˈpɑrtnərˌʃɪp/",
+          "vi": "Đối tác",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Negotiation",
+          "ipa": "/nɪˌɡoʊʃiˈeɪʃən/",
+          "vi": "Đàm phán",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Collaboration",
+          "ipa": "/kəˌlæbəˈreɪʃən/",
+          "vi": "Hợp tác",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-48-1",
+      "number": 53,
+      "topicNumber": 48,
+      "topic": "Thành phố",
+      "title": "Thành phố",
+      "words": [
+        {
+          "en": "Urban",
+          "ipa": "/ˈɜːrbən/",
+          "vi": "Đô thị",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Downtown",
+          "ipa": "/ˈdaʊntaʊn/",
+          "vi": "Trung tâm thành phố",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Suburb",
+          "ipa": "/ˈsʌrbɜːrb/",
+          "vi": "Ngoại ô",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Skyline",
+          "ipa": "/ˈskaɪlaɪn/",
+          "vi": "Đường chân trời",
+          "page": 55,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Traffic",
+          "ipa": "/ˈtræfɪk/",
+          "vi": "Giao thông",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Pedestrian",
+          "ipa": "/pəˈdɛstriən/",
+          "vi": "Người đi bộ",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Avenue",
+          "ipa": "/ˈævənuː/",
+          "vi": "Đại lộ",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Boulevard",
+          "ipa": "/ˈbuːləˌvɑːrd/",
+          "vi": "Đại lộ",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Intersection",
+          "ipa": "/ˌɪntərˈsɛkʃən/",
+          "vi": "Ngã tư",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Sidewalk",
+          "ipa": "/ˈsaɪdwɔːk/",
+          "vi": "Vỉa hè",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Park",
+          "ipa": "/pɑːrk/",
+          "vi": "Công viên",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Museum",
+          "ipa": "/mjuːˈziəm/",
+          "vi": "Bảo tàng",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Library",
+          "ipa": "/ˈlaɪbrəri/",
+          "vi": "Thư viện",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Restaurant",
+          "ipa": "/ˈrɛstərɒnt/",
+          "vi": "Nhà hàng",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Shopping mall",
+          "ipa": "/ˈʃɑpɪŋ mɔːl/",
+          "vi": "Trung tâm mua sắm",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Skyscraper",
+          "ipa": "/ˈskaɪˌskreɪpər/",
+          "vi": "Tòa nhà chọc trời",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Neighborhood",
+          "ipa": "/ˈneɪbərˌhʊd/",
+          "vi": "Khu phố",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Public transport",
+          "ipa": "/ˈpʌblɪk ˈtrænspɔːrt/",
+          "vi": "Phương tiện giao thông công cộng",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Landmark",
+          "ipa": "/ˈlændmɑːrk/",
+          "vi": "Địa danh nổi tiếng",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Fountain",
+          "ipa": "/ˈfaʊntɪn/",
+          "vi": "Đài phun nước",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-49-1",
+      "number": 54,
+      "topicNumber": 49,
+      "topic": "Tên các nước",
+      "title": "Tên các nước",
+      "words": [
+        {
+          "en": "United States",
+          "ipa": "/juːˌnaɪtɪd ˈsteɪts/",
+          "vi": "Hoa Kỳ",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Canada",
+          "ipa": "/ˈkænədə/",
+          "vi": "Canada",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Mexico",
+          "ipa": "/ˈmɛksɪkoʊ/",
+          "vi": "Mexico",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Brazil",
+          "ipa": "/brəˈzɪl/",
+          "vi": "Brazil",
+          "page": 56,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "France",
+          "ipa": "/fræns/",
+          "vi": "Pháp",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Germany",
+          "ipa": "/ˈdʒɜːrməni/",
+          "vi": "Đức",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Italy",
+          "ipa": "/ˈɪtəli/",
+          "vi": "Ý",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Spain",
+          "ipa": "/speɪn/",
+          "vi": "Tây Ban Nha",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "United Kingdom",
+          "ipa": "/juːˌnaɪtɪd ˈkɪŋdəm/",
+          "vi": "Vương quốc Anh",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Russia",
+          "ipa": "/ˈrʌʃə/",
+          "vi": "Nga",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "China",
+          "ipa": "/ˈtʃaɪnə/",
+          "vi": "Trung Quốc",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Japan",
+          "ipa": "/dʒəˈpæn/",
+          "vi": "Nhật Bản",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "India",
+          "ipa": "/ˈɪndiə/",
+          "vi": "Ấn Độ",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Australia",
+          "ipa": "/ɔːˈstreɪliə/",
+          "vi": "Úc",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "South Korea",
+          "ipa": "/saʊθ kəˈriə/",
+          "vi": "Hàn Quốc",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Saudi Arabia",
+          "ipa": "/ˌsɔːdi əˈreɪbiə/",
+          "vi": "Ả Rập Xê Út",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Egypt",
+          "ipa": "/ˈiːdʒɪpt/",
+          "vi": "Ai Cập",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "South Africa",
+          "ipa": "/saʊθ ˈæfrɪkə/",
+          "vi": "Nam Phi",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Nigeria",
+          "ipa": "/naɪˈdʒɪəriə/",
+          "vi": "Nigeria",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Argentina",
+          "ipa": "/ˌɑːrʤənˈtiːnə/",
+          "vi": "Argentina",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    },
+    {
+      "id": "pdf-50-1",
+      "number": 55,
+      "topicNumber": 50,
+      "topic": "Đời sống công sở",
+      "title": "Đời sống công sở",
+      "words": [
+        {
+          "en": "Colleague",
+          "ipa": "/ˈkɒliːɡ/",
+          "vi": "Đồng nghiệp",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Manager",
+          "ipa": "/ˈmænɪdʒər/",
+          "vi": "Quản lý",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Meeting",
+          "ipa": "/ˈmiːtɪŋ/",
+          "vi": "Cuộc họp",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Deadline",
+          "ipa": "/ˈdɛd.laɪn/",
+          "vi": "Hạn chót",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Project",
+          "ipa": "/ˈprɒdʒɛkt/",
+          "vi": "Dự án",
+          "page": 57,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Presentation",
+          "ipa": "/ˌprɛz.ənˈteɪ.ʃən/",
+          "vi": "Bài thuyết trình",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Teamwork",
+          "ipa": "/ˈtiːm.wɜːk/",
+          "vi": "Làm việc nhóm",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Email",
+          "ipa": "/ˈiːmeɪl/",
+          "vi": "Email",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Report",
+          "ipa": "/rɪˈpɔːt/",
+          "vi": "Báo cáo",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Schedule",
+          "ipa": "/ˈʃɛdjuːl/",
+          "vi": "Lịch trình",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Overtime",
+          "ipa": "/ˈəʊ.və.taɪm/",
+          "vi": "Làm thêm giờ",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Promotion",
+          "ipa": "/prəˈməʊ.ʃən/",
+          "vi": "Thăng chức",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Conference",
+          "ipa": "/ˈkɒn.fər.əns/",
+          "vi": "Hội nghị",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Workload",
+          "ipa": "/ˈwɜːk.loʊd/",
+          "vi": "Khối lượng công việc",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Office",
+          "ipa": "/ˈɒf.ɪs/",
+          "vi": "Văn phòng",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Desk",
+          "ipa": "/dɛsk/",
+          "vi": "Bàn làm việc",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Meeting room",
+          "ipa": "/ˈmiːtɪŋ ruːm/",
+          "vi": "Phòng họp",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Printer",
+          "ipa": "/ˈprɪn.tər/",
+          "vi": "Máy in",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Deadline",
+          "ipa": "/ˈdɛd.laɪn/",
+          "vi": "Hạn chót",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        },
+        {
+          "en": "Business trip",
+          "ipa": "/ˈbɪz.nəs trɪp/",
+          "vi": "Chuyến công tác",
+          "page": 58,
+          "cefr": "Theo chủ đề"
+        }
+      ]
+    }
+  ]
+}

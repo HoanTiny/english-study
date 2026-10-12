@@ -22,7 +22,7 @@ const ROLE_LABEL: Record<string, string> = {
 const ROLE_BADGE: Record<string, string> = {
   admin: "bg-primary/15 text-primary border-primary/30",
   editor: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  user: "bg-white/5 text-muted border-white/10",
+  user: "bg-primary-soft text-muted border-border",
 };
 
 export default function AdminUsersPage() {
@@ -86,12 +86,12 @@ export default function AdminUsersPage() {
   }
 
   if (!ready) {
-    return <div className="py-20 text-center text-xs font-black uppercase tracking-wider text-muted">Đang tải…</div>;
+    return <div className="py-20 text-center text-xs font-bold tracking-normal text-muted">Đang tải…</div>;
   }
   if (!isAdmin) {
     return (
       <div className="mx-auto max-w-md rounded-2xl border border-rose-500/20 bg-rose-500/5 p-6 text-center">
-        <p className="text-sm font-bold text-rose-400">Chỉ tài khoản admin mới quản lý được tài khoản & phân quyền.</p>
+        <p className="text-sm font-bold text-warn">Chỉ tài khoản admin mới quản lý được tài khoản & phân quyền.</p>
       </div>
     );
   }
@@ -111,7 +111,7 @@ export default function AdminUsersPage() {
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm font-bold text-zinc-400">
+        <p className="text-sm font-bold text-muted">
           {counts.total} tài khoản · <span className="text-primary">{counts.admin}</span> admin ·{" "}
           <span className="text-amber-400">{counts.editor}</span> editor
         </p>
@@ -119,24 +119,24 @@ export default function AdminUsersPage() {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Tìm email / tên…"
-          className="rounded-xl border border-white/10 bg-black/25 px-3.5 py-2 text-xs font-bold text-white outline-none focus:border-primary placeholder:text-muted/60"
+          className="rounded-xl border border-border bg-background px-3.5 py-2 text-xs font-bold text-foreground outline-none focus:border-primary placeholder:text-muted/60"
         />
       </div>
 
-      {msg && <p className="mb-3 rounded-lg bg-teal-500/15 px-3 py-2 text-xs font-black text-teal-300">{msg}</p>}
-      {err && <p className="mb-3 rounded-lg bg-rose-500/15 px-3 py-2 text-xs font-black text-rose-300">{err}</p>}
+      {msg && <p className="mb-3 rounded-lg bg-teal-500/15 px-3 py-2 text-xs font-bold text-teal-300">{msg}</p>}
+      {err && <p className="mb-3 rounded-lg bg-rose-500/15 px-3 py-2 text-xs font-bold text-warn">{err}</p>}
 
-      <div className="rounded-2xl border border-white/10 bg-[#161619] p-3 text-[11px] font-semibold text-muted leading-relaxed">
-        <b className="text-zinc-300">Phân quyền:</b> <b className="text-primary">Admin</b> = toàn quyền (sửa nội dung + quản lý tài khoản).{" "}
+      <div className="rounded-2xl border border-border bg-surface p-3 text-xs font-semibold text-muted leading-relaxed">
+        <b className="text-foreground">Phân quyền:</b> <b className="text-primary">Admin</b> = toàn quyền (sửa nội dung + quản lý tài khoản).{" "}
         <b className="text-amber-400">Editor</b> = chỉ sửa nội dung (bài học, video, bài tập). Người dùng thường không vào được CMS.
       </div>
 
-      <section className="mt-4 rounded-xl border border-white/10 p-3 text-xs text-muted">
-        <h2 className="font-bold text-white">Token Gemini theo người dùng</h2>
+      <section className="mt-4 rounded-xl border border-border p-3 text-xs text-muted">
+        <h2 className="font-bold text-foreground">Token Gemini theo người dùng</h2>
         <p className="mt-1">Tổng gồm input, output và suy luận. Hạn mức tự bắt đầu lại mỗi tháng theo giờ Việt Nam (UTC+7). Chỉ có số liệu từ khi bật tính năng; không gồm Azure Speech hoặc provider khác.</p>
-        <div className="mt-3 flex flex-wrap items-center gap-3"><label>Tháng thống kê <input aria-label="Tháng thống kê token" type="month" value={month} onChange={e => { if(e.target.value) { setTokenData(null); setTokenError(""); setMonth(e.target.value); } }} className="ml-2 rounded-lg border border-white/15 bg-black/30 p-2 text-white" /></label><button onClick={refreshTokens} className="rounded-lg border border-white/15 px-3 py-2">Làm mới token</button></div>
+        <div className="mt-3 flex flex-wrap items-center gap-3"><label>Tháng thống kê <input aria-label="Tháng thống kê token" type="month" value={month} onChange={e => { if(e.target.value) { setTokenData(null); setTokenError(""); setMonth(e.target.value); } }} className="ml-2 rounded-lg border border-border bg-background p-2 text-foreground" /></label><button onClick={refreshTokens} className="rounded-lg border border-border px-3 py-2">Làm mới token</button></div>
         <p className="mt-2">Hạn mức bên dưới áp dụng cho tháng hiện tại và các tháng sau, kể cả khi đang xem thống kê tháng cũ.</p>
-        {tokenError ? <p role="alert" className="mt-2 text-rose-300">{tokenError}</p> : !tokenData && <p role="status" className="mt-2">Đang tải thống kê token…</p>}
+        {tokenError ? <p role="alert" className="mt-2 text-warn">{tokenError}</p> : !tokenData && <p role="status" className="mt-2">Đang tải thống kê token…</p>}
       </section>
       <div className="mt-3 space-y-2">
         {filtered.map((u) => {
@@ -144,33 +144,33 @@ export default function AdminUsersPage() {
           return (
             <div
               key={u.id}
-              className="flex flex-wrap items-center gap-3 rounded-2xl border border-white/10 bg-[#161619] px-4 py-3"
+              className="flex flex-wrap items-center gap-3 rounded-2xl border border-border bg-surface px-4 py-3"
             >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-black text-primary">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-bold text-primary">
                 {(u.displayName || u.email || "?").trim().charAt(0).toUpperCase()}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-bold text-white">
+                <p className="truncate text-sm font-bold text-foreground">
                   {u.displayName || u.email}
                   {u.envAdmin && (
-                    <span className="ml-2 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[9px] font-black text-primary">
+                    <span className="ml-2 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">
                       cố định
                     </span>
                   )}
                 </p>
-                {u.displayName && <p className="truncate text-[11px] text-muted">{u.email}</p>}
+                {u.displayName && <p className="truncate text-xs text-muted">{u.email}</p>}
               </div>
-              <span className={`rounded-full border px-2.5 py-1 text-[9px] font-black uppercase ${ROLE_BADGE[roleKey]}`}>
+              <span className={`rounded-full border px-2.5 py-1 text-xs font-bold uppercase ${ROLE_BADGE[roleKey]}`}>
                 {ROLE_LABEL[roleKey]}
               </span>
               {u.envAdmin ? (
-                <span className="text-[10px] font-bold text-muted/70">ADMIN_EMAILS</span>
+                <span className="text-xs font-bold text-muted/70">ADMIN_EMAILS</span>
               ) : (
                 <select
                   value={u.role ?? ""}
                   disabled={busy === u.id}
                   onChange={(e) => setRole(u, (e.target.value || null) as Role)}
-                  className="rounded-xl border border-white/10 bg-black/30 px-2.5 py-1.5 text-xs font-bold text-white outline-none focus:border-primary disabled:opacity-50"
+                  className="rounded-xl border border-border bg-background px-2.5 py-1.5 text-xs font-bold text-foreground outline-none focus:border-primary disabled:opacity-50"
                 >
                   <option value="">Người dùng</option>
                   <option value="editor">Editor</option>

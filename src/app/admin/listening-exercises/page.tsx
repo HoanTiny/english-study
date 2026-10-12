@@ -614,49 +614,49 @@ export default function AdminListeningExercisesPage() {
       {/* Toast nổi — luôn thấy dù đang cuộn ở đâu */}
       {(msg || err) && (
         <div className="fixed top-20 left-1/2 z-50 -translate-x-1/2 px-4">
-          <div className={`rounded-xl px-4 py-2.5 text-sm font-black shadow-2xl border ${err ? "bg-rose-600 border-rose-400 text-white" : "bg-teal-600 border-teal-400 text-white"}`}>
+          <div className={`rounded-xl px-4 py-2.5 text-sm font-bold shadow-2xl border ${err ? "bg-rose-600 border-rose-400 text-white" : "bg-teal-600 border-teal-400 text-white"}`}>
             {err ? `✕ ${err}` : `✓ ${msg}`}
           </div>
         </div>
       )}
 
       <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
-        <p className="text-sm font-bold text-zinc-400">{rows.length} bài tập nghe</p>
+        <p className="text-sm font-bold text-muted">{rows.length} bài tập nghe</p>
         <div className="flex items-center gap-2">
           {!editing && (
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} className="rounded-xl border border-white/15 bg-zinc-900 px-3 py-2 text-xs font-bold text-zinc-200">
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} className="rounded-xl border border-border bg-background px-3 py-2 text-xs font-bold text-foreground">
               <option value="created_desc">Mới tạo trước</option>
               <option value="created_asc">Cũ trước</option>
               <option value="title">Tên (A→Z)</option>
               <option value="unit">Theo Unit · Activity</option>
             </select>
           )}
-          {!editing && <button onClick={() => { setEditing(blankExercise()); setTitleAuto(true); }} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black active:scale-95">+ Bài tập mới</button>}
+          {!editing && <button onClick={() => { setEditing(blankExercise()); setTitleAuto(true); }} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-bold active:scale-95">+ Bài tập mới</button>}
         </div>
       </div>
 
       {!editing && (
-        <div className="mb-5 rounded-2xl border border-white/10 bg-zinc-900/40">
+        <div className="mb-5 rounded-2xl border border-border bg-background">
           <button onClick={() => setImportOpen((v) => !v)} className="flex w-full items-center justify-between px-4 py-3 text-left">
-            <span className="text-sm font-black text-zinc-100">⬇ Nhập hàng loạt (dán text)</span>
-            <span className="text-xs font-bold text-zinc-500">{importOpen ? "▲" : "▼"}</span>
+            <span className="text-sm font-bold text-foreground">⬇ Nhập hàng loạt (dán text)</span>
+            <span className="text-xs font-bold text-muted">{importOpen ? "▲" : "▼"}</span>
           </button>
           {importOpen && (
-            <div className="border-t border-white/10 p-4 space-y-3">
+            <div className="border-t border-border p-4 space-y-3">
               {/* Tab chế độ */}
-              <div className="flex gap-1 rounded-xl bg-zinc-800/60 p-1 w-fit">
+              <div className="flex gap-1 rounded-xl bg-background p-1 w-fit">
                 {(["questions", "transcript", "key"] as const).map((m) => (
                   <button
                     key={m}
                     onClick={() => { setImportMode(m); setPreview(null); setKeyPreview(null); }}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-black transition-colors ${importMode === m ? "bg-primary text-primary-fg" : "text-zinc-400 hover:text-zinc-100"}`}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-colors ${importMode === m ? "bg-primary text-primary-fg" : "text-muted hover:text-foreground"}`}
                   >
                     {m === "questions" ? "📝 Câu hỏi" : m === "transcript" ? "📄 Transcript" : "🔑 Đáp án"}
                   </button>
                 ))}
               </div>
 
-              <p className="text-[11px] font-semibold text-zinc-400">
+              <p className="text-xs font-semibold text-muted">
                 {importMode === "questions" ? (
                   <>Mỗi bài bắt đầu bằng <code className="text-primary">=== EXERCISE ===</code>. Dán nhiều bài, hoặc <b className="text-primary">dán ảnh (Ctrl+V)</b> để AI tự đọc.</>
                 ) : importMode === "transcript" ? (
@@ -675,47 +675,47 @@ export default function AdminListeningExercisesPage() {
                   ? `Dán ảnh trang KEY (Ctrl+V), hoặc gõ:\n\n=== EXERCISE ===\nunit: 1\nsection: Numbers\nactivity: 2\n1 22\n2 190\n3 13`
                   : `Dán ảnh trang sách bằng Ctrl+V, hoặc gõ theo mẫu:\n\n${IMPORT_HINT}`}
                 rows={10}
-                className="le-inp font-mono !text-[11px]"
+                className="le-inp font-mono !text-xs"
                 style={{ whiteSpace: "pre" }}
               />
               <div className="flex flex-wrap items-center gap-2">
-                <label className={`rounded-xl border border-primary/40 bg-primary/10 px-4 py-2 text-xs font-black cursor-pointer ${ocrBusy ? "text-zinc-500" : "text-primary"}`}>
+                <label className={`rounded-xl border border-primary/40 bg-primary/10 px-4 py-2 text-xs font-bold cursor-pointer ${ocrBusy ? "text-muted" : "text-primary"}`}>
                   {ocrBusy ? "Đang đọc ảnh…" : "📷 Ảnh → khối (AI)"}
                   <input type="file" accept="image/*" hidden disabled={ocrBusy} onChange={(e) => e.target.files?.[0] && ocrImage(e.target.files[0])} />
                 </label>
-                <button onClick={doPreview} disabled={!importText.trim()} className="rounded-xl border border-white/15 px-4 py-2 text-xs font-black text-zinc-200 disabled:opacity-40">Xem trước</button>
+                <button onClick={doPreview} disabled={!importText.trim()} className="rounded-xl border border-border px-4 py-2 text-xs font-bold text-foreground disabled:opacity-40">Xem trước</button>
                 {importMode === "key" ? (
-                  <button onClick={importAll} disabled={busy || !keyPreview || keyPreview.keys.length === 0} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black disabled:opacity-40">
+                  <button onClick={importAll} disabled={busy || !keyPreview || keyPreview.keys.length === 0} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-bold disabled:opacity-40">
                     {busy ? "Đang cập nhật…" : `Cập nhật đáp án ${keyPreview?.keys.length ?? 0} bài`}
                   </button>
                 ) : (
-                  <button onClick={importAll} disabled={busy || !preview || preview.exercises.length === 0} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black disabled:opacity-40">
+                  <button onClick={importAll} disabled={busy || !preview || preview.exercises.length === 0} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-bold disabled:opacity-40">
                     {busy ? "Đang import…" : `Import ${preview?.exercises.length ?? 0} bài`}
                   </button>
                 )}
-                <button onClick={() => setImportText(importMode === "transcript" ? "=== EXERCISE ===\nunit: 1\nsection: Numbers\nactivity: 1\n(dán lời thoại của Activity 1 ở đây)" : importMode === "key" ? "=== EXERCISE ===\nunit: 1\nsection: Numbers\nactivity: 2\n1 22\n2 190\n3 13" : IMPORT_HINT)} className="text-[11px] font-bold text-primary">Chèn mẫu</button>
+                <button onClick={() => setImportText(importMode === "transcript" ? "=== EXERCISE ===\nunit: 1\nsection: Numbers\nactivity: 1\n(dán lời thoại của Activity 1 ở đây)" : importMode === "key" ? "=== EXERCISE ===\nunit: 1\nsection: Numbers\nactivity: 2\n1 22\n2 190\n3 13" : IMPORT_HINT)} className="text-xs font-bold text-primary">Chèn mẫu</button>
               </div>
               {importMode === "questions" ? (
-                <label className="flex items-center gap-2 text-[11px] font-bold text-zinc-300 cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-foreground cursor-pointer">
                   <input type="checkbox" checked={mergeByKey} onChange={(e) => setMergeByKey(e.target.checked)} />
                   Khớp & cập nhật theo Unit·Activity (khi sửa bài đã có)
                 </label>
               ) : importMode === "transcript" ? (
-                <p className="text-[11px] font-bold text-teal-400">↪ Tự khớp vào bài có cùng Unit·Activity (chỉ cập nhật transcript, giữ nguyên câu hỏi & audio).</p>
+                <p className="text-xs font-bold text-teal-700 dark:text-teal-300">↪ Tự khớp vào bài có cùng Unit·Activity (chỉ cập nhật transcript, giữ nguyên câu hỏi & audio).</p>
               ) : (
-                <p className="text-[11px] font-bold text-teal-400">↪ Tự khớp vào bài cùng Unit·Activity & điền đáp án theo dạng (trắc nghiệm→chọn đúng, Đúng/Sai, điền, đánh số).</p>
+                <p className="text-xs font-bold text-teal-700 dark:text-teal-300">↪ Tự khớp vào bài cùng Unit·Activity & điền đáp án theo dạng (trắc nghiệm→chọn đúng, Đúng/Sai, điền, đánh số).</p>
               )}
               {preview && (
                 <div className="text-xs">
-                  <p className="font-black text-teal-400">✓ Đọc được {preview.exercises.length} bài</p>
+                  <p className="font-bold text-teal-700 dark:text-teal-300">✓ Đọc được {preview.exercises.length} bài</p>
                   {preview.errors.length > 0 && (
-                    <ul className="mt-1 list-disc pl-5 text-rose-400">
+                    <ul className="mt-1 list-disc pl-5 text-warn">
                       {preview.errors.map((e, i) => <li key={i}>{e}</li>)}
                     </ul>
                   )}
                   {preview.exercises.length > 0 && (
-                    <ul className="mt-1.5 list-disc pl-5 text-zinc-400">
-                      {preview.exercises.slice(0, 8).map((e, i) => <li key={i}>{e.title} <span className="text-zinc-600">({e.type}, {e.items.length} câu)</span></li>)}
+                    <ul className="mt-1.5 list-disc pl-5 text-muted">
+                      {preview.exercises.slice(0, 8).map((e, i) => <li key={i}>{e.title} <span className="text-muted">({e.type}, {e.items.length} câu)</span></li>)}
                       {preview.exercises.length > 8 && <li>…và {preview.exercises.length - 8} bài nữa</li>}
                     </ul>
                   )}
@@ -723,15 +723,15 @@ export default function AdminListeningExercisesPage() {
               )}
               {keyPreview && (
                 <div className="text-xs">
-                  <p className="font-black text-teal-400">✓ Đọc được {keyPreview.keys.length} bộ đáp án</p>
+                  <p className="font-bold text-teal-700 dark:text-teal-300">✓ Đọc được {keyPreview.keys.length} bộ đáp án</p>
                   {keyPreview.errors.length > 0 && (
-                    <ul className="mt-1 list-disc pl-5 text-rose-400">
+                    <ul className="mt-1 list-disc pl-5 text-warn">
                       {keyPreview.errors.map((e, i) => <li key={i}>{e}</li>)}
                     </ul>
                   )}
                   {keyPreview.keys.length > 0 && (
-                    <ul className="mt-1.5 list-disc pl-5 text-zinc-400">
-                      {keyPreview.keys.slice(0, 8).map((k, i) => <li key={i}>U{k.unit ?? "?"}·A{k.activity ?? "?"} {k.section && <span className="text-zinc-600">{k.section}</span>} <span className="text-zinc-600">({k.answers.length} đáp án)</span></li>)}
+                    <ul className="mt-1.5 list-disc pl-5 text-muted">
+                      {keyPreview.keys.slice(0, 8).map((k, i) => <li key={i}>U{k.unit ?? "?"}·A{k.activity ?? "?"} {k.section && <span className="text-muted">{k.section}</span>} <span className="text-muted">({k.answers.length} đáp án)</span></li>)}
                       {keyPreview.keys.length > 8 && <li>…và {keyPreview.keys.length - 8} bộ nữa</li>}
                     </ul>
                   )}
@@ -745,28 +745,28 @@ export default function AdminListeningExercisesPage() {
       {!editing && (
         <div className="space-y-2">
           {sortedRows.map((r) => (
-            <div key={r.id} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-900/60 px-4 py-3">
-              <span className="text-[10px] font-black text-zinc-500 w-12">U{r.unit ?? "?"}</span>
+            <div key={r.id} className="flex items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3">
+              <span className="text-xs font-bold text-muted w-12">U{r.unit ?? "?"}</span>
               <div className="flex-1 min-w-0">
-                <p className="font-bold text-sm truncate text-zinc-100">{r.title}</p>
-                <p className="text-[10px] text-zinc-500">{TYPES.find((t) => t.v === r.type)?.label} · {r.level} {r.audio_path ? "· 🔊" : ""}</p>
+                <p className="font-bold text-sm truncate text-foreground">{r.title}</p>
+                <p className="text-xs text-muted">{TYPES.find((t) => t.v === r.type)?.label} · {r.level} {r.audio_path ? "· 🔊" : ""}</p>
               </div>
-              <button onClick={() => toggleVisible(r)} className={`text-[10px] font-black px-2 py-1 rounded-lg ${r.visible ? "bg-teal-500/15 text-teal-400" : "bg-white/5 text-zinc-500"}`}>{r.visible ? "Hiện" : "Ẩn"}</button>
-              <button onClick={() => openEdit(r.id)} className="text-xs font-black text-primary">Sửa →</button>
-              <button onClick={() => del(r)} className="text-xs font-black text-rose-400">✕</button>
+              <button onClick={() => toggleVisible(r)} className={`text-xs font-bold px-2 py-1 rounded-lg ${r.visible ? "bg-teal-500/15 text-teal-700 dark:text-teal-300" : "bg-primary-soft text-muted"}`}>{r.visible ? "Hiện" : "Ẩn"}</button>
+              <button onClick={() => openEdit(r.id)} className="text-xs font-bold text-primary">Sửa →</button>
+              <button onClick={() => del(r)} className="text-xs font-bold text-warn">✕</button>
             </div>
           ))}
-          {rows.length === 0 && <p className="text-sm text-zinc-500">Chưa có bài tập. Bấm “+ Bài tập mới”.</p>}
+          {rows.length === 0 && <p className="text-sm text-muted">Chưa có bài tập. Bấm “+ Bài tập mới”.</p>}
         </div>
       )}
 
       {editing && (
         <div className="space-y-4">
           {/* Thanh hành động dính ở đầu — Lưu luôn trong tầm tay */}
-          <div className="sticky top-0 z-20 -mx-5 md:-mx-8 flex items-center justify-between gap-3 border-b border-white/10 bg-zinc-950/90 px-5 md:px-8 py-3 backdrop-blur">
-            <button onClick={() => setEditing(null)} className="text-xs font-black text-zinc-400 hover:text-zinc-100">← Danh sách</button>
-            <span className="hidden sm:block flex-1 truncate text-center text-xs font-bold text-zinc-500">{editing.title || "Bài tập mới"}</span>
-            <button onClick={save} disabled={busy} className="rounded-xl bg-primary px-5 py-2 text-xs font-black text-primary-fg active:scale-95 disabled:opacity-40">
+          <div className="sticky top-0 z-20 -mx-5 md:-mx-8 flex items-center justify-between gap-3 border-b border-border bg-background px-5 md:px-8 py-3 backdrop-blur">
+            <button onClick={() => setEditing(null)} className="text-xs font-bold text-muted hover:text-foreground">← Danh sách</button>
+            <span className="hidden sm:block flex-1 truncate text-center text-xs font-bold text-muted">{editing.title || "Bài tập mới"}</span>
+            <button onClick={save} disabled={busy} className="rounded-xl bg-primary px-5 py-2 text-xs font-bold text-primary-fg active:scale-95 disabled:opacity-40">
               {busy ? "Đang lưu…" : "💾 Lưu bài tập"}
             </button>
           </div>
@@ -785,7 +785,7 @@ export default function AdminListeningExercisesPage() {
                 {!titleAuto && (
                   <button type="button" title="Tự điền lại theo Unit·Section·Activity"
                     onClick={() => { setTitleAuto(true); setEditing((p) => (p ? { ...p, title: autoTitle(p.unit, p.section, p.activity) } : p)); }}
-                    className="shrink-0 rounded-lg border border-white/15 px-2 text-xs font-black text-primary">↻</button>
+                    className="shrink-0 rounded-lg border border-border px-2 text-xs font-bold text-primary">↻</button>
                 )}
               </div>
             </L>
@@ -799,19 +799,19 @@ export default function AdminListeningExercisesPage() {
           <L label="Đề bài (instructions)"><textarea rows={2} className="le-inp" value={editing.instructions} onChange={(e) => setEditing({ ...editing, instructions: e.target.value })} /></L>
 
           {/* Audio */}
-          <div className="rounded-2xl border border-white/10 bg-zinc-900/40 p-4">
+          <div className="rounded-2xl border border-border bg-background p-4">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-lg">🎧</span>
-              <span className="text-xs font-black uppercase tracking-wider text-zinc-300">Audio bài tập</span>
+              <span className="text-xs font-bold tracking-normal text-foreground">Audio bài tập</span>
               {editing.audio_path ? (
-                <span className="ml-auto rounded-full bg-teal-500/15 px-2.5 py-0.5 text-[10px] font-black text-teal-400">Đã có</span>
+                <span className="ml-auto rounded-full bg-teal-500/15 px-2.5 py-0.5 text-xs font-bold text-teal-700 dark:text-teal-300">Đã có</span>
               ) : (
-                <span className="ml-auto rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-black text-zinc-500">Chưa có</span>
+                <span className="ml-auto rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-bold text-muted">Chưa có</span>
               )}
             </div>
 
             {!editing.id ? (
-              <p className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-3 py-2 text-[11px] font-bold text-amber-400">
+              <p className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-3 py-2 text-xs font-bold text-amber-700 dark:text-amber-300">
                 ⚠ Bấm “Lưu bài tập” trước, rồi mới tải audio.
               </p>
             ) : (
@@ -824,17 +824,17 @@ export default function AdminListeningExercisesPage() {
                   />
                 )}
                 <div className="flex flex-wrap items-center gap-2">
-                  <label className={`rounded-xl border px-4 py-2 text-xs font-black cursor-pointer transition-colors ${uploadingAudio ? "border-white/10 text-zinc-500" : "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"}`}>
+                  <label className={`rounded-xl border px-4 py-2 text-xs font-bold cursor-pointer transition-colors ${uploadingAudio ? "border-border text-muted" : "border-primary/40 bg-primary/10 text-primary hover:bg-primary/15"}`}>
                     {uploadingAudio ? "Đang tải…" : editing.audio_path ? "🔁 Đổi audio" : "⬆ Tải audio"}
                     <input type="file" accept="audio/*" hidden disabled={uploadingAudio} onChange={(e) => e.target.files?.[0] && uploadAudio(e.target.files[0])} />
                   </label>
                   {editing.audio_path && (
-                    <button onClick={deleteAudio} disabled={busy} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-2 text-xs font-black text-rose-400 hover:bg-rose-500/15 disabled:opacity-40">
+                    <button onClick={deleteAudio} disabled={busy} className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-2 text-xs font-bold text-warn hover:bg-rose-500/15 disabled:opacity-40">
                       🗑 Xoá audio
                     </button>
                   )}
                   {editing.audio_path && (
-                    <span className="text-[10px] font-mono text-zinc-600 truncate max-w-[40%]">{editing.audio_path}</span>
+                    <span className="text-xs font-mono text-muted truncate max-w-[40%]">{editing.audio_path}</span>
                   )}
                 </div>
               </>
@@ -844,36 +844,36 @@ export default function AdminListeningExercisesPage() {
           {/* Items theo dạng */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-black uppercase tracking-wider text-zinc-400">Câu hỏi ({editing.items.length})</p>
+              <p className="text-xs font-bold tracking-normal text-muted">Câu hỏi ({editing.items.length})</p>
               <div className="flex items-center gap-3">
-                <button onClick={() => setGridOpen((v) => !v)} className="text-xs font-black text-amber-400">🖼 Cắt ảnh lưới</button>
+                <button onClick={() => setGridOpen((v) => !v)} className="text-xs font-bold text-amber-700 dark:text-amber-300">🖼 Cắt ảnh lưới</button>
                 {editing.type !== "speaking" && editing.items.length > 0 && (
-                  <button onClick={() => setQuickKeyOpen((v) => !v)} className="text-xs font-black text-teal-400">🔑 Dán đáp án nhanh</button>
+                  <button onClick={() => setQuickKeyOpen((v) => !v)} className="text-xs font-bold text-teal-700 dark:text-teal-300">🔑 Dán đáp án nhanh</button>
                 )}
-                <button onClick={addItem} className="text-xs font-black text-primary">+ Thêm</button>
+                <button onClick={addItem} className="text-xs font-bold text-primary">+ Thêm</button>
               </div>
             </div>
 
             {gridOpen && (
               <div className="mb-3 rounded-2xl border border-amber-500/30 bg-amber-500/5 p-3 space-y-3">
-                <p className="text-[11px] font-bold text-zinc-300">
-                  Dán/tải <b className="text-amber-400">ảnh lưới</b> → căn lưới teal trùng các hình rồi bấm Cắt. Chỉnh <b>lề</b> để bỏ tiêu đề/mép thừa.
+                <p className="text-xs font-bold text-foreground">
+                  Dán/tải <b className="text-amber-700 dark:text-amber-300">ảnh lưới</b> → căn lưới teal trùng các hình rồi bấm Cắt. Chỉnh <b>lề</b> để bỏ tiêu đề/mép thừa.
                 </p>
                 <div className="flex items-center gap-3 flex-wrap">
-                  <label className="text-[11px] font-bold text-zinc-300">Cột <input type="number" min={1} value={gridCols} onChange={(e) => setGridCols(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
-                  <label className="text-[11px] font-bold text-zinc-300">Hàng <input type="number" min={1} value={gridRows} onChange={(e) => setGridRows(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
-                  <span className="text-[11px] font-black text-amber-400">= {gridCols * gridRows} ô</span>
+                  <label className="text-xs font-bold text-foreground">Cột <input type="number" min={1} value={gridCols} onChange={(e) => setGridCols(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
+                  <label className="text-xs font-bold text-foreground">Hàng <input type="number" min={1} value={gridRows} onChange={(e) => setGridRows(+e.target.value || 1)} className="le-inp !w-16 ml-1 inline-block" /></label>
+                  <span className="text-xs font-bold text-amber-700 dark:text-amber-300">= {gridCols * gridRows} ô</span>
                 </div>
 
                 {!gridSrc ? (
                   <div
                     onPaste={onPasteGrid}
                     tabIndex={0}
-                    className="rounded-xl border-2 border-dashed border-amber-500/40 bg-black/20 p-4 text-center text-[11px] font-bold text-zinc-400 outline-none focus:border-amber-400"
+                    className="rounded-xl border-2 border-dashed border-amber-500/40 bg-background p-4 text-center text-xs font-bold text-muted outline-none focus:border-amber-400"
                   >
-                    Bấm vào đây rồi <b className="text-amber-400">Ctrl+V</b> để dán ảnh lưới
+                    Bấm vào đây rồi <b className="text-amber-700 dark:text-amber-300">Ctrl+V</b> để dán ảnh lưới
                     <div className="mt-2">
-                      <label className="inline-block rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-amber-400 cursor-pointer">
+                      <label className="inline-block rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-amber-700 dark:text-amber-300 cursor-pointer">
                         hoặc chọn file
                         <input type="file" accept="image/*" hidden onChange={(e) => e.target.files?.[0] && loadGridFile(e.target.files[0])} />
                       </label>
@@ -881,21 +881,21 @@ export default function AdminListeningExercisesPage() {
                   </div>
                 ) : (
                   <>
-                    <canvas ref={previewRef} className="max-w-full rounded-lg border border-white/10 bg-white" />
+                    <canvas ref={previewRef} className="max-w-full rounded-lg border border-border bg-white" />
                     {/* Lề (top/right/bottom/left) % */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {(["top", "right", "bottom", "left"] as const).map((side) => (
-                        <label key={side} className="text-[10px] font-bold text-zinc-400">
+                        <label key={side} className="text-xs font-bold text-muted">
                           Lề {side === "top" ? "trên" : side === "right" ? "phải" : side === "bottom" ? "dưới" : "trái"}: {gm[side]}%
                           <input type="range" min={0} max={40} value={gm[side]} onChange={(e) => setGm({ ...gm, [side]: +e.target.value })} className="w-full accent-amber-500" />
                         </label>
                       ))}
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <button onClick={doGridCut} disabled={gridBusy} className="rounded-xl bg-amber-600 px-4 py-2 text-xs font-black text-white disabled:opacity-40">
+                      <button onClick={doGridCut} disabled={gridBusy} className="rounded-xl bg-amber-700 px-4 py-2 text-xs font-bold text-white disabled:opacity-40">
                         {gridBusy ? "Đang cắt & tải…" : `✂️ Cắt ${gridCols * gridRows} ô → thêm câu`}
                       </button>
-                      <button onClick={() => { setGridSrc(null); gridImgRef.current = null; setGm({ top: 0, right: 0, bottom: 0, left: 0 }); }} className="text-[11px] font-bold text-zinc-400">Chọn ảnh khác</button>
+                      <button onClick={() => { setGridSrc(null); gridImgRef.current = null; setGm({ top: 0, right: 0, bottom: 0, left: 0 }); }} className="text-xs font-bold text-muted">Chọn ảnh khác</button>
                     </div>
                   </>
                 )}
@@ -904,9 +904,9 @@ export default function AdminListeningExercisesPage() {
 
             {quickKeyOpen && editing.type !== "speaking" && (
               <div className="mb-3 rounded-2xl border border-teal-500/30 bg-teal-500/5 p-3 space-y-2">
-                <p className="text-[11px] font-bold text-zinc-300">
-                  Dán đáp án theo thứ tự câu (mỗi dòng 1 đáp án, hoặc dạng <code className="text-teal-400">1 đáp_án</code>),
-                  hoặc <b className="text-teal-400">dán ảnh đáp án (Ctrl+V)</b> để AI tự đọc. Áp vào {editing.items.length} câu hiện có.
+                <p className="text-xs font-bold text-foreground">
+                  Dán đáp án theo thứ tự câu (mỗi dòng 1 đáp án, hoặc dạng <code className="text-teal-700 dark:text-teal-300">1 đáp_án</code>),
+                  hoặc <b className="text-teal-700 dark:text-teal-300">dán ảnh đáp án (Ctrl+V)</b> để AI tự đọc. Áp vào {editing.items.length} câu hiện có.
                 </p>
                 <textarea
                   value={quickKey}
@@ -914,16 +914,16 @@ export default function AdminListeningExercisesPage() {
                   onPaste={onPasteQuickKey}
                   rows={Math.min(8, Math.max(3, editing.items.length))}
                   placeholder={quickOcrBusy ? "Đang đọc ảnh…" : editing.type === "truefalse" ? "Dán ảnh (Ctrl+V) hoặc gõ:\nright\nwrong\nright" : editing.type === "mc" ? "Dán ảnh (Ctrl+V) hoặc gõ:\n22\n190\n13" : "Dán ảnh (Ctrl+V) hoặc gõ:\nOxford 64711\n021 930 2738"}
-                  className="le-inp font-mono !text-[11px]"
+                  className="le-inp font-mono !text-xs"
                   style={{ whiteSpace: "pre" }}
                 />
                 <div className="flex flex-wrap items-center gap-2">
-                  <label className={`rounded-xl border border-teal-500/40 bg-teal-500/10 px-3 py-2 text-[11px] font-black cursor-pointer ${quickOcrBusy ? "text-zinc-500" : "text-teal-400"}`}>
+                  <label className={`rounded-xl border border-teal-500/40 bg-teal-500/10 px-3 py-2 text-xs font-bold cursor-pointer ${quickOcrBusy ? "text-muted" : "text-teal-700 dark:text-teal-300"}`}>
                     {quickOcrBusy ? "Đang đọc ảnh…" : "📷 Ảnh đáp án"}
                     <input type="file" accept="image/*" hidden disabled={quickOcrBusy} onChange={(e) => e.target.files?.[0] && ocrQuickKey(e.target.files[0])} />
                   </label>
-                  <button onClick={applyQuickKey} disabled={!quickKey.trim()} className="rounded-xl bg-teal-600 px-4 py-2 text-xs font-black text-white disabled:opacity-40">Áp vào câu hỏi</button>
-                  <button onClick={() => { setQuickKey(""); setQuickKeyOpen(false); }} className="text-[11px] font-bold text-zinc-400">Đóng</button>
+                  <button onClick={applyQuickKey} disabled={!quickKey.trim()} className="rounded-xl bg-teal-700 px-4 py-2 text-xs font-bold text-white disabled:opacity-40">Áp vào câu hỏi</button>
+                  <button onClick={() => { setQuickKey(""); setQuickKeyOpen(false); }} className="text-xs font-bold text-muted">Đóng</button>
                 </div>
               </div>
             )}
@@ -937,21 +937,21 @@ export default function AdminListeningExercisesPage() {
                   : editing.type === "ordering" ? !!it.label?.trim()
                   : true;
                 return (
-                <div key={i} className="rounded-2xl border border-white/10 bg-zinc-900/40 p-3 space-y-2.5">
+                <div key={i} className="rounded-2xl border border-border bg-background p-3 space-y-2.5">
                   <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/5 text-[10px] font-black text-zinc-400">{i + 1}</span>
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-soft text-xs font-bold text-muted">{i + 1}</span>
                     {!answered && editing.type !== "speaking" && (
-                      <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-[9px] font-black text-amber-400">chưa có đáp án</span>
+                      <span className="rounded-full bg-amber-500/15 px-2 py-0.5 text-xs font-bold text-amber-700 dark:text-amber-300">chưa có đáp án</span>
                     )}
-                    <button onClick={() => setItems(editing.items.filter((_, idx) => idx !== i))} className="ml-auto text-xs text-rose-400 font-black">✕</button>
+                    <button onClick={() => setItems(editing.items.filter((_, idx) => idx !== i))} className="ml-auto text-xs text-warn font-bold">✕</button>
                   </div>
 
                   {/* Ảnh của câu (nếu có) */}
                   {it.image && (
                     <div className="flex items-center gap-2">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imgSrc(it.image)} alt="" className="h-16 w-16 rounded-lg object-cover border border-white/10 bg-white" />
-                      <button onClick={() => upd(i, { image: undefined })} className="text-[10px] font-black text-rose-400">Gỡ ảnh</button>
+                      <img src={imgSrc(it.image)} alt="" className="h-16 w-16 rounded-lg object-cover border border-border bg-white" />
+                      <button onClick={() => upd(i, { image: undefined })} className="text-xs font-bold text-warn">Gỡ ảnh</button>
                     </div>
                   )}
 
@@ -975,7 +975,7 @@ export default function AdminListeningExercisesPage() {
                   {/* phần ĐÁP ÁN riêng */}
                   {editing.type !== "speaking" && (
                     <div className="rounded-xl border border-teal-500/20 bg-teal-500/5 p-2.5">
-                      <p className="mb-1.5 text-[10px] font-black uppercase tracking-wider text-teal-400">✅ Đáp án</p>
+                      <p className="mb-1.5 text-xs font-bold tracking-normal text-teal-700 dark:text-teal-300">✅ Đáp án</p>
 
                       {editing.type === "mc" && (
                         <div className="space-y-1.5">
@@ -984,21 +984,21 @@ export default function AdminListeningExercisesPage() {
                             return (
                               <div key={oi} className="flex items-center gap-2">
                                 <button type="button" title="Đặt làm đáp án đúng" onClick={() => upd(i, { answer: oi })}
-                                  className={`h-5 w-5 shrink-0 rounded-full border text-[10px] font-black flex items-center justify-center ${correct ? "border-teal-400 bg-teal-500 text-white" : "border-white/20 text-transparent hover:border-teal-400/60"}`}>✓</button>
+                                  className={`h-5 w-5 shrink-0 rounded-full border text-xs font-bold flex items-center justify-center ${correct ? "border-teal-400 bg-teal-500 text-white" : "border-border text-transparent hover:border-teal-400/60"}`}>✓</button>
                                 <input className={`le-inp ${correct ? "!border-teal-500/50" : ""}`} placeholder={`Lựa chọn ${oi + 1}`} value={opt} onChange={(e) => upd(i, { options: (it.options ?? []).map((o, k) => (k === oi ? e.target.value : o)) })} />
-                                <button onClick={() => upd(i, { options: (it.options ?? []).filter((_, k) => k !== oi), answer: it.answer === oi ? 0 : it.answer })} className="text-rose-400 text-xs shrink-0">✕</button>
+                                <button onClick={() => upd(i, { options: (it.options ?? []).filter((_, k) => k !== oi), answer: it.answer === oi ? 0 : it.answer })} className="text-warn text-xs shrink-0">✕</button>
                               </div>
                             );
                           })}
-                          <button onClick={() => upd(i, { options: [...(it.options ?? []), ""] })} className="text-[10px] font-black text-primary">+ lựa chọn</button>
-                          <p className="text-[9px] text-zinc-500">Bấm dấu ✓ bên trái lựa chọn để chọn đáp án đúng.</p>
+                          <button onClick={() => upd(i, { options: [...(it.options ?? []), ""] })} className="text-xs font-bold text-primary">+ lựa chọn</button>
+                          <p className="text-xs text-muted">Bấm dấu ✓ bên trái lựa chọn để chọn đáp án đúng.</p>
                         </div>
                       )}
 
                       {editing.type === "truefalse" && (
                         <div className="flex gap-2">
-                          <button type="button" onClick={() => upd(i, { answer: true })} className={`rounded-lg px-4 py-1.5 text-xs font-black ${it.answer === true ? "bg-teal-500 text-white" : "bg-white/5 text-zinc-300"}`}>Đúng (right)</button>
-                          <button type="button" onClick={() => upd(i, { answer: false })} className={`rounded-lg px-4 py-1.5 text-xs font-black ${it.answer === false ? "bg-rose-500 text-white" : "bg-white/5 text-zinc-300"}`}>Sai (wrong)</button>
+                          <button type="button" onClick={() => upd(i, { answer: true })} className={`rounded-lg px-4 py-1.5 text-xs font-bold ${it.answer === true ? "bg-teal-500 text-white" : "bg-primary-soft text-foreground"}`}>Đúng (right)</button>
+                          <button type="button" onClick={() => upd(i, { answer: false })} className={`rounded-lg px-4 py-1.5 text-xs font-bold ${it.answer === false ? "bg-rose-500 text-white" : "bg-primary-soft text-foreground"}`}>Sai (wrong)</button>
                         </div>
                       )}
 
@@ -1007,7 +1007,7 @@ export default function AdminListeningExercisesPage() {
                       )}
 
                       {editing.type === "ordering" && (
-                        <p className="text-[10px] font-bold text-zinc-400">Thứ tự nghe đúng = <span className="text-teal-400">vị trí {i + 1}</span> (sắp các mục đúng thứ tự là xong).</p>
+                        <p className="text-xs font-bold text-muted">Thứ tự nghe đúng = <span className="text-teal-700 dark:text-teal-300">vị trí {i + 1}</span> (sắp các mục đúng thứ tự là xong).</p>
                       )}
                     </div>
                   )}
@@ -1018,7 +1018,7 @@ export default function AdminListeningExercisesPage() {
 
           <L label="Transcript (tuỳ chọn)"><textarea rows={3} className="le-inp" value={editing.transcript} onChange={(e) => setEditing({ ...editing, transcript: e.target.value })} /></L>
 
-          <button onClick={save} disabled={busy} className="w-full rounded-xl bg-primary text-primary-fg py-3 text-sm font-black disabled:opacity-40">{busy ? "Đang lưu…" : "Lưu bài tập"}</button>
+          <button onClick={save} disabled={busy} className="w-full rounded-xl bg-primary text-primary-fg py-3 text-sm font-bold disabled:opacity-40">{busy ? "Đang lưu…" : "Lưu bài tập"}</button>
         </div>
       )}
 
@@ -1026,17 +1026,17 @@ export default function AdminListeningExercisesPage() {
         :global(.le-inp) {
           width: 100%;
           border-radius: 0.6rem;
-          border: 1px solid rgba(255,255,255,0.12);
-          background: rgba(255,255,255,0.05);
-          color: #f4f4f5;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          color: var(--foreground);
           padding: 0.45rem 0.7rem;
           font-size: 0.8rem;
           font-weight: 600;
         }
-        :global(.le-inp::placeholder) { color: #71717a; }
+        :global(.le-inp::placeholder) { color: var(--muted); }
         :global(.le-inp:focus) { outline: none; border-color: var(--primary, #2b788b); }
-        :global(select.le-inp) { background: #18181b; }
-        :global(.le-inp option) { background: #18181b; color: #f4f4f5; }
+        :global(select.le-inp) { background: var(--surface); }
+        :global(.le-inp option) { background: var(--surface); color: var(--foreground); }
       `}</style>
     </div>
   );
@@ -1045,7 +1045,7 @@ export default function AdminListeningExercisesPage() {
 function L({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">{label}</span>
+      <span className="text-xs font-bold tracking-normal text-muted">{label}</span>
       <div className="mt-1">{children}</div>
     </label>
   );

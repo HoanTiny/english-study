@@ -137,13 +137,13 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
   if (phase === "setup") {
     return (
       <main className="study-page study-page--focused animate-fadeIn">
-        <Link href="/listening" className="mb-5 inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground cursor-pointer transition-colors">
+        <Link href="/listening" className="mb-5 inline-flex items-center gap-1.5 text-xs font-bold tracking-normal text-muted hover:text-foreground cursor-pointer transition-colors">
           ← Luyện nghe
         </Link>
         <div className="liquid-glass-card flex flex-col items-center gap-6 p-6 md:p-8 text-center border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md">
           <span className="text-6xl animate-bounce">📝</span>
           <div className="space-y-1">
-            <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+            <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
               ⚡ CHÉP CHÍNH TẢ PHẢN XẠ
             </span>
             <h1 className="font-display text-3xl font-extrabold text-foreground mt-3">Nghe chép chính tả</h1>
@@ -154,25 +154,25 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
 
           {/* Chọn nguồn */}
           <div className="flex w-full max-w-sm gap-3">
-            <button onClick={() => setSource("bank")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "bank" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
+            <button onClick={() => setSource("bank")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-bold tracking-normal transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "bank" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
               📚 Kho câu
             </button>
-            <button onClick={() => setSource("yt")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "yt" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
+            <button onClick={() => setSource("yt")} className={`flex-1 rounded-full border px-4 py-2.5 text-xs font-bold tracking-normal transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${source === "yt" ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground hover:scale-[1.02]"}`}>
               ▶️ YouTube Video
             </button>
           </div>
 
           {/* Độ khó (chung) */}
           <div className="w-full max-w-sm text-left">
-            <label className="text-[9px] font-black uppercase tracking-wider text-muted">Độ khó che chữ</label>
+            <label className="text-xs font-bold tracking-normal text-muted">Độ khó che chữ</label>
             <div className="mt-2 flex gap-3">
               {(["easy", "normal", "hard"] as Diff[]).map((d) => (
-                <button key={d} onClick={() => setDiff(d)} className={`flex-1 rounded-full border py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${diff === d ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground"}`}>
+                <button key={d} onClick={() => setDiff(d)} className={`flex-1 rounded-full border py-2.5 text-xs font-bold tracking-normal transition-all duration-300 active:scale-95 cursor-pointer shadow-sm ${diff === d ? "bg-primary border-primary text-primary-fg shadow-md scale-102" : "border-border/60 bg-surface/50 text-muted hover:text-foreground"}`}>
                   {d === "easy" ? "Dễ" : d === "normal" ? "Vừa" : "Khó"}
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-[10px] font-semibold text-muted leading-normal">
+            <p className="mt-2 text-xs font-semibold text-muted leading-normal">
               * Dễ: lộ ký tự đầu · Vừa: che theo độ dài ký tự · Khó: giấu kín toàn bộ ký tự.
             </p>
           </div>
@@ -180,14 +180,14 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
           {source === "bank" ? (
             <div className="w-full max-w-sm space-y-4 text-left">
               <div>
-                <label className="text-[9px] font-black uppercase tracking-wider text-muted">Chủ đề từ vựng</label>
+                <label className="text-xs font-bold tracking-normal text-muted">Chủ đề từ vựng</label>
                 <select value={topic} onChange={(e) => setTopic(e.target.value)} className="mt-2 w-full rounded-2xl border-2 border-border/60 bg-background/50 px-4.5 py-3 text-xs font-bold text-foreground outline-none focus:border-primary">
                   <option value="all">Tất cả ({DATA.length} câu)</option>
                   {TOPICS.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
-                <p className="mt-2 text-[10px] font-semibold text-muted">{count} câu khả dụng · mỗi phiên 8 câu ôn</p>
+                <p className="mt-2 text-xs font-semibold text-muted">{count} câu khả dụng · mỗi phiên 8 câu ôn</p>
               </div>
-              <button onClick={startBank} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider shadow-md">Bắt đầu ngay</button>
+              <button onClick={startBank} className="mt-2 w-full liquid-glass-btn py-3.5 text-xs font-bold tracking-normal shadow-md">Bắt đầu ngay</button>
             </div>
           ) : (
             <YouTubeDictationSetup key={`${userId ?? "guest"}:${vParam ?? ""}`} initialVideo={vParam} userId={userId} onStart={data => {
@@ -204,8 +204,8 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
   return (
     <main className="study-page animate-fadeIn">
       <div className="mb-4 flex items-center justify-between border-b border-border/40 pb-3">
-        <button onClick={() => { setPhase("setup"); ytRef.current?.pause(); }} className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-[9px] font-black uppercase tracking-wider text-muted hover:text-foreground hover:border-primary/50 transition-all duration-300 active:scale-95 shadow-sm cursor-pointer">← Thoát game</button>
-        <div className="flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/35 p-1.5 text-[9px] font-black uppercase tracking-wider shadow-sm">
+        <button onClick={() => { setPhase("setup"); ytRef.current?.pause(); }} className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/20 px-3.5 py-1.5 text-xs font-bold tracking-normal text-muted hover:text-foreground hover:border-primary/50 transition-all duration-300 active:scale-95 shadow-sm cursor-pointer">← Thoát game</button>
+        <div className="flex items-center gap-1.5 rounded-full border border-border/80 bg-white/40 dark:bg-black/35 p-1.5 text-xs font-bold tracking-normal shadow-sm">
           {(["easy", "normal", "hard"] as Diff[]).map((d) => (
             <button key={d} onClick={() => setDiff(d)} className={`rounded-lg px-3 py-1 cursor-pointer transition-all ${diff === d ? "bg-primary text-primary-fg shadow-sm" : "text-muted"}`}>{d === "easy" ? "Dễ" : d === "normal" ? "Vừa" : "Khó"}</button>
           ))}
@@ -226,26 +226,26 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
           ) : (
             <div className="flex flex-col items-center justify-center py-6 bg-black/5 dark:bg-white/5 border border-border/40 rounded-2xl shadow-inner">
               <span className="text-5xl animate-bounce">🎧🎙️</span>
-              <p className="text-[10px] font-black uppercase tracking-widest text-muted mt-2">Học nghe chép chính tả kho câu</p>
+              <p className="text-xs font-bold tracking-normal text-muted mt-2">Học nghe chép chính tả kho câu</p>
             </div>
           )}
 
           {/* Playback Controls Row */}
           <div className="flex items-center justify-between gap-4 border-b border-border/40 pb-3">
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-muted">
+            <span className="text-xs font-bold tracking-normal text-muted">
               Phân đoạn {idx + 1}/{segs.length}
             </span>
             <div className="flex gap-2.5">
               <button
                 onClick={() => listen(false)}
-                className="liquid-glass-btn px-6 py-2.5 text-[10px] font-black uppercase tracking-wider shadow-md active:scale-95 transition-all"
+                className="liquid-glass-btn px-6 py-2.5 text-xs font-bold tracking-normal shadow-md active:scale-95 transition-all"
               >
                 ▶ Nghe đoạn
               </button>
               {source === "bank" && (
                 <button
                   onClick={() => listen(true)}
-                  className="rounded-full border border-border/80 bg-white/50 dark:bg-slate-900/60 px-5 py-2.5 text-[10px] font-black uppercase tracking-wider text-foreground hover:border-primary/55 hover:bg-primary-soft/20 cursor-pointer active:scale-95 transition-all duration-300 shadow-sm"
+                  className="rounded-full border border-border/80 bg-white/50 dark:bg-slate-900/60 px-5 py-2.5 text-xs font-bold tracking-normal text-foreground hover:border-primary/55 hover:bg-primary-soft/20 cursor-pointer active:scale-95 transition-all duration-300 shadow-sm"
                 >
                   🐢 Nghe chậm
                 </button>
@@ -255,7 +255,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
 
           {/* Typing Laboratory */}
           <div>
-            <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">Gõ bản chép của bạn ở phía dưới</p>
+            <p className="mb-2 text-xs font-bold tracking-normal text-muted">Gõ bản chép của bạn ở phía dưới</p>
             <textarea
               value={typed}
               onChange={(e) => setTyped(e.target.value)}
@@ -275,7 +275,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
                 return (
                   <span key={i} className={`flex items-center gap-1 rounded-xl border px-3 py-1.5 transition-all ${cls}`}>
                     {!isDone && st === "hidden" && (
-                      <button onClick={() => setRevealed((s) => new Set(s).add(i))} className="text-[10px] opacity-65 hover:opacity-100 cursor-pointer mr-1" title="Hiện từ này">👁</button>
+                      <button onClick={() => setRevealed((s) => new Set(s).add(i))} className="text-xs opacity-65 hover:opacity-100 cursor-pointer mr-1" title="Hiện từ này">👁</button>
                     )}
                     <span className="text-xs font-semibold tracking-wide leading-none">{st === "hidden" ? maskWord(w, diff) : w}</span>
                   </span>
@@ -283,7 +283,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
               })}
             </div>
 
-            <p className="mt-2 text-[8px] font-black uppercase tracking-wider text-muted">* Mẹo: Mỗi từ mở bằng nhãn 👁 sẽ không được tính điểm chính xác.</p>
+            <p className="mt-2 text-xs font-bold tracking-normal text-muted">* Mẹo: Mỗi từ mở bằng nhãn 👁 sẽ không được tính điểm chính xác.</p>
 
             {/* Vietnamese translation box */}
             {isDone && cur?.vi && (
@@ -296,7 +296,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
             <div className="mt-4.5 flex gap-3">
               <button
                 onClick={revealAll}
-                className="flex-1 rounded-full border border-amber-500/30 bg-amber-500/10 py-3.5 text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer shadow-sm active:scale-95 transition-all"
+                className="flex-1 rounded-full border border-amber-500/30 bg-amber-500/10 py-3.5 text-xs font-bold tracking-normal text-amber-700 dark:text-amber-400 hover:bg-amber-500/20 cursor-pointer shadow-sm active:scale-95 transition-all"
               >
                 Hiện tất cả các từ
               </button>
@@ -304,7 +304,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
                 <button
                   onClick={check}
                   disabled={!typed.trim()}
-                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-bold tracking-normal disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Kiểm tra kết quả
                 </button>
@@ -312,7 +312,7 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
                 <button
                   onClick={() => goto(idx + 1)}
                   disabled={idx + 1 >= segs.length}
-                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-55 disabled:cursor-not-allowed"
+                  className="flex-1 liquid-glass-btn py-3.5 text-xs font-bold tracking-normal disabled:opacity-55 disabled:cursor-not-allowed"
                 >
                   Đoạn tiếp theo →
                 </button>
@@ -326,8 +326,8 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
           <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-xl pointer-events-none" />
 
           <div className="mb-3.5 flex items-center justify-between border-b border-border/40 pb-3">
-            <span className="font-display text-sm font-black uppercase tracking-wider text-foreground">Bản chép chính tả</span>
-            <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-[9px] font-black text-primary shadow-sm">{progress}% hoàn tất</span>
+            <span className="font-display text-sm font-bold tracking-normal text-foreground">Bản chép chính tả</span>
+            <span className="rounded-full bg-primary-soft border border-primary/20 px-3 py-1 text-xs font-bold text-primary shadow-sm">{progress}% hoàn tất</span>
           </div>
           <div className="mb-4 h-2.5 overflow-hidden rounded-full bg-border border border-border/40 shadow-inner">
             <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-300" style={{ width: `${progress}%` }} />
@@ -343,8 +343,8 @@ function DictationInner({ vParam, userId }: { vParam: string | null; userId: str
                   className={`w-full rounded-2xl border p-4 text-left transition-all duration-300 cursor-pointer shadow-sm active:scale-98 ${active ? "border-primary bg-primary-soft" : done[i] ? "border-border/60 bg-white/40 dark:bg-slate-900/30" : "border-border bg-white/20 dark:bg-black/10"}`}
                 >
                   <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-muted">Đoạn #{i + 1}</span>
-                    {done[i] && <span className="text-[9px] text-primary font-black bg-primary-soft border border-primary/10 px-2 py-0.5 rounded-full shadow-sm">✓ Hoàn thành</span>}
+                    <span className="text-xs font-bold tracking-normal text-muted">Đoạn #{i + 1}</span>
+                    {done[i] && <span className="text-xs text-primary font-bold bg-primary-soft border border-primary/10 px-2 py-0.5 rounded-full shadow-sm">✓ Hoàn thành</span>}
                   </div>
                   <p className="text-xs sm:text-sm font-semibold leading-relaxed text-foreground/90">
                     {done[i] ? s.en : ws.map((w) => maskWord(w, diff)).join(" ")}

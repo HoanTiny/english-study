@@ -193,38 +193,39 @@ export default function AdminLessonsPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-        <p className="text-sm font-bold text-zinc-400">{lessons.length} bài · quản lý nội dung & audio</p>
+        <p className="text-sm font-bold text-muted">{lessons.length} bài · quản lý nội dung & audio</p>
         {!editing && (
           <div className="flex items-center gap-2">
             <button
               onClick={seedAll}
               disabled={busy}
               title="Đẩy nội dung tĩnh (lessons.ts) xuống DB — cập nhật bài mới sửa, giữ nguyên audio"
-              className="rounded-xl border border-border bg-white/10 px-4 py-2 text-xs font-black text-foreground hover:border-primary/40 active:scale-95 disabled:opacity-50"
+              className="rounded-xl border border-border bg-primary-soft px-4 py-2 text-xs font-bold text-foreground hover:border-primary/40 active:scale-95 disabled:opacity-50"
             >
               {busy ? "Đang seed…" : "↻ Seed lại"}
             </button>
-            <button onClick={newLesson} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-black active:scale-95">+ Bài mới</button>
+            <button onClick={newLesson} className="rounded-xl bg-primary text-primary-fg px-4 py-2 text-xs font-bold active:scale-95">+ Bài mới</button>
           </div>
         )}
       </div>
-      {msg && <p className="mb-3 rounded-lg bg-teal-500/15 px-3 py-2 text-xs font-black text-teal-300">{msg}</p>}
-      {err && <p className="mb-3 rounded-lg bg-rose-500/15 px-3 py-2 text-xs font-black text-rose-300">{err}</p>}
+      {msg && <p className="mb-3 rounded-lg bg-teal-500/15 px-3 py-2 text-xs font-bold text-teal-700 dark:text-teal-300">{msg}</p>}
+      {err && <p className="mb-3 rounded-lg bg-rose-500/15 px-3 py-2 text-xs font-bold text-warn">{err}</p>}
 
       {/* Danh sách */}
       {!editing && (
         <div className="space-y-2">
+          {lessons.length === 0 && !err && <div className="study-panel py-10 text-center"><p className="font-semibold">Chưa có bài học trong danh sách</p><p className="mt-2 text-sm text-muted">Tạo bài mới để bắt đầu xây dựng nội dung cho học viên.</p></div>}
           {lessons.map((l) => (
-            <div key={l.id} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-white/60 dark:bg-zinc-900/50 px-4 py-3">
-              <span className="text-[10px] font-black text-muted w-8">GĐ{l.stage}</span>
+            <div key={l.id} className="flex items-center gap-3 rounded-2xl border border-border/60 bg-white/60 dark:bg-background px-4 py-3">
+              <span className="text-xs font-bold text-muted w-8">GĐ{l.stage}</span>
               <div className="flex-1 min-w-0">
-                <p className="font-bold text-sm truncate">{l.title} <span className="text-[10px] text-muted">({l.slug})</span></p>
-                <p className="text-[10px] text-muted">{l.cefr} · {l.phraseCount} cụm {l.audio_url ? "· 🔊 audio" : ""}</p>
+                <p className="font-bold text-sm truncate">{l.title} <span className="text-xs text-muted">({l.slug})</span></p>
+                <p className="text-xs text-muted">{l.cefr} · {l.phraseCount} cụm {l.audio_url ? "· 🔊 audio" : ""}</p>
               </div>
-              <button onClick={() => toggleVisible(l)} className={`text-[10px] font-black px-2 py-1 rounded-lg ${l.visible ? "bg-teal-500/10 text-teal-600" : "bg-black/10 text-muted"}`}>
+              <button onClick={() => toggleVisible(l)} className={`text-xs font-bold px-2 py-1 rounded-lg ${l.visible ? "bg-teal-500/10 text-teal-600" : "bg-background text-muted"}`}>
                 {l.visible ? "Hiện" : "Ẩn"}
               </button>
-              <button onClick={() => openEdit(l.slug)} className="text-xs font-black text-primary">Sửa →</button>
+              <button onClick={() => openEdit(l.slug)} className="text-xs font-bold text-primary">Sửa →</button>
             </div>
           ))}
         </div>
@@ -233,7 +234,7 @@ export default function AdminLessonsPage() {
       {/* Editor */}
       {editing && (
         <div className="space-y-5">
-          <button onClick={() => setEditing(null)} className="text-xs font-black text-muted">← Danh sách</button>
+          <button onClick={() => setEditing(null)} className="text-xs font-bold text-muted">← Danh sách</button>
 
           <div className="grid sm:grid-cols-2 gap-3">
             <L label="Slug (duy nhất)"><input className="inp" value={editing.slug} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} /></L>
@@ -248,14 +249,14 @@ export default function AdminLessonsPage() {
 
           {/* Audio cả bài */}
           <div className="rounded-2xl border border-border/60 p-3 flex items-center gap-3 flex-wrap">
-            <span className="text-xs font-black flex-1">Audio cả bài {editing.audio_url ? "✓" : "(chưa có)"}</span>
+            <span className="text-xs font-bold flex-1">Audio cả bài {editing.audio_url ? "✓" : "(chưa có)"}</span>
             {editing.audio_url && (
               <audio controls src={`/api/lesson-audio?path=${encodeURIComponent(editing.audio_url)}`} className="h-8" />
             )}
             {!editing.id ? (
-              <span className="text-[10px] font-bold text-amber-600">⚠ Lưu bài trước rồi mới tải audio</span>
+              <span className="text-xs font-bold text-amber-600">⚠ Lưu bài trước rồi mới tải audio</span>
             ) : (
-              <label className={`text-[10px] font-black cursor-pointer ${uploading === "lesson" ? "text-muted" : "text-primary"}`}>
+              <label className={`text-xs font-bold cursor-pointer ${uploading === "lesson" ? "text-muted" : "text-primary"}`}>
                 {uploading === "lesson" ? "Đang tải…" : "⬆ Tải audio"}
                 <input type="file" accept="audio/*" hidden disabled={uploading !== null} onChange={(e) => e.target.files?.[0] && uploadAudio("lesson", editing.id, e.target.files[0])} />
               </label>
@@ -265,15 +266,15 @@ export default function AdminLessonsPage() {
           {/* Phrases */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-black uppercase tracking-wider text-muted">Cụm ({phrases.length})</p>
-              <button onClick={() => setPhrases([...phrases, { en: "", vi: "", ipa: "", example: "", audio_url: null }])} className="text-xs font-black text-primary">+ Thêm cụm</button>
+              <p className="text-xs font-bold tracking-normal text-muted">Cụm ({phrases.length})</p>
+              <button onClick={() => setPhrases([...phrases, { en: "", vi: "", ipa: "", example: "", audio_url: null }])} className="text-xs font-bold text-primary">+ Thêm cụm</button>
             </div>
             <div className="space-y-3">
               {phrases.map((p, i) => (
                 <div key={i} className="rounded-2xl border border-border/50 p-3 space-y-2">
                   <div className="flex items-center gap-2">
                     <input className="inp flex-1" placeholder="English" value={p.en} onChange={(e) => setPhrase(i, "en", e.target.value)} />
-                    <button onClick={() => setPhrases(phrases.filter((_, idx) => idx !== i))} className="text-xs text-rose-500 font-black px-2">✕</button>
+                    <button onClick={() => setPhrases(phrases.filter((_, idx) => idx !== i))} className="text-xs text-rose-500 font-bold px-2">✕</button>
                   </div>
                   <div className="grid sm:grid-cols-3 gap-2">
                     <input className="inp" placeholder="Nghĩa (vi)" value={p.vi} onChange={(e) => setPhrase(i, "vi", e.target.value)} />
@@ -283,12 +284,12 @@ export default function AdminLessonsPage() {
                   <div className="flex items-center gap-2">
                     {p.audio_url && <audio controls src={`/api/lesson-audio?path=${encodeURIComponent(p.audio_url)}`} className="h-7" />}
                     {p.id ? (
-                      <label className={`text-[10px] font-black cursor-pointer ${uploading === p.id ? "text-muted" : "text-primary"}`}>
+                      <label className={`text-xs font-bold cursor-pointer ${uploading === p.id ? "text-muted" : "text-primary"}`}>
                         {uploading === p.id ? "Đang tải…" : "⬆ Audio cụm"}
                         <input type="file" accept="audio/*" hidden disabled={uploading !== null} onChange={(e) => e.target.files?.[0] && uploadAudio("phrase", p.id!, e.target.files[0])} />
                       </label>
                     ) : (
-                      <span className="text-[9px] text-muted">Lưu bài trước để tải audio cụm</span>
+                      <span className="text-xs text-muted">Lưu bài trước để tải audio cụm</span>
                     )}
                   </div>
                 </div>
@@ -296,7 +297,7 @@ export default function AdminLessonsPage() {
             </div>
           </div>
 
-          <button onClick={saveLesson} disabled={busy} className="w-full liquid-glass-btn py-3 text-sm font-black disabled:opacity-40">
+          <button onClick={saveLesson} disabled={busy} className="w-full liquid-glass-btn py-3 text-sm font-bold disabled:opacity-40">
             {busy ? "Đang lưu…" : "Lưu bài + cụm"}
           </button>
         </div>
@@ -306,15 +307,15 @@ export default function AdminLessonsPage() {
         :global(.inp) {
           width: 100%;
           border-radius: 0.75rem;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.05);
-          color: #f4f4f5;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          color: var(--foreground);
           padding: 0.5rem 0.75rem;
           font-size: 0.8rem;
           font-weight: 600;
         }
         :global(.inp::placeholder) {
-          color: #71717a;
+          color: var(--muted);
         }
         :global(.inp:focus) {
           outline: none;
@@ -328,7 +329,7 @@ export default function AdminLessonsPage() {
 function L({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="text-[10px] font-black uppercase tracking-wider text-muted">{label}</span>
+      <span className="text-xs font-bold tracking-normal text-muted">{label}</span>
       <div className="mt-1">{children}</div>
     </label>
   );

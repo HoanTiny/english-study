@@ -73,6 +73,7 @@ try {
       assert.ok(hints.x >= chat.x + chat.width, "Desktop guide is alongside conversation");
       if (width >= 1440) assert.ok(chat.width > 700, "Desktop conversation uses the previously empty space");
       const reviewButton = await page.getByRole("button", { name: "⭐ Nhận xét hội thoại", exact: true }).boundingBox();
+      if (reviewButton.y + reviewButton.height > chat.y + chat.height + 1) { console.log(JSON.stringify({width,chat,hints,reviewButton})); await page.screenshot({path: output + "/guide-overflow.png",fullPage:true}); }
       assert.ok(reviewButton.y + reviewButton.height <= chat.y + chat.height + 1, "Review action is visible alongside the chat");
     } else assert.ok(hints.y >= chat.y + chat.height - 1, "Tablet/mobile guide follows conversation");
     await page.evaluate(() => window.scrollTo(0, 0));

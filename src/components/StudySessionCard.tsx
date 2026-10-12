@@ -56,20 +56,20 @@ export default function StudySessionCard({ dueReviews }: { dueReviews: number })
     catch { setError("Chưa cập nhật được buổi học. Vui lòng thử lại."); }
   }
   return (
-    <section className="glass-card p-5 sm:p-7" aria-label="Buổi học của bạn">
-      <p className="text-xs font-bold uppercase tracking-wider text-primary">Buổi học của bạn</p>
+    <section className="glass-card session-card p-5 sm:p-7" aria-label="Buổi học của bạn">
+      <p className="text-xs font-bold tracking-normal text-primary">Buổi học của bạn</p>
       <h2 className="mt-2 font-display text-xl font-bold">{session ? (next ? "Tiếp tục từng bước" : "Tổng kết buổi học") : "Hôm nay bạn có bao nhiêu phút?"}</h2>
       <p className="mt-2 text-sm text-muted">Theo trình độ {(["A1", "A2", "B1", "B2"])[currentStage - 1] ?? "A1"} và nội dung cần ôn. Thời gian là ước tính, không cần chạy đua.</p>
       {error && <div role="alert" className="mt-3 text-sm text-rose-600">{error} <button className="underline" onClick={() => setRetry(n => n + 1)}>Thử lại</button></div>}
       <StudySyncStatus />
       {session ? <>
         <p className="mt-4 text-sm font-semibold">{session.steps.filter(stepDone).length}/{session.steps.length} bước đạt mục tiêu · {session.minutes} phút dự kiến</p>
-        <ol className="my-4 space-y-2">
+        <details className="session-steps"><summary>Xem các bước trong buổi học</summary><ol className="my-4 space-y-2">
           {session.steps.map(step => <li key={step.kind} className="flex justify-between gap-3 rounded-xl border border-border p-3 text-sm">
             <span>{step.title}</span><span className="shrink-0">{step.skipped ? "Đã bỏ qua" : `${step.completedIds.length}/${step.target} ${stepDone(step) ? "✓" : ""}`}</span>
           </li>)}
-        </ol>
-        {next ? <Link href={next.href} className="liquid-glass-btn inline-block px-5 py-3 text-sm">Tiếp tục: {next.title} →</Link>
+        </ol></details>
+        {next ? <Link href={next.href} className="liquid-glass-btn session-primary px-5 py-3 text-sm">Tiếp tục: {next.title} →</Link>
           : <p className="text-sm text-muted">{session.steps.some(s => s.skipped) ? "Buổi học đã kết thúc. Những bước bỏ qua không tính là hoàn thành." : "Bạn đã hoàn thành các mục tiêu trong buổi học này."}</p>}
         <button className="mt-4 block text-sm text-muted underline" onClick={reset}>{next ? "Dừng buổi này và chọn lại" : "Tạo buổi học mới"}</button>
       </> : <>
@@ -77,10 +77,10 @@ export default function StudySessionCard({ dueReviews }: { dueReviews: number })
           {([10,20,30] as const).map(m => <button key={m} aria-pressed={minutes === m} onClick={() => setMinutes(m)} className={`rounded-full border px-5 py-2 text-sm font-bold ${minutes === m ? "border-primary bg-primary text-primary-fg" : "border-border text-foreground"}`}>{m} phút</button>)}
         </div>
         {!options && !error && <p role="status" className="text-sm text-muted">Đang chọn bài phù hợp…</p>}
-        <ol className="mb-5 space-y-2">
+        <details className="session-steps"><summary>Xem kế hoạch buổi học</summary><ol className="mb-5 space-y-2">
           {plan.map((step, i) => <li key={step.kind} className="flex justify-between gap-3 text-sm"><span>{i + 1}. {step.title} <span className="text-muted">({step.target} {step.kind === "quiz" ? "bài đạt" : step.kind === "review" ? "thẻ" : step.kind === "errors" ? "lỗi" : "cụm/câu"})</span></span><span className="shrink-0 text-muted">~{step.minutes} phút</span></li>)}
-        </ol>
-        <button disabled={!options || !!error || syncStatus === "loading"} onClick={start} className="liquid-glass-btn px-6 py-3 text-sm disabled:opacity-50">Bắt đầu buổi học →</button>
+        </ol></details>
+        <button disabled={!options || !!error || syncStatus === "loading"} onClick={start} className="liquid-glass-btn session-primary px-6 py-3 text-sm disabled:opacity-50">Bắt đầu buổi học →</button>
         <p className="mt-3 text-xs text-muted">Buổi học trong ngày đồng bộ theo tài khoản khi có mạng. Thiết bị giữ bản dự phòng để bạn tiếp tục khi mất kết nối.</p>
       </>}
     </section>

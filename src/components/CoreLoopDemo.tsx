@@ -76,19 +76,19 @@ export default function CoreLoopDemo() {
       {/* Active vs Passive tracker */}
       <div className="mb-6 flex gap-3 text-center">
         <div className="flex-1 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/15 border border-indigo-500/20 py-2.5 transition-all duration-300">
-          <p className="text-2xl font-black text-indigo-500 dark:text-indigo-400">{recognized}</p>
-          <p className="text-[10px] font-bold tracking-wider uppercase opacity-80">Đã hiểu</p>
+          <p className="text-2xl font-bold text-indigo-500 dark:text-indigo-400">{recognized}</p>
+          <p className="text-xs font-bold tracking-wider uppercase opacity-80">Đã hiểu</p>
         </div>
         <div className="flex-1 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/15 border border-cyan-500/20 py-2.5 transition-all duration-300">
-          <p className="text-2xl font-black text-accent">{mastered}</p>
-          <p className="text-[10px] font-bold tracking-wider uppercase opacity-80">Nói được</p>
+          <p className="text-2xl font-bold text-accent">{mastered}</p>
+          <p className="text-xs font-bold tracking-wider uppercase opacity-80">Nói được</p>
         </div>
         <div className="flex-1 rounded-xl bg-white/10 dark:bg-white/5 border border-border/80 py-2.5 transition-all duration-300">
-          <p className="text-2xl font-black">
+          <p className="text-2xl font-bold">
             {index + 1}
             <span className="text-xs text-muted">/{total}</span>
           </p>
-          <p className="text-[10px] font-bold tracking-wider uppercase opacity-80">Thẻ</p>
+          <p className="text-xs font-bold tracking-wider uppercase opacity-80">Thẻ</p>
         </div>
       </div>
 
@@ -101,7 +101,7 @@ export default function CoreLoopDemo() {
             </span>
           </div>
           <div className="space-y-1">
-            <p className="text-3xl font-black tracking-tight text-gradient-iridescent">{card.en}</p>
+            <p className="text-3xl font-bold tracking-tight text-gradient-iridescent">{card.en}</p>
             <p className="text-sm font-semibold text-muted font-mono">{card.ipa}</p>
           </div>
           <p className="text-base font-bold text-foreground bg-white/20 dark:bg-white/5 border border-border/40 py-2 px-4 rounded-xl inline-block">
@@ -141,10 +141,10 @@ export default function CoreLoopDemo() {
             Hãy tự nhớ và phát âm thành tiếng câu dịch tiếng Anh trong đầu trước khi mở đáp án.
           </p>
           <div className="py-2.5">
-            <p className="text-2xl font-black text-primary filter blur-[4px] hover:blur-0 transition-all duration-500 cursor-pointer select-none" title="Rê chuột để mở">
+            <p className="text-2xl font-bold text-primary filter blur-[4px] hover:blur-0 transition-all duration-500 cursor-pointer select-none" title="Rê chuột để mở">
               {card.en}
             </p>
-            <p className="text-[10px] text-muted font-semibold mt-1">Rê chuột hoặc chạm để xem trước</p>
+            <p className="text-xs text-muted font-semibold mt-1">Rê chuột hoặc chạm để xem trước</p>
           </div>
           <button
             onClick={() => setPhase("speak")}
@@ -162,7 +162,7 @@ export default function CoreLoopDemo() {
               🎙️ Giai đoạn 3 · Nói bắt buộc
             </span>
           </div>
-          <p className="text-3xl font-black tracking-tight text-primary dark:text-primary-fg">{card.en}</p>
+          <p className="text-3xl font-bold tracking-tight text-primary dark:text-primary-fg">{card.en}</p>
           <p className="text-sm font-medium text-muted leading-relaxed max-w-xs mx-auto">
             Bấm nút ghi âm phía dưới và nói to câu trên. Đây là điều kiện tiên quyết để hoàn thành thẻ.
           </p>
@@ -211,7 +211,7 @@ export default function CoreLoopDemo() {
           <div className="py-2 relative flex justify-center">
             {/* Glossy assessment circular bubble */}
             <div
-              className={`flex h-28 w-28 items-center justify-center rounded-full text-4xl font-black border backdrop-blur-md shadow-lg transition-all duration-500 scale-105 ${
+              className={`flex h-28 w-28 items-center justify-center rounded-full text-4xl font-bold border backdrop-blur-md shadow-lg transition-all duration-500 scale-105 ${
                 score >= 80
                   ? "bg-gradient-to-tr from-accent/20 to-emerald-500/20 border-accent/40 text-accent shadow-[0_0_30px_rgba(6,182,212,0.3)]"
                   : "bg-gradient-to-tr from-warn/20 to-rose-500/20 border-warn/40 text-warn shadow-[0_0_30px_rgba(245,158,11,0.25)]"

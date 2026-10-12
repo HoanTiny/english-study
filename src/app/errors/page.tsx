@@ -84,16 +84,16 @@ export default function ErrorsPage() {
 
   return (
     <main className={`study-page ${practicing ? "study-page--focused" : ""} animate-fadeIn`}>
-      <h1 className="font-display text-3xl font-black text-gradient-iridescent">Sổ lỗi cá nhân</h1>
+      <h1 className="font-display text-3xl font-bold text-gradient-iridescent">Sổ lỗi cá nhân</h1>
       <p className="mt-2 text-sm font-semibold text-muted leading-relaxed">
         Tổng hợp lỗi từ nhật ký, hội thoại AI và luyện ngữ pháp — ôn lại để không lặp lại. Còn <b className="text-foreground">{unresolved}</b> lỗi chưa nắm.
       </p>
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
         {SOURCES.map((s) => (
-          <button key={s.key} disabled={!!practicing} onClick={() => setFilter(s.key)} className={`rounded-full border px-3 py-1.5 text-xs font-black transition-all ${filter === s.key ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{s.label}</button>
+          <button key={s.key} disabled={!!practicing} onClick={() => setFilter(s.key)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-all ${filter === s.key ? "border-primary bg-primary text-primary-fg" : "border-border bg-surface text-foreground hover:border-primary/40"}`}>{s.label}</button>
         ))}
-        <label className="ml-auto flex items-center gap-1.5 text-[11px] font-bold text-muted cursor-pointer">
+        <label className="ml-auto flex items-center gap-1.5 text-xs font-bold text-muted cursor-pointer">
           <input type="checkbox" checked={hideResolved} onChange={(e) => setHideResolved(e.target.checked)} />
           Ẩn lỗi đã nắm
         </label>
@@ -121,12 +121,12 @@ export default function ErrorsPage() {
           {filtered.map((r) => (
             <div key={r.id} className={`rounded-2xl border p-4 shadow-sm transition-colors ${r.resolved ? "border-border/40 bg-surface/30 opacity-60" : "border-border/70 bg-surface/60"}`}>
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="rounded-full bg-black/5 dark:bg-white/5 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-muted">{srcLabel(r.source)}</span>
-                {r.resolved && <span className="text-[9px] font-black text-emerald-500">✓ đã nắm</span>}
+                <span className="rounded-full bg-black/5 dark:bg-white/5 px-2 py-0.5 text-xs font-bold tracking-normal text-muted">{srcLabel(r.source)}</span>
+                {r.resolved && <span className="text-xs font-bold text-emerald-500">✓ đã nắm</span>}
                 <div className="ml-auto flex flex-wrap items-center gap-2">
                   <button onClick={() => speak(r.correction)} title="Nghe câu đúng" className="text-sm hover:scale-110 transition-transform">🔊</button>
-                  <button disabled={busy || !!practicing} onClick={() => toggle(r)} className={`text-[10px] font-black px-2 py-1 rounded-lg ${r.resolved ? "bg-white/5 text-muted" : "bg-emerald-500/15 text-emerald-500"}`}>{r.resolved ? "Bỏ đánh dấu" : "Tự đánh dấu đã nắm"}</button>
-                  <button aria-label="Xóa lỗi" disabled={busy || !!practicing} onClick={() => remove(r)} className="min-w-8 text-xs font-black text-rose-400">✕</button>
+                  <button disabled={busy || !!practicing} onClick={() => toggle(r)} className={`text-xs font-bold px-2 py-1 rounded-lg ${r.resolved ? "bg-white/5 text-muted" : "bg-emerald-500/15 text-emerald-500"}`}>{r.resolved ? "Bỏ đánh dấu" : "Tự đánh dấu đã nắm"}</button>
+                  <button aria-label="Xóa lỗi" disabled={busy || !!practicing} onClick={() => remove(r)} className="min-w-8 text-xs font-bold text-rose-400">✕</button>
                 </div>
               </div>
               {r.original && <p className="text-sm font-bold text-rose-500/90 line-through">{r.original}</p>}

@@ -112,7 +112,7 @@ export default function ReviewPage() {
     return (
       <main className="mx-auto max-w-xl px-5 py-24 text-center">
       {errorBanner}
-        <p className="text-xs font-black uppercase tracking-wider text-muted animate-pulse">Đang đồng bộ dữ liệu ôn tập… ⏳</p>
+        <p className="text-xs font-bold tracking-normal text-muted animate-pulse">Đang đồng bộ dữ liệu ôn tập… ⏳</p>
       </main>
     );
   }
@@ -122,14 +122,14 @@ export default function ReviewPage() {
       {errorBanner}
       <div className="mb-8 flex items-baseline justify-between border-b border-border/40 pb-4.5">
         <div>
-          <span className="text-[9px] font-black uppercase tracking-[0.2em] text-primary bg-primary-soft/80 border border-primary/10 px-3.5 py-1.5 rounded-full inline-flex self-start mb-2">
+          <span className="text-xs font-bold tracking-normal text-primary bg-primary-soft/80 border border-primary/10 px-3.5 py-1.5 rounded-full inline-flex self-start mb-2">
             🔁 ÔN TẬP SRS THÔNG MINH
           </span>
           <h1 className="text-3xl font-extrabold tracking-tight text-foreground mt-1.5">Học tập thông minh</h1>
           <p className="text-xs font-semibold text-muted mt-1">Ôn tập ngắt quãng tối ưu hóa phản xạ tự nhiên</p>
         </div>
-        <span className="text-[10px] font-black text-muted bg-surface border border-border px-3.5 py-2 rounded-full shadow-sm shrink-0">
-          🔥 <span className="text-primary font-black">{queue.length}</span> thẻ đến hạn
+        <span className="text-xs font-bold text-muted bg-surface border border-border px-3.5 py-2 rounded-full shadow-sm shrink-0">
+          🔥 <span className="text-primary font-bold">{queue.length}</span> thẻ đến hạn
         </span>
       </div>
 
@@ -138,7 +138,7 @@ export default function ReviewPage() {
           <p className="text-muted font-semibold text-sm">Hồ ôn tập hiện tại của bạn đang trống. Hãy thêm từ vựng từ Sổ tay.</p>
           <Link
             href="/notes"
-            className="mt-6 inline-block liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
+            className="mt-6 inline-block liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal active:scale-95"
           >
             Đến Sổ tay & Đẩy thẻ ôn tập →
           </Link>
@@ -148,7 +148,7 @@ export default function ReviewPage() {
           <p className="text-5xl mb-4 animate-bounce">🎉</p>
           <p className="text-xl font-extrabold tracking-tight text-foreground">Tuyệt vời! Bạn đã hoàn thành!</p>
           <p className="mt-2.5 text-xs font-semibold text-muted leading-relaxed max-w-sm mx-auto">
-            Hôm nay bạn đã ôn tập xuất sắc toàn bộ <span className="text-accent font-black">{doneCount}</span> thẻ đến hạn. Hãy quay lại vào ngày mai để tiếp tục phản xạ nhé!
+            Hôm nay bạn đã ôn tập xuất sắc toàn bộ <span className="text-accent font-bold">{doneCount}</span> thẻ đến hạn. Hãy quay lại vào ngày mai để tiếp tục phản xạ nhé!
           </p>
         </div>
       ) : (
@@ -163,12 +163,12 @@ export default function ReviewPage() {
                 style={{ width: `${(doneCount / (doneCount + queue.length)) * 100}%` }}
               />
             </div>
-            <span className="text-[10px] font-black text-muted shrink-0 bg-surface border border-border px-2.5 py-1 rounded-full shadow-sm">
+            <span className="text-xs font-bold text-muted shrink-0 bg-surface border border-border px-2.5 py-1 rounded-full shadow-sm">
               {doneCount}/{doneCount + queue.length}
             </span>
           </div>
 
-          <span className={`inline-block rounded-full border px-3.5 py-1 text-[8.5px] font-black uppercase tracking-wider ${
+          <span className={`inline-block rounded-full border px-3.5 py-1 text-xs font-bold tracking-normal ${
             current.kind === "structure"
               ? "bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400"
               : "bg-primary-soft/80 border-primary/20 text-primary"
@@ -190,7 +190,7 @@ export default function ReviewPage() {
             const strength = s ? memoryStrength(s) : 0;
             return (
               <div className="mx-auto mt-6 max-w-xs border-t border-border/40 pt-5">
-                <div className="mb-2 flex items-center justify-between text-[8.5px] font-black uppercase tracking-wider text-muted">
+                <div className="mb-2 flex items-center justify-between text-xs font-bold tracking-normal text-muted">
                   <span>🧠 Sức mạnh ghi nhớ FSRS</span>
                   <span>{s ? `${strength}% · ~${s.interval}d` : "Thẻ mới tinh"}</span>
                 </div>
@@ -207,7 +207,7 @@ export default function ReviewPage() {
           {!revealed ? (
             <button
               onClick={() => setRevealed(true)}
-              className="mt-8 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider active:scale-95"
+              className="mt-8 w-full liquid-glass-btn py-3.5 text-xs font-bold tracking-normal active:scale-95"
             >
               Hiển thị câu ví dụ gợi ý
             </button>
@@ -223,12 +223,12 @@ export default function ReviewPage() {
                   <button
                     onClick={sayIt}
                     disabled={speaking}
-                    className={`rounded-full px-5 py-2.5 text-xs font-black transition-all active:scale-95 ${speaking ? "bg-rose-500 text-white animate-pulse" : "bg-primary-soft border border-primary/25 text-primary hover:bg-primary/15"}`}
+                    className={`rounded-full px-5 py-2.5 text-xs font-bold transition-all active:scale-95 ${speaking ? "bg-rose-500 text-white animate-pulse" : "bg-primary-soft border border-primary/25 text-primary hover:bg-primary/15"}`}
                   >
                     {speaking ? "🎙️ Đang nghe… nói cụm trên" : "🎤 Nói thử & chấm phát âm"}
                   </button>
                   {speakScore != null && (
-                    <div className="flex items-center gap-2 text-xs font-black">
+                    <div className="flex items-center gap-2 text-xs font-bold">
                       <span className={speakScore >= 80 ? "text-emerald-500" : speakScore >= 60 ? "text-amber-500" : "text-rose-500"}>
                         Phát âm: {speakScore}/100
                       </span>
@@ -241,13 +241,13 @@ export default function ReviewPage() {
               )}
 
               <div className="border-t border-border/40 mt-6 pt-5">
-                <p className="mb-4 text-[9px] font-black uppercase tracking-wider text-muted">Bạn nhớ thẻ này ở mức độ nào?</p>
+                <p className="mb-4 text-xs font-bold tracking-normal text-muted">Bạn nhớ thẻ này ở mức độ nào?</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {grades.map(({ g, label, cls }) => (
                     <button
                       key={g}
                       disabled={saving} onClick={() => grade(g)}
-                      className={`rounded-xl py-3 text-xs font-black transition-all duration-300 scale-100 active:scale-95 cursor-pointer shadow-sm ${cls}`}
+                      className={`rounded-xl py-3 text-xs font-bold transition-all duration-300 scale-100 active:scale-95 cursor-pointer shadow-sm ${cls}`}
                     >
                       {label}
                     </button>

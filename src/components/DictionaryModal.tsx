@@ -125,7 +125,7 @@ export default function DictionaryModal({
               placeholder="Nhập từ tiếng Anh hoặc tiếng Việt…"
               className="w-full rounded-full border-2 border-border/60 bg-background/50 px-5 py-3 text-sm font-semibold text-foreground outline-none focus:border-primary focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all shadow-inner"
             />
-            <button onClick={() => search()} disabled={loading || !q.trim()} className="liquid-glass-btn shrink-0 px-6 py-3 text-xs font-black disabled:opacity-50">
+            <button onClick={() => search()} disabled={loading || !q.trim()} className="liquid-glass-btn shrink-0 px-6 py-3 text-xs font-bold disabled:opacity-50">
               {loading ? "Đang tra…" : "Tìm kiếm"}
             </button>
           </div>
@@ -140,24 +140,24 @@ export default function DictionaryModal({
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2.5">
                         <span className="font-display text-lg font-bold text-foreground">{s.en}</span>
-                        {s.pos && <span className="rounded-full bg-primary-soft/80 border border-primary/10 px-2.5 py-0.5 text-[8.5px] font-black uppercase tracking-wider text-primary">{s.pos}</span>}
+                        {s.pos && <span className="rounded-full bg-primary-soft/80 border border-primary/10 px-2.5 py-0.5 text-xs font-bold tracking-normal text-primary">{s.pos}</span>}
                       </div>
                       {/* audio UK/US */}
                       <div className="mt-2 flex flex-wrap items-center gap-3">
                         {s.uk?.audio || s.us?.audio ? (
                           <>
-                            {s.uk && <button onClick={() => play(s.uk!.audio, s.en)} className="text-xs font-black text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 UK {s.uk.ipa && <span className="font-bold text-muted">/{s.uk.ipa}/</span>}</button>}
-                            {s.us && <button onClick={() => play(s.us!.audio, s.en)} className="text-xs font-black text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 US {s.us.ipa && <span className="font-bold text-muted">/{s.us.ipa}/</span>}</button>}
+                            {s.uk && <button onClick={() => play(s.uk!.audio, s.en)} className="text-xs font-bold text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 UK {s.uk.ipa && <span className="font-bold text-muted">/{s.uk.ipa}/</span>}</button>}
+                            {s.us && <button onClick={() => play(s.us!.audio, s.en)} className="text-xs font-bold text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 US {s.us.ipa && <span className="font-bold text-muted">/{s.us.ipa}/</span>}</button>}
                           </>
                         ) : (
-                          <button onClick={() => play(undefined, s.en)} className="text-xs font-black text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 Nghe {s.ipa && <span className="font-bold text-muted">/{s.ipa}/</span>}</button>
+                          <button onClick={() => play(undefined, s.en)} className="text-xs font-bold text-primary hover:underline flex items-center gap-1 cursor-pointer">🔊 Nghe {s.ipa && <span className="font-bold text-muted">/{s.ipa}/</span>}</button>
                         )}
                       </div>
                     </div>
                     <button
                       onClick={() => save(s)}
                       disabled={isSaved}
-                      className={`shrink-0 rounded-full px-4 py-2 text-xs font-black transition-all cursor-pointer ${isSaved ? "bg-primary-soft text-primary border border-primary/20" : "liquid-glass-btn"}`}
+                      className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${isSaved ? "bg-primary-soft text-primary border border-primary/20" : "liquid-glass-btn"}`}
                     >
                       {isSaved ? "✓ Đã lưu" : "+ Thêm"}
                     </button>
@@ -167,7 +167,7 @@ export default function DictionaryModal({
                   {s.example && (
                     <div className="mt-3.5 border-l-2 border-primary/40 pl-3.5 py-0.5">
                       <p className="text-xs font-semibold italic text-foreground/90 leading-relaxed">“{s.example}”</p>
-                      {s.exampleVi && <p className="text-[10px] font-bold text-muted mt-1 leading-relaxed">{s.exampleVi}</p>}
+                      {s.exampleVi && <p className="text-xs font-bold text-muted mt-1 leading-relaxed">{s.exampleVi}</p>}
                     </div>
                   )}
                 </div>

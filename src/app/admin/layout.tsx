@@ -1,243 +1,44 @@
 "use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminAuthProvider, useAdminAuth } from "@/lib/adminAuth";
 import { supabase } from "@/lib/supabase";
+import AppIcon, { type IconName } from "@/components/AppIcon";
+import ThemeToggle from "@/components/ThemeToggle";
 
-const NAV = [
-  { href: "/admin/lessons", label: "Bài học", icon: "📘", desc: "Nội dung & audio" },
-  { href: "/admin/listening-exercises", label: "Bài tập nghe", icon: "📝", desc: "Audio + câu hỏi" },
-  { href: "/admin/listening", label: "Video nghe", icon: "🎧", desc: "Kho YouTube" },
+const NAV: { href: string; label: string; icon: IconName; desc: string }[] = [
+  { href: "/admin/lessons", label: "Bài học", icon: "book", desc: "Nội dung & audio" },
+  { href: "/admin/vocabulary", label: "Từ vựng", icon: "grid", desc: "Ảnh minh họa & audio US/UK" },
+  { href: "/admin/listening-exercises", label: "Bài tập nghe", icon: "edit", desc: "Audio & câu hỏi" },
+  { href: "/admin/listening", label: "Video nghe", icon: "headphones", desc: "Thư viện YouTube" },
 ];
-
 async function adminSignOut(redirect: string) {
-  try {
-    await supabase.auth.signOut();
-  } catch {
-    /* ignore */
-  }
+  try { await supabase.auth.signOut(); } catch { /* Navigate to the login even if local sign-out fails. */ }
   window.location.href = redirect;
 }
-
 function AccessScreen() {
   const { email } = useAdminAuth();
-  const loggedIn = !!email;
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#09090b] px-5 select-none font-sans">
-      <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#161619] p-8 shadow-2xl text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
-
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 text-2xl relative z-1">
-          {loggedIn ? "🚫" : "🔐"}
-        </div>
-
-        <div className="relative z-1 space-y-1">
-          <h1 className="font-display text-xl font-black text-white">SpeakUp CMS</h1>
-          <p className="text-[11px] font-bold text-muted">Quản trị nội dung — chỉ tài khoản admin</p>
-        </div>
-
-        <div className="relative z-1 mt-6 space-y-4">
-          {loggedIn ? (
-            <>
-              <p className="rounded-xl bg-rose-500/10 border border-rose-500/20 px-3.5 py-3 text-xs font-bold text-rose-400 leading-relaxed">
-                Tài khoản <b className="text-rose-300">{email}</b> không có quyền quản trị.
-              </p>
-              <button
-                onClick={() => adminSignOut("/login")}
-                className="w-full rounded-2xl bg-primary py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg transition-all hover:opacity-90 active:scale-98 shadow-lg shadow-primary/25 cursor-pointer"
-              >
-                Đăng nhập tài khoản khác →
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="text-xs font-semibold text-muted leading-relaxed">
-                Vui lòng đăng nhập bằng tài khoản admin để vào CMS.
-              </p>
-              <Link
-                href="/login"
-                className="block w-full rounded-2xl bg-primary py-3.5 text-xs font-black uppercase tracking-wider text-primary-fg transition-all hover:opacity-90 active:scale-98 shadow-lg shadow-primary/25"
-              >
-                Đăng nhập →
-              </Link>
-            </>
-          )}
-
-          <Link
-            href="/"
-            className="mt-1 inline-block text-[10px] font-bold text-muted hover:text-white transition-colors"
-          >
-            ← Quay lại ứng dụng chính
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+  return <main className="cms-access"><div className="study-panel"><span className="feature-icon"><AppIcon name="settings" size={24} /></span><p className="eyebrow mt-5">Không gian quản trị</p><h1 className="mt-2 text-2xl font-bold">SpeakUp CMS</h1><p className="mt-3 text-sm text-muted">{email ? <>Tài khoản <strong>{email}</strong> chưa có quyền quản trị.</> : "Đăng nhập bằng tài khoản quản trị để quản lý nội dung học tập."}</p>{email ? <button onClick={() => adminSignOut("/login")} className="liquid-glass-btn mt-6 w-full">Đăng nhập tài khoản khác</button> : <Link href="/login" className="liquid-glass-btn mt-6 w-full">Đăng nhập</Link>}<Link href="/today" className="mt-5 block text-center text-sm text-muted">← Quay lại học tập</Link></div></main>;
 }
-
 function Shell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const { isAdmin } = useAdminAuth();
-  const [open, setOpen] = useState(false);
-  // Mục "Tài khoản" chỉ dành cho admin (editor không quản lý được tài khoản).
-  const nav = isAdmin
-    ? [...NAV, { href: "/admin/users", label: "Tài khoản", icon: "👥", desc: "Phân quyền" }]
-    : NAV;
-  const current = nav.find((n) => pathname === n.href || pathname?.startsWith(n.href + "/"));
-
-  return (
-    <div className="dark min-h-screen bg-[#09090b] text-[#f8fafc] font-sans">
-      
-      {/* ========================================================
-          DESKTOP: Left CMS Sidebar (fixed w-60)
-          ======================================================== */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-white/5 bg-[#161619]/95 backdrop-blur-md p-4 md:flex select-none">
-        
-        {/* Branding Title */}
-        <Link href="/admin/lessons" className="mb-6 flex items-center gap-2.5 px-2.5 pb-4 border-b border-white/5">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs font-black text-primary-fg shadow-inner">
-            S
-          </span>
-          <div className="flex flex-col">
-            <span className="font-display text-sm font-black text-white leading-none">SpeakUp CMS</span>
-            <span className="text-[8px] font-bold text-muted tracking-wider uppercase mt-1">ADMINISTRATOR</span>
-          </div>
-        </Link>
-
-        {/* Sidebar Nav */}
-        <nav className="flex flex-col gap-1.5 flex-1">
-          {nav.map((n) => {
-            const active = pathname === n.href || pathname?.startsWith(n.href + "/");
-            return (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all border ${
-                  active
-                    ? "bg-primary-soft text-primary border-primary/20 shadow-sm"
-                    : "border-transparent text-muted hover:bg-white/5 hover:text-white"
-                }`}
-              >
-                <span className="text-base shrink-0">{n.icon}</span>
-                <span className="flex flex-col min-w-0">
-                  <span className={`text-xs font-black truncate leading-tight ${active ? "text-primary" : "text-zinc-200 group-hover:text-white"}`}>
-                    {n.label}
-                  </span>
-                  <span className={`text-[9px] font-bold mt-0.5 truncate leading-none ${active ? "text-primary/75" : "text-muted"}`}>
-                    {n.desc}
-                  </span>
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Sidebar Footer */}
-        <div className="mt-auto flex flex-col gap-1.5 border-t border-white/5 pt-4">
-          <Link
-            href="/"
-            className="rounded-xl px-3 py-2 text-xs font-bold text-muted hover:bg-white/5 hover:text-white transition-colors"
-          >
-            ← Về ứng dụng
-          </Link>
-          <button
-            onClick={() => adminSignOut("/")}
-            className="rounded-xl px-3 py-2 text-left text-xs font-black uppercase tracking-wider text-rose-500 hover:bg-rose-500/10 active:scale-98 transition-all cursor-pointer"
-          >
-            Đăng xuất
-          </button>
-        </div>
-      </aside>
-
-      {/* ========================================================
-          MOBILE: Top CMS Navbar & Drawer
-          ======================================================== */}
-      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-white/5 bg-[#161619] px-4 py-3 md:hidden select-none">
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Menu quản trị"
-          aria-expanded={open}
-          aria-controls="admin-mobile-navigation"
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 text-base active:scale-95 bg-black/10"
-        >
-          ☰
-        </button>
-        <span className="font-display text-xs font-black text-white">
-          SpeakUp CMS · {current?.label}
-        </span>
-        <button onClick={() => adminSignOut("/")} className="text-[10px] font-black uppercase tracking-wider text-rose-500">
-          Thoát
-        </button>
-      </header>
-
-      {/* Mobile Drawer Menu */}
-      {open && (
-        <nav id="admin-mobile-navigation" aria-label="Điều hướng quản trị" className="border-b border-white/5 bg-[#161619] p-3 md:hidden space-y-1 select-none">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-xs font-bold text-zinc-300 hover:bg-white/5"
-            >
-              <span>{n.icon}</span> <span>{n.label}</span>
-            </Link>
-          ))}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-xs font-bold text-muted hover:bg-white/5"
-          >
-            ← Quay lại ứng dụng chính
-          </Link>
-        </nav>
-      )}
-
-      {/* ========================================================
-          CONTENT AREA: (md:pl-60 offset matched to sidebar)
-          ======================================================== */}
-      <div className="md:pl-60">
-        
-        {/* Desktop Sticky Header */}
-        <header className="sticky top-0 z-30 hidden items-center justify-between border-b border-white/5 bg-[#09090b]/80 px-8 py-4.5 backdrop-blur-md md:flex select-none">
-          <h1 className="font-display text-base font-black text-white flex items-center gap-2.5">
-            <span>{current?.icon}</span>
-            <span>{current?.label ?? "CMS Dashboard"}</span>
-          </h1>
-          <span className="text-[9px] font-black uppercase tracking-widest text-muted">
-            Quản trị nội dung SpeakUp
-          </span>
-        </header>
-
-        {/* Page children container */}
-        <main className="admin-content min-w-0 p-4 sm:p-6 xl:p-8 animate-fadeIn">{children}</main>
-      </div>
-
-    </div>
-  );
+  const path = usePathname();
+  const { isAdmin, email } = useAdminAuth();
+  const nav = isAdmin ? [...NAV, { href: "/admin/users", label: "Tài khoản", icon: "user" as const, desc: "Phân quyền & token AI" }] : NAV;
+  const current = nav.find(i => path === i.href || path.startsWith(i.href + "/"));
+  return <div className="app-shell cms-shell">
+    <a href="#cms-content" className="skip-link">Đến nội dung quản trị</a>
+    <aside className="sidebar"><Link href="/admin/lessons" className="brand"><span className="brand-mark"><AppIcon name="chat" /></span><span>SpeakUp<span className="brand-caption">Không gian quản trị</span></span></Link><nav className="sidebar-scroll" aria-label="Điều hướng quản trị"><p className="nav-group-label">Quản lý nội dung</p>{nav.map(i => <Link key={i.href} href={i.href} className={`nav-item ${current?.href === i.href ? "is-active" : ""}`} aria-current={current?.href === i.href ? "page" : undefined}><AppIcon name={i.icon} /><span>{i.label}<small className="block text-xs font-normal text-muted mt-1">{i.desc}</small></span></Link>)}</nav><div className="sidebar-footer"><Link href="/today" className="nav-item"><AppIcon name="home" />Về ứng dụng</Link><p className="px-3 py-2 text-xs text-muted truncate">{email}</p><button onClick={() => adminSignOut("/")} className="nav-item text-warn">Đăng xuất</button></div></aside>
+    <header className="mobile-header"><Link href="/today" className="brand"><span className="brand-mark"><AppIcon name="chat" /></span>SpeakUp <small className="text-xs text-muted font-normal">CMS</small></Link><div className="mobile-actions"><ThemeToggle /><button onClick={() => adminSignOut("/")} className="icon-button" aria-label="Đăng xuất"><AppIcon name="user" /></button></div></header>
+    <div className="app-content"><header className="desktop-header"><div className="header-location"><span>Quản trị</span><span>/</span><strong>{current?.label ?? "Nội dung"}</strong></div><ThemeToggle /></header><main id="cms-content" tabIndex={-1} className="admin-content p-4 sm:p-6 xl:p-8 animate-fadeIn"><header className="page-heading"><p className="eyebrow">Không gian quản trị</p><h1 className="text-2xl font-semibold">{current?.label ?? "Nội dung"}</h1><p>{current?.desc}</p></header>{children}</main></div>
+    <nav className="mobile-tabs" aria-label="Điều hướng quản trị" style={{ gridTemplateColumns: `repeat(${nav.length}, minmax(0, 1fr))` }}>{nav.map(i => <Link key={i.href} href={i.href} className={current?.href === i.href ? "is-active" : ""} aria-current={current?.href === i.href ? "page" : undefined}><span><AppIcon name={i.icon} /></span>{i.label}</Link>)}</nav>
+  </div>;
 }
-
 function Gate({ children }: { children: React.ReactNode }) {
   const { authed, ready } = useAdminAuth();
-  
-  if (!ready) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#09090b]">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-primary" />
-      </div>
-    );
-  }
-  
+  if (!ready) return <div className="cms-access" role="status"><div className="h-8 w-8 animate-spin rounded-full border-2 border-border border-t-primary" /><span className="sr-only">Đang kiểm tra quyền truy cập…</span></div>;
   if (!authed) return <AccessScreen />;
   return <Shell>{children}</Shell>;
 }
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <AdminAuthProvider>
-      <Gate>{children}</Gate>
-    </AdminAuthProvider>
-  );
+  return <AdminAuthProvider><Gate>{children}</Gate></AdminAuthProvider>;
 }

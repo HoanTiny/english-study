@@ -108,13 +108,13 @@ export default function LessonQuiz({
   if (!started) {
     return (
       <div className="mt-10 rounded-3xl border border-primary/20 bg-primary-soft/30 p-6 sm:p-7 text-center shadow-sm">
-        <p className="font-display text-lg font-black text-foreground">📝 Kiểm tra cuối bài</p>
+        <p className="font-display text-lg font-bold text-foreground">📝 Kiểm tra cuối bài</p>
         <p className="mt-1.5 text-xs font-semibold text-muted">
           {phrases.filter((p) => p.vi && p.en).length} câu trắc nghiệm nhanh — chọn cụm tiếng Anh đúng với nghĩa.
         </p>
         <button
           onClick={start}
-          className="mt-5 inline-block liquid-glass-btn px-7 py-3 text-xs font-black uppercase tracking-wider active:scale-95"
+          className="mt-5 inline-block liquid-glass-btn px-7 py-3 text-xs font-bold tracking-normal active:scale-95"
         >
           Bắt đầu kiểm tra →
         </button>
@@ -130,19 +130,19 @@ export default function LessonQuiz({
     return (
       <div className="mt-10 rounded-3xl border border-border/60 bg-white/70 dark:bg-zinc-900/60 p-7 text-center shadow-sm animate-fadeIn">
         <p className="text-4xl">{great ? "🎉" : "💪"}</p>
-        <p className="mt-2 font-display text-2xl font-black text-foreground">
+        <p className="mt-2 font-display text-2xl font-bold text-foreground">
           {score}/{total} <span className="text-base text-muted">({pct}%) — {pct >= 80 ? "Đạt" : "Cần đạt 80% để hoàn thành bài"}</span>
         </p>
         <p className="mt-1 text-xs font-semibold text-muted">
           {great ? "Tuyệt vời! Bạn nắm bài tốt." : "Tốt rồi — ôn lại vài cụm và thử lại nhé."}
         </p>
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-teal-600 dark:text-teal-400">
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 px-3 py-1 text-xs font-bold tracking-normal text-teal-600 dark:text-teal-400">
           {great ? "✓ Đã hoàn thành bài học" : "Chưa đạt — hãy ôn và thử lại"}
         </p>
         <div className="mt-5">
           <button
             onClick={start}
-            className="rounded-full border border-border/80 bg-white/50 dark:bg-black/30 px-6 py-2.5 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground hover:border-primary/40 active:scale-95 transition-all cursor-pointer"
+            className="rounded-full border border-border/80 bg-white/50 dark:bg-black/30 px-6 py-2.5 text-xs font-bold tracking-normal text-muted hover:text-foreground hover:border-primary/40 active:scale-95 transition-all cursor-pointer"
           >
             ↻ Làm lại
           </button>
@@ -156,16 +156,16 @@ export default function LessonQuiz({
   return (
     <div className="mt-10 rounded-3xl border border-border/60 bg-white/70 dark:bg-zinc-900/60 p-6 sm:p-7 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[10px] font-black uppercase tracking-wider text-muted">
+        <span className="text-xs font-bold tracking-normal text-muted">
           Câu {idx + 1}/{questions.length}
         </span>
-        <span className="text-[10px] font-black uppercase tracking-wider text-primary">
+        <span className="text-xs font-bold tracking-normal text-primary">
           Điểm: {score}
           {saveError && <span role="alert">{saveError}</span>}
         </span>
       </div>
-      <p className="text-xs font-bold text-muted uppercase tracking-wider mb-1">Nghĩa</p>
-      <p className="font-display text-xl font-black text-foreground mb-5">{q.prompt}</p>
+      <p className="text-xs font-bold text-muted tracking-normal mb-1">Nghĩa</p>
+      <p className="font-display text-xl font-bold text-foreground mb-5">{q.prompt}</p>
 
       <div className="grid gap-2.5">
         {q.options.map((opt) => {
@@ -197,7 +197,7 @@ export default function LessonQuiz({
         <button
           disabled={saving}
           onClick={next}
-          className="mt-5 w-full liquid-glass-btn py-3 text-xs font-black uppercase tracking-wider active:scale-95"
+          className="mt-5 w-full liquid-glass-btn py-3 text-xs font-bold tracking-normal active:scale-95"
         >
           {idx + 1 >= questions.length ? "Xem kết quả →" : "Câu tiếp theo →"}
         </button>

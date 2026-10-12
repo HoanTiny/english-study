@@ -69,7 +69,7 @@ export default function OnboardingPage() {
             >
               <span className="text-3xl">{c.emoji}</span>
               <div>
-                <p className="font-display text-base font-black text-foreground">{c.label} <span className="text-[10px] font-bold text-primary">{c.level}</span></p>
+                <p className="font-display text-base font-bold text-foreground">{c.label} <span className="text-xs font-bold text-primary">{c.level}</span></p>
                 <p className="mt-0.5 text-xs font-semibold text-muted leading-snug">{c.desc}</p>
               </div>
             </button>
@@ -77,7 +77,7 @@ export default function OnboardingPage() {
         </div>
 
         <div className="mt-6 text-center">
-          <button onClick={() => setStep("test")} className="rounded-full border border-primary/30 bg-primary-soft/70 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary hover:bg-primary-soft">
+          <button onClick={() => setStep("test")} className="rounded-full border border-primary/30 bg-primary-soft/70 px-6 py-3 text-xs font-bold tracking-normal text-primary hover:bg-primary-soft">
             ✍️ Không chắc? Làm bài test xếp loại (8 câu)
           </button>
         </div>
@@ -91,7 +91,7 @@ export default function OnboardingPage() {
     return (
       <main className="mx-auto max-w-2xl px-6 py-16 pt-24 animate-fadeIn">
       {saveError && <p role="alert">{saveError}</p>}
-        <button onClick={() => setStep("choose")} className="mb-4 text-[10px] font-black uppercase tracking-wider text-muted hover:text-foreground">← Quay lại chọn nhanh</button>
+        <button onClick={() => setStep("choose")} className="mb-4 text-xs font-bold tracking-normal text-muted hover:text-foreground">← Quay lại chọn nhanh</button>
         <h1 className="font-display text-2xl font-extrabold text-foreground">Bài test xếp loại</h1>
         <p className="mt-1 text-xs font-semibold text-muted">Chọn đáp án đúng. 8 câu, không tính giờ.</p>
 
@@ -114,7 +114,7 @@ export default function OnboardingPage() {
           ))}
         </div>
 
-        <button onClick={submitTest} disabled={!allAnswered} className="mt-6 w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-50">
+        <button onClick={submitTest} disabled={!allAnswered} className="mt-6 w-full liquid-glass-btn py-3.5 text-xs font-bold tracking-normal disabled:opacity-50">
           {allAnswered ? "Xem kết quả →" : `Còn ${answers.filter((a) => a === null).length} câu chưa trả lời`}
         </button>
       </main>
@@ -129,10 +129,10 @@ export default function OnboardingPage() {
         <span className="text-5xl">🎉</span>
         <h1 className="font-display text-2xl font-extrabold text-foreground">Trình độ gợi ý: {result?.level}</h1>
         <p className="text-sm font-semibold text-muted">Bạn trả lời đúng <b className="text-primary">{result?.correct}/{PLACEMENT.length}</b> câu. Chúng tôi sẽ bắt đầu lộ trình ở mức phù hợp.</p>
-        <button onClick={() => result && save(result.stage)} disabled={saving} className="w-full liquid-glass-btn py-3.5 text-xs font-black uppercase tracking-wider disabled:opacity-50">
+        <button onClick={() => result && save(result.stage)} disabled={saving} className="w-full liquid-glass-btn py-3.5 text-xs font-bold tracking-normal disabled:opacity-50">
           {saving ? "Đang lưu…" : "Bắt đầu học →"}
         </button>
-        <button onClick={() => setStep("choose")} className="text-[11px] font-bold text-muted hover:text-foreground">Tự chọn lại trình độ</button>
+        <button onClick={() => setStep("choose")} className="text-xs font-bold text-muted hover:text-foreground">Tự chọn lại trình độ</button>
       </div>
     </main>
   );

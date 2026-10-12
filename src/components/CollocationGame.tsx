@@ -119,7 +119,7 @@ export default function CollocationGame() {
         <div className="liquid-glass-card flex flex-col items-center gap-7 p-8 text-center md:p-12 border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md animate-fadeIn">
           <span className="text-6xl animate-bounce">🧩</span>
           <div className="space-y-2.5">
-            <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-[9px] font-black uppercase tracking-wider text-primary">
+            <span className="shimmer-edge inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft/80 px-4 py-1.5 text-xs font-bold tracking-normal text-primary">
               ⚡ MINI-GAME GHÉP CỤM
             </span>
             <h2 className="font-display text-3xl font-extrabold text-foreground sm:text-4xl leading-none mt-2 w-full">Ghép cụm từ</h2>
@@ -129,7 +129,7 @@ export default function CollocationGame() {
           </div>
           {/* Cách chơi — hướng dẫn nhanh cho lần đầu */}
           <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background/40 p-4 text-left">
-            <p className="mb-2 text-[9px] font-black uppercase tracking-wider text-muted">📖 Cách chơi</p>
+            <p className="mb-2 text-xs font-bold tracking-normal text-muted">📖 Cách chơi</p>
             <ul className="space-y-1.5 text-xs font-semibold text-foreground/85 leading-relaxed">
               <li>1️⃣ Chọn một <b>động từ</b> ở cột trái (ví dụ: <i>make</i>).</li>
               <li>2️⃣ Chọn <b>từ đi kèm</b> đúng ở cột phải (<i>a decision</i> ✓, không phải <i>a photo</i>).</li>
@@ -137,7 +137,7 @@ export default function CollocationGame() {
             </ul>
           </div>
 
-          <button onClick={start} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md">
+          <button onClick={start} className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal shadow-md">
             Bắt đầu ghép
           </button>
         </div>
@@ -146,8 +146,8 @@ export default function CollocationGame() {
       {phase === "playing" && (
         <div className="liquid-glass-card p-6 md:p-8 border border-border/80 shadow-2xl bg-white/20 dark:bg-black/20 backdrop-blur-md animate-fadeIn">
           <div className="mb-6 flex items-center justify-between border-b border-border/40 pb-3">
-            <span className="text-xs font-black uppercase tracking-wider text-muted">Vòng thi {roundNo}</span>
-            <span className="rounded-full bg-primary-soft border border-primary/20 px-3.5 py-1 text-xs font-black text-primary shadow-sm">{score} điểm</span>
+            <span className="text-xs font-bold tracking-normal text-muted">Vòng thi {roundNo}</span>
+            <span className="rounded-full bg-primary-soft border border-primary/20 px-3.5 py-1 text-xs font-bold text-primary shadow-sm">{score} điểm</span>
           </div>
 
           <p className="mb-5 text-center text-xs font-semibold text-muted">
@@ -165,7 +165,7 @@ export default function CollocationGame() {
                     key={c.head}
                     disabled={done}
                     onClick={() => setSelHead(c.head)}
-                    className={`w-full rounded-2xl border px-4 py-3 text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-sm ${
+                    className={`w-full rounded-2xl border px-4 py-3 text-xs font-bold tracking-normal transition-all duration-300 cursor-pointer shadow-sm ${
                       done
                         ? "border-primary/20 bg-primary-soft/40 text-primary/60 cursor-default"
                         : sel
@@ -189,7 +189,7 @@ export default function CollocationGame() {
                     key={c.tail}
                     disabled={done}
                     onClick={() => clickTail(c.tail)}
-                    className={`w-full rounded-2xl border px-4 py-3 text-xs font-black transition-all duration-300 cursor-pointer shadow-sm ${
+                    className={`w-full rounded-2xl border px-4 py-3 text-xs font-bold transition-all duration-300 cursor-pointer shadow-sm ${
                       done
                         ? "border-primary/20 bg-primary-soft/40 text-primary/60 cursor-default"
                         : wrong
@@ -207,12 +207,12 @@ export default function CollocationGame() {
           {/* Danh sách cụm đã ghép (kèm nghĩa) */}
           {matched.size > 0 && (
             <div className="mt-6 space-y-2 border-t border-border/40 pt-4.5">
-              <p className="text-[9px] font-black uppercase tracking-wider text-muted mb-2">Các cụm đã ghép thành công:</p>
+              <p className="text-xs font-bold tracking-normal text-muted mb-2">Các cụm đã ghép thành công:</p>
               {round
                 .filter((c) => matched.has(c.head))
                 .map((c) => (
                   <div key={c.head} className="flex items-center gap-2 bg-background/50 border border-border px-3.5 py-2.5 rounded-xl shadow-sm animate-fadeIn">
-                    <button onClick={() => speak(`${c.head} ${c.tail}`)} className="text-xs font-black text-primary hover:underline flex items-center gap-1 cursor-pointer">
+                    <button onClick={() => speak(`${c.head} ${c.tail}`)} className="text-xs font-bold text-primary hover:underline flex items-center gap-1 cursor-pointer">
                       🔊 {c.head} {c.tail}
                     </button>
                     <span className="text-xs font-semibold text-muted"> — {c.vi}</span>
@@ -224,7 +224,7 @@ export default function CollocationGame() {
           {allMatched && (
             <div className="mt-8 flex animate-fadeIn flex-col items-center gap-3.5">
               <p className="font-display text-base font-extrabold text-primary flex items-center gap-1">✓ Đã ghép xong tất cả cụm từ vòng {roundNo}!</p>
-              <button onClick={() => newRound()} className="liquid-glass-btn px-8 py-3.5 text-xs font-black uppercase tracking-wider shadow-md">
+              <button onClick={() => newRound()} className="liquid-glass-btn px-8 py-3.5 text-xs font-bold tracking-normal shadow-md">
                 Sang vòng sau →
               </button>
             </div>
